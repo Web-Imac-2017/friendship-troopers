@@ -2,3 +2,4 @@
 #Whatever need to be ignored.
 .DS_Store
 node_modules
+gulp
