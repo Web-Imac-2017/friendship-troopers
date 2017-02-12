@@ -1,0 +1,31 @@
+<?php 
+/*Copier ce fichier et créer un fichier config.php avec votre config*/
+	switch ($_SERVER['SERVER_NAME']) 
+	{
+		case 'fts.dev' :
+		case 'localhost' :
+			define('ENVIRONMENT', 'local');
+			define('DB_HOSTNAME', 'localhost', true);
+			define('DB_USERNAME', 'root', true);
+			define('DB_PASSWORD', '', true);
+			define('DB_DATABASE', 'spaceship', true);
+
+			break;
+
+		case 'OnlineHost' : /*Valeur à modifier et compléter lorsqu'on connaîtra l'adresse du site*/
+			define('ENVIRONMENT', 'prod');
+			define('DB_HOSTNAME', '', true);
+			define('DB_USERNAME', '', true);
+			define('DB_PASSWORD', '', true);
+			define('DB_DATABASE', '', true);
+			break;
+
+		default :
+			define('ENVIRONMENT', 'local');
+			define('DB_HOSTNAME', 'localhost', true);
+			define('DB_USERNAME', 'root', true);
+			define('DB_PASSWORD', '', true);
+			define('DB_DATABASE', 'spaceship', true);
+			break;
+	}
+?>
