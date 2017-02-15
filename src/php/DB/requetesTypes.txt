@@ -1,0 +1,9 @@
+INSERT INTO `planet` (`id`, `name`, `description`, `history`, `imagePath`) VALUES (NULL, 'Terre', 'Notre bonne vieille planète la TERRE !', 'lorem ipsum dolor sit amet', 'ok');
+
+
+INSERT INTO `role` (`id`, `label`) VALUES (NULL, 'administrateur'), (NULL, 'modérateur'), (NULL, 'utilisateur'), (NULL, 'banni');
+
+SELECT `username`, `mail` FROM `user` WHERE `username` = 'JR' AND `mail` = 'mail@mail.fr'
+
+INSERT INTO `user` (`id`, `firstName`, `lastName`, `username`, `mail`, `password`, `description`, `birthDate`, `planetId`, `roleId`, `activated`) VALUES
+(3, 'Jean', 'Robert', 'JR', 'mail@mail.fr', 'pass123', 'blabla', '2017-02-13', 1, 3, 1);
