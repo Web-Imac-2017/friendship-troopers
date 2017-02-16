@@ -4,7 +4,6 @@
 * @var EventModel
 * ////////////////////////////
 */
-require_once($_SERVER['DOCUMENT_ROOT'].'api/models/AvatarModel.class.php');
 
 class EventModel extends ApplicationModel {
   // ----------[ CONSTANTS ]----------
@@ -72,5 +71,3 @@ class EventModel extends ApplicationModel {
 
 
 }
-
-?>

@@ -4,7 +4,6 @@
 * @var ApplicationModel
 * ////////////////////////////
 */
-require_once($_SERVER['DOCUMENT_ROOT'].'/config/config.php');
 
 abstract class ApplicationModel {
 	// ----------[ CONSTANTS ]----------
@@ -14,7 +13,7 @@ abstract class ApplicationModel {
 	// ----------[ ATTRIBUTS ]----------
 
 
-	
+
 	protected function autoload() {
 		spl_autoload_extensions('.php, .class.php');
 		spl_autoload_register('classLoader');
@@ -55,5 +54,3 @@ abstract class ApplicationModel {
 
 
 }
-
-?>

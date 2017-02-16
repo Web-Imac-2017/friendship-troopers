@@ -4,7 +4,6 @@
 * @var SmileyModel
 * ////////////////////////////
 */
-require_once($_SERVER['DOCUMENT_ROOT'].'api/models/AvatarModel.class.php');
 
 class SmileyModel extends ApplicationModel {
   // ----------[ CONSTANTS ]----------
@@ -69,5 +68,3 @@ class SmileyModel extends ApplicationModel {
 
 
 }
-
-?>

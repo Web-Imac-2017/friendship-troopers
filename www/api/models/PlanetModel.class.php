@@ -4,7 +4,6 @@
  * @var PlanetModel
  * ////////////////////////////
  */
-require_once($_SERVER['DOCUMENT_ROOT'].'api/models/ApplicationModel.class.php');
 
 class PlanetModel extends ApplicationModel {
 	// ----------[ CONSTANTS ]----------
@@ -74,4 +73,3 @@ class PlanetModel extends ApplicationModel {
    public function getAllPlanets() {
    }
 }
-?>

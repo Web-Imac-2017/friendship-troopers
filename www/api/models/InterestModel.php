@@ -4,7 +4,6 @@
 * @var InterestModel
 * ////////////////////////////
 */
-require_once($_SERVER['DOCUMENT_ROOT'].'api/models/AvatarModel.class.php');
 
 class InterestModel extends ApplicationModel {
   // ----------[ CONSTANTS ]----------
@@ -67,5 +66,3 @@ class InterestModel extends ApplicationModel {
 
 
 }
-
-?>

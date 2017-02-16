@@ -1,22 +1,13 @@
-<?php 
+<?php
 
-require_once($_SERVER['DOCUMENT_ROOT'].'/api/controllers/SignInController.class.php');
+define('ROOT', __DIR__);
 
-$controller = new SignIn(); 
-?>
+require_once ROOT.'/vendor/autoload.php';
 
+$loader = new \Autoloadr\Universal();
+$loader->add_prefix(ROOT.'/api/controllers');
+$loader->add_prefix(ROOT.'/api/models');
+$loader->add_prefix(ROOT.'/api/utils');
+$loader->register();
 
-<form method="POST" action="views/test.php">
-	<label>Username
-		<input type="text" name="username"/>
-	</label>
-	<label>email
-		<input type="text" name="mail"/>
-	</label>
-	<label>password
-		<input type="password" name="password" />
-		</label>
-
-	<input type="submit" value="envoyer">
-</form>
-
+//$controller = new SignIn();

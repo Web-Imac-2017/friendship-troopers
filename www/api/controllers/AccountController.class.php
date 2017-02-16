@@ -15,4 +15,3 @@ class Account extends Application{
 	}
 }
 
-?>

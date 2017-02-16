@@ -4,7 +4,6 @@
 * @var CommentModel
 * ////////////////////////////
 */
-require_once($_SERVER['DOCUMENT_ROOT'].'api/models/AvatarModel.class.php');
 
 class CommentModel extends ApplicationModel {
   // ----------[ CONSTANTS ]----------
@@ -73,5 +72,3 @@ class CommentModel extends ApplicationModel {
 
 
 }
-
-?>

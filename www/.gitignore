@@ -1,0 +1,3 @@
+api/config/env.json
+vendor/*
+composer.lock
