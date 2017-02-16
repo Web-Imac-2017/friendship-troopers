@@ -1,12 +1,12 @@
 <?php //ApplicationModel
 /**
-* 
+*
 */
 require_once($_SERVER['DOCUMENT_ROOT'].'/config/config.php');
 abstract class ApplicationModel {
 
 	protected function autoload() {
-		spl_autoload_extensions('.php, .class.php'); 
+		spl_autoload_extensions('.php, .class.php');
 		spl_autoload_register('classLoader');
 	}
 	
@@ -21,7 +21,7 @@ abstract class ApplicationModel {
     }
 
     protected function verifyInput($input){
-    	
+
     }
 
 	static function dbConnection(){
@@ -39,7 +39,7 @@ abstract class ApplicationModel {
 		} catch (Exception $e) {
 			die('Erreur :'.$e->getMessage());
 		}
-		
+
 		return $result;
 	}
 
