@@ -8,7 +8,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'api/models/ApplicationModel.class.php');
 
 class PlanetModel extends ApplicationModel {
 	// ----------[ CONSTANTS ]----------
-	
+
 	const TABLE_NAME = 'planet';
 
 	// ----------[ ATTRIBUTS ]----------
@@ -36,7 +36,7 @@ class PlanetModel extends ApplicationModel {
 	//----------[ SETTERS ]------------
 
 	/**
-	 * Set Planet atribute into planetModel
+	 * Set planet atribute into planetModel
 	 * @param [type] $attr  [attribute you need]
 	 * @param [type] $value [value you wanna push into planetModel]
 	 */
@@ -53,7 +53,7 @@ class PlanetModel extends ApplicationModel {
 	// ----------[ GETTERS ]-------------
 
 	/**
-	 * Get Planet attribut from data base
+	 * Get planet attribut from data base
 	 * @param  [type] $attr [attribut you wanna know]
 	 * @return [type]       [value of the attribut from PlanetModel]
 	 */

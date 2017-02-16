@@ -1,15 +1,25 @@
-<?php //ApplicationModel
+<?php
 /**
-*
+* ////////////////////////////
+* @var ApplicationModel
+* ////////////////////////////
 */
 require_once($_SERVER['DOCUMENT_ROOT'].'/config/config.php');
-abstract class ApplicationModel {
 
+abstract class ApplicationModel {
+	// ----------[ CONSTANTS ]----------
+
+
+
+	// ----------[ ATTRIBUTS ]----------
+
+
+	
 	protected function autoload() {
 		spl_autoload_extensions('.php, .class.php');
 		spl_autoload_register('classLoader');
 	}
-	
+
 	protected function classLoader($class) {
         $filename = strtolower($class) . '.php';
         $file =$_SERVER['DOCUMENT_ROOT'].'api/controllers/' . $filename;
