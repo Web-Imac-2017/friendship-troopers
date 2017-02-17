@@ -13,9 +13,7 @@ class SmileyModel extends Model {
 
   // ----------[ ATTRIBUTS ]----------
 
-  private $code;
-  private $label;
-  private $price;
+
 
   // ----------[ FUNCTIONS ]----------
 

@@ -42,13 +42,13 @@ abstract class Model {
 
   /**
    * find almost anything that you want function
-   * [Model function for almost all requests needed in SQL]
-   * @param  [asso array] $request     [array passed by the controller for basic requests]
-   * @param  [char*] $sql              [the SQL request, build step by step]
-   * @param  [char*] $join             [the left join part, if there is a leftJoin request]
-   * @param  [char*] $condition        [the conditions part, if there is some conditions]
-   * @param  [char*] $otherConditions  [if there is multiple conditions, add them to condition]
-   * @return [stdObject]               [object containing all the occurences found in the DB]
+   * Model function for almost all requests needed in this SQL DB
+   * @param  ass array  $request          array passed by the controller for basic requests
+   * @param  char*      $sql              the SQL request, build step by step
+   * @param  char*      $join             the left join part, if there is a leftJoin request
+   * @param  char*      $condition        the conditions part, if there is some conditions
+   * @param  char*      $otherConditions  if there is multiple conditions, add them to condition
+   * @return stdObject  ...               object containing all the occurences found in the DB
    */
   public function find($request) {
     $sql = 'SELECT ';
@@ -135,9 +135,9 @@ abstract class Model {
 
   /**
    * find first occurence function
-   * [Return only the first occurence found by the DB]
-   * @param  [asso array] $request [the request send by the controller]
-   * @return [stdObject]           [the first occurence found in the DB]
+   * Return only the first occurence found by the DB
+   * @param  asso array   $request  the request sent by the controller
+   * @return stdObject    ...       the first occurence found in the DB
    */
   public function findFisrt ($request) {
     return (current($this->find($request)));
@@ -145,9 +145,9 @@ abstract class Model {
 
   /**
    * find and count occurences function
-   * [Return the number of occurences found in the DB, with or without conditions]
-   * @param  [asso array] $conditions [the conditions needed for count]
-   * @return [stdObject]              [the number of occurences found int the DB]
+   * Return the number of occurences found in the DB, with or without conditions
+   * @param  asso array   $conditions   the conditions needed for count
+   * @return stdObject    ...           the number of occurences found int the DB
    */
   public function findCount ($conditions = NULL) {
     if ($conditions === NULL) {
@@ -162,9 +162,9 @@ abstract class Model {
 
  /**
   * delete function
-  * [delete one or multiple correspondances in the DB talbe specified]
-  * @param  [asso array] $id  [one or multiple entries that need to be deleted]
-  * @return [none]            [no need to return because there is nothing anymore]
+  * delete one or multiple correspondances in the DB talbe specified
+  * @param  asso array  $id   one or multiple entries that need to be deleted
+  * @return none        ...   no need to return because there is nothing anymore
   */
   public function delete ($id) {
     if (!is_array($id)) {
@@ -182,5 +182,15 @@ abstract class Model {
     }
     $prepareRequest = $this->pdo->prepare($sql);
     $prepareRequest->execute();
+    }
+
+    /**
+     * Update one or many entries of the DB based on the data and keys sent by a controller
+     * @param  object   $data     datas that need to be pushed in the DB
+     * @param  array    $addKeys  description
+     * @return type     ...       description
+     */
+    public function update ($data, $addKeys = array()) {
+
     }
 }

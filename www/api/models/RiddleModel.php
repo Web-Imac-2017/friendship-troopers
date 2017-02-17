@@ -13,15 +13,7 @@ class RiddleModel extends Model {
 
   // ----------[ ATTRIBUTS ]----------
 
-  private $title;
-  private $description;
-  private $level;
-  private $minReward;
-  private $maxReward;
-  private $nbParticipants;
 
-  // Foreign key
-  private $riddleTypeId;
 
   // ----------[ FUNCTIONS ]----------
 

@@ -14,10 +14,7 @@ class AvatarModel extends Model {
 
   // ----------[ ATTRIBUTS ]----------
 
-  private $id;
-  private $imagePath;
-  private $description;
-  private $pack;
+
 
   // ----------[ FUNCTIONS ]----------
 

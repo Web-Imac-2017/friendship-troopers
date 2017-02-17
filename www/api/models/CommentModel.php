@@ -13,14 +13,7 @@ class CommentModel extends Model {
 
   // ----------[ ATTRIBUTS ]----------
 
-  private $id;
-  private $content;
-  private $publishDate;
-  private $modified = NULL;
 
-  // Foreign keys
-  private $userId;
-  private $publicationId;
 
   // ----------[ FUNCTIONS ]----------
 

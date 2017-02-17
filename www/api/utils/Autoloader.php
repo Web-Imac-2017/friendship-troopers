@@ -14,7 +14,8 @@ class Autoloader {
      * (j'ai suivi un tuto de grafikart là dessus en fait)
      * (et un peu l'autoloadr que vous m'aviez envoyé)
      *
-     * @param       $class  le nom de la class
+     * @param   char*   $class  current class name
+     * @return  bool    ...     if file does not exist, return false
      */
     static function classLoader($class) {
         $pathParts = array_map(function ($s) {

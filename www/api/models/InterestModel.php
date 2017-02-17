@@ -13,8 +13,7 @@ class InterestModel extends Model {
 
   // ----------[ ATTRIBUTS ]----------
 
-  private $id;
-  private $label;
+
 
   // ----------[ FUNCTIONS ]----------
 

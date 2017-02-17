@@ -13,14 +13,7 @@ class PublicationModel extends Model {
 
   // ----------[ ATTRIBUTS ]----------
 
-  private $title;
-  private $content;
-  private $publishDate;
-  private $modified = NULL;
 
-  // Foreign keys
-  private $userId;
-  private $imageUploadId;
 
   // ----------[ FUNCTIONS ]----------
 

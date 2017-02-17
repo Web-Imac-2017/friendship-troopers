@@ -17,7 +17,7 @@ class AvatarModel extends Model {
 
 	// ----------[ ATTRIBUTS ]----------
 
-	private $label;
+
 
 	// ----------[ FUNCTIONS ]----------
 

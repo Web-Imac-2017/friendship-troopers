@@ -13,13 +13,7 @@ class EventModel extends Model {
 
   // ----------[ ATTRIBUTS ]----------
 
-  private $id;
-  private $startDate;
-  private $endDate;
-  private $description;
 
-  // Foreign key
-  private $riddleId;
 
   // ----------[ FUNCTIONS ]----------
 
