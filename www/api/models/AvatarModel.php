@@ -5,7 +5,9 @@
 * ////////////////////////////
 */
 
-class AvatarModel extends ApplicationModel {
+namespace Models;
+
+class AvatarModel extends Model {
   // ----------[ CONSTANTS ]----------
 
   const TABLE_NAME = 'avatar';

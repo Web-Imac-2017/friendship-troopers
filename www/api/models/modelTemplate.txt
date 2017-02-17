@@ -4,25 +4,14 @@
 * @var ...Model
 * ////////////////////////////
 */
+namespace Models;
 
-class ...Model extends ApplicationModel {
+class ...Model extends Model {
   // ----------[ CONSTANTS ]----------
 
   const TABLE_NAME = '...';
 
   // ----------[ ATTRIBUTS ]----------
-
-
-
-  // ----------[ CONSTRUCT ]----------
-
-
-
-  // ----------[ SETTER ]-------------
-
-
-
-  // ----------[ GETTER ]-------------
 
 
 
