@@ -2,7 +2,8 @@
 /**
 * Gère l'inscription d'un user
 */
-require_once($_SERVER['DOCUMENT_ROOT'].'api/controllers/ApplicationController.class.php');
+namespace controllers;
+
 class SignIn extends Application{
 
 	function inscription() {
@@ -21,9 +22,9 @@ class SignIn extends Application{
 			$this->modelLoader('UserModel');
 			
 			$user = new UserModel();
-			$user->setMail($mail);
-			$user->setUsername($username);
-			$user->setPassword($password);
+			$user->mail($mail);
+			$user->username($username);
+			$user->password($password);
 
 			var_dump($user);
 

@@ -2,8 +2,9 @@ test.php
 
 <?php 
 
-require_once($_SERVER['DOCUMENT_ROOT'].'/api/controllers/SignInController.class.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/api/autoload.php');
+autoloader::register();
 
-$controller = new SignIn(); 
+$controller = new controllers\SignIn(); 
 $controller->inscription();
 ?>

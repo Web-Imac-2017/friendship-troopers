@@ -2,16 +2,17 @@
 /**
 * Gère le compte d'un user
 */
+namespace controllers;
 class Account extends Application{
 
 	function deleteAccount(){
-		//delete user
-		//delete userBadge
-		//delete userSmiley
-		//delete post & comment
+		//delete user -> usermodel
+		//delete userBadge -> userModel
+		//delete userSmiley -> userBadge
+		//delete post & comment -> publicationModel & commentModel
 		//delete like ?
 		//supression cookie
-		//logout
+		//logout -> userModel
 	}
 }
 

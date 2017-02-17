@@ -14,12 +14,9 @@ class PlanetModel extends ApplicationModel{
 	private $imagePath;
 
 	function __construct($params = false) {
-
 		if (is_array($params)) {
 			foreach ($params as $key => $val) {
-				if($key != "password") {
 					$this->$key = $val;
-				}
 			}
 		} 
 	}

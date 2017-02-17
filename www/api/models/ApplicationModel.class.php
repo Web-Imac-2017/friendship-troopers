@@ -1,13 +1,15 @@
 <?php //ApplicationModel
 /**
-* 
+* ////////////////////////////
+* @var ApplicationModel
+* ////////////////////////////
 */
 require_once($_SERVER['DOCUMENT_ROOT'].'/config/config.php');
-abstract class ApplicationModel {
+abstract class \model\ApplicationModel {
 
 	protected function autoload() {
-		spl_autoload_extensions('.php, .class.php'); 
-		spl_autoload_register('classLoader');
+		spl_autoload_extensions('.php'); 
+		spl_autoload_register([$this, 'classLoader']);
 	}
 	
 	protected function classLoader($class) {
@@ -18,10 +20,6 @@ abstract class ApplicationModel {
             return false;
         }
         require_once $file;
-    }
-
-    protected function verifyInput($input){
-    	
     }
 
 	static function dbConnection(){

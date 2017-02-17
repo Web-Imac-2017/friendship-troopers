@@ -2,11 +2,12 @@
 /**
 * 
 */
+namespace controllers;
 abstract class Application {
 
 	protected function autoload() {
-		spl_autoload_extensions('.php, .class.php'); 
-		spl_autoload_register('classLoader');
+		spl_autoload_extensions('.php'); 
+		spl_autoload_register([$this, 'classLoader']);
 	}
 	
 	protected function classLoader($class) {

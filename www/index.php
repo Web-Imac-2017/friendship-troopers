@@ -1,8 +1,13 @@
 <?php 
+/*
+require_once($_SERVER['DOCUMENT_ROOT'].'/api/autoload.php');
+$autoload =  new \Autoloadr\Universal();
+$autoload->add_prefix($_SERVER['DOCUMENT_ROOT'] . '/api');
+/*$autoload->add_prefix($_SERVER['DOCUMENT_ROOT'] . '/api/models');*/
+/*$autoload->register();
+$controller = new controllers\SignIn(); */
 
-require_once($_SERVER['DOCUMENT_ROOT'].'/api/controllers/SignInController.class.php');
-
-$controller = new SignIn(); 
+echo strpbrk("clasController", 'Controller');
 ?>
 
 
