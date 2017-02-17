@@ -2,12 +2,13 @@
 
 define('ROOT', __DIR__);
 
-require_once ROOT.'/vendor/autoload.php';
+require_once ROOT.'/api/utils/Autoloader.php';
 
-$loader = new \Autoloadr\Universal();
-$loader->add_prefix(ROOT.'/api/controllers');
-$loader->add_prefix(ROOT.'/api/models');
-$loader->add_prefix(ROOT.'/api/utils');
-$loader->register();
+\Utils\Autoloader::register();
+\Utils\Config::init();
+
+//var_dump(\Utils\Config::get('db.hostname'));
+
+$model = new \Models\Model();
 
 //$controller = new SignIn();

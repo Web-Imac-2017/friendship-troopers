@@ -1,5 +1,7 @@
 <?php
 
+namespace Utils;
+
 class Config
 {
     private static $conf;
