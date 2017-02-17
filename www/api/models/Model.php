@@ -139,7 +139,7 @@ abstract class Model {
    * @param  asso array   $request  the request sent by the controller
    * @return stdObject    ...       the first occurence found in the DB
    */
-  public function findFisrt ($request) {
+  public function findFirst ($request) {
     return (current($this->find($request)));
   }
 
@@ -182,15 +182,64 @@ abstract class Model {
     }
     $prepareRequest = $this->pdo->prepare($sql);
     $prepareRequest->execute();
+  }
+
+  /**
+   * Insert function
+   * INSERT INTO table VALUES ('valeur 1', 'valeur 2', ...)
+   * Insert one or many entries into the DB. Based on the data and keys sent by a controller
+   * Update one or many entries of the DB based on the data and keys sent by a controller
+   * @param  object   $data     datas that need to be pushed in the DB
+   * @param  array    $addKeys  description
+   * @return type     ...       description
+   */
+  public function insert ($data, $addKeys = array()) {
+    $key = $this->$primaryKey;
+    $fields = array();
+    $currentData = array();
+    $action = null;
+
+    // REQUIREMENTS BEFORE INSERTION OR UPDATE INTO DB (HELP TO PREPARE THE REQUEST)
+    if(isset($data->$key) and empty($data->$key)) {
+      unset($data->$key);
     }
 
-    /**
-     * Update one or many entries of the DB based on the data and keys sent by a controller
-     * @param  object   $data     datas that need to be pushed in the DB
-     * @param  array    $addKeys  description
-     * @return type     ...       description
-     */
-    public function update ($data, $addKeys = array()) {
-
+    foreach ($data as $key => $value) {
+      $fields[] = "$key=:$key";
+      $currentData[$key] = "$value";
     }
+
+    foreach($addkeys as $key => $value) {
+      $currentData[":$key"] = $value;
+    }
+
+    // PREPARE UPDATE INTO DB SELECTED TABLE
+    // ELSE
+    // PREPARE INSERTION INTO DB SELECTED TABLE
+    if (isset($data->$key) and !empty($data->$key)) {
+        $sql = ' UPDATE ' . $this->$table . ' SET ' . implode(', ', $fields) . ' WHERE ' . $key . '=:' . $key;
+        foreach ($addkeys as $key => $value) {
+          $sql .= ' AND ' . $key . '=:' . $key;
+        }
+        $this->primaryKeyValue = $data->$key;
+        $action = 'update';
+    } else {
+      $sql = ' INSERT INTO ' . $this->table . ' SET '. implode(', ', $flieds);
+      $action = 'insert';
+    }
+
+    $prepareRequest = $this->pdo->prepare($sql);
+    $prepareRequest->execute($currentData);
+
+    // SAVE IN THE CLASS INSANCE THE LAST ID INSERTED INTO DB SELECTED TABLE
+    if($action == 'insert') {
+      $this->primaryKeyValue = $this->pdo->lastInsertId();
+    }
+  }
+
+  /**
+   * Update function
+
+   */
+
 }
