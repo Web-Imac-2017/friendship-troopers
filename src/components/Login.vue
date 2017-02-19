@@ -1,20 +1,41 @@
-<!-- <template>
-  <section class="login">
 
-    <form-user v-model="user" title="Request form">
-	<div slot="header">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis, minus.</div>
-    <div slot="footer">Footer ipsum dolor sit amet, consectetur adipisicing elit. Debitis, minus.</div>
+<template>
+	<div class="container">
 
-    <div slot="error">{{user.pseudo}} est déjà utilisé !</div>
+	  	<div class="row">
+	  		<div class="col-sm-6">
+	  			<h1>Frienship troopers</h1>
+	  			<div>
+	  				<p>
+	  					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est dolorem dolores quidem nihil asperiores, voluptates voluptate alias impedit perferendis!
+	  				</p> 
+	  				<p>
+	  					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est dolorem dolores quidem nihil asperiores, voluptates voluptate alias impedit perferendis!
+	  				</p> 
+	  			</div>
+	  		</div>
+	  		<div class="col-sm-6">
+
+	<form-user v-model="user" title="Request form">
+		<div slot="header">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis, minus.</div>
+		<div slot="footer">Footer ipsum dolor sit amet, consectetur adipisicing elit. Debitis, minus.</div>
+
+		<div slot="error">{{user.pseudo}} est déjà utilisé !</div>
 
 	</form-user>
 
-    <pre>{{user}}</pre>
+	<pre>{{user}}</pre>
 
-  </div>
+	</div>
 
-  </section>
-</template>
+	</div>
+</div>
+
+
+
+
+
+</template> 
 
 
 <script>
@@ -52,9 +73,11 @@ let formUser = {
 			<label for="">Mot de passe</label>
 			<input type="text" v-model="user.password" placeholder="edit me">
 		</div>
+		<a href="">Jai déjà un compte</a>
 		<button class="button" type="submit">Envoyer</button>	
 		<p><slot name="footer"></slot></p>
     </form>
+	  		
 	`
 	,/*mounted: function(){
 		console.log(this)
@@ -75,89 +98,41 @@ export default {
 
 }
 </script>
- -->
 
 
- <template>
-  <div class="container container-table">
-      <div class="row vertical-10p">
-        <div class="container">
-          <img class="logo" src="../assets/logo.png">
-          <div class="text-center col-md-4 col-sm-offset-4">
-            <!-- errors -->
-            <div v-if=response class="text-red"><p>{{response}}</p></div>
 
-            <!-- login form -->
-            <form class="ui form loginForm"  @submit.prevent="save">
 
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                <input class="form-control" name="username" placeholder="Username" type="text" v-model="username">
-              </div>
-
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                <input class="form-control" name="mail" placeholder="Mail" type="text" v-model="mail">
-              </div>
-
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                <input class="form-control" name="password" placeholder="Password" type="password" v-model="password">
-              </div>
-              <button type="submit" v-bind:class="'btn btn-primary btn-lg ' + loading">Submit</button>
-            </form>
-          </div>
-        </div>
-      </div>
-  </div>
-</template>
-
-<script>
-module.exports = {
-  name: 'Login',
-  data: function (router) {
-    return {
-      username: '',
-      password: '',
-      mail: '',
-    }
-  },
-  methods: {
-    save: function () {
-      this.$emit("input", this.user)
-  	}
-  }
-}
-</script>
 
 <style>
- html, body, .container-table {
-  height: 100%;
-  /* background-color: #282B30 !important; */
+/*  html, body, .container-table {
+ height: 100%;
+ background-color: #282B30 !important;
 }
 .container-table {
-    display: table;
-    color: white;
+   display: table;
+   color: white;
 }
 .vertical-center-row {
-    display: table-cell;
-    vertical-align: middle;
+   display: table-cell;
+   vertical-align: middle;
 }
 .vertical-20p {
-  padding-top: 20%;
+ padding-top: 20%;
 }
 .vertical-10p {
-  padding-top: 10%;
+ padding-top: 10%;
 }
 .logo {
-  width: 15em;
-  padding: 3em;
+ width: 15em;
+ padding: 3em;
 }
 .loginForm .input-group {
-  padding-bottom: 1em;
-  height: 4em;
+ padding-bottom: 1em;
+ height: 4em;
 }
 .input-group input {
-  height: 4em;
-} 
+ height: 4em;
+}  */
 </style>
+
+

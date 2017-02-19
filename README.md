@@ -12,7 +12,7 @@ npm run dev
 --> you can see the website at : localhost:8080
 
 ## build for production with minification 
-## don't do it yet, julie needs to fix it
 npm run build
 ```
-
+## if you touch the css
+gulp watch 

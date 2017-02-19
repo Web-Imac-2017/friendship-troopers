@@ -1,0 +1,47 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400italic,700italic,400,700);
+ 
+
+$primary-color: #fff;
+$secondary-color: #efefef;
+$background-color: #000000;
+
+// Font Variables
+$main-font: 'Roboto', serif;   
+
+
+@font-face {
+    font-family: earthOrbiter;
+    src: url(earthorbiterxtrabold.ttf);
+}
+
+$title-font: earthOrbiter;
+
+// Styles
+
+html {
+  font-size: 62.5%; 
+}
+
+@mixin font-size($sizeValue: 0.6) {
+  font-size: ($sizeValue * 10) + px;
+  font-size: $sizeValue + rem;
+}
+
+body {
+  font-family: $main-font;
+  font-weight: normal;
+  @include font-size(1.2);
+  background: $background-color;
+  color: $primary-color;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: $title-font;
+  font-weight: normal;
+  @include font-size(1.6);
+}
+
+@media screen and (min-width: 1200px) {
+  .container-fluid {
+    width: 1170px;
+  }
+}
