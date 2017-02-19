@@ -23,7 +23,7 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   text-align: center; }
 
-.center > * {
+.center {
   text-align: center; }
 
 .left > * {
@@ -79,18 +79,14 @@ button {
   .login > .row .col-sm-4 {
     border-right: 1px solid #46bfa9; }
 
-@media screen and (min-width: 1200px) {
-  .container-fluid {
-    width: 1170px; } }
-
 small {
   font-weight: lighter;
   font-size: 10px;
   font-size: 1rem; }
 
-.content-block {
-  margin: 0% 0% 0% 100px; }
-
+/* .content-block {
+  margin: 0% 0% 0% 100px;
+} */
 .post {
   background-color: #222d3c;
   padding: 2%;
@@ -102,8 +98,32 @@ small {
 .connect-buttons {
   text-align: right; }
 
+.contain-img {
+  width: 4em; }
+  .contain-img img {
+    width: 100%;
+    height: 100%; }
+
 .avatar {
   height: 70px;
   width: 70px;
-  background-color: #cdcccc;
   margin: 0px; }
+  .avatar img {
+    border-radius: 1;
+    -webkit-border-radius: 1;
+    -moz-border-radius: 1; }
+
+.comment {
+  background: #303b4c;
+  margin-top: 2%;
+  max-height: 8em; }
+  .comment .col-sm-1 {
+    padding: 1%; }
+  .comment button {
+    margin-top: 1em; }
+  .comment textarea {
+    padding-left: 0; }
+
+@media screen and (min-width: 1200px) {
+  .container-fluid {
+    width: 1170px; } }

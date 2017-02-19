@@ -1,7 +1,86 @@
 <template>
   <section class="article">
-    <post-template :post="post"></post-template>
-    <create-post :post="post"></create-post>
+    <!-- <create-post :post="post"></create-post> -->
+   <!--  <post-template :post="post"></post-template> -->
+
+   <div class="container post">
+      <div class="row">
+        <div class="col-sm-1 avatar">
+            <img src="../assets/Avatar1.svg" alt="default avatar" class="avatar">
+        </div>
+        <div class="col-sm-11">
+          <form class="form-post" @submit.prevent="save">
+          <!-- <textarea rows="3" type="text" placeholder="Publier quelque chose .."></textarea>
+          <div class="field">
+            <button v-on:click="uploadPicture" class="left"> Upload picture </button>
+            <button v-on:click="publish">Publier</button>
+          </div> -->
+          <form class="form-post" @submit.prevent="save">
+            <textarea rows="3" type="text" placeholder="Publier quelque chose"></textarea>
+            <div class="field">
+              <button class="left"> Upload picture </button>
+              <button>Publier</button>
+          </div> 
+          </form>
+        </div>
+      </div>
+    </div>
+   
+    <div class="container post">
+      <div class="row"> 
+        <div class="col-sm-1">
+            <div class="avatar">
+            <img src="../assets/Avatar1.svg" alt="default avatar" class="avatar">
+            </div>
+        </div>
+        <div class="col-sm-11">
+          <div class="row"> 
+            <div class="col-sm-11 left">
+              <h1 class="pseudo">{{ post.user }}</h1>
+              <small class="date"> {{ post.date + " à " + post.hour }}</small>
+            </div>
+            <div class="col-sm-1 right contain-img">
+              <img src="../assets/Options.svg" alt="Options">
+            </div>
+          </div>
+          <div class="row"> 
+            <div class="col-sm-12">
+              <p class="content-block"> {{ post.content }} </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-10 left">
+              <button>Voir plus</button>
+            </div>
+            <div class="col-sm-1 connect-buttons contain-img">
+              <img src="../assets/Like.svg" alt="likes">
+              <span> {{ post.likes }} </span>
+            </div>
+            <div class="col-sm-1 connect-buttons contain-img">
+              <img src="../assets/Comment.svg" alt="comments"> 
+              <span> {{ post.comments }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row comment"> 
+        <div class="col-sm-1">
+            <div class="avatar">
+              <img src="../assets/Avatar1.svg" alt="default avatar" class="avatar">
+            </div>
+        </div>
+        <div class="col-sm-11">
+          <form class="form-post" @submit.prevent="save">
+            <textarea rows="3" type="text" placeholder="Votre commentaire"></textarea>
+            <button>Publier</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+          
+          
+
     <pre>{{post}}</pre>
   </section>
 </template>
