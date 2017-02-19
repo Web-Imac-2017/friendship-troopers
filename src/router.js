@@ -7,6 +7,7 @@ Vue.use(Router)
 import Hello from './components/Hello'
 import PageA from './components/PageA'
 import Login from './components/Login'
+import Home from './components/Home'
 
 // ==================== Router registration ====================
 export default new Router({
@@ -22,6 +23,9 @@ export default new Router({
     	path: '/article/:id', 
     	component : PageA
 	},{ 
+      path: '/home', 
+      component : Home
+  },{ 
     	path: '*', 
     	redirect: '/'
 	}

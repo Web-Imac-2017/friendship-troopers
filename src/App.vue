@@ -24,9 +24,6 @@ export default {
   $link-color: #42b983;
   $brand-success: #42b983;
   @import 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
-  // font awesome
-  $fa-font-path: '../node_modules/font-awesome/fonts/';
-  @import 'node_modules/font-awesome/scss/font-awesome';
   //some styling adaptations
   h1
     color: #42b983
