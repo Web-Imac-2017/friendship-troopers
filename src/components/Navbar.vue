@@ -6,6 +6,7 @@
         <router-link to="/" class="nav-item nav-link"> Home </router-link>
         <router-link to="/login" class="nav-item nav-link"> Login </router-link>
         <router-link to="/inscription" class="nav-item nav-link"> Inscription </router-link>
+        <router-link to="/home" class="nav-item nav-link"> Home </router-link>
       </li>
       <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
     </ul>
