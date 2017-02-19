@@ -1,4 +1,3 @@
-
 <template>
 	<div class="container login">
 
@@ -37,7 +36,6 @@
 
 
 <script>
-
 let formUser = {
 	props:{
 		value:Object
@@ -53,7 +51,6 @@ let formUser = {
 			this.$emit("input", this.user),
 			this.error1=true,
         	this.error2=true
-
 			
 		}
 	},
@@ -97,10 +94,8 @@ export default {
         },
         error1:false,
         error2:false
-
       }
     }
-
 }
 </script>
 
@@ -139,5 +134,3 @@ export default {
  height: 4em;
 }  */
 </style>
-
-

@@ -59,6 +59,18 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 } 
 
+.center>*{
+  text-align: center;
+}
+
+.left>*{
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
 a{
 	color:$main-text;
 	text-decoration: underline;
@@ -93,11 +105,13 @@ form{
 			padding:1% 5%;
 		}
 	}
+  textarea {
+    @extend input;
+    width: 100%;
+    resize: none;
+  }
 }
 
-.center>*{
-	text-align: center;
-}
 
 button{
 	background: $main-title ;
@@ -124,3 +138,34 @@ button{
     width: 1170px;
   }
 }
+
+small {
+  font-weight: lighter;
+  @include font-size(1);
+}
+
+.content-block {
+  margin: 0% 0% 0% 100px;
+}
+
+.post {
+  background-color: $articles-background;
+  padding: 2%;
+  margin: 2%;
+}
+
+.pseudo {
+  margin: 0px 1px 0.5px 2px;
+}
+
+.connect-buttons {
+  text-align: right;
+}
+
+.avatar {
+  height: 70px;
+  width: 70px;
+  background-color: $grey;
+  margin: 0px;
+}
+

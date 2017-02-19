@@ -23,6 +23,15 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   text-align: center; }
 
+.center > * {
+  text-align: center; }
+
+.left > * {
+  text-align: left; }
+
+.right {
+  text-align: right; }
+
 a {
   color: #e7e8e8;
   text-decoration: underline; }
@@ -37,7 +46,7 @@ form label {
   text-align: right;
   padding: 0 4%; }
 
-form input {
+form input, form textarea {
   background: #303b4c;
   border: none;
   padding: 1% 2%;
@@ -52,8 +61,9 @@ form .field {
     margin: 0 0 0 2%;
     padding: 1% 5%; }
 
-.center > * {
-  text-align: center; }
+form textarea {
+  width: 100%;
+  resize: none; }
 
 button {
   background: #46bfa9;
@@ -69,26 +79,31 @@ button {
   .login > .row .col-sm-4 {
     border-right: 1px solid #46bfa9; }
 
-input.button-add {
-  background-image: url(/images/fuseeFirstPage.png);
-  /* 16px x 16px */
-  background-color: transparent;
-  /* make the button transparent */
-  background-repeat: no-repeat;
-  /* make the background image appear only once */
-  background-position: 0px 0px;
-  /* equivalent to 'top left' */
-  border: none;
-  /* assuming we don't want any borders */
-  cursor: pointer;
-  /* make the cursor like hovering over an <a> element */
-  height: 16px;
-  /* make this the size of your image */
-  padding-left: 16px;
-  /* make text start to the right of the image */
-  vertical-align: middle;
-  /* align the text vertically centered */ }
-
 @media screen and (min-width: 1200px) {
   .container-fluid {
     width: 1170px; } }
+
+small {
+  font-weight: lighter;
+  font-size: 10px;
+  font-size: 1rem; }
+
+.content-block {
+  margin: 0% 0% 0% 100px; }
+
+.post {
+  background-color: #222d3c;
+  padding: 2%;
+  margin: 2%; }
+
+.pseudo {
+  margin: 0px 1px 0.5px 2px; }
+
+.connect-buttons {
+  text-align: right; }
+
+.avatar {
+  height: 70px;
+  width: 70px;
+  background-color: #cdcccc;
+  margin: 0px; }
