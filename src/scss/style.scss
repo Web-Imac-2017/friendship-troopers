@@ -1,20 +1,36 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400italic,700italic,400,700);
- 
 
-$primary-color: #fff;
-$secondary-color: #efefef;
-$background-color: #000000;
+// Colors variables
+
+
+$white: #fff;
+$enigme-title: #8cada9;
+
+$main-title: #46bfa9;
+$username: #349994;
+$planets: #206671;
+
+$main-text: #e7e8e8;
+$grey : #cdcccc;
+$secondary-text : #999999;
+
+$comments-background : #303b4c;
+$articles-background : #222d3c;
+$background: #0f1a28;
+
+$notifs: #7c397b;
 
 // Font Variables
+
 $main-font: 'Roboto', serif;   
 
 
 @font-face {
-    font-family: earthOrbiter;
+    font-family: earthOrbiter-font;
     src: url(earthorbiterxtrabold.ttf);
 }
 
-$title-font: earthOrbiter;
+$title-font: earthOrbiter-font;
 
 // Styles
 
@@ -31,13 +47,76 @@ body {
   font-family: $main-font;
   font-weight: normal;
   @include font-size(1.2);
-  background: $background-color;
-  color: $primary-color;
+  background: $background;
+  color:$main-text;
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: $title-font;
   font-weight: normal;
   @include font-size(1.6);
+  color:$main-title;
+  text-transform: uppercase;
+  text-align: center;
+} 
+
+a{
+	color:$main-text;
+	text-decoration: underline;
+	&:hover{
+		color:$main-title;
+	}
+}
+
+form{
+    label{
+    	display:block;
+	    margin-bottom: 0;
+	    display: inline-block;
+	    min-width: 19%;
+	    text-align: right;
+	    padding: 0 4%;
+    }
+    input{
+		background: $comments-background ;
+		border: none;
+		padding: 1% 2%;
+		outline: 0;
+		display: inline-block;
+		width:80%;
+	}
+	.field{
+		text-align: right;
+		padding: 1% 0;
+
+		button{
+			margin: 0 0 0 2%;
+			padding:1% 5%;
+		}
+	}
+}
+
+.center>*{
+	text-align: center;
+}
+
+button{
+	background: $main-title ;
+	border: none;
+	padding: 1% 2%;
+	outline: 0;
+	display: inline-block;
+	&:hover{
+		background: $username;
+	}
+}
+
+
+.login > .row{
+	
+	padding: 2% 3%;
+	.col-sm-4{
+		border-right: 1px solid $main-title;
+	}
 }
 
 @media screen and (min-width: 1200px) {

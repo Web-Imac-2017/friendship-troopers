@@ -1,39 +1,37 @@
 
 <template>
-	<div class="container">
+	<div class="container login">
+
 
 	  	<div class="row">
-	  		<div class="col-sm-6">
+	  		<div class="col-sm-4">
 	  			<h1>Frienship troopers</h1>
-	  			<div>
+	  			<div class="center">
 	  				<p>
-	  					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est dolorem dolores quidem nihil asperiores, voluptates voluptate alias impedit perferendis!
-	  				</p> 
-	  				<p>
-	  					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est dolorem dolores quidem nihil asperiores, voluptates voluptate alias impedit perferendis!
+	  					Venez partager votre passion de la science-fiction à travers ce réseau social mélant énigmes et bonne humeur !
+					</p> <p>
+						A votre inscription, vous répondrez à une série de questions et une planète vous sera attribuée en fonction de vos réponses...
+					</p> <p>
+						Vous pourrez ensuite rencontrer d’autres passionnés en résolvant des énigmes avec eux !
 	  				</p> 
 	  			</div>
 	  		</div>
-	  		<div class="col-sm-6">
+	  		<div class="col-sm-8">
 
-	<form-user v-model="user" title="Request form">
-		<div slot="header">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis, minus.</div>
-		<div slot="footer">Footer ipsum dolor sit amet, consectetur adipisicing elit. Debitis, minus.</div>
+				<form-user v-model="user" title="Request form">
 
-		<div slot="error">{{user.pseudo}} est déjà utilisé !</div>
+					<div v-show='error1' slot="error1">{{user.username}} est déjà utilisé !</div>
+					<div v-show='error2' slot="error2">L'adresse mail {{user.mail}} est déjà utilisée !</div>
 
-	</form-user>
+				</form-user>
+				<!-- <img src="../../www/assets/images/FuseeFirstPage.svg" alt="fusée"> -->
 
-	<pre>{{user}}</pre>
+				<pre>{{user}}</pre>
 
+			</div>
+
+		</div>
 	</div>
-
-	</div>
-</div>
-
-
-
-
 
 </template> 
 
@@ -48,34 +46,39 @@ let formUser = {
 		return{
 			user:JSON.parse(JSON.stringify(this.value)),
 			title: 'Inscription',
-			seen:false
 		}
 	},
 	methods:{
 		save(){
-			this.$emit("input", this.user)
+			this.$emit("input", this.user),
+			this.error1=true,
+        	this.error2=true
+
+			
 		}
 	},
 	template: `
 	<form class="form" @submit.prevent="save">
 		<h1>{{ title }}</h1>
-		<p><slot name="header"></slot></p>
+		
 		<div class="field">
 			<label for="">Pseudo</label>
-			<input type="text" v-model="user.pseudo" placeholder="edit me">
-			<p><slot name="error" v-if="seen"></slot></p>
+			<input type="text" v-model="user.username">
 		</div>
 		<div class="field">
 			<label for="">Mail</label>
-			<input type="text" v-model="user.mail" placeholder="edit me">
+			<input type="email" v-model="user.mail">
 		</div>
 		<div class="field">
 			<label for="">Mot de passe</label>
-			<input type="text" v-model="user.password" placeholder="edit me">
+			<input type="password" v-model="user.password">
 		</div>
-		<a href="">Jai déjà un compte</a>
-		<button class="button" type="submit">Envoyer</button>	
-		<p><slot name="footer"></slot></p>
+		<div class="field">
+			<a href="">Jai déjà un compte</a>
+			<button v-on:click="save">S'inscrire</button>
+		</div>
+		<p><slot name="error1"></slot></p>
+		<p><slot name="error2"></slot></p>
     </form>
 	  		
 	`
@@ -88,10 +91,12 @@ export default {
 	data () {
       return {
         user:{
-        	pseudo: '',
+        	username: '',
 	        mail: '',
-	        password: ''
+	        password: '',
         },
+        error1:false,
+        error2:false
 
       }
     }

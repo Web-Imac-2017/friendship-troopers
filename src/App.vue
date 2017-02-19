@@ -18,6 +18,8 @@ export default {
 }
 </script>
 
+<style src="../www/assets/css/reset.css"></style>
+
  <style lang="sass">
   // Bootstrap
   $icon-font-path: '../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
@@ -30,5 +32,6 @@ export default {
   p
     text-align: justify
 </style>
+
 
 <style src="../www/assets/css/style.css"></style>
