@@ -71,7 +71,7 @@ let formUser = {
 			<input type="password" v-model="user.password">
 		</div>
 		<div class="field">
-			<a href="">Jai déjà un compte</a>
+			<a href="">J'ai déjà un compte</a>
 			<button v-on:click="save">S'inscrire</button>
 		</div>
 		<p><slot name="error1"></slot></p>
