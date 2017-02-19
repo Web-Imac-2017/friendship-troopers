@@ -8,6 +8,7 @@ import Hello from './components/Hello'
 import PageA from './components/PageA'
 import Login from './components/Login'
 import Home from './components/Home'
+import Inscription from './components/Inscription'
 
 // ==================== Router registration ====================
 export default new Router({
@@ -20,6 +21,9 @@ export default new Router({
     	path: '/login', 
     	component : Login
 	},{ 
+      path: '/inscription', 
+      component : Inscription
+  },{ 
     	path: '/article/:id', 
     	component : PageA
 	},{ 
