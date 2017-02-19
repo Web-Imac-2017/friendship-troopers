@@ -90,8 +90,8 @@ let formUser = {
 						</div>
 					</div> 
 					<div class="field">
-						<a href="">Jai déjà un compte</a>
-						<button v-on:click.stop="save">Sinscrire</button>
+						<a href="">J'ai déjà un compte</a>
+						<button v-on:click.stop="save">S'inscrire</button>
 					</div>
 					<p><slot name="error1"></slot></p>
 					<p><slot name="error2"></slot></p>
