@@ -87,7 +87,7 @@ let createPost = {
       return {
         post:{
           user: 'Lucky',
-          avatar : 'AVATAR',
+          avatar : "addresse de l'avatar",
           date: '20 fev',
           hour: '12h04',
           content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut tortor eu ipsum laoreet faucibus. Etiam mattis eros id leo maximus blandit. Proin id massa in risus gravida suscipit non eu arcu. Aenean auctor lacus risus, porttitor sodales odio vehicula eu. Curabitur luctus ut ligula a iaculis. Aliquam erat volutpat. Pellentesque magna nibh, aliquam sit amet consectetur eget, auctor quis neque.',
