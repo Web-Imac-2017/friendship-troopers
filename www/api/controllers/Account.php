@@ -2,7 +2,9 @@
 /**
 * Gère le compte d'un user
 */
-class Account extends Application{
+namespace Controllers;
+
+class Account extends Controller{
 
 	function deleteAccount(){
 		//delete user
@@ -14,4 +16,3 @@ class Account extends Application{
 		//logout
 	}
 }
-

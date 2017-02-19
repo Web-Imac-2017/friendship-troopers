@@ -6,7 +6,7 @@
 */
 namespace Models;
 
-abstract class Model {
+class Model {
   protected $table = NULL;
   protected $pdo;
 

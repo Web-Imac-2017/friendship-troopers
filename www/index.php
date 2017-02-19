@@ -10,5 +10,6 @@ require_once ROOT.'/api/utils/Autoloader.php';
 //var_dump(\Utils\Config::get('db.hostname'));
 
 $model = new \Models\Model();
-
+$controller = new \Controllers\publication();
+$controller->view(1);
 //$controller = new SignIn();
