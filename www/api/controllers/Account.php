@@ -2,7 +2,7 @@
 /**
 * Gère le compte d'un user
 */
-namespace controllers;
+namespace Controllers;
 class Account extends Application{
 
 	function deleteAccount(){

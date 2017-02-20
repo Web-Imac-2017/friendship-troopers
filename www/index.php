@@ -1,27 +1,25 @@
-<?php 
-/*
-require_once($_SERVER['DOCUMENT_ROOT'].'/api/autoload.php');
-$autoload =  new \Autoloadr\Universal();
-$autoload->add_prefix($_SERVER['DOCUMENT_ROOT'] . '/api');
-/*$autoload->add_prefix($_SERVER['DOCUMENT_ROOT'] . '/api/models');*/
-/*$autoload->register();
-$controller = new controllers\SignIn(); */
-
-echo strpbrk("clasController", 'Controller');
-?>
-
+<?php
+define('ROOT', __DIR__);
+require_once ROOT.'/api/utils/Autoloader.php';
+\Utils\Autoloader::register();
+\Utils\Config::init();
+//var_dump(\Utils\Config::get('db.hostname'));
+//$model = new \Models\Model();
+//$controller = new SignIn(); ?>
 
 <form method="POST" action="views/test.php">
-	<label>Username
+	<!-- <label>Username
 		<input type="text" name="username"/>
-	</label>
+	</label> -->
 	<label>email
 		<input type="text" name="mail"/>
 	</label>
 	<label>password
 		<input type="password" name="password" />
-		</label>
+	</label>
 
 	<input type="submit" value="envoyer">
 </form>
+
+
 

@@ -4,13 +4,11 @@
 * @var ...userModel
 * ////////////////////////////
 */
-namespace model;
+namespace Models;
 
-require_once($_SERVER['DOCUMENT_ROOT'].'api/models/ApplicationModel.class.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'api/models/constantes.php');
-class UserModel extends ApplicationModel{
+class User extends Model{
 	//----------[ CONSTANTS ]----------
-	const TABLE_NAME = 'user';
+	
 	//----------[ ATTRIBUTS ]----------
 	private $id;
 	private $username;
@@ -25,6 +23,7 @@ class UserModel extends ApplicationModel{
 
 	//----------[ CONSTRUCT ]----------
 	function __construct($params = false) {
+		parent::__construct();
 		if (is_array($params)) {
 			foreach ($params as $key => $val) {
 				if($key != "password") {
@@ -86,74 +85,37 @@ class UserModel extends ApplicationModel{
 	 * Check if new user is valid (mail or username already in use)
 	 *
 	 */
-	function checkIsNewUser() {
-		/*$sql = "SELECT `username`, `mail` 
-				FROM `user` 
-				WHERE `username` = '". $this->username ."' 
-				AND `mail` = '". $this->mail ."'";*/
-		$bdd = ApplicationModel::dbConnection();
-		$bdd->prepare("SELECT `username`, `mail` 
-				FROM `user` 
-				WHERE `username` = ? 
-				AND `mail` = ?;
-			");
-		$bdd->execute(array($this->username,$this->));
-		$result = ApplicationModel::executeQuery($sql,$bdd);
-		$fetch=$result->fetchAll(PDO::FETCH_ASSOC);
-
-		if(count($fetch) > 0){
+	function checkIsNewUser($data) {
+		// j'ai besoin d'un OR T-T		
+		$result=$this->findFirst($data);
+		echo "result";
+		var_dump($result);
+		var_dump(count($result));
+		if(count($result) > 0 && $result != false){
 			return false;
 		} else {
 			return true;
 		}
 	}
+
 	/**
-	 * vérifie si le nom d'utilisateur est libre ou non (
-	 * Pour vérification temps réel en front 
-	 * (requête ajax)
+	 * Adds an user.
 	 *
-	 * @param      <type>  $username  The username
+	 * @param      array   $data    The datas
+	 * @param      integer  $role    The role
+	 * @param      integer  $planet  The planet
 	 */
-	function checkUsernameExist($username){
+	function addUser($data, $role = 3, $planet = 1) {
+
+		$data["planetId"] = $planet; // TERRE
+		$data["roleId"] = $role; // user par défaut
 		
+		var_dump($data);
+
+		$result=$this->insert($data);
+		var_dump($this->primaryKeyValue);
+		$this->password="ok";
 	}
-
-	/**
-	 * Adds an user in db.
-	 *
-	 * @param      <type>  $user   The user
-	 */
-	function addUser() {
-		//hash du mdp
-		$sql = "INSERT INTO ". self::TABLE_NAME ." ( `username`, `mail`, `password`, `planetId`, `roleId`, `activated`) 
-		VALUES ('".$this->username ."' , '". $this->mail ."', '". $this->password ."', ".TERRE.", ".USER.", 0);";
-		
-		var_dump($sql);
-		
-		$bdd = ApplicationModel::dbConnection();
-		ApplicationModel::executeQuery($sql,$bdd);
-	}
-
-	/**
-	 * login
-	 *
-	 * @param      char  $mail      The mail
-	 * @param      char  $password  The password
-	 */
-	function login($mail, $password) {
-		// requête bdd, 
-		// créer un objet user
-		return new self();
-	}
-	/**
-	 * { function_description }
-	 */
-	function checkUserLogin(){
-
-		$this->password
-	}
-
-
 }
 
 ?>
