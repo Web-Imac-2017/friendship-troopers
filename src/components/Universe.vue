@@ -5,7 +5,7 @@
         <img class="logo" src="../assets/logo.png">
       </div>
       <div id="hello">
-        <h1> Hello Vue!</h1>
+        <h1>Page univers</h1>
       </div>
     </div>
   </div>

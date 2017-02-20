@@ -4,7 +4,22 @@
     <div id="app">
       <navbar></navbar>
       <router-view></router-view>
+
       
+      <h1>Menu temporaire</h1>
+      <router-link to="/"> Login/Accueil </router-link>
+      <router-link to="/inscription"> Inscription </router-link>
+      <router-link to="/univers"> Univers </router-link>
+      <router-link to="/recherche"> Recherche </router-link>
+      <router-link to="/utilisateur"> Profil </router-link>
+      <router-link to="/utilisateur/enigmes"> Enigme </router-link>
+      <router-link to="/planete"> Planete </router-link>
+      <router-link to="/planete/actualites"> Fil d'actualité </router-link>
+      <router-link to="/planete/post/2"> Post </router-link>
+      <router-link to="/planete/wiki"> Wiki d'une planète </router-link>
+      <router-link to="/marche-intergalactique"> Marché </router-link>
+      <router-link to="/FAQ"> FAQ </router-link>
+      <router-link to="/error404"> Erreur 404 </router-link>
 
     </div>
 </template>
