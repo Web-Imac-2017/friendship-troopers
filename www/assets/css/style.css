@@ -127,3 +127,16 @@ small {
 @media screen and (min-width: 1200px) {
   .container-fluid {
     width: 1170px; } }
+
+nav .navbar-brand {
+  font-family: earthOrbiter-font; }
+
+nav ul {
+  width: 100%;
+  background-color: #222d3c;
+  color: #e7e8e8; }
+  nav ul li .nav-item {
+    display: inline-block;
+    text-decoration: none; }
+  nav ul li input .nav-item, nav ul li form textarea .nav-item, form nav ul li textarea .nav-item {
+    background-color: #0f1a28; }

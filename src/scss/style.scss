@@ -16,6 +16,7 @@ $secondary-text : #999999;
 
 $comments-background : #303b4c;
 $articles-background : #222d3c;
+$menu-background : $articles-background;
 $background: #0f1a28;
 
 $notifs: #7c397b;
@@ -201,3 +202,25 @@ small {
     width: 1170px;
   }
 }
+
+
+nav {
+  .navbar-brand {
+    font-family: $title-font;
+  }
+  ul {
+    width: 100%;
+    background-color: $menu-background;
+    color: $main-text;
+  
+    li {
+      .nav-item {
+        display : inline-block;
+        text-decoration: none;
+      }
+      input .nav-item {
+        background-color: $background;
+      }
+    }
+  }
+}  

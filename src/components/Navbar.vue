@@ -1,12 +1,13 @@
 <template>
   <nav class="navbar navbar-default">
-    <a class="navbar-brand" href="/"> {{$store.state.appTitle}} {{$store.state.appVersion}}</a>
     <ul class="nav navbar-nav navbar-right">
       <li>
-        <router-link to="/" class="nav-item nav-link"> Home </router-link>
+        <a class="navbar-brand" href="/"> {{$store.state.appTitle}} {{$store.state.appVersion}}</a>
+        <router-link to="/home" class="nav-item nav-link"> Accueil </router-link>
+        <router-link to="/enigma" class="nav-item nav-link"> Énigmes </router-link>
+        <input type ="text" class="nav-item" value ="Recherche"></input>
         <router-link to="/login" class="nav-item nav-link"> Login </router-link>
         <router-link to="/inscription" class="nav-item nav-link"> Inscription </router-link>
-        <router-link to="/home" class="nav-item nav-link"> Home </router-link>
       </li>
       <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
     </ul>
