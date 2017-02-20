@@ -3,8 +3,21 @@
   font-family: earthOrbiter-font;
   src: url(earthorbiterxtrabold.ttf); }
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
 html {
   font-size: 62.5%; }
+
+#app {
+  background: #0f1a28; }
+
+.nav input, .nav form textarea, form .nav textarea {
+  background: #0f1a28;
+  border: none;
+  padding: 0.9rem; }
 
 body {
   font-family: "Roboto", serif;
@@ -23,9 +36,6 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   text-align: center; }
 
-.center {
-  text-align: center; }
-
 .left > * {
   text-align: left; }
 
@@ -36,7 +46,8 @@ a {
   color: #e7e8e8;
   text-decoration: underline; }
   a:hover {
-    color: #46bfa9; }
+    color: #46bfa9;
+    background-color: none; }
 
 form label {
   display: block;
@@ -49,7 +60,7 @@ form label {
 form input, form textarea {
   background: #303b4c;
   border: none;
-  padding: 1% 2%;
+  padding: 0.5rem 1.5rem;
   outline: 0;
   display: inline-block;
   width: 80%; }
@@ -59,7 +70,7 @@ form .field {
   padding: 1% 0; }
   form .field button {
     margin: 0 0 0 2%;
-    padding: 1% 5%; }
+    padding: 1rem 3rem; }
 
 form textarea {
   width: 100%;
@@ -68,7 +79,7 @@ form textarea {
 button {
   background: #46bfa9;
   border: none;
-  padding: 1% 2%;
+  padding: 0.5rem 1.5rem;
   outline: 0;
   display: inline-block; }
   button:hover {
@@ -135,8 +146,14 @@ nav ul {
   width: 100%;
   background-color: #222d3c;
   color: #e7e8e8; }
-  nav ul li .nav-item {
+  nav ul li .nav-link {
     display: inline-block;
     text-decoration: none; }
-  nav ul li input .nav-item, nav ul li form textarea .nav-item, form nav ul li textarea .nav-item {
+    nav ul li .nav-link:hover {
+      text-decoration: none;
+      background-color: none; }
+    nav ul li .nav-link:active {
+      font-weight: bold;
+      color: #e7e8e8; }
+  nav ul li input, nav ul li form textarea, form nav ul li textarea {
     background-color: #0f1a28; }

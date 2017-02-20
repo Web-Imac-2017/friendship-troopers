@@ -9,6 +9,7 @@ import PageA from './components/PageA'
 import Login from './components/Login'
 import Home from './components/Home'
 import Inscription from './components/Inscription'
+// faire les nouvelles vues pour les charger
 
 // ==================== Router registration ====================
 export default new Router({
@@ -23,6 +24,7 @@ export default new Router({
 	},{ 
       path: '/inscription', 
       component : Inscription
+      // mixer avec la page login sur la page d'accueil
   },{ 
     	path: '/article/:id', 
     	component : PageA
@@ -35,3 +37,4 @@ export default new Router({
 	}
   ]
 })
+

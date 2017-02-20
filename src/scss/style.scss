@@ -2,7 +2,6 @@
 
 // Colors variables
 
-
 $white: #fff;
 $enigme-title: #8cada9;
 
@@ -33,6 +32,48 @@ $main-font: 'Roboto', serif;
 
 $title-font: earthOrbiter-font;
 
+
+// Padding and margin variables
+
+@mixin padding($sizeValue) {
+  padding:$sizeValue + rem;
+}
+
+@mixin padding-button($sizeValue) {
+  padding:$sizeValue*0.5 + rem $sizeValue*1.5 + rem;
+}
+
+@mixin padding-input($sizeValue) {
+  padding:$sizeValue*0.9 + rem;
+}
+
+// Center something
+
+%center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+// Placeholders for inputs
+
+@mixin placeholder($color) {
+
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: $color;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: $color;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: $color;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: $color;
+  }
+}
+
 // Styles
 
 html {
@@ -48,6 +89,19 @@ html {
 	border-radius: $size;
 	-webkit-border-radius: $size;
 	-moz-border-radius: $size;
+}
+
+#app{
+  background: $background;
+}
+
+.nav{
+  input{
+    background: $background;
+    border:none;
+    @include padding-input(1);
+  }
+  
 }
 
 body {
@@ -67,7 +121,7 @@ h1, h2, h3, h4, h5, h6 {
 } 
 
 .center{
-  text-align: center;
+  @extend %center;
 }
 
 .left>*{
@@ -83,8 +137,11 @@ a{
 	text-decoration: underline;
 	&:hover{
 		color:$main-title;
+    background-color: none;
 	}
 }
+
+
 
 form{
     label{
@@ -98,7 +155,7 @@ form{
     input{
 		background: $comments-background ;
 		border: none;
-		padding: 1% 2%;
+		@include padding-button(1);
 		outline: 0;
 		display: inline-block;
 		width:80%;
@@ -109,7 +166,7 @@ form{
 
 		button{
 			margin: 0 0 0 2%;
-			padding:1% 5%;
+			@include padding-button(2);
 		}
 	}
   textarea {
@@ -123,7 +180,7 @@ form{
 button{
 	background: $main-title ;
 	border: none;
-	padding: 1% 2%;
+	@include padding-button(1);
 	outline: 0;
 	display: inline-block;
 	&:hover{
@@ -212,15 +269,29 @@ nav {
     width: 100%;
     background-color: $menu-background;
     color: $main-text;
+
+    
   
     li {
-      .nav-item {
+      .nav-link {
         display : inline-block;
         text-decoration: none;
+
+        &:hover{
+          text-decoration: none;
+          background-color: none;
+
+        }
+        &:active{
+          font-weight: bold;
+          color:$main-text;
+
+        }
       }
-      input .nav-item {
-        background-color: $background;
+      input {
+       background-color: $background;
+
       }
     }
   }
-}  
+}
