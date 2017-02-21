@@ -164,7 +164,8 @@ nav .navbar-brand:hover {
 nav ul {
   width: 100%;
   background-color: #222d3c;
-  color: #e7e8e8; }
+  color: #e7e8e8;
+  display: block; }
   nav ul li .nav-link, nav ul li .nav-item {
     display: inline-block;
     text-decoration: none;
@@ -181,3 +182,26 @@ nav ul {
   nav ul li img {
     width: 20px;
     height: auto; }
+
+nav ul li.navbar-right .nav-responsive {
+  position: fixed;
+  top: 0px;
+  right: 0px; }
+
+@media screen and (max-width: 800px) {
+  nav ul li.navbar-right .nav-item, nav ul li.navbar-right menu-separator {
+    display: none; }
+  nav ul li.navbar-right .nav-responsive {
+    display: inline-block; } }
+
+@media screen and (min-width: 801px) {
+  nav ul li.navbar-right .nav-item, nav ul li.navbar-right menu-separator {
+    display: inline-block; }
+  nav ul li.navbar-right .nav-responsive {
+    display: none; } }
+
+menu-separator {
+  vertical-align: middle;
+  height: 20px;
+  border: 1px solid #e7e8e8;
+  margin: 0 10px; }

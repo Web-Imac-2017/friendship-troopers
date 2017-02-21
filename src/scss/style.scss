@@ -292,7 +292,8 @@ nav {
     width: 100%;
     background-color: $menu-background;
     color: $main-text;
-  
+    display : block;
+
     li {
 
       .nav-link, .nav-item {
@@ -324,4 +325,35 @@ nav {
       }
     }
   }
+}
+
+nav ul li.navbar-right .nav-responsive{
+    position: fixed;
+    top : 0px;
+    right: 0px;
+}
+
+@media screen and (max-width: 800px) {
+  nav ul li.navbar-right .nav-item, nav ul li.navbar-right menu-separator {
+    display: none;
+  }
+  nav ul li.navbar-right .nav-responsive{
+    display: inline-block;
+  }
+}
+
+@media screen and (min-width: 801px) {
+  nav ul li.navbar-right .nav-item, nav ul li.navbar-right menu-separator {
+    display: inline-block;
+  }
+  nav ul li.navbar-right .nav-responsive {
+    display: none;
+  }
+}
+
+menu-separator {
+  vertical-align: middle;
+  height: 20px;
+  border: 1px solid $main-text;
+  margin: 0 10px;
 }
