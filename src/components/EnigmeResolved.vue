@@ -5,7 +5,7 @@
         <img class="logo" src="../assets/logo.png">
       </div>
       <div id="hello">
-        <h1>Page d'enigme start</h1>
+        <h1>Page pour voir les énigmes résolues</h1>
       </div>
     </div>
   </div>

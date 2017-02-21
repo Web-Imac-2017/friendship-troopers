@@ -4,7 +4,7 @@
       <li class="navbar-left">
         <a class="navbar-brand" href="/"> <!-- {{$store.state.appTitle}} {{$store.state.appVersion}} -->Friendship<br/>Troopers</a>
         <menu-separator></menu-separator>
-        <router-link to="/planete/actualites" class="nav-item nav-link"> Accueil </router-link>
+        <router-link to="/actualites" class="nav-item nav-link"> Accueil </router-link>
         <router-link to="/utilisateur/enigmes" class="nav-item nav-link"> <b>Énigmes</b> </router-link>
       </li>
 

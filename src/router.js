@@ -5,14 +5,22 @@ Vue.use(Router)
 
 // ===================== Pages Components ======================
 import Login from './components/Login'
-import Feed from './components/Feed'
 import Inscription from './components/Inscription'
-import Universe from './components/Universe'
+
+import Event from './components/Event'
 import Search from './components/Search'
 import User from './components/User'
+import Parameters from './components/Parameters'
+import Friends from './components/Friends'
+import Chat from './components/Chat'
 import Enigme from './components/Enigme'
-import Planet from './components/Planet'
+import EnigmeResolved from './components/EnigmeResolved'
+import EnigmeCurrent from './components/EnigmeCurrent'
+import EnigmeCurrentChat from './components/EnigmeCurrentChat'
+
+import Feed from './components/Feed'
 import Post from './components/Post'
+
 import Wiki from './components/Wiki'
 import Market from './components/Market'
 import FAQ from './components/FAQ'
@@ -30,8 +38,8 @@ export default new Router({
       component : Inscription
       // mixer avec la page login sur la page d'accueil !
   },{ 
-      path: '/univers', 
-      component : Universe
+      path: '/univers/evenement', 
+      component : Event
   },{ 
       path: '/recherche', 
       component : Search
@@ -39,29 +47,36 @@ export default new Router({
       path: '/utilisateur', 
       component : User
       // mettre $username : unique pour chaque utilisateur
-  },
-  /* mettre routes suivantes :
-      /utilisateur/param   (onglet préférences / profil /….)
-      /utilisateur/profil
-      /utilisateur/amis
-      /utilisateur/conversations
-          /utilisateur/conversations/username
-
-          /utilisateur/enigmes/resolues
-          /utilisateur/enigmes/en-cours
-          /utilisateur/enigmes/en-cours/chatbox
-          /utilisateur/enigmes/start
-  */
-  { 
+  },{ 
+      path: '/utilisateur/parametres', 
+      component : Parameters
+      // mettre $username : unique pour chaque utilisateur
+  },{ 
+      path: '/utilisateur/amis', 
+      component : Friends
+      // mettre $username : unique pour chaque utilisateur
+  },{ 
+      path: '/utilisateur/conversations/utilisateur', 
+      component : Chat
+      // mettre $username : unique pour chaque utilisateur
+  },{ 
       path: '/utilisateur/enigmes', 
       component : Enigme
       // mettre $username : unique pour chaque utilisateur
   },{ 
-      path: '/planete', 
-      component : Planet
-      // mettre $planet : unique pour chaque planete
+      path: '/utilisateur/enigmes/resolues', 
+      component : EnigmeResolved
+      // mettre $username : unique pour chaque utilisateur
   },{ 
-      path: '/planete/actualites', 
+      path: '/utilisateur/enigmes/en-cours', 
+      component : EnigmeCurrent
+      // mettre $username : unique pour chaque utilisateur
+  },{ 
+      path: '/utilisateur/enigmes/en-cours/chatbox', 
+      component : EnigmeCurrentChat
+      // mettre $username : unique pour chaque utilisateur
+  },{ 
+      path: '/actualites', 
       component : Feed
       // mettre $planet : unique pour chaque planete
   },{ 

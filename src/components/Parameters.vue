@@ -5,7 +5,7 @@
         <img class="logo" src="../assets/logo.png">
       </div>
       <div id="hello">
-        <h1>Page d'enigme start</h1>
+        <h1>Page paramètres d'un profil</h1>
       </div>
     </div>
   </div>

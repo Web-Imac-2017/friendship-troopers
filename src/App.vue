@@ -7,19 +7,27 @@
 
       
       <h1>Menu temporaire</h1>
-      <router-link to="/"> Login/Accueil </router-link>
-      <router-link to="/inscription"> Inscription </router-link>
-      <router-link to="/univers"> Univers </router-link>
-      <router-link to="/recherche"> Recherche </router-link>
-      <router-link to="/utilisateur"> Profil </router-link>
-      <router-link to="/utilisateur/enigmes"> Enigme </router-link>
-      <router-link to="/planete"> Planete </router-link>
-      <router-link to="/planete/actualites"> Fil d'actualité </router-link>
-      <router-link to="/planete/post/2"> Post </router-link>
-      <router-link to="/planete/wiki"> Wiki d'une planète </router-link>
-      <router-link to="/marche-intergalactique"> Marché </router-link>
-      <router-link to="/FAQ"> FAQ </router-link>
-      <router-link to="/error404"> Erreur 404 </router-link>
+      <ul>
+        <li><router-link to="/"> Login/Accueil </router-link></li>
+        <li><router-link to="/inscription"> Inscription </router-link></li>
+        <li><router-link to="/univers/evenement"> Evenement </router-link></li>
+        <li><router-link to="/recherche"> Recherche </router-link></li>
+        <li><router-link to="/utilisateur"> Profil </router-link></li>
+        <li><router-link to="/utilisateur/parametres"> Paramètre d'un profil </router-link></li>
+        <li><router-link to="/utilisateur/amis"> Amis </router-link></li>
+        <li><router-link to="/utilisateur/conversations/utilisateur"> Chat </router-link></li>
+        
+        <li><router-link to="/utilisateur/enigmes"> Enigme débuter </router-link></li>
+        <li><router-link to="/utilisateur/enigmes/resolues"> Enigmes résolues </router-link></li>
+        <li><router-link to="/utilisateur/enigmes/en-cours"> Enigmes en cours </router-link></li>
+        <li><router-link to="/utilisateur/enigmes/en-cours/chatbox"> Chat de l'enigme </router-link></li>
+        <li><router-link to="/actualites"> Fil d'actualité </router-link></li>
+        <li><router-link to="/planete/post/2"> Post </router-link></li>
+        <li><router-link to="/planete/wiki"> Wiki d'une planète </router-link></li>
+        <li><router-link to="/marche-intergalactique"> Marché </router-link></li>
+        <li><router-link to="/FAQ"> FAQ </router-link></li>
+        <li><router-link to="/error404"> Erreur 404 </router-link></li>
+      </ul>
 
     </div>
 </template>
