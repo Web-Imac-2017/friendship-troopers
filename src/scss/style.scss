@@ -100,13 +100,27 @@ html {
   position: fixed;
   top :0;
   z-index: 1;
-  input{
-    background: $background;
-    border:none;
-    @include padding-input(1);
-  }
-}
 
+  input {
+    border:none;
+    @include padding-input(1);    
+  }
+  input.nav-item {
+      background: $background;
+  }
+  input.nav-search-icon {
+    height: 80%;
+    width: auto;
+    background: none;
+    background-image: url("../images/search.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;
+  }
+
+  
+}
 
 
 body {
@@ -270,6 +284,9 @@ nav {
     font-family: $title-font;
     text-decoration: none;
   }
+  .navbar-brand:hover {
+    background-color: none;
+  }
 
   ul {
     width: 100%;
@@ -277,30 +294,34 @@ nav {
     color: $main-text;
   
     li {
-    
-      .nav-link {
+
+      .nav-link, .nav-item {
         display : inline-block;
         text-decoration: none;
+        background: none;
 
         &:hover{
           text-decoration: none;
-          background-color: none;
+          background: none;
 
         }
         &:active{
-          font-weight: bold;
-          color:$main-text;
+          text-decoration: none;
+          background: none;
 
         }
-      }
-      .nav-link:hover {
-        background-color: transparent;
-      }
-      input {
-       background-color: $background;
+         &:focus{
+          text-decoration: none;
+          background: none;
 
+        }
+
+      }
+
+      img {
+        width: 20px;
+        height: auto;
       }
     }
   }
 }
-

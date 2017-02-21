@@ -20,9 +20,19 @@ html {
   top: 0;
   z-index: 1; }
   .nav input, .nav form textarea, form .nav textarea {
-    background: #0f1a28;
     border: none;
     padding: 0.9rem; }
+  .nav input.nav-item, .nav form textarea.nav-item, form .nav textarea.nav-item {
+    background: #0f1a28; }
+  .nav input.nav-search-icon, .nav form textarea.nav-search-icon, form .nav textarea.nav-search-icon {
+    height: 80%;
+    width: auto;
+    background: none;
+    background-image: url("../images/search.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle; }
 
 body {
   font-family: "Roboto", serif;
@@ -148,23 +158,26 @@ nav .navbar-brand {
   font-family: earthOrbiter-font;
   text-decoration: none; }
 
-nav .navbar-brand a:hover {
+nav .navbar-brand:hover {
   background-color: none; }
 
 nav ul {
   width: 100%;
   background-color: #222d3c;
   color: #e7e8e8; }
-  nav ul li .nav-link {
+  nav ul li .nav-link, nav ul li .nav-item {
     display: inline-block;
-    text-decoration: none; }
-    nav ul li .nav-link:hover {
+    text-decoration: none;
+    background: none; }
+    nav ul li .nav-link:hover, nav ul li .nav-item:hover {
       text-decoration: none;
-      background-color: none; }
-    nav ul li .nav-link:active {
-      font-weight: bold;
-      color: #e7e8e8; }
-  nav ul li .nav-link:hover {
-    background-color: transparent; }
-  nav ul li input, nav ul li form textarea, form nav ul li textarea {
-    background-color: #0f1a28; }
+      background: none; }
+    nav ul li .nav-link:active, nav ul li .nav-item:active {
+      text-decoration: none;
+      background: none; }
+    nav ul li .nav-link:focus, nav ul li .nav-item:focus {
+      text-decoration: none;
+      background: none; }
+  nav ul li img {
+    width: 20px;
+    height: auto; }
