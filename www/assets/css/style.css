@@ -14,10 +14,15 @@ html {
 #app {
   background: #0f1a28; }
 
-.nav input, .nav form textarea, form .nav textarea {
-  background: #0f1a28;
-  border: none;
-  padding: 0.9rem; }
+.nav {
+  margin: 0px;
+  position: fixed;
+  top: 0;
+  z-index: 1; }
+  .nav input, .nav form textarea, form .nav textarea {
+    background: #0f1a28;
+    border: none;
+    padding: 0.9rem; }
 
 body {
   font-family: "Roboto", serif;
@@ -140,7 +145,11 @@ small {
     width: 1170px; } }
 
 nav .navbar-brand {
-  font-family: earthOrbiter-font; }
+  font-family: earthOrbiter-font;
+  text-decoration: none; }
+
+nav .navbar-brand a:hover {
+  background-color: none; }
 
 nav ul {
   width: 100%;
@@ -155,5 +164,7 @@ nav ul {
     nav ul li .nav-link:active {
       font-weight: bold;
       color: #e7e8e8; }
+  nav ul li .nav-link:hover {
+    background-color: transparent; }
   nav ul li input, nav ul li form textarea, form nav ul li textarea {
     background-color: #0f1a28; }
