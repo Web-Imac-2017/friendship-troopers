@@ -186,6 +186,12 @@ form{
 		button{
 			margin: 0 0 0 2%;
 			@include padding-button(2);
+
+      .img-rocket {
+        width: 3em;
+        position: absolute;
+        right:0em;
+      }
 		}
 	}
   textarea {
@@ -194,6 +200,9 @@ form{
     resize: none;
   }
 }
+
+
+
 
 
 button{
@@ -289,6 +298,7 @@ nav {
   }
 
   ul {
+    padding: 0 1em;
     width: 100%;
     background-color: $menu-background;
     color: $main-text;
@@ -320,7 +330,7 @@ nav {
       }
 
       img {
-        width: 20px;
+        width: 2em;
         height: auto;
       }
     }
@@ -329,8 +339,9 @@ nav {
 
 nav ul li.navbar-right .nav-responsive{
     position: fixed;
-    top : 0px;
-    right: 0px;
+    top : 1em;
+    right: 1em;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 800px) {
@@ -353,9 +364,14 @@ nav ul li.navbar-right .nav-responsive{
 
 menu-separator {
   vertical-align: middle;
-  height: 20px;
-  border: 1px solid $main-text;
-  margin: 0 10px;
+  height: 1em;
+  border: 0.2px solid $main-text;
+  margin: 0 1.3em;
+}
+
+.like-icon:hover {
+  background-image: url("../images/LikeFull.svg");
+  background-size: 100%;
 }
 
 .square {

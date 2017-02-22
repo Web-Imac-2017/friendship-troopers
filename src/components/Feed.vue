@@ -53,7 +53,7 @@
               <button>Voir plus</button>
             </div>
             <div class="col-sm-1 connect-buttons contain-img">
-              <img src="../assets/Like.svg" alt="likes">
+              <img class="like-icon" src="../assets/Like.svg" alt="likes">
               <span> {{ post.likes }} </span>
             </div>
             <div class="col-sm-1 connect-buttons contain-img">
