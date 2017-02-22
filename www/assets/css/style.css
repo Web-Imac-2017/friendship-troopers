@@ -205,3 +205,9 @@ menu-separator {
   height: 20px;
   border: 1px solid #e7e8e8;
   margin: 0 10px; }
+
+.square {
+  height: 150px;
+  width: 150px;
+  background-color: #cdcccc;
+  margin: 10% 5%; }
