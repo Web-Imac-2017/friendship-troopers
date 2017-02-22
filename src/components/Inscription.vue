@@ -46,7 +46,7 @@ let formUser = {
 		}
 	},
 	template: `
-	<div class="container login">  
+	<div class="container login"> 
 		<div class="row">
 			<div v-if="etape === 'A'" class="col-sm-4">
 				<h1>Frienship troopers</h1>
@@ -91,7 +91,7 @@ let formUser = {
 					</div> 
 					<div class="field">
 						<a href="">J'ai déjà un compte</a>
-						<button v-on:click.stop="save">S'inscrire</button>
+						<button v-on:click.stop="save">S'inscrire<img class="img-rocket" src="static/FuseeFirstPage.svg"> </button>
 					</div>
 					<p><slot name="error1"></slot></p>
 					<p><slot name="error2"></slot></p>

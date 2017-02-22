@@ -289,6 +289,7 @@ nav {
   }
 
   ul {
+    padding: 0 1em;
     width: 100%;
     background-color: $menu-background;
     color: $main-text;
@@ -320,7 +321,7 @@ nav {
       }
 
       img {
-        width: 20px;
+        width: 2em;
         height: auto;
       }
     }
@@ -329,8 +330,9 @@ nav {
 
 nav ul li.navbar-right .nav-responsive{
     position: fixed;
-    top : 0px;
-    right: 0px;
+    top : 1em;
+    right: 1em;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 800px) {
@@ -353,7 +355,26 @@ nav ul li.navbar-right .nav-responsive{
 
 menu-separator {
   vertical-align: middle;
-  height: 20px;
-  border: 1px solid $main-text;
-  margin: 0 10px;
+  height: 1em;
+  border: 0.2px solid $main-text;
+  margin: 0 1.3em;
+}
+
+.like-icon:hover {
+  background-image: url("../images/LikeFull.svg");
+  background-size: 100%;
+}
+
+.login .field button {
+  padding: 0.8em 5em;
+}
+
+.img-rocket {
+  width: 3em;
+  
+  position: relative;
+  right: -6em;
+  margin-top: -2em; 
+  margin-bottom: -2em; 
+  margin-left: -4em;
 }
