@@ -186,6 +186,12 @@ form{
 		button{
 			margin: 0 0 0 2%;
 			@include padding-button(2);
+
+      .img-rocket {
+        width: 3em;
+        position: absolute;
+        right:0em;
+      }
 		}
 	}
   textarea {
@@ -194,6 +200,9 @@ form{
     resize: none;
   }
 }
+
+
+
 
 
 button{
@@ -363,18 +372,4 @@ menu-separator {
 .like-icon:hover {
   background-image: url("../images/LikeFull.svg");
   background-size: 100%;
-}
-
-.login .field button {
-  padding: 0.8em 5em;
-}
-
-.img-rocket {
-  width: 3em;
-  
-  position: relative;
-  right: -6em;
-  margin-top: -2em; 
-  margin-bottom: -2em; 
-  margin-left: -4em;
 }

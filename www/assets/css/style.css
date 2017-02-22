@@ -86,6 +86,10 @@ form .field {
   form .field button {
     margin: 0 0 0 2%;
     padding: 1rem 3rem; }
+    form .field button .img-rocket {
+      width: 3em;
+      position: absolute;
+      right: 0em; }
 
 form textarea {
   width: 100%;
@@ -211,14 +215,3 @@ menu-separator {
 .like-icon:hover {
   background-image: url("../images/LikeFull.svg");
   background-size: 100%; }
-
-.login .field button {
-  padding: 0.8em 5em; }
-
-.img-rocket {
-  width: 3em;
-  position: relative;
-  right: -6em;
-  margin-top: -2em;
-  margin-bottom: -2em;
-  margin-left: -4em; }
