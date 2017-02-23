@@ -1,30 +1,36 @@
 <template>
 
-<div class="container col-sm-12 post">
+  <div class="container col-sm-12 lateralMenuLeft">
     <div class="lateralMenuAvatar">
-
+    
+ <!-- 
       <img :src="user.userAvatar" alt="your avatar" class="avatar">
       <img :src="user.userPlanet.path" alt="your planet" class="planet">
+ -->
+      <img src="../assets/logo.png" alt="your avatar" class="avatar">
+      <img src="../assets/logo.png" alt="your planet" class="planet">
+
       <h1> {{ user.username }} </h1> <br>
       <p> {{ user.userBadge}} </p>
 
-   </div>
-  <div class="enigmes">
-    <h1> Enigmes </h1>
-    <a href="#"> Résoudre l'énigme en cours </a> <br>
-    <a href="#"> Voir la liste des enigmes </a> 
-  </div>
-  <div class="amis">
-    <h1> Amis </h1>
-    <a href="#"> Voir tous mes amis </a> <br>
-    <a href="#"> Accéder à la messagerie </a>
-    <div class="lastFriends">
-      <p> Derniers compagnons </p>
-      <ul>
-        <li v-for="friend in lastFriends">
-          <img :src="friend.avatar" :alt="friend.name">
-    </div> 
-  </div>
+    </div>
+
+      <p class="enigmes"> Enigmes </p>
+      <router-link to=""> Résoudre l'énigme en cours </router-link> <br>
+      <router-link to=""> Voir la liste des enigmes </router-link> 
+
+      <p class="amis">Amis</p>
+      <router-link to=""> Voir tous mes amis </router-link> <br/>
+      <router-link to=""> Accéder à la messagerie </router-link>
+      <div class="lastFriends">
+        <p> Derniers compagnons </p>
+        <ul>
+          <li v-for="friend in lastFriends">
+            <img :src="friend.avatar" :alt="friend.name">
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
