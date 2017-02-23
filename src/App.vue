@@ -58,4 +58,5 @@ export default {
 </style>
 
 
+<style src="../www/assets/css/input-range.css"></style>
 <style src="../www/assets/css/style.css"></style>
