@@ -1,13 +1,5 @@
 <template>
-  <div class="lateralMenuLeft">
-    <div class="lateralMenuAvatar">
-
-   <img src="../assets/logo.png" alt="your avatar" class="avatar">
-      <img src="../assets/logo.png" alt="your planet" class="planet">
-
-
-   </div>
-
+  <div class="lateralMenuRight">
     Je suis un super menu latéral !! <br/>
     Youpipipouharra !! <br/><br/>
 

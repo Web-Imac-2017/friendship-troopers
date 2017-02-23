@@ -2,8 +2,46 @@
 
 .lateralMenuLeft {
   width: 10em;
-  background-color: $grey;
+  background-color: $comments-background;
+  position: relative;
+  left: 1em;
+  /*display: inline-block;*/
+}
+
+.lateralMenuRight {
+  width: 10em;
+  background-color: $comments-background;
+  position: fixed;
+  right: 1em;
+  display: inline-block;
+}
+
+.menuTools{
+  width: 10em;
+  background-color: $comments-background;
   position: relative;
   left: 1em;
   display: inline-block;
+  margin-top: 2em;
+  text-align: center;
+  text-decoration: none;
+}
+
+.menuTools a{
+	text-decoration: none;
+}
+
+.lateralMenuAvatar{
+	background-image: url("../images/search.svg");
+	background-size: 100%;
+	text-align: center;
+	background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;
+
+    .planet{
+    	width: 5em;
+    	z-index: 2;
+    	position: relative;
+    }
 }

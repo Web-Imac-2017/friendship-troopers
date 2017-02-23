@@ -1,6 +1,39 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400italic,700italic,400,700);
 .lateralMenuLeft {
   width: 10em;
-  background-color: #cdcccc;
+  background-color: #303b4c;
   position: relative;
   left: 1em;
+  /*display: inline-block;*/ }
+
+.lateralMenuRight {
+  width: 10em;
+  background-color: #303b4c;
+  position: fixed;
+  right: 1em;
   display: inline-block; }
+
+.menuTools {
+  width: 10em;
+  background-color: #303b4c;
+  position: relative;
+  left: 1em;
+  display: inline-block;
+  margin-top: 2em;
+  text-align: center;
+  text-decoration: none; }
+
+.menuTools a {
+  text-decoration: none; }
+
+.lateralMenuAvatar {
+  background-image: url("../images/search.svg");
+  background-size: 100%;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle; }
+  .lateralMenuAvatar .planet {
+    width: 5em;
+    z-index: 2;
+    position: relative; }
