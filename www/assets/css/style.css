@@ -14,26 +14,6 @@ html {
 #app {
   background: #0f1a28; }
 
-.nav {
-  margin: 0px;
-  position: fixed;
-  top: 0;
-  z-index: 1; }
-  .nav input, .nav form textarea, form .nav textarea {
-    border: none;
-    padding: 0.9rem; }
-  .nav input.nav-item, .nav form textarea.nav-item, form .nav textarea.nav-item {
-    background: #0f1a28; }
-  .nav input.nav-search-icon, .nav form textarea.nav-search-icon, form .nav textarea.nav-search-icon {
-    height: 80%;
-    width: auto;
-    background: none;
-    background-image: url("../images/search.svg");
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    vertical-align: middle; }
-
 body {
   font-family: "Roboto", serif;
   font-weight: normal;
@@ -188,6 +168,26 @@ nav ul {
     width: 2em;
     height: auto; }
 
+.nav {
+  margin: 0px;
+  position: fixed;
+  top: 0;
+  z-index: 10; }
+  .nav input, .nav form textarea, form .nav textarea {
+    border: none;
+    padding: 0.9rem; }
+  .nav input.nav-item, .nav form textarea.nav-item, form .nav textarea.nav-item, .nav input.nav-item:active, .nav form textarea.nav-item:active, form .nav textarea.nav-item:active, .nav input.nav-item:focus, .nav form textarea.nav-item:focus, form .nav textarea.nav-item:focus, .nav input.nav-item:hover, .nav form textarea.nav-item:hover, form .nav textarea.nav-item:hover {
+    background: #0f1a28; }
+  .nav input.nav-search-icon, .nav form textarea.nav-search-icon, form .nav textarea.nav-search-icon, .nav input.nav-search-icon:active, .nav form textarea.nav-search-icon:active, form .nav textarea.nav-search-icon:active, .nav input.nav-search-icon:hover, .nav form textarea.nav-search-icon:hover, form .nav textarea.nav-search-icon:hover, .nav input.nav-search-icon:focus, .nav form textarea.nav-search-icon:focus, form .nav textarea.nav-search-icon:focus {
+    height: 80%;
+    width: auto;
+    background: none;
+    background-image: url("../images/search.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle; }
+
 nav ul li.navbar-right .nav-responsive {
   position: fixed;
   top: 1em;
@@ -212,11 +212,9 @@ menu-separator {
   border: 0.2px solid #e7e8e8;
   margin: 0 1.3em; }
 
-  
 .like-icon:hover {
   background-image: url("../images/LikeFull.svg");
   background-size: 100%; }
-
 
 .square {
   height: 150px;

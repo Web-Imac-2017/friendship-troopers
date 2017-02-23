@@ -37,9 +37,13 @@
 <script>
 import Navbar from './components/Navbar'
 
+
 export default {
-  components: { Navbar }
+  components: { Navbar}
 }
+</script>
+
+
 </script>
 
 <style src="../www/assets/css/reset.css"></style>

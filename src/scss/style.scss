@@ -76,32 +76,7 @@ html {
   background: $background;
 }
 
-.nav{
-  margin: 0px;
-  position: fixed;
-  top :0;
-  z-index: 1;
 
-  input {
-    border:none;
-    @include padding-input(1);    
-  }
-  input.nav-item {
-      background: $background;
-  }
-  input.nav-search-icon {
-    height: 80%;
-    width: auto;
-    background: none;
-    background-image: url("../images/search.svg");
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    vertical-align: middle;
-  }
-
-  
-}
 
 
 body {
@@ -302,10 +277,9 @@ nav {
           background: none;
 
         }
-         &:focus{
+        &:focus{
           text-decoration: none;
           background: none;
-
         }
 
       }
@@ -315,6 +289,31 @@ nav {
         height: auto;
       }
     }
+  }
+}
+
+.nav{
+  margin: 0px;
+  position: fixed;
+  top :0;
+  z-index: 10;
+
+  input {
+    border:none;
+    @include padding-input(1);    
+  }
+  input.nav-item,input.nav-item:active, input.nav-item:focus,input.nav-item:hover {
+      background: $background;
+  }
+  input.nav-search-icon, input.nav-search-icon:active, input.nav-search-icon:hover, input.nav-search-icon:focus {
+    height: 80%;
+    width: auto;
+    background: none;
+    background-image: url("../images/search.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;
   }
 }
 
