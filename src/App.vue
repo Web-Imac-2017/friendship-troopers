@@ -3,6 +3,7 @@
     
     <div id="app">
       <navbar></navbar>
+      <lateralMenuLeft></lateralMenuLeft>
       <router-view></router-view>
 
       
@@ -36,10 +37,14 @@
 
 <script>
 import Navbar from './components/Navbar'
+import LateralMenuLeft from './components/LateralMenuLeft'
 
 export default {
-  components: { Navbar }
+  components: { Navbar, LateralMenuLeft }
 }
+</script>
+
+
 </script>
 
 <style src="../www/assets/css/reset.css"></style>

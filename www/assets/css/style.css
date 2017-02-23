@@ -212,14 +212,19 @@ menu-separator {
   border: 0.2px solid #e7e8e8;
   margin: 0 1.3em; }
 
-  
 .like-icon:hover {
   background-image: url("../images/LikeFull.svg");
   background-size: 100%; }
-
 
 .square {
   height: 150px;
   width: 150px;
   background-color: #cdcccc;
   margin: 10% 5%; }
+
+.lateralMenuLeft {
+  width: 10em;
+  background-color: orange;
+  position: relative;
+  left: 1em;
+  display: inline-block; }

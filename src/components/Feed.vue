@@ -86,6 +86,7 @@
 </template>
 
 <script>
+
 let postTemplate = {
   props:{
     post:Object
@@ -160,6 +161,7 @@ let createPost = {
     </div>
     `
 }
+
   export default {
   components: { postTemplate, createPost },
   data () {
