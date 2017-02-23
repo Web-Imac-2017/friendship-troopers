@@ -3,7 +3,7 @@
     <!-- <create-post :post="post"></create-post> -->
    <!--  <post-template :post="post"></post-template> -->
    <div class="row">
-    <div class="col-sm-1">
+    <div class="col-sm-2">
         <lateralMenuLeft></lateralMenuLeft>
         <MenuTools></MenuTools>
     </div>
