@@ -26,6 +26,7 @@
         <li><router-link to="/planete/post/2"> Post </router-link></li>
         <li><router-link to="/planete/wiki"> Wiki d'une planète </router-link></li>
         <li><router-link to="/marche-intergalactique"> Marché </router-link></li>
+        <li><router-link to="/a-propos"> À propos </router-link></li>
         <li><router-link to="/FAQ"> FAQ </router-link></li>
         <li><router-link to="/error404"> Erreur 404 </router-link></li>
       </ul>

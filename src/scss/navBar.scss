@@ -1,0 +1,137 @@
+@import "variables";
+
+.nav{
+  margin: 0px;
+  position: fixed;
+  top :0;
+  z-index: 10;
+}
+
+input {
+  border:none;
+  @include padding-input(1);    
+}
+
+
+.navbar-brand {
+  font-family: $title-font;
+  text-decoration: none;
+  /*position: relative;*/
+  height: auto;
+  line-height: 3rem;
+  padding: 0;
+  margin: 0;
+}
+.navbar-brand:hover {
+  background-color: none;
+}
+
+ul {
+  padding: 0 1em;
+  width: 100%;
+  background-color: $menu-background;
+  color: $main-text;
+  display : block;
+
+  li {
+
+    .nav-link, .nav-item, .navbar-brand  {
+      display : inline-block;
+      text-decoration: none;
+      background: none;
+
+      &:hover{
+        text-decoration: none;
+        background: none;
+
+      }
+      &:active{
+        text-decoration: none;
+        background: none;
+
+      }
+      &:focus{
+        text-decoration: none;
+        background: none;
+      }
+
+    }
+
+    img {
+      width: 2em;
+      height: auto;
+    }
+  }
+}
+
+ul li {
+  .navbar-brand  {
+    line-height: 2rem;
+    margin: -0.5rem 0;
+  }
+  .nav-link, .nav-item  {
+    line-height: 3rem;
+  }
+}
+
+.nav input.nav-item {
+  &:active, &:hover, &:focus, & {
+      background: $background;
+  }
+}
+
+.nav input.nav-search-icon {
+  &:active, &:hover, &:focus, & {
+    height: 80%;
+    width: auto;
+    background: none;
+    background-image: url("../images/search.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;  
+  }
+}
+
+.nav-icon {
+    @include padding(1);
+    cursor: pointer;
+}
+.navbar-left {
+  vertical-align: middle;
+  height: auto;
+}
+
+
+@media screen and (max-width: 800px) {
+  nav ul li.navbar-right .nav-item, nav ul li.navbar-right menu-separator {
+    display: none;
+  }
+  nav ul li.navbar-right .nav-responsive{
+    display: inline-block;
+  }
+}
+
+@media screen and (min-width: 801px) {
+  nav ul li.navbar-right .nav-item, nav ul li.navbar-right menu-separator {
+    display: inline-block;
+  }
+  nav ul li.navbar-right .nav-responsive {
+    display: none;
+  }
+}
+
+menu-separator {
+  vertical-align: middle;
+  height: 1.5rem;
+  border: 0.1rem solid $main-text;
+  margin: 0 1.3rem;
+}
+
+
+nav ul li.navbar-right .nav-responsive{
+  position: fixed;
+  top : 1rem;
+  right: 1rem;
+  cursor: pointer;
+}

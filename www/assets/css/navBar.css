@@ -1,0 +1,101 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400italic,700italic,400,700);
+@font-face {
+  font-family: earthOrbiter-font;
+  src: url(earthorbiterxtrabold.ttf); }
+
+.nav {
+  margin: 0px;
+  position: fixed;
+  top: 0;
+  z-index: 10; }
+
+input {
+  border: none;
+  padding: 0.9rem; }
+
+.navbar-brand {
+  font-family: earthOrbiter-font;
+  text-decoration: none;
+  /*position: relative;*/
+  height: auto;
+  line-height: 3rem;
+  padding: 0;
+  margin: 0; }
+
+.navbar-brand:hover {
+  background-color: none; }
+
+ul {
+  padding: 0 1em;
+  width: 100%;
+  background-color: #222d3c;
+  color: #e7e8e8;
+  display: block; }
+  ul li .nav-link, ul li .nav-item, ul li .navbar-brand {
+    display: inline-block;
+    text-decoration: none;
+    background: none; }
+    ul li .nav-link:hover, ul li .nav-item:hover, ul li .navbar-brand:hover {
+      text-decoration: none;
+      background: none; }
+    ul li .nav-link:active, ul li .nav-item:active, ul li .navbar-brand:active {
+      text-decoration: none;
+      background: none; }
+    ul li .nav-link:focus, ul li .nav-item:focus, ul li .navbar-brand:focus {
+      text-decoration: none;
+      background: none; }
+  ul li img {
+    width: 2em;
+    height: auto; }
+
+ul li .navbar-brand {
+  line-height: 2rem;
+  margin: -0.5rem 0; }
+
+ul li .nav-link, ul li .nav-item {
+  line-height: 3rem; }
+
+.nav input.nav-item:active, .nav input.nav-item:hover, .nav input.nav-item:focus, .nav input.nav-item {
+  background: #0f1a28; }
+
+.nav input.nav-search-icon:active, .nav input.nav-search-icon:hover, .nav input.nav-search-icon:focus, .nav input.nav-search-icon {
+  height: 80%;
+  width: auto;
+  background: none;
+  background-image: url("../images/search.svg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle; }
+
+.nav-icon {
+  padding: 1rem;
+  cursor: pointer; }
+
+.navbar-left {
+  vertical-align: middle;
+  height: auto; }
+
+@media screen and (max-width: 800px) {
+  nav ul li.navbar-right .nav-item, nav ul li.navbar-right menu-separator {
+    display: none; }
+  nav ul li.navbar-right .nav-responsive {
+    display: inline-block; } }
+
+@media screen and (min-width: 801px) {
+  nav ul li.navbar-right .nav-item, nav ul li.navbar-right menu-separator {
+    display: inline-block; }
+  nav ul li.navbar-right .nav-responsive {
+    display: none; } }
+
+menu-separator {
+  vertical-align: middle;
+  height: 1.5rem;
+  border: 0.1rem solid #e7e8e8;
+  margin: 0 1.3rem; }
+
+nav ul li.navbar-right .nav-responsive {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer; }

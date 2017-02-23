@@ -24,7 +24,9 @@ import Post from './components/Post'
 
 import Wiki from './components/Wiki'
 import Market from './components/Market'
+import About from './components/About'
 import FAQ from './components/FAQ'
+import Legals from './components/Legals'
 import Error404 from './components/Error404'
 
 // ==================== Router registration ====================
@@ -97,6 +99,12 @@ export default new Router({
   },{ 
       path: '/faq', 
       component : FAQ
+  },{
+      path: '/a-propos', 
+      component : About
+  },{
+      path: '/mentions-legales', 
+      component : Legals
   },{ 
       path: '/erreur404', 
       component : Error404

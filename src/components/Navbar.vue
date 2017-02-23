@@ -13,9 +13,9 @@
         <input type="submit" class="nav-item nav-search-icon" value=""></input>
         
         <menu-separator></menu-separator>
-        <router-link to="/utilisateur/amis" class="nav-item nav-link"> <img src="../assets/Friends.svg"> </router-link>
-        <router-link to="/utilisateur/conversations" class="nav-item nav-link"> <img src="../assets/Messages.svg"> </router-link>
-        <div class="nav-item nav-link"> <img src="../assets/Notifications.svg"> </div>
+        <div class="nav-item nav-icon"> <img src="../assets/Friends.svg"> </div>
+        <div class="nav-item nav-icon"> <img src="../assets/Messages.svg"> </div>
+        <div class="nav-item nav-icon"> <img src="../assets/Notifications.svg"> </div>
 
         <menu-separator></menu-separator>
         <router-link to="/utilisateur" class="nav-item nav-link"> Mon profil </router-link>
@@ -24,6 +24,8 @@
     </ul>
   </nav>
 </template>
+
+<style src="../../www/assets/css/navBar.css"></style>
 
 <script>
   export default {

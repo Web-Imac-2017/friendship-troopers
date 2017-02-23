@@ -1,7 +1,7 @@
 <template>
   <div class="menuTools">
 
-    <router-link to="/legals" class=""> Mentions legales </router-link>
+    <router-link to="/mentions-legales" class=""> Mentions legales </router-link>
 
   </div>
 </template>
