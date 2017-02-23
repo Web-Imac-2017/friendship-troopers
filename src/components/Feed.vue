@@ -188,7 +188,27 @@ export default {
           likes: '50',
           comments: '2'
         }, 
-        picture:false
+        picture:false, 
+        user : {
+          userAvatar : '../assets/logo.png',
+          username : 'LuckyPon', 
+          userBadge : 'Baroudeuse de l\'espace', 
+          userPlanet : {
+            path : '../assets/Avatar1.svg',
+            name : 'Planete X785-E'
+          }, 
+          lastFriends : [ {
+            avatar : '../assets/Avatar1.svg',
+            name : 'Spockdu77'
+          }, {
+            avatar : '../assets/Avatar1.svg',
+            name : 'MartyDuPassé'
+          }, {
+            avatar : '../assets/Avatar1.svg',
+            name : 'JulieDuFutur'
+          }
+          ]
+        }
       }
     }
 
