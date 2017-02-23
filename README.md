@@ -11,7 +11,8 @@ npm run dev
 
 --> you can see the website at : localhost:8080
 
-## build for production with minification
+## build for production with minification 
 npm run build
 ```
-
+## if you touch the css
+gulp watch 
