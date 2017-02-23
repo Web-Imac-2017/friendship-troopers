@@ -30,9 +30,27 @@ html {
   -webkit-order: 2;
   order: 2; }
 
-.container-fluid {
-  background: #222d3c; }
+.container-colored {
+  background: #212d3f;
+  margin: 0.5rem; }
 
+.relative {
+  position: relative; }
+
+.top-right, .bottom-right {
+  position: absolute;
+  right: 0;
+  color: #cdcccc; }
+
+.top-right {
+  top: 0; }
+
+.bottom-right {
+  bottom: 0; }
+
+/* .container-fluid{
+  background:$articles-background;
+} */
 .welcome-on-board {
   padding: 2rem;
   font-size: 13px;
@@ -55,7 +73,7 @@ html {
     opacity: 0.2; }
 
 #app {
-  background: #0f1a28; }
+  background: #0f1928; }
 
 .nav {
   margin: 0px;
@@ -66,7 +84,7 @@ html {
     border: none;
     padding: 0.9rem; }
   .nav input.nav-item, .nav form textarea.nav-item, form .nav textarea.nav-item {
-    background: #0f1a28; }
+    background: #0f1928; }
   .nav input.nav-search-icon, .nav form textarea.nav-search-icon, form .nav textarea.nav-search-icon {
     height: 80%;
     width: auto;
@@ -85,7 +103,7 @@ body {
   font-weight: normal;
   font-size: 12px;
   font-size: 1.2rem;
-  background: #0f1a28;
+  background: #0f1928;
   color: #e7e8e8; }
 
 h1, h2, h3, h4, h5, h6 {
@@ -119,7 +137,7 @@ form label {
   padding: 0 4%; }
 
 form input, form textarea {
-  background: #303b4c;
+  background: #2f3b4f;
   border: none;
   padding: 0.5rem 1.5rem;
   outline: 0;
@@ -164,7 +182,7 @@ small {
   margin: 0% 0% 0% 100px;
 } */
 .post {
-  background-color: #222d3c;
+  background-color: #212d3f;
   padding: 2%;
   margin: 2%; }
 
@@ -190,7 +208,7 @@ small {
     -moz-border-radius: 1; }
 
 .comment {
-  background: #303b4c;
+  background: #2f3b4f;
   margin-top: 2%;
   max-height: 8em; }
   .comment .col-sm-1 {
@@ -214,7 +232,7 @@ nav .navbar-brand:hover {
 nav ul {
   padding: 0 1em;
   width: 100%;
-  background-color: #222d3c;
+  background-color: #212d3f;
   color: #e7e8e8;
   display: block; }
   nav ul li .nav-link, nav ul li .nav-item {

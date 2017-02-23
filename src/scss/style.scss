@@ -13,12 +13,12 @@ $main-text: #e7e8e8;
 $grey : #cdcccc;
 $secondary-text : #999999;
 
-$comments-background : #303b4c;
-$articles-background : #222d3c;
+$comments-background : #2f3b4f;
+$articles-background : #212d3f;
 $menu-background : $articles-background;
-$background: #0f1a28;
+$background: #0f1928;
 
-$notifs: #7c397b;
+$notifs: #d48bbc;
 
 // Font Variables
 
@@ -132,10 +132,32 @@ html {
   @include order(2);
 }
 
-
-.container-fluid{
+.container-colored{
   background:$articles-background;
+  @include margin(0.5);
 }
+
+.relative{
+  position:relative;
+}
+
+.top-right, .bottom-right{
+  position: absolute;
+  right:0;
+  color:$grey;
+}
+
+.top-right{
+  top:0;
+}
+
+.bottom-right{
+  bottom:0;
+} 
+
+/* .container-fluid{
+  background:$articles-background;
+} */
 
 .welcome-on-board{
   @include padding(2);

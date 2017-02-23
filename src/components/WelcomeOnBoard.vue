@@ -1,5 +1,5 @@
 <template>
-   <div class="container-fluid welcome-on-board">
+   <div class="container-fluid welcome-on-board container-colored">
     <div class="row title">
       <div> {{ questions[current].number }}.</div>  
       <div> {{ questions[current].title }} </div>
