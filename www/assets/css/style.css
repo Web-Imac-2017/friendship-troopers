@@ -221,10 +221,3 @@ menu-separator {
   width: 150px;
   background-color: #cdcccc;
   margin: 10% 5%; }
-
-.lateralMenuLeft {
-  width: 10em;
-  background-color: orange;
-  position: relative;
-  left: 1em;
-  display: inline-block; }

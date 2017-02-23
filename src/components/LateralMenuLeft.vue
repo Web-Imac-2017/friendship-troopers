@@ -14,6 +14,8 @@
   </div>
 </template>
 
+<style src="../../www/assets/css/lateralMenu.css"></style>
+
 <script>
   export default {
   }

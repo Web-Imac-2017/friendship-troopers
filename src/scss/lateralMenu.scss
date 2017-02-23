@@ -1,0 +1,9 @@
+@import "variables";
+
+.lateralMenuLeft {
+  width: 10em;
+  background-color: $grey;
+  position: relative;
+  left: 1em;
+  display: inline-block;
+}

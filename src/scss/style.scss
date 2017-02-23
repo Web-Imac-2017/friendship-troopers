@@ -1,24 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400italic,700italic,400,700);
+@import "variables";
 
-// Colors variables
-
-$white: #fff;
-$enigme-title: #8cada9;
-
-$main-title: #46bfa9;
-$username: #349994;
-$planets: #206671;
-
-$main-text: #e7e8e8;
-$grey : #cdcccc;
-$secondary-text : #999999;
-
-$comments-background : #303b4c;
-$articles-background : #222d3c;
-$menu-background : $articles-background;
-$background: #0f1a28;
-
-$notifs: #7c397b;
 
 // Font Variables
 
@@ -379,12 +361,4 @@ menu-separator {
   width: 150px;
   background-color: $grey;
   margin: 10% 5%;
-}
-
-.lateralMenuLeft {
-  width: 10em;
-  background-color: orange;
-  position: relative;
-  left: 1em;
-  display: inline-block;
 }
