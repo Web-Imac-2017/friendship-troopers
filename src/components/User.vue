@@ -1,23 +1,38 @@
 <template>
-   <div class="container">
-    <div class="row center post">
-      <div class="col-sm-8">
+  <div class="container-fluid">
+    <div class="row container-colored">
+      <div class="col-sm-2">
         <img :src="user.userAvatar">
+      </div>
+      <div class="col-sm-8">
         <p v-if="myself"> Mon profil </p>
         <p v-else> Profil de {{ user.username }} </p>
         <small> {{ user.userBadge }} </small>
         <p> Né le {{ user.birthDate }} </p>
       </div>
-      <div class="col-sm-4"> 
+      <div class="col-sm-2">
         <img :src="user.userPlanet.path"> 
         <p> {{ user.userPlanet.name }} </p>
       </div>
     </div>
+    
     <optionBar :myself="myself"></optionBar>
+
     <statistics  :user="user"></statistics>
-    <button @click="profil"> (debug) Profil change from public to private</button>
-</div>
+
+    <button @click="profil"> (debug) Profil change from public to private</button>  
+
+    <div class="row container-colored">
+      <div class="col-sm-12">
+        <p>Post : reprendre l'autre quand ils seront 100% terminés <br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, ex?</p>
+    </div>
+    </div>
+  </div>
 </template>
+
+
+
+
 
 
 <script>
@@ -26,69 +41,68 @@ let optionBar = {
   props: ['myself'],
 
   template: `
-    <div class="row">
-      <div class="col-sm-12" v-if="myself">
-        <div class="col-sm-3 post">
-          <img src="../assets/Friends.svg">
-          <p> Debloquer des récompenses </p>
-        </div>
-         <div class="col-sm-3 post">
-          <img src="../assets/Messages.svg">
-          <p> Modifier mes informations </p>
-        </div>
-         <div class="col-sm-3 post">
-          <p> Autres actions </p>
-        </div>
-      </div>
-      <div class="col-sm-12" v-else>
-        <div class="col-sm-3 post">
-          <img src="../assets/Friends.svg">
-          <p> Ajouter à mes amis </p>
-        </div>
-         <div class="col-sm-3 post">
-          <img src="../assets/Messages.svg">
-          <p> Envoyer un message </p>
-        </div>
-         <div class="col-sm-3 post">
-          <p> Autres actions </p>
-        </div>
-      </div>
-    </div>
+  <div>
+    <ul class="wrapper" v-if="myself">
+      <li class="item container-colored">
+        <img src="../assets/Friends.svg">
+        <p> Debloquer des récompenses </p>
+      </li>
+      <li class="item container-colored">
+        <img src="../assets/Messages.svg">
+        <p> Modifier mes informations </p>
+      </li>
+      <li class="item container-colored">
+        <p> Autres actions </p>
+      </li>
+    </ul>
+    <ul class="wrapper" v-else>
+      <li class="item container-colored">
+        <img src="../assets/Friends.svg">
+        <p> Ajouter à mes amis </p>
+      </li>
+      <li class="item container-colored">
+        <img src="../assets/Messages.svg">
+        <p> Envoyer un message </p>
+      </li>
+      <li class="item container-colored">
+        <p> Autres actions </p>
+      </li>
+    </ul>
+  </div>
   `
 }
 
 let statistics = {
   props: ['user'],
   template : `
-  <div class="container post">
-    <div class="row">
-       <div class="col-sm-12">
-         <h1> Statistics </h1>
-         <p> Nombre d'amis : {{ user.nbFriends}} </p>
-          <p> Nombre d'enigmes résolues : {{ user.nbRiddleSolved}} </p>
-          <p> Nombre de points : {{ user.points }} </p>
-        <div>
-      </div>
+  <div class="container-colored relative">
+    <div class="top-right">Masquer</div>
     <div class="row">
       <div class="col-sm-12">
-        <h1> Derniers badges débloqués </h1>
-        <ul> 
-          <li class="col-sm-2" v-for="badge in user.lastBadges"> 
+        <h1 class="pseudo">Statistiques</h1>
+        <p> Nombre d'amis : {{ user.nbFriends}} </p>
+        <p> Nombre d'enigmes résolues : {{ user.nbRiddleSolved}} </p>
+        <p> Nombre de points : {{ user.points }} </p>
+      </div>
+    </div>
+     <div class="row">
+      <div class="col-sm-12">
+        <h1 class="pseudo">Derniers badges débloqués</h1>
+         <ul class="wrapper">
+          <li class="item" v-for="badge in user.lastBadges"> 
             <img :src="badge.path"> 
             <p> {{ badge.name }} </p>
           </li>
         </ul>
-      </div>
     </div>
-    <div class="row">
+    </div>
+     <div class="row">
       <div class="col-sm-12">
-        <h1> Dernier titre débloqué </h1>
+        <h1 class="pseudo">Dernier titre débloqué</h1>
         <p> {{ user.userBadge}} </p>
-      </div>
-      <div class="col-sm-3 right">
-        <p> Voir toutes les autres récompenses obtenues </p>
-      </div>
     </div>
+    </div>
+    <div class="bottom-right">Voir toutes les récompenses obtenues</div>  
   </div>
   `
 }
