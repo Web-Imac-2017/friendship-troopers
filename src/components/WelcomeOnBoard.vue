@@ -9,15 +9,15 @@
       <div class="col-sm-12">
         <ul>
           <li class="col-sm-2" @click="selected(0)">
-            <div class="square"> </div> {{ questions[current].answer[0] }} </li>
+            <div class="square"> <img :src="questions[current].answer[0].image"> </div> {{ questions[current].answer[0].text }} </li>
           <li class="col-sm-2" @click="selected(1)">
-            <div class="square"> </div> {{ questions[current].answer[1] }}  </li>
+            <div class="square"> <img :src="questions[current].answer[1].image"> </div> {{ questions[current].answer[1].text }}  </li>
           <li class="col-sm-2" @click="selected(2)">
-             <div class="square"> </div> {{ questions[current].answer[2] }}  </li>
+             <div class="square"><img :src="questions[current].answer[2].image">  </div> {{ questions[current].answer[2].text }}  </li>
           <li class="col-sm-2" @click="selected(3)">
-             <div class="square"> </div> {{ questions[current].answer[3] }}  </li>
+             <div class="square"> <img :src="questions[current].answer[3].image"> </div> {{ questions[current].answer[3].text }}  </li>
           <li class="col-sm-2" @click="selected(4)">
-            <div class="square"> </div> {{ questions[current].answer[4] }} </li>
+            <div class="square"> <img :src="questions[current].answer[4].image"> </div> {{ questions[current].answer[4].text }} </li>
         </ul>
       </div>
       <div class="col-sm-8">
@@ -44,7 +44,7 @@ export default {
 
   }, 
     selected : function(index){
-    console.log(this.questions[this.current].answer[index])
+    console.log(this.questions[this.current].answer[index].text)
     console.log(index)
     if (this.current < this.nbQuestions - 1)
         this.current ++
@@ -55,32 +55,55 @@ export default {
        questions: [ {
          number : "1",
          title : 'Ta couleur : ' ,
-         answer : [ 'bleu', 'vert', 'orange', 'violet', 'noir'
+         answer : [ {text: 'bleu',image : "../assets/Avatar1.svg"},
+                    {text:'vert', image : "../assets/Avatar1.svg"},
+                    {text:'orange',image : "../assets/Avatar1.svg"},
+                    {text:'violet', image : "../assets/Avatar1.svg"},
+                    {text:'noir', image : "../assets/Avatar1.svg"}
          ]
         }, {
           number : "2",
-          title : 'Ton compagnon :' ,
-          answer : [ 'un petit vélociraptor', 'un mini Groot', 'une charmante androïde', 'Doc', 'un Choubacca'
+          title : 'Ton compagnon :',
+          answer : [ {text:'un petit vélociraptor', image : "../assets/Avatar1.svg"},
+                     {text:'un mini Groot', image : "../assets/Avatar1.svg"}, 
+                     {text:'une charmante androïde', image : "../assets/Avatar1.svg"}, 
+                     {text:'Doc', image : "../assets/Avatar1.svg"}, 
+                     {text: 'un Choubacca', image : "../assets/Avatar1.svg"} 
          ] 
         }, {
           number : "3",
           title : 'Tes vacances parfaites:' ,
-          answer : [ 'un week-end romantique à New New York', 'tester les spécialités culinaires de Vulcain', 'relire tes classiques', 'arpenter un trou nor', 'faire la course de la Bounta'
+          answer : [ {text:'un week-end romantique à New New York', image : "../assets/Avatar1.svg"},
+                     {text:'tester les spécialités culinaires de Vulcain', image : "../assets/Avatar1.svg"},
+                     {text:'relire tes classiques', image : "../assets/Avatar1.svg"}, 
+                     {text:'arpenter un trou nor', image : "../assets/Avatar1.svg"},
+                     {text:'faire la course de la Bounta', image : "../assets/Avatar1.svg"}
          ] 
         },{
           number : "4",
           title : 'L\'intellingence artificielle pour gérer ta maison :' ,
-          answer : [ 'la Matrice', 'le Brain Bug', 'GladOS', 'AI du HIVE', 'Hall'
+          answer : [{text: 'la Matrice', image : "../assets/Avatar1.svg"}, 
+                    {text:'le Brain Bug', image : "../assets/Avatar1.svg"}, 
+                    {text:'GladOS', image : "../assets/Avatar1.svg"}, 
+                    {text:'AI du HIVE', image : "../assets/Avatar1.svg"}, 
+                   {text: 'Hall', image : "../assets/Avatar1.svg"}
          ]},{
           number : "5",
-          title : 'Ton moyen de transport de prédilection:' ,
-          answer : [ 'le TARDIS', 'la Porte des Etoiles', 'en astro-stop', 'en DeLorean', 'à bord de l\'Arcadia'
+          title : 'Ton moyen de transport de prédilection:' , 
+          answer : [ {text:'le TARDIS', image : "../assets/Avatar1.svg"},
+                     {text:'la Porte des Etoiles', image : "../assets/Avatar1.svg"},
+                     {text:'en astro-stop', image : "../assets/Avatar1.svg"},
+                     {text:'en DeLorean', image : "../assets/Avatar1.svg"}, 
+                    {text: 'à bord de l\'Arcadia', image : "../assets/Avatar1.svg"}
          ] 
         },{
           number : "6",
           title : 'Tu aimes :' ,
-          answer : [ 'passer du temps dans ton bunker', 'les rencontres du 3ième type', 'trafiquer le droïde ménager de maman', 'créer des paradoxes', 'aller en croisière muni de votre multipass'
-         ] 
+          answer : [{text: 'passer du temps dans ton bunker', image : "../assets/Avatar1.svg"}, 
+                    {text:'les rencontres du 3ième type', image : "../assets/Avatar1.svg"}, 
+                    {text:'trafiquer le droïde ménager de maman', image : "../assets/Avatar1.svg"}, 
+                    {text:'créer des paradoxes', image : "../assets/Avatar1.svg"}, 
+                   {text: 'aller en croisière muni de votre multipass', image : "../assets/Avatar1.svg"}         ] 
         }
         ], 
         nbQuestions : 6,
