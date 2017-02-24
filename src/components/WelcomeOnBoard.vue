@@ -33,7 +33,7 @@
     </div>
     <div class="row"> 
               <button v-on:click="decrement"> Question précedente {{current}}</button>
-              <button v-on:click="increment" v-if="finish"> Question suivante {{current}}</button>
+              <button v-on:click="increment" v-if="!finish"> Question suivante {{current}}</button>
               <button v-on:click="increment" v-else> Submit {{current}}</button>
       <p>
           {{current}}
@@ -48,6 +48,10 @@
 
 export default {
    methods: {
+  finished : function(){
+    if (this.current == this.nbQuestions - 1 )
+      this.finish = true
+  },
     decrement: function(){
       if (this.current > 0 )
         this.current --
@@ -55,20 +59,16 @@ export default {
   }, increment: function(){
       if (this.current < this.nbQuestions - 1)
         this.current ++
-      finished()
+      this.finished()
 
   },
     selected : function(index){
     console.log(this.questions[this.current].answer[index].text)
     console.log(index)
-    answers[this.current] = this.questions[this.current].answer[index].text
+    this.answers[this.current] = this.questions[this.current].answer[index].text
     if (this.current < this.nbQuestions - 1)
         this.current ++
-    finished()
-  },
-  finished : function(){
-    if (this.current == this.nbQuestions)
-      answer[1] = "bla"
+    this.finished()
   }
 }, 
   data () {
@@ -130,7 +130,7 @@ export default {
         nbQuestions : 6,
         current : 0,
         finish : false,
-        answers : ['','','','','']
+        answers : ['','','','','','']
       }
     }
 
