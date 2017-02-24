@@ -11,9 +11,10 @@
 .lateralMenuRight {
   width: 10em;
   background-color: $comments-background;
-  position: fixed;
+  position: absolute;
+  top: 10em;
   right: 1em;
-  display: inline-block;
+  /*display: inline-block;*/
 }
 
 .menuTools{
