@@ -3,9 +3,6 @@
     
     <div id="app">
       <navbar></navbar>
-      <lateralMenuLeft></lateralMenuLeft>
-      <lateralMenuRight></lateralMenuRight>
-      <MenuTools></MenuTools>
       <router-view></router-view>
 
       
@@ -39,13 +36,10 @@
 
 <script>
 import Navbar from './components/Navbar'
-import LateralMenuLeft from './components/LateralMenuLeft'
-import LateralMenuRight from './components/LateralMenuRight'
-import MenuTools from './components/MenuTools'
 
 
 export default {
-  components: { Navbar, LateralMenuLeft, LateralMenuRight, MenuTools }
+  components: { Navbar}
 }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
-  <div class="menuTools">
+<div class="container col-sm-12 menuTools">
 
-    <router-link to="/legals" class=""> Mentions legales </router-link>
+    <router-link to="/legals" class=""> Mentions légales </router-link>
 
   </div>
 </template>

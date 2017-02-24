@@ -1,34 +1,37 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400italic,700italic,400,700);
+.lateralMenuLeft, .lateralMenuRight, .menuTools {
+  /* common properties */
+  background-color: #222d3c; }
+
 .lateralMenuLeft {
-  width: 10em;
-  background-color: #303b4c;
-  position: relative;
-  left: 1em;
-  /*display: inline-block;*/ }
+  /* style and properties */ }
 
 .lateralMenuRight {
+<<<<<<< HEAD
   width: 10em;
   background-color: #303b4c;
   position: absolute;
   top: 10em;
   right: 1em;
   /*display: inline-block;*/ }
+=======
+  /* style and properties */ }
+>>>>>>> f890838ed731acbf4deab97c8ed3c77b5aafc24f
 
 .menuTools {
-  width: 10em;
-  background-color: #303b4c;
-  position: relative;
-  left: 1em;
+  /* style and properties */
+  width: 100%;
+  margin-top: 1rem;
   display: inline-block;
-  margin-top: 2em;
   text-align: center;
   text-decoration: none; }
 
 .menuTools a {
+  /* style and properties for links (a) in menuTools */
   text-decoration: none; }
 
 .lateralMenuAvatar {
-  background-image: url("../images/search.svg");
+  background-image: url("../images/LineAboveAvatar.svg");
   background-size: 100%;
   text-align: center;
   background-repeat: no-repeat;
@@ -36,5 +39,5 @@
   vertical-align: middle; }
   .lateralMenuAvatar .planet {
     width: 5em;
-    z-index: 2;
+    z-index: 1;
     position: relative; }

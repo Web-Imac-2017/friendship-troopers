@@ -1,5 +1,5 @@
 <template>
-  <div class="lateralMenuRight">
+<div class="container col-sm-12 lateralMenuRight">
     Je suis un super menu latéral !! <br/>
     Youpipipouharra !! <br/><br/>
 

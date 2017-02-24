@@ -1,48 +1,42 @@
 @import "variables";
 
-.lateralMenuLeft {
-  width: 10em;
-  background-color: $comments-background;
-  position: relative;
-  left: 1em;
-  /*display: inline-block;*/
+.lateralMenuLeft, .lateralMenuRight, .menuTools {
+  /* common properties */
+  background-color: $menu-background;
 }
 
+.lateralMenuLeft {
+  /* style and properties */
+}
 .lateralMenuRight {
-  width: 10em;
-  background-color: $comments-background;
-  position: absolute;
-  top: 10em;
-  right: 1em;
-  /*display: inline-block;*/
+  /* style and properties */
 }
 
 .menuTools{
-  width: 10em;
-  background-color: $comments-background;
-  position: relative;
-  left: 1em;
+  /* style and properties */
+  width: 100%;
+  margin-top: 1rem;
   display: inline-block;
-  margin-top: 2em;
   text-align: center;
   text-decoration: none;
 }
 
 .menuTools a{
+  /* style and properties for links (a) in menuTools */
 	text-decoration: none;
 }
 
 .lateralMenuAvatar{
-	background-image: url("../images/search.svg");
+	background-image: url("../images/LineAboveAvatar.svg");
 	background-size: 100%;
 	text-align: center;
 	background-repeat: no-repeat;
-    background-position: center;
-    vertical-align: middle;
+  background-position: center;
+  vertical-align: middle;
 
-    .planet{
-    	width: 5em;
-    	z-index: 2;
-    	position: relative;
-    }
+  .planet{
+  	width: 5em;
+  	z-index: 1;
+  	position: relative;
+  }
 }
