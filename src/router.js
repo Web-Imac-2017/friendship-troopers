@@ -24,9 +24,21 @@ import Post from './components/Post'
 
 import Wiki from './components/Wiki'
 import Market from './components/Market'
+
 import About from './components/About'
 import FAQ from './components/FAQ'
 import Legals from './components/Legals'
+
+import AdminCreatePost from './components/admin/CreatePost'
+import AdminCreateEvent from './components/admin/CreateEvent'
+import AdminAddAdmin from './components/admin/AddAdmin'
+import AdminReport from './components/admin/Report'
+import AdminDelateAccount from './components/admin/DelateAccount'
+import AddBadge from './components/admin/AddBadge'
+import AddAvatar from './components/admin/AddAvatar'
+import AddEmoji from './components/admin/AddEmoji'
+import AddEnigme from './components/admin/AddEnigme'
+
 import Error404 from './components/Error404'
 
 // ==================== Router registration ====================
@@ -108,6 +120,33 @@ export default new Router({
   },{ 
       path: '/erreur404', 
       component : Error404
+  },{ 
+      path: '/admin/creer-post', 
+      component : AdminCreatePost
+  },{ 
+      path: '/admin/creer-evenement', 
+      component : AdminCreateEvent
+  },{  
+      path: '/admin/nouvel-administrateur', 
+      component : AdminAddAdmin
+  },{  
+      path: '/admin/signalement', 
+      component : AdminReport
+  },{  
+      path: '/admin/supprimer-compte', 
+      component : AdminDelateAccount
+  },{  
+      path: '/admin/ajout-badge', 
+      component : AddBadge
+  },{   
+      path: '/admin/ajout-avatar', 
+      component : AddAvatar
+  },{   
+      path: '/admin/ajout-emoticone', 
+      component : AddEmoji
+  },{   
+      path: '/admin/ajout-enigme', 
+      component : AddEnigme
   },{ 
     	path: '*', 
     	redirect: '/erreur404'

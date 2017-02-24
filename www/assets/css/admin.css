@@ -1,0 +1,17 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400italic,700italic,400,700);
+@font-face {
+  font-family: earthOrbiter-font;
+  src: url(earthorbiterxtrabold.ttf); }
+
+.admin-menu {
+  background: #303b4c;
+  line-height: 2rem;
+  padding: 1rem; }
+
+.admin-menu a, .admin-menu a:active, .admin-menu a:focus, .admin-menu a:hover {
+  text-decoration: none;
+  display: block; }
+
+.menu-section-title {
+  margin-top: 2rem;
+  color: #46bfa9; }

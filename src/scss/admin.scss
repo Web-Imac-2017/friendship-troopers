@@ -1,0 +1,19 @@
+@import "variables";
+
+.admin-menu {
+	background: $comments-background;
+	line-height: 2rem;
+	@include padding(1);
+}
+
+.admin-menu a {
+	&, &:active, &:focus, &:hover {
+		text-decoration: none;
+		display: block; 
+	}
+}
+
+.menu-section-title {
+	margin-top: 2rem;
+	color: $main-title;
+}
