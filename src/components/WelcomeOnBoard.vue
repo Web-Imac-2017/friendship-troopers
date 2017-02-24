@@ -32,7 +32,8 @@
       <input type="range" v-model.number="current" min="0" max="5" step="1"> </input>
     </div>
     <div class="row"> 
-              <button v-on:click="increment"> Next {{current}}</button>
+              <button v-on:click="decrement"> Question précedente {{current}}</button>
+              <button v-on:click="increment"> Question suivante {{current}}</button>
       <p>
           {{current}}
       </p>
@@ -46,11 +47,15 @@
 
 export default {
    methods: {
-    increment: function(){
+    decrement: function(){
+      if (this.current > 0 )
+        this.current --
+
+  }, increment: function(){
       if (this.current < this.nbQuestions - 1)
         this.current ++
 
-  }, 
+  },
     selected : function(index){
     console.log(this.questions[this.current].answer[index].text)
     console.log(index)
