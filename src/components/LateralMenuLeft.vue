@@ -1,20 +1,6 @@
 <template>
 
-<<<<<<< HEAD
-      <img src="../assets/logo.png" alt="your avatar" class="avatar">
-      <img src="../assets/logo.png" alt="your planet" class="planet">
-      
-    </div>
 
-    Je suis un super menu latéral !! <br/>
-    Youpipipouharra !! <br/><br/>
-
-    Je suis un super menu latéral !! <br/>
-    Youpipipouharra !! <br/><br/>
-
-    Je suis un super menu latéral !! <br/>
-    Youpipipouharra !! <br/><br/>
-=======
   <div class="container col-sm-12 lateralMenuLeft">
     <div class="lateralMenuAvatar">
     
@@ -29,7 +15,7 @@
       <p> {{ user.userBadge}} </p>
 
     </div>
->>>>>>> f890838ed731acbf4deab97c8ed3c77b5aafc24f
+
 
       <p class="enigmes"> Enigmes </p>
       <router-link to=""> Résoudre l'énigme en cours </router-link> <br>
