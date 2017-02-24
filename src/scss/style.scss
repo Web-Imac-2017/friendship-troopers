@@ -1,5 +1,86 @@
-@import "variables";
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400italic,700italic,400,700);
 
+// Colors variables
+
+$white: #fff; 
+$enigme-title: #8cada9;
+
+$main-title: #46bfa9;
+$username: #349994;
+$planets: #206671;
+
+$main-text: #e7e8e8;
+$grey : #cdcccc;
+$secondary-text : #999999;
+
+$comments-background : #2f3b4f;
+$articles-background : #212d3f;
+$menu-background : $articles-background;
+$background: #0f1928;
+
+$notifs: #d48bbc;
+
+// Font Variables
+
+$main-font: 'Roboto', serif;   
+
+
+@font-face {
+    font-family: earthOrbiter-font;
+    src: url(earthorbiterxtrabold.ttf);
+}
+
+$title-font: earthOrbiter-font;
+
+
+// Padding and margin variables
+
+@mixin padding($sizeValue) {
+  padding:$sizeValue + rem;
+}
+
+@mixin padding-button($sizeValue) {
+  padding:$sizeValue*0.5 + rem $sizeValue*1.5 + rem;
+}
+
+@mixin padding-input($sizeValue) {
+  padding:$sizeValue*0.9 + rem;
+}
+
+@mixin margin($sizeValue) {
+  margin:$sizeValue + rem;
+}
+
+@mixin margin2($height,$width) {
+  margin:$height+rem $width+rem;
+}
+
+// Center something
+
+%center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+// Placeholders for inputs
+
+@mixin placeholder($color) {
+
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: $color;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: $color;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: $color;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: $color;
+  }
+}
 
 // Styles
 
@@ -13,17 +94,139 @@ html {
 }
 
 @mixin border-radius($size: 10px) {
-	border-radius: $size;
-	-webkit-border-radius: $size;
-	-moz-border-radius: $size;
+  border-radius: $size;
+  -webkit-border-radius: $size;
+  -moz-border-radius: $size;
 }
+
+@mixin flexbox() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex($values) {
+  -webkit-box-flex: $values;
+  -moz-box-flex:  $values;
+  -webkit-flex:  $values;
+  -ms-flex:  $values;
+  flex:  $values;
+}
+
+@mixin order($val) {
+  -webkit-box-ordinal-group: $val;  
+  -moz-box-ordinal-group: $val;     
+  -ms-flex-order: $val;     
+  -webkit-order: $val;  
+  order: $val;
+}
+
+.wrapper {
+  @include flexbox();
+}
+
+.item {
+  @include flex(1 200px);
+  @include order(2);
+}
+
+.container-colored{
+  background:$articles-background;
+  @include margin(0.5);
+}
+
+.relative{
+  position:relative;
+}
+
+.top-right, .bottom-right{
+  position: absolute;
+  right:0;
+  color:$grey;
+}
+
+.top-right{
+  top:0;
+}
+
+.bottom-right{
+  bottom:0;
+} 
+
+/* .container-fluid{
+  background:$articles-background;
+} */
+
+.welcome-on-board{
+  @include padding(2);
+  @include font-size(1.3);
+
+  .row{
+    @include margin2(1,5);
+  }
+
+  .row:nth-child(2){
+    margin:4rem 0;
+  }
+
+  .title > div{
+    display: inline-block; 
+  }
+
+  .title >div:first-child{
+    @include font-size(5);
+  }
+
+  .title >div:last-child{
+    position: absolute;
+    @include font-size(2);
+    padding: 1rem
+  }
+
+  .slider{
+    opacity:0.2;
+  }
+
+}
+
+
+
 
 #app{
   background: $background;
 }
 
+.nav{
+  margin: 0px;
+  position: fixed;
+  top :0;
+  z-index: 1;
 
+  input {
+    border:none;
+    @include padding-input(1);    
+  }
+  input.nav-item {
+      background: $background;
+  }
+  input.nav-search-icon {
+    height: 80%;
+    width: auto;
+    background: none;
+    background-image: url("../images/search.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;
+  }
 
+  
+}
+.text-center{
+  text-align:center;
+}
 
 body {
   font-family: $main-font;
@@ -54,48 +257,48 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a{
-	color:$main-text;
-	text-decoration: underline;
-	&:hover{
-		color:$main-title;
+  color:$main-text;
+  text-decoration: underline;
+  &:hover{
+    color:$main-title;
     background-color: none;
-	}
+  }
 }
 
 
 
 form{
     label{
-    	display:block;
-	    margin-bottom: 0;
-	    display: inline-block;
-	    min-width: 19%;
-	    text-align: right;
-	    padding: 0 4%;
+      display:block;
+      margin-bottom: 0;
+      display: inline-block;
+      min-width: 19%;
+      text-align: right;
+      padding: 0 4%;
     }
     input{
-		background: $comments-background ;
-		border: none;
-		@include padding-button(1);
-		outline: 0;
-		display: inline-block;
-		width:80%;
-	}
-	.field{
-		text-align: right;
-		padding: 1% 0;
+    background: $comments-background ;
+    border: none;
+    @include padding-button(1);
+    outline: 0;
+    display: inline-block;
+    width:80%;
+  }
+  .field{
+    text-align: right;
+    padding: 1% 0;
 
-		button{
-			margin: 0 0 0 2%;
-			@include padding-button(2);
+    button{
+      margin: 0 0 0 2%;
+      @include padding-button(2);
 
       .img-rocket {
         width: 3em;
         position: absolute;
         right:0em;
       }
-		}
-	}
+    }
+  }
   textarea {
     @extend input;
     width: 100%;
@@ -108,22 +311,22 @@ form{
 
 
 button{
-	background: $main-title ;
-	border: none;
-	@include padding-button(1);
-	outline: 0;
-	display: inline-block;
-	&:hover{
-		background: $username;
-	}
+  background: $main-title ;
+  border: none;
+  @include padding-button(1);
+  outline: 0;
+  display: inline-block;
+  &:hover{
+    background: $username;
+  }
 }
 
 
 .login > .row{
-	padding: 2% 3%;
-	.col-sm-4{
-		border-right: 1px solid $main-title;
-	}
+  padding: 2% 3%;
+  .col-sm-4{
+    border-right: 1px solid $main-title;
+  }
 }
 
 
@@ -152,35 +355,35 @@ small {
 }
 
 .contain-img{
-	width:4em;
-	img{
-		width: 100%;
-		height: 100%;
-	}
+  width:4em;
+  img{
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .avatar {
   height: 70px;
   width: 70px;
   margin: 0px;
-  	img{
-  		@include border-radius(1);
-  	}
+    img{
+      @include border-radius(1);
+    }
 }
 
 .comment{
-	background: $comments-background;
-	margin-top:2%;
-	max-height: 8em;
-	.col-sm-1{
-		padding: 1%;
-	}
-	button{
-		margin-top:1em;
-	}
-	textarea{
-		padding-left: 0;
-	}
+  background: $comments-background;
+  margin-top:2%;
+  max-height: 8em;
+  .col-sm-1{
+    padding: 1%;
+  }
+  button{
+    margin-top:1em;
+  }
+  textarea{
+    padding-left: 0;
+  }
 }
 
 @media screen and (min-width: 1200px) {
@@ -190,14 +393,95 @@ small {
 }
 
 
+nav {
+  .navbar-brand {
+    font-family: $title-font;
+    text-decoration: none;
+  }
+  .navbar-brand:hover {
+    background-color: none;
+  }
+
+  ul {
+    padding: 0 1em;
+    width: 100%;
+    background-color: $menu-background;
+    color: $main-text;
+    display : block;
+
+    li {
+
+      .nav-link, .nav-item {
+        display : inline-block;
+        text-decoration: none;
+        background: none;
+
+        &:hover{
+          text-decoration: none;
+          background: none;
+
+        }
+        &:active{
+          text-decoration: none;
+          background: none;
+
+        }
+         &:focus{
+          text-decoration: none;
+          background: none;
+
+        }
+
+      }
+
+      img {
+        width: 2em;
+        height: auto;
+      }
+    }
+  }
+}
+
+nav ul li.navbar-right .nav-responsive{
+    position: fixed;
+    top : 1em;
+    right: 1em;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  nav ul li.navbar-right .nav-item, nav ul li.navbar-right menu-separator {
+    display: none;
+  }
+  nav ul li.navbar-right .nav-responsive{
+    display: inline-block;
+  }
+}
+
+@media screen and (min-width: 801px) {
+  nav ul li.navbar-right .nav-item, nav ul li.navbar-right menu-separator {
+    display: inline-block;
+  }
+  nav ul li.navbar-right .nav-responsive {
+    display: none;
+  }
+}
+
+menu-separator {
+  vertical-align: middle;
+  height: 1em;
+  border: 0.2px solid $main-text;
+  margin: 0 1.3em;
+}
+
 .like-icon:hover {
   background-image: url("../images/LikeFull.svg");
   background-size: 100%;
 }
 
 .square {
-  height: 150px;
-  width: 150px;
+  height: 13rem;
+  width: 13rem;
   background-color: $grey;
-  margin: 10% 5%;
+  margin: 1rem auto;
 }
