@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-Vue.use(Router)
+Vue.use(Router) 
 
 // ===================== Pages Components ======================
 import Login from './components/Login'
-import Inscription from './components/Inscription'
+/*import Inscription from './components/Inscription'*/
 import WelcomeOnBoard from './components/WelcomeOnBoard'
 
 import Event from './components/Event'
@@ -36,13 +36,9 @@ export default new Router({
     { 
     	path: '/', 
     	component: Login 
-	},{ 
-      path: '/inscription', 
-      component : Inscription
-      // mixer avec la page login sur la page d'accueil !
-  }, {
-    path: '/inscription/welcome-on-board', 
-    component : WelcomeOnBoard
+	},{
+      path: '/inscription/welcome-on-board', 
+      component : WelcomeOnBoard
   },{ 
       path: '/univers/evenement', 
       component : Event

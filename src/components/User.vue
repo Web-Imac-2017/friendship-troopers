@@ -22,11 +22,8 @@
 
     <button @click="profil"> (debug) Profil change from public to private</button>  
 
-    <div class="row container-colored">
-      <div class="col-sm-12">
-        <p>Post : reprendre l'autre quand ils seront 100% terminés <br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, ex?</p>
-    </div>
-    </div>
+    <Post></Post>
+
   </div>
 </template>
 
@@ -36,6 +33,8 @@
 
 
 <script>
+
+import Post from './Post.vue'
 
 let optionBar = {
   props: ['myself'],
@@ -108,7 +107,7 @@ let statistics = {
 }
 
 export default {
-  components: {optionBar, statistics },
+  components: {optionBar, statistics, Post },
    methods: {
     profil: function(){
       if (this.myself)
