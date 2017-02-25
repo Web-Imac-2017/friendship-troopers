@@ -40,9 +40,6 @@ export default new Router({
       path: '/inscription/welcome-on-board', 
       component : WelcomeOnBoard
   },{ 
-      path: '/univers/evenement', 
-      component : Event
-  },{ 
       path: '/recherche', 
       component : Search
   },{ 
@@ -82,11 +79,14 @@ export default new Router({
       component : Feed
       // mettre $planet : unique pour chaque planete
   },{ 
-      path: '/planete/post/:id', 
+      path: '/univers/evenement', 
+      component : Event
+  },{ 
+      path: '/univers/planete/post/:id', 
       component : Post
       // mettre $planet : unique pour chaque planete
   },{ 
-      path: '/planete/wiki', 
+      path: '/univers/planete/wiki', 
       component : Wiki
       // mettre $planet : unique pour chaque planete
   },{ 
