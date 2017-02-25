@@ -172,7 +172,8 @@ abstract class Model {
 		if (!is_array($id)) {
 			$sql = ' DELETE FROM ' . $this->table . ' WHERE ' . $this->primaryKey . ' = ' . $id;
 		} else {
-			$sql = ' DELETE FROM ' . $this->table . ' WHERE';
+			$sql = ' DELETE FROM ' . $this->table . ' WHERE ';
+			$first = true;
 			foreach($id as $key => $value) {
 				if($first) {
 					$first = false;
@@ -182,9 +183,10 @@ abstract class Model {
 				$sql .= "$key = $value";
 			}
 		}
+		var_dump($sql);
 		$prepareRequest = $this->pdo->prepare($sql);
 		$prepareRequest->execute();
-		}
+	}
 
 			/**
 	 * Insert / Update function
@@ -195,7 +197,7 @@ abstract class Model {
 	 * @param  array    $addKeys  keys needed for the update
 	 * @return type     ...
 	 */
-	public function save($data, $addKeys = array()) {
+	public function save($data, $addKeys = []) {
 		$Pkey = $this->primaryKey;
 		$fields = array();
 		$currentData = array();
