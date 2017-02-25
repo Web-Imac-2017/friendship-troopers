@@ -20,7 +20,10 @@
 import menuAdmin from './NavbarAdmin'
 
 export default {
-  components: { menuAdmin } 
+  components: { menuAdmin } ,
+  data () {
+      return {
+      
 
 }
 </script>

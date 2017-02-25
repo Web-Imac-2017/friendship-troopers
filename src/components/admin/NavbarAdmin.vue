@@ -1,7 +1,12 @@
 <template>
 
   <div class="admin-menu">
-
+      <div class=""> 
+        <p> Bienvenue </p> 
+        <h1> {{ admin.adminName }} </h1>
+        <p class="red" v-if=" reports.number > 1"> {{ reports.number }} signalements </p>    
+        <p class="red" v-else> {{ reports.number }} signalement </p>
+      </div>
       <div class="menu-section-title">Publications</div>
       <a href="/admin/creer-post" class=""> Créer un post intergalactique </a>
       <a href="/admin/creer-evenement" class=""> Créer un évenement </a>
@@ -27,5 +32,15 @@
 <script>
 
   export default {
+    data () {
+      return {
+       admin : {
+          adminName : 'LuckyPon'
+       }, 
+       reports : {
+          number : '4'
+       }
+      }
+    }
   }
 </script>
