@@ -85,7 +85,7 @@ abstract class Model {
 					$condition = array();
 					foreach ($request['conditions'] as $key => $value) {
 						if (strstr($key, '.') === false) {
-							$key = $this->table . '.' . $key; 
+							$key = $this->table . '.' . $key;
 						}
 						if (is_array($value)) {
 							if (isset($value['value']) and isset($value['cmp'])) {
@@ -187,7 +187,7 @@ abstract class Model {
 		}
 
 			/**
-	 * Insert function
+	 * Insert / Update function
 	 * INSERT INTO table VALUES ('valeur 1', 'valeur 2', ...)
 	 * Insert one or many entries into the DB. Based on the data and keys sent by a controller
 	 * Update one or many entries of the DB based on the data and keys sent by a controller
@@ -195,7 +195,7 @@ abstract class Model {
 	 * @param  array    $addKeys  description
 	 * @return type     ...       description
 	 */
-	public function insert ($data, $addKeys = array()) {
+	public function save($data, $addKeys = array()) {
 		$Pkey = $this->primaryKey;
 		$fields = array();
 		$currentData = array();
@@ -236,13 +236,4 @@ abstract class Model {
 		}
 	}
 
-	/**
-	 * Update one or many entries of the DB based on the data and keys sent by a controller
-	 * @param  object   $data     datas that need to be pushed in the DB
-	 * @param  array    $addKeys  description
-	 * @return type     ...       description
-	 */
-	public function update ($data, $addKeys = array()) {
-		
-	}
 }
