@@ -1,14 +1,14 @@
 <template>
-  <div class="well">
-    <div class="row">
-      <div class="col-sm-5 text-right">
-        <img class="logo" src="../assets/logo.png">
-      </div>
-      <div id="hello">
-        <h1>Page pour voir ses amis</h1>
-      </div>
+  <section class="article">
+   <div class="row">
+
+    <div class="col-sm-8"> 
+  
+    </div>
+    <div class="col-sm-2">
     </div>
   </div>
+  </section>
 </template>
 
 <script>

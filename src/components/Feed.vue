@@ -1,21 +1,27 @@
 <template>
-  <section class="article">
-   <div class="row">
-    <div class="col-sm-2">
-        <lateralMenuLeft></lateralMenuLeft>
-        <MenuTools></MenuTools> 
-    </div>
-    <div class="col-sm-8"> 
-        <create-post :post="post"></create-post>
-        <Post></Post>
-  
-    </div>
+  <div class="container-fluid">
+    <div class="row">
+      <aside class="col-sm-2">
+      <lateralMenuLeft></lateralMenuLeft>
+      <MenuTools></MenuTools>
+    </aside>
+    <section class="article col-sm-8">
+
+          <create-post :post="post"></create-post>
+          <Post></Post>
+
+    </section>
     <div class="col-sm-2">
        <lateralMenuRight></lateralMenuRight>
     </div>
+    <pre>{{post}}</pre>
+
+
+    </div>
+    
+    
   </div>
-  <pre>{{post}}</pre>
-  </section>
+  
 </template>
 
 <script>
@@ -35,7 +41,7 @@ let createPost = {
   },
   template:
     `
-    <div class="container post">
+    <div class="post">
       <div class="row">
         <div class="col-sm-1 avatar">
             <img src="../assets/Avatar1.svg" alt="default avatar" class="avatar">
@@ -61,7 +67,6 @@ import Post from './Post.vue'
 
 export default {
   components: { createPost, LateralMenuLeft, LateralMenuRight, MenuTools, Post  },
-  
 
 }
 </script>

@@ -3,6 +3,9 @@
   font-family: earthOrbiter-font;
   src: url(earthorbiterxtrabold.ttf); }
 
+html {
+  font-size: 62.5%; }
+
 .nav {
   margin: 0px;
   position: fixed;
@@ -28,7 +31,7 @@ input {
 ul {
   padding: 0 1em;
   width: 100%;
-  background-color: #222d3c;
+  background-color: #212d3f;
   color: #e7e8e8;
   display: block; }
   ul li .nav-link, ul li .nav-item, ul li .navbar-brand {
@@ -56,7 +59,7 @@ ul li .nav-link, ul li .nav-item {
   line-height: 3rem; }
 
 .nav input.nav-item:active, .nav input.nav-item:hover, .nav input.nav-item:focus, .nav input.nav-item {
-  background: #0f1a28; }
+  background: #0f1928; }
 
 .nav input.nav-search-icon:active, .nav input.nav-search-icon:hover, .nav input.nav-search-icon:focus, .nav input.nav-search-icon {
   height: 80%;

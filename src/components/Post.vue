@@ -12,7 +12,7 @@ let postTemplate = {
   },
   template:
     `
-    <div class="container post">
+    <div class="post">
       <div class="row"> 
         <div class="col-sm-1">
             <div class="avatar">

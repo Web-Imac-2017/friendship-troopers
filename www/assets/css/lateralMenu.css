@@ -3,9 +3,12 @@
   font-family: earthOrbiter-font;
   src: url(earthorbiterxtrabold.ttf); }
 
+html {
+  font-size: 62.5%; }
+
 .lateralMenuLeft, .lateralMenuRight, .menuTools {
   /* common properties */
-  background-color: #303b4c; }
+  background-color: #2f3b4f; }
 
 .lateralMenuLeft {
   /* style and properties */ }
