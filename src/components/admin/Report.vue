@@ -23,7 +23,9 @@ export default {
   components: { menuAdmin } ,
   data () {
       return {
+   }
       
+   }
 
 }
 </script>
