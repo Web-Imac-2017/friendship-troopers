@@ -1,7 +1,7 @@
 <template>
 
 
-  <div class="container col-sm-12 lateralMenuLeft">
+  <div class="container col-sm-11 lateralMenuLeft">
     <div class="lateralMenuAvatar">
     
  <!-- 

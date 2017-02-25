@@ -6,7 +6,9 @@
 }
 
 .lateralMenuLeft {
-  /* style and properties */
+	padding-top: 2rem;
+	padding-bottom: 1rem;
+	  /* style and properties */
 }
 .lateralMenuRight {
   /* style and properties */
@@ -14,6 +16,8 @@
 
 .menuTools{
   /* style and properties */
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   width: 100%;
   margin-top: 1rem;
   display: inline-block;
@@ -31,8 +35,8 @@
 	background-size: 100%;
 	text-align: center;
 	background-repeat: no-repeat;
-  background-position: center;
-  vertical-align: middle;
+  	background-position: center;
+  	vertical-align: middle;
 
   .planet{
   	width: 5em;

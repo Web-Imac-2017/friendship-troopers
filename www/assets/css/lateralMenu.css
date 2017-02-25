@@ -4,6 +4,8 @@
   background-color: #222d3c; }
 
 .lateralMenuLeft {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
   /* style and properties */ }
 
 .lateralMenuRight {
@@ -11,6 +13,8 @@
 
 .menuTools {
   /* style and properties */
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   width: 100%;
   margin-top: 1rem;
   display: inline-block;
