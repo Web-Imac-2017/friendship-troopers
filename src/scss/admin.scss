@@ -22,3 +22,20 @@
 	color: $report-red;
 	font-weight: bold;
 }
+
+.brown-button {
+	background-color: $report-brown;
+}
+
+.red-button {
+	background-color : $report-red;
+}
+
+.admin-button {
+	margin: 1%;
+	@include padding-button(3);
+}
+
+span {
+	text-color: $article-background;
+}

@@ -19,3 +19,13 @@
 .red {
   color: #ef3824;
   font-weight: bold; }
+
+.brown-button {
+  background-color: #b5780b; }
+
+.red-button {
+  background-color: #ef3824; }
+
+.admin-button {
+  margin: 1%;
+  padding: 1.5rem 4.5rem; }
