@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-Vue.use(Router)
+Vue.use(Router) 
 
 // ===================== Pages Components ======================
 import Login from './components/Login'
-import Inscription from './components/Inscription'
+/*import Inscription from './components/Inscription'*/
 import WelcomeOnBoard from './components/WelcomeOnBoard'
 
 import Event from './components/Event'
@@ -36,16 +36,9 @@ export default new Router({
     { 
     	path: '/', 
     	component: Login 
-	},{ 
-      path: '/inscription', 
-      component : Inscription
-      // mixer avec la page login sur la page d'accueil !
-  }, {
-    path: '/inscription/welcome-on-board', 
-    component : WelcomeOnBoard
-  },{ 
-      path: '/univers/evenement', 
-      component : Event
+	},{
+      path: '/inscription/welcome-on-board', 
+      component : WelcomeOnBoard
   },{ 
       path: '/recherche', 
       component : Search
@@ -86,11 +79,14 @@ export default new Router({
       component : Feed
       // mettre $planet : unique pour chaque planete
   },{ 
-      path: '/planete/post/:id', 
+      path: '/univers/evenement', 
+      component : Event
+  },{ 
+      path: '/univers/planete/post/:id', 
       component : Post
       // mettre $planet : unique pour chaque planete
   },{ 
-      path: '/planete/wiki', 
+      path: '/univers/planete/wiki', 
       component : Wiki
       // mettre $planet : unique pour chaque planete
   },{ 
