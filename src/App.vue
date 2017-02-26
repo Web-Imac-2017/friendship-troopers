@@ -1,6 +1,4 @@
-<template>
-  <div>
-    
+<template>    
     <div id="app">
       <navbar></navbar>
       <router-view></router-view>
@@ -29,7 +27,6 @@
         <li><router-link to="/FAQ"> FAQ </router-link></li>
         <li><router-link to="/error404"> Erreur 404 </router-link></li>
       </ul>
-      </div>
     </div>
 </template>
 
