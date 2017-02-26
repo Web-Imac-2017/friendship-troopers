@@ -3,8 +3,8 @@
 
     <router-link to="/legals" class=""> Mentions légales </router-link> -
     <router-link to="/aide" class=""> Aide </router-link> -
-    <router-link to="/problems" class=""> Signaler un probleme </router-link> -
-    <router-link to="/propos" class=""> A propos </router-link> -
+    <router-link to="/problems" class=""> Signaler un problème </router-link> -
+    <router-link to="/propos" class=""> À propos </router-link> -
     <router-link to="/FAQ" class=""> FAQ </router-link>
 
   </div>
