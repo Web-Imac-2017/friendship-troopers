@@ -13,7 +13,7 @@ class Publication extends Controller {
    * @param  char*  $title  the article title
    * @return int    ...     return value (-1 = error)
    */
-  public function view ($title) {
+  public function viewFirst ($title) {
     $publicationModel = new \Models\Publication();
 
     $request = $this->publicationModel->findFirst([
@@ -29,18 +29,25 @@ class Publication extends Controller {
    * @param  int    $author   the author id (foreignKey)
    * @return int    ...       return value (-1 = error)
    */
-  public function create ($title, $content, $publicationType, $author) {
-    $publicationModel = new \Models\Publication();
+  public function create ($post) {
+    if (checkRequired(['title', 'content', 'userId'], $post)) {
+      $title = $_POST['title'];
+      $content = $_POST['content'];
+      $author = $_POST['author'];
+      $publicationType = $_POST['publicationType'];
 
-    if ($title === NULL || $content === NULL || $author === NULL) {
-      if (!$title)
-        echo 'aucun titre';
-      if (!$content)
-        echo 'aucun contenu';
-      if (!$author)
-        echo 'auteur invalide';
-      return -1;
+      if ($title === NULL || $content === NULL || $author === NULL) {
+        if (!$title)
+          echo 'aucun titre';
+        if (!$content)
+          echo 'aucun contenu';
+        if (!$author)
+          echo 'auteur invalide';
+        return -1;
+      }
     }
+
+    $publicationModel = new \Models\Publication();
 
     $publicationModel->save(filterXSS([
       'title' => $title,
@@ -56,30 +63,36 @@ class Publication extends Controller {
    * @param  text   $content  the modified content
    * @return int    ...       return value (-1 = error)
    */
-  public function update ($title, $content, $publicationId) {
-    $publicationModel = new \Models\Publication();
+  public function update () {
+    if (checkRequired(['title', 'content', 'userId', 'publicationId'])) {
+      $title = $_POST['title'];
+      $content = $_POST['content'];
+      $publicationId = $_POST['publicationId'];
 
-    if ($title === NULL || $content === NULL) {
-      echo 'aucun contenu';
-      return -1;
+      if ($title === NULL || $content === NULL) {
+        echo 'aucun contenu';
+        return false;
+      }
+
+      $publicationModel = new \Models\Publication();
+
+      $oldPublication = $publicationModel->findFirst([
+        'fields' => ['title', 'content', 'id'],
+        'conditions' => ['id' => $publicationId],
+      ]);
+
+      if ($title == $oldPublication['title'] && $content == $oldPublication['content']) {
+        echo "aucunes modifications apportées";
+        return false;
+      }
+
+      $publicationModel->save(filterXSS([
+        'id' => $publicationId,
+        'title' => $title,
+        'content' => $content,
+        'modified' => +1,
+      ]));
     }
-
-    $oldPublication = $publicationModel->findFirst([
-      'fields' => ['title', 'content', 'id'],
-      'conditions' => ['id' => $publicationId],
-    ]);
-
-    if ($title == $oldPublication['title'] && $content == $oldPublication['content']) {
-      echo "aucunes modifications apportées";
-      return -2;
-    }
-
-    $publicationModel->save(filterXSS([
-      'id' => $publicationId,
-      'title' => $title,
-      'content' => $content,
-      'modified' => +1,
-    ]));
   }
 
   /**
