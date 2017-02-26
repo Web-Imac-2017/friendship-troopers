@@ -7,7 +7,7 @@
 namespace Controllers;
 
 abstract class Controller {
-  
+
   public function filterXSS ($data) {
     $currentData = $data;
     if (!isset($currentData))

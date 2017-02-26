@@ -1,4 +1,5 @@
 <?php
+
 define('ROOT', __DIR__);
 
 if ($_GET['url'] === 'favicon.ico') {
@@ -34,8 +35,12 @@ $router->run();
 //session_start();
 //$userId = $_SESSION['user'] = new Models\user(['id' => 1]);
 $publication = new \Controllers\Publication();
-$title = 'Gaëlle';
+$title = 'Cyril';
 $content = 'super content';
-//$publication->create($title, $content, 1);
-//$publication->delete(1, 1);
-//$publication->update($title, $content, 1);
+$imgPath = 'test.jpg';
+$publicationType = 3;
+$userId = 3;
+
+//$publication->create($title, $content, $publicationType, $userId);
+//$publication->delete(2);
+//$publication->update($title, $content, 2);

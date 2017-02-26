@@ -8,6 +8,7 @@ namespace Models;
 
 abstract class Model {
 	protected $table = NULL;
+	protected $dbName = 'friendshipTroopers';
 	protected $pdo;
 
 	protected $primaryKey = 'id';
@@ -27,7 +28,7 @@ abstract class Model {
 		$database = \Utils\Config::get('db', true);
 
 		if ($this->table === NULL) {
-			$tableName=explode('\\',strtolower(get_class($this)));
+			$tableName = explode('\\',strtolower(get_class($this)));
 			$this->table = $tableName[sizeof($tableName)-1];
 		}
 

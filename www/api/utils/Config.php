@@ -2,12 +2,10 @@
 
 namespace Utils;
 
-class Config
-{
+class Config {
     private static $conf;
 
-    public static function init()
-    {
+    public static function init() {
         $configuration_file = file_get_contents(ROOT.'/config/env.json');
         if ($configuration_file === false) {
             $configuration_file = file_get_contents(ROOT.'/config/env.json.sample');
@@ -16,8 +14,7 @@ class Config
         self::$conf = json_decode($configuration_file);
     }
 
-    private static function insertVariable($string)
-    {
+    private static function insertVariable($string) {
         if (is_string($string)) {
             return preg_replace_callback('/\{([^}]+)\}/', function ($matches) {
                 if ($matches[1] === 'ROOT') {
@@ -31,8 +28,7 @@ class Config
         return $string;
     }
 
-    public static function get($key, $force = false)
-    {
+    public static function get($key, $force = false) {
         $key_getter = explode('.', $key);
         $value = null;
         foreach ($key_getter as $k) {
