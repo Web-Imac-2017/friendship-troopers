@@ -29,7 +29,7 @@ class Publication extends Controller {
    * @param  int    $author   the author id (foreignKey)
    * @return int    ...       return value (-1 = error)
    */
-  public function create ($title, $content, $author) {
+  public function create ($title, $content, $publicationType, $author) {
     $publicationModel = new \Models\Publication();
 
     if ($title === NULL || $content === NULL || $author === NULL) {
@@ -42,14 +42,12 @@ class Publication extends Controller {
       return -1;
     }
 
-    $data = [
+    $publicationModel->save(filterXSS([
       'title' => $title,
       'content' => $content,
       'userId' => $author,
-    ];
-
-    $this->filterXSS($data);
-    $publicationModel->save($data);
+      'publicationTypeId' => $publicationType,
+    ]));
   }
 
   /**
@@ -70,22 +68,18 @@ class Publication extends Controller {
       'fields' => ['title', 'content', 'id'],
       'conditions' => ['id' => $publicationId],
     ]);
-    var_dump($oldPublication);
 
     if ($title == $oldPublication['title'] && $content == $oldPublication['content']) {
-      echo "aucune modifications apportées";
+      echo "aucunes modifications apportées";
       return -2;
     }
 
-    $data = [
+    $publicationModel->save(filterXSS([
       'id' => $publicationId,
       'title' => $title,
       'content' => $content,
       'modified' => +1,
-    ];
-
-    $this->filterXSS($data);
-    $publicationModel->save($data);
+    ]));
   }
 
   /**
@@ -102,7 +96,6 @@ class Publication extends Controller {
       'conditions' => ['publicationId' => $id],
     ])) {
       echo "aucun commentaires à supprimer";
-      return -1;
     }
 
     $commentModel->delete(['publicationId' => $id]);
@@ -120,5 +113,4 @@ class Publication extends Controller {
 
     $publicationModel->delete($id);
   }
-
 }

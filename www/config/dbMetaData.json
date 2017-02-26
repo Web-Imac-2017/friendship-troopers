@@ -1,0 +1,532 @@
+[
+    {
+        "TABLE_NAME": "avatar",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "avatar",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "100"
+    },
+    {
+        "TABLE_NAME": "avatar",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "500"
+    },
+    {
+        "TABLE_NAME": "avatar",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "badge",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "badge",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "60"
+    },
+    {
+        "TABLE_NAME": "badge",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "500"
+    },
+    {
+        "TABLE_NAME": "badge",
+        "DATA_TYPE": "text",
+        "CHARACTER_MAXIMUM_LENGTH": "65535"
+    },
+    {
+        "TABLE_NAME": "badge",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "100"
+    },
+    {
+        "TABLE_NAME": "badge",
+        "DATA_TYPE": "tinyint",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "badge",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "chatbox",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "chatbox",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "45"
+    },
+    {
+        "TABLE_NAME": "chatbox_user",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "chatbox_user",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "comment",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "comment",
+        "DATA_TYPE": "text",
+        "CHARACTER_MAXIMUM_LENGTH": "65535"
+    },
+    {
+        "TABLE_NAME": "comment",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "comment",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "comment",
+        "DATA_TYPE": "datetime",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "comment",
+        "DATA_TYPE": "tinyint",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "event",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "event",
+        "DATA_TYPE": "datetime",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "event",
+        "DATA_TYPE": "datetime",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "event",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "500"
+    },
+    {
+        "TABLE_NAME": "event",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "imgupload",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "imgupload",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "100"
+    },
+    {
+        "TABLE_NAME": "imgupload",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "60"
+    },
+    {
+        "TABLE_NAME": "interest",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "interest",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "45"
+    },
+    {
+        "TABLE_NAME": "interest",
+        "DATA_TYPE": "tinyint",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "like",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "like",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "planet",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "planet",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "30"
+    },
+    {
+        "TABLE_NAME": "planet",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "500"
+    },
+    {
+        "TABLE_NAME": "planet",
+        "DATA_TYPE": "text",
+        "CHARACTER_MAXIMUM_LENGTH": "65535"
+    },
+    {
+        "TABLE_NAME": "planet",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "100"
+    },
+    {
+        "TABLE_NAME": "preference",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "preference",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "45"
+    },
+    {
+        "TABLE_NAME": "publication",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "publication",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "100"
+    },
+    {
+        "TABLE_NAME": "publication",
+        "DATA_TYPE": "text",
+        "CHARACTER_MAXIMUM_LENGTH": "65535"
+    },
+    {
+        "TABLE_NAME": "publication",
+        "DATA_TYPE": "datetime",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "publication",
+        "DATA_TYPE": "tinyint",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "publication",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "publication",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "publication",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "publication_type",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "publication_type",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "45"
+    },
+    {
+        "TABLE_NAME": "report",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "report",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "riddle",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "riddle",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "100"
+    },
+    {
+        "TABLE_NAME": "riddle",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "500"
+    },
+    {
+        "TABLE_NAME": "riddle",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "riddle",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "riddle",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "riddle",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "riddle",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "riddlephase",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "riddlephase",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "riddlephase",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "500"
+    },
+    {
+        "TABLE_NAME": "riddlephase",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "500"
+    },
+    {
+        "TABLE_NAME": "riddlephase",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "riddle_type",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "riddle_type",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "50"
+    },
+    {
+        "TABLE_NAME": "role",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "role",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "30"
+    },
+    {
+        "TABLE_NAME": "smiley",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "smiley",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "20"
+    },
+    {
+        "TABLE_NAME": "smiley",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "20"
+    },
+    {
+        "TABLE_NAME": "smiley",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "45"
+    },
+    {
+        "TABLE_NAME": "user",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "45"
+    },
+    {
+        "TABLE_NAME": "user",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "30"
+    },
+    {
+        "TABLE_NAME": "user",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "100"
+    },
+    {
+        "TABLE_NAME": "user",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "255"
+    },
+    {
+        "TABLE_NAME": "user",
+        "DATA_TYPE": "varchar",
+        "CHARACTER_MAXIMUM_LENGTH": "500"
+    },
+    {
+        "TABLE_NAME": "user",
+        "DATA_TYPE": "date",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user",
+        "DATA_TYPE": "tinyint",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user",
+        "DATA_TYPE": "datetime",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user_avatar",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user_avatar",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user_avatar",
+        "DATA_TYPE": "tinyint",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user_badge",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user_badge",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user_badge",
+        "DATA_TYPE": "tinyint",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user_interest",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user_interest",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user_preference",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user_preference",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user_preference",
+        "DATA_TYPE": "tinyint",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user_riddle",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user_riddle",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user_riddle",
+        "DATA_TYPE": "datetime",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user_riddle",
+        "DATA_TYPE": "datetime",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user_riddle",
+        "DATA_TYPE": "tinyint",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user_smiley",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user_smiley",
+        "DATA_TYPE": "int",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user_smiley",
+        "DATA_TYPE": "datetime",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+        "TABLE_NAME": "user_smiley",
+        "DATA_TYPE": "datetime",
+        "CHARACTER_MAXIMUM_LENGTH": null
+    }
+]
