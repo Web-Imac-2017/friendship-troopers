@@ -24,6 +24,7 @@ $router->get('/:planet/posts/:id', 'Publication#view');
 $router->get('/planet/wiki', 'Planet#wiki');
 $router->get('/planets', 'Planet#getAllPlanet');
 $router->get('/univers', '');
+$router->post('/connexion','CONTROLLER#FONCTION');
 $router->run();
 
 //COMMENT CREER UNE ROUTE :
