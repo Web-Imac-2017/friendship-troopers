@@ -14,37 +14,37 @@
 				<div class="container col-sm-9">
 					<p class="left"> Publication signalée pour <span> {{ reportedPost.type}} </span> le {{ reportedPost.date}} à {{ reportedPost.hour}} </p>
 					<!-- TODO change with posttemplate -->			
-						<div class="row post"> 
-							<div class="col-sm-1">
-								<div class="avatar">
-									<img :src="avatar" alt="default avatar" class="avatar">
-								</div>
-							</div>
-							<div class="col-sm-11">
-								<div class="row"> 
-									<div class="col-sm-11 left">
-										<h1 class="pseudo">{{ reportedPost.post.user }}</h1>
-										<small class="date"> {{ reportedPost.post.date + " à " + reportedPost.post.hour }}</small>
-									</div>
-								</div>
-								<div class="row"> 
-									<div class="col-sm-12">
-										<p class="content-block"> {{ reportedPost.post.content }} </p>
-									</div>
-								</div>
-
+					<div class="row post"> 
+						<div class="col-sm-1">
+							<div class="avatar">
+								<img :src="avatar" alt="default avatar" class="avatar">
 							</div>
 						</div>
+						<div class="col-sm-11">
+							<div class="row"> 
+								<div class="col-sm-11 left">
+									<h1 class="pseudo">{{ reportedPost.post.user }}</h1>
+									<small class="date"> {{ reportedPost.post.date + " à " + reportedPost.post.hour }}</small>
+								</div>
+							</div>
+							<div class="row"> 
+								<div class="col-sm-12">
+									<p class="content-block"> {{ reportedPost.post.content }} </p>
+								</div>
+							</div>
+
+						</div>
 					</div>
-					<p> <span>{{reportedPost.nbTimesReported}} fois </sapn> signalé depuis son inscritpion ({{ reportedPost.inscriptionDate }}) </p>
+				</div>
+				<p> <span>{{reportedPost.nbTimesReported}} fois </span> signalé depuis son inscritpion ({{ reportedPost.inscriptionDate }}) </p>
 				
 					
-					<reportBar> </reportBar>
-					
-				</div>
+				<reportBar> </reportBar>
+				
 			</div>
-
-			</template>
+		</div>
+	</div>
+</template>
 
 <style src="../../../www/assets/css/admin.css"></style>
 
