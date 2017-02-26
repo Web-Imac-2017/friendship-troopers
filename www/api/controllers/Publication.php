@@ -31,17 +31,13 @@ class Publication extends Controller {
    */
   public function create ($post) {
     if (checkRequired(['title', 'content', 'userId'], $post)) {
-      $title = $_POST['title'];
-      $content = $_POST['content'];
-      $author = $_POST['author'];
-      $publicationType = $_POST['publicationType'];
 
-      if ($title === NULL || $content === NULL || $author === NULL) {
-        if (!$title)
+      if ($post['title'] === NULL || $post['content'] === NULL || $post['author'] === NULL) {
+        if (!$post['title'])
           echo 'aucun titre';
-        if (!$content)
+        if (!$post['content'])
           echo 'aucun contenu';
-        if (!$author)
+        if (!$post['author'])
           echo 'auteur invalide';
         return -1;
       }
@@ -50,10 +46,10 @@ class Publication extends Controller {
     $publicationModel = new \Models\Publication();
 
     $publicationModel->save(filterXSS([
-      'title' => $title,
-      'content' => $content,
-      'userId' => $author,
-      'publicationTypeId' => $publicationType,
+      'title' => $post['title'],
+      'content' => $post['content'],
+      'userId' => $post['author'],
+      'publicationTypeId' => $post['publicationType'],
     ]));
   }
 
@@ -65,9 +61,9 @@ class Publication extends Controller {
    */
   public function update () {
     if (checkRequired(['title', 'content', 'userId', 'publicationId'])) {
-      $title = $_POST['title'];
-      $content = $_POST['content'];
-      $publicationId = $_POST['publicationId'];
+      $title = $post['title'];
+      $content = $post['content'];
+      $publicationId = $post['publicationId'];
 
       if ($title === NULL || $content === NULL) {
         echo 'aucun contenu';
