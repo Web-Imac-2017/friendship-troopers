@@ -51,14 +51,26 @@ function getMetaData ($request = array()) {
   }
 }
 
+function groupBy($data) {
+  return array_reduce($data, function ($carry, $current) {
+    $carry[$current['TABLE_NAME']][$current['COLUMN_NAME']] = [
+      'type'      => $current['DATA_TYPE'],
+      'maxLength' => $current['CHARACTER_MAXIMUM_LENGTH'],
+    ];
+
+    return $carry;
+  }, []);
+}
+
 $datas = getMetaData([
   'metaData' => [
     'TABLE_NAME',
+    'COLUMN_NAME',
     'DATA_TYPE',
     'CHARACTER_MAXIMUM_LENGTH',
   ]
 ]);
 
-file_put_contents(ROOT.'/config/dbMetaData.json', json_encode($datas, JSON_PRETTY_PRINT));
+file_put_contents(ROOT.'/config/dbMetaData.json', json_encode(groupBy($datas), JSON_PRETTY_PRINT));
 
 // json_decode(file_get_contents(ROOT.'/config/dbMetaData.json'), true);
