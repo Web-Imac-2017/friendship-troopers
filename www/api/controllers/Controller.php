@@ -28,6 +28,7 @@ abstract class Controller {
 
   }
 
+<<<<<<< HEAD
   public function filterXSS ($data) {
     $currentData = $data;
     if (!isset($currentData))
@@ -47,4 +48,6 @@ abstract class Controller {
   public function filterCSRF () {
 
   }
+=======
+>>>>>>> 4bc30704667d8cda7f042eaf3b483f95fcd33a62
 }
