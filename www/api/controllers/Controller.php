@@ -8,6 +8,18 @@ namespace Controllers;
 
 abstract class Controller {
 
+  public function checkRequired ($required, $post) {
+    // MAK SURE EACH REQUIRED FIELDS EXISTS IN $_POST
+    return array_filter($required, function ($r) use ($post) {
+      return !array_key_exists($r, $post);
+    });
+  }
+
+  /**
+   * Filter XSS attempts comming from users
+   * @param  [type] $data [description]
+   * @return [type]       [description]
+   */
   public function filterXSS ($data) {
     $currentData = $data;
     if (!isset($currentData))

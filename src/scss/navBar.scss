@@ -66,18 +66,79 @@ ul {
 
 ul li {
   .navbar-brand  {
-    line-height: 2rem;
-    margin: -0.5rem 0;
+    line-height: 1.5rem;
+    margin: -0.75rem 0;
   }
   .nav-link, .nav-item  {
-    line-height: 3rem;
+    line-height: 1.5rem;
   }
+  .nav-icon {
+    cursor: pointer;
+
+  }
+
+  .friends-icon, .messages-icon, .notifications-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: inline-block;
+    vertical-align: middle;
+    @include margin(1);
+  }
+
+  .friends-icon {
+    background-image: url("../images/Friends.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+  .friends-icon:hover {
+    background-image: url("../images/FriendsHover.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+  }
+  .messages-icon {
+      background-image: url("../images/Messages.svg");
+      background-size: 100%;
+      background-repeat: no-repeat;
+  }
+  .messages-icon:hover {
+      background-image: url("../images/MessagesHover.svg");
+      background-size: 100%;
+      background-repeat: no-repeat;
+  }
+  .notifications-icon {
+      background-image: url("../images/Notifications.svg");
+      background-size: 100%;
+      background-repeat: no-repeat;
+  }
+  .notifications-icon:hover {
+      background-image: url("../images/NotificationsHover.svg");
+      background-size: 100%;
+      background-repeat: no-repeat;
+  }
+  .notif {
+    @include border-radius(50%);
+    background-color: $notifs;
+    color: $menu-background;
+    @include font-size(1);
+    width: 1.8rem;
+    height: 1.8rem;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 0.15rem;
+    position: relative;
+    top: 1.3rem;
+    left: 1.3rem;
+  }
+
 }
 
 .nav input.nav-item {
   &:active, &:hover, &:focus, & {
       background: $background;
   }
+  background-position: center;
+  vertical-align: middle; 
 }
 
 .nav input.nav-search-icon {
@@ -93,10 +154,7 @@ ul li {
   }
 }
 
-.nav-icon {
-    @include padding(1);
-    cursor: pointer;
-}
+
 .navbar-left {
   vertical-align: middle;
   height: auto;
@@ -124,7 +182,7 @@ ul li {
 menu-separator {
   vertical-align: middle;
   height: 1.5rem;
-  border: 0.1rem solid $main-text;
+  border-right: 0.1rem solid $main-text;
   margin: 0 1.3rem;
 }
 
