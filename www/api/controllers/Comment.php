@@ -10,6 +10,6 @@ class Comment extends Controller {
 
 
   public function create ($content) {
-
+    
   }
 }
