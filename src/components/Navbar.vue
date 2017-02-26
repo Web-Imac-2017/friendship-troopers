@@ -13,21 +13,58 @@
         <input type="submit" class="nav-item nav-search-icon" value=""></input>
         
         <menu-separator></menu-separator>
-        <div class="nav-item nav-icon"> <img src="../assets/Friends.svg"> </div>
-        <div class="nav-item nav-icon"> <img src="../assets/Messages.svg"> </div>
-        <div class="nav-item nav-icon"> <img src="../assets/Notifications.svg"> </div>
+        <div class="nav-item nav-icon friends-icon"> 
+          <p v-if="notif.friends > 99" class="notif">99+</p> 
+          <p v-else-if="notif.friends > 0" class="notif"> {{ notif.friends }} </p> 
+        </div>
+        <div class="nav-item nav-icon messages-icon"> 
+          <p v-if="notif.messages > 99" class="notif">99+</p>
+          <p v-else-if="notif.messages > 0" class="notif"> {{ notif.messages }}</p> 
+        </div>
+        <div class="nav-item nav-icon notifications-icon">
+          <p v-if="notif.notifications > 99" class="notif">99+</p> 
+          <p v-else-if="notif.notifications > 0" class="notif"> {{ notif.notifications }}</p> 
+        </div>
 
         <menu-separator></menu-separator>
         <router-link to="/utilisateur" class="nav-item nav-link"> Mon profil </router-link>
-        <div class="nav-responsive nav-item nav-link"> <img src="../assets/MenuResponsive.svg"> </div>
+        <div class="nav-responsive nav-item nav-link"  @click="showMenuPesponsive()"> <img src="../assets/MenuResponsive.svg"> </div>
       </li>
     </ul>
   </nav>
 </template>
 
-<style src="../../www/assets/css/navBar.css"></style>
+<style src="../../www/assets/css/navbar.css"></style>
+
 
 <script>
-  export default {
-  }
+
+export default {
+  methods: {
+    showMenuPesponsive: function(){
+      
+    }, 
+    showNotifications: function(){
+      
+    }, 
+    showMessages: function(){
+      
+    }, 
+    showFriends: function(){
+      
+    }
+  }, 
+   data () {
+      return {
+        notif:{
+          friends : 1,
+          messages : 16,
+          notifications : 100
+        }
+      }
+    }
+
+    
+
+}
 </script>

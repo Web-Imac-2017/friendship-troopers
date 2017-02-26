@@ -75,32 +75,7 @@
   background: $background;
 }
 
-.nav{
-  margin: 0px;
-  position: fixed;
-  top :0;
-  z-index: 1;
 
-  input {
-    border:none;
-    @include padding-input(1);    
-  }
-  input.nav-item {
-      background: $background;
-  }
-  input.nav-search-icon {
-    height: 80%;
-    width: auto;
-    background: none;
-    background-image: url("../images/search.svg");
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    vertical-align: middle;
-  }
-
-  
-}
 .text-center{
   text-align:center;
 }
@@ -269,87 +244,6 @@ small {
   }
 } */
 
-
-nav {
-  .navbar-brand {
-    font-family: $title-font;
-    text-decoration: none;
-  }
-  .navbar-brand:hover {
-    background-color: none;
-  }
-
-  ul {
-    padding: 0 1em;
-    width: 100%;
-    background-color: $menu-background;
-    color: $main-text;
-    display : block;
-
-    li {
-
-      .nav-link, .nav-item {
-        display : inline-block;
-        text-decoration: none;
-        background: none;
-
-        &:hover{
-          text-decoration: none;
-          background: none;
-
-        }
-        &:active{
-          text-decoration: none;
-          background: none;
-
-        }
-         &:focus{
-          text-decoration: none;
-          background: none;
-
-        }
-
-      }
-
-      img {
-        width: 2em;
-        height: auto;
-      }
-    }
-  }
-}
-
-nav ul li.navbar-right .nav-responsive{
-    position: fixed;
-    top : 1em;
-    right: 1em;
-    cursor: pointer;
-}
-
-@media screen and (max-width: 800px) {
-  nav ul li.navbar-right .nav-item, nav ul li.navbar-right menu-separator {
-    display: none;
-  }
-  nav ul li.navbar-right .nav-responsive{
-    display: inline-block;
-  }
-}
-
-@media screen and (min-width: 801px) {
-  nav ul li.navbar-right .nav-item, nav ul li.navbar-right menu-separator {
-    display: inline-block;
-  }
-  nav ul li.navbar-right .nav-responsive {
-    display: none;
-  }
-}
-
-menu-separator {
-  vertical-align: middle;
-  height: 1em;
-  border: 0.2px solid $main-text;
-  margin: 0 1.3em;
-}
 
 .like-icon:hover {
   background-image: url("../images/LikeFull.svg");
