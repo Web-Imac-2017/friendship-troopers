@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
 * ////////////////////////////
 * @var ...userModel
@@ -8,7 +8,7 @@ namespace Models;
 
 class User extends Model{
 	//----------[ CONSTANTS ]----------
-	
+
 	//----------[ ATTRIBUTS ]----------
 	private $id;
 	private $username;
@@ -30,7 +30,7 @@ class User extends Model{
 					$this->$key = $val;
 				}
 			}
-		} 
+		}
 	}
 
 	//----------[ SETTER ]-------------
@@ -66,7 +66,7 @@ class User extends Model{
         return $this->firsname = $firsname;
     }
     private function setLastname($lastname) {
-        return $this->lastname = $lastname;    
+        return $this->lastname = $lastname;
     }
     private function setBirthdate($birthdate) {
         return $this->birthdate = $birthdate;
@@ -86,7 +86,7 @@ class User extends Model{
 	 *
 	 */
 	function checkIsNewUser($data) {
-		// j'ai besoin d'un OR T-T		
+		// j'ai besoin d'un OR T-T
 		$result=$this->findFirst($data);
 		echo "result";
 		var_dump($result);
@@ -109,10 +109,10 @@ class User extends Model{
 
 		$data["planetId"] = $planet; // TERRE
 		$data["roleId"] = $role; // user par défaut
-		
+
 		var_dump($data);
 
-		$result=$this->insert($data);
+		$result=$this->save($data);
 		var_dump($this->primaryKeyValue);
 		$this->password="ok";
 	}

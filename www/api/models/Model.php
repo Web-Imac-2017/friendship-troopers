@@ -95,8 +95,11 @@ abstract class Model {
 								$condition[] = $key . $value['cmp'] . $value['value'];
 							} else {
 								$otherConditions = array();
-								foreach ($value as $valueOfValue) {
-									$otherConditions[] = "$key=$valueOfValue";
+								foreach ($value as $orKey => $valueOfValue) {
+									if(!is_numeric($valueOfValue)){
+										$valueOfValue=$this->pdo->quote($valueOfValue);
+									}
+									$otherConditions[] = "$orKey=$valueOfValue";
 								}
 								$condition[] = '(' . implode(' OR ', $otherConditions) . ')';
 							}
@@ -126,7 +129,7 @@ abstract class Model {
 			if (isset($request['limit'])) {
 				$sql .= ' LIMIT ' . $request['limit'];
 			}
-
+			var_dump($sql);
 			// PREPARE THE REQUEST AND EXECUTE IT THEN RETURN AN OBJECT FROM YOUR DB
 			$prepareRequest = $this->pdo->prepare($sql);
 			$prepareRequest->execute();
@@ -192,8 +195,8 @@ abstract class Model {
 	 * Insert one or many entries into the DB. Based on the data and keys sent by a controller
 	 * Update one or many entries of the DB based on the data and keys sent by a controller
 	 * @param  array   $data     datas that need to be pushed in the DB
-	 * @param  array    $addKeys  description
-	 * @return type     ...       description
+	 * @param  array    $addKeys  keys needed for the update
+	 * @return type     ...
 	 */
 	public function save($data, $addKeys = array()) {
 		$Pkey = $this->primaryKey;
@@ -235,5 +238,4 @@ abstract class Model {
 			$this->primaryKeyValue = $this->pdo->lastInsertId($this->primaryKey);
 		}
 	}
-
 }
