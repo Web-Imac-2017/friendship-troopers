@@ -32,21 +32,36 @@ html {
 
 .container-colored {
   background: #212d3f;
-  margin: 0.5rem; }
+  margin: 0rem 0rem 1rem 0rem;
+  padding: 1rem; }
 
 .relative {
   position: relative; }
 
 .top-right, .bottom-right {
   position: absolute;
-  right: 0;
+  right: 1rem;
   color: #cdcccc; }
 
+.friend-list {
+  flex-flow: row wrap;
+  background: none; }
+  .friend-list .item {
+    flex-grow: 0;
+    background: #2f3b4f;
+    margin: 1rem; }
+  .friend-list img {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px; }
+
 .top-right {
-  top: 0; }
+  top: 1rem; }
 
 .bottom-right {
-  bottom: 0; }
+  bottom: 1rem; }
 
 /* .container-fluid{
   background:$articles-background;
@@ -128,6 +143,9 @@ a {
     color: #46bfa9;
     background-color: none; }
 
+.button-field {
+  margin-top: 1rem; }
+
 form label {
   display: block;
   margin-bottom: 0;
@@ -184,7 +202,7 @@ small {
 .post {
   background-color: #212d3f;
   padding: 2%;
-  /*   margin: 2%; */ }
+  margin-bottom: 2%; }
 
 .pseudo {
   margin: 0px 1px 0.5px 2px; }
@@ -199,13 +217,15 @@ small {
     height: 100%; }
 
 .avatar {
-  height: 70px;
-  width: 70px;
-  margin: 0px; }
+  max-height: 6rem;
+  /*   padding-right:0; */
+  text-align: center; }
   .avatar img {
-    border-radius: 1;
-    -webkit-border-radius: 1;
-    -moz-border-radius: 1; }
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    width: auto;
+    height: inherit; }
 
 .comment {
   background: #2f3b4f;

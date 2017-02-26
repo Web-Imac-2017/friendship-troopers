@@ -11,7 +11,8 @@
 
 .container-colored{
   background:$articles-background;
-  @include margin(0.5);
+  @include margin4(0, 0, 1, 0);
+  @include padding(1);
 }
 
 .relative{
@@ -20,16 +21,33 @@
 
 .top-right, .bottom-right{
   position: absolute;
-  right:0;
+  right:1rem;
   color:$grey;
 }
 
+.friend-list{
+  flex-flow: row wrap;
+  background:  none;
+
+  .item{
+    flex-grow:0;
+    background: $comments-background;
+    @include margin(1);
+  }
+
+  img{
+    width:100%;
+    @include padding(1);
+    @include border-radius(10);
+  }
+}
+
 .top-right{
-  top:0;
+  top:1rem;
 }
 
 .bottom-right{
-  bottom:0;
+  bottom:1rem;
 } 
 
 /* .container-fluid{
@@ -142,7 +160,9 @@ a{
   }
 }
 
-
+.button-field{
+  margin-top:1rem;
+}
 
 form{
     label{
@@ -220,7 +240,7 @@ small {
 .post {
   background-color: $articles-background;
   padding: 2%;
-/*   margin: 2%; */
+ margin-bottom: 2%;
 }
 
 .pseudo {
@@ -240,11 +260,13 @@ small {
 }
 
 .avatar {
-  height: 70px;
-  width: 70px;
-  margin: 0px;
+  max-height: 6rem;
+/*   padding-right:0; */
+  text-align:center;
     img{
-      @include border-radius(1);
+      @include border-radius(10);
+      width:auto;
+      height:inherit;
     }
 }
 

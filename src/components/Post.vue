@@ -16,7 +16,7 @@ let postTemplate = {
       <div class="row"> 
         <div class="col-sm-1">
             <div class="avatar">
-            <img src="../assets/Avatar1.svg" alt="default avatar" class="avatar">
+            <img src="http://placehold.it/100x100" alt="default avatar" class="avatar">
             </div>
         </div>
         <div class="col-sm-11">
@@ -25,8 +25,8 @@ let postTemplate = {
               <h1 class="pseudo">{{ post.user }}</h1>
               <small class="date"> {{ post.date + " à " + post.hour }}</small>
             </div>
-            <div class="col-sm-1 right contain-img">
-              <img src="../assets/Options.svg" alt="Options">
+            <div class="col-sm-1 right">
+              <img src="http://placehold.it/20x5" alt="Options">
             </div>
           </div>
           <div class="row"> 
@@ -39,11 +39,11 @@ let postTemplate = {
               <button>Voir plus</button>
             </div>
             <div class="col-sm-1 connect-buttons contain-img">
-              <img class="like-icon" src="../assets/Like.svg" alt="likes">
+              <img class="like-icon" src="http://placehold.it/100x100" alt="likes">
               <span> {{ post.likes }} </span>
             </div>
             <div class="col-sm-1 connect-buttons contain-img">
-              <img src="../assets/Comment.svg" alt="comments"> 
+              <img src="http://placehold.it/100x100" alt="comments"> 
               <span> {{ post.comments }}</span>
             </div>
           </div>
@@ -52,7 +52,7 @@ let postTemplate = {
       <div class="row comment"> 
         <div class="col-sm-1">
             <div class="avatar">
-              <img src="../assets/Avatar1.svg" alt="default avatar" class="avatar">
+              <img src="http://placehold.it/100x100" alt="default avatar" class="avatar">
             </div>
         </div>
         <div class="col-sm-11">

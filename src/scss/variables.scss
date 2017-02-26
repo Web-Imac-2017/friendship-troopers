@@ -55,6 +55,10 @@ $title-font: earthOrbiter-font;
   margin:$height+rem $width+rem;
 }
 
+@mixin margin4($top,$right,$bot,$left) {
+  margin:$top+rem $right+rem $bot+rem $left+rem;
+}
+
 // Center something
 
 %center {
@@ -93,10 +97,10 @@ html {
   font-size: $sizeValue + rem;
 }
 
-@mixin border-radius($size: 10px) {
-  border-radius: $size;
-  -webkit-border-radius: $size;
-  -moz-border-radius: $size;
+@mixin border-radius($size) {
+  border-radius: $size*10 + px;
+  -webkit-border-radius: $size*10 + px;
+  -moz-border-radius: $size*10 + px;
 }
 
 @mixin flexbox() {

@@ -1,31 +1,41 @@
 <template>
   <div class="container-fluid">
-    <div class="row container-colored">
-      <div class="col-sm-2">
-        <img :src="user.userAvatar">
+    <div class="row">
+      <aside class="col-sm-2">
+        <lateralMenuLeft></lateralMenuLeft>
+        <MenuTools></MenuTools>
+      </aside>
+    <section class="article col-sm-8">
+      <div class="row container-colored">
+        <div class="col-sm-2">
+          <img :src="user.userAvatar">
+        </div>
+        <div class="col-sm-8">
+          <p v-if="myself"> Mon profil </p>
+          <p v-else> Profil de {{ user.username }} </p>
+          <small> {{ user.userBadge }} </small>
+          <p> Né le {{ user.birthDate }} </p>
+        </div>
+        <div class="col-sm-2">
+          <img :src="user.userPlanet.path"> 
+          <p> {{ user.userPlanet.name }} </p>
+        </div>
       </div>
-      <div class="col-sm-8">
-        <p v-if="myself"> Mon profil </p>
-        <p v-else> Profil de {{ user.username }} </p>
-        <small> {{ user.userBadge }} </small>
-        <p> Né le {{ user.birthDate }} </p>
-      </div>
-      <div class="col-sm-2">
-        <img :src="user.userPlanet.path"> 
-        <p> {{ user.userPlanet.name }} </p>
-      </div>
+      
+      <optionBar :myself="myself"></optionBar>
+
+      <statistics  :user="user"></statistics>
+
+      <button @click="profil"> (debug) Profil change from public to private</button>  
+
+      <Post></Post>
+    </section>
+    <div class="col-sm-2">
+       <lateralMenuRight></lateralMenuRight>
     </div>
-    
-    <optionBar :myself="myself"></optionBar>
-
-    <statistics  :user="user"></statistics>
-
-    <button @click="profil"> (debug) Profil change from public to private</button>  
-
-    <Post></Post>
 
   </div>
-</template>
+</template> 
 
 
 
@@ -34,6 +44,9 @@
 
 <script>
 
+import LateralMenuLeft from './LateralMenuLeft'
+import LateralMenuRight from './LateralMenuRight'
+import MenuTools from './MenuTools'
 import Post from './Post.vue'
 
 let optionBar = {
@@ -75,10 +88,10 @@ let statistics = {
   props: ['user'],
   template : `
   <div class="container-colored relative">
-    <div class="top-right">Masquer</div>
+    
     <div class="row">
       <div class="col-sm-12">
-        <h1 class="pseudo">Statistiques</h1>
+        <h1 class="text-left">Statistiques</h1>
         <p> Nombre d'amis : {{ user.nbFriends}} </p>
         <p> Nombre d'enigmes résolues : {{ user.nbRiddleSolved}} </p>
         <p> Nombre de points : {{ user.points }} </p>
@@ -86,28 +99,29 @@ let statistics = {
     </div>
      <div class="row">
       <div class="col-sm-12">
-        <h1 class="pseudo">Derniers badges débloqués</h1>
+        <h1 class="text-left">Derniers badges débloqués</h1>
          <ul class="wrapper">
           <li class="item" v-for="badge in user.lastBadges"> 
             <img :src="badge.path"> 
             <p> {{ badge.name }} </p>
           </li>
         </ul>
-    </div>
+      </div>
     </div>
      <div class="row">
       <div class="col-sm-12">
-        <h1 class="pseudo">Dernier titre débloqué</h1>
+        <h1 class="text-left">Dernier titre débloqué</h1>
         <p> {{ user.userBadge}} </p>
+      </div>
     </div>
-    </div>
-    <div class="bottom-right">Voir toutes les récompenses obtenues</div>  
+    <a href="" class="top-right">Masquer</a>
+    <a href="" class="bottom-right">Voir toutes les récompenses obtenues</a>  
   </div>
   `
 }
 
 export default {
-  components: {optionBar, statistics, Post },
+  components: {optionBar, statistics, LateralMenuLeft, LateralMenuRight, MenuTools, Post },
    methods: {
     profil: function(){
       if (this.myself)
@@ -116,8 +130,8 @@ export default {
         this.myself = true
       console.log(this.myself)
 
-  }
-}, 
+    }
+  }, 
   data () {
       return {
        user: {
@@ -144,6 +158,6 @@ export default {
        myself : false
     }
 
-}
+  }
 }
 </script>
