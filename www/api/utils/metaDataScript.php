@@ -73,4 +73,4 @@ $datas = getMetaData([
 
 file_put_contents(ROOT.'/config/dbMetaData.json', json_encode(groupBy($datas), JSON_PRETTY_PRINT));
 
-// json_decode(file_get_contents(ROOT.'/config/dbMetaData.json'), true);
+//json_decode(file_get_contents(ROOT.'/config/dbMetaData.json'), true);
