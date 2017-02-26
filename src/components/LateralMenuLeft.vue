@@ -23,6 +23,8 @@
       <ul>
         <li v-for="friend in lastFriends">
           <img :src="friend.avatar" :alt="friend.name">
+        </li>
+      </ul>
     </div> 
   </div>
   </div>
