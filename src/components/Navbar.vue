@@ -34,7 +34,7 @@
   </nav>
 </template>
 
-<style src="../../www/assets/css/navbar.css"></style>
+<style src="../../www/assets/css/navBar.css"></style>
 
 
 <script>
