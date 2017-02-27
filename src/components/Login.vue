@@ -60,15 +60,15 @@ let formUser = {
 		
 		<div class="field">
 			<label for="">Pseudo</label>
-			<input type="text" v-model="user.username">
+			<input type="text" v-model="user.username" name='username'>
 		</div>
 		<div class="field">
 			<label for="">Mail</label>
-			<input type="email" v-model="user.mail">
+			<input type="email" v-model="user.mail" name='mail'>
 		</div>
 		<div class="field">
 			<label for="">Mot de passe</label>
-			<input type="password" v-model="user.password">
+			<input type="password" v-model="user.password" name='password'>
 		</div>
 		<div class="field">
 			<a href="">J'ai déjà un compte</a>
