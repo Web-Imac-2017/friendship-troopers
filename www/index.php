@@ -18,5 +18,7 @@ $router->get('/deconnexion','account#logout');
 $router->get('/validate','account#validateUser');
 $router->get('/profil/:username','account#getUser');
 $router->get('/profil/:username/validation','account#getUser');
+$router->get('/univers/:planet/post/:id','publication#view');
+$router->get('/univers/:planet/actualites' , 'planet#getPlanetFeed');
 $router->run();
 ?>

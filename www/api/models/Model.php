@@ -33,7 +33,7 @@ abstract class Model {
 			$tableName = explode('\\',strtolower(get_class($this)));
 			$this->table = $tableName[sizeof($tableName)-1];
 		}
-		
+
 		$this->metaData = json_decode(file_get_contents(ROOT.'/config/dbMetaData.json'), true)[$this->table];
 
 		//TRY TO OPPEN A CONNEXION TO THE DB
@@ -73,10 +73,10 @@ abstract class Model {
 			if (isset($request['leftJoin'])) {
 				if (!is_array($request['leftJoin'][0])) {
 					$join = $request['leftJoin'];
-					$sql .= 'LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . get_class($this) . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
+					$sql .= 'LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . array_pop(explode("\\", get_class($this))) . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
 				} else {
 					foreach ($request['leftJoin'] as $join) {
-						$sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . (isset($join['JoinTable']) ? $join['JoinTable'] : get_class($this)) . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
+						$sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . (isset($join['JoinTable']) ? $join['JoinTable'] : array_pop(explode("\\", get_class($this)))) . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
 					}
 				}
 			}
@@ -119,7 +119,7 @@ abstract class Model {
 
 			// IF THERE IS AN ORDER BY FIELD, ADD IT TO THE REQUEST
 			if (isset($request['orderBy'])) {
-				$sql .= ' ORDER BY ' . $request['orderBy']['key'] . ' . ' . $request['orderBy']['order'];
+				$sql .= ' ORDER BY ' . $request['orderBy']['key'] . ' ' . $request['orderBy']['order'];
 			}
 
 			// IF THERE IS A GROUP BY FIELD, ADD IT TO THE REQUEST
@@ -136,6 +136,7 @@ abstract class Model {
 			$prepareRequest = $this->pdo->prepare($sql);
 			$prepareRequest->execute();
 
+			var_dump($sql);
 			return ($prepareRequest->fetchAll(\PDO::FETCH_ASSOC));
 		}
 	}
