@@ -16,8 +16,7 @@ html {
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
-  display: flex; 
-}
+  display: flex; }
 
 .item {
   -webkit-box-flex: 1 200px;
@@ -34,8 +33,7 @@ html {
 .container-colored {
   background: #212d3f;
   margin: 0rem 0rem 1rem 0rem;
-  padding: 1rem; 
-}
+  padding: 1rem; }
 
 .relative {
   position: relative; }
@@ -65,6 +63,29 @@ html {
 .bottom-right {
   bottom: 1rem; }
 
+/* .container-fluid{
+  background:$articles-background;
+} */
+.welcome-on-board {
+  padding: 2rem;
+  font-size: 13px;
+  font-size: 1.3rem; }
+  .welcome-on-board .row {
+    margin: 1rem 5rem; }
+  .welcome-on-board .row:nth-child(2) {
+    margin: 4rem 0; }
+  .welcome-on-board .title > div {
+    display: inline-block; }
+  .welcome-on-board .title > div:first-child {
+    font-size: 50px;
+    font-size: 5rem; }
+  .welcome-on-board .title > div:last-child {
+    position: absolute;
+    font-size: 20px;
+    font-size: 2rem;
+    padding: 1rem; }
+  .welcome-on-board .slider {
+    opacity: 0.2; }
 
 /* .container-fluid{
   background:$articles-background;
@@ -135,7 +156,7 @@ form label {
   display: inline-block;
   min-width: 19%;
   text-align: right;
-  padding: 0 4%; }
+  /* padding: 0 4%; */ }
 
 form input, form textarea {
   background: #2f3b4f;
@@ -171,8 +192,8 @@ button {
 
 .login > .row {
   padding: 2% 3%; }
-  .login > .row .col-sm-4 {
-    border-right: 1px solid #46bfa9; }
+  .login > .row .col-sm-8 {
+    border-left: 1px solid #46bfa9; }
 
 small {
   font-weight: lighter;
@@ -223,66 +244,9 @@ small {
 
 /* @media screen and (min-width: 1200px) {
   .container-fluid {
-<<<<<<< HEAD
     width: 1170px;
   }
 } */
-
-nav .navbar-brand {
-  font-family: earthOrbiter-font;
-  text-decoration: none; }
-
-nav .navbar-brand:hover {
-  background-color: none; }
-
-nav ul {
-  padding: 0 1em;
-  width: 100%;
-  background-color: #212d3f;
-  color: #e7e8e8;
-  display: block; }
-  nav ul li .nav-link, nav ul li .nav-item {
-    display: inline-block;
-    text-decoration: none;
-    background: none; }
-    nav ul li .nav-link:hover, nav ul li .nav-item:hover {
-      text-decoration: none;
-      background: none; }
-    nav ul li .nav-link:active, nav ul li .nav-item:active {
-      text-decoration: none;
-      background: none; }
-    nav ul li .nav-link:focus, nav ul li .nav-item:focus {
-      text-decoration: none;
-      background: none; }
-  nav ul li img {
-    width: 2em;
-    height: auto; }
-
-nav ul li.navbar-right .nav-responsive {
-  position: fixed;
-  top: 1em;
-  right: 1em;
-  cursor: pointer; }
-
-@media screen and (max-width: 800px) {
-  nav ul li.navbar-right .nav-item, nav ul li.navbar-right menu-separator {
-    display: none; }
-  nav ul li.navbar-right .nav-responsive {
-    display: inline-block; } }
-
-@media screen and (min-width: 801px) {
-  nav ul li.navbar-right .nav-item, nav ul li.navbar-right menu-separator {
-    display: inline-block; }
-  nav ul li.navbar-right .nav-responsive {
-    display: none; } }
-
-menu-separator {
-  vertical-align: middle;
-  height: 1em;
-  border: 0.2px solid #e7e8e8;
-  margin: 0 1.3em; }
-
->>>>>>> welcomeOnBoard
 .like-icon:hover {
   background-image: url("../images/LikeFull.svg");
   background-size: 100%; }

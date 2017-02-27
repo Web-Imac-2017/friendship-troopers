@@ -99,9 +99,9 @@ ul li .notifications-icon:hover {
   background-repeat: no-repeat; }
 
 ul li .notif {
-  border-radius: 50%;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
+  border-radius: 500%px;
+  -webkit-border-radius: 500%px;
+  -moz-border-radius: 500%px;
   background-color: #d48bbc;
   color: #212d3f;
   font-size: 10px;
