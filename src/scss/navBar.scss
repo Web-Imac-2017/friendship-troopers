@@ -94,7 +94,6 @@ ul li {
     background-image: url("../images/FriendsHover.svg");
     background-size: 100%;
     background-repeat: no-repeat;
-
   }
   .messages-icon {
       background-image: url("../images/Messages.svg");
@@ -117,7 +116,7 @@ ul li {
       background-repeat: no-repeat;
   }
   .notif {
-    @include border-radius(50%);
+    @include border-radius-percent(100);
     background-color: $notifs;
     color: $menu-background;
     @include font-size(1);
@@ -131,6 +130,15 @@ ul li {
     left: 1.3rem;
   }
 
+  .notifications-icon:hover, .messages-icon:hover , .friends-icon:hover {
+    .notif {
+      @include border-radius-percent(100);
+      border: 1px solid $notifs;
+      color: $notifs;
+      background-color: $menu-background;
+      @include font-size(1);
+    }
+  }
 }
 
 .nav input.nav-item {

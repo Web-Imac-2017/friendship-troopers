@@ -106,6 +106,12 @@ html {
   -moz-border-radius: $size*10 + px;
 }
 
+@mixin border-radius-percent($percent) {
+  border-radius: $percent + %;
+  -webkit-border-radius: $percent + %;
+  -moz-border-radius: $percent + %;
+}
+
 @mixin flexbox() {
   display: -webkit-box;
   display: -moz-box;

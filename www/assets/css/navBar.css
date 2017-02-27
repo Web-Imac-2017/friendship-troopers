@@ -99,9 +99,9 @@ ul li .notifications-icon:hover {
   background-repeat: no-repeat; }
 
 ul li .notif {
-  border-radius: 500%px;
-  -webkit-border-radius: 500%px;
-  -moz-border-radius: 500%px;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
   background-color: #d48bbc;
   color: #212d3f;
   font-size: 10px;
@@ -114,6 +114,16 @@ ul li .notif {
   position: relative;
   top: 1.3rem;
   left: 1.3rem; }
+
+ul li .notifications-icon:hover .notif, ul li .messages-icon:hover .notif, ul li .friends-icon:hover .notif {
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border: 1px solid #d48bbc;
+  color: #d48bbc;
+  background-color: #212d3f;
+  font-size: 10px;
+  font-size: 1rem; }
 
 .nav input.nav-item {
   background-position: center;
