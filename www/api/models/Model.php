@@ -33,7 +33,7 @@ abstract class Model {
 			$tableName = explode('\\',strtolower(get_class($this)));
 			$this->table = $tableName[sizeof($tableName)-1];
 		}
-		
+
 		$this->metaData = json_decode(file_get_contents(ROOT.'/config/dbMetaData.json'), true)[$this->table];
 
 		//TRY TO OPPEN A CONNEXION TO THE DB

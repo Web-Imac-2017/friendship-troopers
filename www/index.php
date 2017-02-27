@@ -18,5 +18,6 @@ $router->get('/deconnexion','account#logout');
 $router->get('/validate','account#validateUser');
 $router->get('/profil/:username','account#getUser');
 $router->get('/profil/:username/validation','account#getUser');
+$router->post('/admin','planet#newPlanet');
 $router->run();
 ?>
