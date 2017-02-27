@@ -48,6 +48,17 @@
 <script>
 
 let reportBar = {
+	methods: {
+		ignore() {
+			
+		},
+		deleteMessage() {
+
+		},
+		deleteUser() {
+
+		}
+	},
 	template : 
 	`
 	<div class="col-sm-6">
@@ -63,17 +74,7 @@ let reportBar = {
 import menuAdmin from './NavbarAdmin'
 
 export default {
-	method: {
-		ignore() {
-			
-		},
-		deleteMessage() {
-
-		},
-		deleteUser() {
-
-		}
-	},
+	
   components: { menuAdmin, reportBar} ,
   data () {
       return { 
