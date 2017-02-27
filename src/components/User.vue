@@ -5,35 +5,36 @@
         <lateralMenuLeft></lateralMenuLeft>
         <MenuTools></MenuTools>
       </aside>
-    <section class="article col-sm-8">
-      <div class="row container-colored">
-        <div class="col-sm-2">
-          <img :src="user.userAvatar">
+      <section class="article col-sm-8">
+        <div class="row container-colored">
+          <div class="col-sm-2">
+            <img :src="user.userAvatar">
+          </div>
+          <div class="col-sm-8">
+            <p v-if="myself"> Mon profil </p>
+            <p v-else> Profil de {{ user.username }} </p>
+            <small> {{ user.userBadge }} </small>
+            <p> Né le {{ user.birthDate }} </p>
+          </div>
+          <div class="col-sm-2">
+            <img :src="user.userPlanet.path"> 
+            <p> {{ user.userPlanet.name }} </p>
+          </div>
         </div>
-        <div class="col-sm-8">
-          <p v-if="myself"> Mon profil </p>
-          <p v-else> Profil de {{ user.username }} </p>
-          <small> {{ user.userBadge }} </small>
-          <p> Né le {{ user.birthDate }} </p>
-        </div>
-        <div class="col-sm-2">
-          <img :src="user.userPlanet.path"> 
-          <p> {{ user.userPlanet.name }} </p>
-        </div>
+        
+        <optionBar :myself="myself"></optionBar>
+
+        <statistics  :user="user"></statistics>
+
+        <button @click="profil"> (debug) Profil change from public to private</button>  
+
+        <Post></Post>
+      </section>
+      <div class="col-sm-2">
+         <lateralMenuRight></lateralMenuRight>
       </div>
-      
-      <optionBar :myself="myself"></optionBar>
 
-      <statistics  :user="user"></statistics>
-
-      <button @click="profil"> (debug) Profil change from public to private</button>  
-
-      <Post></Post>
-    </section>
-    <div class="col-sm-2">
-       <lateralMenuRight></lateralMenuRight>
     </div>
-
   </div>
 </template> 
 

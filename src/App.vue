@@ -1,5 +1,4 @@
 <template>
-  <div>
     
     <div id="app">
       <navbar></navbar>
@@ -30,7 +29,6 @@
         <li><router-link to="/error404"> Erreur 404 </router-link></li>
       </ul>
 
-    </div>
   </div>
 </template>
 
