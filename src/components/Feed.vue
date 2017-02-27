@@ -15,6 +15,7 @@
             <button v-on:click="uploadPicture" class="left"> Upload picture </button>
             <button v-on:click="publish">Publier</button>
           </div> -->
+          </form>
           <form class="form-post" @submit.prevent="save">
             <textarea rows="3" type="text" placeholder="Publier quelque chose"></textarea>
             <div class="field">

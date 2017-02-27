@@ -29,12 +29,12 @@
       </ul>
     </div>
     <div class="row slider">
-      <input type="range" v-model.number="current" min="0" max="5" step="1"> </input>
+      <input type="range" v-model.number="current" min="0" :max="nbQuestions - 1" step="1"> </input>
     </div>
     <div class="row"> 
               <button v-on:click="decrement"> Question précedente {{current}}</button>
-              <button v-on:click="increment" v-if="!finish"> Question suivante {{current}}</button>
-              <button v-on:click="increment" v-else> Submit {{current}}</button>
+              <button v-on:click="increment" v-if="!finish"> Question suivante </button>
+              <button v-on:click="submit" v-else> Submit </button>
       <p>
           {{current}}
       </p>
@@ -51,6 +51,9 @@ export default {
   finished : function(){
     if (this.current == this.nbQuestions - 1 )
       this.finish = true
+    for (var i = 0; i < this.nbQuestions; i++) 
+      if (this.answers[i] == '')
+        this.finish = false
   },
     decrement: function(){
       if (this.current > 0 )
@@ -69,6 +72,9 @@ export default {
     if (this.current < this.nbQuestions - 1)
         this.current ++
     this.finished()
+  },
+  submit : function(){
+     this.http.post('', answers)
   }
 }, 
   data () {
