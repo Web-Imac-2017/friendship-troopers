@@ -1,5 +1,4 @@
 <template>    
-
     <div id="app">
       <navbar></navbar>
       <router-view></router-view>
@@ -36,6 +35,7 @@
 
         <li><router-link to="/error404"> Erreur 404 </router-link></li>
       </ul>
+    </div>
 
   </div>
 </template>
@@ -69,4 +69,5 @@ export default {
 </style>
 
 
+<style src="../www/assets/css/input-range.css"></style>
 <style src="../www/assets/css/style.css"></style>

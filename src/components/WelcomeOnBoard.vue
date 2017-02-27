@@ -1,35 +1,45 @@
 <template>
-   <div class="container post">
-    <div class="row center">
-      <div class="col-sm-8">
-        
-        <p> {{ questions[current].number }}</p>
-        <p> {{ questions[current].title }} </p>
-      </div>
-      <div class="col-sm-12">
-        <ul>
-          <li class="col-sm-2" @click="selected(0)">
-            <div class="square"> <img :src="questions[current].answer[0].image"> </div> {{ questions[current].answer[0].text }} </li>
-          <li class="col-sm-2" @click="selected(1)">
-            <div class="square"> <img :src="questions[current].answer[1].image"> </div> {{ questions[current].answer[1].text }}  </li>
-          <li class="col-sm-2" @click="selected(2)">
-             <div class="square"><img :src="questions[current].answer[2].image">  </div> {{ questions[current].answer[2].text }}  </li>
-          <li class="col-sm-2" @click="selected(3)">
-             <div class="square"> <img :src="questions[current].answer[3].image"> </div> {{ questions[current].answer[3].text }}  </li>
-          <li class="col-sm-2" @click="selected(4)">
-            <div class="square"> <img :src="questions[current].answer[4].image"> </div> {{ questions[current].answer[4].text }} </li>
-        </ul>
-      </div>
-      <div class="col-sm-8">
-        <div class="slider">
-          <input type="range" v-model.number="current" min="0" max="5" step="1"> </input>
-        </div>
-        <button v-on:click="increment"> Next {{current}}</button>
-          <p>
+   <div class="container-fluid welcome-on-board container-colored">
+    <div class="row title">
+      <div> {{ questions[current].number }}.</div>  
+      <div> {{ questions[current].title }} </div>
+    </div>
+    <div class="row">
+      <ul class="wrapper">
+        <li class="item" @click="selected(0)">
+          <div class="square"> <img :src="questions[current].answer[0].image"> </div> 
+          <div class="text-center">{{ questions[current].answer[0].text }} </div>
+        </li>
+        <li class="item" @click="selected(1)">
+          <div class="square"> <img :src="questions[current].answer[1].image"> </div> 
+          <div class="text-center">{{ questions[current].answer[1].text }} </div> 
+        </li>
+        <li class="item" @click="selected(2)">
+           <div class="square"><img :src="questions[current].answer[2].image">  </div> 
+           <div class="text-center">{{ questions[current].answer[2].text }}</div> 
+         </li>
+        <li class="item" @click="selected(3)">
+           <div class="square"> <img :src="questions[current].answer[3].image"> </div> 
+           <div class="text-center">{{ questions[current].answer[3].text }}</div>  
+         </li>
+        <li class="item" @click="selected(4)">
+          <div class="square"> <img :src="questions[current].answer[4].image"> </div> 
+          <div class="text-center">{{ questions[current].answer[4].text }}</div> 
+        </li>
+      </ul>
+    </div>
+    <div class="row slider">
+      <input type="range" v-model.number="current" min="0" :max="nbQuestions - 1" step="1"> </input>
+    </div>
+    <div class="row"> 
+              <button v-on:click="decrement"> Question précedente {{current}}</button>
+              <button v-on:click="increment" v-if="!finish"> Question suivante </button>
+              <button v-on:click="submit" v-else> Submit </button>
+      <p>
           {{current}}
       </p>
-      </div> 
     </div>
+    <pre> {{ answers }} </pre>
 </div>
 </template>
 
@@ -38,16 +48,33 @@
 
 export default {
    methods: {
-    increment: function(){
+  finished : function(){
+    if (this.current == this.nbQuestions - 1 )
+      this.finish = true
+    for (var i = 0; i < this.nbQuestions; i++) 
+      if (this.answers[i] == '')
+        this.finish = false
+  },
+    decrement: function(){
+      if (this.current > 0 )
+        this.current --
+
+  }, increment: function(){
       if (this.current < this.nbQuestions - 1)
         this.current ++
+      this.finished()
 
-  }, 
+  },
     selected : function(index){
     console.log(this.questions[this.current].answer[index].text)
     console.log(index)
+    this.answers[this.current] = this.questions[this.current].answer[index].text
     if (this.current < this.nbQuestions - 1)
         this.current ++
+    this.finished()
+  },
+  submit : function(){
+     this.http.post('', answers)
   }
 }, 
   data () {
@@ -55,7 +82,7 @@ export default {
        questions: [ {
          number : "1",
          title : 'Ta couleur : ' ,
-         answer : [ {text: 'bleu',image : "../assets/Avatar1.svg"},
+         answer : [ {text: 'bleu',image : "../logo.png"},
                     {text:'vert', image : "../assets/Avatar1.svg"},
                     {text:'orange',image : "../assets/Avatar1.svg"},
                     {text:'violet', image : "../assets/Avatar1.svg"},
@@ -107,7 +134,9 @@ export default {
         }
         ], 
         nbQuestions : 6,
-        current : 0
+        current : 0,
+        finish : false,
+        answers : ['','','','','','']
       }
     }
 
