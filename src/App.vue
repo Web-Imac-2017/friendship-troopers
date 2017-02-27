@@ -1,5 +1,5 @@
-<template>
-    
+<template>    
+
     <div id="app">
       <navbar></navbar>
       <router-view></router-view>
@@ -26,6 +26,14 @@
         <li><router-link to="/marche-intergalactique"> Marché </router-link></li>
         <li><router-link to="/a-propos"> À propos </router-link></li>
         <li><router-link to="/FAQ"> FAQ </router-link></li>
+
+        <li><router-link to="/admin/nouvel-administrateur"> Administrateur : Ajout compte admin </router-link></li>
+        <li><router-link to="/admin/creer-post"> Administrateur : Créer post intergalactique </router-link></li>
+        <li><router-link to="/admin/signalement"> Administrateur : Signalement </router-link></li>
+        <li><router-link to="/admin/ajout-badge"> Administrateur : Ajout badge</router-link></li>
+        <li><router-link to="/admin/ajout-avatar"> Administrateur : Ajout avatar</router-link></li>
+        <li><router-link to="/admin/ajout-enigme"> Administrateur : Ajout énigme</router-link></li>
+
         <li><router-link to="/error404"> Erreur 404 </router-link></li>
       </ul>
 

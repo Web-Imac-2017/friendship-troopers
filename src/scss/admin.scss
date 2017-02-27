@@ -1,0 +1,41 @@
+@import "variables";
+
+.admin-menu {
+	background: $comments-background;
+	line-height: 2rem;
+	@include padding(1);
+}
+
+.admin-menu a {
+	&, &:active, &:focus, &:hover {
+		text-decoration: none;
+		display: block; 
+	}
+}
+
+.menu-section-title {
+	margin-top: 2rem;
+	color: $main-title;
+}
+
+.red {
+	color: $report-red;
+	font-weight: bold;
+}
+
+.brown-button {
+	background-color: $report-brown;
+}
+
+.red-button {
+	background-color : $report-red;
+}
+
+.admin-button {
+	margin: 1%;
+	@include padding-button(3);
+}
+
+span {
+	text-color: $article-background;
+}
