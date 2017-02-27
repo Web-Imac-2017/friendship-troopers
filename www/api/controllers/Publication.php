@@ -30,18 +30,22 @@ class Publication extends Controller {
    * @return int    ...       return value (-1 = error)
    */
   public function create ($post) {
-    if (checkRequired(['title', 'content', 'userId'], $post)) {
-
-      if ($post['title'] === NULL || $post['content'] === NULL || $post['author'] === NULL) {
-        if (!$post['title'])
-          echo 'aucun titre';
-        if (!$post['content'])
-          echo 'aucun contenu';
-        if (!$post['author'])
-          echo 'auteur invalide';
-        return -1;
-      }
+    $required = ['title', 'content', 'userId'];
+    $missingFields = checkRequired($required, $post);
+    if (array_key_exist($required, $missingFields)) {
+      return false;
     }
+
+    if ($post['title'] === NULL || $post['content'] === NULL || $post['author'] === NULL) {
+      if (!$post['title'])
+        echo 'aucun titre';
+      if (!$post['content'])
+        echo 'aucun contenu';
+      if (!$post['author'])
+        echo 'auteur invalide';
+      return -1;
+    }
+
 
     $publicationModel = new \Models\Publication();
 
@@ -96,7 +100,7 @@ class Publication extends Controller {
    * @param  int  $id   the article ID
    * @return int  ...   return value (-1 = error)
    */
-  public function delete ($id) {
+  public function delete ($post) {
     // FIRST THINGS FIRST : DELETE ALL COMMENTS LINKED TO THE PUBLICATION
     $commentModel = new \Models\comment();
 
