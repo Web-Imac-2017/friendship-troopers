@@ -205,7 +205,7 @@ form{
       display: inline-block;
       min-width: 19%;
       text-align: right;
-      padding: 0 4%;
+      /* padding: 0 4%; */
     }
     input{
     background: $comments-background ;
@@ -255,8 +255,8 @@ button{
 
 .login > .row{
   padding: 2% 3%;
-  .col-sm-4{
-    border-right: 1px solid $main-title;
+  .col-sm-8{
+    border-left: 1px solid $main-title;
   }
 }
 
@@ -274,7 +274,7 @@ small {
 .post {
   background-color: $articles-background;
   padding: 2%;
- margin-bottom: 2%;
+  margin-bottom: 2%;
 }
 
 .pseudo {

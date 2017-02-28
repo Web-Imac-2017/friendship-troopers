@@ -95,33 +95,33 @@ export default {
                      {text:'un mini Groot', image : "../assets/Avatar1.svg"}, 
                      {text:'une charmante androïde', image : "../assets/Avatar1.svg"}, 
                      {text:'Doc', image : "../assets/Avatar1.svg"}, 
-                     {text: 'un Choubacca', image : "../assets/Avatar1.svg"} 
+                     {text:'un Choubacca', image : "../assets/Avatar1.svg"} 
          ] 
         }, {
           number : "3",
-          title : 'Tes vacances parfaites:' ,
+          title : 'Tes vacances parfaites :' ,
           answer : [ {text:'un week-end romantique à New New York', image : "../assets/Avatar1.svg"},
                      {text:'tester les spécialités culinaires de Vulcain', image : "../assets/Avatar1.svg"},
                      {text:'relire tes classiques', image : "../assets/Avatar1.svg"}, 
-                     {text:'arpenter un trou nor', image : "../assets/Avatar1.svg"},
+                     {text:'arpenter un trou noir', image : "../assets/Avatar1.svg"},
                      {text:'faire la course de la Bounta', image : "../assets/Avatar1.svg"}
          ] 
         },{
           number : "4",
-          title : 'L\'intellingence artificielle pour gérer ta maison :' ,
+          title : 'L\'intelligence artificielle pour gérer ta maison :' ,
           answer : [{text: 'la Matrice', image : "../assets/Avatar1.svg"}, 
                     {text:'le Brain Bug', image : "../assets/Avatar1.svg"}, 
                     {text:'GladOS', image : "../assets/Avatar1.svg"}, 
                     {text:'AI du HIVE', image : "../assets/Avatar1.svg"}, 
-                   {text: 'Hall', image : "../assets/Avatar1.svg"}
+                   {text:'Hall', image : "../assets/Avatar1.svg"}
          ]},{
           number : "5",
-          title : 'Ton moyen de transport de prédilection:' , 
+          title : 'Ton moyen de transport de prédilection :' , 
           answer : [ {text:'le TARDIS', image : "../assets/Avatar1.svg"},
                      {text:'la Porte des Etoiles', image : "../assets/Avatar1.svg"},
-                     {text:'en astro-stop', image : "../assets/Avatar1.svg"},
-                     {text:'en DeLorean', image : "../assets/Avatar1.svg"}, 
-                    {text: 'à bord de l\'Arcadia', image : "../assets/Avatar1.svg"}
+                     {text:'l\'astro-stop', image : "../assets/Avatar1.svg"},
+                     {text:'la DeLorean', image : "../assets/Avatar1.svg"}, 
+                    {text:'l\'Arcadia', image : "../assets/Avatar1.svg"}
          ] 
         },{
           number : "6",
@@ -130,7 +130,7 @@ export default {
                     {text:'les rencontres du 3ième type', image : "../assets/Avatar1.svg"}, 
                     {text:'trafiquer le droïde ménager de maman', image : "../assets/Avatar1.svg"}, 
                     {text:'créer des paradoxes', image : "../assets/Avatar1.svg"}, 
-                   {text: 'aller en croisière muni de votre multipass', image : "../assets/Avatar1.svg"}         ] 
+                   {text: 'aller en croisière muni de ton multipass', image : "../assets/Avatar1.svg"}         ] 
         }
         ], 
         nbQuestions : 6,

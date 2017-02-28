@@ -3,8 +3,11 @@
   font-family: earthOrbiter-font;
   src: url(earthorbiterxtrabold.ttf); }
 
+html {
+  font-size: 62.5%; }
+
 .admin-menu {
-  background: #303b4c;
+  background: #2f3b4f;
   line-height: 2rem;
   padding: 1rem; }
 
@@ -29,3 +32,6 @@
 .admin-button {
   margin: 1%;
   padding: 1.5rem 4.5rem; }
+
+span {
+  text-color: #212d3f; }
