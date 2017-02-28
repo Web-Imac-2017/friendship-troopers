@@ -20,14 +20,23 @@
 	  				<div class="col-sm-5" @click="connexion"><h1>Connexion</h1></div>
 	  			</div>
 
-				<form-user :user="user" :login="login" title="Request form">
+				<form-user v-model="user" :login="login" title="Request form">
 
-					<div v-show='error1' slot="error1">{{user.username}} est déjà utilisé !</div>
-					<div v-show='error2' slot="error2">L'adresse mail {{user.mail}} est déjà utilisée !</div>
+					<p slot="errorUsername">{{user.username}} est déjà utilisé !</p>
+					<p slot="errorMail">L'adresse mail {{user.mail}} est déjà utilisée !</p>
+					<p slot="errorPassword">Les deux mots de passe ne correspondent pas !</p>
+					<p slot="errorLogin">
+						L'adresse mail et le mot de passe ne correspondent pas! <br>
+						Veuillez reessayer ou réinitialiser votre mot de passe
+					</p>
+					<p slot="passwordMissing">Veuillez rentrer un mot de passe</p>
+
+				<!-- 	<p slot="error1">{{user.username}} est déjà utilisé !</p>
+				<p slot="error2">L'adresse mail {{user.mail}} est déjà utilisée !</p> -->
 
 				</form-user>
 
-				<!-- <pre>{{user}}</pre> -->
+				<pre>{{user}}</pre>
 
 			</div>
 
@@ -39,74 +48,113 @@
 
 <script>
 let formUser = {
-	props: ['login','user'],
+	props: {
+		login:Boolean,
+		value:Object,
+	},
+	data(){
+		return{
+			user: JSON.parse(JSON.stringify(this.value)),
+			alreadyUsedUsername:false,
+			alreadyUsedMail:false,
+			falsePassword:false,
+			passwordNot:false,
+			errorLogin:false
+		}
+	},
 	methods:{
 		save(){
-			this.$emit("input", this.user),
-			this.error1=true,
-        	this.error2=true	
+			this.$emit('input', this.user);
+        	if(!this.login & this.user.username == this.$parent.usernameExisting){
+	      		this.alreadyUsedUsername=true;
+	      		console.log("Pseudo deja utilisé :"+this.alreadyUsedUsername);
+	      	}else
+	      		this.alreadyUsedUsername=false;
+	      	if(!this.login & this.user.mail == this.$parent.mailExisting){
+	      		this.alreadyUsedMail=true;
+	      		console.log("Mail deja utilisé :"+this.alreadyUsedMail);
+	      	}else
+	      		this.alreadyUsedMail=false;
+	      	if(!this.login & this.user.password != this.user.passwordChecked){
+	      		this.falsePassword=true;
+	      		console.log("Les deux mots de passe sont différents :"+this.falsePassword);
+	      	}else
+	      		this.falsePassword=false;
+	      	if(this.login & (this.user.mail != "admin@gmail.com" | this.user.password != "admin")){
+	      		if(this.user.password == ""){
+	      			this.passwordNot=true;
+	      			this.errorLogin=false;
+	      		}else{
+	      			this.passwordNot=false;
+		      		this.errorLogin=true;
+		      		console.log("erreur login :"+this.errorLogin);
+	      		}	
+	      	}else
+	      		this.errorLogin=false;
 		}
 	},
 	template: `
 	<div>
 		<form v-if="login" class="form" @submit.prevent="save">
 			<div class="field">
-				<label for="">Pseudo</label>
-				<input type="text" v-model="user.username" name='username'>
-			</div>
-			<div class="field">
 				<label for="">Adresse e-mail</label>
-				<input type="email" v-model="user.mail" name='mail'>
+				<input type="email" v-model="user.mail" name='mail' required>
 			</div>
 			<div class="field" >
 				<label for="">Mot de passe</label>
-				<input type="password" v-model="user.password" name='password'>
+				<input type="password" v-model="user.password" name='password' required>
+				<div v-if="passwordNot"><slot name="passwordMissing"></slot></div>
 			</div>	
 			<div class="field">
-				<button v-on:click.stop="save">Se connecter<img class="img-rocket" src="static/FuseeFirstPage.svg"> </button>
+				<div v-if="errorLogin"><slot name="errorLogin"></slot></div>
+				<a href="">J'ai oublié mon mot de passe</a>
+				<button @click.prevent="save">Se connecter<img class="img-rocket" src="static/FuseeFirstPage.svg"> </button>
 			</div>
 	    </form>
 	    <form v-else class="form" @submit.prevent="save">
 			<div class="field">
 				<label for="">Pseudo</label>
-				<input type="text" v-model="user.username" name='username'>
+				<input type="text" v-model="user.username" name='username' required>
+				<div v-if="alreadyUsedUsername"><slot name="errorUsername"></slot></div>
 			</div>
 			<div class="field">
 				<label for="">Adresse e-mail</label>
-				<input type="email" v-model="user.mail" name='mail'>
+				<input type="email" v-model="user.mail" name='mail' required>
+				<div v-show="alreadyUsedMail"><slot name="errorMail"></slot></div>
 			</div>
 			<div class="field" >
 				<label for="">Mot de passe</label>
-				<input type="password" v-model="user.password" name='password'>
+				<input type="password" v-model="user.password" name='password' required>
 			</div>
 			<div class="field">
 				<label for="">Mot de passe<br>(répeter)</label>
-				<input type="password" v-model="user.passwordChecked" name='password'>
+				<input type="password" v-model="user.passwordChecked" required>
+				<div v-if="falsePassword"><slot name="errorPassword"></slot></div>
 			</div>
 			<div class="field">
 				<label for="">Date de naissance</label>
-				<select name="day" id="day">
+				<select name="day" id="day" required>
 			       <option v-for="option in user.day">
 			            {{ option }}
 			        </option>
 		       </select>
-		       <select  name="month" id="month">
+		       <select  name="month" id="month" required>
 			       <option v-for="option in user.month">
 			            {{ option }}
 			        </option>
 		       </select>
-		       <select name="year" id="year">
+		       <select name="year" id="year" required>
 			       <option v-for="option in user.year">
 			            {{ option }}
 			        </option>
 		       </select>
 			</div>
 			<div class="field">
-				<button v-on:click.stop="save">S''inscrire<img class="img-rocket" src="static/FuseeFirstPage.svg"> </button>
+				<button @click.prevent="save">S''inscrire<img class="img-rocket" src="static/FuseeFirstPage.svg"> </button>
 			</div>
 	    </form>
-    	<p><slot name="error1"></slot></p>
-		<p><slot name="error2"></slot></p>
+		
+		
 	</div>
 	
 	  		
@@ -116,10 +164,18 @@ export default {
 	components: {formUser },
 	methods: {
 	    inscription: function(){
-	      this.login = false
+	      this.login = false;
+	      this.reinitialize();
 	    },
 	    connexion: function(){
-	      this.login = true
+	      this.login = true;
+	      this.reinitialize();
+	    },
+	    reinitialize: function(){
+	    	this.user.username = '';
+	        this.user.mail = '';
+	        this.user.password = '';
+	        this.user.passwordChecked = '';
 	    }
 	  }, 
 	data () {
@@ -133,8 +189,8 @@ export default {
 	        month : [ 'janvier', 'fevrier', 'mars'],
 	        year : [ 1995, 1996, 2874]
         },
-        error1:false,
-        error2:false,
+        usernameExisting:'JeanLuc',
+        mailExisting:'JeanLuc@gmail.com',
         login:false
       }
     }
