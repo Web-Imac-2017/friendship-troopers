@@ -68,7 +68,7 @@ class Planet extends Controller {
      ORDER BY publishDate DESC
      LIMIT 0, 10
      */
-    var_dump($request);
-    return $request;
+    var_dump(json_encode($request, JSON_PRETTY_PRINT));
+    return json_encode($request, JSON_PRETTY_PRINT);
   }
 }
