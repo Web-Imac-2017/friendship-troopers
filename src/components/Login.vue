@@ -24,11 +24,8 @@
 
 					<p slot="errorUsername">{{userSignIn.username}} est déjà utilisé !</p>
 					<p slot="errorMail">L'adresse mail {{userSignIn.mail}} est déjà utilisée !</p>
+					<p slot="errorMailValid">L'adresse mail n'est pas valide, veuillez vérifier svp !</p>
 					<p slot="errorPassword">Les deux mots de passe ne correspondent pas !</p>
-					<p slot="errorLogin">
-						L'adresse mail et le mot de passe ne correspondent pas! <br>
-						Veuillez reessayer ou réinitialiser votre mot de passe.
-					</p>
 					<p slot="passwordMissing">Veuillez rentrer un mot de passe</p>
 					<p slot="errorDate">La date de naissance est invalide !</p>
 					<p slot="nullInputUsername">{{ nullMessage }}</p>
@@ -41,10 +38,9 @@
 				<form-login v-model="userLogin" v-else>
 		
 					<p slot="errorLogin">
-						L'adresse mail et le mot de passe ne correspondent pas! <br>
+						L'adresse mail et/ou le mot de passe ne correspondent pas! <br>
 						Veuillez reessayer ou réinitialiser votre mot de passe
 					</p>
-					<p slot="passwordMissing">Veuillez rentrer un mot de passe</p>
 
 				</form-login>
 
@@ -68,28 +64,26 @@ let formLogin = {
 	data(){
 		return{
 			userLogin: JSON.parse(JSON.stringify(this.value)),
-			passwordNot:false,
-			errorLogin:false
+			cantSubmit:false
 		}
 	},
 	methods:{
 		connect(){
 			this.$emit('input', this.userLogin);
-			if(this.userLogin.mail != "admin@gmail.com" | this.userLogin.password != "admin"){
-	      		if(this.userLogin.password == ""){
-	      			this.passwordNot=true;
-	      			this.errorLogin=false;
-	      			console.log("connexion en cours !!! Gerer ça");
-	      		}else{
-	      			this.passwordNot=false;
-		      		this.errorLogin=true;
-	      		}	
-	      	}else
-	      		this.errorLogin=false;
+			if(this.userLogin.mail != "" | this.userLogin.password != ""){
+				if(this.userLogin.mail == "admin@gmail.com" && this.userLogin.password == "admin"){
+					this.cantSubmit=false;
+					console.log("connexion en cours !!! Gerer ça quand liaison front/back done");
+				}else
+					this.cantSubmit=true;
+			}else{
+				this.cantSubmit=true;
+			}
+	      		
 		}
 	},
 	template: `
-	<form class="form" @submit.prevent="connect">
+	<form class="form" @submit.prevent.stop="connect">
 		<div class="field">
 			<label for="">Adresse e-mail</label>
 			<input maxlength="255" type="email" v-model="userLogin.mail" name='mail' required>
@@ -97,12 +91,11 @@ let formLogin = {
 		<div class="field" >
 			<label for="">Mot de passe</label>
 			<input maxlength="255" type="password" v-model="userLogin.password" name='password' required>
-			<div v-if="passwordNot"><slot name="passwordMissing"></slot></div>
 		</div>	
 		<div class="field">
-			<div v-if="errorLogin"><slot name="errorLogin"></slot></div>
+			<div v-if="cantSubmit"><slot name="errorLogin"></slot></div>
 			<a href="">J'ai oublié mon mot de passe</a>
-			<button @click.prevent="connect">Se connecter<img class="img-rocket" src="static/FuseeFirstPage.svg"> </button>
+			<button>Se connecter<img class="img-rocket" src="static/FuseeFirstPage.svg"> </button>
 		</div>
     </form>  		
 	`
@@ -118,6 +111,7 @@ let formUser = {
 			userSignIn: JSON.parse(JSON.stringify(this.value)),
 			alreadyUsedUsername:false,
 			alreadyUsedMail:false,
+			falseMail:false,
 			falsePassword:false,
 			falseDate:false,
 			nullUsername:false,
@@ -127,59 +121,39 @@ let formUser = {
 		}
 	},
 	methods:{
+		checkMail(){
+			var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+			this.falseMail = (!regex.test(this.userSignIn.mail)) ? true : false;
+		},
 		checkInputs(){
-			if(this.userSignIn.username == ''){
-	      		this.nullUsername=true;
-	      	}else
-	      		this.nullUsername=false;
-	      	if(this.userSignIn.mail == ''){
-	      		this.nullMail=true;
-	      	}else
-	      		this.nullMail=false;
-	      	if(this.userSignIn.password == ''){
-	      		this.nullPassword=true;
-	      	}else
-	      		this.nullPassword=false;
-	      	if(this.userSignIn.passwordChecked == ''){
-	      		this.nullPasswordChecked=true;
-	      	}else
-	      		this.nullPasswordChecked=false;
+			this.nullUsername = (this.userSignIn.username == '') ? true : false;
+			this.nullMail = (this.userSignIn.mail == '') ? true : false;
+			this.nullPassword = (this.userSignIn.password == '') ? true : false;
+			this.nullPasswordChecked = (this.userSignIn.passwordChecked == '') ? true : false;
 
-        	if(this.userSignIn.username == this.$parent.usernameExisting){
-	      		this.alreadyUsedUsername=true;
-	      	}else
-	      		this.alreadyUsedUsername=false;
-	      	if(this.userSignIn.mail == this.$parent.mailExisting){
-	      		this.alreadyUsedMail=true;
-	      	}else
-	      		this.alreadyUsedMail=false;
-	      	if(this.userSignIn.password != this.userSignIn.passwordChecked){
-	      		this.falsePassword=true;
-	      	}else
-	      		this.falsePassword=false;
+			this.alreadyUsedUsername = (this.userSignIn.username == this.$parent.usernameExisting) ? true : false;
+			this.alreadyUsedMail = (this.userSignIn.mail == this.$parent.mailExisting) ? true : false;
+			this.falsePassword = (this.userSignIn.password != this.userSignIn.passwordChecked) ? true : false;
+
 	      	this.checkDate();
+	      	this.checkMail();
+
+	      	return ((!this.nullUsername)&&(!this.nullMail)&&(!this.nullPassword)&&(!this.nullPasswordChecked)&&(!this.alreadyUsedMail)&&(!this.alreadyUsedUsername)&&(!this.falsePassword)&&(!this.falseDate)&&(!this.falseMail)) ? true : false;
 		},
 		save(){
 			this.$emit('input', this.userSignIn);
-			this.checkInputs();
-			console.log("Aller dans welcome on board !! gérer ça");
+			if(this.checkInputs())
+				console.log("Aller dans welcome on board !! gérer ça quand connexion front/back");
 			
 		},
 		isBissextile(value){
-			if((value % 4 == 0 && value%100 != 0) || value%400 == 0) 
-				return true;
-			else
-				return false;
+			return ((value % 4 == 0 && value%100 != 0) || value%400 == 0) ? true : false;
 		},
 		checkDate(){
 	    	if((this.userSignIn.day == 30 || this.userSignIn.day == 31) && this.userSignIn.month == 2)
 	    		this.falseDate = true;
 	    	else if(this.userSignIn.day == 29 && this.userSignIn.month == 2){
-	    		if(this.isBissextile(this.userSignIn.year)){
-	    			console.log("ok");
-					this.falseDate = false;
-	    		}else
-	    			this.falseDate = true;
+	    		this.falseDate = (this.isBissextile(this.userSignIn.year)) ? false : true;
 	    	}
 	    	else if(this.userSignIn.day == 31 && (this.userSignIn.month == 4 | this.userSignIn.month == 6 | this.userSignIn.month == 9 | this.userSignIn.month == 11 ))
 	    		this.falseDate = true;
@@ -188,7 +162,7 @@ let formUser = {
 	    }
 	},
 	template: `
-    <form class="form" @submit.prevent="save">
+    <form class="form" @submit.prevent.stop="save">
 		<div class="field">
 			<label for="">Pseudo</label>
 			<input maxlength="255" type="text" v-model="userSignIn.username" name='username' required>
@@ -198,8 +172,9 @@ let formUser = {
 		<div class="field">
 			<label for="">Adresse e-mail</label>
 			<input maxlength="255" type="email" v-model="userSignIn.mail" name='mail' required>
-			<div v-show="alreadyUsedMail"><slot name="errorMail"></slot></div>
+			<div v-if="alreadyUsedMail"><slot name="errorMail"></slot></div>
 			<div v-if="nullMail"><slot name="nullInputMail"></slot></div>
+			<div v-if="falseMail"><slot name="errorMailValid"></slot></div>
 		</div>
 		<div class="field" >
 			<label for="">Mot de passe</label>
@@ -232,7 +207,7 @@ let formUser = {
 		<div v-if="falseDate"><slot name="errorDate"></slot></div>
 		</div>
 		<div class="field">
-			<button @click.prevent="save">S'inscrire<img class="img-rocket" src="static/FuseeFirstPage.svg"> </button>
+			<button>S'inscrire<img class="img-rocket" src="static/FuseeFirstPage.svg"> </button>
 		</div>
     </form>
 	  		
