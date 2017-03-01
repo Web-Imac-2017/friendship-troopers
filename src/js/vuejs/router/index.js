@@ -17,8 +17,8 @@ import EnigmeResolved from '../components/EnigmeResolved.vue'
 import EnigmeCurrent from '../components/EnigmeCurrent.vue'
 import EnigmeCurrentChat from '../components/EnigmeCurrentChat.vue'
 
-import Feed from '../components/Feed.vue'
-import Post from '../components/Post.vue'
+import Feed from '../components/Feed'
+import Post from '../components/Post'
 
 import Wiki from '../components/Wiki.vue'
 import Market from '../components/Market.vue'

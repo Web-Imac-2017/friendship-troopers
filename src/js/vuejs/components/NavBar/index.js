@@ -5,7 +5,7 @@ let template = require('./template.html');
 template     = eval(`\`${template}\``);
 
 
-const WelcomeOnBoard = Vue.extend({
+const NavBar = Vue.extend({
   template,
   methods: {
     showMenuPesponsive: function(){

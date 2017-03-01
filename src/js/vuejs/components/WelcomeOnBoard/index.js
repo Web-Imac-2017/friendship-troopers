@@ -4,11 +4,9 @@ import Vue from 'vue/dist/vue';
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
 
-
-
 const WelcomeOnBoard = Vue.extend({
   template,
-   methods: {
+  methods: {
   finished : function(){
     if (this.current == this.nbQuestions - 1 )
       this.finish = true
