@@ -26,6 +26,7 @@
 					<p slot="errorMail">L'adresse mail {{userSignIn.mail}} est déjà utilisée !</p>
 					<p slot="errorMailValid">L'adresse mail n'est pas valide, veuillez vérifier svp !</p>
 					<p slot="errorPassword">Les deux mots de passe ne correspondent pas !</p>
+					<p slot="errorLowPassword">Le mot de passe n'est pas suffisament compliqué! Il doit comporter 1 chiffre, 1 lettre et au minimum 8 caractères.</p>
 					<p slot="passwordMissing">Veuillez rentrer un mot de passe</p>
 					<p slot="errorDate">La date de naissance est invalide !</p>
 					<p slot="nullInputUsername">{{ nullMessage }}</p>
@@ -112,6 +113,7 @@ let formUser = {
 			alreadyUsedUsername:false,
 			alreadyUsedMail:false,
 			falseMail:false,
+			lowPassword:false,
 			falsePassword:false,
 			falseDate:false,
 			nullUsername:false,
@@ -125,6 +127,13 @@ let formUser = {
 			var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
 			this.falseMail = (!regex.test(this.userSignIn.mail)) ? true : false;
 		},
+		checkPassword(){
+			var regex = /^.*(?=.{8,})(?=.*\d)(?=.*[a-zA-Z]).*$/;
+			
+			this.falsePassword = (this.userSignIn.password != this.userSignIn.passwordChecked) ? true : false;
+			if(!this.falsePassword)
+				this.lowPassword = (!regex.test(this.userSignIn.password)) ? true : false;
+		},
 		checkInputs(){
 			this.nullUsername = (this.userSignIn.username == '') ? true : false;
 			this.nullMail = (this.userSignIn.mail == '') ? true : false;
@@ -133,18 +142,12 @@ let formUser = {
 
 			this.alreadyUsedUsername = (this.userSignIn.username == this.$parent.usernameExisting) ? true : false;
 			this.alreadyUsedMail = (this.userSignIn.mail == this.$parent.mailExisting) ? true : false;
-			this.falsePassword = (this.userSignIn.password != this.userSignIn.passwordChecked) ? true : false;
-
+			
+			this.checkPassword();
 	      	this.checkDate();
 	      	this.checkMail();
 
-	      	return ((!this.nullUsername)&&(!this.nullMail)&&(!this.nullPassword)&&(!this.nullPasswordChecked)&&(!this.alreadyUsedMail)&&(!this.alreadyUsedUsername)&&(!this.falsePassword)&&(!this.falseDate)&&(!this.falseMail)) ? true : false;
-		},
-		save(){
-			this.$emit('input', this.userSignIn);
-			if(this.checkInputs())
-				console.log("Aller dans welcome on board !! gérer ça quand connexion front/back");
-			
+	      	return ((!this.nullUsername)&&(!this.nullMail)&&(!this.lowPassword)&&(!this.nullPassword)&&(!this.nullPasswordChecked)&&(!this.alreadyUsedMail)&&(!this.alreadyUsedUsername)&&(!this.falsePassword)&&(!this.falseDate)&&(!this.falseMail)) ? true : false;
 		},
 		isBissextile(value){
 			return ((value % 4 == 0 && value%100 != 0) || value%400 == 0) ? true : false;
@@ -159,7 +162,13 @@ let formUser = {
 	    		this.falseDate = true;
 	    	else
 	    		this.falseDate = false;
-	    }
+	    },
+	    save(){
+			this.$emit('input', this.userSignIn);
+			if(this.checkInputs())
+				console.log("Aller dans welcome on board !! gérer ça quand connexion front/back");
+			
+		}
 	},
 	template: `
     <form class="form" @submit.prevent.stop="save">
@@ -180,6 +189,7 @@ let formUser = {
 			<label for="">Mot de passe</label>
 			<input maxlength="255" type="password" v-model="userSignIn.password" name='password' required>
 			<div v-if="nullPassword"><slot name="nullInputPassword"></slot></div>
+			<div v-if="lowPassword"><slot name="errorLowPassword"></slot></div>
 		</div>
 		<div class="field">
 			<label for="">Mot de passe<br>(répeter)</label>
