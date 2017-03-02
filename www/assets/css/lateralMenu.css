@@ -16,6 +16,19 @@
   padding-top: 1rem;
   padding-bottom: 1rem; }
 
+.avatarMenu {
+  text-align: center;
+  width: 60%;
+  display: inline-block;
+  margin-top: 0rem; }
+
+.planet {
+  display: inline-block;
+  width: 50%;
+  position: relative;
+  left: 3rem;
+  top: -4rem; }
+
 .menuTools {
   /* style and properties */
   padding-top: 1rem;
@@ -33,11 +46,9 @@
 .lateralMenuAvatar {
   background-image: url("../images/LineAboveAvatar.svg");
   background-size: 100%;
+  background-position-x: 0rem;
   text-align: center;
   background-repeat: no-repeat;
   background-position: center;
-  vertical-align: middle; }
-  .lateralMenuAvatar .planet {
-    width: 5em;
-    z-index: 1;
-    position: relative; }
+  vertical-align: middle;
+  width: auto; }

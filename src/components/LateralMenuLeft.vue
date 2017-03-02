@@ -6,14 +6,16 @@
  <!-- 
       <img :src="user.userAvatar" alt="your avatar" class="avatar">
       <img :src="user.userPlanet.path" alt="your planet" class="planet">
- -->
-      <img src="../assets/logo.png" alt="your avatar" class="avatar">
-      <img src="../assets/logo.png" alt="your planet" class="planet">
-
-      <h1> {{ user.username }} </h1> <br>
-      <p> {{ user.userBadge}} </p>
+ -->  
+      <img class="avatarMenu" src="../assets/Avatar1.svg" alt="your planet">
+      <img class="planet" src="../assets/P1.svg" alt="your planet">
 
     </div>
+
+      <div>
+        <h1> {{ user.username }} </h1> <br>
+        <p> {{ user.userBadge}} </p>
+      </div>
 
       <div>
       <p class="enigmes"> <b>Enigmes</b> </p>
