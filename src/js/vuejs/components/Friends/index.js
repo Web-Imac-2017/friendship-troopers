@@ -22,37 +22,37 @@ const Friends = Vue.extend({
         planetSelected : 'Eat-712', 
         friends : 
           [ { 
-              path  : 'http://placehold.it/350x350',
+              path  : '../../../www/assets/images/Avatar1.svg',
               name : 'ILoveUfo',
               badge : 'Baroudeuse de l\'espace',
               birthDate : '29 avril'
             },{ 
-              path : 'http://placehold.it/350x350',
+              path : '../../../www/assets/images/Avatar1.svg',
               name : 'JeanLuc',
               badge : 'Baroudeur de l\'espace',
               birthDate : '29 avril'
             },{ 
-              path : 'http://placehold.it/350x350',
+              path : '../../../www/assets/images/Avatar1.svg',
               name : 'LoverDu77',
               badge : 'Séducteur de l\'espace',
               birthDate : '29 avril'
             },{ 
-              path : 'http://placehold.it/350x350',
+              path : '../../../www/assets/images/Avatar1.svg',
               name : 'LoverDu77',
               badge : 'Séducteur de l\'espace',
               birthDate : '29 avril'
             },{ 
-              path : 'http://placehold.it/350x350',
+              path : '../../../www/assets/images/Avatar1.svg',
               name : 'LoverDu77',
               badge : 'Séducteur de l\'espace',
               birthDate : '29 avril'
             },{ 
-              path : 'http://placehold.it/350x350',
+              path : '../../../www/assets/images/Avatar1.svg',
               name : 'LoverDu77',
               badge : 'Séducteur de l\'espace',
               birthDate : '29 avril'
             },{ 
-              path : 'http://placehold.it/350x350',
+              path : '../../../www/assets/images/Avatar1.svg',
               name : 'LoverDu77',
               badge : 'Séducteur de l\'espace',
               birthDate : '29 avril'}

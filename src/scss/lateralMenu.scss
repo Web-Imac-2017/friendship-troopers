@@ -23,20 +23,20 @@
 
 .menuTools a{
   /* style and properties for links (a) in menuTools */
-	text-decoration: none;
+  text-decoration: none;
 }
 
 .lateralMenuAvatar{
-	background-image: url("../images/LineAboveAvatar.svg");
-	background-size: 100%;
-	text-align: center;
-	background-repeat: no-repeat;
+  background-image: url("../images/LineAboveAvatar.svg");
+  background-size: 100%;
+  text-align: center;
+  background-repeat: no-repeat;
   background-position: center;
   vertical-align: middle;
 
   .planet{
-  	width: 5em;
-  	z-index: 1;
-  	position: relative;
+    width: 5em;
+    z-index: 1;
+    position: relative;
   }
 }

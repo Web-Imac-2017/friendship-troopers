@@ -10,21 +10,21 @@ const LateralMenuLeft = Vue.extend({
    data () {
       return {
         user : {
-          userAvatar : '../assets/logo.png',
+          userAvatar : '../../../www/assets/images/Avatar1.svg',
           username : 'LuckyPon', 
           userBadge : 'Baroudeuse de l\'espace', 
           userPlanet : {
-            path : '../assets/Avatar1.svg',
+            path : '../../../www/assets/images/Avatar1.svg',
             name : 'Planete X785-E'
           }, 
           lastFriends : [ {
-            avatar : '../assets/Avatar1.svg',
+            avatar : '../../../www/assets/images/Avatar1.svg',
             name : 'Spockdu77'
           }, {
-            avatar : '../assets/Avatar1.svg',
+            avatar : '../../../www/assets/images/Avatar1.svg',
             name : 'MartyDuPassé'
           }, {
-            avatar : '../assets/Avatar1.svg',
+            avatar : '../../../www/assets/images/Avatar1.svg',
             name : 'JulieDuFutur'
           }
           ]

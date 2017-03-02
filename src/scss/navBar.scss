@@ -7,6 +7,10 @@
   z-index: 10;
 }
 
+.nav > li {
+  display: inline-block;
+}
+
 input {
   border:none;
   @include padding-input(1);    
