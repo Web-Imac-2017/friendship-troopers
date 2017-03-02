@@ -14,7 +14,7 @@ var concat = require('gulp-concat');
 
 var config = {
   scss      : './src/scss/*',         // Les fichiers à watch
-  src       : './src/scss/all.scss', // Le fichier principal
+  src       : './src/scss/style.scss', // Le fichier principal
   outputDir : './www/assets/css',     // Le dossier ou le build sera généré
   outputFile: 'style.css'             // Le nom du fichier build
 };
@@ -24,9 +24,8 @@ var config = {
 // La tache pour générer le build scss.
 // C'est un peu similaire à la tache js.
 gulp.task('sass', function() {
-  return gulp.src(config.scss)
+  return gulp.src(config.src)
     .pipe(sourcemaps.init({ loadMaps: true }))
-    .pipe(concat('all.scss'))
     .pipe(sass())
     .on('error', mapError)
     .pipe(rename(config.outputFile))

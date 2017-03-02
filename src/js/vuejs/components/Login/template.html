@@ -1,0 +1,56 @@
+<div class="container login">
+
+	  	<div class="row">
+	  		<div class="col-sm-4">
+	  			<h1>Friendship troopers</h1>
+	  			<div class="center">
+	  				<p>
+	  					Venez partager votre passion de la science-fiction à travers ce réseau social mélant énigmes et bonne humeur !
+					</p> <p>
+						A votre inscription, vous répondrez à une série de questions et une planète vous sera attribuée en fonction de vos réponses...
+					</p> <p>
+						Vous pourrez ensuite rencontrer d’autres passionnés en résolvant des énigmes avec eux !
+	  				</p> 
+	  			</div>
+	  		</div>
+	  		<div class="col-sm-8">
+	  			<div class="row">
+	  				<div class="col-sm-5" v-on:click="inscription"><h1>Inscription</h1></div>
+	  				<div class="col-sm-5" v-on:click="connexion"><h1>Connexion</h1></div>
+	  			</div>
+
+				<form-user v-model="userSignIn" v-if="signIn">
+
+					<p slot="errorUsername">{{userSignIn.username}} est déjà utilisé !</p>
+					<p slot="errorMail">L'adresse mail {{userSignIn.mail}} est déjà utilisée !</p>
+					<p slot="errorPassword">Les deux mots de passe ne correspondent pas !</p>
+					<p slot="errorLogin">
+						L'adresse mail et le mot de passe ne correspondent pas! <br>
+						Veuillez reessayer ou réinitialiser votre mot de passe.
+					</p>
+					<p slot="passwordMissing">Veuillez rentrer un mot de passe</p>
+					<p slot="errorDate">La date de naissance est invalide !</p>
+					<p slot="nullInputUsername">{{ nullMessage }}</p>
+					<p slot="nullInputMail">{{ nullMessage }}</p>
+					<p slot="nullInputPassword">{{ nullMessage }}</p>
+					<p slot="nullInputPasswordChecked">{{ nullMessage }}</p>
+
+				</form-user>
+
+				<form-login v-model="userLogin" v-else>
+		
+					<p slot="errorLogin">
+						L'adresse mail et le mot de passe ne correspondent pas! <br>
+						Veuillez reessayer ou réinitialiser votre mot de passe
+					</p>
+					<p slot="passwordMissing">Veuillez rentrer un mot de passe</p>
+
+				</form-login>
+
+				<pre>{{userLogin}}</pre>
+				<pre>{{userSignIn}}</pre>
+
+			</div>
+
+		</div>
+	</div>

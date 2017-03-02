@@ -1,4 +1,9 @@
+@import "reset";
 @import "variables";
+@import "admin";
+@import "navBar";
+@import "lateralMenu";
+@import "input-range";
 
 .wrapper {
   @include flexbox();

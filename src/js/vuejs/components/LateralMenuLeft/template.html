@@ -19,7 +19,7 @@
     <div class="lastFriends">
       <p> Derniers compagnons </p>
       <ul>
-        <li v-for="friend in lastFriends">
+        <li v-for="friend in user.lastFriends">
           <img :src="friend.avatar" :alt="friend.name">
         </li>
       </ul>

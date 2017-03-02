@@ -8,9 +8,6 @@ template     = eval(`\`${template}\``);
 
 const Post = Vue.extend({
   template,
-  props:{
-    post:Object
-  },
   data () {
       return {
         post:{

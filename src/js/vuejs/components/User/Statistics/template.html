@@ -1,0 +1,30 @@
+  <div class="container-colored relative">
+    
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="text-left">Statistiques</h1>
+        <p> Nombre d'amis : {{ user.nbFriends}} </p>
+        <p> Nombre d'enigmes résolues : {{ user.nbRiddleSolved}} </p>
+        <p> Nombre de points : {{ user.points }} </p>
+      </div>
+    </div>
+     <div class="row">
+      <div class="col-sm-12">
+        <h1 class="text-left">Derniers badges débloqués</h1>
+         <ul class="wrapper">
+          <li class="item" v-for="badge in user.lastBadges"> 
+            <img :src="badge.path"> 
+            <p> {{ badge.name }} </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+     <div class="row">
+      <div class="col-sm-12">
+        <h1 class="text-left">Dernier titre débloqué</h1>
+        <p> {{ user.userBadge}} </p>
+      </div>
+    </div>
+    <a href="" class="top-right">Masquer</a>
+    <a href="" class="bottom-right">Voir toutes les récompenses obtenues</a>  
+  </div>

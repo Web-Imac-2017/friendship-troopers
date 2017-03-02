@@ -2,30 +2,30 @@
 import VueRouter from 'vue-router';
 
 // ===================== Pages Components ======================
-import Login from '../components/Login.vue'
+import Login from '../components/Login'
 /*import Inscription from './components/Inscription'*/
 import WelcomeOnBoard from '../components/WelcomeOnBoard'
 
-import Event from '../components/Event.vue'
-import Search from '../components/Search.vue'
-import User from '../components/User.vue'
-import Parameters from '../components/Parameters.vue'
-import Friends from '../components/Friends.vue'
-import Chat from '../components/Chat.vue'
-import Enigme from '../components/Enigme.vue'
-import EnigmeResolved from '../components/EnigmeResolved.vue'
-import EnigmeCurrent from '../components/EnigmeCurrent.vue'
-import EnigmeCurrentChat from '../components/EnigmeCurrentChat.vue'
+import Event from '../components/Event'
+import Search from '../components/Search'
+import User from '../components/User'
+import Parameters from '../components/Parameters'
+import Friends from '../components/Friends'
+import Chat from '../components/Chat'
+import Enigme from '../components/Enigme'
+import EnigmeResolved from '../components/EnigmeResolved'
+import EnigmeCurrent from '../components/EnigmeCurrent'
+import EnigmeCurrentChat from '../components/EnigmeCurrentChat'
 
 import Feed from '../components/Feed'
 import Post from '../components/Post'
 
-import Wiki from '../components/Wiki.vue'
-import Market from '../components/Market.vue'
+import Wiki from '../components/Wiki'
+import Market from '../components/Market'
 
-import About from '../components/About.vue'
-import FAQ from '../components/FAQ.vue'
-import Legals from '../components/Legals.vue'
+import About from '../components/About'
+import FAQ from '../components/FAQ'
+import Legals from '../components/Legals'
 
 import AdminCreatePost from '../components/admin/CreatePost.vue'
 import AdminCreateEvent from '../components/admin/CreateEvent.vue'
@@ -37,7 +37,7 @@ import AddAvatar from '../components/admin/AddAvatar.vue'
 import AddEmoji from '../components/admin/AddEmoji.vue'
 import AddEnigme from '../components/admin/AddEnigme.vue'
 
-import Error404 from '../components/Error404.vue'
+import Error404 from '../components/Error404'
 
 // ==================== Router registration ====================
 const router = new VueRouter({
