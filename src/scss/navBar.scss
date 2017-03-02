@@ -64,6 +64,7 @@ ul {
   }
 }
 
+
 ul li {
   .navbar-brand  {
     line-height: 1.5rem;
@@ -110,7 +111,7 @@ ul li {
       background-size: 100%;
       background-repeat: no-repeat;
   }
-  .notifications-icon:hover {
+  .notifications-icon:hover, .notifications-icon:active, .notifications-icon:focus {
       background-image: url("../images/NotificationsHover.svg");
       background-size: 100%;
       background-repeat: no-repeat;
@@ -129,7 +130,7 @@ ul li {
     top: 1.3rem;
     left: 1.3rem;
   }
-
+/*
   .notifications-icon:hover, .messages-icon:hover , .friends-icon:hover {
     .notif {
       @include border-radius-percent(100);
@@ -138,7 +139,7 @@ ul li {
       background-color: $menu-background;
       @include font-size(1);
     }
-  }
+  }*/
 }
 
 .nav input.nav-item {
@@ -170,19 +171,19 @@ ul li {
 
 
 @media screen and (max-width: 800px) {
-  nav ul li.navbar-right .nav-item, nav ul li.navbar-right menu-separator {
+  ul li.navbar-right input[type=text], ul li.navbar-right .nav-profil, ul li.navbar-left .nav-home {
     display: none;
   }
-  nav ul li.navbar-right .nav-responsive{
+  ul li.navbar-right .nav-responsive{
     display: inline-block;
   }
 }
 
 @media screen and (min-width: 801px) {
-  nav ul li.navbar-right .nav-item, nav ul li.navbar-right menu-separator {
+  ul li.navbar-right input[type=text], ul li.navbar-right .nav-profil, ul li.navbar-left .nav-home {
     display: inline-block;
   }
-  nav ul li.navbar-right .nav-responsive {
+  ul li.navbar-right .nav-responsive {
     display: none;
   }
 }
@@ -195,9 +196,20 @@ menu-separator {
 }
 
 
-nav ul li.navbar-right .nav-responsive{
+ul li.navbar-right .nav-responsive{
   position: fixed;
   top : 1rem;
   right: 1rem;
   cursor: pointer;
+}
+
+.sub-menu {
+  position: absolute;
+  top: 5rem;
+  ul {
+    background-color: $comments-background;
+    li {
+      padding: 0.5rem 0;
+    }
+  }
 }
