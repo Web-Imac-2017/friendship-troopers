@@ -6,12 +6,19 @@
 }
 
 .lateralMenuLeft {
-	padding-top: 2rem;
+	padding-top: 1rem;
 	padding-bottom: 1rem;
-	  /* style and properties */
+	text-decoration: none;
+	display: inline-block;
 }
+
+.lateralMenuLeft a{
+	text-decoration: none;
+}
+
 .lateralMenuRight {
-  /* style and properties */
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .menuTools{

@@ -1,5 +1,6 @@
 <template>
-<div class="container col-sm-11 menuTools">
+
+<div class="container col-sm-10 menuTools">
 
     <router-link to="/legals" class=""> Mentions légales </router-link> -
     <router-link to="/aide" class=""> Aide </router-link> -

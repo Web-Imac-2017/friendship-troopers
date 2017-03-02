@@ -1,7 +1,6 @@
 <template>
 
-
-  <div class="container col-sm-11 lateralMenuLeft">
+  <div class="container col-sm-10 lateralMenuLeft">
     <div class="lateralMenuAvatar">
     
  <!-- 
@@ -16,16 +15,27 @@
 
     </div>
 
-
-      <p class="enigmes"> Enigmes </p>
+      <div>
+      <p class="enigmes"> <b>Enigmes</b> </p>
       <router-link to=""> Résoudre l'énigme en cours </router-link> <br>
       <router-link to=""> Voir la liste des enigmes </router-link> 
+      </div>
 
-      <p class="amis">Amis</p>
+      <br><div>
+      <p class="amis"><b>Amis</b></p>
       <router-link to=""> Voir tous mes amis </router-link> <br/>
       <router-link to=""> Accéder à la messagerie </router-link>
       <div class="lastFriends">
-        <p> Derniers compagnons </p>
+        <p> <u>Derniers compagnons:</u></p>
+        </div>
+        <div align="center">
+          <img src="../assets/Avatar1.svg" width="30%" height="30%" alt="" align="right" style="float:right"/>
+          <img src="../assets/Avatar1.svg" width="30%" height="30%" alt="" align="left" style="float:left" />
+            <div id="content" align="center"> 
+            <img src="../assets/Avatar1.svg" width="30%" height="30%" alt="" align="center" />
+            </div>
+        </div>
+
         <ul>
           <li v-for="friend in lastFriends">
             <img :src="friend.avatar" :alt="friend.name">
