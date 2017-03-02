@@ -172,6 +172,10 @@ ul li {
   height: auto;
 }
 
+.nav>li.navbar-left {
+  display: inline-block;
+}
+
 
 @media screen and (max-width: 800px) {
   nav ul li.navbar-right .nav-item, nav ul li.navbar-right menu-separator {
