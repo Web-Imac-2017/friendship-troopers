@@ -1,0 +1,49 @@
+<form class="form post container-colored"  v-on:submit.prevent.stop="save">
+    <div class="row">
+      <div class="col-sm-6">
+        <p>Modifier votre avatar</p>
+        <img src="http://placehold.it/150x150">
+        <a href="">Choisir un nouvel avatar</a> 
+      </div>
+      <div class="col-sm-6">
+        <p>Modifier votre titre</p>
+        <select v-model="user.title">
+          <option v-for="option in user.titleTab">
+            {{ option }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <p>Modifier votre adresse mail</p>
+    <div class="row">
+      <div class="col-sm-2">
+        <label for="">Adresse mail</label>
+      </div>
+      <div class="col-sm-10">
+        <input maxlength="255" type="email" v-model="user.mail" name='mail'>
+      </div>
+    </div>
+    <p>Modifier votre mot de passe</p>
+    <div class="row">
+      <div class="col-sm-2">
+        <label for="">Nouveau</label>
+      </div>
+      <div class="col-sm-10">
+        <input maxlength="255" type="password" v-model="user.password" name='password'>
+        <div v-if="lowPassword"><slot name="errorLowPassword"></slot></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <label for="">Répéter nouveau</label>
+      </div>
+      <div class="col-sm-10">
+        <input maxlength="255" type="password" v-model="user.passwordChecked">
+        <div v-if="falsePassword"><slot name="errorPassword"></slot></div>
+      </div>
+    </div>
+    <div class="row">
+       <button>Annuler</button>
+      <button>Enregistrer</button>
+    </div>
+  </form>

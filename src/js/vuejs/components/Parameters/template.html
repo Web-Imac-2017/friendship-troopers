@@ -1,10 +1,23 @@
-div class="well">
+<div class="container-fluid">
     <div class="row">
-      <div class="col-sm-5 text-right">
-        <img class="logo" src="../assets/logo.png">
+      <aside class="col-sm-2">
+        <lateral-menu-left></lateral-menu-left>
+        <menu-tools></menu-tools>
+      </aside>
+      <section class="article col-sm-8">
+        <h1> Modifier mes informations </h1>
+        <form-parameters v-model="user">
+          <p slot="errorPassword">Les deux mots de passe ne correspondent pas !</p>
+          <p slot="errorLowPassword">Le mot de passe n'est pas suffisament compliqué! Il doit comporter 1 chiffre, 1 lettre et au minimum 8 caractères.</p>
+
+        </form-parameters>
+        <pre>{{user}}</pre>
+
+      </section>
+      <div class="col-sm-2">
+         <lateral-menu-right></lateral-menu-right>
       </div>
-      <div id="hello">
-        <h1>Page paramètres d'un profil</h1>
-      </div>
+
+
     </div>
   </div>
