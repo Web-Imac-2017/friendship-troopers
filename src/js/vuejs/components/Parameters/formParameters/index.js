@@ -12,20 +12,52 @@ const formParameters = Vue.extend({
   },
   data(){
     return{
-      user: JSON.parse(JSON.stringify(this.value)),
+      initialUser:JSON.parse(JSON.stringify(this.value)),
       lowPassword:false,
       falsePassword:false,
       falseMail:false,
       nullMail:true,
       nullPassword:true,
       nullPasswordChecked:true,
-      imgDiv:false
+      imgDiv:false,
+      user:{
+        mail: '',
+        password: '',
+        passwordChecked:'',
+        avatar : JSON.parse(JSON.stringify(this.value)).avatar,
+        title: JSON.parse(JSON.stringify(this.value)).title,
+      },
+      finalUser:{
+        mail: '',
+        password: '',
+        avatar : '',
+        title: '',
+      }
+      
     }
   },
   methods:{
+    goBack(){
+      this.finalUser.mail = this.initialUser.mail;
+      this.finalUser.password = this.initialUser.password;
+      this.finalUser.avatar = this.initialUser.avatar;
+      this.finalUser.title = this.initialUser.title;
+      this.user.mail= '';
+      this.user.password= '';
+      this.user.passwordChecked='';
+      this.user.avatar = this.initialUser.avatar;
+      this.user.title= this.initialUser.title
+      console.log("Revenu en arrière...");
+    },
+    finalUserToInitialUser(){
+      this.initialUser.mail = this.finalUser.mail;
+      this.initialUser.password = this.finalUser.password;
+      this.initialUser.avatar = this.finalUser.avatar;
+      this.initialUser.title = this.finalUser.title;
+    },
     checkMail(){
       var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
-      this.falseMail = (!regex.test(this.userSignIn.mail)) ? true : false;
+      this.falseMail = (!regex.test(this.user.mail)) ? true : false;
     },
     checkPassword(){
       var regex = /^.*(?=.{8,})(?=.*\d)(?=.*[a-zA-Z]).*$/;
@@ -45,24 +77,20 @@ const formParameters = Vue.extend({
       if(!(this.nullMail)){
         this.checkMail();
       }
-      
         
     },
     showAvatars(){
       this.imgDiv = (!this.imgDiv) ? true : false;
-      console.log("show avatars");
-    },
-    changeAvatar : function (event) {
-/*      this.user.imagePath = this.attr('src');
-      console.log("avatar " + this.attr('src'));*/
     },
     save(){
       this.$emit('input', this.user);
       this.checkInputs();
-      if(!(this.nullPasswordChecked) && !(this.lowPassword) && !(this.falsePassword))
-          console.log("Changement de mot de passe possible !!");
-      if(!(this.nullMail) && !(this.falseMail))
-          console.log("Changement de mail possible !!");
+
+      this.finalUser.password = (!(this.nullPasswordChecked) && !(this.lowPassword) && !(this.falsePassword)) ? this.user.password : this.initialUser.password;
+      this.finalUser.mail = (!(this.nullMail) && !(this.falseMail)) ? this.user.mail : this.initialUser.mail;
+      this.finalUser.title = this.user.title;
+      this.finalUser.avatar = this.user.avatar;
+
       console.log("changements faits !!! Gerer ça quand liaison front/back done");
       
     }

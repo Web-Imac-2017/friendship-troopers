@@ -18,24 +18,24 @@ const Parameters = Vue.extend({
   	'form-parameters' : formParameters 
   }, 
   data () {
-      return {
-        user:{
-          mail: '',
-          password: '',
-          passwordChecked: '',
-          imagePath : "http://placehold.it/150x150",
-          title:'Super alien',
-          titleTab : [ "Astronaute débutant","Super alien"],
-          imagePathTab : [
-            "http://placehold.it/150x150",
-            "http://placehold.it/150x150",
-            "http://placehold.it/150x150",
-            "http://placehold.it/150x150",
-            "http://placehold.it/150x150",
-          ]
-        }
+    return {
+      user:{
+        mail: 'admin@gmail.com',
+        password: 'admin1234',
+        passwordChecked: 'admin1234',
+        avatar : "http://placehold.it/150x150",
+        title:'Super alien',
+        titleTab : [ "Astronaute débutant","Super alien", "Cacahuete planétaire"],
+        avatarPathTab : [
+          "http://placehold.it/150x150",
+          "http://placehold.it/25x15",
+          "http://placehold.it/10x15",
+          "http://placehold.it/15x15",
+          "http://placehold.it/15x10",
+        ]
       }
     }
+  }
 });
 
 
