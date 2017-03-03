@@ -59,9 +59,6 @@ const NavBar = Vue.extend({
       }
     }
 
-    
-
-}
 });
 
 

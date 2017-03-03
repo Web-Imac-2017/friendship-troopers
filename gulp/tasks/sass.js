@@ -13,7 +13,7 @@ var mapError     = require('../error');
 var concat = require('gulp-concat');
 
 var config = {
-  scss      : './src/scss/*',         // Les fichiers à watch
+  scss      : './src/scss/*.scss',         // Les fichiers à watch
   src       : './src/scss/style.scss', // Le fichier principal
   outputDir : './www/assets/css',     // Le dossier ou le build sera généré
   outputFile: 'style.css'             // Le nom du fichier build
@@ -23,12 +23,27 @@ var config = {
 
 // La tache pour générer le build scss.
 // C'est un peu similaire à la tache js.
+// gulp.task('sass', function() {
+//   return gulp.src(config.src)
+//     .pipe(sourcemaps.init({ loadMaps: true }))
+//     .pipe(sass())
+//     .on('error', mapError)
+//     .pipe(rename(config.outputFile))
+//     .pipe(autoprefixer())                 // Auto prefix css rules for each browsers
+//     .pipe(minify({processImport: false})) // Minify build file
+//     .pipe(sourcemaps.write('./'))
+//     .pipe(gulp.dest(config.outputDir))
+//     .pipe(notify({
+//       onLast: true,
+//       message: 'Generated file: <%= file.relative %>',
+//     }));
+// });
+
 gulp.task('sass', function() {
-  return gulp.src(config.src)
+  return gulp.src(config.scss)
     .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(sass())
     .on('error', mapError)
-    .pipe(rename(config.outputFile))
     .pipe(autoprefixer())                 // Auto prefix css rules for each browsers
     .pipe(minify({processImport: false})) // Minify build file
     .pipe(sourcemaps.write('./'))
