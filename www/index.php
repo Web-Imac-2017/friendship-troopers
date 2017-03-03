@@ -1,18 +1,3 @@
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>friendship-troopers</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="text/javascript" src="assets/js/build.js"></script>
-  </body>
-</html>
-
-
 <?php
 session_start();
 if ($_GET['url'] === 'favicon.ico') {
