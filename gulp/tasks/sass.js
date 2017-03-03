@@ -13,7 +13,7 @@ var mapError     = require('../error');
 var concat = require('gulp-concat');
 
 var config = {
-  scss      : './src/scss/*.scss',         // Les fichiers à watch
+  scss      : './src/scss/*',         // Les fichiers à watch
   src       : './src/scss/style.scss', // Le fichier principal
   outputDir : './www/assets/css',     // Le dossier ou le build sera généré
   outputFile: 'style.css'             // Le nom du fichier build
@@ -57,8 +57,15 @@ gulp.task('sass', function() {
 
 gulp.task('css', function () {
    gulp.src('./src/scss/*.scss')
-      .pipe(sass().on('error', sass.logError))
-      .pipe(gulp.dest('./www/assets/css/'));
+     .pipe(sass())
+     .on('error', mapError)
+     .pipe(autoprefixer())                 // Auto prefix css rules for each browsers
+    .pipe(minify({processImport: false})) // Minify build file
+     .pipe(gulp.dest(config.outputDir))
+    .pipe(notify({
+      onLast: true,
+      message: 'Generated file: <%= file.relative %>',
+    }));
 });
 
 // Task pour watch les modifications sur les fichiers scss

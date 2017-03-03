@@ -4,6 +4,7 @@
 @import "navBar";
 @import "lateralMenu";
 @import "input-range";
+@import "bootstrap-custom";
 
 .wrapper {
   @include flexbox();
@@ -21,8 +22,9 @@
 }
 
 .relative{
-  position:relative;
+  position:relative; 
 }
+
 
 .top-right, .bottom-right{
   position: absolute;
@@ -165,7 +167,7 @@ body {
   font-family: $main-font;
   font-weight: normal;
   @include font-size(1.2);
-  background: $background;
+  background-image: url("../images/background-bigger.jpg");
   color:$main-text;
 }
 

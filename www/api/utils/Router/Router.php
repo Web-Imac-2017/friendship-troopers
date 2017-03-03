@@ -41,7 +41,7 @@ class Router {
                 return $route->call();
             }
         }
-        echo 'No matching routes';
+        echo 'No matching routes !';
     }
 
     public function url($name, $params = []) {

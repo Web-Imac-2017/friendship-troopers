@@ -42,11 +42,11 @@ import Error404 from '../components/Error404'
 // ==================== Router registration ====================
 const router = new VueRouter({
   mode: 'history',
-  base  : '/',
+  base  : 'friendship-troopers/www',
   routes: [
     { 
       name : 'Login',
-    	path: '/', 
+    	path: '/index.html', 
     	component: Login 
 	},{
       name: 'WelcomeOnBoard',
