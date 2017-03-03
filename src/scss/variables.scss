@@ -3,25 +3,42 @@
 // Colors variables
 
 $white: #fff; 
-$enigme-title: #8cada9;
+
 
 $main-title: #46bfa9;
 $username: #349994;
 $planets: #206671;
 
 $main-text: #e7e8e8;
+
 $grey : #cdcccc;
 $secondary-text : #999999;
 
-$comments-background : #2f3b4f;
-$articles-background : #212d3f;
-$menu-background : $articles-background;
-$background: #0f1928;
+//Menu colors
+$menu-background : #060c2a;
+$input-background : #131735;
+$lateral-menu-background : #21253e;
 
-$notifs: #d48bbc; 
+//posts
+$comments-background : #3b425e;
+$comments-publish : #4a526c;
+$articles-background : #2d3653;
+
+//Secondary colors
+$notifs: #c33a78; 
+$enigme-title: $notifs;
+$green-text: #17d4b2;
+
+//Administration colors
 $report-red : #ef3824;
 $report-brown : #b5780b;
 
+//Planete colors
+$planet-space-opera : #faa61a;
+$planet-parallel : #f04747;
+$planet-robots : #de8ace;
+$planet-earth : #3fb7e0;
+$planet-alien : #72b51a;
 
 // Font Variables
 

@@ -5,6 +5,7 @@
   position: fixed;
   top :0;
   z-index: 10;
+  background-color: $menu-background;
 }
 
 .nav > li {
@@ -33,7 +34,7 @@ input {
 ul {
   padding: 0 1em;
   width: 100%;
-  background-color: $menu-background;
+  background-color: $articles-background;
   color: $main-text;
   display : block;
 
@@ -148,7 +149,7 @@ ul li {
 
 .nav input.nav-item {
   &:active, &:hover, &:focus, & {
-      background: $background;
+      background: $input-background;
   }
   background-position: center;
   vertical-align: middle; 
