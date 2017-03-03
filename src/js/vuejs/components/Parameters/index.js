@@ -23,8 +23,16 @@ const Parameters = Vue.extend({
           mail: '',
           password: '',
           passwordChecked: '',
+          imagePath : "http://placehold.it/150x150",
           title:'Super alien',
           titleTab : [ "Astronaute débutant","Super alien"],
+          imagePathTab : [
+            "http://placehold.it/150x150",
+            "http://placehold.it/150x150",
+            "http://placehold.it/150x150",
+            "http://placehold.it/150x150",
+            "http://placehold.it/150x150",
+          ]
         }
       }
     }

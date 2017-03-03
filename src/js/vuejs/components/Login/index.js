@@ -1,5 +1,5 @@
 'use strict';
-
+ 
 import Vue from 'vue/dist/vue';
 
 let template = require('./template.html');

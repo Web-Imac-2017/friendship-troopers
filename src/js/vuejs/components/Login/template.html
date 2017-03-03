@@ -1,5 +1,5 @@
 <div class="container login">
-
+ 
 	  	<div class="row">
 	  		<div class="col-sm-4">
 	  			<h1>Friendship troopers</h1>
@@ -23,11 +23,9 @@
 
 					<p slot="errorUsername">{{userSignIn.username}} est déjà utilisé !</p>
 					<p slot="errorMail">L'adresse mail {{userSignIn.mail}} est déjà utilisée !</p>
+					<p slot="errorMailValid">L'adresse mail n'est pas valide, veuillez vérifier svp !</p>
 					<p slot="errorPassword">Les deux mots de passe ne correspondent pas !</p>
-					<p slot="errorLogin">
-						L'adresse mail et le mot de passe ne correspondent pas! <br>
-						Veuillez reessayer ou réinitialiser votre mot de passe.
-					</p>
+					<p slot="errorLowPassword">Le mot de passe n'est pas suffisament compliqué! Il doit comporter 1 chiffre, 1 lettre et au minimum 8 caractères.</p>
 					<p slot="passwordMissing">Veuillez rentrer un mot de passe</p>
 					<p slot="errorDate">La date de naissance est invalide !</p>
 					<p slot="nullInputUsername">{{ nullMessage }}</p>
@@ -40,10 +38,9 @@
 				<form-login v-model="userLogin" v-else>
 		
 					<p slot="errorLogin">
-						L'adresse mail et le mot de passe ne correspondent pas! <br>
+						L'adresse mail et/ou le mot de passe ne correspondent pas! <br>
 						Veuillez reessayer ou réinitialiser votre mot de passe
 					</p>
-					<p slot="passwordMissing">Veuillez rentrer un mot de passe</p>
 
 				</form-login>
 

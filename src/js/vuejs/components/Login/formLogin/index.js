@@ -1,5 +1,5 @@
 'use strict';
-
+ 
 import Vue from 'vue/dist/vue';
 
 let template = require('./template.html');
@@ -13,24 +13,22 @@ const formLogin = Vue.extend({
 	data(){
 		return{
 			userLogin: JSON.parse(JSON.stringify(this.value)),
-			passwordNot:false,
-			errorLogin:false
+			cantSubmit:false
 		}
 	},
 	methods:{
 		connect(){
 			this.$emit('input', this.userLogin);
-			if(this.userLogin.mail != "admin@gmail.com" | this.userLogin.password != "admin"){
-	      		if(this.userLogin.password == ""){
-	      			this.passwordNot=true;
-	      			this.errorLogin=false;
-	      			console.log("connexion en cours !!! Gerer ça");
-	      		}else{
-	      			this.passwordNot=false;
-		      		this.errorLogin=true;
-	      		}	
-	      	}else
-	      		this.errorLogin=false;
+			if(this.userLogin.mail != "" | this.userLogin.password != ""){
+				if(this.userLogin.mail == "admin@gmail.com" && this.userLogin.password == "admin"){
+					this.cantSubmit=false;
+					console.log("connexion en cours !!! Gerer ça quand liaison front/back done");
+				}else
+					this.cantSubmit=true;
+			}else{
+				this.cantSubmit=true;
+			}
+	      		
 		}
 	}
 });

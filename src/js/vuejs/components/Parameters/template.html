@@ -7,6 +7,7 @@
       <section class="article col-sm-8">
         <h1> Modifier mes informations </h1>
         <form-parameters v-model="user">
+          <p slot="errorMail">L'adresse mail n'est pas juste !</p>
           <p slot="errorPassword">Les deux mots de passe ne correspondent pas !</p>
           <p slot="errorLowPassword">Le mot de passe n'est pas suffisament compliqué! Il doit comporter 1 chiffre, 1 lettre et au minimum 8 caractères.</p>
 

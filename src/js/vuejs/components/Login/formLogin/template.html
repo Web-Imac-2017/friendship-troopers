@@ -1,4 +1,4 @@
-<form class="form" v-on:submit.prevent="connect">
+<form class="form" v-on:submit.prevent.stop="connect">
 		<div class="field">
 			<label for="">Adresse e-mail</label>
 			<input maxlength="255" type="email" v-model="userLogin.mail" name='mail' required>
@@ -6,11 +6,10 @@
 		<div class="field" >
 			<label for="">Mot de passe</label>
 			<input maxlength="255" type="password" v-model="userLogin.password" name='password' required>
-			<div v-if="passwordNot"><slot name="passwordMissing"></slot></div>
 		</div>	
 		<div class="field">
-			<div v-if="errorLogin"><slot name="errorLogin"></slot></div>
+			<div v-if="cantSubmit"><slot name="errorLogin"></slot></div>
 			<a href="">J'ai oublié mon mot de passe</a>
-			<button v-on:click.prevent="connect">Se connecter<img class="img-rocket" src="www/assets/images/FuseeFirstPage.svg"> </button>
+			<button>Se connecter<img class="img-rocket" src="static/FuseeFirstPage.svg"> </button>
 		</div>
     </form>  
