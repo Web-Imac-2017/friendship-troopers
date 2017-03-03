@@ -23,8 +23,8 @@ const Parameters = Vue.extend({
           mail: '',
           password: '',
           passwordChecked: '',
-          title:'title1',
-          titleTab : [ "title1","title2"],
+          title:'Super alien',
+          titleTab : [ "Astronaute débutant","Super alien"],
         }
       }
     }

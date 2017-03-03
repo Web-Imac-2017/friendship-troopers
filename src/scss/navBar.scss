@@ -17,6 +17,7 @@ input {
 }
 
 
+
 .navbar-brand {
   font-family: $title-font;
   text-decoration: none;
@@ -35,7 +36,8 @@ ul {
   width: 100%;
   background-color: $menu-background;
   color: $main-text;
-  display : block;
+  display : inline-block; 
+
 
   li {
 
@@ -220,4 +222,8 @@ ul li.navbar-right .nav-responsive{
       padding: 0.5rem 0;
     }
   }
+}
+
+.navbar-left{
+  display:inline-block;
 }

@@ -2,7 +2,7 @@
 import Vue from 'vue/dist/vue';
 
 let template = require('./template.html');
-template     = eval(`\`${template}\``);
+template     = eval(`\`${template}\``); 
 
 
 const NavBar = Vue.extend({
@@ -61,7 +61,6 @@ const NavBar = Vue.extend({
 
     
 
-}
 });
 
 
