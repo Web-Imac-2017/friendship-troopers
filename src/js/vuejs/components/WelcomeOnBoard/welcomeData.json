@@ -1,0 +1,92 @@
+{       "finish" : false,
+       "questions": [ {
+         "number" : "1",
+         "title" : "Ta couleur : ",
+         "answer" : [ {"text": "bleu", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/1_planete-bleue.jpg", "planetID" : "1"},
+                    {"text":"vert", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/1_planete-verte.jpg", "planetID" : "2"},
+                    {"text":"violet","image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/1_planete-violette.jpg", "planetID" : "3"},
+                    {"text":"rouge", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/1_planete-rouge.jpg", "planetID" : "4"},
+                    {"text":"orange", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/1_planete-orange.jpg", "planetID" : "5"}
+         ]
+        }, {
+          "number" : "2",
+          "title" : "Ton compagnon :",
+          "answer" : [ {"text":"un petit vélociraptor", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/2_velociraptor.jpg", "planetID" : "1"},
+                     {"text":"un mini Groot", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/2_groot.png", "planetID" : "2"}, 
+                     {"text":"une charmante androïde", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/2_android.png", "planetID" : "3"}, 
+                     {"text":"Doc", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/2_Doc.jpg", "planetID" : "4"}, 
+                     {"text":"un Choubacca", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/2_choubacca.jpeg", "planetID" : "5"} 
+         ] 
+        }, {
+          "number" : "3",
+          "title" : "Tes vacances parfaites :" ,
+          "answer" : [ {"text":"un week-end romantique à New New York", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/3_new-new-york.jpg", "planetID" : "1"},
+                     {"text":"tester les spécialités culinaires de Vulcain", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/3_vulcain.jpg", "planetID" : "2"},
+                     {"text":"relire tes classiques", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/3_lire-classiques.jpg", "planetID" : "3"}, 
+                     {"text":"arpenter un trou noir", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/3_trous-noirs.jpg", "planetID" : "4"},
+                     {"text":"faire la course de la Bounta", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/3_bounta.jpg", "planetID" : "5"}
+         ] 
+        },{
+          "number" : "4",
+          "title" : "L\"intelligence artificielle pour gérer ta maison :" ,
+          "answer" : [{"text": "la Matrice", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/4_matrice.jpg", "planetID" : "1"}, 
+                    {"text":"le Brain Bug", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/4_brainBug.jpg", "planetID" : "2"}, 
+                    {"text":"GladOS", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/4_Glados.jpg", "planetID" : "3"}, 
+                    {"text":"La Reine Rouge", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/4_red-queen.png", "planetID" : "4"}, 
+                   {"text":"AUTO", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/4_AUTO.jpg", "planetID" : "5"}
+         ]},{
+          "number" : "5",
+          "title" : "Ton moyen de transport de prédilection :" , 
+          "answer" : [ {"text":"le TARDIS", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/5_tardis.jpg", "planetID" : "1"},
+                     {"text":"la Porte des Etoiles", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/5_porte-des-etoiles.jpg", "planetID" : "2"},
+                     {"text":"l\"astro-stop", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/5_astro-stop.jpg", "planetID" : "3"},
+                     {"text":"la DeLorean", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/5_deLorean.jpg", "planetID" : "4"}, 
+                     {"text":"l\"Arcadia", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/5_arcadia.jpg", "planetID" : "5"}
+         ] 
+        },{
+          "number" : "6",
+          "title" : "Tu aimes :" ,
+          "answer" : [{"text": "passer du temps dans ton bunker", "image" : "../../../friendship-troopers/www/assets/images/Avatar1.svg", "planetID" : "1"}, 
+                    {"text":"les rencontres du 3ième type", "image" : "../../../friendship-troopers/www/assets/images/Avatar1.svg", "planetID" : "2"}, 
+                    {"text":"trafiquer le droïde ménager de maman", "image" : "../../../friendship-troopers/www/assets/images/Avatar1.svg", "planetID" : "3"}, 
+                    {"text":"créer des paradoxes", "image" : "../../../friendship-troopers/www/assets/images/Avatar1.svg", "planetID" : "4"}, 
+                   {"text": "aller en croisière muni de ton multipass", "image" : "../../../friendship-troopers/www/assets/images/Avatar1.svg", "planetID" : "5"}         ] 
+        }
+        ], 
+        "nbQuestions" : 6,
+        "current" : 0,
+       
+        "answers": [],
+        "answerValidate" : [false,false,false,false,false,false],
+        " planetUser" : "",
+        "planetInfo" : [
+          {
+            "planetID" : "1",
+            "name" : "Terre  #AA001",
+            "info" : "La Terre… Ce nom vous semble peut-être familière, mais la connaissez vous vraiment ? Depuis la démocratisation des voyages intersidéraux on y est plus à son aise ! Finis les embouteillages, les métropoles polluées et les files d’attentes aux supermarchés. Maintenant on peut vivre où on le souhaite, plus de loyers à payer. S’endormir en Alaska, admirant une aurore boréale et le lendemain, remettre ça face aux ruines magnifiques de Buenos Aires est devenu chose commune.", 
+             "img" : "../../../friendship-troopers/www/assets/images/P1.svg"
+          } , 
+           {
+            "planetID" : "2",
+            "name" : "Sautien #SS013",
+            "info" : "Avide d’aventures ? Tant mieux ! Vous voilà maintenant sur la planète Sautien, première planète alien découverte par l’explorateur Cari-Hu ! Vos charmants petits compatriotes se cachent principalement vers les montagnes Jighs. Bien que ces montagnes soient absolument charmante, nous vous conseillons de ne pas l’oubliez au cours de vos randonnées !",
+             "img" : "../../../friendship-troopers/www/assets/images/P1.svg"
+
+          } , {
+            "planetID" : "3",
+            "name" : "Technome #8T077",
+            "info" : " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at porta odio. Sed eleifend, odio eget dictum molestie, sem purus sagittis velit, sit amet pharetra nulla arcu a ligula. Aenean rhoncus finibus est, id pretium dolor. Vivamus placerat nec neque non molestie. Donec egestas tincidunt arcu sed semper",
+   "img" : "../../../friendship-troopers/www/assets/images/P1.svg"
+          }, {
+            "planetID" : "4",
+            "name" : "Paranose #312LL",
+            "info" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at porta odio. Sed eleifend, odio eget dictum molestie, sem purus sagittis velit,sit amet pharetra nulla arcu a ligula. Aenean rhoncus finibus est, id pretium dolor. Vivamus placerat nec neque non molestie. Donec egestas tincidunt arcu sed semper",
+   "img" : "../../../friendship-troopers/www/assets/images/P1.svg"
+          }, {
+            "planetID" : "5",
+            "name" : "Multas #781ST",
+            "info" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at porta odio. Sed eleifend, odio eget dictum molestie, sem purus sagittis velit, sit amet pharetra nulla arcu a ligula. Aenean rhoncus finibus est, id pretium dolor. Vivamus placerat nec neque non molestie. Donec egestas tincidunt arcu sed semper",
+           "img" : "../../../friendship-troopers/www/assets/images/P1.svg"
+          }
+       ]
+      }
