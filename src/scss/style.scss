@@ -1,0 +1,339 @@
+@import "variables";
+
+.wrapper {
+  @include flexbox();
+}
+
+.item {
+  @include flex(1 200px);
+  @include order(2);
+}
+
+.container-colored{
+  background:$articles-background;
+  @include margin4(0, 0, 1, 0);
+  @include padding(1);
+}
+
+.relative{
+  position:relative;
+}
+
+.top-right, .bottom-right{
+  position: absolute;
+  right:1rem;
+  color:$grey;
+}
+
+.friend-list{
+  flex-flow: row wrap;
+  background:  none;
+
+  .item{
+    flex-grow:0;
+    background: $comments-background;
+    @include margin(1);
+  }
+
+  img{
+    width:100%;
+    @include padding(1);
+    @include border-radius(10);
+  }
+}
+
+.top-right{
+  top:1rem;
+}
+
+.bottom-right{
+  bottom:1rem;
+} 
+
+/* .container-fluid{
+  background:$articles-background;
+} */
+
+.welcome-on-board{
+  @include padding(2);
+  @include font-size(1.3);
+
+  .row{
+    @include margin2(1,5);
+  }
+
+  .row:nth-child(2){
+    margin:4rem 0;
+  }
+
+  .title > div{
+    display: inline-block; 
+  }
+
+  .title >div:first-child{
+    @include font-size(5);
+  }
+
+  .title >div:last-child{
+    position: absolute;
+    @include font-size(2);
+    padding: 1rem
+  }
+
+  .slider{
+    opacity:0.2;
+  }
+
+}
+
+
+@mixin flexbox() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex($values) {
+  -webkit-box-flex: $values;
+  -moz-box-flex:  $values;
+  -webkit-flex:  $values;
+  -ms-flex:  $values;
+  flex:  $values;
+}
+
+@mixin order($val) {
+  -webkit-box-ordinal-group: $val;  
+  -moz-box-ordinal-group: $val;     
+  -ms-flex-order: $val;     
+  -webkit-order: $val;  
+  order: $val;
+}
+
+/* .container-fluid{
+  background:$articles-background;
+} */
+
+.welcome-on-board{
+  @include padding(2);
+  @include font-size(1.3);
+
+  .row{
+    @include margin2(1,5);
+  }
+
+  .row:nth-child(2){
+    margin:4rem 0;
+  }
+
+  .title > div{
+    display: inline-block; 
+  }
+
+  .title >div:first-child{
+    @include font-size(5);
+  }
+
+  .title >div:last-child{
+    position: absolute;
+    @include font-size(2);
+    padding: 1rem
+  }
+
+  .slider{
+    opacity:0.2;
+  }
+
+}
+
+#app{
+  background: $background;
+}
+
+
+.text-center{
+  text-align:center;
+}
+
+body {
+  font-family: $main-font;
+  font-weight: normal;
+  @include font-size(1.2);
+  background: $background;
+  color:$main-text;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $title-font;
+  font-weight: normal;
+  @include font-size(1.6);
+  color:$main-title;
+  text-transform: uppercase;
+  text-align: center;
+} 
+
+.center{
+  @extend %center;
+}
+
+.left>*{
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+a{
+  color:$main-text;
+  text-decoration: underline;
+  &:hover{
+    color:$main-title;
+    background-color: none;
+  }
+}
+
+.button-field{
+  margin-top:1rem;
+}
+
+form{
+    label{
+      display:block;
+      margin-bottom: 0;
+      display: inline-block;
+      min-width: 19%;
+      text-align: right;
+      /* padding: 0 4%; */
+    }
+    input{
+    background: $comments-background ;
+    border: none;
+    @include padding-button(1);
+    outline: 0;
+    display: inline-block;
+    width:80%;
+  }
+  .field{
+    text-align: right;
+    padding: 1% 0;
+
+    button{
+      margin: 0 0 0 2%;
+      @include padding-button(2);
+
+      .img-rocket {
+        width: 3em;
+        position: absolute;
+        right:0em;
+      }
+    }
+  }
+  textarea {
+    @extend input;
+    width: 100%;
+    resize: none;
+  }
+}
+
+
+
+
+
+button{
+  background: $main-title ;
+  border: none;
+  @include padding-button(1);
+  outline: 0;
+  display: inline-block;
+  &:hover{
+    background: $username;
+  }
+}
+
+
+.login > .row{
+  padding: 2% 3%;
+  .col-sm-8{
+    border-left: 1px solid $main-title;
+  }
+}
+
+
+
+small {
+  font-weight: lighter;
+  @include font-size(1);
+}
+
+/* .content-block {
+  margin: 0% 0% 0% 100px;
+} */
+
+.post {
+  background-color: $articles-background;
+  padding: 2%;
+  margin-bottom: 2%;
+}
+
+.pseudo {
+  margin: 0px 1px 0.5px 2px;
+}
+
+.connect-buttons {
+  text-align: right;
+}
+
+.contain-img{
+  width:4em;
+  img{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.avatar {
+  max-height: 6rem;
+/*   padding-right:0; */
+  text-align:center;
+    img{
+      @include border-radius(10);
+      width:auto;
+      height:inherit;
+    }
+}
+
+.comment{
+  background: $comments-background;
+  margin-top:2%;
+  max-height: 8em;
+  .col-sm-1{
+    padding: 1%;
+  }
+  button{
+    margin-top:1em;
+  }
+  textarea{
+    padding-left: 0;
+  }
+}
+
+/* @media screen and (min-width: 1200px) {
+  .container-fluid {
+    width: 1170px;
+  }
+} */
+
+
+.like-icon:hover {
+  background-image: url("../images/LikeFull.svg");
+  background-size: 100%;
+}
+
+.square {
+  height: 13rem;
+  width: 13rem;
+  background-color: $grey;
+  margin: 1rem auto;
+}

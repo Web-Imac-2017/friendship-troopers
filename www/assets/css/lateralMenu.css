@@ -1,0 +1,41 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400italic,700italic,400,700);
+@font-face {
+  font-family: earthOrbiter-font;
+  src: url(earthorbiterxtrabold.ttf); }
+
+html {
+  font-size: 62.5%; }
+
+.lateralMenuLeft, .lateralMenuRight, .menuTools {
+  /* common properties */
+  background-color: #2f3b4f; }
+
+.lateralMenuLeft {
+  /* style and properties */ }
+
+.lateralMenuRight {
+  /* style and properties */ }
+
+.menuTools {
+  /* style and properties */
+  width: 100%;
+  margin-top: 1rem;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none; }
+
+.menuTools a {
+  /* style and properties for links (a) in menuTools */
+  text-decoration: none; }
+
+.lateralMenuAvatar {
+  background-image: url("../images/LineAboveAvatar.svg");
+  background-size: 100%;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle; }
+  .lateralMenuAvatar .planet {
+    width: 5em;
+    z-index: 1;
+    position: relative; }

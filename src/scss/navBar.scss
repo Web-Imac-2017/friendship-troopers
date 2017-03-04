@@ -1,0 +1,203 @@
+@import "variables";
+
+.nav{
+  margin: 0px;
+  position: fixed;
+  top :0;
+  z-index: 10;
+}
+
+input {
+  border:none;
+  @include padding-input(1);    
+}
+
+
+.navbar-brand {
+  font-family: $title-font;
+  text-decoration: none;
+  /*position: relative;*/
+  height: auto;
+  line-height: 3rem;
+  padding: 0;
+  margin: 0;
+}
+.navbar-brand:hover {
+  background-color: none;
+}
+
+ul {
+  padding: 0 1em;
+  width: 100%;
+  background-color: $menu-background;
+  color: $main-text;
+  display : block;
+
+  li {
+
+    .nav-link, .nav-item, .navbar-brand  {
+      display : inline-block;
+      text-decoration: none;
+      background: none;
+
+      &:hover{
+        text-decoration: none;
+        background: none;
+
+      }
+      &:active{
+        text-decoration: none;
+        background: none;
+
+      }
+      &:focus{
+        text-decoration: none;
+        background: none;
+      }
+
+    }
+
+    img {
+      width: 2em;
+      height: auto;
+    }
+  }
+}
+
+ul li {
+  .navbar-brand  {
+    line-height: 1.5rem;
+    margin: -0.75rem 0;
+  }
+  .nav-link, .nav-item  {
+    line-height: 1.5rem;
+  }
+  .nav-icon {
+    cursor: pointer;
+
+  }
+
+  .friends-icon, .messages-icon, .notifications-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: inline-block;
+    vertical-align: middle;
+    @include margin(1);
+  }
+
+  .friends-icon {
+    background-image: url("../images/Friends.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+  .friends-icon:hover {
+    background-image: url("../images/FriendsHover.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+  .messages-icon {
+      background-image: url("../images/Messages.svg");
+      background-size: 100%;
+      background-repeat: no-repeat;
+  }
+  .messages-icon:hover {
+      background-image: url("../images/MessagesHover.svg");
+      background-size: 100%;
+      background-repeat: no-repeat;
+  }
+  .notifications-icon {
+      background-image: url("../images/Notifications.svg");
+      background-size: 100%;
+      background-repeat: no-repeat;
+  }
+  .notifications-icon:hover {
+      background-image: url("../images/NotificationsHover.svg");
+      background-size: 100%;
+      background-repeat: no-repeat;
+  }
+  .notif {
+    @include border-radius-percent(100);
+    background-color: $notifs;
+    color: $menu-background;
+    @include font-size(1);
+    width: 1.8rem;
+    height: 1.8rem;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 0.15rem;
+    position: relative;
+    top: 1.3rem;
+    left: 1.3rem;
+  }
+
+  .notifications-icon:hover, .messages-icon:hover , .friends-icon:hover {
+    .notif {
+      @include border-radius-percent(100);
+      border: 1px solid $notifs;
+      color: $notifs;
+      background-color: $menu-background;
+      @include font-size(1);
+    }
+  }
+}
+
+.nav input.nav-item {
+  &:active, &:hover, &:focus, & {
+      background: $background;
+  }
+  background-position: center;
+  vertical-align: middle; 
+}
+
+.nav input.nav-search-icon {
+  &:active, &:hover, &:focus, & {
+    height: 80%;
+    width: auto;
+    background: none;
+    background-image: url("../images/search.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;  
+  }
+}
+
+
+.navbar-left {
+  vertical-align: middle;
+  height: auto;
+}
+
+
+@media screen and (max-width: 800px) {
+  nav ul li.navbar-right .nav-item, nav ul li.navbar-right menu-separator {
+    display: none;
+  }
+  nav ul li.navbar-right .nav-responsive{
+    display: inline-block;
+  }
+}
+
+@media screen and (min-width: 801px) {
+  nav ul li.navbar-right .nav-item, nav ul li.navbar-right menu-separator {
+    display: inline-block;
+  }
+  nav ul li.navbar-right .nav-responsive {
+    display: none;
+  }
+}
+
+menu-separator {
+  vertical-align: middle;
+  height: 1.5rem;
+  border-right: 0.1rem solid $main-text;
+  margin: 0 1.3rem;
+}
+
+
+nav ul li.navbar-right .nav-responsive{
+  position: fixed;
+  top : 1rem;
+  right: 1rem;
+  cursor: pointer;
+}
