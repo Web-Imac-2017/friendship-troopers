@@ -40,8 +40,19 @@ const Login = Vue.extend({
         	mail:'',
         	password:''
         },
-        usernameExisting:'JeanLuc',
-        mailExisting:'JeanLuc@gmail.com',
+        loginTab : [{
+          username:'Test1',
+        	mail:'test1@gmail.com',
+        	password:'123456789a'
+        },{
+          username:'Test2',
+        	mail:'test2@gmail.com',
+        	password:'password123'
+        },{
+          username:'Test3',
+        	mail:'test3@gmail.com',
+        	password:'password123'
+        }],
         signIn:true,
         nullMessage:"Veuillez remplir ce champs svp!"
       }

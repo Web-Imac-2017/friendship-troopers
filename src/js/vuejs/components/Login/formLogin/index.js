@@ -17,17 +17,25 @@ const formLogin = Vue.extend({
 		}
 	},
 	methods:{
+		checkLogin(index){
+			return ((this.userLogin.mail == this.$parent.loginTab[index].mail) && (this.userLogin.password == this.$parent.loginTab[index].password)) ? true : false;
+		},
 		connect(){
 			this.$emit('input', this.userLogin);
 			if(this.userLogin.mail != "" | this.userLogin.password != ""){
-				if(this.userLogin.mail == "admin@gmail.com" && this.userLogin.password == "admin"){
-					this.cantSubmit=false;
-					console.log("connexion en cours !!! Gerer ça quand liaison front/back done");
-				}else
-					this.cantSubmit=true;
+				var i = 0;
+				for(var i; i < this.$parent.loginTab.length; i++){
+					if(this.checkLogin(i)){
+						this.cantSubmit=false;
+						console.log("connexion faite !");
+						this.$router.push("/actualites")
+					}
+				}
+				this.cantSubmit=true;
 			}else{
 				this.cantSubmit=true;
 			}
+			
 	      		
 		}
 	}
