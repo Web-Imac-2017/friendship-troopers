@@ -16,8 +16,7 @@ class Comment extends Controller {
     }
 
     if ($post['content'] === NULL || $post['author'] === NULL || $post['publicationId']) {
-      echo 'penser à throw exception error 400';
-      return false;
+      throw new \Utils\RequestException('champ manquant', 400);
     }
 
     $commentModel = new \Models\Comment();
@@ -38,8 +37,7 @@ class Comment extends Controller {
 
     if ($post['content'] === NULL || $post['publicationId'] == NULL
      || $post['userId'] || $post['commentId']) {
-      echo 'penser à throw exception';
-      return false;
+      throw new \Utils\RequestException('champ manquant', 400);
     }
 
     $publicationModel = new \Models\Comment();

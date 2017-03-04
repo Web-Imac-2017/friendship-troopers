@@ -21,8 +21,7 @@ class Stardust extends Controller {
     }
 
     if ($post['userId'] === NULL || $post['publicationId'] === NULL) {
-      echo 'penser à throw exception';
-      return false;
+      throw new \Utils\RequestException('champ manquant', 400);
     }
 
     $StardustModel = new \Models\Stardust();
@@ -40,14 +39,6 @@ class Stardust extends Controller {
    */
   public function delete ($post) {
     $StardustModel = new \Models\Stardust();
-
-    if (!$stardustModel->findFirst([
-      'userId' => $post['userId'],
-      'publicationId' => $post['publicationId'],
-      ])) {
-        echo "penser à renvoyer une exception ou à trhow";
-        return false;
-    }
 
     $StardustModel->delete([
       'userId' =>$post['userId'],

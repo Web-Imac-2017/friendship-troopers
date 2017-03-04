@@ -39,4 +39,8 @@ abstract class Controller {
   public function filterCSRF () {
 
   }
+
+  public function response(array $data) {
+    echo json_encode($data);
+  }
 }

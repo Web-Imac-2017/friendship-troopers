@@ -5,7 +5,6 @@
 namespace Controllers;
 
 class Account extends Controller{
-
 	function deleteAccount(){
 		//delete user
 		//delete userBadge

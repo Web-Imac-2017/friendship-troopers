@@ -37,8 +37,7 @@ class Publication extends Controller {
     }
 
     if ($post['content'] === NULL || $post['author'] === NULL) {
-      echo 'penser à throw exception';
-      return false;
+      throw new \Utils\RequestException('champ manquant', 400);
     }
 
 
@@ -64,8 +63,7 @@ class Publication extends Controller {
     }
 
     if ($post['content'] === NULL || $post['userId'] === NULL || $post['publicationId'] === NULL) {
-      echo 'penser à throw exception';
-      return false;
+      throw new \Utils\RequestException('champ mamquant', 400);
     }
 
     $publicationModel = new \Models\Publication();
@@ -95,7 +93,7 @@ class Publication extends Controller {
       'fields' => ['publicationId'],
       'conditions' => ['publicationId' => $id],
     ])) {
-      echo "aucun commentaires à supprimer";
+      throw new \Utils\RequestException("aucun commentaires à supprimer", 404);
     }
 
     $commentModel->delete(['publicationId' => $id]);
@@ -107,8 +105,7 @@ class Publication extends Controller {
       'fields' => ['id'],
       'conditions' => ['id' => $id],
     ])) {
-      echo "article introuvable. ID incorrect";
-      return -2;
+      throw new \Utils\RequestException("article introuvable. ID incorrect", 404);
     }
 
     $publicationModel->delete($id);

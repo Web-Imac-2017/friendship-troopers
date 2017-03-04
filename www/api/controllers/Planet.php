@@ -36,13 +36,9 @@ class Planet extends Controller {
     ]);
 
     if (array_key_exists('planetId', $missingFields)) {
-      echo'planète introuvable';
-      return $missingFields;
+      throw new \Utils\RequestException('planète introuvable', 404);
     } else if ($request['name'] != $get) {
-      var_dump('get planet = ' . $get);
-      var_dump( $request);
-      echo 'vous n\'appartenez pas à cette planète !';
-      return false;
+      throw new \Utils\RequestException('vous n\'appartenez pas à cette planète !', 403);
     }
 
     $publicationModel = new \Models\Publication();
@@ -83,8 +79,7 @@ class Planet extends Controller {
     $missingFields = $this->checkRequired($required, $_SESSION);
 
     if (array_key_exists($required, $missingFields)) {
-      echo'planète introuvable';
-      return $missingFields;
+      throw new \Utils\RequestException('planète introuvable', 404);
     }
 
     $CommentModel = new \Models\Comment();

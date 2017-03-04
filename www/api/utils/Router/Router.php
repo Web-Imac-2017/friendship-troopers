@@ -34,19 +34,19 @@ class Router {
 
     public function run(){
         if(!isset($this->routes[$_SERVER['REQUEST_METHOD']]) && !file_get_contents("php://input")) {
-            echo 'REQUEST_METHOD does not exist';
+            throw new \Utils\RequestException('bad method', 405);
         }
         foreach($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
             if($route->match($this->url)) {
                 return $route->call();
             }
         }
-        echo 'No matching routes';
+        throw new \Utils\RequestException('not found', 404);
     }
 
     public function url($name, $params = []) {
         if(!isset($this->namedRoutes[$name])) {
-            echo 'erreur 404';
+            throw new \Utils\RequestException('not found', 404);
         }
         return $this->namedRoutes[$name]->getUrl($params);
     }
