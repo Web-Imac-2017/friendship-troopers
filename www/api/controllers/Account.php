@@ -109,7 +109,7 @@ class Account extends Controller{
 	 * @param  boolean $resend
 	 */
 	public function sendValidationMail($data){
-		$to      = $data['email'];
+		$to      = $data['mail'];
 		$subject = '[Friendship Trooper]Inscription | Validation';
 		$message = '
 		Bienvenue dans notre Galaxie, '. $data['username'] .'
@@ -117,62 +117,53 @@ class Account extends Controller{
 
 		Il est tant maintenant de valider votre arrivée, simplement en cliquant sur le lien ci dessous !
 
-		'.$_SERVER['DOCUMENT_ROOT'] .'/validate?email='.$data['email'].'&hash='.$data['activated'];
+		'.$_SERVER['DOCUMENT_ROOT'] .'/' . \Utils\Router\Router::url('auth.validate') . '?email='.$to.'&hash='.$data['activated'];
 
 		$headers = 'From:noreply@fst.dev' . "\r\n";
 		mail($to, $subject, $message, $headers);
 	}
+
 		/**
 		* register a new user and send a validation mail
 		* @return [type] [description]
 		*/
 		public function inscription($post) {
 			$error = array();
-			$required = ['username','mail', 'day','month','year','password'];
+			$required = ['username','mail', 'birthdate', 'password'];
 			$error = $this->checkRequired($required, $post);
-			if(empty($error)){
-				//renvoyer une erreur à la views
-				return json_encode($error);
+			if(!empty($error)){
+				throw new \Utils\RequestException('champs manquants', 400);
 			} else {
-				$day = $post['day'] ;
-				$month = $post['month'];
-				$year = $post['year'];
+				$birthdate = $post['birthdate'];
+				$tmpBirth = explode('-', $birthdate);
+				$day = $tmpBirth[2];
+				$month = $tmpBirth[1];
+				$year = $tmpBirth[0];
 				if(!checkdate($month,$day,$year)) {
-					$error = array(0=>'Date erronée');
-					return json_encode($error);
+					throw new \Utils\RequestException('Date invalide', 400);
 				}
 				$birthdate = $year . '-' . $month . '-' . $day;
 				$password = $post['password'] ;
-				$data =  array(
+				$data = [
 					"username" => $post['username'],
 					"mail" => $post['mail'],
 					"birthdate" => $birthdate,
 					"password" => $password,
 					"activated" => md5(rand(0,1000))
-				);
+				];
 				$this->filterXSS($data);
-				$request = array(
-					"fields" => array(
-						"username",
-						"mail"
-					),
-					'conditions' => [
-						'or' => array(
-							'username' => $data['username'],
-							'mail' => $data['mail'],)
-							]
-						);
 				$user = new \Models\User();
 
-				if($user->checkIsNewUser($request) == false) {
-					// message d'erreur et retour à la views d'inscription
-					$error = array(0=>'Mail et/ou username existant');
-					return json_encode($error);
-				} else {
-					$data['password']=password_hash($password, PASSWORD_DEFAULT);
-					$user->addUser($data);
-					$this->sendValidationMail($data);
-				}
+				$data['password']=password_hash($password, PASSWORD_DEFAULT);
+		        try {
+		        	$user->addUser($data);
+		        } catch (\PDOException $e) {
+					throw new \Utils\RequestException('utilisateur existe deja', 400);
+		        }
+				$this->sendValidationMail($data);
+				unset($data['password']);
+				unset($data['activated']);
+				$this->response($data, 201);
 			}
 		}
 		/**

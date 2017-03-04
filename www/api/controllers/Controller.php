@@ -39,7 +39,11 @@ abstract class Controller {
 
   }
 
-  public function response(array $data) {
+  public function response(array $data, int $httpCode = 200) {
+    header('Content-Type: application/json; charset=utf-8');
+    http_response_code($httpCode);
     echo json_encode($data);
+
+    return $this;
   }
 }

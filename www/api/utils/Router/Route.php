@@ -8,10 +8,12 @@ class Route {
 	private $callable;
 	private $matches = [];
 	private $params = [];
+
 	public function __construct($path, $callable) {
 		$this->path = trim($path, '/');  // On retire les / inutils
 		$this->callable = $callable;
 	}
+
 	/**
 	* Permettra de capturer l'url avec les paramètres
 	* get('/posts/:slug-:id') par exemple
@@ -38,12 +40,14 @@ class Route {
 		}
 		return true;
 	}
+
 	private function paramMatch($match) {
 		if(isset($this->params[$match[1]])) {
 			return '(' . $this->params[$match[1]] . ')';
 		}
 		return '([^/]+)';
 	}
+
 	public function call() {
 		if(is_string($this->callable)) {
 			$params = explode('#', $this->callable);
@@ -55,11 +59,15 @@ class Route {
 			return call_user_func_array($this->callable, $this->matches);
 		}
 	}
+
 	public function with($param, $regex) {
 		$this->params[$param] = str_replace('(', '(?:', $regex);
 		return $this; // On retourne tjrs l'objet pour enchainer les arguments
 	}
 
-}
+  public function getUrl()
+  {
+    return $this->path;
+  }
 
-?>
+}
