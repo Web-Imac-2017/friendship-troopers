@@ -1,15 +1,15 @@
 <?php
 /**
 * ////////////////////////////
-* @var ...Model
+* @var InterestModel
 * ////////////////////////////
 */
 namespace Models;
 
-class ...Model extends Model {
+class InterestModel extends Model {
   // ----------[ CONSTANTS ]----------
 
-  const TABLE_NAME = '...';
+  const TABLE_NAME = 'interest';
 
   // ----------[ ATTRIBUTS ]----------
 
