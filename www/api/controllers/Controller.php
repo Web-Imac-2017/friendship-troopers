@@ -39,8 +39,11 @@ abstract class Controller {
 
   }
 
-  public function response(array $data, int $httpCode = 200) {
+  public function response(array $data, int $httpCode = 200, array $headers = []) {
     header('Content-Type: application/json; charset=utf-8');
+    foreach ($headers as $k => $v) {
+      header("$k: $v");
+    }
     http_response_code($httpCode);
     echo json_encode($data);
 

@@ -75,7 +75,8 @@ abstract class Model {
                     $sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . $this->table . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
                 } else {
                     foreach ($request['leftJoin'] as $join) {
-                        $sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . (isset($join['JoinTable']) ? $join['JoinTable'] : array_pop(explode("\\", get_class($this)))) . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
+						$tmp = explode("\\", get_class($this));
+                        $sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . (isset($join['JoinTable']) ? $join['JoinTable'] : strtolower(array_pop($tmp))) . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
                     }
                 }
             }
@@ -96,7 +97,7 @@ abstract class Model {
 								if (!is_numeric($value['value'])) {
 									$value['value'] = $this->pdo->quote($value['value']);
 								}
-								$condition[] = $key . $value['cmp'] . $value['value'];
+								$condition[] = $key . ' ' . $value['cmp'] . ' ' . $value['value'];
 							} else {
 								$otherConditions = array();
 								foreach ($value as $orKey => $valueOfValue) {

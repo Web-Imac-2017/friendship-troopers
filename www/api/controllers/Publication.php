@@ -22,6 +22,79 @@ class Publication extends Controller {
     ]);
   }
 
+  public function list($planetId, $get) {
+    $planetModel = new \Models\Planet();
+
+    /*$userPlanet = $_SESSION['user']['planet'];
+    $required = ['planetId'];
+    $missingFields = $this->checkRequired($required, $_SESSION);
+    $request = $planetModel->findFirst([
+      'fields' => ['name'],
+      'conditions' => ['name' => $userPlanet],
+    ]);
+
+    if (array_key_exists('planetId', $missingFields)) {
+      throw new \Utils\RequestException('planète introuvable', 404);
+    } else if ($request['name'] != $get) {
+      throw new \Utils\RequestException('vous n\'appartenez pas à cette planète !', 403);
+    }*/
+
+    $publicationModel = new \Models\Publication();
+
+    $offset = +($get['offset'] ?? 0);
+    $limit = +($get['limit'] ?? 10);
+    if ($limit > 10) {
+      throw new \Utils\RequestException('limit trop elevee', 416);
+    }
+
+    $where = [];
+    if ($get['user']) {
+      $where['publication.userId'] = $get['user'];
+    }
+
+    if ($get['title']) {
+      $where['publication.title'] = [
+        'cmp' => 'like',
+        'value' => '%'.$get['title'].'%',
+      ];
+    }
+
+    $request = $publicationModel->find([
+      'fields' => ['publication.id', 'publication.title', 'publication.content', 'publication.publishDate', 'publication.userId', 'publication.modified'],
+      'leftJoin' => [
+        [
+          'table' => 'user',
+  				'alias' => 'UserPlanet',
+  				'from' => 'id',
+  				'to' => 'userId',
+        ],
+        [
+          'table' => 'comment',
+  				'alias' => 'publicationComment',
+  				'from' => 'publicationId',
+  				'to' => 'id',
+        ],
+        [
+          'table' => 'stardust',
+  				'alias' => 'publicationStardust',
+  				'from' => 'publicationId',
+  				'to' => 'id',
+        ]
+      ],
+      'conditions' => $where,
+      'limit' => "$offset, $limit",
+      'orderBy' => [
+        'key' => 'publishDate',
+				'order' => 'DESC',
+      ],
+    ]);
+
+    $offset = $offset + $limit;
+    $this->response($request, 200, [
+      'Link' => Router::url('planets.posts.list') . "\"?offset=$offset&per_page=$limit\"; rel=\"next\", \"https://api.github.com/user/repos?page=50&amp;per_page=100\"; rel=\"last\"",
+    ]);
+  }
+
   /**
    * Create an article in the DB, based on the data sent
    * @param  char*  $title    the article title

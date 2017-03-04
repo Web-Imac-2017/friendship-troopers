@@ -18,6 +18,7 @@ Router::post('/auth/login','account#login');
 Router::post('/auth/logout','account#logout');
 Router::get('/auth/validate','account#validateUser', 'auth.validate');
 Router::get('/accounts/:username','account#getUser');
+Router::get('/planets/:planet/posts', 'publication#list', 'planets.posts.list');
 Router::get('/planets/:planet/posts/:id','publication#view');
 Router::get('/planets/:planet/news' , 'planet#getPlanetFeed');
 
