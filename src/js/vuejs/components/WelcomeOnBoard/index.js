@@ -15,8 +15,6 @@ const WelcomeOnBoard = Vue.extend({
         welcomeData.finish = false;
       }
     }
-    console.log(welcomeData.answerValidate);
-    console.log(welcomeData.answers);
   },
     decrement: function(){
       if (welcomeData.current > 0 )
@@ -36,11 +34,12 @@ const WelcomeOnBoard = Vue.extend({
     this.finished()
   },
   attributePlanet : function(){
-    var planet = [0,0,0,0,0,0];
+    var planet = [0,0,0,0,0];
     for (var i = 0; i < welcomeData.answers.length; i++) {
         planet[welcomeData.answers[i]-1] += 1
     }
     var max = 0, index = 0;
+    console.log("Planete :" + planet);
     for (i = 0; i < planet.length; i++) {
       if (planet[i] > max ){
         max = planet[i]
@@ -48,19 +47,29 @@ const WelcomeOnBoard = Vue.extend({
       }
     }
     welcomeData.current = welcomeData.nbQuestions;
-    return index + 1;
+    return index;
   },
   submit : function(){
     welcomeData.planetUser = this.attributePlanet()
-    console.log(welcomeData.planetUser);
+    this.styleObject.borderColor = welcomeData.planetInfo[welcomeData.planetUser].color;
+    
   },
   backToQuestion : function(index){
     welcomeData.current = index;
   }
-}, 
+}, computed: {
+    
+    color: function () {
+      if (planerUser != "")
+        return welcomeData.planetInfo[welcomeData.planetUser].color;
+      } 
+  },
   data () {
       return {
-        welcomeData
+        welcomeData,
+        styleObject : {
+          borderColor : ''
+        }
     }
   }
 });

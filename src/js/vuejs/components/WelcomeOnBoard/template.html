@@ -44,15 +44,15 @@
       <div v-on:click="submit" class="col-sm-3 align-self-end" v-else > Submit  <img src="../assets/images/fleche-droite.svg"></div>
     </div>
 </div>
-<div class="container-fluid welcome-on-board border-planet" v-else>
+<div class="container-fluid welcome-on-board border-planet" v-bind:style="styleObject" v-else>
   <div class="container-transparent">
-    <div class="row no-gutter">
+    <div class="row no-gutters">
       <div class="col-sm-6">
-        <img :src="welcomeData.planetInfo[welcomeData.planetUser].img" alt="planet" class="center">
+        <img :src="welcomeData.planetInfo[welcomeData.planetUser].path" alt="planet" class="center planet">
         <h1> {{ welcomeData.planetInfo[welcomeData.planetUser].name }}</h1>
       </div>
       <div class="col-sm-6">
-        <p> {{ welcomeData.planetInfo[welcomeData.planetUser].info }} </p>
+        <p > {{ welcomeData.planetInfo[welcomeData.planetUser].info }} </p>
         <router-link to="/actualites">Explorer! </router-link>
       </div>
     </div>
