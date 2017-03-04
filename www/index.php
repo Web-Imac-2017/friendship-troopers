@@ -4,7 +4,9 @@ if ($_GET['url'] === 'favicon.ico') {
     http_response_code(404);
     exit();
 }
-$_SESSION['test']='ok';
+$_SESSION['user'] = [
+  'planet' => 'Terre',
+];
 define('ROOT', __DIR__);
 require_once ROOT.'/api/utils/Autoloader.php';
 \Utils\Autoloader::register();

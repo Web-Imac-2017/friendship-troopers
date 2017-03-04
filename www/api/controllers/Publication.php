@@ -30,27 +30,21 @@ class Publication extends Controller {
    * @return int    ...       return value (-1 = error)
    */
   public function create ($post) {
-    $required = ['title', 'content', 'userId'];
+    $required = ['content', 'userId'];
     $missingFields = checkRequired($required, $post);
-    if (array_key_exist($required, $missingFields)) {
+    if (array_key_exists($required, $missingFields)) {
       return false;
     }
 
-    if ($post['title'] === NULL || $post['content'] === NULL || $post['author'] === NULL) {
-      if (!$post['title'])
-        echo 'aucun titre';
-      if (!$post['content'])
-        echo 'aucun contenu';
-      if (!$post['author'])
-        echo 'auteur invalide';
-      return -1;
+    if ($post['content'] === NULL || $post['author'] === NULL) {
+      echo 'penser à throw exception';
+      return false;
     }
 
 
     $publicationModel = new \Models\Publication();
 
     $publicationModel->save(filterXSS([
-      'title' => $post['title'],
       'content' => $post['content'],
       'userId' => $post['author'],
       'publicationTypeId' => $post['publicationType'],
@@ -59,40 +53,33 @@ class Publication extends Controller {
 
   /**
    * Modify the publication title and/or content
-   * @param  char*  $title    the modified title
-   * @param  text   $content  the modified content
+   * @param  POST   $post     post method from front
    * @return int    ...       return value (-1 = error)
    */
-  public function update () {
-    if (checkRequired(['title', 'content', 'userId', 'publicationId'])) {
-      $title = $post['title'];
-      $content = $post['content'];
-      $publicationId = $post['publicationId'];
-
-      if ($title === NULL || $content === NULL) {
-        echo 'aucun contenu';
-        return false;
-      }
-
-      $publicationModel = new \Models\Publication();
-
-      $oldPublication = $publicationModel->findFirst([
-        'fields' => ['title', 'content', 'id'],
-        'conditions' => ['id' => $publicationId],
-      ]);
-
-      if ($title == $oldPublication['title'] && $content == $oldPublication['content']) {
-        echo "aucunes modifications apportées";
-        return false;
-      }
-
-      $publicationModel->save(filterXSS([
-        'id' => $publicationId,
-        'title' => $title,
-        'content' => $content,
-        'modified' => +1,
-      ]));
+  public function update ($post) {
+    $required = ['content', 'userId', 'publicationId'];
+    $missingFields = checkRequired($required, $post);
+    if (array_key_exists($required, $missingFields)) {
+      return false;
     }
+
+    if ($post['content'] === NULL || $post['userId'] === NULL || $post['publicationId'] === NULL) {
+      echo 'penser à throw exception';
+      return false;
+    }
+
+    $publicationModel = new \Models\Publication();
+
+    $oldPublication = $publicationModel->findFirst([
+      'fields' => ['content', 'id'],
+      'conditions' => ['id' => $post['publicationId']],
+    ]);
+
+    $publicationModel->save(filterXSS([
+      'id' => $post['publicationId'],
+      'content' => $post['content'],
+      'modified' => +1,
+    ]));
   }
 
   /**
