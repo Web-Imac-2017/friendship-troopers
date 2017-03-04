@@ -20,7 +20,6 @@ abstract class Model {
 	public $form;
 
 	protected $metaData;
-
 	/**
 	 * initiate a connection with the db
 	 * create the table for the request if it doesn't exist already.
@@ -100,8 +99,11 @@ abstract class Model {
 								$condition[] = $key . $value['cmp'] . $value['value'];
 							} else {
 								$otherConditions = array();
-								foreach ($value as $valueOfValue) {
-									$otherConditions[] = "$key=$valueOfValue";
+								foreach ($value as $orKey => $valueOfValue) {
+									if(!is_numeric($valueOfValue)){
+										$valueOfValue=$this->pdo->quote($valueOfValue);
+									}
+									$otherConditions[] = "$orKey=$valueOfValue";
 								}
 								$condition[] = '(' . implode(' OR ', $otherConditions) . ')';
 							}
@@ -131,12 +133,10 @@ abstract class Model {
 			if (isset($request['limit'])) {
 				$sql .= ' LIMIT ' . $request['limit'];
 			}
-
 			// PREPARE THE REQUEST AND EXECUTE IT THEN RETURN AN OBJECT FROM YOUR DB
 			$prepareRequest = $this->pdo->prepare($sql);
 			$prepareRequest->execute();
 
-			var_dump($sql);
 			return ($prepareRequest->fetchAll(\PDO::FETCH_ASSOC));
 		}
 	}
@@ -189,7 +189,6 @@ abstract class Model {
 				$sql .= "$key = $value";
 			}
 		}
-		var_dump($sql);
 		$prepareRequest = $this->pdo->prepare($sql);
 		$prepareRequest->execute();
 	}

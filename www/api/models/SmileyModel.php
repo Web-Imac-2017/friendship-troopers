@@ -1,15 +1,15 @@
 <?php
 /**
 * ////////////////////////////
-* @var ...Model
+* @var SmileyModel
 * ////////////////////////////
 */
 namespace Models;
 
-class ...Model extends Model {
+class SmileyModel extends Model {
   // ----------[ CONSTANTS ]----------
 
-  const TABLE_NAME = '...';
+  const TABLE_NAME = 'smiley';
 
   // ----------[ ATTRIBUTS ]----------
 

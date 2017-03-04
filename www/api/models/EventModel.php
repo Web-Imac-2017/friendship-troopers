@@ -1,15 +1,15 @@
 <?php
 /**
 * ////////////////////////////
-* @var ...Model
+* @var EventModel
 * ////////////////////////////
 */
 namespace Models;
 
-class ...Model extends Model {
+class EventModel extends Model {
   // ----------[ CONSTANTS ]----------
 
-  const TABLE_NAME = '...';
+  const TABLE_NAME = 'event';
 
   // ----------[ ATTRIBUTS ]----------
 
