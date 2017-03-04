@@ -1,5 +1,4 @@
-#gitignore.
-#Whatever need to be ignored.
 .DS_Store
-node_modules
-/bin/
+node_modules/
+dist/
+npm-debug.log

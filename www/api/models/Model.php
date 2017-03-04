@@ -8,6 +8,7 @@ namespace Models;
 
 abstract class Model {
 	protected $table = NULL;
+	protected $dbName = 'friendshipTroopers';
 	protected $pdo;
 
 	protected $primaryKey = 'id';
@@ -18,6 +19,7 @@ abstract class Model {
 
 	public $form;
 
+	protected $metaData;
 	/**
 	 * initiate a connection with the db
 	 * create the table for the request if it doesn't exist already.
@@ -30,6 +32,8 @@ abstract class Model {
 			$tableName=explode('\\',strtolower(get_class($this)));
 			$this->table = array_pop($tableName);
 		}
+
+		$this->metaData = json_decode(file_get_contents(ROOT.'/config/dbMetaData.json'), true)[$this->table];
 
 		//TRY TO OPPEN A CONNEXION TO THE DB
 		try {
@@ -116,7 +120,7 @@ abstract class Model {
 
 			// IF THERE IS AN ORDER BY FIELD, ADD IT TO THE REQUEST
 			if (isset($request['orderBy'])) {
-				$sql .= ' ORDER BY ' . $request['orderBy']['key'] . ' . ' . $request['orderBy']['order'];
+				$sql .= ' ORDER BY ' . $request['orderBy']['key'] . ' ' . $request['orderBy']['order'];
 			}
 
 			// IF THERE IS A GROUP BY FIELD, ADD IT TO THE REQUEST
@@ -128,7 +132,6 @@ abstract class Model {
 			if (isset($request['limit'])) {
 				$sql .= ' LIMIT ' . $request['limit'];
 			}
-			var_dump($sql);
 			// PREPARE THE REQUEST AND EXECUTE IT THEN RETURN AN OBJECT FROM YOUR DB
 			$prepareRequest = $this->pdo->prepare($sql);
 			$prepareRequest->execute();
@@ -174,7 +177,8 @@ abstract class Model {
 		if (!is_array($id)) {
 			$sql = ' DELETE FROM ' . $this->table . ' WHERE ' . $this->primaryKey . ' = ' . $id;
 		} else {
-			$sql = ' DELETE FROM ' . $this->table . ' WHERE';
+			$sql = ' DELETE FROM ' . $this->table . ' WHERE ';
+			$first = true;
 			foreach($id as $key => $value) {
 				if($first) {
 					$first = false;
@@ -186,7 +190,7 @@ abstract class Model {
 		}
 		$prepareRequest = $this->pdo->prepare($sql);
 		$prepareRequest->execute();
-		}
+	}
 
 			/**
 	 * Insert / Update function
@@ -197,7 +201,7 @@ abstract class Model {
 	 * @param  array    $addKeys  keys needed for the update
 	 * @return type     ...
 	 */
-	public function save($data, $addKeys = array()) {
+	public function save($data, $addKeys = []) {
 		$Pkey = $this->primaryKey;
 		$fields = array();
 		$currentData = array();

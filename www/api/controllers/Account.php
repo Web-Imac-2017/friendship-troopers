@@ -1,11 +1,10 @@
-<?php
+<?php //ApplicationModel
 /**
 * Account functions
 */
 namespace Controllers;
 
 class Account extends Controller{
-
 	/**
 	* login fucntion. Allow user to log in with his account
 	* @return [type] [description]

@@ -102,10 +102,7 @@ class User extends Model{
 		$data['planetId'] = $planet; // TERRE
 		$data['roleId'] = $role; // user par défaut
 
-		var_dump($data);
-
 		$result=$this->save($data);
-		var_dump($this->primaryKeyValue);
 		$this->password="ok";
 	}
 
