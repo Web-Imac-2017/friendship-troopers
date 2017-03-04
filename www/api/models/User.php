@@ -85,17 +85,9 @@ class User extends Model{
 	 * Check if new user is valid (mail or username already in use)
 	 *
 	 */
-	function checkIsNewUser($data) {
-		// j'ai besoin d'un OR T-T
+	public function checkIsNewUser($data) {
 		$result=$this->findFirst($data);
-		echo "result";
-		var_dump($result);
-		var_dump(count($result));
-		if(count($result) > 0 && $result != false){
-			return false;
-		} else {
-			return true;
-		}
+		return !(count($result) > 0 && $result != false);
 	}
 
 	/**
@@ -105,16 +97,22 @@ class User extends Model{
 	 * @param      integer  $role    The role
 	 * @param      integer  $planet  The planet
 	 */
-	function addUser($data, $role = 3, $planet = 1) {
+	public function addUser($data, $role = 3, $planet = 1) {
 
-		$data["planetId"] = $planet; // TERRE
-		$data["roleId"] = $role; // user par défaut
+		$data['planetId'] = $planet; // TERRE
+		$data['roleId'] = $role; // user par défaut
 
 		var_dump($data);
 
 		$result=$this->save($data);
 		var_dump($this->primaryKeyValue);
 		$this->password="ok";
+	}
+
+	public function getUserProfil($username) {
+		// SELECT username, description, avatarId FROM user AS user
+		// LEFT JOIN user_avatar AS UA ON User.id = UA.userId
+		// WHERE user.username=? AND UA.currentAvatar=1
 	}
 }
 

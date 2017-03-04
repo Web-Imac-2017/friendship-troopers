@@ -28,7 +28,7 @@ abstract class Model {
 
 		if ($this->table === NULL) {
 			$tableName=explode('\\',strtolower(get_class($this)));
-			$this->table = $tableName[sizeof($tableName)-1];
+			$this->table = array_pop($tableName);
 		}
 
 		//TRY TO OPPEN A CONNEXION TO THE DB
@@ -54,7 +54,6 @@ abstract class Model {
 	 */
 	public function find($request) {
 		$sql = 'SELECT ';
-
 		// MANAGE THE FIRST PART OF THE REQUEST [THE FIELDS]
 		if (isset($request['fields'])) {
 			if (is_array($request['fields'])) {
@@ -62,19 +61,19 @@ abstract class Model {
 			} else {
 				$sql .= '*';
 			}
-			$sql .= ' FROM ' . $this->table. ' AS ' . $this->table;//get_class($this);
+			$sql .= ' FROM ' . $this->table. ' AS ' . $this->table;
 
 			// IF THIS IS A [LEFT JOIN], ACT ACCORDING SO TO COMPLETE THE REQUEST
 			if (isset($request['leftJoin'])) {
-				if (!is_array($request['leftJoin'][0])) {
-					$join = $request['leftJoin'];
-					$sql .= 'LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . get_class($this) . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
-				} else {
-					foreach ($request['leftJoin'] as $join) {
-						$sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . (isset($join['JoinTable']) ? $join['JoinTable'] : get_class($this)) . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
-					}
-				}
-			}
+                if (!is_array($request['leftJoin'][0])) {
+                    $join = $request['leftJoin'];
+                    $sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . $this->table . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
+                } else {
+                    foreach ($request['leftJoin'] as $join) {
+                        $sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . (isset($join['JoinTable']) ? $join['JoinTable'] : array_pop(explode("\\", get_class($this)))) . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
+                    }
+                }
+            }
 
 			// ADD THE CONDITIONS TO THE REQUEST, ONE OR MANY
 			if (isset($request['conditions'])) {
