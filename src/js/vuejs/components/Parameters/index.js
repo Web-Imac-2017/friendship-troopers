@@ -3,7 +3,8 @@ import Vue from 'vue/dist/vue';
 import LateralMenuLeft from '../LateralMenuLeft/index.js'
 import LateralMenuRight from '../LateralMenuRight/index.js'
 import MenuTools from '../MenuTools/index.js'
-import formParameters from './formParameters/index.js'
+import topParameters from './topParameters/index.js'
+import bottomParameters from './bottomParameters/index.js'
 
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
@@ -15,14 +16,14 @@ const Parameters = Vue.extend({
   	'lateral-menu-left' : LateralMenuLeft, 
   	'lateral-menu-right' : LateralMenuRight, 
   	'menu-tools' : MenuTools, 
-  	'form-parameters' : formParameters 
+  	'top-parameters' : topParameters,
+    'bottom-parameters' : bottomParameters  
   }, 
   data () {
     return {
       user:{
         mail: 'admin@gmail.com',
         password: 'admin1234',
-        passwordChecked: 'admin1234',
         avatar : "http://placehold.it/150x150",
         title:'Super alien',
         titleTab : [ "Astronaute débutant","Super alien", "Cacahuete planétaire"],

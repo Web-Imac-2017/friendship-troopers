@@ -1,0 +1,30 @@
+<form class="form post container-colored" v-on:submit.prevent.stop="">
+    <div class="row">
+      <div class="col-sm-6">
+        <p>Modifier votre avatar</p>
+        <img :src="user.avatar">
+        <a v-on:click="showAvatars">Choisir un nouvel avatar</a>
+        <div v-if="imgDiv">
+          <ul v-for="option in user.avatarPathTab">
+            <li>
+              <input type="radio" :value="option" v-model="user.avatar">
+              <label for=""><img :src="option"></label>
+            </li><br>
+          </ul>
+          
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <p>Modifier votre titre</p>
+        <select v-model="user.title">
+          <option v-for="option in user.titleTab">
+            {{ option }}
+          </option>
+        </select>
+      </div>
+    </div>
+   
+    <div>
+      A Envoyer au back : avatar : {{ user.avatar }}, title : {{ user.title }} 
+    </div>
+  </form>
