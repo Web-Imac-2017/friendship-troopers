@@ -128,7 +128,7 @@ class Account extends Controller{
 				"mail" => $post['mail'],
 				"birthdate" => $birthdate,
 				"password" => $password,
-				"activated" => md5(rand(0,1000))
+				"activated" => 0,
 			];
 			$this->filterXSS($data);
 			$user = new \Models\User();

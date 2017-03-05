@@ -113,8 +113,8 @@ class Publication extends Controller {
       'publicationId' => $id,
     ], 201, [
       'Location' => \Utils\Router\Router::url('planets.posts.view', [
-        'planet' => $planet,
-        'id' => $id,
+      'planet' => $planet,
+      'id' => $id,
       ]),
     ]);
   }
