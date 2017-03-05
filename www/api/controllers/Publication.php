@@ -157,12 +157,20 @@ class Publication extends Controller {
    * @param  int  $id   the article ID
    * @return int  ...   return value (-1 = error)
    */
-  public function delete ($planetId, $id, $post) {
+  public function delete ($planetId, $id, $delete) {
     if (!\Utils\Session::isLoggedIn()) {
       throw new \Utils\RequestException('operation reservee aux membres', 401);
     }
 
-    // verifier que c'est le bon utilisateur ou un admin
+    $userId = \Utils\Session::user('id');
+    $publiUserId = $this->Publication->findFirst([
+      'fields' => 'userId',
+      'conditions' => ['id' => $id],
+    ]);
+
+    if (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $userId != $publiUserId) {
+      throw new \Utils\RequestException('action reservee aux administeurs', 403);
+    }
 
     $this->loadModel('Comment');
 
