@@ -16,6 +16,7 @@ const Login = Vue.extend({
 	methods: {
 	    inscription: function(){
 	      this.signIn = true;
+        
 	    },
 	    connexion: function(){
 	      this.signIn = false;
@@ -29,9 +30,9 @@ const Login = Vue.extend({
 	        mail: '',
 	        password: '',
 	        passwordChecked: '',
-	        day:1,
-	        month:1,
-	        year:1975,
+	        day:'',
+	        month:'',
+	        year:'',
 	        dayTab : [ 1,28, 29, 30, 31],
 	        monthTab : [ 1, 2, 3,4,5,6,7,8,9,10,11,12],
 	        yearTab : [ 1975, 1996, 2000, 2016]

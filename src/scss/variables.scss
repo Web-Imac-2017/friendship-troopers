@@ -16,6 +16,8 @@ $secondary-text : #999999;
 
 //Menu colors
 $menu-background : #060c2a;
+
+
 $input-background : #131735;
 $lateral-menu-background : #21253e;
 
@@ -23,6 +25,10 @@ $lateral-menu-background : #21253e;
 $comments-background : #3b425e;
 $comments-publish : #4a526c;
 $articles-background : #2d3653;
+
+@mixin background-transparent($value) {
+  background: rgba(45, 54, 83, $value)
+}
 
 //Secondary colors
 $notifs: #c33a78; 
@@ -50,7 +56,7 @@ $main-font: 'Roboto', serif;
     src: url(../fonts/earthorbiterxtrabold.ttf);
 }
 
-$title-font: earthOrbiter-font;
+$title-font: earthOrbiter-font; 
 
 
 // Padding and margin variables
@@ -58,6 +64,14 @@ $title-font: earthOrbiter-font;
 @mixin padding($sizeValue) {
   padding:$sizeValue + rem;
 }
+
+@mixin padding2($height,$width) {
+  padding:$height+rem $width+rem;
+}
+
+@mixin padding4($top,$right,$bot,$left) {
+  padding:$top+rem $right+rem $bot+rem $left+rem;
+} 
 
 @mixin padding-button($sizeValue) {
   padding:$sizeValue*0.5 + rem $sizeValue*1.5 + rem;

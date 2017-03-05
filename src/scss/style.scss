@@ -55,7 +55,9 @@
 
 .bottom-right{
   bottom:1rem;
-} 
+}
+
+
 
 /* .container-fluid{
   background:$articles-background;
@@ -220,21 +222,7 @@ form{
     display: inline-block;
     width:80%;
   }
-  .field{
-    text-align: right;
-    padding: 1% 0;
-
-    button{
-      margin: 0 0 0 2%;
-      @include padding-button(2);
-
-      .img-rocket {
-        width: 3em;
-        position: absolute;
-        right:0em;
-      }
-    }
-  }
+  
   textarea {
     @extend input;
     width: 100%;
@@ -242,6 +230,35 @@ form{
   }
 }
 
+select {
+
+  background: #3b425e;
+  color:$white;
+  font-weight: 300;
+  @include padding2(0.5,1.5);
+  width:100%;
+  border:none;
+  margin: 0;      
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-image:
+    linear-gradient(45deg, transparent 50%, $grey 50%),
+    linear-gradient(135deg, $grey 50%, transparent 50%),
+    linear-gradient(to right, $comments-background, $comments-background);
+  background-position:
+    calc(105% - 20px) calc(1em + 2px),
+    calc(105% - 15px) calc(1em + 2px),
+    100% 0;
+  background-size:
+    5px 5px,
+    5px 5px,
+    2.5em 2.5em;
+  background-repeat: no-repeat;
+}
 
 
 
@@ -258,11 +275,98 @@ button{
 }
 
 
-.login > .row{
-  padding: 2% 3%;
-  .col-sm-8{
-    border-left: 1px solid $main-title;
+.login{
+  width:205px;
+  .row{
+     @include padding(1);
   }
+
+  .col-sm-4 > .row{
+    @include padding2(0.5,0);
+  }
+ 
+  .col-sm-8{
+    
+    padding:0;
+  }
+
+  .tabs > div{
+    width: 50%;
+    display: inline-block;
+    @include padding2(0.5,0);
+    border-bottom: 1px solid $main-title;
+    color:$white;
+    margin-bottom: -1px; 
+    
+  }
+  .tabs > div:first-child{
+    border-right:  1px solid $main-title;
+    
+  }
+
+  .activeTab{
+    @include background-transparent(0.6);
+    border-top:  1px solid $main-title;
+    border-bottom:  none !important ;
+    color:$main-title;
+    margin-bottom: 0px;
+    border-left:  1px solid $main-title;
+  } 
+
+ 
+  h1{
+    @include margin4(0,0,2,0);
+  }
+  p{
+    @include margin(1);
+    text-align: center;
+  }
+
+  form{
+    border-left: 1px solid $main-title;
+    @include background-transparent(0.6);
+    @include padding(0.5);
+  }
+  label{
+    font-weight: 300;
+    @include padding2(0.5,0); 
+  }
+  .row:nth-child(4){
+    label{
+      @include padding(0);
+    }
+  } 
+  input{
+    width:100%;
+    color:$white;
+    @include margin2(0.1,0);
+  }
+
+  form > .row > .col-sm-3{
+    text-align: right;
+  }
+
+  .item:nth-child(2){
+    @include margin2(0,2);
+  } 
+
+  .form-button{
+    text-align: right;
+
+    button{
+      margin: 0 0 0 2%;
+      @include padding-button(2);
+      color:$white;
+
+      .img-rocket {
+        width: 3em;
+        position: absolute;
+        right:0em;
+      }
+    }
+  }
+  
+ 
 }
 
 
