@@ -130,12 +130,10 @@ class Publication extends Controller {
     }
 
     $userId = \Utils\Session::user('id');
-    $publiUserId = $this->Publication->find([
+    $publiUserId = $this->Publication->findFirst([
       'fields' => 'userId',
       'conditions' => ['id' => $id],
     ]);
-    var_dump($userId);
-    var_dump($publiUserId);
 
     if (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $userId != $publiUserId) {
       throw new \Utils\RequestException('action reservee aux administeurs', 403);
