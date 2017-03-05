@@ -1,4 +1,10 @@
+@import "reset";
 @import "variables";
+@import "admin";
+@import "navBar";
+@import "lateralMenu";
+@import "input-range";
+@import "bootstrap-custom";
 
 .wrapper {
   @include flexbox();
@@ -15,9 +21,16 @@
   @include padding(1);
 }
 
-.relative{
-  position:relative;
+.container-transparent{
+  background-color: $transparent-background;
+  @include margin4(0, 0, 1, 0);
+  @include padding(1);
 }
+
+.relative{
+  position:relative; 
+}
+
 
 .top-right, .bottom-right{
   position: absolute;
@@ -55,6 +68,8 @@
 } */
 
 .welcome-on-board{
+  width: 80%;
+  margin: 2% auto;
   @include padding(2);
   @include font-size(1.3);
 
@@ -85,7 +100,6 @@
   }
 
 }
-
 
 @mixin flexbox() {
   display: -webkit-box;
@@ -115,41 +129,6 @@
   background:$articles-background;
 } */
 
-.welcome-on-board{
-  @include padding(2);
-  @include font-size(1.3);
-
-  .row{
-    @include margin2(1,5);
-  }
-
-  .row:nth-child(2){
-    margin:4rem 0;
-  }
-
-  .title > div{
-    display: inline-block; 
-  }
-
-  .title >div:first-child{
-    @include font-size(5);
-  }
-
-  .title >div:last-child{
-    position: absolute;
-    @include font-size(2);
-    padding: 1rem
-  }
-
-  .slider{
-    opacity:0.2;
-  }
-
-}
-
-#app{
-  background: $background;
-}
 
 
 .text-center{
@@ -160,7 +139,7 @@ body {
   font-family: $main-font;
   font-weight: normal;
   @include font-size(1.2);
-  background: $background;
+  background-image: url("../images/background-bigger.jpg");
   color:$main-text;
 }
 
@@ -332,8 +311,52 @@ small {
 }
 
 .square {
-  height: 13rem;
-  width: 13rem;
-  background-color: $grey;
-  margin: 1rem auto;
+  height: 17rem;
+  width: 17rem;
+  margin: 1rem 1rem;
+}
+
+input[type="radio"] {
+    width: 5rem;
+    margin-top: 5rem;
+}
+
+.invite-friends {
+  margin : 10% 0 0 0;
+}
+
+.circle{
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    border-radius:8px;
+    border:2px solid $comments-background;
+    width:20px;
+    height:20px;
+    background-color: $transparent-background;
+    margin: 5rem 0;
+}
+
+.fullCircle {
+  background-color: $comments-background;
+}
+
+.border-planet {
+  border: 10px solid $planet-earth;
+}
+
+.small-circle {
+   -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    border-radius:8px;
+    border:2px solid $comments-background;
+    width: 15px;
+    height: 15px;
+    background-color: $transparent-background;
+    margin: 0 0;
+}
+
+.pseudo-button {
+  cursor: pointer;
+  padding: 0;
+  font-size: 1.5rem;
 }

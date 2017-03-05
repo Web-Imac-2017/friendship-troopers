@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <div class="row">
+      <aside class="col-sm-2">
+        <lateral-menu-left></lateral-menu-left>
+        <menu-tools></menu-tools>
+      </aside>
+      <section class="article col-sm-8">
+        <h1> Modifier mes informations </h1>
+        <top-parameters v-model="user">
+          <p slot="changeDone">Vos paramètres ont été appliqués</p>
+
+        </top-parameters>
+        <bottom-parameters v-model="user">
+          <p slot="errorMail">L'adresse mail n'est pas juste !</p>
+          <p slot="errorPassword">Les deux mots de passe ne correspondent pas !</p>
+          <p slot="errorLowPassword">Le mot de passe n'est pas suffisament compliqué! Il doit comporter 1 chiffre, 1 lettre et au minimum 8 caractères.</p>
+          <p slot="errorWrongPassword">Vous vous êtes trompé dans votre mot de passe</p>
+          <p slot="errorNoChange">Vous n'avez rien changé..</p>
+
+        </bottom-parameters>
+        <router-link to="/utilisateur">Retour au profil</router-link>
+        
+  
+      </section>
+      <div class="col-sm-2">
+         <lateral-menu-right></lateral-menu-right>
+      </div>
+
+
+    </div>
+  </div>

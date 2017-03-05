@@ -1,0 +1,49 @@
+<form class="form" v-on:submit.prevent.stop="save">
+		<div class="field">
+			<label for="">Pseudo</label>
+			<input maxlength="255" type="text" v-model="userSignIn.username" name='username' required>
+			<div v-if="alreadyUsedUsername"><slot name="errorUsername"></slot></div>
+			<div v-if="nullUsername"><slot name="nullInputUsername"></slot></div>
+		</div>
+		<div class="field">
+			<label for="">Adresse e-mail</label>
+			<input maxlength="255" type="email" v-model="userSignIn.mail" name='mail' required>
+			<div v-if="alreadyUsedMail"><slot name="errorMail"></slot></div>
+			<div v-if="nullMail"><slot name="nullInputMail"></slot></div>
+			<div v-if="falseMail"><slot name="errorMailValid"></slot></div>
+		</div>
+		<div class="field" >
+			<label for="">Mot de passe</label>
+			<input maxlength="255" type="password" v-model="userSignIn.password" name='password' required>
+			<div v-if="nullPassword"><slot name="nullInputPassword"></slot></div>
+			<div v-if="lowPassword"><slot name="errorLowPassword"></slot></div>
+		</div>
+		<div class="field">
+			<label for="">Mot de passe<br>(répeter)</label>
+			<input maxlength="255" type="password" v-model="userSignIn.passwordChecked" required>
+			<div v-if="falsePassword"><slot name="errorPassword"></slot></div>
+			<div v-if="nullPasswordChecked"><slot name="nullInputPasswordChecked"></slot></div>
+		</div>
+		<div class="field">
+			<label for="">Date de naissance</label>
+			<select v-model.number="userSignIn.day" name="day" id="day" required>
+		       <option v-for="option in userSignIn.dayTab">
+		            {{ option }}
+		        </option>
+	       </select>
+	       <select v-model.number="userSignIn.month" name="month" id="month" required>
+		       <option v-for="option in userSignIn.monthTab">
+		            {{ option }}
+		        </option>
+	       </select>
+	       <select v-model.number="userSignIn.year" name="year" id="year" required>
+		       <option v-for="option in userSignIn.yearTab">
+		            {{ option }}
+		        </option>
+	       </select>
+		<div v-if="falseDate"><slot name="errorDate"></slot></div>
+		</div>
+		<div class="field">
+			<button>S'inscrire<img class="img-rocket" src="../www/assets/images/FuseeFirstPage.svg"> </button>
+		</div>
+    </form>
