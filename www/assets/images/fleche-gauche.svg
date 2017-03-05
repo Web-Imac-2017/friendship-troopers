@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xml:space="preserve"
+   enable-background="new 0 0 110.297 105"
+   viewBox="0 0 49.999998 9.5109997"
+   height="9.5109997"
+   width="49.999996"
+   y="0px"
+   x="0px"
+   id="Calque_1"
+   version="1.1"><metadata
+     id="metadata3423"><rdf:RDF><cc:Work
+         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+     id="defs3421" /><g
+     transform="translate(-30.297,-49.744)"
+     id="g3409"><g
+       id="g3411"><line
+         style="fill:none;stroke:#e6e6e6;stroke-miterlimit:10"
+         id="line3413"
+         y2="54.5"
+         x2="80.296997"
+         y1="54.5"
+         x1="36.297001"
+         stroke-miterlimit="10" /><g
+         id="g3415"><path
+           style="fill:#e6e6e6"
+           id="path3417"
+           d="m 30.297,54.499 c 2.84,1.054 6.363,2.852 8.547,4.756 l -1.72,-4.756 1.72,-4.755 c -2.184,1.904 -5.707,3.702 -8.547,4.755 z" /></g></g></g></svg>

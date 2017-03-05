@@ -15,6 +15,16 @@
   @include order(2);
 }
 
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $title-font;
+  font-weight: normal;
+  @include font-size(1.6);
+  color:$main-title;
+  text-transform: uppercase;
+  text-align: center;
+} 
+
 .container-colored{
   background:$articles-background;
   @include margin4(0, 0, 1, 0);
@@ -171,14 +181,6 @@ body {
   color:$main-text;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: $title-font;
-  font-weight: normal;
-  @include font-size(1.6);
-  color:$main-title;
-  text-transform: uppercase;
-  text-align: center;
-} 
 
 .center{
   @extend %center;
@@ -276,7 +278,11 @@ button{
 
 
 .login{
-  width:205px;
+/*   background-image: url("../images/background-image.jpg");
+background-repeat:no-repeat; */
+  .container{
+    width:900px;
+  }
   .row{
      @include padding(1);
   }
@@ -295,8 +301,10 @@ button{
     display: inline-block;
     @include padding2(0.5,0);
     border-bottom: 1px solid $main-title;
-    color:$white;
     margin-bottom: -1px; 
+    h1{
+      color:white;
+    }
     
   }
   .tabs > div:first-child{
@@ -308,9 +316,11 @@ button{
     @include background-transparent(0.6);
     border-top:  1px solid $main-title;
     border-bottom:  none !important ;
-    color:$main-title;
     margin-bottom: 0px;
     border-left:  1px solid $main-title;
+    h1{
+      color:$main-title !important;
+    }
   } 
 
  

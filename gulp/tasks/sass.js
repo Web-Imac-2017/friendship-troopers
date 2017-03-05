@@ -74,20 +74,20 @@ gulp.task('css', function () {
 
 
 
-gulp.task('browserSync', function() {
+/*gulp.task('browserSync', function() {
     browserSync.init({
         proxy: "localhost/friendship-troopers/www/index.html"
     });
-});
+});*/
 
 // Task pour watch les modifications sur les fichiers scss
-/*gulp.task('watch', ['sass'], function() {
+gulp.task('watch', ['sass'], function() {
 	gulp.watch(config.scss, ['sass']);
-})*/
+})
 
 
-gulp.task('watch', ['browserSync', 'sass'], function (){
-  gulp.watch(config.scss, ['sass']); 
-  // Reloads the browser whenever JS files change
-  gulp.watch('./src/js/**/*.js', browserSync.reload); 
-});
+//gulp.task('watch', ['browserSync', 'sass'], function (){
+//  gulp.watch(config.scss, ['sass']); 
+//  // Reloads the browser whenever JS files change
+//  gulp.watch('./src/js/**/*.js', browserSync.reload); 
+//});

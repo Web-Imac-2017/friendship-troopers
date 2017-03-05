@@ -8,17 +8,30 @@ template     = eval(`\`${template}\``);
 
 const CreatePost = Vue.extend({
   template,
- props:{
-    post:Object
-  }, 
   methods:{
     publish(){
-      this.$emit("post", this.user)  
+      this.$emit("newPost", this.post) 
+
     },
     uploadPicture(){
       this.picture = true     
     }
-  },
+  }, 
+  data () {
+      return {
+        post : {
+           user: 'Lucky',
+            avatar : "../assets/images/Avatar1.svg",
+            date: '20 fev',
+            hour: '12h04',
+            content: '',
+            likes: 0,
+            comments: 0, 
+            id : 7
+        }
+           
+      }
+  }
 });
 
 
