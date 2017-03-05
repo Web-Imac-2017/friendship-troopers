@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `friendshipTroopers`.`RIDDLE` (
   `riddleTypeId` INT NOT NULL,
   PRIMARY KEY (`id`, `riddleTypeId`),
   UNIQUE INDEX `title_UNIQUE` (`title` ASC),
-  UNIQUE INDEX `description_UNIQUE` (`description` ASC),
+  --UNIQUE INDEX `description_UNIQUE` (`description` ASC),
   INDEX `fk_RIDDLE_RIDDLE_TYPE1_idx` (`riddleTypeId` ASC),
   CONSTRAINT `fk_RIDDLE_RIDDLE_TYPE1`
     FOREIGN KEY (`riddleTypeId`)

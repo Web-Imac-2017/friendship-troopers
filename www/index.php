@@ -1,25 +1,44 @@
 <?php
-session_start();
+
 if ($_GET['url'] === 'favicon.ico') {
     http_response_code(404);
     exit();
 }
-$_SESSION['test']='ok';
 define('ROOT', __DIR__);
 require_once ROOT.'/api/utils/Autoloader.php';
 \Utils\Autoloader::register();
 \Utils\Config::init();
-$router = new Utils\Router\Router($_GET['url']);
-$router->get('/',function(){echo 'homepage';});
-$router->get('/inscription',function(){echo 'inscription';});
-$router->post('/inscription','account#inscription');
-$router->post('/connexion','account#login');
-$router->get('/deconnexion','account#logout');
-$router->get('/validate','account#validateUser');
-$router->get('/profil/:username','account#getUser');
-$router->get('/profil/:username/validation','account#getUser');
-$router->get('/univers/:planet/post/:id','publication#view');
-$router->get('/univers/:planet/actualites' , 'planet#getPlanetFeed');
-$router->run();
+\Utils\Session::init();
 
-?>
+use \Utils\Router\Router;
+
+Router::init($_GET['url']);
+
+Router::post('/auth/signin','account#inscription');
+Router::post('/auth/login','account#login');
+Router::post('/auth/logout','account#logout');
+Router::get('/auth/validate','account#validateUser', 'auth.validate');
+Router::get('/users/me','account#getCurrentUser', 'users.me');
+
+Router::post('/planets/:planet/posts', 'publication#create', 'planets.posts.create');
+Router::get('/planets/:planet/posts', 'publication#list', 'planets.posts.list');
+Router::get('/planets/:planet/posts/:id','publication#view', 'planets.posts.view');
+Router::patch('/planets/:planet/posts/:id', 'publication#update', 'planets.posts.update');
+Router::delete('planets/:planet/posts/:id', 'publication#delete', 'planets.posts.delete');
+
+Router::get('/planets/:planet/news' , 'planet#getPlanetFeed');
+
+Router::post('/riddles', 'riddle#create', 'riddle.create');
+Router::get('/riddles', 'riddle#list', 'riddle.list');
+Router::patch('/riddles/:id', 'riddle#update', 'riddle.update');
+Router::delete('/riddles/:id', 'riddle#delete', 'riddle.delete');
+
+try {
+  Router::run();
+} catch (\Utils\RequestException $e) {
+  header('Content-Type: application/json; charset=utf-8');
+  http_response_code($e->getHttpCode());
+  echo json_encode([
+    'error' => $e->getMessage(),
+  ]);
+}

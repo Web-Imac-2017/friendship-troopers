@@ -7,7 +7,6 @@
 namespace Controllers;
 
 abstract class Controller {
-
   public function checkRequired ($required, $post) {
     // MAK SURE EACH REQUIRED FIELDS EXISTS IN $_POST
     return array_filter($required, function ($r) use ($post) {
@@ -38,5 +37,23 @@ abstract class Controller {
 
   public function filterCSRF () {
 
+  }
+
+  public function response($data, int $httpCode = 200, array $headers = []) {
+    header('Content-Type: application/json; charset=utf-8');
+    foreach ($headers as $k => $v) {
+      header("$k: $v");
+    }
+    http_response_code($httpCode);
+    if ($data !== null) {
+      echo json_encode($data);
+    }
+
+    return $this;
+  }
+
+  public function loadModel($name) {
+    $className = '\Models\\'.$name;
+    $this->$name = new $className();
   }
 }

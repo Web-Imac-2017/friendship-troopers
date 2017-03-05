@@ -4,53 +4,53 @@ namespace Utils\Router;
 
 class Router {
 
-    private $url;
-    private $routes = [];
-    private $namedRoutes = [];
+    static private $url;
+    static private $routes = [];
+    static private $namedRoutes = [];
 
-    public function __construct($url) {
-        $this->url = $url;
+    static public function init($url) {
+        self::$url = $url;
     }
 
-    public function get($path, $callable, $name = null) {
-        return $this->add($path, $callable, $name, 'GET');
+    static public function __callStatic($method, $args) {
+        if (!in_array($method, ['get', 'post', 'put', 'delete', 'patch', 'options', 'head'])) {
+            throw new \Exception('unknown method');
+        }
+        $args[2] = $args[2] ?? null;
+        $args[3] = strtoupper($method);
+
+        return call_user_func_array([get_called_class(), 'add'], $args);
     }
 
-    public function post($path, $callable, $name = null) {
-        return $this->add($path, $callable, $name, 'POST');
-    }
-
-    private function add($path, $callable, $name, $method) {
+    static private function add($path, $callable, $name, $method) {
         $route = new Route($path, $callable);
-        $this->routes[$method][] = $route;
+        self::$routes[$method][] = $route;
         if(is_string($callable) && $name === null) {
             $name = $callable;
         }
         if($name) {
-            $this->namedRoutes[$name] = $route;
+            self::$namedRoutes[$name] = $route;
         }
         return $route;
     }
 
-    public function run(){
-        if(!isset($this->routes[$_SERVER['REQUEST_METHOD']]) && !file_get_contents("php://input")) {
-            echo 'REQUEST_METHOD does not exist';
+    static public function run(){
+        if(!isset(self::$routes[$_SERVER['REQUEST_METHOD']]) && !file_get_contents("php://input")) {
+            throw new \Utils\RequestException('bad method', 405);
         }
-        foreach($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
-            if($route->match($this->url)) {
+        foreach(self::$routes[$_SERVER['REQUEST_METHOD']] as $route) {
+            if($route->match(self::$url)) {
                 return $route->call();
             }
         }
-        echo 'No matching routes !';
+        throw new \Utils\RequestException('not found', 404);
     }
 
-    public function url($name, $params = []) {
-        if(!isset($this->namedRoutes[$name])) {
-            echo 'erreur 404';
+    static public function url($name, $params = []) {
+        if(!isset(self::$namedRoutes[$name])) {
+            throw new \Utils\RequestException('not found', 404);
         }
-        return $this->namedRoutes[$name]->getUrl($params);
+        return '/' . self::$namedRoutes[$name]->getUrl($params);
     }
 
 }
-
-?>

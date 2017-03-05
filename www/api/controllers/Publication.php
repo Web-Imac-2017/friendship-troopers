@@ -8,17 +8,69 @@ namespace Controllers;
 
 class Publication extends Controller {
 
-  /**
-   * Return the fields of the article, by it's title
-   * @param  char*  $title  the article title
-   * @return int    ...     return value (-1 = error)
-   */
-  public function viewFirst ($title) {
-    $publicationModel = new \Models\Publication();
+  public function __construct() {
+    $this->loadModel('Publication');
+  }
 
-    $request = $this->publicationModel->findFirst([
-      'fields' => ['title', 'content', 'publishDate', 'userId'],
-      'conditions' => ['title' => $title]
+  public function list($planetId, $get) {
+    if (\Utils\Session::user('planetId') !== $planetId) {
+      throw new \Utils\RequestException('vous n\'appartenez pas à cette planète !', 403);
+    }
+
+    $offset = +($get['offset'] ?? 0);
+    $limit = +($get['limit'] ?? 10);
+    if ($limit > 10) {
+      throw new \Utils\RequestException('limit trop elevee', 416);
+    }
+
+    $where = [];
+    if (array_key_exists('user', $get)) {
+      $where['publication.userId'] = $get['user'];
+    }
+
+    if (array_key_exists('title', $get)) {
+      $where['publication.title'] = [
+        'cmp' => 'like',
+        'value' => '%'.$get['title'].'%',
+      ];
+    }
+
+    $request = $this->Publication->find([
+      'fields' => ['publication.id', 'publication.title', 'publication.content', 'publication.publishDate', 'publication.userId', 'publication.modified'],
+      'leftJoin' => [
+        [
+          'table' => 'user',
+  				'alias' => 'UserPlanet',
+  				'from' => 'id',
+  				'to' => 'userId',
+        ],
+        [
+          'table' => 'comment',
+  				'alias' => 'publicationComment',
+  				'from' => 'publicationId',
+  				'to' => 'id',
+        ],
+        [
+          'table' => 'stardust',
+  				'alias' => 'publicationStardust',
+  				'from' => 'publicationId',
+  				'to' => 'id',
+        ]
+      ],
+      'conditions' => $where,
+      'limit' => "$offset, $limit",
+      'orderBy' => [
+        'key' => 'publishDate',
+				'order' => 'DESC',
+      ],
+    ]);
+
+    $offset = $offset + $limit;
+    $listUrl = \Utils\Router\Router::url('planets.posts.list', [
+      'planet' => $planetId,
+    ]);
+    $this->response($request, 200, [
+      'Link' => "\"$listUrl?offset=$offset&limit=$limit\"; rel=\"next\", \"$listUrl?page=$offset&limit=$limit\"; rel=\"last\"",
     ]);
   }
 
@@ -29,70 +81,75 @@ class Publication extends Controller {
    * @param  int    $author   the author id (foreignKey)
    * @return int    ...       return value (-1 = error)
    */
-  public function create ($post) {
-    $required = ['title', 'content', 'userId'];
-    $missingFields = checkRequired($required, $post);
-    if (array_key_exist($required, $missingFields)) {
-      return false;
+  public function create ($planet, $post) {
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
     }
 
-    if ($post['title'] === NULL || $post['content'] === NULL || $post['author'] === NULL) {
-      if (!$post['title'])
-        echo 'aucun titre';
-      if (!$post['content'])
-        echo 'aucun contenu';
-      if (!$post['author'])
-        echo 'auteur invalide';
-      return -1;
+    if (\Utils\Session::user('roleId') === 3 && $post['publicationType']) {
+      throw new \Utils\RequestException('cannot update publicationType as user', 403);
     }
 
+    $userId = \Utils\Session::user('userId');
+    $required = ['content', 'title'];
+    if (!empty($this->checkRequired($required, $post))) {
+      throw new \Utils\RequestException('champ manquant', 400);
+    }
 
-    $publicationModel = new \Models\Publication();
+    try {
+      $id = $this->Publication->save($this->filterXSS([
+        'userId' => $userId,
+        'content' => $post['content'],
+        'publicationTypeId' => $post['publicationType'] ?? 3,
+        'title' => $post['title'],
+      ]));
+    } catch (\PDOException $e) {
+      $this->response([
+        'error' => $e->getMessage(),
+      ], 500);
+    }
 
-    $publicationModel->save(filterXSS([
-      'title' => $post['title'],
-      'content' => $post['content'],
-      'userId' => $post['author'],
-      'publicationTypeId' => $post['publicationType'],
-    ]));
+    $this->response([
+      'publicationId' => $id,
+    ], 201, [
+      'Location' => \Utils\Router\Router::url('planets.posts.view', [
+      'planet' => $planet,
+      'id' => $id,
+      ]),
+    ]);
   }
 
   /**
    * Modify the publication title and/or content
-   * @param  char*  $title    the modified title
-   * @param  text   $content  the modified content
+   * @param  POST   $post     post method from front
    * @return int    ...       return value (-1 = error)
    */
-  public function update () {
-    if (checkRequired(['title', 'content', 'userId', 'publicationId'])) {
-      $title = $post['title'];
-      $content = $post['content'];
-      $publicationId = $post['publicationId'];
-
-      if ($title === NULL || $content === NULL) {
-        echo 'aucun contenu';
-        return false;
-      }
-
-      $publicationModel = new \Models\Publication();
-
-      $oldPublication = $publicationModel->findFirst([
-        'fields' => ['title', 'content', 'id'],
-        'conditions' => ['id' => $publicationId],
-      ]);
-
-      if ($title == $oldPublication['title'] && $content == $oldPublication['content']) {
-        echo "aucunes modifications apportées";
-        return false;
-      }
-
-      $publicationModel->save(filterXSS([
-        'id' => $publicationId,
-        'title' => $title,
-        'content' => $content,
-        'modified' => +1,
-      ]));
+  public function update ($planetId, $id, $patches) {
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
     }
+
+    $userId = \Utils\Session::user('id');
+    $publiUserId = $this->Publication->findFirst([
+      'fields' => 'userId',
+      'conditions' => ['id' => $id],
+    ]);
+
+    if (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $userId != $publiUserId) {
+      throw new \Utils\RequestException('action reservee aux administeurs', 403);
+    }
+
+    $updates = ['id' => $id, 'modified' => true];
+    foreach ($patches as $patch) {
+      switch ($patch['op']) {
+        case 'replace':
+          $updates[explode('/',$patch['path'])[1]] = $patch['value'];
+          break;
+        default:
+          throw new \Utils\RequestException('bad op', 400);
+      }
+    }
+    $this->Publication->save($this->filterXSS($updates));
   }
 
   /**
@@ -100,30 +157,31 @@ class Publication extends Controller {
    * @param  int  $id   the article ID
    * @return int  ...   return value (-1 = error)
    */
-  public function delete ($post) {
-    // FIRST THINGS FIRST : DELETE ALL COMMENTS LINKED TO THE PUBLICATION
-    $commentModel = new \Models\comment();
-
-    if (!$commentModel->find([
-      'fields' => ['publicationId'],
-      'conditions' => ['publicationId' => $id],
-    ])) {
-      echo "aucun commentaires à supprimer";
+  public function delete ($planetId, $id, $delete) {
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
     }
 
-    $commentModel->delete(['publicationId' => $id]);
-
-    // THEN DELETE THE ARTICLE FROM THE DB
-    $publicationModel = new \Models\Publication();
-
-    if (!$publicationModel->findFirst([
-      'fields' => ['id'],
+    $userId = \Utils\Session::user('id');
+    $publiUserId = $this->Publication->findFirst([
+      'fields' => 'userId',
       'conditions' => ['id' => $id],
-    ])) {
-      echo "article introuvable. ID incorrect";
-      return -2;
+    ]);
+
+    if (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $userId != $publiUserId) {
+      throw new \Utils\RequestException('action reservee aux administeurs', 403);
     }
 
-    $publicationModel->delete($id);
+    $this->loadModel('Comment');
+
+    $this->Comment->delete([
+      'publicationId' => $id,
+    ]);
+
+    $this->Publication->delete([
+      'id' => $id,
+    ]);
+
+    $this->response(null, 204);
   }
 }
