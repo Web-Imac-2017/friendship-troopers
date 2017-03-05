@@ -124,27 +124,34 @@ class Publication extends Controller {
    * @param  POST   $post     post method from front
    * @return int    ...       return value (-1 = error)
    */
-  public function update ($planetId, $id, $post) {
+  public function update ($planetId, $id, $patches) {
     if (!\Utils\Session::isLoggedIn()) {
       throw new \Utils\RequestException('operation reservee aux membres', 401);
     }
 
-    if (\Utils\Session::user('roleId') === 3 && $post['publicationType']) {
-      throw new \Utils\RequestException('cannot update publicationType as user', 403);
+    $userId = \Utils\Session::user('id');
+    $publiUserId = $this->Publication->find([
+      'fields' => 'userId',
+      'conditions' => ['id' => $id],
+    ]);
+    var_dump($userId);
+    var_dump($publiUserId);
+
+    if (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $userId != $publiUserId) {
+      throw new \Utils\RequestException('action reservee aux administeurs', 403);
     }
 
-    $required = ['content', 'title'];
-    if (!empty(checkRequired($required, $post))) {
-     throw new \Utils\RequestException('champ mamquant', 400);
+    $updates = ['id' => $id, 'modified' => true];
+    foreach ($patches as $patch) {
+      switch ($patch['op']) {
+        case 'replace':
+          $updates[explode('/',$patch['path'])[1]] = $patch['value'];
+          break;
+        default:
+          throw new \Utils\RequestException('bad op', 400);
+      }
     }
-
-    // Checker si c'est bien le bon utilisateur qui modifie, ou un admin
-    $this->Publication->save(filterXSS([
-      'id' => $id,
-      'content' => $post['content'],
-      'title' => $post['title'],
-      'modified' => true,
-    ]));
+    $this->Publication->save($this->filterXSS($updates));
   }
 
   /**

@@ -23,15 +23,15 @@ Router::get('/users/me','account#getCurrentUser', 'users.me');
 Router::post('/planets/:planet/posts', 'publication#create', 'planets.posts.create');
 Router::get('/planets/:planet/posts', 'publication#list', 'planets.posts.list');
 Router::get('/planets/:planet/posts/:id','publication#view', 'planets.posts.view');
-Router::put('/planets/:planet/posts/:id', 'publication#update', 'planets.posts.update');
+Router::patch('/planets/:planet/posts/:id', 'publication#update', 'planets.posts.update');
 Router::delete('planets/:planet/posts/:id', 'publication#delete', 'planets.posts.delete');
 
 Router::get('/planets/:planet/news' , 'planet#getPlanetFeed');
 
 Router::post('/riddles', 'riddle#create', 'riddle.create');
-Router::get('/riddles/:', 'riddle#list', 'riddle.list');
-Router::put('/riddles', 'riddle#update', 'riddle.update');
-Router::delete('/riddles', 'riddle#delete', 'riddle.delete');
+Router::get('/riddles', 'riddle#list', 'riddle.list');
+Router::patch('/riddles/:id', 'riddle#update', 'riddle.update');
+Router::delete('/riddles/:id', 'riddle#delete', 'riddle.delete');
 
 try {
   Router::run();

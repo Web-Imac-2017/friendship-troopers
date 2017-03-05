@@ -27,17 +27,22 @@ class Route {
 		}
 		array_shift($matches);
 		$this->matches = $matches;
-		switch ($_SERVER['REQUEST_METHOD']) {
-			case 'POST':
-			$this->matches['method'] = $_POST;
-			break;
-			case 'GET':
-			$this->matches['method'] = $_GET;
-			break;
-			default:
-			$this->matches['method'] = '';
-			break;
+		if ($_SERVER['CONTENT_TYPE'] === 'application/json') {
+			$this->matches['method'] = json_decode(file_get_contents('php://input'), true);
+		} else {
+			switch ($_SERVER['REQUEST_METHOD']) {
+				case 'POST':
+					$this->matches['method'] = $_POST;
+					break;
+				case 'GET':
+					$this->matches['method'] = $_GET;
+					break;
+				default:
+					$this->matches['method'] = '';
+					break;
+			}
 		}
+
 		return true;
 	}
 
