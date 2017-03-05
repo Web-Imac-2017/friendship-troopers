@@ -65,9 +65,21 @@ class Route {
 		return $this; // On retourne tjrs l'objet pour enchainer les arguments
 	}
 
-  public function getUrl()
-  {
-    return $this->path;
-  }
+  	public function getUrl(array $params = []) {
+		$search = [];
+		$replace = [];
+
+	  	foreach ($params as $k => $v) {
+			$search[] = ":$k";
+			$replace[] = $v;
+		}
+
+		$url = str_replace($search, $replace, $this->path);
+		if (substr_count($url, ':') !== 0) {
+      		throw new \Exception('bad param count');
+    	}
+
+		return $url;
+  	}
 
 }

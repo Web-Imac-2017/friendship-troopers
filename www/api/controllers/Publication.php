@@ -8,15 +8,17 @@ namespace Controllers;
 
 class Publication extends Controller {
 
+  public function __construct() {
+    $this->loadModel('Publication');
+  }
+
   /**
    * Return the fields of the article, by it's title
    * @param  char*  $title  the article title
    * @return int    ...     return value (-1 = error)
    */
   public function viewFirst ($title) {
-    $publicationModel = new \Models\Publication();
-
-    $request = $this->publicationModel->findFirst([
+    $request = $this->Publication->findFirst([
       'fields' => ['title', 'content', 'publishDate', 'userId'],
       'conditions' => ['title' => $title]
     ]);
@@ -39,8 +41,6 @@ class Publication extends Controller {
       throw new \Utils\RequestException('vous n\'appartenez pas à cette planète !', 403);
     }*/
 
-    $publicationModel = new \Models\Publication();
-
     $offset = +($get['offset'] ?? 0);
     $limit = +($get['limit'] ?? 10);
     if ($limit > 10) {
@@ -48,18 +48,18 @@ class Publication extends Controller {
     }
 
     $where = [];
-    if ($get['user']) {
+    if (array_key_exists('user', $get)) {
       $where['publication.userId'] = $get['user'];
     }
 
-    if ($get['title']) {
+    if (array_key_exists('title', $get)) {
       $where['publication.title'] = [
         'cmp' => 'like',
         'value' => '%'.$get['title'].'%',
       ];
     }
 
-    $request = $publicationModel->find([
+    $request = $this->Publication->find([
       'fields' => ['publication.id', 'publication.title', 'publication.content', 'publication.publishDate', 'publication.userId', 'publication.modified'],
       'leftJoin' => [
         [
@@ -90,8 +90,11 @@ class Publication extends Controller {
     ]);
 
     $offset = $offset + $limit;
+    $listUrl = \Utils\Router\Router::url('planets.posts.list', [
+      'planet' => $planetId,
+    ]);
     $this->response($request, 200, [
-      'Link' => Router::url('planets.posts.list') . "\"?offset=$offset&per_page=$limit\"; rel=\"next\", \"https://api.github.com/user/repos?page=50&amp;per_page=100\"; rel=\"last\"",
+      'Link' => "\"$listUrl?offset=$offset&limit=$limit\"; rel=\"next\", \"$listUrl?page=$offset&limit=$limit\"; rel=\"last\"",
     ]);
   }
 
@@ -102,25 +105,36 @@ class Publication extends Controller {
    * @param  int    $author   the author id (foreignKey)
    * @return int    ...       return value (-1 = error)
    */
-  public function create ($post) {
-    $required = ['content', 'userId'];
-    $missingFields = checkRequired($required, $post);
-    if (array_key_exists($required, $missingFields)) {
-      return false;
-    }
-
-    if ($post['content'] === NULL || $post['author'] === NULL) {
+  public function create ($planet, $post) {
+    // Si utilisateur normal + publicationType => erreur 403
+    // Recuperer le userId dans la session
+    $userId = 6;
+    $required = ['content', 'title'];
+    if (!empty($this->checkRequired($required, $post))) {
       throw new \Utils\RequestException('champ manquant', 400);
     }
 
+    try {
+      $id = $this->Publication->save($this->filterXSS([
+        'userId' => $userId,
+        'content' => $post['content'],
+        'publicationTypeId' => $post['publicationType'] ?? 3,
+        'title' => $post['title'],
+      ]));
+    } catch (\PDOException $e) {
+      $this->response([
+        'error' => $e->getMessage(),
+      ], 500);
+    }
 
-    $publicationModel = new \Models\Publication();
-
-    $publicationModel->save(filterXSS([
-      'content' => $post['content'],
-      'userId' => $post['author'],
-      'publicationTypeId' => $post['publicationType'],
-    ]));
+    $this->response([
+      'publicationId' => $id,
+    ], 201, [
+      'Location' => \Utils\Router\Router::url('planets.posts.view', [
+        'planet' => $planet,
+        'id' => $id,
+      ]),
+    ]);
   }
 
   /**
@@ -129,27 +143,17 @@ class Publication extends Controller {
    * @return int    ...       return value (-1 = error)
    */
   public function update ($post) {
-    $required = ['content', 'userId', 'publicationId'];
-    $missingFields = checkRequired($required, $post);
-    if (array_key_exists($required, $missingFields)) {
-      return false;
+    // Si utilisateur normal + publicationType => erreur 403
+    // Recuperer le userId dans la session
+    $required = ['content', 'title'];
+    if (!empty(checkRequired($required, $post))) {
+     throw new \Utils\RequestException('champ mamquant', 400);
     }
 
-    if ($post['content'] === NULL || $post['userId'] === NULL || $post['publicationId'] === NULL) {
-      throw new \Utils\RequestException('champ mamquant', 400);
-    }
-
-    $publicationModel = new \Models\Publication();
-
-    $oldPublication = $publicationModel->findFirst([
-      'fields' => ['content', 'id'],
-      'conditions' => ['id' => $post['publicationId']],
-    ]);
-
-    $publicationModel->save(filterXSS([
-      'id' => $post['publicationId'],
+    $this->Publication->save(filterXSS([
       'content' => $post['content'],
-      'modified' => +1,
+      'title' => $post['title'],
+      'modified' => true,
     ]));
   }
 
@@ -158,29 +162,17 @@ class Publication extends Controller {
    * @param  int  $id   the article ID
    * @return int  ...   return value (-1 = error)
    */
-  public function delete ($post) {
-    // FIRST THINGS FIRST : DELETE ALL COMMENTS LINKED TO THE PUBLICATION
-    $commentModel = new \Models\comment();
+  public function delete ($planetId, $id, $post) {
+    $this->loadModel('Comment');
 
-    if (!$commentModel->find([
-      'fields' => ['publicationId'],
-      'conditions' => ['publicationId' => $id],
-    ])) {
-      throw new \Utils\RequestException("aucun commentaires à supprimer", 404);
-    }
+    $this->Comment->delete([
+      'publicationId' => $id,
+    ]);
 
-    $commentModel->delete(['publicationId' => $id]);
+    $this->Publication->delete([
+      'id' => $id,
+    ]);
 
-    // THEN DELETE THE ARTICLE FROM THE DB
-    $publicationModel = new \Models\Publication();
-
-    if (!$publicationModel->findFirst([
-      'fields' => ['id'],
-      'conditions' => ['id' => $id],
-    ])) {
-      throw new \Utils\RequestException("article introuvable. ID incorrect", 404);
-    }
-
-    $publicationModel->delete($id);
+    $this->response(null, 204);
   }
 }

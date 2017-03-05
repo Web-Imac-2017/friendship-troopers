@@ -39,14 +39,21 @@ abstract class Controller {
 
   }
 
-  public function response(array $data, int $httpCode = 200, array $headers = []) {
+  public function response($data, int $httpCode = 200, array $headers = []) {
     header('Content-Type: application/json; charset=utf-8');
     foreach ($headers as $k => $v) {
       header("$k: $v");
     }
     http_response_code($httpCode);
-    echo json_encode($data);
+    if ($data !== null) {
+      echo json_encode($data);
+    }
 
     return $this;
+  }
+
+  public function loadModel($name) {
+    $className = '\Models\\'.$name;
+    $this->$name = new $className();
   }
 }

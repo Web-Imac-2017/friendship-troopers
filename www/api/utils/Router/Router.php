@@ -12,12 +12,14 @@ class Router {
         self::$url = $url;
     }
 
-    static public function get($path, $callable, $name = null) {
-        return self::add($path, $callable, $name, 'GET');
-    }
+    static public function __callStatic($method, $args) {
+        if (!in_array($method, ['get', 'post', 'put', 'delete', 'patch', 'options', 'head'])) {
+            throw new \Exception('unknown method');
+        }
+        $args[2] = $args[2] ?? null;
+        $args[3] = strtoupper($method);
 
-    static public function post($path, $callable, $name = null) {
-        return self::add($path, $callable, $name, 'POST');
+        return call_user_func_array([get_called_class(), 'add'], $args);
     }
 
     static private function add($path, $callable, $name, $method) {
@@ -48,7 +50,7 @@ class Router {
         if(!isset(self::$namedRoutes[$name])) {
             throw new \Utils\RequestException('not found', 404);
         }
-        return self::$namedRoutes[$name]->getUrl($params);
+        return '/' . self::$namedRoutes[$name]->getUrl($params);
     }
 
 }

@@ -82,7 +82,7 @@ abstract class Model {
             }
 
 			// ADD THE CONDITIONS TO THE REQUEST, ONE OR MANY
-			if (isset($request['conditions'])) {
+			if (isset($request['conditions']) && !empty($request['conditions'])) {
 				$sql .= ' WHERE ';
 				if (!is_array($request['conditions'])) {
 					$sql .= $request['conditions'];
@@ -242,5 +242,7 @@ abstract class Model {
 		if($action == 'insert') {
 			$this->primaryKeyValue = $this->pdo->lastInsertId($this->primaryKey);
 		}
+
+    return $this->primaryKeyValue;
 	}
 }
