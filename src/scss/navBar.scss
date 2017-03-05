@@ -37,7 +37,16 @@ ul {
   background-color: $articles-background;
   color: $main-text;
   display : block;
+  
+  .nav-enigmes {
+    font-weight: bold;
+    color: $notifs;
+  }
 
+  .nav-home, .nav-enigmes {
+    margin: 0 1rem;
+  }
+  
   li {
 
     .nav-link, .nav-item, .navbar-brand  {
@@ -80,7 +89,6 @@ ul li {
   }
   .nav-icon {
     cursor: pointer;
-
   }
 
   .friends-icon, .messages-icon, .notifications-icon {
@@ -149,6 +157,7 @@ ul li {
 
 .nav input.nav-item {
   &:active, &:hover, &:focus, & {
+      color: $main-text;
       background: $input-background;
   }
   background-position: center;
@@ -177,6 +186,7 @@ ul li {
 .nav>li.navbar-left {
   display: inline-block;
 }
+
 
 
 @media screen and (max-width: 800px) {
@@ -212,13 +222,94 @@ ul li.navbar-right .nav-responsive{
   cursor: pointer;
 }
 
-.sub-menu {
+ul li.navbar-right .nav-icon .sub-menu {
+  width: 20rem;
+  background-color: $sub-menu-background;
+  padding: 0.8rem;
+  border: 0.2rem solid $sub-menu-border;
   position: absolute;
   top: 5rem;
-  ul {
-    background-color: $comments-background;
-    li {
-      padding: 0.5rem 0;
+  margin-left: -10.1rem;
+
+  p {
+    color : $sub-menu-border;
+    font-weight: bold;
+    text-align: center;
+
+    a {
+      color: $sub-menu-border;
+      text-decoration: none;
     }
+  }
+  
+  .separator {
+    margin: 0.3rem 0;
+    border-top: 0.1rem solid $sub-menu-border;
+  }
+
+  ul.list {
+    background-color: $sub-menu-list-item-background;
+    padding: 0.2rem;
+    p {
+      color: $main-text;
+      font-weight: normal;   
+      font-size: 90%;
+    }
+
+    li {
+      margin: 0.5rem;
+      background-color: $sub-menu-item-background;
+
+      ul.sub-menu-item {
+        background: none;
+        display: inline-block;
+
+        .space-opera {color : $planet-space-opera;}
+        .parallel {color : $planet-parallel;}
+        .robots {color : $planet-robots;}
+        .earth {color : $planet-earth;}
+        .alien {color : $planet-alien;}
+        .pseudo {font-family: $title-font;}
+
+
+        li {
+          padding: 0;
+          margin : 0;
+          display: inline-block;
+          vertical-align: middle;
+          img {
+            min-width: 4rem;
+            margin : 0.5rem 0;
+          }
+          p {
+            text-align: left;
+            font-weight: normal;
+          }
+          .date {
+              color: $grey;
+          }
+
+        }
+      }
+      .content {
+        font-size: 80%;           
+
+      }
+    }
+  }
+
+  .sub-menu-triangle {
+    z-index: 5;
+    background-color: $sub-menu-background;
+    border-left: 0.2rem solid $sub-menu-border;
+    border-top: 0.2rem solid $sub-menu-border;
+    position: absolute;
+    top: -1.1rem;
+    margin-left: 10.1rem;
+    width: 2rem;
+    height: 2rem;
+    transform: rotateZ(45deg);
+    -moz-transform: rotateZ(45deg);
+    -webkit-transform: rotateZ(45deg);
   }
 }
