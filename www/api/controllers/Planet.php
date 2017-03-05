@@ -12,18 +12,21 @@ class Planet extends Controller {
   const MODO = 2;
   const USER = 3;
   const BAN = 4;
+  const ME = 5;
 
   public function newPlanet($post){
+    $_SESSION['user']=[];
+    //$_SESSION['user']['id']= ME;
     // verifier que l'user est connecté
-    if(!$_SESSION['user']){
+    if(!array_key_exists('user',$_SESSION)){
       //renvoyer une erreur
       echo "user not logged in";
       return 0;
     }
 
     // vérifier que c'est un ADMIN
-
-    $_SESSION['user']['roleId'] = self::USER;
+    //$_SESSION['user']=[];
+    $_SESSION['user']['roleId'] = self::ADMIN;
 
     $role = $_SESSION['user']['roleId'];
     if($role != self::ADMIN){
@@ -52,7 +55,6 @@ class Planet extends Controller {
            ];
     //nettoyer data (éviter faille)
     $this->filterXSS($data);
-    //$role = $_SESSION['user']['roleId'];
     $planet = new \Models\Planet();
     $request = ['fields' => ['id', 'name']];
     $reponse = $planet->save($request);
