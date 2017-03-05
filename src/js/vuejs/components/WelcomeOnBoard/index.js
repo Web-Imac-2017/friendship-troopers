@@ -52,6 +52,7 @@ const WelcomeOnBoard = Vue.extend({
   submit : function(){
     welcomeData.planetUser = this.attributePlanet()
     this.styleObject.borderColor = welcomeData.planetInfo[welcomeData.planetUser].color;
+    this.styleObject2.borderLeftColor = welcomeData.planetInfo[welcomeData.planetUser].color;
     
   },
   backToQuestion : function(index){
@@ -69,6 +70,9 @@ const WelcomeOnBoard = Vue.extend({
         welcomeData,
         styleObject : {
           borderColor : ''
+        }, 
+        styleObject2 : {
+          borderLeftColor : ''
         }
     }
   }

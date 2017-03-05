@@ -46,18 +46,19 @@
 </div>
 <div class="container-fluid welcome-on-board border-planet" v-bind:style="styleObject" v-else>
   <div class="container-transparent">
-    <div class="row no-gutters">
+    <div class="row no-gutters vertical-align">
       <div class="col-sm-6">
         <img :src="welcomeData.planetInfo[welcomeData.planetUser].path" alt="planet" class="center planet">
         <h1> {{ welcomeData.planetInfo[welcomeData.planetUser].name }}</h1>
       </div>
-      <div class="col-sm-6">
-        <p > {{ welcomeData.planetInfo[welcomeData.planetUser].info }} </p>
-        <router-link to="/actualites">Explorer! </router-link>
+      <div class="col-sm-6 border-left"  v-bind:style="styleObject2">
+        <div class="row no-gutters">
+        <p > {{ welcomeData.planetInfo[welcomeData.planetUser].info }} </p> </div>
+      <div class="row "> 
+        <router-link to="/actualites" class="col-sm-3 col-sm-offset-9">Explorer! </router-link>
       </div>
     </div>
   </div>
 </div>
-<pre> {{ welcomeData.answers }} </pre>
 </div>
 
