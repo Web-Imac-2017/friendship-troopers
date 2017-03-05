@@ -1,15 +1,37 @@
 'use strict';
 
 import Vue from 'vue/dist/vue';
-import {apiRoot} from '../../../../../config.js'
+// import {apiRoot} from '../../../../../config.js'
 
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
 
 
 const Post = Vue.extend({
+  props : {
+    post:Object
+  },
   template,
-  created () {
+   methods : {
+    like : function(){
+      this.post.likes += 1;
+      //TODO dans requete ajax, post like, id post + user name (get from session)
+    },
+    publishNewComment : function() {
+      console.log(this.newComment);
+    }
+  },
+
+  data () {
+    return {
+      newComment : '',
+      planetData: ["#3eb6df", "#ef4646", "#767fe2", "#72b51a", "#f9a519" ]
+
+       
+
+    }
+  }
+  // created () {
    /* this.$http.get(apiRoot() +'/univers/Terre/actualites').then(
         (response) => {
           console.log("ok "+response.body);
@@ -19,42 +41,7 @@ const Post = Vue.extend({
           console.log("fail " + JSON.stringify(response.data));
         }
       )*/
-  },
-  data () {
-      return {
-        post:{
-          user: 'Lucky',
-          avatar : "addresse de l'avatar",
-          date: '20 fev',
-          hour: '12h04',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut tortor eu ipsum laoreet faucibus. Etiam mattis eros id leo maximus blandit. Proin id massa in risus gravida suscipit non eu arcu. Aenean auctor lacus risus, porttitor sodales odio vehicula eu. Curabitur luctus ut ligula a iaculis. Aliquam erat volutpat. Pellentesque magna nibh, aliquam sit amet consectetur eget, auctor quis neque.',
-          likes: '50',
-          comments: '2'
-        }, 
-        picture:false,
-        actualites: [], 
-        user : {
-          userAvatar : '../assets/logo.png',
-          username : 'LuckyPon', 
-          userBadge : 'Baroudeuse de l\'espace', 
-          userPlanet : {
-            path : '../assets/Avatar1.svg',
-            name : 'Planete X785-E'
-          }, 
-          lastFriends : [ {
-            avatar : '../assets/Avatar1.svg',
-            name : 'Spockdu77'
-          }, {
-            avatar : '../assets/Avatar1.svg',
-            name : 'MartyDuPassé'
-          }, {
-            avatar : '../assets/Avatar1.svg',
-            name : 'JulieDuFutur'
-          }
-          ]
-        }
-      }
-    }
+  // }
 });
 
 

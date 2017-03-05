@@ -5,15 +5,15 @@
         <menu-tools></menu-tools>
       </aside>
       <section class="article col-sm-8">
-        <create-post :post="post"></create-post>
-        <post></post>
-
+        <create-post></create-post>
+        <page-nav></page-nav>
+        <div v-for="post in posts">
+        <post :post="post"></post>
+        <div>
       </section>
       <div class="col-sm-2">
          <lateral-menu-right></lateral-menu-right>
       </div>
-      <pre>{{post}}</pre>
-
 
     </div>
   </div>

@@ -101,7 +101,6 @@
 
 }
 
-
 @mixin flexbox() {
   display: -webkit-box;
   display: -moz-box;
@@ -343,4 +342,21 @@ input[type="radio"] {
 
 .border-planet {
   border: 10px solid $planet-earth;
+}
+
+.small-circle {
+   -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    border-radius:8px;
+    border:2px solid $comments-background;
+    width: 15px;
+    height: 15px;
+    background-color: $transparent-background;
+    margin: 0 0;
+}
+
+.pseudo-button {
+  cursor: pointer;
+  padding: 0;
+  font-size: 1.5rem;
 }

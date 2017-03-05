@@ -1,51 +1,22 @@
-<div class="post">
-      <div class="row"> 
-        <div class="col-sm-1">
-            <div class="avatar">
-            <img src="www/assets/images/Avatar1.svg" alt="default avatar" class="avatar">
-            </div>
+    <div class="post">
+      <div class="row">
+        <div class="col-md-1 col-lg-1 avatar">
+            <img src="http://placehold.it/150x150" alt="default avatar" class="avatar">
         </div>
-        <div class="col-sm-11">
-          <div class="row"> 
-            <div class="col-sm-11 left">
-              <h1 class="pseudo">{{ post.user }}</h1>
-              <small class="date"> {{ post.date + " à " + post.hour }}</small>
-            </div>
-            <div class="col-sm-1 right">
-              <img src="http://placehold.it/20x5" alt="Options">
-            </div>
-          </div>
-          <div class="row"> 
-            <div class="col-sm-12">
-              <p class="content-block"> {{ post.content }} </p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-10 left">
-              <button>Voir plus</button>
-            </div>
-            <div class="col-sm-1 connect-buttons contain-img">
-              <img class="like-icon" src="http://placehold.it/100x100" alt="likes">
-              <span> {{ post.likes }} </span>
-            </div>
-            <div class="col-sm-1 connect-buttons contain-img">
-              <img src="http://placehold.it/100x100" alt="comments"> 
-              <span> {{ post.comments }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row comment"> 
-        <div class="col-sm-1">
-            <div class="avatar">
-              <img src="www/assets/images/Avatar1.svg" alt="default avatar" class="avatar">
-            </div>
-        </div>
-        <div class="col-sm-11">
+        <div class="col-md-11 col-lg-11">
           <form class="form-post" v-on:submit.prevent="save">
-            <textarea rows="3" type="text" placeholder="Votre commentaire"></textarea>
-            <button>Publier</button>
+            <textarea rows="3" type="text" placeholder="Publier quelque chose" v-model="post.content" ></textarea>
           </form>
         </div>
       </div>
+      <div class="row button-field">
+        <div class="col-md-1 col-lg-1"></div>
+        <div class="col-sm-5 text-left">
+          <button v-on:click="uploadPicture"> <img src="http://placehold.it/55x15" alt="Upload Picture" class="avatar"> </button>
+        </div>
+        <div class="col-sm-6 text-right">
+          <button v-on:click="publish">Publier</button>
+        </div> 
+      </div>
+      <pre> {{post.content}} </pre>
     </div>
