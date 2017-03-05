@@ -24,12 +24,12 @@ class Session {
 	}
 
 	static public function isLoggedIn() {
-		return !!self::user('role');
+		return !!self::user('roleId');
 	}
 
 	static public function user($key) {
-		if (self::read('User') && isset(self::read('User')->$key)) {
-			return self::read('User')->$key;
+		if (self::read('User') && isset(self::read('User')[$key])) {
+			return self::read('User')[$key];
 		}
 
 		return null;

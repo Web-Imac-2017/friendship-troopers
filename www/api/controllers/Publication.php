@@ -12,34 +12,10 @@ class Publication extends Controller {
     $this->loadModel('Publication');
   }
 
-  /**
-   * Return the fields of the article, by it's title
-   * @param  char*  $title  the article title
-   * @return int    ...     return value (-1 = error)
-   */
-  public function viewFirst ($title) {
-    $request = $this->Publication->findFirst([
-      'fields' => ['title', 'content', 'publishDate', 'userId'],
-      'conditions' => ['title' => $title]
-    ]);
-  }
-
   public function list($planetId, $get) {
-    $planetModel = new \Models\Planet();
-
-    /*$userPlanet = $_SESSION['user']['planet'];
-    $required = ['planetId'];
-    $missingFields = $this->checkRequired($required, $_SESSION);
-    $request = $planetModel->findFirst([
-      'fields' => ['name'],
-      'conditions' => ['name' => $userPlanet],
-    ]);
-
-    if (array_key_exists('planetId', $missingFields)) {
-      throw new \Utils\RequestException('planète introuvable', 404);
-    } else if ($request['name'] != $get) {
+    if (\Utils\Session::user('planetId') !== $planetId) {
       throw new \Utils\RequestException('vous n\'appartenez pas à cette planète !', 403);
-    }*/
+    }
 
     $offset = +($get['offset'] ?? 0);
     $limit = +($get['limit'] ?? 10);
@@ -106,9 +82,15 @@ class Publication extends Controller {
    * @return int    ...       return value (-1 = error)
    */
   public function create ($planet, $post) {
-    // Si utilisateur normal + publicationType => erreur 403
-    // Recuperer le userId dans la session
-    $userId = 6;
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
+    }
+
+    if (\Utils\Session::user('roleId') === 3 && $post['publicationType']) {
+      throw new \Utils\RequestException('cannot update publicationType as user', 403);
+    }
+
+    $userId = \Utils\Session::user('userId');
     $required = ['content', 'title'];
     if (!empty($this->checkRequired($required, $post))) {
       throw new \Utils\RequestException('champ manquant', 400);
@@ -142,15 +124,23 @@ class Publication extends Controller {
    * @param  POST   $post     post method from front
    * @return int    ...       return value (-1 = error)
    */
-  public function update ($post) {
-    // Si utilisateur normal + publicationType => erreur 403
-    // Recuperer le userId dans la session
+  public function update ($planetId, $id, $post) {
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
+    }
+
+    if (\Utils\Session::user('roleId') === 3 && $post['publicationType']) {
+      throw new \Utils\RequestException('cannot update publicationType as user', 403);
+    }
+
     $required = ['content', 'title'];
     if (!empty(checkRequired($required, $post))) {
      throw new \Utils\RequestException('champ mamquant', 400);
     }
 
+    // Checker si c'est bien le bon utilisateur qui modifie, ou un admin
     $this->Publication->save(filterXSS([
+      'id' => $id,
       'content' => $post['content'],
       'title' => $post['title'],
       'modified' => true,
@@ -163,6 +153,12 @@ class Publication extends Controller {
    * @return int  ...   return value (-1 = error)
    */
   public function delete ($planetId, $id, $post) {
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
+    }
+
+    // verifier que c'est le bon utilisateur ou un admin
+
     $this->loadModel('Comment');
 
     $this->Comment->delete([
