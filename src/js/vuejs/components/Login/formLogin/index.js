@@ -1,6 +1,7 @@
 'use strict';
  
 import Vue from 'vue/dist/vue';
+import {apiRoot} from '../../../../../../config.js';
 
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
@@ -17,27 +18,32 @@ const formLogin = Vue.extend({
 		}
 	},
 	methods:{
-		checkLogin(index){
-			return ((this.userLogin.mail == this.$parent.loginTab[index].mail) && (this.userLogin.password == this.$parent.loginTab[index].password)) ? true : false;
-		},
 		connect(){
 			this.$emit('input', this.userLogin);
+
 			if(this.userLogin.mail != "" | this.userLogin.password != ""){
-				var i = 0;
-				for(var i; i < this.$parent.loginTab.length; i++){
-					if(this.checkLogin(i)){
-						this.cantSubmit=false;
-						console.log("connexion faite !");
-						this.$router.push("/actualites")
-					}
-				}
-				this.cantSubmit=true;
-			}else{
-				this.cantSubmit=true;
-			}
-			
+		       	this.$http.post(apiRoot() + 'auth/login', 
+		       	{
+		       		'mail' : this.userLogin.mail, 
+		       		'password': this.userLogin.password 
+		       	},{
+		        	emulateJSON: true
+		        }).then(
+		          (response) => {
+		            console.log("success !");
+		            this.cantSubmit=false;
+		            this.$router.push("/actualites")
+		          },
+		          (response) => {
+		            console.log("fail !")
+		            this.cantSubmit=true;
+		          }
+		        )
+		    }
+
+    	}
 	      		
-		}
+		
 	}
 });
 

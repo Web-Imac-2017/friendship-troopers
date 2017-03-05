@@ -1,13 +1,14 @@
 'use strict';
 import Vue from 'vue/dist/vue';
+import {apiRoot} from '../../../../../config.js';
 
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
 
 
 const LateralMenuLeft = Vue.extend({
-  template,
-   data () {
+    template,
+    data () {
       return {
         user : {
           userAvatar : '../../../www/assets/images/Avatar1.svg',
@@ -27,8 +28,25 @@ const LateralMenuLeft = Vue.extend({
             avatar : '../../../www/assets/images/Avatar1.svg',
             name : 'JulieDuFutur'
           }
-          ]
+          ] 
         }
+      }
+    },
+    methods:{
+      deconnect(){
+        this.$http.post(apiRoot() + 'auth/logout', {
+          emulateJSON: true
+        }).then(
+          (response) => {
+            console.log("success deconnexion !");
+            this.$router.push("/")
+          },
+          (response) => {
+            console.log("fail deconnexion !")
+          }
+        )
+       
+
       }
     }
 });

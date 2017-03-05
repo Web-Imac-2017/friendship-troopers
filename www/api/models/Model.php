@@ -138,7 +138,6 @@ abstract class Model {
 			$prepareRequest = $this->pdo->prepare($sql);
 			$prepareRequest->execute();
 
-			var_dump($sql);
 			return ($prepareRequest->fetchAll(\PDO::FETCH_ASSOC));
 		}
 	}

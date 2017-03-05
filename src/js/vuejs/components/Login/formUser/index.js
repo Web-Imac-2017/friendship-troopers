@@ -85,14 +85,38 @@ const formUser = Vue.extend({
 	    	else
 	    		this.falseDate = false;
 	    },
-	    save(){
+		save(){
 			this.$emit('input', this.userSignIn);
 			if(this.checkInputs()){
+				/*this.$http.post(apiRoot() + 'auth/signin', 
+		       	{
+		       		'mail' : this.userLogin.mail, 
+		       		'password': this.userLogin.password 
+		       	},{
+		        	emulateJSON: true
+		        }).then(
+		          (response) => {
+		            console.log("success !");
+		            this.cantSubmit=false;
+		            this.$router.push("/actualites")
+		          },
+		          (response) => {
+		            console.log("fail !")
+		            this.cantSubmit=true;
+		          }
+		        )*/
+
+
+				
 				console.log("inscription faite !");
 				this.$router.push("/inscription/welcome-on-board");
 			}
+
 			
-		}
+		       	
+		    
+
+    	}
 	}
 });
 
