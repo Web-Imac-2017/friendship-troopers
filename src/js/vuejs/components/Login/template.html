@@ -21,8 +21,8 @@
 
 				<form-user v-model="userSignIn" v-if="signIn">
 
-					<p slot="errorUsername">{{userSignIn.username}} est déjà utilisé !</p>
-					<p slot="errorMail">L'adresse mail {{userSignIn.mail}} est déjà utilisée !</p>
+					<p slot="errorUsername">Ce pseudo est déjà utilisé !</p>
+					<p slot="errorMail">Cette adresse mail est déjà utilisée !</p>
 					<p slot="errorMailValid">L'adresse mail n'est pas valide, veuillez vérifier svp !</p>
 					<p slot="errorPassword">Les deux mots de passe ne correspondent pas !</p>
 					<p slot="errorLowPassword">Le mot de passe n'est pas suffisament compliqué! Il doit comporter 1 chiffre, 1 lettre et au minimum 8 caractères.</p>
@@ -44,7 +44,6 @@
 
 				</form-login>
 
-				<pre>{{userLogin}}</pre>
 				<pre>{{userSignIn}}</pre>
 
 			</div>
