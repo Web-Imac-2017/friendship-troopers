@@ -26,7 +26,7 @@ import Market from '../components/Market'
 import About from '../components/About'
 import FAQ from '../components/FAQ'
 import Legals from '../components/Legals'
-
+/*
 import AdminCreatePost from '../components/admin/CreatePost.vue'
 import AdminCreateEvent from '../components/admin/CreateEvent.vue'
 import AdminAddAdmin from '../components/admin/AddAdmin.vue'
@@ -35,14 +35,14 @@ import AdminDelateAccount from '../components/admin/DelateAccount.vue'
 import AddBadge from '../components/admin/AddBadge.vue'
 import AddAvatar from '../components/admin/AddAvatar.vue'
 import AddEmoji from '../components/admin/AddEmoji.vue'
-import AddEnigme from '../components/admin/AddEnigme.vue'
+import AddEnigme from '../components/admin/AddEnigme.vue'*/
 
 import Error404 from '../components/Error404'
 
 // ==================== Router registration ====================
 const router = new VueRouter({
   mode: 'history',
-  base  : 'friendship-troopers/www',
+  base  : '',
   routes: [
     { 
       name : 'Login',
@@ -135,7 +135,7 @@ const router = new VueRouter({
       name : 'Error404',
       path: '/erreur404', 
       component : Error404
-  },{ 
+  }/*,{ 
       name : 'AdminCreatePost',
       path: '/admin/creer-post', 
       component : AdminCreatePost
@@ -171,7 +171,7 @@ const router = new VueRouter({
       name : 'AddEnigme',
       path: '/admin/ajout-enigme', 
       component : AddEnigme
-  },{ 
+  }*/,{ 
     	path: '*', 
     	redirect: '/erreur404'
 	}

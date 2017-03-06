@@ -1,6 +1,7 @@
 'use strict';
 
 import Vue from 'vue/dist/vue';
+import {apiRoot} from '../../../../../config.js'
 
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
@@ -87,7 +88,20 @@ const Feed = Vue.extend({
           }
           ]
         }
-  	}
+  	},
+    created(){
+      
+            this.$http.get(apiRoot() + '/planets/1/posts', {
+              emulateJSON: true
+            }).then(
+              (response) => {
+                console.log("success !" + response.data);
+              },
+              (response) => {
+                console.log("fail !" + response.data)
+              }
+            )
+        }
 
 });
 

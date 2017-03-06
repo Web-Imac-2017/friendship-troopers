@@ -1,0 +1,1 @@
+# Ne pas oublier de mettre le contenu du dossier www dans le dossier www de wamp (directement). Le dossier friendship-troopers doit être à côté

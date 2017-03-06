@@ -18,8 +18,8 @@
   		</div>
   		<div class="col-sm-8">
   			<div class="tabs">
-  				<div v-bind:class="{ activeTab: signIn }" v-on:click="inscription"><h1>Inscription</h1></div>
-  				<div v-bind:class="{ activeTab: !signIn }" v-on:click="connexion"><h1>Connexion</h1></div>
+  				<div class="pseudo-button" v-bind:class="{ activeTab: signIn }" v-on:click="inscription"><h1>Inscription</h1></div>
+  				<div class="pseudo-button" v-bind:class="{ activeTab: !signIn }" v-on:click="connexion"><h1>Connexion</h1></div>
   			</div>
 
 			<form-user v-model="userSignIn" v-if="signIn">
