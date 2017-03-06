@@ -14,6 +14,9 @@ import Post from '../Post/index.js'
 import optionBar from './optionBar/index.js'
 import statistics from './Statistics/index.js'
 
+import NavBar from '../NavBar/index.js';
+
+
 const User = Vue.extend({
   template,
    components: {
@@ -22,7 +25,8 @@ const User = Vue.extend({
     'lateral-menu-left' : LateralMenuLeft,
     'lateral-menu-right' : LateralMenuRight, 
     'menu-tools' : MenuTools, 
-    'post' : Post },
+    'post' : Post,
+    'navbar' : NavBar },
    methods: {
     profil: function(){
       if (this.myself)
