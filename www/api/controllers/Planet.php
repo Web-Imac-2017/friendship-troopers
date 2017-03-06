@@ -33,7 +33,6 @@ class Planet extends Controller {
   }
 }
 
-
   public function newPlanet($post){
     $_SESSION['user']=[];
     //$_SESSION['user']['id']= ME;
@@ -105,3 +104,5 @@ class Planet extends Controller {
     //delete();
   }
 }
+}
+?>
