@@ -80,4 +80,28 @@ class Planet extends Controller {
     $reponse = $planet->save($request);
     var_dump($reponse);
   }
+
+  public function deletePlanet($post){
+    $_SESSION['user']=[];
+    if(!array_key_exists('user',$_SESSION)){
+      echo "user not logged in";
+      return 0;
+    }
+
+    $_SESSION['user']['roleId'] = self::USER;
+//var dump pour tester
+//pas echo
+//throw new
+    if (!) {
+
+    }
+
+    $this->filterXSS([
+      'name' => $post['name'],
+      'id' => $post['id']
+   ]);
+    //recuperer la planete à supprimer ?
+    //Supprimer la planete ?
+    //delete();
+  }
 }
