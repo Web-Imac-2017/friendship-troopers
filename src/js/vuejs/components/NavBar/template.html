@@ -4,7 +4,7 @@
         <a class="navbar-brand" href="/"> <!-- {{$store.state.appTitle}} {{$store.state.appVersion}} -->Friendship<br/>Troopers</a>
         <menu-separator></menu-separator>
         <router-link to="/actualites" class="nav-item nav-link nav-home"> Accueil </router-link>
-        <router-link to="/utilisateur/enigmes" class="nav-item nav-link"> <b>Énigmes</b> </router-link>
+        <router-link to="/utilisateur/enigmes" class="nav-item nav-link nav-enigmes"> Énigmes </router-link>
       </li>
 
       <li class="navbar-right">
@@ -13,82 +13,69 @@
         
         <menu-separator></menu-separator>
         
-        <div class="nav-item nav-icon " v-on:click="showSubMenu(1)">
-          <div class="friends-icon">
-          <p v-if="friends.length > 99" class="notif">99+</p> 
-          <p v-else-if="friends.length > 0" class="notif"> {{ friends.length }} </p> 
-        </div>
-          <div v-if="subMenu == 1" class="sub-menu"> 
-            <ul class="menu-friends">
-            <p v-if = "friends.length > 0">
-              Vous avez des demandes d'amis ! <br/>
-            </p>
-            <p v-else>
-              Vous n'avez pas de nouvelles demandes d'ami... <br/>
-            </p>
-
-              <li v-if = "friends.length > 0">
-                {{friends[0].pseudo}} vous a invité le {{friends[0].date}}
-              </li>
-              <li v-if = "friends.length > 1">
-                {{friends[1].pseudo}} vous a invité le {{friends[1].date}}
-              </li>
-
-            </ul>
+        <div class="nav-item nav-icon">
+          <div class="friends-icon" v-on:click="showSubMenu(1)">
+            <p v-if="friends.length > 99" class="notif">99+</p> 
+            <p v-else-if="friends.length > 0" class="notif"> {{ friends.length }} </p> 
           </div>
 
+          <div v-if="subMenu == 1" class="sub-menu menu-friends"> 
+            <div class ="sub-menu-triangle"></div>
+            <p v-if = "friends.length > 0"> Mes demandes d'amis</p>
+            <p v-else>Pas de nouvelles demandes d'ami</p>
+
+            <div class="separator"> </div>
+            <ul class="list" v-if = "friends.length > 0">
+              <friend-item v-for="item in friends" v-bind:friend="item"></friend-item>
+            </ul>
+            <div  v-if = "friends.length > 0" class="separator"></div>
+
+            <p> <a href ="/utilisateur/amis"> Voir tous les amis</a></p>
+          </div>
         </div>
 
-
-        <div class="nav-item nav-icon" v-on:click="showSubMenu(2)"> 
-          <div class="messages-icon">
+        <div class="nav-item nav-icon">
+          <div class="messages-icon" v-on:click="showSubMenu(2)">
             <p v-if="messages.length > 99" class="notif">99+</p>
             <p v-else-if="messages.length > 0" class="notif"> {{ messages.length }}</p>
           </div>
 
-          <div v-if="subMenu == 2" class="sub-menu"> 
-            <ul class="menu-messages">
+          <div v-if="subMenu == 2" class="sub-menu menu-messages"> 
+            <div class ="sub-menu-triangle"></div>
+            <p v-if = "messages.length > 0">Mes messages</p>
+            <p v-else>Pas de nouveaux messages</p>
 
-              <p v-if = "messages.length > 0">
-               Vous avez des nouveaux messages ! <br/>
-              </p>
-              <p v-else>
-                Vous n'avez pas de nouveaux messages... <br/>
-              </p>
-
-              <li v-if = "messages.length > 0">
-                {{messages[0].pseudo}}, le {{messages[0].date}}
-              </li>
-              <li v-if = "messages.length > 1">
-                {{messages[1].pseudo}}, le {{messages[1].date}}
-              </li>
+            <div class="separator"> </div>
+            <ul class="list" v-if = "messages.length > 0">
+              <message-item v-for="item in messages" v-bind:message="item"></message-item>
             </ul>
-          </div> 
+            <div  v-if = "messages.length > 0" class="separator"></div>
 
+            <p> <a href ="/messagerie">Accéder à ma messagerie</a></p>
+
+          </div> 
         </div>
         
 
-        <div class="nav-item nav-icon" v-on:click="showSubMenu(3)">
-          <div class="notifications-icon">
-              <p v-if="notifications.length > 99" class="notif">99+</p> 
-              <p v-else-if="notifications.length > 0" class="notif"> {{ notifications.length }}</p> 
-         </div>
-
-          <div v-if="subMenu == 3" class="sub-menu"> 
-            <ul class="menu-notifications">
-
-              <p v-if = "notifications.length == 0">
-               Vous n'avez pas nouvelles notifications... <br/>
-              </p>
-
-              <li v-if = "notifications.length > 0">
-                {{notifications[0].pseudo}} a {{notifications[0].type}} votre post {{notifications[0].post}}
-              </li>
-              <li v-if = "notifications.length > 1">
-                {{notifications[1].pseudo}} a {{notifications[1].type}} votre post {{notifications[1].post}}
-              </li>
-            </ul>
+        <div class="nav-item nav-icon">
+          <div class="notifications-icon" v-on:click="showSubMenu(3)">
+            <p v-if="notifications.length > 99" class="notif">99+</p> 
+            <p v-else-if="notifications.length > 0" class="notif"> {{ notifications.length }}</p> 
           </div>
+
+          <div v-if="subMenu == 3" class="sub-menu menu-notifications"> 
+            <div class ="sub-menu-triangle"></div>
+
+            <p v-if = "notifications.length > 0">Tableau de bord</p>
+            <p v-else>Rien de nouveau à signaler</p>
+
+            <div class="separator"> </div>
+            <ul class="list" v-if = "notifications.length > 0">
+              <notification-item v-for="item in notifications" v-bind:notification="item"></notification-item>
+            </ul>
+            <div  v-if = "notifications.length > 0" class="separator"></div>
+
+          </div> 
      
         </div>
 
