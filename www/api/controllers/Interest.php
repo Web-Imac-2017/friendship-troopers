@@ -1,7 +1,7 @@
 <?php
 /**
 * ////////////////////////////
-* @var ApplicationInterest
+* @var InterestController
 * ////////////////////////////
 */
 
