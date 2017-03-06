@@ -35,13 +35,13 @@ class Planet extends Controller {
       throw new \Utils\RequestException('champs vides', 404);
     }
 
-    $reponse = $this->Planet->save($this->filterXSS([
+    $response = $this->Planet->save($this->filterXSS([
       'name' => $post['name'],
       'description' => $post['description'] ?? 'none',
       'imagePath' => $post['imagePath'],
       'history' => $post['history'] ?? 'none',
     ]));
-    var_dump($reponse);
+    var_dump($response);
     $this->response(null, 204);
   }
 
