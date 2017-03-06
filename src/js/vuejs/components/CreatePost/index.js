@@ -21,7 +21,7 @@ const CreatePost = Vue.extend({
       return {
         post : {
            user: 'Lucky',
-            avatar : "../assets/images/Avatar1.svg",
+            avatar : "../friendship-troopers/www/assets/images/Avatar1.svg",
             date: '20 fev',
             hour: '12h04',
             content: '',
