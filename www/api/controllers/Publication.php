@@ -28,15 +28,15 @@ class Publication extends Controller {
       $where['publication.userId'] = $get['user'];
     }
 
-    if (array_key_exists('title', $get)) {
+    /*if (array_key_exists('title', $get)) {
       $where['publication.title'] = [
         'cmp' => 'like',
         'value' => '%'.$get['title'].'%',
       ];
-    }
+    }*/
 
     $request = $this->Publication->find([
-      'fields' => ['publication.id', 'publication.title', 'publication.content', 'publication.publishDate', 'publication.userId', 'publication.modified'],
+      'fields' => ['publication.id', 'publication.content', 'publication.publishDate', 'publication.userId', 'publication.modified'],
       'leftJoin' => [
         [
           'table' => 'user',
@@ -91,7 +91,7 @@ class Publication extends Controller {
     }
 
     $userId = \Utils\Session::user('userId');
-    $required = ['content', 'title'];
+    $required = ['content'];
     if (!empty($this->checkRequired($required, $post))) {
       throw new \Utils\RequestException('champ manquant', 400);
     }
@@ -101,7 +101,6 @@ class Publication extends Controller {
         'userId' => $userId,
         'content' => $post['content'],
         'publicationTypeId' => $post['publicationType'] ?? 3,
-        'title' => $post['title'],
       ]));
     } catch (\PDOException $e) {
       $this->response([
