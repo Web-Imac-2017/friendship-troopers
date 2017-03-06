@@ -33,6 +33,9 @@ Router::get('/riddles', 'riddle#list', 'riddle.list');
 Router::patch('/riddles/:id', 'riddle#update', 'riddle.update');
 Router::delete('/riddles/:id', 'riddle#delete', 'riddle.delete');
 
+Router::post('/planets', 'planet#create');
+Router::delete('/planets/:planet', 'planet#delete');
+
 try {
   Router::run();
 } catch (\Utils\RequestException $e) {
