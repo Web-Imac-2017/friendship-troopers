@@ -25,10 +25,8 @@ const Post = Vue.extend({
   data () {
     return {
       newComment : '',
-      planetData: ["#3eb6df", "#ef4646", "#767fe2", "#72b51a", "#f9a519" ]
-
-       
-
+      /* admin / earth / parallel / robots / aliens / space-opera*/
+      planetData: ["#3e3e3e", "#3eb6df", "#ef4646", "#767fe2", "#72b51a", "#f9a519" ]
     }
   },
 

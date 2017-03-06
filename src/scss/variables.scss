@@ -29,9 +29,10 @@ $sub-menu-item-background : #19565d;
 
 
 //posts
-$comments-background : #3b425e;
-$comments-publish : #4a526c;
-$articles-background : #2d3653;
+$publish-background : #4a526c;
+$comments-background : #2d3653;
+$comments-publish : #3b425e;
+$articles-background : #272c48;
 
 @mixin background-transparent($value) {
   background: rgba(45, 54, 83, $value)

@@ -395,6 +395,17 @@ small {
   padding: 2%;
   margin-bottom: 2%;
 }
+.publish {
+  background-color: $comments-background;
+  padding: 2%;
+  margin-bottom: 2%;
+  textarea {
+    margin-left: 2%;
+    width: 98%;
+    background: $publish-background;
+    color: $grey;
+  }
+}
 
 .pseudo {
   margin: 0px 1px 0.5px 2px;
@@ -423,20 +434,37 @@ small {
     }
 }
 
-.comment{
+.post-content {
+  padding-left: 5rem;
+}
+
+.your-comment{
+  text-align: center;
   background: $comments-background;
+  width: 95%;
+  margin: 0 2.5%;
   margin-top:2%;
   max-height: 8em;
   .col-sm-1{
     padding: 1%;
   }
+  img {
+    max-height: 4em;
+  }
   button{
     margin-top:1em;
   }
-  textarea{
-    padding-left: 0;
+  .form-post img {
+    cursor: pointer;
   }
+  textarea{
+    color: $grey;
+    padding-left: 0;
+    text-align: left;
+  }
+
 }
+
 
 /* @media screen and (min-width: 1200px) {
   .container-fluid {

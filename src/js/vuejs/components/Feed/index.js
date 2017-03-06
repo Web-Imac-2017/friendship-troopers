@@ -27,9 +27,10 @@ const Feed = Vue.extend({
  
   	data () {
       	return {
-      		posts : [{
+      		posts : [{      /* earth / parallel / robots / aliens / space-opera*/
+
         	  user: 'Lucky',
-	          avatar : "../assets/images/Avatar1.svg",
+            avatar : "../../assets/images/avatars/parallel/astro.svg",
             planeteId : 2,
 	          date: '20 fev',
 	          hour: '12h04',
@@ -48,7 +49,7 @@ const Feed = Vue.extend({
 	        },
           {
             user: 'Lucky',
-            avatar : "../assets/images/Avatar1.svg",
+            avatar : "../../assets/images/avatars/robots/landscape.svg",
             planeteId : 3,
             date: '20 fev',
             hour: '12h04',
@@ -67,7 +68,7 @@ const Feed = Vue.extend({
           },
           {
             user: 'Lucky',
-            avatar : "../assets/images/Avatar1.svg",
+            avatar : "../../assets/images/avatars/aliens/landscape.svg",
             planeteId : 4,
             date: '20 fev',
             hour: '12h04',
