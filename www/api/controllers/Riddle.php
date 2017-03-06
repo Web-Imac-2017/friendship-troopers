@@ -118,17 +118,22 @@ class Riddle extends Controller {
     $this->Riddle->save($this->filterXSS($updates));
   }
 
-  public function delete() {
+  public function delete($id, $delete) {
     if (!\Utils\Session::isLoggedIn()) {
       throw new \Utils\RequestException('operation reservee aux membres', 401);
     }
 
-    if (\Utils\Session::user('roleId') !== in_array([1, 2])) {
+    if (!in_array(\Utils\Session::user('roleId'), [1, 2])) {
       throw new \Utils\RequestException('action reservee aux administeurs', 403);
     }
 
-    //code
-    //$this->response();
+    $this->loadModel('Comment');
+
+    $this->Riddle->delete([
+      'id' => $id,
+    ]);
+
+    $this->response(null, 204);
   }
 
 }

@@ -26,6 +26,11 @@ Router::get('/planets/:planet/posts/:id','publication#view', 'planets.posts.view
 Router::patch('/planets/:planet/posts/:id', 'publication#update', 'planets.posts.update');
 Router::delete('planets/:planet/posts/:id', 'publication#delete', 'planets.posts.delete');
 
+Router::post('/planets/:planet/posts/:publicationId/comments', 'publication#create', 'planets.posts.comments.create');
+Router::get('/planets/:planet/posts/:publicationId/comments', 'publication#list', 'planets.posts.comments.list');
+Router::patch('/planets/:planet/posts/:publicationId/comments/:id/:publishDate', 'publication#update', 'planets.posts.comments.update');
+Router::delete('planets/:planet/posts/:publicationId/comments/:id', 'publication#delete', 'planets.posts.comments.delete');
+
 Router::get('/planets/:planet/news' , 'planet#getPlanetFeed');
 
 Router::post('/riddles', 'riddle#create', 'riddle.create');

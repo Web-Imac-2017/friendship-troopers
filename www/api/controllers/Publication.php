@@ -8,10 +8,20 @@ namespace Controllers;
 
 class Publication extends Controller {
 
+  /**
+   * Construction of the principal Model
+   */
   public function __construct() {
     $this->loadModel('Publication');
   }
 
+  /**
+   * list publications by user or for a simple feed of one particular planet.
+   * generate next road to ease front's job
+   * @param  int    $planetId   planet id passed by road
+   * @param  array  $get        associativ array passed by method get (datas)
+   * @return [type] []          [description]
+   */
   public function list($planetId, $get) {
     if (\Utils\Session::user('planetId') !== $planetId) {
       throw new \Utils\RequestException('vous n\'appartenez pas à cette planète !', 403);
@@ -28,27 +38,21 @@ class Publication extends Controller {
       $where['publication.userId'] = $get['user'];
     }
 
-    if (array_key_exists('title', $get)) {
-      $where['publication.title'] = [
+    if (array_key_exists('content', $get)) {
+      $where['publication.content'] = [
         'cmp' => 'like',
-        'value' => '%'.$get['title'].'%',
+        'value' => '%'.$get['content'].'%',
       ];
     }
 
     $request = $this->Publication->find([
-      'fields' => ['publication.id', 'publication.title', 'publication.content', 'publication.publishDate', 'publication.userId', 'publication.modified'],
+      'fields' => ['publication.id', 'publication.content', 'publication.publishDate', 'publication.userId', 'publication.modified'],
       'leftJoin' => [
         [
           'table' => 'user',
   				'alias' => 'UserPlanet',
   				'from' => 'id',
   				'to' => 'userId',
-        ],
-        [
-          'table' => 'comment',
-  				'alias' => 'publicationComment',
-  				'from' => 'publicationId',
-  				'to' => 'id',
         ],
         [
           'table' => 'stardust',
@@ -75,11 +79,10 @@ class Publication extends Controller {
   }
 
   /**
-   * Create an article in the DB, based on the data sent
-   * @param  char*  $title    the article title
-   * @param  text   $content  the content (text field)
-   * @param  int    $author   the author id (foreignKey)
-   * @return int    ...       return value (-1 = error)
+   * Create a publication. Accessible by administrators and the "author" user only.
+   * @param  int    $planet   planet id passed by road
+   * @param  array  $post     assosiativ array passed by method post (datas)
+   * @return [type] []        [description]
    */
   public function create ($planet, $post) {
     if (!\Utils\Session::isLoggedIn()) {
@@ -91,7 +94,7 @@ class Publication extends Controller {
     }
 
     $userId = \Utils\Session::user('userId');
-    $required = ['content', 'title'];
+    $required = ['content'];
     if (!empty($this->checkRequired($required, $post))) {
       throw new \Utils\RequestException('champ manquant', 400);
     }
@@ -101,7 +104,6 @@ class Publication extends Controller {
         'userId' => $userId,
         'content' => $post['content'],
         'publicationTypeId' => $post['publicationType'] ?? 3,
-        'title' => $post['title'],
       ]));
     } catch (\PDOException $e) {
       $this->response([
@@ -119,10 +121,13 @@ class Publication extends Controller {
     ]);
   }
 
+
   /**
-   * Modify the publication title and/or content
-   * @param  POST   $post     post method from front
-   * @return int    ...       return value (-1 = error)
+   * Update a publication. Accessible by administrators and the "author" user only.
+   * @param  int    $planetId   planet id passed by road
+   * @param  int    $id         publication id passed by road
+   * @param  array  $patches    assosiativ array passed by method patch (datas)
+   * @return [type] []          [description]
    */
   public function update ($planetId, $id, $patches) {
     if (!\Utils\Session::isLoggedIn()) {
@@ -153,9 +158,12 @@ class Publication extends Controller {
   }
 
   /**
-   * Delete one article from DB, based on the article ID
-   * @param  int  $id   the article ID
-   * @return int  ...   return value (-1 = error)
+   * Delete a publication. Accessible by administrators and the "author" user only.
+   * it delete all foreign keys firstly.
+   * @param  int    $planetId   planet id passed by road
+   * @param  int    $id         publication id passed by road
+   * @param  array  $delete     assosiativ array passed by method delete (datas)
+   * @return [type] []          [description]
    */
   public function delete ($planetId, $id, $delete) {
     if (!\Utils\Session::isLoggedIn()) {
