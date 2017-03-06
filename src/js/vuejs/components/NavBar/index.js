@@ -59,7 +59,7 @@ Vue.component('notification-item', {
       
        <ul class = "sub-menu-item">
         <li>
-          <img src="../../www/assets/images/Messages.svg"> 
+          <img src="../../assets/images/Messages.svg"> 
         </li>
         <li> 
           <p>Votre dernier post fait réagir !</p>
@@ -85,22 +85,19 @@ const NavBar = Vue.extend({
   }, 
    data () {
       return {
-        friends: [ {pseudo: 'luckypon', avatar:'../../www/assets/images/avatars/earth/astro.svg', planet :'earth',date : '12/03/13'},
-                    {pseudo: 'luckyLuke', avatar:'../../www/assets/images/avatars/aliens/astro.svg', planet :'alien', date : '12/03/13'},
-                    {pseudo: 'titi', avatar:'../../www/assets/images/avatars/parallel/landscape.svg', planet :'parallel', date : '12/03/13'},
-                    {pseudo: 'tot', avatar:'../../www/assets/images/avatars/space-opera/astro.svg', planet :'space-opera', date : '12/03/13'}
+        friends: [ {pseudo: 'luckypon', avatar:'../../assets/images/avatars/earth/astro.svg', planet :'earth',date : '12/03/13'},
+                    {pseudo: 'luckyLuke', avatar:'../../assets/images/avatars/aliens/astro.svg', planet :'alien', date : '12/03/13'},
+                    {pseudo: 'titi', avatar:'../../assets/images/avatars/parallel/landscape.svg', planet :'parallel', date : '12/03/13'},
+                    {pseudo: 'tot', avatar:'../../assets/images/avatars/space-opera/astro.svg', planet :'space-opera', date : '12/03/13'}
                  ],
-        messages: [ {pseudo: 'luckypon',avatar:'../../www/assets/images/avatars/earth/astro.svg', planet :'earth', begining:"Je t'envoie un message toto !", date : '12/03/13'},
-                    {pseudo: 'tintin', avatar:'../../www/assets/images/avatars/space-opera/landscape.svg', planet :'space-opera',begining:"Je t'envoie un message toto !", date : '11/02/12'},
-                    {pseudo: 'kirikoukou', avatar:'../../www/assets/images/avatars/space-opera/landscape.svg', planet :'space-opera', begining:"Je t'envoie un message toto !", date : '01/03/13'}
+        messages: [ {pseudo: 'luckypon',avatar:'../../assets/images/avatars/earth/astro.svg', planet :'earth', begining:"Je t'envoie un message toto !", date : '12/03/13'},
+                    {pseudo: 'tintin', avatar:'../../assets/images/avatars/space-opera/landscape.svg', planet :'space-opera',begining:"Je t'envoie un message toto !", date : '11/02/12'},
+                    {pseudo: 'kirikoukou', avatar:'../../assets/images/avatars/space-opera/landscape.svg', planet :'space-opera', begining:"Je t'envoie un message toto !", date : '01/03/13'}
                  ], 
         notifications: [
-        /*  type 1 : post intergalactique
-            type 2 : ami news 
-            type 3 : last post
-        */
+        /*  type 1 : post intergalactique / type 2 : ami news  /  type 3 : last post */
                     {type:'1', post:'4'},
-                    {type:'2', post:'2', pseudo: 'hihi', avatar:'../../www/assets/images/avatars/earth/astro.svg', planet :'earth'},     
+                    {type:'2', post:'2', pseudo: 'hihi', avatar:'../../assets/images/avatars/earth/astro.svg', planet :'earth'},     
                     {type:'3', post:'3'}     
         ], 
         subMenu : 0
