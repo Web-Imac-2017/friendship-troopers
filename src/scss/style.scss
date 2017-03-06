@@ -21,7 +21,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
   @include font-size(1.6);
   color:$main-title;
-  text-transform: uppercase;
+  text-transform: uppercase; 
   text-align: center;
 } 
 
@@ -156,6 +156,12 @@ body {
   color:$main-text;
 }
 
+html, body, #home {
+    height: 100%;
+    margin: 0;
+}
+
+
 
 .center{
   @extend %center;
@@ -187,7 +193,6 @@ form{
       display:block;
       margin-bottom: 0;
       display: inline-block;
-      min-width: 19%;
       text-align: right;
       /* padding: 0 4%; */
     }
@@ -252,14 +257,23 @@ button{
 .login{
 /*   background-image: url("../images/background-image.jpg");
 background-repeat:no-repeat; */
-  .container{
-    width:900px;
+  min-height: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+/*   justify-content: center; */
+  padding-top: 10%;
+
+
+
+  #intro-txt{
+    @include margin4(0,0,3,0);
   }
   .row{
      @include padding(1);
   }
 
-  .col-sm-4 > .row{
+  .col-xs-4 > .row{
     @include padding2(0.5,0);
   }
  
@@ -324,7 +338,13 @@ background-repeat:no-repeat; */
     @include margin2(0.1,0);
   }
 
-  form > .row > .col-sm-3{
+  form {
+    p{
+      opacity: 0.7;
+    }
+  }
+
+  form > .row > .col-xs-3{
     text-align: right;
   }
 
@@ -337,13 +357,15 @@ background-repeat:no-repeat; */
 
     button{
       margin: 0 0 0 2%;
-      @include padding-button(2);
+      @include padding2(0.9,3.5); 
       color:$white;
+      position:relative;
 
       .img-rocket {
-        width: 3em;
+        width: 4em;
         position: absolute;
-        right:0em;
+        right: -1.5rem;
+        top: -0.5rem;
       }
     }
   }
@@ -519,4 +541,33 @@ input[type="radio"] {
   border-left-style: solid;
   border-left-width: 0.2rem;
 }
+
+
+@media screen and (max-width: $break-small) {
+  #intro-form{
+    form{
+      .col-xs-3{
+        width: 100%;
+        text-align: left;
+        padding-bottom: 1rem;
+      }
+      .col-xs-9{
+        width: 100%; 
+      }
+    }
+    .form-button{
+      a{
+        margin-bottom: 2rem;
+        display: block;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $break-mid) {
+  #intro-form{
+    padding:0;
+  }
+}
+
 

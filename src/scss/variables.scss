@@ -57,7 +57,12 @@ $planet-alien : #72b51a;
 
 // Font Variables
 
-$main-font: 'Roboto', serif;   
+$main-font: 'Roboto', serif;
+
+// Media queries
+
+$break-mid: 768px;    
+$break-small: 467px;    
 
 
 @font-face {
@@ -83,8 +88,8 @@ $title-font: earthOrbiter-font;
 } 
 
 @mixin padding-button($sizeValue) {
-  padding:$sizeValue*0.5 + rem $sizeValue*1.5 + rem;
-}
+  padding:$sizeValue*0.4 + rem $sizeValue*1.9 + rem;
+} 
 
 @mixin padding-input($sizeValue) {
   padding:$sizeValue*0.9 + rem;

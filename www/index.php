@@ -14,7 +14,7 @@ use \Utils\Router\Router;
 
 Router::init($_GET['url']);
 
-Router::post('/auth/signin','account#inscription');
+Router::post('/auth/signin','account#inscription'); 
 Router::post('/auth/login','account#login');
 Router::post('/auth/logout','account#logout');
 Router::get('/auth/validate','account#validateUser', 'auth.validate');
