@@ -48,22 +48,25 @@
 			<div class="col-sm-9 wrapper">
 				<div class="item">
 					<select v-model.number="userSignIn.day" name="day" id="day" required>
-			       	<option v-for="option in userSignIn.dayTab">
+<!-- 			       	<option v-for="option in userSignIn.dayTab">
+ -->			     <option v-for="option in 31">
 			            {{ option }}
 			        </option>
 		       </select>
 				</div>
 				<div class="item">
 					<select v-model.number="userSignIn.month" name="month" id="month" required>
-			       	<option v-for="option in userSignIn.monthTab">
+			       	<!-- <option v-for="option in userSignIn.monthTab"> -->
+			       	<option v-for="option in 12">
 			            {{ option }}
 			        </option>
 		       </select>
 				</div>
 				<div class="item">
 					<select v-model.number="userSignIn.year" name="year" id="year" required>
-			       	<option v-for="option in userSignIn.yearTab">
-			            {{ option }}
+			       	<!-- <option v-for="option in userSignIn.yearTab"> -->
+			       	<option v-for="option in 100">
+			            {{ 2018 - option }}
 			        </option>
 		       </select>
 				</div>  
@@ -73,7 +76,7 @@
 		</div>
 		<div class="row form-button">
 			<div class="col-sm-3"></div><div class="col-sm-9">
-				<button>S'inscrire<img class="img-rocket" src="../../../www/assets/images/FuseeFirstPage.svg"> </button>
+				<button>S'inscrire<img class="img-rocket" src="../../assets/images/FuseeFirstPage.svg"> </button>
 			</div>
 		
 		</div>

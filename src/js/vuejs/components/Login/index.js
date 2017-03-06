@@ -8,6 +8,7 @@ template     = eval(`\`${template}\``);
 import formLogin from './formLogin/index.js'
 import formUser from './formUser/index.js'
 
+
 const Login = Vue.extend({ 
   template,
   components: {
