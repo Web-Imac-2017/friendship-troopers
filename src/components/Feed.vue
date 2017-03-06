@@ -14,8 +14,8 @@
                 <img src="../assets/Avatar1.svg" alt="default avatar" class="avatar">
             </div>
             <div class="col-sm-11">
-              <form class="form-post" @submit.prevent="save">
-              <!-- <textarea rows="3" type="text" placeholder="Publier quelque chose .."></textarea>
+             <!--  <form class="form-post" @submit.prevent="save">
+              <textarea rows="3" type="text" placeholder="Publier quelque chose .."></textarea>
               <div class="field">
                 <button v-on:click="uploadPicture" class="left"> Upload picture </button>
                 <button v-on:click="publish">Publier</button>
@@ -25,7 +25,7 @@
                 <div class="field">
                   <button class="left"> Upload picture </button>
                   <button>Publier</button>
-              </div> 
+                </div> 
               </form>
             </div>
           </div>
