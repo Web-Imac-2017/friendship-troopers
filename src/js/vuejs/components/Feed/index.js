@@ -70,7 +70,7 @@ const Feed = Vue.extend({
           },
           {
             user: 'Lucky',
-            avatar : "../../friendship-troopers/www/assets/images/avatars/aliens/landscape.svg",
+            avatar : "/assets/images/avatars/aliens/dashboard.svg",
             planeteId : 4,
             date: '20 fev',
             hour: '12h04',

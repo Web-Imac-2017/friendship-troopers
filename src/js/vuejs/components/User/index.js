@@ -39,23 +39,23 @@ const User = Vue.extend({
   data () {
       return {
        user: {
-        userAvatar : '../assets/logo.png',
+        userAvatar : '/assets/images/avatars/earth/miror.svg',
         username : 'LuckyPon', 
         userBadge : 'Baroudeuse de l\'espace', 
         birthDate : '29 avril',
         userPlanet : {
-          path : '../assets/Avatar1.svg',
+          path : '../assets/images/planets/P1.svg',
           name : 'Planete X785-E'
         }, 
         nbFriends : 53, 
         nbRiddleSolved : 2,
         points : 745,
         lastBadges : 
-          [ { path  : '../assets/logo.png',
+          [ { path  : '/assets/images/badges/logo.png',
             name : 'Resoudre une énigme'},
-            { path : '../assets/logo.png',
+            { path : '/assets/images/badges/logo.png',
             name : 'Ajouter un ami'},
-            { path : '../assets/logo.png',
+            { path : '/assets/images/badges/logo.png',
             name : 'Inscription'}
           ]
        }, 
