@@ -5,6 +5,7 @@
 @import "lateralMenu";
 @import "input-range";
 @import "bootstrap-custom";
+@import "riddle";
 
 .wrapper {
   @include flexbox();
@@ -520,3 +521,7 @@ input[type="radio"] {
   border-left-width: 0.2rem;
 }
 
+.border-bottom {
+  border-bottom-style: solid;
+  border-bottom-width: 0.2rem;
+}
