@@ -7,7 +7,7 @@ template     = eval(`\`${template}\``);
 import AdminMenu from '../AdminMenu/index.js'
 
 
-const CreatePost = Vue.extend({
+const AdminCreatePost = Vue.extend({
   template,
    components : {
   	'admin-menu' : AdminMenu
@@ -15,4 +15,4 @@ const CreatePost = Vue.extend({
 });
 
 
-export default CreatePost;
+export default AdminCreatePost;

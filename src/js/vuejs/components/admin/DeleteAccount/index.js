@@ -6,7 +6,7 @@ template     = eval(`\`${template}\``);
 
 import AdminMenu from '../AdminMenu/index.js'
 
-const DeleteAccount = Vue.extend({
+const AdminDeleteAccount = Vue.extend({
   template,
   components : {
   	'admin-menu' : AdminMenu
@@ -14,4 +14,4 @@ const DeleteAccount = Vue.extend({
 });
 
 
-export default DeleteAccount;
+export default AdminDeleteAccount;

@@ -7,7 +7,7 @@ template     = eval(`\`${template}\``);
 import AdminMenu from '../AdminMenu/index.js'
 
 
-const AddAdmin = Vue.extend({
+const AdminAddAdmin = Vue.extend({
   template,
    components : {
   	'admin-menu' : AdminMenu
@@ -15,4 +15,4 @@ const AddAdmin = Vue.extend({
 });
 
 
-export default AddAdmin;
+export default AdminAddAdmin;

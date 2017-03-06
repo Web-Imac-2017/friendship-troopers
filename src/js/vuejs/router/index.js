@@ -27,15 +27,15 @@ import About from '../components/About'
 import FAQ from '../components/FAQ'
 import Legals from '../components/Legals'
 
-import AdminCreatePost from '../components/admin/CreatePost.vue'
-import AdminCreateEvent from '../components/admin/CreateEvent.vue'
-import AdminAddAdmin from '../components/admin/AddAdmin.vue'
-import AdminReport from '../components/admin/Report.vue'
-import AdminDelateAccount from '../components/admin/DelateAccount.vue'
-import AddBadge from '../components/admin/AddBadge.vue'
-import AddAvatar from '../components/admin/AddAvatar.vue'
-import AddEmoji from '../components/admin/AddEmoji.vue'
-import AddEnigme from '../components/admin/AddEnigme.vue'
+import AdminCreatePost from '../components/admin/CreatePost'
+import AdminCreateEvent from '../components/admin/CreateEvent'
+import AdminAddAdmin from '../components/admin/AddAdmin'
+import AdminReport from '../components/admin/Report'
+import AdminDeleteAccount from '../components/admin/DeleteAccount'
+import AddBadge from '../components/admin/AddBadge'
+import AddAvatar from '../components/admin/AddAvatar'
+import AddEmoji from '../components/admin/AddEmoji'
+import AddEnigme from '../components/admin/AddEnigme'
 
 import Error404 from '../components/Error404'
 
@@ -154,7 +154,7 @@ const router = new VueRouter({
   },{ 
       name : 'AdminDelateAccount' ,
       path: '/admin/supprimer-compte', 
-      component : AdminDelateAccount
+      component : AdminDeleteAccount
   },{  
       name : 'AddBadge',
       path: '/admin/ajout-badge', 

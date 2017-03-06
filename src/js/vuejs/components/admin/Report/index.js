@@ -7,7 +7,7 @@ template     = eval(`\`${template}\``);
 import AdminMenu from '../AdminMenu/index.js'
 import ReportBar from './ReportBar/index.js'
 
-const Report = Vue.extend({
+const AdminReport = Vue.extend({
   template,
   components: { 
   	'menu-admin' : AdminMenu,
@@ -56,4 +56,4 @@ const Report = Vue.extend({
 });
 
 
-export default Report;
+export default AdminReport;

@@ -7,7 +7,7 @@ template     = eval(`\`${template}\``);
 import AdminMenu from '../AdminMenu/index.js'
 
 
-const CreateEvent = Vue.extend({
+const AdminCreateEvent = Vue.extend({
   template,
    components : {
   	'admin-menu' : AdminMenu
@@ -15,4 +15,4 @@ const CreateEvent = Vue.extend({
 });
 
 
-export default CreateEvent;
+export default AdminCreateEvent;
