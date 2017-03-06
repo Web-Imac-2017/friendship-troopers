@@ -13,7 +13,7 @@ import MenuTools from '../MenuTools/index.js'
 import Post from '../Post/index.js'
 import CreatePost from '../CreatePost/index.js'
 import PageNav from './pageNav/index.js'
-
+import NavBar from '../NavBar/index.js';
 
 const Feed = Vue.extend({
   template,
@@ -23,7 +23,8 @@ const Feed = Vue.extend({
   	'lateral-menu-right' : LateralMenuRight, 
   	'menu-tools' : MenuTools, 
   	'post' : Post ,
-    'page-nav' : PageNav
+    'page-nav' : PageNav,
+    'navbar' : NavBar
   },
  
   	data () {
@@ -31,7 +32,7 @@ const Feed = Vue.extend({
       		posts : [{      /* earth / parallel / robots / aliens / space-opera*/
 
         	  user: 'Lucky',
-            avatar : "../../friendship-troopers/www/assets/images/avatars/parallel/astro.svg",
+            avatar : "/assets/images/avatars/parallel/astro.svg",
             planeteId : 2,
 	          date: '20 fev',
 	          hour: '12h04',
@@ -50,7 +51,7 @@ const Feed = Vue.extend({
 	        },
           {
             user: 'Lucky',
-            avatar : "../../friendship-troopers/www/assets/images/avatars/robots/landscape.svg",
+            avatar : "/assets/images/avatars/robots/landscape.svg",
             planeteId : 3,
             date: '20 fev',
             hour: '12h04',
@@ -91,16 +92,16 @@ const Feed = Vue.extend({
   	},
     created(){
       
-            this.$http.get(apiRoot() + '/planets/1/posts', {
-              emulateJSON: true
-            }).then(
-              (response) => {
-                console.log("success !" + response.data);
-              },
-              (response) => {
-                console.log("fail !" + response.data)
-              }
-            )
+            // this.$http.get(apiRoot() + '/planets/1/posts', {
+            //   emulateJSON: true
+            // }).then(
+            //   (response) => {
+            //     console.log("success !" + response.data);
+            //   },
+            //   (response) => {
+            //     console.log("fail !" + response.data)
+            //   }
+            // )
         }
 
 });
