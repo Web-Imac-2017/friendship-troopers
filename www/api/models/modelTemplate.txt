@@ -1,12 +1,12 @@
 <?php
 /**
 * ////////////////////////////
-* @var ...
+* @var ...Model
 * ////////////////////////////
 */
 namespace Models;
 
-class ... extends Model {
+class ...Model extends Model {
   // ----------[ CONSTANTS ]----------
 
   const TABLE_NAME = '...';

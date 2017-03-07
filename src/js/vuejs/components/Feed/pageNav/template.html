@@ -1,0 +1,10 @@
+<div class="row justify-content-md-center no-gutters pageNav"> 
+	<div v-on:click="previousPage" class="col-sm-4 pseudo-button"> <img src="/assets/images/fleche-gauche.svg">Page précédente </div>
+	<div class="col-sm-4">
+		<div class="col-sm-1" v-for="index in 7">
+			<div class="small-circle pseudo-button"  v-on:click="goToPage(index)" v-if="index != currentPage"> </div>
+			<div v-else> {{ currentPage }} </div> 
+		</div>
+	</div>
+	<div v-on:click="nextPage"  class="col-sm-4 align-self-end pseudo-button"> Page suivante <img src="/assets/images/fleche-droite.svg"></div>
+</div>

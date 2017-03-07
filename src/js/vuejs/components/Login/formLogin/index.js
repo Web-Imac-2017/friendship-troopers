@@ -1,6 +1,7 @@
 'use strict';
  
 import Vue from 'vue/dist/vue';
+import {apiRoot} from '../../../../../../config.js';
 
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
@@ -16,20 +17,72 @@ const formLogin = Vue.extend({
 			cantSubmit:false
 		}
 	},
+	created(){
+		// TEST POUR RECUPERER UN POST DE LA PLANETE 1
+		/*this.$http.get(apiRoot() + 'planets/1/posts', 
+		{
+        	emulateJSON: true
+        }).then(
+          (response) => {
+          	
+            console.log("success");
+            var postTab = response.data;
+            console.log("Test content "+postTab[0].content);
+          },
+          (response) => {
+            console.log("fail !"+response)
+          }
+        )*/
+
+
+		// TEST POUR RECUPERER UN POST DE L UTILISATEUR COULON : NE MARCHE PAS ENCORE
+		/*this.$http.get(apiRoot() + 'planets/1/posts',
+       	{
+       		'username' : 'coulon'
+       	},{
+        	emulateJSON: true
+        }).then(
+          (response) => {
+          	
+            console.log("success"+response.data);
+            console.log(response.data);
+            var postTab = response.data;
+            console.log("Test content "+postTab[0].content);
+          },
+          (response) => {
+            console.log("fail !")
+            console.log(response)
+          }
+        )*/
+
+    },
 	methods:{
 		connect(){
 			this.$emit('input', this.userLogin);
+
 			if(this.userLogin.mail != "" | this.userLogin.password != ""){
-				if(this.userLogin.mail == "admin@gmail.com" && this.userLogin.password == "admin"){
-					this.cantSubmit=false;
-					console.log("connexion en cours !!! Gerer ça quand liaison front/back done");
-				}else
-					this.cantSubmit=true;
-			}else{
-				this.cantSubmit=true;
-			}
+		       	this.$http.post(apiRoot() + 'auth/login', 
+		       	{
+		       		'mail' : this.userLogin.mail, 
+		       		'password': this.userLogin.password 
+		       	},{
+		        	emulateJSON: true
+		        }).then(
+		          (response) => {
+		            console.log("success !");
+		            this.cantSubmit=false;
+		            this.$router.push("/actualites")
+		          },
+		          (response) => {
+		            console.log("fail !")
+		            this.cantSubmit=true;
+		          }
+		        )
+		    }
+
+    	}
 	      		
-		}
+		
 	}
 });
 

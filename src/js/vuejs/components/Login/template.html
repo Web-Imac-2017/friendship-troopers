@@ -1,53 +1,56 @@
-<div class="container login">
- 
-	  	<div class="row">
-	  		<div class="col-sm-4">
-	  			<h1>Friendship troopers</h1>
-	  			<div class="center">
-	  				<p>
-	  					Venez partager votre passion de la science-fiction à travers ce réseau social mélant énigmes et bonne humeur !
-					</p> <p>
-						A votre inscription, vous répondrez à une série de questions et une planète vous sera attribuée en fonction de vos réponses...
-					</p> <p>
-						Vous pourrez ensuite rencontrer d’autres passionnés en résolvant des énigmes avec eux !
-	  				</p> 
-	  			</div>
-	  		</div>
-	  		<div class="col-sm-8">
-	  			<div class="row">
-	  				<div class="col-sm-5" v-on:click="inscription"><h1>Inscription</h1></div>
-	  				<div class="col-sm-5" v-on:click="connexion"><h1>Connexion</h1></div>
-	  			</div>
+<div class="login">
+<div class="container">
+  	<div class="row">
+  		<div id="intro-txt" class="col-md-4">
+  			<div class="row">
+  				<h1>Friendship troopers</h1>
+  			</div>
+  			
+  			<div class="row">
+  				<p>
+  					Venez partager votre passion de la science-fiction à travers ce réseau social mélant énigmes et bonne humeur !
+				</p> <p>
+					A votre inscription, vous répondrez à une série de questions et une planète vous sera attribuée en fonction de vos réponses...
+				</p> <p>
+					Vous pourrez ensuite rencontrer d’autres passionnés en résolvant des énigmes avec eux !
+  				</p> 
+  			</div>
+  		</div>
+  		<div id="intro-form" class="col-md-8">
+  			<div class="tabs">
+  				<div class="pseudo-button" v-bind:class="{ activeTab: signIn }" v-on:click="inscription"><h1>Inscription</h1></div>
+  				<div class="pseudo-button" v-bind:class="{ activeTab: !signIn }" v-on:click="connexion"><h1>Connexion</h1></div>
+  			</div>
 
-				<form-user v-model="userSignIn" v-if="signIn">
+			<form-user v-model="userSignIn" v-if="signIn">
 
-					<p slot="errorUsername">{{userSignIn.username}} est déjà utilisé !</p>
-					<p slot="errorMail">L'adresse mail {{userSignIn.mail}} est déjà utilisée !</p>
-					<p slot="errorMailValid">L'adresse mail n'est pas valide, veuillez vérifier svp !</p>
-					<p slot="errorPassword">Les deux mots de passe ne correspondent pas !</p>
-					<p slot="errorLowPassword">Le mot de passe n'est pas suffisament compliqué! Il doit comporter 1 chiffre, 1 lettre et au minimum 8 caractères.</p>
-					<p slot="passwordMissing">Veuillez rentrer un mot de passe</p>
-					<p slot="errorDate">La date de naissance est invalide !</p>
-					<p slot="nullInputUsername">{{ nullMessage }}</p>
-					<p slot="nullInputMail">{{ nullMessage }}</p>
-					<p slot="nullInputPassword">{{ nullMessage }}</p>
-					<p slot="nullInputPasswordChecked">{{ nullMessage }}</p>
+				<p slot="errorUsername">Ce pseudo est déjà utilisé !</p>
+				<p slot="errorUsernameLong">Votre pseudo doit faire moins de 20 caractères !</p>
+				<p slot="errorMail">Cette adresse mail est déjà utilisée !</p>
+				<p slot="errorMailValid">L'adresse mail n'est pas valide, veuillez vérifier svp !</p>
+				<p slot="errorPassword">Les deux mots de passe ne correspondent pas !</p>
+				<p slot="errorLowPassword">Le mot de passe n'est pas suffisament compliqué! Il doit comporter 1 chiffre, 1 lettre et au minimum 8 caractères.</p>
+				<p slot="passwordMissing">Veuillez rentrer un mot de passe</p>
+				<p slot="errorDate">La date de naissance est invalide !</p>
+				<p slot="nullInputUsername">{{ nullMessage }}</p>
+				<p slot="nullInputMail">{{ nullMessage }}</p>
+				<p slot="nullInputPassword">{{ nullMessage }}</p>
+				<p slot="nullInputPasswordChecked">{{ nullMessage }}</p>
+				<p slot="errorDBField">Une erreur semble s'être produite avec la base de données, nous nous excusons pour les désagréments.</p>
 
-				</form-user>
+			</form-user>
 
-				<form-login v-model="userLogin" v-else>
-		
-					<p slot="errorLogin">
-						L'adresse mail et/ou le mot de passe ne correspondent pas! <br>
-						Veuillez reessayer ou réinitialiser votre mot de passe
-					</p>
+			<form-login v-model="userLogin" v-else>
+	
+				<p slot="errorLogin">
+					L'adresse mail et/ou le mot de passe ne correspondent pas! <br>
+					Veuillez reessayer ou réinitialiser votre mot de passe
+				</p>
 
-				</form-login>
-
-				<pre>{{userLogin}}</pre>
-				<pre>{{userSignIn}}</pre>
-
-			</div>
+			</form-login>
 
 		</div>
+
 	</div>
+</div>
+</div>

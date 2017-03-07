@@ -1,4 +1,4 @@
 export function apiRoot(){
-    var projectRoot = "http://localhost/friendship-troopers/www/";
+    var projectRoot = "http://localhost/";
     return projectRoot ;
 }

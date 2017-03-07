@@ -1,0 +1,51 @@
+<form class="form post container-colored" v-on:submit.prevent.stop="">
+  <p>Modifier votre adresse mail</p>
+  <div class="row">
+    <div class="col-sm-2">
+      <label for="">Adresse mail</label>
+    </div>
+    <div class="col-sm-10">
+      <input maxlength="255" type="email" :placeholder="user.mail" v-model="user.mail" name='mail'>
+      <div v-if="falseMail"><slot name="errorMail"></slot></div>
+    </div>
+  </div>
+  <p>Modifier votre mot de passe</p> 
+  <div class="row">
+    <div class="col-sm-2">
+      <label for="">Nouveau</label>
+    </div>
+    <div class="col-sm-10">
+      <input maxlength="255" type="password" v-model="user.newPassword">
+      <div v-if="lowPassword"><slot name="errorLowPassword"></slot></div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm-2">
+      <label for="">Répéter nouveau</label>
+    </div>
+    <div class="col-sm-10">
+      <input maxlength="255" type="password" v-model="user.passwordChecked">
+      <div v-if="falsePassword"><slot name="errorPassword"></slot></div>
+    </div>
+  </div>
+  <br>
+  <div v-if="noChange"><slot name="errorNoChange"></slot></div>
+  <div v-if="validate" class="row">
+    <div class="col-sm-2">
+      <label for="">Rentrez votre mot de passe actuel pour confirmer</label>
+    </div>
+    <div class="col-sm-10">
+      <input maxlength="255" type="password" v-model="user.password" name='password'>
+      <div v-if="wrongPassword"><slot name="errorWrongPassword"></slot></div>
+    </div>
+    <button v-on:click="toggleValidate">Annuler</button>
+    <button v-on:click="saveFinal">Valider</button>
+  </div>
+  <div class="row">
+    <button v-on:click="save">Enregistrer</button>
+  </div>
+  <div>
+    A Envoyer au back : mail : {{ finalUser.mail }}, mdp : {{ finalUser.password }} 
+  </div>
+</form>

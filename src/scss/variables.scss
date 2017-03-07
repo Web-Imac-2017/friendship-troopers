@@ -19,13 +19,25 @@ $transparent-background : rgba(47,60,79,0.2);
 
 //Menu colors
 $menu-background : #060c2a;
+
+
 $input-background : #131735;
 $lateral-menu-background : #21253e;
+$sub-menu-background : #e5e5e5;
+$sub-menu-border : #359691;
+$sub-menu-list-item-background : #21646f;
+$sub-menu-item-background : #19565d;
+
 
 //posts
-$comments-background : #3b425e;
-$comments-publish : #4a526c;
-$articles-background : #2d3653;
+$publish-background : #4a526c;
+$comments-background : #2d3653;
+$comments-publish : #3b425e;
+$articles-background : #272c48;
+
+@mixin background-transparent($value) {
+  background: rgba(45, 54, 83, $value)
+}
 
 //Secondary colors
 $notifs: #c33a78; 
@@ -46,7 +58,12 @@ $planet-alien : #72b51a;
 
 // Font Variables
 
-$main-font: 'Roboto', serif;   
+$main-font: 'Roboto', serif;
+
+// Media queries
+
+$break-mid: 768px;    
+$break-small: 467px;    
 
 
 @font-face {
@@ -54,7 +71,7 @@ $main-font: 'Roboto', serif;
     src: url(../fonts/earthorbiterxtrabold.ttf);
 }
 
-$title-font: earthOrbiter-font;
+$title-font: earthOrbiter-font; 
 
 
 // Padding and margin variables
@@ -63,9 +80,17 @@ $title-font: earthOrbiter-font;
   padding:$sizeValue + rem;
 }
 
-@mixin padding-button($sizeValue) {
-  padding:$sizeValue*0.5 + rem $sizeValue*1.5 + rem;
+@mixin padding2($height,$width) {
+  padding:$height+rem $width+rem;
 }
+
+@mixin padding4($top,$right,$bot,$left) {
+  padding:$top+rem $right+rem $bot+rem $left+rem;
+} 
+
+@mixin padding-button($sizeValue) {
+  padding:$sizeValue*0.4 + rem $sizeValue*1.9 + rem;
+} 
 
 @mixin padding-input($sizeValue) {
   padding:$sizeValue*0.9 + rem;

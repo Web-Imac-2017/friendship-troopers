@@ -20,7 +20,6 @@ abstract class Model {
 	public $form;
 
 	protected $metaData;
-
 	/**
 	 * initiate a connection with the db
 	 * create the table for the request if it doesn't exist already.
@@ -30,8 +29,8 @@ abstract class Model {
 		$database = \Utils\Config::get('db', true);
 
 		if ($this->table === NULL) {
-			$tableName = explode('\\',strtolower(get_class($this)));
-			$this->table = $tableName[sizeof($tableName)-1];
+			$tableName=explode('\\',strtolower(get_class($this)));
+			$this->table = array_pop($tableName);
 		}
 
 		$this->metaData = json_decode(file_get_contents(ROOT.'/config/dbMetaData.json'), true)[$this->table];
@@ -39,9 +38,10 @@ abstract class Model {
 		//TRY TO OPPEN A CONNEXION TO THE DB
 		try {
 			$this->pdo = new \PDO('mysql:host=' . $database['hostname'] . ';dbname=' . $database['database']. ';',
-							$database['login'],
-							$database['password'],
-							array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+				$database['login'],
+				$database['password'],
+				array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+			$this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 		} catch (\PDOException $e) {
 			die('ERROR ' . $e->getMessage());
 		}
@@ -59,7 +59,6 @@ abstract class Model {
 	 */
 	public function find($request) {
 		$sql = 'SELECT ';
-
 		// MANAGE THE FIRST PART OF THE REQUEST [THE FIELDS]
 		if (isset($request['fields'])) {
 			if (is_array($request['fields'])) {
@@ -67,22 +66,23 @@ abstract class Model {
 			} else {
 				$sql .= '*';
 			}
-			$sql .= ' FROM ' . $this->table. ' AS ' . $this->table;//get_class($this);
+			$sql .= ' FROM ' . $this->table. ' AS ' . $this->table;
 
 			// IF THIS IS A [LEFT JOIN], ACT ACCORDING SO TO COMPLETE THE REQUEST
 			if (isset($request['leftJoin'])) {
 				if (!is_array($request['leftJoin'][0])) {
 					$join = $request['leftJoin'];
-					$sql .= 'LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . array_pop(explode("\\", get_class($this))) . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
+					$sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . $this->table . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
 				} else {
 					foreach ($request['leftJoin'] as $join) {
-						$sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . (isset($join['JoinTable']) ? $join['JoinTable'] : array_pop(explode("\\", get_class($this)))) . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
+						$tmp = explode("\\", get_class($this));
+						$sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . (isset($join['JoinTable']) ? $join['JoinTable'] : strtolower(array_pop($tmp))) . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
 					}
 				}
 			}
 
 			// ADD THE CONDITIONS TO THE REQUEST, ONE OR MANY
-			if (isset($request['conditions'])) {
+			if (isset($request['conditions']) && !empty($request['conditions'])) {
 				$sql .= ' WHERE ';
 				if (!is_array($request['conditions'])) {
 					$sql .= $request['conditions'];
@@ -97,11 +97,14 @@ abstract class Model {
 								if (!is_numeric($value['value'])) {
 									$value['value'] = $this->pdo->quote($value['value']);
 								}
-								$condition[] = $key . $value['cmp'] . $value['value'];
+								$condition[] = $key . ' ' . $value['cmp'] . ' ' . $value['value'];
 							} else {
 								$otherConditions = array();
-								foreach ($value as $valueOfValue) {
-									$otherConditions[] = "$key=$valueOfValue";
+								foreach ($value as $orKey => $valueOfValue) {
+									if(!is_numeric($valueOfValue)){
+										$valueOfValue=$this->pdo->quote($valueOfValue);
+									}
+									$otherConditions[] = "$orKey=$valueOfValue";
 								}
 								$condition[] = '(' . implode(' OR ', $otherConditions) . ')';
 							}
@@ -131,12 +134,10 @@ abstract class Model {
 			if (isset($request['limit'])) {
 				$sql .= ' LIMIT ' . $request['limit'];
 			}
-
 			// PREPARE THE REQUEST AND EXECUTE IT THEN RETURN AN OBJECT FROM YOUR DB
 			$prepareRequest = $this->pdo->prepare($sql);
 			$prepareRequest->execute();
 
-			var_dump($sql);
 			return ($prepareRequest->fetchAll(\PDO::FETCH_ASSOC));
 		}
 	}
@@ -168,7 +169,7 @@ abstract class Model {
 		))->count);
 	}
 
- 	/**
+	/**
 	 * delete function
 	 * delete one or multiple correspondances in the DB talbe specified
 	 * @param  asso array  $id   one or multiple entries that need to be deleted
@@ -189,12 +190,11 @@ abstract class Model {
 				$sql .= "$key = $value";
 			}
 		}
-		var_dump($sql);
 		$prepareRequest = $this->pdo->prepare($sql);
 		$prepareRequest->execute();
 	}
 
-			/**
+	/**
 	 * Insert / Update function
 	 * INSERT INTO table VALUES ('valeur 1', 'valeur 2', ...)
 	 * Insert one or many entries into the DB. Based on the data and keys sent by a controller
@@ -242,5 +242,6 @@ abstract class Model {
 		if($action == 'insert') {
 			$this->primaryKeyValue = $this->pdo->lastInsertId($this->primaryKey);
 		}
+		return $this->primaryKeyValue;
 	}
 }

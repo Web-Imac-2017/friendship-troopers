@@ -1,15 +1,21 @@
 @import "variables";
 
-.lateralMenuLeft, .lateralMenuRight, .menuTools {
+.lateralMenuLeft, .lateralMenuLeft ul, .lateralMenuRight, .menuTools, .menu-deconnexion {
   /* common properties */
-  background-color: $comments-background;
+  background-color: $lateral-menu-background;
 }
 
 .lateralMenuLeft {
   /* style and properties */
+  padding: 1rem;
 }
 .lateralMenuRight {
   /* style and properties */
+}
+
+.menu-deconnexion {
+  margin-top: 1rem;
+  text-align: center;
 }
 
 .menuTools{

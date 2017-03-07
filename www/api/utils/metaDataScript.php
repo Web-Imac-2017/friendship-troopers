@@ -45,7 +45,6 @@ function getMetaData ($request = array()) {
 
     $prepareRequest = $pdo->prepare($sql);
     $prepareRequest->execute($currentColumns);
-    var_dump($prepareRequest);
 
     return ($prepareRequest->fetchAll(\PDO::FETCH_ASSOC));
   }

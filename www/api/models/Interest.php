@@ -7,5 +7,5 @@
 namespace Models;
 
 class Interest extends Model {
-
+  
 }

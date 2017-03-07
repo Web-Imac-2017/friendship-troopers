@@ -27,18 +27,22 @@ class Route {
 		}
 		array_shift($matches);
 		$this->matches = $matches;
-		switch ($_SERVER['REQUEST_METHOD']) {
-			case 'POST':
-			$this->matches['method'] = $_POST;
-			break;
-			case 'GET':
-			$this->matches['method'] = $_GET;
-			break;
-			default:
-			$this->matches['method'] = '';
-			break;
+		if ($_SERVER['CONTENT_TYPE'] === 'application/json') {
+			$this->matches['method'] = json_decode(file_get_contents('php://input'), true);
+		} else {
+			switch ($_SERVER['REQUEST_METHOD']) {
+				case 'POST':
+					$this->matches['method'] = $_POST;
+					break;
+				case 'GET':
+					$this->matches['method'] = $_GET;
+					break;
+				default:
+					$this->matches['method'] = '';
+					break;
+			}
 		}
-		var_dump($this->matches);
+
 		return true;
 	}
 
@@ -66,6 +70,21 @@ class Route {
 		return $this; // On retourne tjrs l'objet pour enchainer les arguments
 	}
 
-}
+  	public function getUrl(array $params = []) {
+		$search = [];
+		$replace = [];
 
-?>
+	  	foreach ($params as $k => $v) {
+			$search[] = ":$k";
+			$replace[] = $v;
+		}
+
+		$url = str_replace($search, $replace, $this->path);
+		if (substr_count($url, ':') !== 0) {
+      		throw new \Exception('bad param count');
+    	}
+
+		return $url;
+  	}
+
+}

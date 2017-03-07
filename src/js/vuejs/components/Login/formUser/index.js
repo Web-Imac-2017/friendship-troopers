@@ -1,6 +1,7 @@
 'use strict';
 
 import Vue from 'vue/dist/vue';
+import {apiRoot} from '../../../../../../config.js';
  
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
@@ -16,13 +17,15 @@ const formUser = Vue.extend({
 			alreadyUsedUsername:false,
 			alreadyUsedMail:false,
 			falseMail:false,
+			longUsername:false,
 			lowPassword:false,
 			falsePassword:false,
 			falseDate:false,
 			nullUsername:false,
 			nullMail:false,
 			nullPassword:false,
-			nullPasswordChecked:false
+			nullPasswordChecked:false,
+			errorDB:false
 		}
 	},
 	methods:{
@@ -37,20 +40,25 @@ const formUser = Vue.extend({
 			if(!this.falsePassword)
 				this.lowPassword = (!regex.test(this.userSignIn.password)) ? true : false;
 		},
+		checkUsername(){
+			var username = this.userSignIn.username;
+			this.longUsername = (username.length > 20) ? true : false;
+			this.nullUsername = (username == '') ? true : false;
+		},
 		checkInputs(){
-			this.nullUsername = (this.userSignIn.username == '') ? true : false;
+			
 			this.nullMail = (this.userSignIn.mail == '') ? true : false;
 			this.nullPassword = (this.userSignIn.password == '') ? true : false;
 			this.nullPasswordChecked = (this.userSignIn.passwordChecked == '') ? true : false;
 
-			this.alreadyUsedUsername = (this.userSignIn.username == this.$parent.usernameExisting) ? true : false;
-			this.alreadyUsedMail = (this.userSignIn.mail == this.$parent.mailExisting) ? true : false;
 			
+			this.checkUsername();
 			this.checkPassword();
 	      	this.checkDate();
 	      	this.checkMail();
 
-	      	return ((!this.nullUsername)&&(!this.nullMail)&&(!this.lowPassword)&&(!this.nullPassword)&&(!this.nullPasswordChecked)&&(!this.alreadyUsedMail)&&(!this.alreadyUsedUsername)&&(!this.falsePassword)&&(!this.falseDate)&&(!this.falseMail)) ? true : false;
+	      	return ((!this.nullUsername)&&(!this.nullMail)&&(!this.longUsername)&&(!this.lowPassword)&&(!this.nullPassword)
+	      		&&(!this.nullPasswordChecked)&&(!this.falsePassword)&&(!this.falseDate)&&(!this.falseMail)) ? true : false;
 		},
 		isBissextile(value){
 			return ((value % 4 == 0 && value%100 != 0) || value%400 == 0) ? true : false;
@@ -66,12 +74,50 @@ const formUser = Vue.extend({
 	    	else
 	    		this.falseDate = false;
 	    },
-	    save(){
+		save(){
 			this.$emit('input', this.userSignIn);
-			if(this.checkInputs())
-				console.log("Aller dans welcome on board !! gérer ça quand connexion front/back");
+			if(this.checkInputs()){
+				var birthdate = this.userSignIn.year + '-' + this.userSignIn.month + '-' + this.userSignIn.day;
+
+				this.$http.post(apiRoot() + 'auth/signin', 
+		       	{
+		       		'username' : this.userSignIn.username,
+		       		'mail' : this.userSignIn.mail, 
+		       		'birthdate' : birthdate, 
+		       		'password': this.userSignIn.password 
+		       	},{
+		        	emulateJSON: true
+		        }).then(
+		          (response) => {
+		          	this.alreadyUsedUsername = false;
+					this.alreadyUsedMail = false;
+					this.falseDate = false;
+					this.errorDB = false;
+		          	console.log("inscription faite !");
+		            this.$router.push("/inscription/welcome-on-board");
+		          },
+		          (response) => {
+		            if(response.data.error == "USER_EXISTING"){
+		            	this.alreadyUsedUsername = true;
+						this.alreadyUsedMail = true;
+		            }
+		            else if(response.data.error == "INVALID_DATE"){
+		            	this.falseDate = true;
+		            }
+		            else{
+		            	this.errorDB = true;
+		            }
+		          }
+		        )
+
+    	
+			}
+
 			
-		}
+		       	
+		    
+
+    	}
 	}
 });
 

@@ -8,122 +8,188 @@ namespace Controllers;
 
 class Publication extends Controller {
 
-  /**
-   * Return the fields of the article, by it's title
-   * @param  char*  $title  the article title
-   * @return int    ...     return value (-1 = error)
-   */
-  public function viewFirst ($title) {
-    $publicationModel = new \Models\Publication();
+	/**
+	 * Load the main model
+	 */
+	public function __construct() {
+		$this->loadModel('Publication');
+	}
 
-    $request = $this->publicationModel->findFirst([
-      'fields' => ['title', 'content', 'publishDate', 'userId'],
-      'conditions' => ['title' => $title]
-    ]);
-  }
+	/**
+	* list publications by user or for a simple feed of one particular planet.
+	* generate next road to ease front's job
+	* @param  int 		$planetId 	planet id passed by road
+	* @param  array 	$get 				associativ array passed by method get (datas)
+	* @return [type] 	[] 					[description]
+	*/
+	public function list($planetId, $get) {
+		if (\Utils\Session::user('planetId') !== $planetId) {
+			throw new \Utils\RequestException('vous n\'appartenez pas à cette planète !', 403);
+		}
 
-  /**
-   * Create an article in the DB, based on the data sent
-   * @param  char*  $title    the article title
-   * @param  text   $content  the content (text field)
-   * @param  int    $author   the author id (foreignKey)
-   * @return int    ...       return value (-1 = error)
-   */
-  public function create ($post) {
-    $required = ['title', 'content', 'userId'];
-    $missingFields = checkRequired($required, $post);
-    if (array_key_exist($required, $missingFields)) {
-      return false;
-    }
+		$offset = +($get['offset'] ?? 0);
+		$limit = +($get['limit'] ?? 10);
+		if ($limit > 10) {
+			throw new \Utils\RequestException('limit trop elevee', 416);
+		}
 
-    if ($post['title'] === NULL || $post['content'] === NULL || $post['author'] === NULL) {
-      if (!$post['title'])
-        echo 'aucun titre';
-      if (!$post['content'])
-        echo 'aucun contenu';
-      if (!$post['author'])
-        echo 'auteur invalide';
-      return -1;
-    }
+		$where = [];
+		if (array_key_exists('user', $get)) {
+			$where['publication.userId'] = $get['user'];
+		}
+
+		if (array_key_exists('content', $get)) {
+			$where['publication.content'] = [
+				'cmp' => 'like',
+				'value' => '%'.$get['content'].'%',
+			];
+		}
+
+		$request = $this->Publication->find([
+			'fields' => ['publication.id', 'publication.content', 'publication.publishDate', 'publication.userId', 'publication.modified'],
+			'leftJoin' => [
+			[
+				'table' => 'user',
+				'alias' => 'UserPlanet',
+				'from' => 'id',
+				'to' => 'userId',
+			],
+			[
+				'table' => 'stardust',
+				'alias' => 'publicationStardust',
+				'from' => 'publicationId',
+				'to' => 'id',
+			]
+			],
+				'conditions' => $where,
+				'limit' => "$offset, $limit",
+				'orderBy' => [
+				'key' => 'publishDate',
+				'order' => 'DESC',
+			],
+		]);
+
+		$offset = $offset + $limit;
+		$listUrl = \Utils\Router\Router::url('planets.posts.list', [
+			'planet' => $planetId,
+		]);
+		$this->response($request, 200, [
+			'Link' => "\"$listUrl?offset=$offset&limit=$limit\"; rel=\"next\", \"$listUrl?page=$offset&limit=$limit\"; rel=\"last\"",
+		]);
+	}
+
+	/**
+	* Create a publication. Accessible by administrators and the "author" user only.
+	* @param  int 		$planet 	planet id passed by road
+	* @param  array 	$post 		assosiativ array passed by method post (datas)
+	* @return [type] 	[] 				[description]
+	*/
+	public function create ($planet, $post) {
+		if (!\Utils\Session::isLoggedIn()) {
+			throw new \Utils\RequestException('operation reservee aux membres', 401);
+		}
+
+		if (\Utils\Session::user('roleId') === 3 && $post['publicationType']) {
+			throw new \Utils\RequestException('cannot update publicationType as user', 403);
+		}
+
+		$userId = \Utils\Session::user('id');
+		$required = ['content'];
+		if (!empty($this->checkRequired($required, $post))) {
+			throw new \Utils\RequestException('champ manquant', 400);
+		}
+
+		try {
+			$id = $this->Publication->save($this->filterXSS([
+				'userId' => $userId,
+				'content' => $post['content'],
+				'publicationTypeId' => $post['publicationType'] ?? 3,
+			]));
+		} catch (\PDOException $e) {
+			$this->response([
+				'error' => $e->getMessage(),
+			], 500);
+		}
+
+		$this->response([
+			'publicationId' => $id,
+			], 201, [
+				'Location' => \Utils\Router\Router::url('planets.posts.view', [
+				'planet' => $planet,
+				'id' => $id,
+			]),
+		]);
+	}
 
 
-    $publicationModel = new \Models\Publication();
+	/**
+	* Update a publication. Accessible by administrators and the "author" user only.
+	* @param  int 		$planetId 	planet id passed by road
+	* @param  int 		$id 				publication id passed by road
+	* @param  array 	$patches 		assosiativ array passed by method patch (datas)
+	* @return [type] 	[] 					[description]
+	*/
+	public function update ($planetId, $id, $patches) {
+		if (!\Utils\Session::isLoggedIn()) {
+			throw new \Utils\RequestException('operation reservee aux membres', 401);
+		}
 
-    $publicationModel->save(filterXSS([
-      'title' => $post['title'],
-      'content' => $post['content'],
-      'userId' => $post['author'],
-      'publicationTypeId' => $post['publicationType'],
-    ]));
-  }
+		$userId = \Utils\Session::user('id');
+		$publiUserId = $this->Publication->findFirst([
+			'fields' => 'userId',
+			'conditions' => ['id' => $id],
+		]);
 
-  /**
-   * Modify the publication title and/or content
-   * @param  char*  $title    the modified title
-   * @param  text   $content  the modified content
-   * @return int    ...       return value (-1 = error)
-   */
-  public function update () {
-    if (checkRequired(['title', 'content', 'userId', 'publicationId'])) {
-      $title = $post['title'];
-      $content = $post['content'];
-      $publicationId = $post['publicationId'];
+		if (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $userId != $publiUserId) {
+			throw new \Utils\RequestException('action reservee aux administeurs', 403);
+		}
 
-      if ($title === NULL || $content === NULL) {
-        echo 'aucun contenu';
-        return false;
-      }
+		$updates = ['id' => $id, 'modified' => true];
+		foreach ($patches as $patch) {
+			switch ($patch['op']) {
+				case 'replace':
+					$updates[explode('/',$patch['path'])[1]] = $patch['value'];
+					break;
+				default:
+					throw new \Utils\RequestException('bad op', 400);
+			}
+		}
+		$this->Publication->save($this->filterXSS($updates));
+	}
 
-      $publicationModel = new \Models\Publication();
+	/**
+	* Delete a publication. Accessible by administrators and the "author" user only.
+	* it delete all foreign keys firstly.
+	* @param  int 		$planetId 	planet id passed by road
+	* @param  int 		$id 				publication id passed by road
+	* @param  array 	$delete 		assosiativ array passed by method delete (datas)
+	* @return [type] 	[] 					[description]
+	*/
+	public function delete ($planetId, $id, $delete) {
+		if (!\Utils\Session::isLoggedIn()) {
+			throw new \Utils\RequestException('operation reservee aux membres', 401);
+		}
 
-      $oldPublication = $publicationModel->findFirst([
-        'fields' => ['title', 'content', 'id'],
-        'conditions' => ['id' => $publicationId],
-      ]);
+		$userId = \Utils\Session::user('id');
+		$publiUserId = $this->Publication->findFirst([
+			'fields' => 'userId',
+			'conditions' => ['id' => $id],
+		]);
 
-      if ($title == $oldPublication['title'] && $content == $oldPublication['content']) {
-        echo "aucunes modifications apportées";
-        return false;
-      }
+		if (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $userId != $publiUserId) {
+			throw new \Utils\RequestException('action reservee aux administeurs', 403);
+		}
 
-      $publicationModel->save(filterXSS([
-        'id' => $publicationId,
-        'title' => $title,
-        'content' => $content,
-        'modified' => +1,
-      ]));
-    }
-  }
+		$this->loadModel('Comment');
 
-  /**
-   * Delete one article from DB, based on the article ID
-   * @param  int  $id   the article ID
-   * @return int  ...   return value (-1 = error)
-   */
-  public function delete ($post) {
-    // FIRST THINGS FIRST : DELETE ALL COMMENTS LINKED TO THE PUBLICATION
-    $commentModel = new \Models\comment();
+		$this->Comment->delete([
+			'publicationId' => $id,
+		]);
 
-    if (!$commentModel->find([
-      'fields' => ['publicationId'],
-      'conditions' => ['publicationId' => $id],
-    ])) {
-      echo "aucun commentaires à supprimer";
-    }
+		$this->Publication->delete([
+			'id' => $id,
+		]);
 
-    $commentModel->delete(['publicationId' => $id]);
-
-    // THEN DELETE THE ARTICLE FROM THE DB
-    $publicationModel = new \Models\Publication();
-
-    if (!$publicationModel->findFirst([
-      'fields' => ['id'],
-      'conditions' => ['id' => $id],
-    ])) {
-      echo "article introuvable. ID incorrect";
-      return -2;
-    }
-
-    $publicationModel->delete($id);
-  }
+		$this->response(null, 204);
+	}
 }

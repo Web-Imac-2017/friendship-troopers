@@ -7,14 +7,16 @@ template     = eval(`\`${template}\``);
 import LateralMenuLeft from '../LateralMenuLeft/index.js'
 import MenuTools from '../MenuTools/index.js'
 import FriendTemplate from '../FriendTemplate/index.js'
-
+import NavBar from '../NavBar/index.js';
 
 const Friends = Vue.extend({
   template,
   components: {
     'FriendTemplate' : FriendTemplate, 
     'lateral-menu-left' : LateralMenuLeft, 
-    'menu-tools' : MenuTools }, 
+    'menu-tools' : MenuTools,
+    'navbar' : NavBar
+  }, 
   data () {
       return {
        user: {

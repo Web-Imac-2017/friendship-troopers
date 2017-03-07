@@ -8,14 +8,15 @@ var notify       = require('gulp-notify');       // Provides notification to bot
 var rename       = require('gulp-rename');       // Rename sources
 var sass         = require('gulp-sass');         // Used to build sass files
 var sourcemaps   = require('gulp-sourcemaps');   // Provide external sourcemap files
+var browserSync = require('browser-sync').create(); // pour recharger le navigateur
 
 var mapError     = require('../error');
 var concat = require('gulp-concat');
 
 var config = {
-  scss      : './src/scss/*',         // Les fichiers à watch
+  scss      : './src/scss/*.scss',         // Les fichiers à watch
   src       : './src/scss/style.scss', // Le fichier principal
-  outputDir : './www/assets/css',     // Le dossier ou le build sera généré
+  outputDir : '../www/assets/css',     // Le dossier ou le build sera généré
   outputFile: 'style.css'             // Le nom du fichier build
 };
 
@@ -48,6 +49,9 @@ gulp.task('sass', function() {
     .pipe(minify({processImport: false})) // Minify build file
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.outputDir))
+    .pipe(browserSync.reload({
+      stream: true
+    }))
     .pipe(notify({
       onLast: true,
       message: 'Generated file: <%= file.relative %>',
@@ -68,7 +72,22 @@ gulp.task('css', function () {
     }));
 });
 
+
+
+/*gulp.task('browserSync', function() {
+    browserSync.init({
+        proxy: "localhost/friendship-troopers/www/index.html"
+    });
+});*/
+
 // Task pour watch les modifications sur les fichiers scss
 gulp.task('watch', ['sass'], function() {
 	gulp.watch(config.scss, ['sass']);
 })
+
+
+//gulp.task('watch', ['browserSync', 'sass'], function (){
+//  gulp.watch(config.scss, ['sass']); 
+//  // Reloads the browser whenever JS files change
+//  gulp.watch('./src/js/**/*.js', browserSync.reload); 
+//});

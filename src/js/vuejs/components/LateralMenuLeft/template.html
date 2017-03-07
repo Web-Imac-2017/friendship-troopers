@@ -1,8 +1,10 @@
-<div class="container col-sm-12 post">
+<div class="container col-sm-12">
+  
+  <div class="lateralMenuLeft">
     <div class="lateralMenuAvatar">
 
       <img :src="user.userAvatar" alt="your avatar" class="avatar">
-      <img :src="user.userPlanet.path" alt="your planet" class="planet">
+      <!-- <img :src="user.userPlanet.path" alt="your planet" class="planet"> -->
       <h1> {{ user.username }} </h1> <br>
       <p> {{ user.userBadge}} </p>
 
@@ -24,5 +26,16 @@
         </li>
       </ul>
     </div> 
+    </div>
   </div>
-  </div>
+
+<div class="menu-deconnexion">
+    <p class="pseudo-button" v-on:click="deconnect">Déconnexion</p>
+</div>
+
+<div class="menuTools">
+
+    <router-link to="/mentions-legales" class=""> Mentions legales </router-link>
+
+</div>
+</div>

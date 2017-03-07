@@ -15,6 +15,16 @@
   @include order(2);
 }
 
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $title-font;
+  font-weight: normal;
+  @include font-size(1.6);
+  color:$main-title;
+  text-transform: uppercase; 
+  text-align: center;
+} 
+
 .container-colored{
   background:$articles-background;
   @include margin4(0, 0, 1, 0);
@@ -26,6 +36,7 @@
   @include margin4(0, 0, 1, 0);
   @include padding(1);
 }
+
 
 .relative{
   position:relative; 
@@ -61,7 +72,9 @@
 
 .bottom-right{
   bottom:1rem;
-} 
+}
+
+
 
 /* .container-fluid{
   background:$articles-background;
@@ -135,12 +148,6 @@
   order: $val;
 }
 
-/* .container-fluid{
-  background:$articles-background;
-} */
-
-
-
 .text-center{
   text-align:center;
 }
@@ -153,14 +160,12 @@ body {
   color:$main-text;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: $title-font;
-  font-weight: normal;
-  @include font-size(1.6);
-  color:$main-title;
-  text-transform: uppercase;
-  text-align: center;
-} 
+html, body, #home {
+    height: 100%;
+    margin: 0;
+}
+
+
 
 .center{
   @extend %center;
@@ -192,7 +197,6 @@ form{
       display:block;
       margin-bottom: 0;
       display: inline-block;
-      min-width: 19%;
       text-align: right;
       /* padding: 0 4%; */
     }
@@ -204,26 +208,42 @@ form{
     display: inline-block;
     width:80%;
   }
-  .field{
-    text-align: right;
-    padding: 1% 0;
-
-    button{
-      margin: 0 0 0 2%;
-      @include padding-button(2);
-
-      .img-rocket {
-        width: 3em;
-        position: absolute;
-        right:0em;
-      }
-    }
-  }
+  
   textarea {
     @extend input;
     width: 100%;
     resize: none;
   }
+}
+
+select {
+
+  background: #3b425e;
+  color:$white;
+  font-weight: 300;
+  @include padding2(0.5,1.5);
+  width:100%;
+  border:none;
+  margin: 0;      
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-image:
+    linear-gradient(45deg, transparent 50%, $grey 50%),
+    linear-gradient(135deg, $grey 50%, transparent 50%),
+    linear-gradient(to right, $comments-background, $comments-background);
+  background-position:
+    calc(105% - 20px) calc(1em + 2px),
+    calc(105% - 15px) calc(1em + 2px),
+    100% 0;
+  background-size:
+    5px 5px,
+    5px 5px,
+    2.5em 2.5em;
+  background-repeat: no-repeat;
 }
 
 button{
@@ -238,11 +258,123 @@ button{
 }
 
 
-.login > .row{
-  padding: 2% 3%;
-  .col-sm-8{
-    border-left: 1px solid $main-title;
+.login{
+/*   background-image: url("../images/background-image.jpg");
+background-repeat:no-repeat; */
+  min-height: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+/*   justify-content: center; */
+  padding-top: 10%;
+
+
+
+  #intro-txt{
+    @include margin4(0,0,3,0);
   }
+  .row{
+     @include padding(1);
+  }
+
+  .col-xs-4 > .row{
+    @include padding2(0.5,0);
+  }
+ 
+  .col-sm-8{
+    
+    padding:0;
+  }
+
+  .tabs > div{
+    width: 50%;
+    display: inline-block;
+    @include padding2(0.5,0);
+    border-bottom: 1px solid $main-title;
+    margin-bottom: -1px; 
+    h1{
+      color:white;
+    }
+    
+  }
+  .tabs > div:first-child{
+    border-right:  1px solid $main-title;
+    
+  }
+
+  .activeTab{
+    @include background-transparent(0.6);
+    border-top:  1px solid $main-title;
+    border-bottom:  none !important ;
+    margin-bottom: 0px;
+    border-left:  1px solid $main-title;
+    h1{
+      color:$main-title !important;
+    }
+  } 
+
+ 
+  h1{
+    @include margin4(0,0,2,0);
+  }
+  p{
+    @include margin(1);
+    text-align: center;
+  }
+
+  form{
+    border-left: 1px solid $main-title;
+    @include background-transparent(0.6);
+    @include padding(0.5);
+  }
+  label{
+    font-weight: 300;
+    @include padding2(0.5,0); 
+  }
+  .row:nth-child(4){
+    label{
+      @include padding(0);
+    }
+  } 
+  input{
+    width:100%;
+    color:$white;
+    @include margin2(0.1,0);
+  }
+
+  form {
+    p{
+      opacity: 0.7;
+    }
+  }
+
+  form > .row > .col-xs-3{
+    text-align: right;
+  }
+
+  .item:nth-child(2){
+    @include margin2(0,2);
+  } 
+
+  .form-button{
+    text-align: right;
+
+    button{
+      margin: 0 0 0 2%;
+      @include padding2(0.9,3.5); 
+      color:$white;
+      position:relative;
+
+      .img-rocket {
+        width: 4em;
+        position: absolute;
+        right: -1.5rem;
+        top: -0.5rem;
+      }
+    }
+  }
+  
+ 
 }
 
 
@@ -260,6 +392,17 @@ small {
   background-color: $articles-background;
   padding: 2%;
   margin-bottom: 2%;
+}
+.publish {
+  background-color: $comments-background;
+  padding: 2%;
+  margin-bottom: 2%;
+  textarea {
+    margin-left: 2%;
+    width: 98%;
+    background: $publish-background;
+    color: $grey;
+  }
 }
 
 .pseudo {
@@ -289,20 +432,37 @@ small {
     }
 }
 
-.comment{
+.post-content {
+  padding-left: 5rem;
+}
+
+.your-comment{
+  text-align: center;
   background: $comments-background;
+  width: 95%;
+  margin: 0 2.5%;
   margin-top:2%;
   max-height: 8em;
   .col-sm-1{
     padding: 1%;
   }
+  img {
+    max-height: 4em;
+  }
   button{
     margin-top:1em;
   }
-  textarea{
-    padding-left: 0;
+  .form-post img {
+    cursor: pointer;
   }
+  textarea{
+    color: $grey;
+    padding-left: 0;
+    text-align: left;
+  }
+
 }
+
 
 /* @media screen and (min-width: 1200px) {
   .container-fluid {
@@ -317,9 +477,9 @@ small {
 }
 
 .square {
-  height: 17rem;
-  width: 17rem;
-  margin: 1rem 1rem;
+  height: 13rem;
+  width: 13rem;
+  margin: 1rem auto;
 }
 
 input[type="radio"] {
@@ -331,6 +491,15 @@ input[type="radio"] {
   margin : 10% 0 0 0;
 }
 
+.uploadPicture {
+  background: $articles-background;
+  width: 6rem;
+  img{
+    width: 100%;
+    height: 100%;
+  }
+}
+
 .circle{
     -webkit-border-radius:8px;
     -moz-border-radius:8px;
@@ -339,7 +508,19 @@ input[type="radio"] {
     width:20px;
     height:20px;
     background-color: $transparent-background;
-    margin: 5rem 0;
+    margin:0;
+}
+
+
+.small-circle{
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    border-radius:8px;
+    border:2px solid $comments-background;
+    width:15px;
+    height:15px;
+    background-color: $transparent-background;
+    margin: 0;
 }
 
 .fullCircle {
@@ -364,3 +545,32 @@ input[type="radio"] {
 .pseudo-button {
   cursor : pointer;
 }
+
+
+@media screen and (max-width: $break-small) {
+  #intro-form{
+    form{
+      .col-xs-3{
+        width: 100%;
+        text-align: left;
+        padding-bottom: 1rem;
+      }
+      .col-xs-9{
+        width: 100%; 
+      }
+    }
+    .form-button{
+      a{
+        margin-bottom: 2rem;
+        display: block;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $break-mid) {
+  #intro-form{
+    padding:0;
+  }
+}
+
