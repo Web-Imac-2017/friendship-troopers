@@ -4,7 +4,7 @@
 * @var PublicationController
 * ////////////////////////////
 */
-namespace Controllers;
+namespace Controllers; 
 
 class Publication extends Controller {
 
