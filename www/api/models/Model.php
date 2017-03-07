@@ -87,10 +87,10 @@ abstract class Model {
 				if (!is_array($request['conditions'])) {
 					$sql .= $request['conditions'];
 				} else {
-					$condition = array();
+					$condition = [];
 					foreach ($request['conditions'] as $key => $value) {
 						if (strstr($key, '.') === false) {
-							$key = $this->table . '.' . $key;
+							$key = (isset($join['JoinTable']) ? $join['JoinTable'] : strtolower(array_pop($tmp))) . '.' . $key;
 						}
 						if (is_array($value)) {
 							if (isset($value['value']) and isset($value['cmp'])) {
@@ -136,6 +136,7 @@ abstract class Model {
 			}
 			// PREPARE THE REQUEST AND EXECUTE IT THEN RETURN AN OBJECT FROM YOUR DB
 			$prepareRequest = $this->pdo->prepare($sql);
+			var_dump($sql);
 			$prepareRequest->execute();
 
 			return ($prepareRequest->fetchAll(\PDO::FETCH_ASSOC));

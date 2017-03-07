@@ -27,12 +27,6 @@ class Comment extends Controller {
 			throw new \Utils\RequestException('vous n\'appartenez pas a cette planete !', 403);
 		}
 
-		if ($publicationId != $this->Comment->findFirst([
-				'fields' => '*',
-			])) {
-			throw new \Utils\RequestException('ces commentaires n\'appartiennent pas a cette publication !', 403);
-		}
-
 		$offset = +($get['offset'] ?? 0);
 		$limit = +($get['limit'] ?? 1);
 		if ($limit > 10) {
@@ -45,8 +39,8 @@ class Comment extends Controller {
 			[
 				'table' => 'publication',
 				'alias' => 'publication',
-				'from' => 'commentId',
-				'to' => 'id',
+				'from' => 'id',
+				'to' => 'publicationId',
 			],
 			],
 				'limit' => "$offset, $limit",
