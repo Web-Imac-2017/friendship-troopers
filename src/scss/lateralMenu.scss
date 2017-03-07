@@ -143,8 +143,6 @@
 }
 
 
-
-
 p.honor {
   text-align: center;
   padding: 0;
@@ -154,3 +152,28 @@ p.honor {
   color: $grey;
   font-style : italic;
 }
+
+/*
+
+@media screen and (max-width: $break-large) {
+  .lateralMenuRight {
+    display: none;
+  }
+}
+
+@media screen and (min-width: $break-large) {
+  .lateralMenuRight {
+    display: inline-block;
+  }
+}
+@media screen and (max-width: $break-mid) {
+  .lateralMenuLeft {
+    display: none;
+  }
+}
+
+@media screen and (min-width: $break-mid) {
+  .lateralMenuLeft {
+    display: inline-block;
+  }
+}*/

@@ -63,17 +63,11 @@ const router = new VueRouter({
       path: '/utilisateur/:user', 
       component: User, 
       props: true
-      // 
-      // path: '/utilisateur', 
-      // component : User
-      // mettre $username : unique pour chaque utilisateur
   },{ 
       name : 'Parameters',
       path: '/:user/parametres', 
       component : Parameters,
       props: true
-
-      // mettre $username : unique pour chaque utilisateur
   },{ 
       name : 'Friends',
       path: '/:user/amis', 
@@ -81,14 +75,12 @@ const router = new VueRouter({
       props: true
   },{ 
       name : 'Chat',
-      path: '/utilisateur/conversations/utilisateur', 
+      path: '/:user/conversations/utilisateur', 
       component : Chat
-      // mettre $username : unique pour chaque utilisateur
   },{ 
       name : 'Messages',
       path: '/:user/conversations', 
       component : Messages
-      // mettre $username : unique pour chaque utilisateur
   } ,{ 
       name : 'Enigme',
       path: '/:user/enigmes', 
@@ -99,19 +91,15 @@ const router = new VueRouter({
       path: '/:user/enigmes/resolues', 
       component : EnigmeResolved,
       props: true
-
-      // mettre $username : unique pour chaque utilisateur
   },{ 
       name : 'EnigmeCurrent',
       path: '/:user/enigmes/en-cours', 
       component : EnigmeCurrent,
       props: true
-      // mettre $username : unique pour chaque utilisateur
   },{ 
       name : 'EnigmeCurrentChat',
-      path: '/utilisateur/enigmes/en-cours/chatbox', 
+      path: '/:user/enigmes/en-cours/chatbox', 
       component : EnigmeCurrentChat
-      // mettre $username : unique pour chaque utilisateur
   },{ 
       name : 'Feed',
       path: '/actualites', 
@@ -125,12 +113,10 @@ const router = new VueRouter({
       name : 'Post',
       path: '/univers/:planet/post/:id', 
       component : Post
-      // mettre $planet : unique pour chaque planete
   },{ 
       name : 'Wiki',
       path: '/univers/:planet/wiki', 
       component : Wiki
-      // mettre $planet : unique pour chaque planete
   },{ 
       name : 'Market',
       path: '/marche-intergalactique', 
@@ -191,7 +177,7 @@ const router = new VueRouter({
       path: '/index.html', 
       redirect: {name:'Feed'}
   },{ 
-      path: '/*', 
+      path: '*', 
       redirect: '/erreur404'
   }
   ]
