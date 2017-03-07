@@ -81,7 +81,7 @@ const Feed = Vue.extend({
 	          likes: 50,
 	          comments: [
             {
-              user : "Moi",
+              user : "Moi1Toi1Kozepog",
                planeteId : 2,
               avatar : "/assets/images/avatars/parallel/astro.svg",
               content : "la vie c'est du kiri,Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut tortor eu ipsum laoreet faucibus. Etiam mattis eros id leo maximus blandit. Proin id massa in risus gravida suscipit non eu arcu. Aenean auctor lacus risus, porttitor sodales odio vehicula eu. Curabitur luctus ut ligula a iaculis. Aliquam erat volutpat. Pellentesque magna nibh, aliquam sit amet consectetur eget, auctor quis neque. BLJozeuoaugoeugo'",
