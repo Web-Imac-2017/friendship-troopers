@@ -28,6 +28,7 @@ import FAQ from '../components/FAQ'
 import Legals from '../components/Legals'
 
 /*import AdminCreatePost from '../components/admin/CreatePost.vue'
+import AdminCreatePost from '../components/admin/CreatePost.vue'
 import AdminCreateEvent from '../components/admin/CreateEvent.vue'
 import AdminAddAdmin from '../components/admin/AddAdmin.vue'
 import AdminReport from '../components/admin/Report.vue'

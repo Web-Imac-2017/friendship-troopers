@@ -4,3 +4,4 @@ dist/
 npm-debug.log
 www/assets/js
 www/assets/css
+gulp/tasks/

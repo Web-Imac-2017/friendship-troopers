@@ -1,24 +1,25 @@
- <div class="container-fluid friends">
-    <div class="row">
-      <aside class="col-sm-2">
-        <lateral-menu-left></lateral-menu-left>
-        <menu-tools></menu-tools>
-      </aside>
+<div class="container-fluid friends">
+  <navbar></navbar>
+  <div class="row">
+    <aside class="col-sm-2">
+      <lateral-menu-left></lateral-menu-left>
+      <menu-tools></menu-tools>
+    </aside>
 
-      <section class="article col-sm-10">
-        <div class="row">
-          <div class="col-sm-2" v-for="(item, index) in planets" v-on:click="selectedPlanet(index)">
-            <img :src="item.path" alt="planet" class="planet">
-            <h1 :class=item.type class="text-center">{{item.name}}</h1>
-          </div>
+    <section class="article col-sm-10">
+      <div class="row">
+        <div class="col-sm-2" v-for="(item, index) in planets" v-on:click="selectedPlanet(index)">
+          <img :src="item.path" alt="planet" class="planet">
+          <h1 :class=item.type class="text-center">{{item.name}}</h1>
         </div>
+      </div>
 
-        <div class="row">
-          <img src="../assets/images/Avatar1.svg">
-          <h1> Amis de la planète</h1>
-          <p> {{ user.nbFriends }} au total</p>
-        </div>
-        <friend-template :user="user"></friend-template>
-      </section>
-    </div>
+      <div class="row">
+        <img src="../assets/images/Avatar1.svg">
+        <h1> Amis de la planète</h1>
+        <p> {{ user.nbFriends }} au total</p>
+      </div>
+      <friend-template :user="user"></friend-template>
+    </section>
   </div>
+</div>

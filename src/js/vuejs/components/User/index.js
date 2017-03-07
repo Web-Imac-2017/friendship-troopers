@@ -14,6 +14,9 @@ import Post from '../Post/index.js'
 import optionBar from './optionBar/index.js'
 import statistics from './Statistics/index.js'
 
+import NavBar from '../NavBar/index.js';
+
+
 const User = Vue.extend({
   template,
    components: {
@@ -22,7 +25,8 @@ const User = Vue.extend({
     'lateral-menu-left' : LateralMenuLeft,
     'lateral-menu-right' : LateralMenuRight, 
     'menu-tools' : MenuTools, 
-    'post' : Post },
+    'post' : Post,
+    'navbar' : NavBar },
    methods: {
     profil: function(){
       if (this.myself)
@@ -35,23 +39,23 @@ const User = Vue.extend({
   data () {
       return {
        user: {
-        userAvatar : '../assets/logo.png',
+        userAvatar : '/assets/images/avatars/earth/miror.svg',
         username : 'LuckyPon', 
         userBadge : 'Baroudeuse de l\'espace', 
         birthDate : '29 avril',
         userPlanet : {
-          path : '../assets/Avatar1.svg',
+          path : '../assets/images/planets/P1.svg',
           name : 'Planete X785-E'
         }, 
         nbFriends : 53, 
         nbRiddleSolved : 2,
         points : 745,
         lastBadges : 
-          [ { path  : '../assets/logo.png',
+          [ { path  : '/assets/images/badges/logo.png',
             name : 'Resoudre une énigme'},
-            { path : '../assets/logo.png',
+            { path : '/assets/images/badges/logo.png',
             name : 'Ajouter un ami'},
-            { path : '../assets/logo.png',
+            { path : '/assets/images/badges/logo.png',
             name : 'Inscription'}
           ]
        }, 

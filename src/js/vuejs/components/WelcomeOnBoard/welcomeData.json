@@ -2,46 +2,46 @@
        "questions": [ {
          "number" : "1",
          "title" : "Ta couleur : ",
-         "answer" : [ {"text": "bleu", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/1_planete-bleue.jpg", "planetID" : "1"},
-                    {"text":"vert", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/1_planete-verte.jpg", "planetID" : "2"},
-                    {"text":"violet","image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/1_planete-violette.jpg", "planetID" : "3"},
-                    {"text":"rouge", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/1_planete-rouge.jpg", "planetID" : "4"},
-                    {"text":"orange", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/1_planete-orange.jpg", "planetID" : "5"}
+         "answer" : [ {"text": "bleu", "image" : "/assets/images/welcomeOnBoard/1_planete-bleue.jpg", "planetID" : "1"},
+                   {"text":"vert", "image" : "/assets/images/welcomeOnBoard/1_planete-verte.jpg", "planetID" : "2"},
+                    {"text":"violet","image" : "/assets/images/welcomeOnBoard/1_planete-violette.jpg", "planetID" : "3"},
+                    {"text":"rouge", "image" : "/assets/images/welcomeOnBoard/1_planete-rouge.jpg", "planetID" : "4"},
+                    {"text":"orange", "image" : "/assets/images/welcomeOnBoard/1_planete-orange.jpg", "planetID" : "5"}
          ]
         }, {
           "number" : "2",
           "title" : "Ton compagnon :",
-          "answer" : [ {"text":"un petit vélociraptor", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/2_velociraptor.jpg", "planetID" : "1"},
-                     {"text":"un mini Groot", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/2_groot.png", "planetID" : "2"}, 
-                     {"text":"une charmante androïde", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/2_android.png", "planetID" : "3"}, 
-                     {"text":"Doc", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/2_Doc.jpg", "planetID" : "4"}, 
-                     {"text":"un Choubacca", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/2_choubacca.jpeg", "planetID" : "5"} 
+          "answer" : [ {"text":"un petit vélociraptor", "image" : "/assets/images/welcomeOnBoard/2_velociraptor.jpg", "planetID" : "1"},
+                     {"text":"un mini Groot", "image" : "/assets/images/welcomeOnBoard/2_groot.png", "planetID" : "2"}, 
+                     {"text":"une charmante androïde", "image" : "/assets/images/welcomeOnBoard/2_android.png", "planetID" : "3"}, 
+                     {"text":"Doc", "image" : "/assets/images/welcomeOnBoard/2_Doc.jpg", "planetID" : "4"}, 
+                     {"text":"un Choubacca", "image" : "/assets/images/welcomeOnBoard/2_choubacca.jpeg", "planetID" : "5"} 
          ] 
         }, {
           "number" : "3",
           "title" : "Tes vacances parfaites :" ,
-          "answer" : [ {"text":"un week-end romantique à New New York", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/3_new-new-york.jpg", "planetID" : "1"},
-                     {"text":"tester les spécialités culinaires de Vulcain", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/3_vulcain.jpg", "planetID" : "2"},
-                     {"text":"relire tes classiques", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/3_lire-classiques.jpg", "planetID" : "3"}, 
-                     {"text":"arpenter un trou noir", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/3_trous-noirs.jpg", "planetID" : "4"},
-                     {"text":"faire la course de la Bounta", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/3_bounta.jpg", "planetID" : "5"}
+          "answer" : [ {"text":"un week-end romantique à New New York", "image" : "/assets/images/welcomeOnBoard/3_new-new-york.jpg", "planetID" : "1"},
+                     {"text":"tester les spécialités culinaires de Vulcain", "image" : "/assets/images/welcomeOnBoard/3_vulcain.jpg", "planetID" : "2"},
+                     {"text":"relire tes classiques", "image" : "/assets/images/welcomeOnBoard/3_lire-classiques.jpg", "planetID" : "3"}, 
+                     {"text":"arpenter un trou noir", "image" : "/assets/images/welcomeOnBoard/3_trous-noirs.jpg", "planetID" : "4"},
+                     {"text":"faire la course de la Bounta", "image" : "/assets/images/welcomeOnBoard/3_bounta.jpg", "planetID" : "5"}
          ] 
         },{
           "number" : "4",
           "title" : "L\"intelligence artificielle pour gérer ta maison :" ,
-          "answer" : [{"text": "la Matrice", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/4_matrice.jpg", "planetID" : "1"}, 
-                    {"text":"le Brain Bug", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/4_brainBug.jpg", "planetID" : "2"}, 
-                    {"text":"GladOS", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/4_Glados.jpg", "planetID" : "3"}, 
-                    {"text":"La Reine Rouge", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/4_red-queen.png", "planetID" : "4"}, 
+          "answer" : [{"text": "la Matrice", "image" : "/assets/images/welcomeOnBoard/4_matrice.jpg", "planetID" : "1"}, 
+                    {"text":"le Brain Bug", "image" : "/assets/images/welcomeOnBoard/4_brainBug.jpg", "planetID" : "2"}, 
+                    {"text":"GladOS", "image" : "/assets/images/welcomeOnBoard/4_Glados.jpg", "planetID" : "3"}, 
+                    {"text":"La Reine Rouge", "image" : "/assets/images/welcomeOnBoard/4_red-queen.png", "planetID" : "4"}, 
                    {"text":"AUTO", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/4_AUTO.jpg", "planetID" : "5"}
          ]},{
           "number" : "5",
           "title" : "Ton moyen de transport de prédilection :" , 
-          "answer" : [ {"text":"le TARDIS", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/5_tardis.jpg", "planetID" : "1"},
-                     {"text":"la Porte des Etoiles", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/5_porte-des-etoiles.jpg", "planetID" : "2"},
-                     {"text":"l\"astro-stop", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/5_astro-stop.jpg", "planetID" : "3"},
-                     {"text":"la DeLorean", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/5_deLorean.jpg", "planetID" : "4"}, 
-                     {"text":"l\"Arcadia", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/5_arcadia.jpg", "planetID" : "5"}
+          "answer" : [ {"text":"le TARDIS", "image" : "/assets/images/welcomeOnBoard/5_tardis.jpg", "planetID" : "1"},
+                     {"text":"la Porte des Etoiles", "image" : "/assets/images/welcomeOnBoard/5_porte-des-etoiles.jpg", "planetID" : "2"},
+                     {"text":"l\"astro-stop", "image" : "/assets/images/welcomeOnBoard/5_astro-stop.jpg", "planetID" : "3"},
+                     {"text":"la DeLorean", "image" : "/assets/images/welcomeOnBoard/5_deLorean.jpg", "planetID" : "4"}, 
+                     {"text":"l\"Arcadia", "image" : "/assets/images/welcomeOnBoard/5_arcadia.jpg", "planetID" : "5"}
          ] 
         },{
           "number" : "6",
