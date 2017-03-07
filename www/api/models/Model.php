@@ -75,7 +75,6 @@ abstract class Model {
 					$sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . $this->table . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
 				} else {
 					foreach ($request['leftJoin'] as $join) {
-
 						$tmp = explode("\\", get_class($this));
 						$sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . (isset($join['JoinTable']) ? $join['JoinTable'] : strtolower(array_pop($tmp))) . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
 					}
@@ -135,9 +134,12 @@ abstract class Model {
 			if (isset($request['limit'])) {
 				$sql .= ' LIMIT ' . $request['limit'];
 			}
-			echo '<pre>';
-			print_r($sql);
-			echo '</pre>';
+
+			// echo '<pre>';
+			// print_r($sql);
+			// echo '</pre>';
+			//var_dump($sql);
+
 			// PREPARE THE REQUEST AND EXECUTE IT THEN RETURN AN OBJECT FROM YOUR DB
 			$prepareRequest = $this->pdo->prepare($sql);
 			$prepareRequest->execute();
