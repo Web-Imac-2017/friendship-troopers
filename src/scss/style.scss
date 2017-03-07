@@ -97,6 +97,51 @@ h1, h2, h3, h4, h5, h6 {
       @include margin(2); 
     }
   }
+  .row{
+    .col-xs-12{
+      text-align: center;
+      padding-top: 2rem;
+    }
+  }
+
+  #planetAttribution{
+    font-weight: 300;
+    line-height: 2.5rem;
+
+    .container-transparent > .row{
+      padding: 4rem;
+    }
+
+    h1{
+      font-size:3rem;
+    }
+
+
+
+    a{
+      text-decoration: none;
+      border-bottom: 2px solid $white;
+      padding-bottom:0.4rem;
+    }
+    a:hover{
+      border-bottom: 2px solid $main-title;
+    }
+
+    .row {
+      margin: 1rem 3rem;
+    }
+
+    .exploration-button{
+      text-align: right;
+      margin-top:4rem;
+      font-size: 1.8rem;
+    }
+
+    
+
+  }
+  
+
 }
 
 .welcome-on-board{
@@ -163,7 +208,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   img.planet {
-      height: 40rem;
+      height: 25rem;
   }
 
   .not-clickable {
@@ -574,7 +619,7 @@ input[type="radio"] {
 
 .border-planet {
   border-style: solid;
-  border-width: 1.5rem;
+  border-width: 1.3rem;
 }
 
 .vertical-align {
@@ -617,19 +662,50 @@ input[type="radio"] {
       li{
         width:100%;
       }
+
     }
+    .button-text{
+       display:none !important;
+    }
+    .welcome-on-board .arrows-row img {
+        padding: 0;
+    }
+
+    p{
+      text-align:center !important;
+    }
+      
   }
 
   .welcome-on-board .row {
       @include margin2(0,1);
   }
+
+  .border-planet {
+      border-width: 0;
+  }
+
+  #welcome-on-board-container #planetAttribution .container-transparent > .row {
+    padding: 0;
+  }
+  #welcome-on-board-container #planetAttribution .row {
+      margin: 0;
+  }
+
+  .exploration-button {
+    margin: 3rem !important;
+    text-align: center !important;
+  }
 }
+
+
+
+
+
 
 @media all and (max-width: $break-small-welcome-on-board) {
   #welcome-on-board-container {
-    .button-text{
-         display:none;
-      }
+    
     .container-transparent{
       li{
         width:100%;
@@ -670,8 +746,24 @@ input[type="radio"] {
         padding-bottom: 2rem;
         padding-top: 2rem;
       }
+
+      .button-text{
+         font-size:1.5rem!important;
+      }
+
     } 
   }
 }
+
+@media (max-width: $screen-md-min) { 
+
+  .border-left {
+      border-left-width: 0;
+  }
+
+  
+
+
+ }
 
 
