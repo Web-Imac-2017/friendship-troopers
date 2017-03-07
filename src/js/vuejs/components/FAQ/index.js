@@ -5,8 +5,13 @@ import Vue from 'vue/dist/vue';
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
 
-const FAQ = Vue.extend({
+import NavBar from '../NavBar/index.js';
+ 
+ const FAQ = Vue.extend({
   template,
+  components : {
+  	'navbar' : NavBar
+  }
 });
 
 

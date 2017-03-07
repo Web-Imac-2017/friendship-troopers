@@ -11,21 +11,21 @@ const LateralMenuLeft = Vue.extend({
     data () {
       return {
         user : {
-          userAvatar : '../../friendship-troopers/www/assets/images/Avatar1.svg',
+          userAvatar : '/assets/images/Avatar1.svg',
           username : 'LuckyPon', 
           userBadge : 'Baroudeuse de l\'espace', 
           userPlanet : {
-            path : '../../friendship-troopers/www/assets/images/Avatar1.svg',
+            path : '/assets/images/planets/P1.svg',
             name : 'Planete X785-E'
           }, 
           lastFriends : [ {
-            avatar : '../../friendship-troopers/www/assets/images/Avatar1.svg',
+            avatar : '/assets/images/avatars/aliens/aliens.svg',
             name : 'Spockdu77'
           }, {
-            avatar : '../../friendship-troopers/www/assets/images/Avatar1.svg',
+            avatar : '/assets/images/avatars/earth/planets.svg',
             name : 'MartyDuPassé'
           }, {
-            avatar : '../../friendship-troopers/www/assets/images/Avatar1.svg',
+            avatar : '/assets/images/avatars/earth/miror.svg',
             name : 'JulieDuFutur'
           }
           ] 

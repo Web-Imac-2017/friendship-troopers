@@ -1,9 +1,9 @@
 <form class="form" v-on:submit.prevent.stop="save">
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-xs-3">
 				<label for="">Adresse e-mail</label>
 			</div>
-			<div class="col-sm-9">
+			<div class="col-xs-9">
 				<input maxlength="255" type="email" v-model="userSignIn.mail" name='mail' required>
 				<div v-if="alreadyUsedMail"><slot name="errorMail"></slot></div>
 				<div v-if="nullMail"><slot name="nullInputMail"></slot></div>
@@ -11,72 +11,75 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-xs-3">
 				<label for="">Pseudo</label>
 			</div>
-			<div class="col-sm-9">
+			<div class="col-xs-9">
 				<input maxlength="255" type="text" v-model="userSignIn.username" name='username' required>
 				<div v-if="alreadyUsedUsername"><slot name="errorUsername"></slot></div>
 				<div v-if="nullUsername"><slot name="nullInputUsername"></slot></div>
+				<div v-if="longUsername"><slot name="errorUsernameLong"></slot></div>
 			</div>
 		</div>
 		
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-xs-3">
 				<label for="">Mot de passe</label>
 			</div>
-			<div class="col-sm-9">
+			<div class="col-xs-9">
 				<input maxlength="255" type="password" v-model="userSignIn.password" name='password' required>
 				<div v-if="nullPassword"><slot name="nullInputPassword"></slot></div>
 				<div v-if="lowPassword"><slot name="errorLowPassword"></slot></div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-xs-3">
 				<label for="">Mot de passe (répéter)</label>
 			</div>
-			<div class="col-sm-9">
+			<div class="col-xs-9">
 				<input maxlength="255" type="password" v-model="userSignIn.passwordChecked" required>
 				<div v-if="falsePassword"><slot name="errorPassword"></slot></div>
 				<div v-if="nullPasswordChecked"><slot name="nullInputPasswordChecked"></slot></div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-xs-3">
 				<label for="">Date de naissance</label>
 			</div>
-			<div class="col-sm-9 wrapper">
+			<div class="col-xs-9 wrapper">
 				<div class="item">
 					<select v-model.number="userSignIn.day" name="day" id="day" required>
 <!-- 			       	<option v-for="option in userSignIn.dayTab">
- -->			     <option v-for="option in 31">
-			            {{ option }}
-			        </option>
-		       </select>
+	 -->			     <option v-for="index in 31">
+				            {{ index }}
+				        </option>
+		       		</select>
 				</div>
 				<div class="item">
 					<select v-model.number="userSignIn.month" name="month" id="month" required>
 			       	<!-- <option v-for="option in userSignIn.monthTab"> -->
-			       	<option v-for="option in 12">
-			            {{ option }}
-			        </option>
-		       </select>
+				       	<option v-for="index in 12">
+				            {{ index }}
+				        </option>
+		       		</select>
 				</div>
 				<div class="item">
 					<select v-model.number="userSignIn.year" name="year" id="year" required>
 			       	<!-- <option v-for="option in userSignIn.yearTab"> -->
-			       	<option v-for="option in 100">
-			            {{ 2017 - option }}
-			        </option>
-		       </select>
+				       	<option v-for="index in 100">
+				            {{ 2017 - index }}
+				        </option>
+			       </select>
 				</div>  
 			
 			</div>
-			<div v-if="falseDate"><slot name="errorDate"></slot></div>
+			
 		</div>
+		<div class="row" v-if="falseDate"><div class="col-xs-3"></div><div class="col-xs-9"><slot name="errorDate"></slot></div></div>
+		<div class="row" v-if="errorDB"><div class="col-xs-3"></div><div class="col-xs-9"><slot name="errorDBField"></slot></div></div>
 		<div class="row form-button">
-			<div class="col-sm-3"></div><div class="col-sm-9">
-				<button>S'inscrire<img class="img-rocket" src="../../friendship-troopers/www/assets/images/FuseeFirstPage.svg"> </button>
+			<div class="col-xs-12">
+				<button class="pseudo-button">S'inscrire<img class="img-rocket" src="./assets/images/FuseeFirstPage.svg"> </button>
 			</div>
 		
 		</div>

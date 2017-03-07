@@ -1,12 +1,12 @@
 <div class="login">
 <div class="container">
   	<div class="row">
-  		<div class="col-sm-4">
+  		<div id="intro-txt" class="col-md-4">
   			<div class="row">
   				<h1>Friendship troopers</h1>
   			</div>
   			
-  			<div>
+  			<div class="row">
   				<p>
   					Venez partager votre passion de la science-fiction à travers ce réseau social mélant énigmes et bonne humeur !
 				</p> <p>
@@ -16,7 +16,7 @@
   				</p> 
   			</div>
   		</div>
-  		<div class="col-sm-8">
+  		<div id="intro-form" class="col-md-8">
   			<div class="tabs">
   				<div class="pseudo-button" v-bind:class="{ activeTab: signIn }" v-on:click="inscription"><h1>Inscription</h1></div>
   				<div class="pseudo-button" v-bind:class="{ activeTab: !signIn }" v-on:click="connexion"><h1>Connexion</h1></div>
@@ -25,6 +25,7 @@
 			<form-user v-model="userSignIn" v-if="signIn">
 
 				<p slot="errorUsername">Ce pseudo est déjà utilisé !</p>
+				<p slot="errorUsernameLong">Votre pseudo doit faire moins de 20 caractères !</p>
 				<p slot="errorMail">Cette adresse mail est déjà utilisée !</p>
 				<p slot="errorMailValid">L'adresse mail n'est pas valide, veuillez vérifier svp !</p>
 				<p slot="errorPassword">Les deux mots de passe ne correspondent pas !</p>
@@ -35,6 +36,7 @@
 				<p slot="nullInputMail">{{ nullMessage }}</p>
 				<p slot="nullInputPassword">{{ nullMessage }}</p>
 				<p slot="nullInputPasswordChecked">{{ nullMessage }}</p>
+				<p slot="errorDBField">Une erreur semble s'être produite avec la base de données, nous nous excusons pour les désagréments.</p>
 
 			</form-user>
 
