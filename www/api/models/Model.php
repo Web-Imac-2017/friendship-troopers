@@ -235,14 +235,14 @@ abstract class Model {
 				foreach ($addKeys as $key => $value) {
 					$sql .= ' AND ' . $key . '=:' . $key;
 				}
-				$this->primaryKeyValue = $data[$key];
+				$this->primaryKeyValue = $data[$Pkey];
 				$action = 'update';
 		} else {
 			$sql = ' INSERT INTO ' . $this->table . ' SET '. implode(', ', $fields);
 			$action = 'insert';
 		}
-		// var_dump($sql);
-		// var_dump($currentData);
+		var_dump($sql);
+		var_dump($currentData);
 		$prepareRequest = $this->pdo->prepare($sql);
 		$prepareRequest->execute($currentData);
 

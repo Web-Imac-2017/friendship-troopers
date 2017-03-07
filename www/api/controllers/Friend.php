@@ -53,18 +53,47 @@ class Friend extends Controller {
      */
     public function confirmFriend($friendId){
         if (\Utils\Session::isLoggedIn() == NULL) {
-            throw new \Utils\RequestException('Vous n\'êtes pas connecté', 401);
+            throw new \Utils\RequestException('USER_NOT_LOGGED', 401);
         }
+        if(!is_string($friendId) || empty($friendId)){
+            throw new \Utils\RequestException('MISSING_FIELDS', 400);
+        }
+        $userId = \Utils\Session::user('id');
+        $addKeys = [
+            'friendId' => $friendId,
+        ];
+        try {
+            $this->Friend->save($this->filterXSS([
+                'userId' => $userId,
+                'status' => 1,
+            ]),$addKeys);
+        } catch (\PDOException $e) {
+            throw new \Utils\RequestException("erreur dans la BDD", 400); //code
+        }
+        $this->response("SUCCESS", 200);
     }
 
     /**
      * The user refuse to be friend with a user (who wanna be friend tho)
      * @param  int $friendId The id of someone who will never be the current user friend.
      */
-    public function refuseFriend($friendId){
+    public function deleteFriend($friendId){
         if (\Utils\Session::isLoggedIn() == NULL) {
-            throw new \Utils\RequestException('Vous n\'êtes pas connecté', 401);
+            throw new \Utils\RequestException('USER_NOT_LOGGED', 401);
         }
+        if(!is_string($friendId) || empty($friendId)){
+            throw new \Utils\RequestException('MISSING_FIELDS', 400);
+        }
+        $userId = \Utils\Session::user('id');
+        try {
+            $this->Friend->delete($this->filterXSS([
+                'userId' => $userId,
+                'friendId' => $friendId,
+            ]));
+        } catch (\PDOException $e) {
+            throw new \Utils\RequestException($e, 400); //code
+        }
+        $this->response("SUCCESS", 200);
     }
 
     /**
@@ -128,11 +157,51 @@ class Friend extends Controller {
         $this->response($result, 200);
     }
 
+    /**
+     * get all of the people who are willing to become the current user friend
+     * @return json list of the users
+     */
     public function invitationList(){
         if (\Utils\Session::isLoggedIn() == NULL) {
             throw new \Utils\RequestException('Vous n\'êtes pas connecté', 401);
         }
         $userId = \Utils\Session::user('id');
-        $result = $this->Friend->find('');
+        $result = $this->Friend->find([
+            'fields'=> ['friend.friendId','username', 'imagePath', 'avatar.altText'],
+            'leftJoin'=> [
+              [
+                'table' => 'user',
+        				'alias' => 'user',
+        				'from' => 'id',
+        				'to' => 'friendId',
+              ],
+              [
+                'table' => 'user_avatar',
+        				'alias' => 'userAvatar',
+        				'from' => 'userId',
+        				'to' => 'friendId',
+                        'JoinTable' => 'friend',
+              ],
+              [
+                'table' => 'avatar',
+        				'alias' => 'avatar',
+        				'from' => 'id',
+        				'to' => 'avatarId',
+                        'JoinTable' =>  'userAvatar',
+              ],
+          ],
+            'orderBy' => [
+              'key' => 'user.planetId',
+      				'order' => 'ASC',
+            ],
+            'conditions' => [
+                'friend.userId' => $userId,
+                'friend.status' => 0,
+                'friend.seeker' => 0,
+                'userAvatar.currentAvatar' => 1,
+                'userTitle.current' => 1,
+            ],
+        ]);
+        $this->response($result, 200);
     }
 }
