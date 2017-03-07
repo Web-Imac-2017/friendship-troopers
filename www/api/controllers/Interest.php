@@ -50,38 +50,29 @@ class Interest extends Controller {
     /*Looking for the interest Id choosen*/
     foreach($data as $key => $value) {
       if(!is_array($key)) {
-        $request = $userInterest->find([
-          'fields' => ['userId','interestId'],
-          'leftJoin' => [
-            [
-              'table' => 'user',
-              'alias' => 'User',
-              'from' => 'id',
-              'to' => 'userId'
-            ],
-            [
-              'table' => 'interest',
-              'alias' => 'interest',
-              'from' => 'id',
-              'to' => 'interestId',
-            ]
-          ]
-
+        $request = $this->Interest->find([
+          'fields' => ['interest.id']
         ]);
 
-        /*Saving the data*/
-        foreach($request as $tableKey => $tableValue) {
-          if($value == $tableValue['interestId']) {
-            $userInterest->save($this->filterXSS([
+        foreach ($request as $tableKey => $tableValue) {
+          if ($value = $tableValue['id']) {
+
+            $response = $userInterest->find([
+              'fields' => ['userId','interestId']
+            ]);
+
+              foreach($response as $tableUserInterestKey => $tableUserInterestValue) {
+                if (in_array($userId,$tableUserInterestValue))
+                  echo $userId.'already set';
+            /*$userInterest->save($this->filterXSS([
               'userId' => $userId,
               'interestId' => $value
-            ]));
-          } else {
-            echo 'tututut '.$value;
+            ]));*/
           }
         }
       }
     }
+  }
 }
 
   public function listuserInterest(){
