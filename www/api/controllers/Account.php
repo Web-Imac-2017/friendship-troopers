@@ -10,7 +10,7 @@ class Account extends Controller{
 	}
 
 	/**
-	* login fucntion. Allow user to log in with his account 
+	* login fucntion. Allow user to log in with his account
 	* @return [type] [description]
 	*/
 	public function login($post) {
@@ -48,7 +48,7 @@ class Account extends Controller{
 	* @return [type] [description]
 	*/
 	public function logout() {
-		Session::destroy();
+		\Utils\Session::destroy();
 
 		$this->response(null, 204);
 	}
