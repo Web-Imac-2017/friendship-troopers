@@ -93,7 +93,7 @@ class Publication extends Controller {
 			throw new \Utils\RequestException('cannot update publicationType as user', 403);
 		}
 
-		$userId = \Utils\Session::user('userId');
+		$userId = \Utils\Session::user('id');
 		$required = ['content'];
 		if (!empty($this->checkRequired($required, $post))) {
 			throw new \Utils\RequestException('champ manquant', 400);

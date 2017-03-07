@@ -242,8 +242,6 @@ abstract class Model {
 		if($action == 'insert') {
 			$this->primaryKeyValue = $this->pdo->lastInsertId($this->primaryKey);
 		}
-
-		var_dump($sql);
 		return $this->primaryKeyValue;
 	}
 }

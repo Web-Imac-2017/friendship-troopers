@@ -82,7 +82,7 @@ class Comment extends Controller {
 			throw new \Utils\RequestException('cannot update publicationType as user', 403);
 		}
 
-		$userId = \Utils\Session::user('userId');
+		$userId = \Utils\Session::user('id');
 		$required = ['content'];
 		if (!empty($this->checkRequired($required, $post))) {
 			throw new \Utils\RequestException('champ manquant', 400);
@@ -111,15 +111,15 @@ class Comment extends Controller {
 		}
 	}
 
-		/**
-		* Update a comment. Accessible by administrators and the "author" user only.
-		* @param  int 		$planetId 			planet id passed by road
-		* @param  int 		$publicationId 	publication id passed by road
-		* @param  int 		$id 						comment id passed by road
-		* @param  array 	$patches 				assosiativ array passed by method patch (datas)
-		* @return [type] 	[] 							[description]
-		*/
-		public function update ($planetId, $publicationId, $id, $date, $patches) {
+	/**
+	* Update a comment. Accessible by administrators and the "author" user only.
+	* @param  int 		$planetId 			planet id passed by road
+	* @param  int 		$publicationId 	publication id passed by road
+	* @param  int 		$id 						comment id passed by road
+	* @param  array 	$patches 				assosiativ array passed by method patch (datas)
+	* @return [type] 	[] 							[description]
+	*/
+	public function update ($planetId, $publicationId, $id, $date, $patches) {
 		if (!\Utils\Session::isLoggedIn()) {
 		throw new \Utils\RequestException('operation reservee aux membres', 401);
 		}
