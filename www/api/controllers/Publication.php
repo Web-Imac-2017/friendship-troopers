@@ -45,21 +45,31 @@ class Publication extends Controller {
 			];
 		}
 
+		/*$where ['avatar.userId'] = [
+			'cmp' => '',
+			'value' => '',
+			'JoinTable' => '',
+		];*/
+
 		$request = $this->Publication->find([
-			'fields' => ['publication.id', 'publication.content', 'publication.publishDate', 'publication.userId', 'publication.modified'],
+			'fields' => [
+				'DISTINCT publication.userId', 'publication.id', 'publication.content', 'publication.publishDate', 'publication.modified',
+				'user.username', 'avatar.imagePath'
+		],
 			'leftJoin' => [
 			[
 				'table' => 'user',
-				'alias' => 'UserPlanet',
+				'alias' => 'user',
 				'from' => 'id',
 				'to' => 'userId',
 			],
 			[
-				'table' => 'stardust',
-				'alias' => 'publicationStardust',
-				'from' => 'publicationId',
+				'table' => 'user_avatar',
+				'alias' => 'listAvatar',
+				'from' => 'userId',
 				'to' => 'id',
-			]
+				'JoinTable' => 'user',
+			],
 			],
 				'conditions' => $where,
 				'limit' => "$offset, $limit",
