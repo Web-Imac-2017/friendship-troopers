@@ -25,6 +25,15 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 } 
 
+.admin {color : $main-text;}
+.space-opera {color : $planet-space-opera;}
+.parallel {color : $planet-parallel;}
+.robots {color : $planet-robots;}
+.earth {color : $planet-earth;}
+.alien {color : $planet-alien;}
+.pseudo {font-family: $title-font;}
+
+
 .container-colored{
   background:$articles-background;
   @include margin4(0, 0, 1, 0);

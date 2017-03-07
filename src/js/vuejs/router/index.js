@@ -12,6 +12,7 @@ import User from '../components/User'
 import Parameters from '../components/Parameters'
 import Friends from '../components/Friends'
 import Chat from '../components/Chat'
+import Messages from '../components/Messages'
 import Enigme from '../components/Enigme'
 import EnigmeResolved from '../components/EnigmeResolved'
 import EnigmeCurrent from '../components/EnigmeCurrent'
@@ -39,6 +40,7 @@ import AddEnigme from '../components/admin/AddEnigme.vue'*/
 
 import Error404 from '../components/Error404'
 
+
 // ==================== Router registration ====================
 const router = new VueRouter({
   mode: 'history',
@@ -58,38 +60,52 @@ const router = new VueRouter({
       component : Search
   },{ 
       name : 'User',
-      path: '/utilisateur', 
-      component : User
+      path: '/utilisateur/:user', 
+      component: User, 
+      props: true
+      // 
+      // path: '/utilisateur', 
+      // component : User
       // mettre $username : unique pour chaque utilisateur
   },{ 
       name : 'Parameters',
-      path: '/utilisateur/parametres', 
-      component : Parameters
+      path: '/:user/parametres', 
+      component : Parameters,
+      props: true
+
       // mettre $username : unique pour chaque utilisateur
   },{ 
       name : 'Friends',
-      path: '/utilisateur/amis', 
-      component : Friends
-      // mettre $username : unique pour chaque utilisateur
+      path: '/:user/amis', 
+      component : Friends,
+      props: true
   },{ 
       name : 'Chat',
       path: '/utilisateur/conversations/utilisateur', 
       component : Chat
       // mettre $username : unique pour chaque utilisateur
   },{ 
-      name : 'Enigme',
-      path: '/utilisateur/enigmes', 
-      component : Enigme
+      name : 'Messages',
+      path: '/:user/conversations', 
+      component : Messages
       // mettre $username : unique pour chaque utilisateur
+  } ,{ 
+      name : 'Enigme',
+      path: '/:user/enigmes', 
+      component: Enigme, 
+      props: true
   },{ 
       name : 'EnigmeResolved',
-      path: '/utilisateur/enigmes/resolues', 
-      component : EnigmeResolved
+      path: '/:user/enigmes/resolues', 
+      component : EnigmeResolved,
+      props: true
+
       // mettre $username : unique pour chaque utilisateur
   },{ 
       name : 'EnigmeCurrent',
-      path: '/utilisateur/enigmes/en-cours', 
-      component : EnigmeCurrent
+      path: '/:user/enigmes/en-cours', 
+      component : EnigmeCurrent,
+      props: true
       // mettre $username : unique pour chaque utilisateur
   },{ 
       name : 'EnigmeCurrentChat',
@@ -107,12 +123,12 @@ const router = new VueRouter({
       component : Event
   },{ 
       name : 'Post',
-      path: '/univers/planete/post/:id', 
+      path: '/univers/:planet/post/:id', 
       component : Post
       // mettre $planet : unique pour chaque planete
   },{ 
       name : 'Wiki',
-      path: '/univers/planete/wiki', 
+      path: '/univers/:planet/wiki', 
       component : Wiki
       // mettre $planet : unique pour chaque planete
   },{ 
@@ -172,9 +188,12 @@ const router = new VueRouter({
       path: '/admin/ajout-enigme', 
       component : AddEnigme
   }*/,{ 
-    	path: '*', 
-    	redirect: '/erreur404'
-	}
+      path: '/index.html', 
+      redirect: {name:'Feed'}
+  },{ 
+      path: '/*', 
+      redirect: '/erreur404'
+  }
   ]
 })
 
