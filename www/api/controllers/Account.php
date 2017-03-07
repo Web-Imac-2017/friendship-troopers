@@ -15,11 +15,11 @@ class Account extends Controller{
 	*/
 	public function login($post) {
 		if(!empty($this->checkRequired(['mail', 'password'], $post))) {
-			throw new \Utils\RequestException('MISSING_FIELDS', 400);
+			throw new \Utils\RequestException('champ manquant', 400);
 		}
 
 		if(!filter_var($post['mail'], FILTER_SANITIZE_EMAIL)){
-			throw new \Utils\RequestException('INVALID_MAIL', 400);
+			throw new \Utils\RequestException('email invalide', 400);
 		}
 
 		$result = $this->User->findFirst([
@@ -32,7 +32,7 @@ class Account extends Controller{
 		if(password_verify($post['password'] , $result['password'])) {
 			\Utils\Session::write('User', $result);
 		} else {
-			throw new \Utils\RequestException('INVALID_PASSWORD', 400);
+			throw new \Utils\RequestException('mdp invalide', 400);
 		}
 
 		$this->response([
@@ -48,7 +48,7 @@ class Account extends Controller{
 	* @return [type] [description]
 	*/
 	public function logout() {
-		\Utils\Session::destroy();
+		Session::destroy();
 
 		$this->response(null, 204);
 	}
@@ -111,7 +111,7 @@ class Account extends Controller{
 		$required = ['username','mail', 'birthdate', 'password'];
 		$error = $this->checkRequired($required, $post);
 		if(!empty($error)){
-			throw new \Utils\RequestException('MISSING_FIELDS', 400);
+			throw new \Utils\RequestException('champs manquants', 400);
 		} else {
 			$birthdate = $post['birthdate'];
 			$tmpBirth = explode('-', $birthdate);
@@ -119,7 +119,7 @@ class Account extends Controller{
 			$month = $tmpBirth[1];
 			$year = $tmpBirth[0];
 			if(!checkdate($month,$day,$year)) {
-				throw new \Utils\RequestException('INVALID_DATE', 400);
+				throw new \Utils\RequestException('Date invalide', 400);
 			}
 			$birthdate = $year . '-' . $month . '-' . $day;
 			$password = $post['password'] ;
@@ -137,7 +137,7 @@ class Account extends Controller{
 			try {
 				$user->addUser($data);
 			} catch (\PDOException $e) {
-					throw new \Utils\RequestException('USER_EXISTING', 400);
+					throw new \Utils\RequestException('utilisateur existe deja', 400);
 			}
 			$this->sendValidationMail($data);
 			unset($data['password']);

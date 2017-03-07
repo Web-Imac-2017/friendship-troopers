@@ -564,6 +564,23 @@ input[type="radio"] {
   border-left-width: 0.2rem;
 }
 
+.space-opera {color : $planet-space-opera;}
+.parallel {color : $planet-parallel;}
+.robots {color : $planet-robots;}
+.earth {color : $planet-earth;}
+.alien {color : $planet-alien;}
+.pseudo {font-family: $title-font;}
+
+.friends {
+  img.planet {
+    width: 90%;
+    height: auto;
+  }
+
+  .planetSelected {
+  background-color: blue;
+  }
+}
 
 @media screen and (max-width: $break-small) {
   #intro-form{

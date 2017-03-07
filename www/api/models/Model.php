@@ -38,9 +38,9 @@ abstract class Model {
 		//TRY TO OPPEN A CONNEXION TO THE DB
 		try {
 			$this->pdo = new \PDO('mysql:host=' . $database['hostname'] . ';dbname=' . $database['database']. ';',
-				$database['login'],
-				$database['password'],
-				array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+							$database['login'],
+							$database['password'],
+							array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 			$this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 		} catch (\PDOException $e) {
 			die('ERROR ' . $e->getMessage());
@@ -70,16 +70,16 @@ abstract class Model {
 
 			// IF THIS IS A [LEFT JOIN], ACT ACCORDING SO TO COMPLETE THE REQUEST
 			if (isset($request['leftJoin'])) {
-				if (!is_array($request['leftJoin'][0])) {
-					$join = $request['leftJoin'];
-					$sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . $this->table . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
-				} else {
-					foreach ($request['leftJoin'] as $join) {
+                if (!is_array($request['leftJoin'][0])) {
+                    $join = $request['leftJoin'];
+                    $sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . $this->table . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
+                } else {
+                    foreach ($request['leftJoin'] as $join) {
 						$tmp = explode("\\", get_class($this));
-						$sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . (isset($join['JoinTable']) ? $join['JoinTable'] : strtolower(array_pop($tmp))) . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
-					}
-				}
-			}
+                        $sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . (isset($join['JoinTable']) ? $join['JoinTable'] : strtolower(array_pop($tmp))) . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
+                    }
+                }
+            }
 
 			// ADD THE CONDITIONS TO THE REQUEST, ONE OR MANY
 			if (isset($request['conditions']) && !empty($request['conditions'])) {
@@ -87,10 +87,10 @@ abstract class Model {
 				if (!is_array($request['conditions'])) {
 					$sql .= $request['conditions'];
 				} else {
-					$condition = [];
+					$condition = array();
 					foreach ($request['conditions'] as $key => $value) {
 						if (strstr($key, '.') === false) {
-							$key = (isset($join['JoinTable']) ? $join['JoinTable'] : strtolower(array_pop($tmp))) . '.' . $key;
+							$key = $this->table . '.' . $key;
 						}
 						if (is_array($value)) {
 							if (isset($value['value']) and isset($value['cmp'])) {
@@ -136,7 +136,6 @@ abstract class Model {
 			}
 			// PREPARE THE REQUEST AND EXECUTE IT THEN RETURN AN OBJECT FROM YOUR DB
 			$prepareRequest = $this->pdo->prepare($sql);
-			var_dump($sql);
 			$prepareRequest->execute();
 
 			return ($prepareRequest->fetchAll(\PDO::FETCH_ASSOC));
@@ -170,7 +169,7 @@ abstract class Model {
 		))->count);
 	}
 
-	/**
+ 	/**
 	 * delete function
 	 * delete one or multiple correspondances in the DB talbe specified
 	 * @param  asso array  $id   one or multiple entries that need to be deleted
@@ -195,7 +194,7 @@ abstract class Model {
 		$prepareRequest->execute();
 	}
 
-	/**
+			/**
 	 * Insert / Update function
 	 * INSERT INTO table VALUES ('valeur 1', 'valeur 2', ...)
 	 * Insert one or many entries into the DB. Based on the data and keys sent by a controller
@@ -243,6 +242,7 @@ abstract class Model {
 		if($action == 'insert') {
 			$this->primaryKeyValue = $this->pdo->lastInsertId($this->primaryKey);
 		}
-		return $this->primaryKeyValue;
+
+    return $this->primaryKeyValue;
 	}
 }
