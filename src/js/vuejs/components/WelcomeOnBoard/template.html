@@ -34,14 +34,14 @@
     </div>
   </div>
   <div class="row align-items-start"> 
-      <div v-on:click="decrement" class="col-sm-3 col-sm-offset-1"> <img src="../assets/images/fleche-gauche.svg">Revenir en arrière </div>
+      <div v-on:click="decrement" class="col-sm-3 col-sm-offset-1 pseudo-button"> <img src="/assets/images/fleche-gauche.svg">Revenir en arrière </div>
       <div class="col-sm-4">
          <div class="col-sm-2" v-for="(validate, index) in welcomeData.answerValidate">
           <div class="circle" v-bind:class="{ fullCircle : validate}" v-on:click="backToQuestion(index)"> </div>
        </div>
        </div>
-      <div v-on:click="increment" v-if="!welcomeData.finish" class="col-sm-4"> Passer la question <img src="../assets/images/fleche-droite.svg"></div>
-      <div v-on:click="submit" class="col-sm-3 align-self-end" v-else > Submit  <img src="../assets/images/fleche-droite.svg"></div>
+      <div  v-if="!welcomeData.finish" class="col-sm-4 align-self-end not-clickable"> Valider <img src="/assets/images/fleche-droite.svg"></div>
+      <div v-on:click="submit" class="col-sm-4 align-self-end pseudo-button" v-else > Valider  <img src="/assets/images/fleche-droite.svg"></div>
     </div>
 </div>
 <div class="container-fluid welcome-on-board border-planet" v-bind:style="styleObject" v-else>

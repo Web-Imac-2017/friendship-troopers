@@ -104,6 +104,10 @@
       height: 40rem;
   }
 
+  .not-clickable {
+    color: $dark-grey;
+  }
+
 }
 
 
@@ -355,4 +359,8 @@ input[type="radio"] {
 .border-left {
   border-left-style: solid;
   border-left-width: 0.2rem;
+}
+
+.pseudo-button {
+  cursor : pointer;
 }
