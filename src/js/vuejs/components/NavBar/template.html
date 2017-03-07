@@ -1,10 +1,10 @@
-  <div class="navbar row">
+  <div class="navbar">
     <ul class="nav navbar-nav">
       <li class="navbar-left">
-        <a class="navbar-brand" href="/"> <!-- {{$store.state.appTitle}} {{$store.state.appVersion}} -->Friendship<br/>Troopers</a>
+        <router-link to="/actualites" class="navbar-brand"> Friendship<br/>Troopers</router-link>
         <menu-separator></menu-separator>
         <router-link to="/actualites" class="nav-item nav-link nav-home"> Accueil </router-link>
-        <router-link to="/utilisateur/enigmes" class="nav-item nav-link nav-enigmes"> Énigmes </router-link>
+        <router-link :to="{ name: 'Enigme', params: { user: pseudo }}" class="nav-item nav-link nav-enigmes"> Énigmes </router-link>
       </li>
 
       <li class="navbar-right">
@@ -30,7 +30,7 @@
             </ul>
             <div  v-if = "friends.length > 0" class="separator"></div>
 
-            <p> <a href ="/utilisateur/amis"> Voir tous les amis</a></p>
+            <p> <router-link :to="{ name: 'Friends', params: { user: pseudo }}"> Voir tous les amis</router-link></p>
           </div>
         </div>
 
@@ -81,7 +81,7 @@
 
 
         <menu-separator></menu-separator>
-        <router-link to="/utilisateur" class="nav-item nav-link nav-profil"> Mon profil </router-link>
+        <router-link :to="{ name: 'User', params: { user: pseudo }}" class="nav-item nav-link nav-profil"> Mon profil </router-link>
 
       </li>
     </ul>

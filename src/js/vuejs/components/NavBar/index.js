@@ -100,7 +100,8 @@ const NavBar = Vue.extend({
                     {type:'2', post:'2', pseudo: 'hihi', avatar:'/assets/images/avatars/earth/astro.svg', planet :'earth'},     
                     {type:'3', post:'3'}     
         ], 
-        subMenu : 0
+        subMenu : 0,
+        pseudo : 'luckypon'
 
         // subMenu : 0 /*1:friends / 2: messages / 3: notif*/
       }

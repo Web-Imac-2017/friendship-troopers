@@ -13,12 +13,13 @@ const LateralMenuLeft = Vue.extend({
         user : {
           userAvatar : '/assets/images/Avatar1.svg',
           username : 'LuckyPon', 
-          userBadge : 'Baroudeuse de l\'espace', 
+          userHonor : 'Baroudeuse de l\'espace', 
           userPlanet : {
             path : '/assets/images/planets/P1.svg',
-            name : 'Planete X785-E'
+            name : 'space-opera'
           }, 
-          lastFriends : [ {
+          lastFriends : [ 
+          {
             avatar : '/assets/images/avatars/aliens/aliens.svg',
             name : 'Spockdu77'
           }, {
@@ -30,23 +31,6 @@ const LateralMenuLeft = Vue.extend({
           }
           ] 
         }
-      }
-    },
-    methods:{
-      deconnect(){
-        this.$http.post(apiRoot() + 'auth/logout', {
-          emulateJSON: true
-        }).then(
-          (response) => {
-            console.log("success deconnexion !");
-            this.$router.push("/")
-          },
-          (response) => {
-            console.log("fail deconnexion !")
-          }
-        )
-       
-
       }
     }
 });
