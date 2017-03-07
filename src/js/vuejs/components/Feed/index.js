@@ -77,15 +77,23 @@ const Feed = Vue.extend({
             planeteId : 2,
 	          date: '20 fev',
 	          hour: '12h04',
-	          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut tortor eu ipsum laoreet faucibus. Etiam mattis eros id leo maximus blandit. Proin id massa in risus gravida suscipit non eu arcu. Aenean auctor lacus risus, porttitor sodales odio vehicula eu. Curabitur luctus ut ligula a iaculis. Aliquam erat volutpat. Pellentesque magna nibh, aliquam sit amet consectetur eget, auctor quis neque.',
+	          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut tortor eu ipsum laoreet faucibus. Aliquam erat volutpat. Pellentesque magna nibh, aliquam sit amet consectetur eget, auctor quis neque.',
 	          likes: 50,
 	          comments: [
             {
               user : "Moi",
-              content : "la vie c'est du kiri"
+               planeteId : 2,
+              avatar : "/assets/images/avatars/parallel/astro.svg",
+              content : "la vie c'est du kiri,Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut tortor eu ipsum laoreet faucibus. Etiam mattis eros id leo maximus blandit. Proin id massa in risus gravida suscipit non eu arcu. Aenean auctor lacus risus, porttitor sodales odio vehicula eu. Curabitur luctus ut ligula a iaculis. Aliquam erat volutpat. Pellentesque magna nibh, aliquam sit amet consectetur eget, auctor quis neque. BLJozeuoaugoeugo'",
+              date: '20 fev',
+               hour: '12h04'
             }, {
               user : "Toi",
-              content : "Non, la vie c'est du kiwi"
+               planeteId : 2,
+              avatar : "/assets/images/avatars/parallel/astro.svg",
+              content : "Non, la vie c'est du kiwi",
+               date: '20 fev',
+            hour: '12h04'
             }
             ],
             id : 1
@@ -96,15 +104,23 @@ const Feed = Vue.extend({
             planeteId : 3,
             date: '20 fev',
             hour: '12h04',
-            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut tortor eu ipsum laoreet faucibus. Etiam mattis eros id leo maximus blandit. Proin id massa in risus gravida suscipit non eu arcu. Aenean auctor lacus risus, porttitor sodales odio vehicula eu. Curabitur luctus ut ligula a iaculis. Aliquam erat volutpat. Pellentesque magna nibh, aliquam sit amet consectetur eget, auctor quis neque.',
+            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut tortor eu ipsum laoreet faucibus. Etiam mattis eros id leo maximus blandit. Proin id massa in risus gravida suscipit non eu arcu. Aenean auctor lacus risus, porttitor sodales odio vehicula eu. Curabitur luctus ut ligula a iaculis. Aliquam erat volutpat. Pellentesque magna nibh, aliquam sit amet consectetur eget, auctor quis neque. BLJozeuoaugoeugo',
             likes: 50,
             comments: [
             {
               user : "Moi",
-              content : "la vie c'est du kiri"
+               planeteId : 2,
+              avatar : "/assets/images/avatars/parallel/astro.svg",
+              content : "la vie c'est du kiri",
+              date: '20 fev',
+              hour: '12h04'
             }, {
               user : "Toi",
-              content : "Non, la vie c'est du kiwi"
+               planeteId : 2,
+              avatar : "/assets/images/avatars/parallel/astro.svg",
+              content : "Non, la vie c'est du kiwi",
+              date: '20 fev',
+              hour: '12h04'
             }
             ],
             id : 2
@@ -120,10 +136,32 @@ const Feed = Vue.extend({
             comments: [
             {
               user : "Moi",
-              content : "la vie c'est du kiri"
+               planeteId : 2,
+              avatar : "/assets/images/avatars/parallel/astro.svg",
+              content : "la vie c'est du kiri",
+              date: '20 fev',
+              hour: '12h04'
             }, {
               user : "Toi",
-              content : "Non, la vie c'est du kiwi"
+               planeteId : 2,
+              avatar : "/assets/images/avatars/parallel/astro.svg",
+              content : "Non, la vie c'est du kiwi",
+              date: '20 fev',
+              hour: '12h04'
+            }, {
+              user : "Moi",
+               planeteId : 2,
+              avatar : "/assets/images/avatars/parallel/astro.svg",
+              content : "la vie c'est du kiri",
+               date: '20 fev',
+            hour: '12h04'
+            }, {
+              user : "Toi",
+               planeteId : 2,
+              avatar : "/assets/images/avatars/parallel/astro.svg",
+              content : "Non, la vie c'est du kiwi",
+               date: '20 fev',
+            hour: '12h04'
             }
             ],
             id : 3
