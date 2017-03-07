@@ -35,6 +35,7 @@ Router::delete('/riddles/:id', 'riddle#delete', 'riddle.delete');
 
 Router::post('/planets', 'planet#create');
 Router::delete('/planets/:planet', 'planet#delete');
+Router::get('/planets', 'planet#list');
 
 try {
   Router::run();

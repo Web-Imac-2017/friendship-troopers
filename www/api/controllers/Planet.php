@@ -21,7 +21,7 @@ class Planet extends Controller {
     }
 
     if (!in_array(\Utils\Session::user('roleId'), [1, 2])) {
-      throw new \Utils\RequestException('action reservee aux administeurs', 403);
+      throw new \Utils\RequestException('action reservee aux administrateurs', 403);
     }
 
     $required = ['name','imagePath'];
@@ -51,7 +51,7 @@ class Planet extends Controller {
     }
 
     if (!in_array(\Utils\Session::user('roleId'), [1, 2])) {
-      throw new \Utils\RequestException('action reservee aux administeurs', 403);
+      throw new \Utils\RequestException('action reservee aux administrateurs', 403);
     }
 
    $this->Planet->delete($this->filterXSS([
@@ -60,4 +60,19 @@ class Planet extends Controller {
 
    $this->response(null, 204);
 }
+
+public function list($get){
+  if (!\Utils\Session::isLoggedIn()) {
+    throw new \Utils\RequestException('operation reservee aux membres', 401);
+  }
+
+  if (!in_array(\Utils\Session::user('roleId'), [1, 2])) {
+    throw new \Utils\RequestException('action reservee aux administrateurs', 403);
+  }
+  $response = $this->Planet->find([
+    'fields' => '*',
+  ]);
+  var_dump($response);
+  }
+
 }
