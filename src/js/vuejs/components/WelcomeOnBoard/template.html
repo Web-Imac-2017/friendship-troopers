@@ -1,5 +1,12 @@
-<div id="home">
-<div class="container-fluid welcome-on-board" v-if="welcomeData.current < welcomeData.nbQuestions">
+<div id="welcome-on-board-container">
+<div v-show="introText" class="container welcome-on-board">
+  <div class="container-transparent intro-text">
+    <h1>Coucou texte d'introduction</h1>
+    <p>Il va falloir expliquer des trucs ici !!! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat maxime dignissimos eaque nemo. Ad consectetur magnam, ab nemo quam dolorum animi culpa reiciendis, quisquam, pariatur totam beatae officia saepe, doloremque.</p>
+    <button v-on:click="introText = false">Commencer le questionnaire</button>
+  </div>
+</div>
+<div v-show="!introText" class="container welcome-on-board" v-if="welcomeData.current < welcomeData.nbQuestions">
   <div class="container-transparent">
     <div class="row title">
       <div> {{ welcomeData.questions[welcomeData.current].number }}.</div>  
@@ -7,41 +14,41 @@
     </div>
     <div class="row">
       <ul>
-        <li class="col-md-2 col-md-offset-1" v-on:click="selected(0)">
+        <li class="pseudo-button col-xs-4 col-md-2 col-md-offset-1" v-on:click="selected(0)">
           <img :src="welcomeData.questions[welcomeData.current].answer[0].image" class="square">
-          <div class="text-center">{{ welcomeData.questions[welcomeData.current].answer[0].text }} </div>
+          <div>{{ welcomeData.questions[welcomeData.current].answer[0].text }} </div>
         </li>
-        <li class="col-md-2" v-on:click="selected(1)">
+        <li class="pseudo-button col-xs-4 col-md-2" v-on:click="selected(1)">
            <img :src="welcomeData.questions[welcomeData.current].answer[1].image" class="square"> 
-          <div class="text-center">{{ welcomeData.questions[welcomeData.current].answer[1].text }} </div> 
+          <div>{{ welcomeData.questions[welcomeData.current].answer[1].text }} </div> 
         </li>
-        <li class="col-md-2" v-on:click="selected(2)">
+        <li class="pseudo-button col-xs-4 col-md-2" v-on:click="selected(2)">
          <img :src="welcomeData.questions[welcomeData.current].answer[2].image" class="square"> 
-         <div class="text-center">{{ welcomeData.questions[welcomeData.current].answer[2].text }}</div> 
+         <div>{{ welcomeData.questions[welcomeData.current].answer[2].text }}</div> 
        </li>
-       <li class="col-md-2" v-on:click="selected(3)">
+       <li class="pseudo-button col-xs-6 col-md-2" v-on:click="selected(3)">
           <img :src="welcomeData.questions[welcomeData.current].answer[3].image" class="square"> 
-         <div class="text-center">{{ welcomeData.questions[welcomeData.current].answer[3].text }}</div>  
+         <div>{{ welcomeData.questions[welcomeData.current].answer[3].text }}</div>  
        </li>
-       <li class="col-md-2" v-on:click="selected(4)" >
+       <li class="pseudo-button col-xs-6 col-md-2" v-on:click="selected(4)" >
          <img :src="welcomeData.questions[welcomeData.current].answer[4].image" class="square"> 
-        <div class="text-center">{{ welcomeData.questions[welcomeData.current].answer[4].text }}</div> 
+        <div>{{ welcomeData.questions[welcomeData.current].answer[4].text }}</div> 
       </li>
     </ul>
     </div>
-    <div class="row slider">
+    <!-- <div class="row slider">
       <input type="range" v-model.number="welcomeData.current" min="0" :max="welcomeData.nbQuestions - 1" step="1" class="col-sm-10 "> </input>
-    </div>
+    </div> -->
   </div>
-  <div class="row align-items-start"> 
-      <div v-on:click="decrement" class="col-sm-3 col-sm-offset-1 pseudo-button"> <img src="/assets/images/fleche-gauche.svg">Revenir en arrière </div>
-      <div class="col-sm-4">
-         <div class="col-sm-2" v-for="(validate, index) in welcomeData.answerValidate">
+  <div class="arrows-row row align-items-start"> 
+      <div v-on:click="decrement" class="col-xs-3 col-sm-4 pseudo-button"> <img src="/assets/images/fleche-gauche.svg"><p class="button-text">Revenir en arrière </p></div>
+      <div class="col-xs-6 col-sm-4">
+        <div class="col-xs-2" v-for="(validate, index) in welcomeData.answerValidate">
           <div class="circle" v-bind:class="{ fullCircle : validate}" v-on:click="backToQuestion(index)"> </div>
        </div>
        </div>
-      <div  v-if="!welcomeData.finish" class="col-sm-4 align-self-end not-clickable"> Valider <img src="/assets/images/fleche-droite.svg"></div>
-      <div v-on:click="submit" class="col-sm-4 align-self-end pseudo-button" v-else > Valider  <img src="/assets/images/fleche-droite.svg"></div>
+      <div  v-if="!welcomeData.finish" class="col-xs-3 col-sm-4 align-self-end not-clickable"><p class="button-text"> Valider </p><img src="/assets/images/fleche-droite.svg"></div>
+      <div v-on:click="submit" class="col-xs-3 col-sm-4 align-self-end pseudo-button" v-else ><p class="button-text"> Valider  </p><img src="/assets/images/fleche-droite.svg"></div>
     </div>
 </div>
 <div class="container-fluid welcome-on-board border-planet" v-bind:style="styleObject" v-else>

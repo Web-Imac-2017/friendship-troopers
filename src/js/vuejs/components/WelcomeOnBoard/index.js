@@ -67,6 +67,7 @@ const WelcomeOnBoard = Vue.extend({
   },
   data () {
       return {
+        introText:true,
         welcomeData,
         styleObject : {
           borderColor : ''

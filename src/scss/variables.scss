@@ -62,8 +62,10 @@ $main-font: 'Roboto', serif;
 
 // Media queries
 
-$break-mid: 768px;    
-$break-small: 467px;    
+$break-mid: 768px; 
+$break-col-xs: 991px;       
+$break-small: 467px;  
+$break-small-welcome-on-board: 500px;    
 
 
 @font-face {

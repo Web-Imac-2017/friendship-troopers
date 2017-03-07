@@ -84,6 +84,7 @@
      @include thumb;
      -webkit-appearance: none;
      margin-top: ((-$track-border-width * 2  $track-height) / 2) - ($thumb-height / 2);
+     background-color: #ffffff;
    }
  
    &::-moz-range-track {

@@ -2,7 +2,7 @@
        "questions": [ {
          "number" : "1",
          "title" : "Ta couleur : ",
-         "answer" : [ {"text": "bleu", "image" : "/assets/images/welcomeOnBoard/1_planete-bleue.jpg", "planetID" : "1"},
+         "answer" : [ {"text": "bleu", "image" : "../assets/images/welcomeOnBoard/1_planete-bleue.jpg", "planetID" : "1"},
                    {"text":"vert", "image" : "/assets/images/welcomeOnBoard/1_planete-verte.jpg", "planetID" : "2"},
                     {"text":"violet","image" : "/assets/images/welcomeOnBoard/1_planete-violette.jpg", "planetID" : "3"},
                     {"text":"rouge", "image" : "/assets/images/welcomeOnBoard/1_planete-rouge.jpg", "planetID" : "4"},
@@ -33,7 +33,7 @@
                     {"text":"le Brain Bug", "image" : "/assets/images/welcomeOnBoard/4_brainBug.jpg", "planetID" : "2"}, 
                     {"text":"GladOS", "image" : "/assets/images/welcomeOnBoard/4_Glados.jpg", "planetID" : "3"}, 
                     {"text":"La Reine Rouge", "image" : "/assets/images/welcomeOnBoard/4_red-queen.png", "planetID" : "4"}, 
-                   {"text":"AUTO", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/4_AUTO.jpg", "planetID" : "5"}
+                   {"text":"AUTO", "image" : "/assets/images/welcomeOnBoard/4_AUTO.jpg", "planetID" : "5"}
          ]},{
           "number" : "5",
           "title" : "Ton moyen de transport de prédilection :" , 
@@ -64,31 +64,31 @@
             "planetID" : "1",
             "name" : "Terre  #AA001",
             "info" : "La Terre… Ce nom vous semble peut-être familière, mais la connaissez vous vraiment ? Depuis la démocratisation des voyages intersidéraux on y est plus à son aise ! Finis les embouteillages, les métropoles polluées et les files d’attentes aux supermarchés. Maintenant on peut vivre où on le souhaite, plus de loyers à payer. S’endormir en Alaska, admirant une aurore boréale et le lendemain, remettre ça face aux ruines magnifiques de Buenos Aires est devenu chose commune.", 
-            "path" : "../../../friendship-troopers/www/assets/images/P1.svg",
+            "path" : "/assets/images/P1.svg",
             "color": "#3eb6df"
           }, {
             "planetID" : "2",
             "name" : "Paranose #312LL",
             "info" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at porta odio. Sed eleifend, odio eget dictum molestie, sem purus sagittis velit,sit amet pharetra nulla arcu a ligula. Aenean rhoncus finibus est, id pretium dolor. Vivamus placerat nec neque non molestie. Donec egestas tincidunt arcu sed semper",
-            "path" : "../../../friendship-troopers/www/assets/images/P1.svg",
+            "path" : "/assets/images/P1.svg",
             "color" : "#ef4646"
           },{
             "planetID" : "3",
             "name" : "Technome #8T077",
             "info" : " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at porta odio. Sed eleifend, odio eget dictum molestie, sem purus sagittis velit, sit amet pharetra nulla arcu a ligula. Aenean rhoncus finibus est, id pretium dolor. Vivamus placerat nec neque non molestie. Donec egestas tincidunt arcu sed semper",
-            "path" : "../../../friendship-troopers/www/assets/images/P1.svg",
+            "path" : "/assets/images/P1.svg",
             "color" : "#767fe2"
           },{
             "planetID" : "4",
             "name" : "Sautien #SS013",
             "info" : "Avide d’aventures ? Tant mieux ! Vous voilà maintenant sur la planète Sautien, première planète alien découverte par l’explorateur Cari-Hu ! Vos charmants petits compatriotes se cachent principalement vers les montagnes Jighs. Bien que ces montagnes soient absolument charmante, nous vous conseillons de ne pas l’oubliez au cours de vos randonnées !",
-             "path" : "../../../friendship-troopers/www/assets/images/P1.svg",
+             "path" : "/assets/images/P1.svg",
             "color" :"#72b51a"
           },{
             "planetID" : "5",
             "name" : "Multas #781ST",
             "info" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at porta odio. Sed eleifend, odio eget dictum molestie, sem purus sagittis velit, sit amet pharetra nulla arcu a ligula. Aenean rhoncus finibus est, id pretium dolor. Vivamus placerat nec neque non molestie. Donec egestas tincidunt arcu sed semper",
-           "path" : "../../../friendship-troopers/www/assets/images/P1.svg",
+           "path" : "/assets/images/P1.svg",
              "color" :"#f9a519"
           }
        ]
