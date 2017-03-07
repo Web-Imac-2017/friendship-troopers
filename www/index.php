@@ -19,14 +19,19 @@ Router::post('/auth/login','account#login');
 Router::post('/auth/logout','account#logout');
 Router::get('/auth/validate','account#validateUser', 'auth.validate');
 Router::get('/users/me','account#getCurrentUser', 'users.me');
+Router::get('/users/:userId/interest','interest#listUserInterest', 'users.me.listInterest');
+Router::post('/users/me/interest/update','interest#addUserInterest', 'users.me.updateUserInterest');
 
 Router::post('/planets/:planet/posts', 'publication#create', 'planets.posts.create');
 Router::get('/planets/:planet/posts', 'publication#list', 'planets.posts.list');
 Router::get('/planets/:planet/posts/:id','publication#view', 'planets.posts.view');
 Router::patch('/planets/:planet/posts/:id', 'publication#update', 'planets.posts.update');
-Router::delete('planets/:planet/posts/:id', 'publication#delete', 'planets.posts.delete');
+Router::delete('/planets/:planet/posts/:id', 'publication#delete', 'planets.posts.delete');
 
-Router::get('/planets/:planet/news' , 'planet#getPlanetFeed');
+Router::get('/planets/:planet/news', 'planet#getPlanetFeed');
+
+Router::post('/interest/add' , 'interest#addInterest','interest.add');
+Router::get('/interest/view','interest#listInterest', 'interest.list');
 
 Router::post('/riddles', 'riddle#create', 'riddle.create');
 Router::get('/riddles', 'riddle#list', 'riddle.list');

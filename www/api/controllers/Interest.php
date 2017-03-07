@@ -8,65 +8,73 @@
 namespace Controllers;
 
 class Interest extends Controller {
-  private $id;
-  private $label;
-  private $initInterest;
-
-  /*CONSTRUCTOR*/
   public function __construct() {
     $this->loadModel('Interest');
   }
 
-  /*GETTERS*/
-  public function getId () {
-    return $this->id;
+  public function listInterest() {
+    $interest = new \Models\Interest();
+    $request = $interest->find([
+      'fields' => ['id','label','initInterest'],
+      'conditions' => 'initInterest = 0'
+    ]);
+    $this->response($request,200);
+
   }
 
-  public function getLabel () {
-    return $this->label;
+  /*Add a interest in the DB*/
+  public function addInterest ($newLabel) {
+
+      $this->Interest->save($this->filterXSS([
+        'label' => $newLabel['label'],
+        'initInterest' => 0
+      ]));
+
+      echo $newLabel['label'];
   }
 
-  public function getInitInterest () {
-    return $this->initInterest;
-  }
+  /*$data contains all of the interest the user choose*/
+  public function addUserInterest ($data) {
+    /*Checking if $data is an array*/
+    if(!is_array($data)) {
+      throw new \Utils\RequestException('data erronées', 403); // code d'erreur ?
+    }
+      /*Checking if the user is logged in*/
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
+    }
 
+    $userId = \Utils\Session::user('id');
+    $
 
-  /*SETTERS*/
-  public function setId ($newId) {
-    $this->id = (int) $newId;
-  }
+    /*Looking for the interest Id choosen*/
+    foreach($data as $key => $value) {
+      if(is_array($key)) {
 
-  public function setLabel ($newLabel) {
-    if(is_string($newLabel))
-      $this->label = $newLabel;
-  }
-
-  public function setInitInterest ($newInitInterest) {
-    if($newInitInterest != 0 && $newInitInterest != 1)
-      $this->initInterest = 0;
-    else
-      $this->initInterest = $newInitInterest;
-  }
-  /*FEATURES*/
-  public function hydrate ($data) {
-    if(is_array($data))
-    {
-      $this->id = setId ($data['id']);
-      $this->label = setLabel ($data['label']);
-      $this->initInterest = setInitInterest ($data['initInterest']);
+      }
     }
   }
 
-  public function display () {
-    $info = 'Interest #'.$this->getId().'<br>';
-    $info .='Label : '.$this->getLabel.'<br>';
-    $info .= 'Is an initial interest ? ';
-    if($this->getInitInterest())
-      $info .= 'yes<br>';
-    else
-      $info .= 'no<br>';
-
-    echo $info;
+  public function listuserInterest(){
+    $userInterest = new \Models\User_Interest();
+    $request = $userInterest->find([
+      'fields' => ['interest.id', 'label'],
+      'leftJoin' => [
+        [
+          'table' => 'user',
+  				'alias' => 'User',
+  				'from' => 'id',
+  				'to' => 'userId',
+        ],
+        [
+          'table' => 'interest',
+  				'alias' => 'interest',
+  				'from' => 'id',
+  				'to' => 'interestId',
+        ],
+      ],
+    ]);
+    $this->response($request, 200);
   }
 }
 
