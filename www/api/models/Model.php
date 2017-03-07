@@ -33,7 +33,7 @@ abstract class Model {
 			$this->table = array_pop($tableName);
 		}
 
-		$this->metaData = json_decode(file_get_contents(ROOT.'/config/dbMetaData.json'), true)[$this->table];
+		//$this->metaData = json_decode(file_get_contents(ROOT.'/config/dbMetaData.json'), true)[$this->table];
 
 		//TRY TO OPPEN A CONNEXION TO THE DB
 		try {
@@ -72,7 +72,7 @@ abstract class Model {
 			if (isset($request['leftJoin'])) {
                 if (!is_array($request['leftJoin'][0])) {
                     $join = $request['leftJoin'];
-                    $sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . $this->table . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
+                    $sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' .  $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
                 } else {
                     foreach ($request['leftJoin'] as $join) {
 						$tmp = explode("\\", get_class($this));
@@ -134,11 +134,11 @@ abstract class Model {
 			if (isset($request['limit'])) {
 				$sql .= ' LIMIT ' . $request['limit'];
 			}
+			var_dump($sql);
 			// PREPARE THE REQUEST AND EXECUTE IT THEN RETURN AN OBJECT FROM YOUR DB
 			$prepareRequest = $this->pdo->prepare($sql);
 			$prepareRequest->execute();
 
-			var_dump($sql);
 			return ($prepareRequest->fetchAll(\PDO::FETCH_ASSOC));
 		}
 	}
@@ -236,6 +236,8 @@ abstract class Model {
 			$sql = ' INSERT INTO ' . $this->table . ' SET '. implode(', ', $fields);
 			$action = 'insert';
 		}
+		// var_dump($sql);
+		// var_dump($currentData);
 		$prepareRequest = $this->pdo->prepare($sql);
 		$prepareRequest->execute($currentData);
 

@@ -48,7 +48,7 @@ class Account extends Controller{
 	* @return [type] [description]
 	*/
 	public function logout() {
-		Session::destroy();
+		\Utils\Session::destroy();
 
 		$this->response(null, 204);
 	}
