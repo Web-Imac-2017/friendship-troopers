@@ -45,15 +45,44 @@ class Interest extends Controller {
     }
 
     $userId = \Utils\Session::user('id');
-    $
+    $userInterest = new \Models\User_Interest();
 
     /*Looking for the interest Id choosen*/
     foreach($data as $key => $value) {
-      if(is_array($key)) {
+      if(!is_array($key)) {
+        $request = $userInterest->find([
+          'fields' => ['userId','interestId'],
+          'leftJoin' => [
+            [
+              'table' => 'user',
+              'alias' => 'User',
+              'from' => 'id',
+              'to' => 'userId'
+            ],
+            [
+              'table' => 'interest',
+              'alias' => 'interest',
+              'from' => 'id',
+              'to' => 'interestId',
+            ]
+          ]
 
+        ]);
+
+        /*Saving the data*/
+        foreach($request as $tableKey => $tableValue) {
+          if($value == $tableValue['interestId']) {
+            $userInterest->save($this->filterXSS([
+              'userId' => $userId,
+              'interestId' => $value
+            ]));
+          } else {
+            echo 'tututut '.$value;
+          }
+        }
       }
     }
-  }
+}
 
   public function listuserInterest(){
     $userInterest = new \Models\User_Interest();
