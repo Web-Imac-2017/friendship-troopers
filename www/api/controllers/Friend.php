@@ -23,19 +23,11 @@ class Friend extends Controller {
         if (is_array($friendId) || empty($friendId) || !is_numeric($friendId)) {
           throw new \Utils\RequestException('user inconnu', 400);
         }
-        $userModel = new \Models\User();
-        $friendPlanetId = $userModel->findFirst([
-            'fields' => ['planetId'],
-            'conditions' => [
-                'id' => $this->filterXSS($friendId),
-            ],
-        ]);
         //the one asking for a friend
         try {
             $this->Friend->save($this->filterXSS([
                 'userId' => $userId,
                 'friendId' => $friendId,
-                'friendPlanetId'=> $friendPlanetId['planetId'],
                 'status' => 0,
                 'seeker' => 1,
             ]));
@@ -47,7 +39,6 @@ class Friend extends Controller {
             $this->Friend->save($this->filterXSS([
                 'userId' => $friendId,
                 'friendId' => $userId,
-                'friendPlanetId'=> $userPlanetId,
                 'status' => 0,
                 'seeker' => 0,
             ]));
@@ -58,7 +49,7 @@ class Friend extends Controller {
 
     /**
      * The user gladly accept to be friend with a user (who wanna be friend tho)
-     * @param  int $friendId the id of the friend the current user is aproving
+     * @param  int $friendId The id of the friend the current user is aproving
      */
     public function confirmFriend($friendId){
         if (\Utils\Session::isLoggedIn() == NULL) {
@@ -81,17 +72,12 @@ class Friend extends Controller {
      * @param  int $userId the user we want to see the friends list
      */
     public function viewListFriend($userId){
-//SELECT planetId, User.id, username FROM friend AS friend
-//     LEFT JOIN user AS User ON friend.userId = User.id
-//     LEFT JOIN user_avatar AS userAvatar ON friend.userId = userAvatar.userId
-//     LEFT JOIN avatar AS Avatar ON userAvatar.avatarId = Avatar.id
-//     LEFT JOIN user_title AS userTitle ON friend.userId = userTitle.UserId
-//     LEFT JOIN title AS Title ON userTitle.titleId = Title.id
-// WHERE friend.status=1
-// ORDER BY planetId ASC
+        if (\Utils\Session::isLoggedIn() == NULL) {
+            throw new \Utils\RequestException('Vous n\'êtes pas connecté', 401);
+        }
+        $this->filterXSS($userId);
         $result = $this->Friend->find([
-            'fields'=> ['planetId','User.id','username', 'imagePath', 'avatar.description', 'title.label'],
-            'conditions'=>['status'=>1],
+            'fields'=> ['user.planetId','friend.friendId','username', 'imagePath', 'avatar.altText','title.honorificTitle'],
             'leftJoin'=> [
               [
                 'table' => 'user',
@@ -113,31 +99,40 @@ class Friend extends Controller {
         				'to' => 'avatarId',
                         'JoinTable' =>  'userAvatar',
               ],
-              [ //friend.userId = userTitle.UserId
+              [
                 'table' => 'user_title',
         				'alias' => 'userTitle',
         				'from' => 'userId',
-        				'to' => 'userId',
+        				'to' => 'friendId',
                         'JoinTable' =>  'friend',
               ],
               [
                 'table' => 'title',
         				'alias' => 'title',
         				'from' => 'id',
-        				'to' => 'userId',
+        				'to' => 'titleId',
                         'JoinTable' => 'userTitle',
               ],
           ],
             'orderBy' => [
-              'key' => 'planetId',
+              'key' => 'user.planetId',
       				'order' => 'ASC',
             ],
-            'conditions' => ['friend.userId' => $userId,],
+            'conditions' => [
+                'friend.userId' => $userId,
+                'friend.status' => 1,
+                'userAvatar.currentAvatar' => 1,
+                'userTitle.current' => 1,
+            ],
         ]);
         $this->response($result, 200);
     }
 
-    public function inviationList(){
-
+    public function invitationList(){
+        if (\Utils\Session::isLoggedIn() == NULL) {
+            throw new \Utils\RequestException('Vous n\'êtes pas connecté', 401);
+        }
+        $userId = \Utils\Session::user('id');
+        $result = $this->Friend->find('');
     }
 }

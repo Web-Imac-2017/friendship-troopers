@@ -498,19 +498,19 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `friendshipTroopers`.`FRIEND` (
   `userId` INT NOT NULL,
   `friendId` INT NOT NULL,
-  `friendPlanetId` INT NOT NULL,
-  `statut` TINYINT NOT NULL DEFAULT 0,
+  `status` TINYINT NOT NULL DEFAULT 0,
+  `seeker` TINYINT NOT NULL DEFAULT 0,
   INDEX `fk_FRIENDS_USER2_idx` (`userId` ASC),
-  PRIMARY KEY (`userId`, `friendId`, `friendPlanetId`),
-  INDEX `fk_FRIENDS_USER1_idx` (`friendId` ASC, `friendPlanetId` ASC),
+  PRIMARY KEY (`userId`, `friendId`),
+  INDEX `fk_FRIENDS_USER1_idx` (`friendId` ASC),
   CONSTRAINT `fk_FRIENDS_USER2`
     FOREIGN KEY (`userId`)
     REFERENCES `friendshipTroopers`.`USER` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_FRIENDS_USER1`
-    FOREIGN KEY (`friendId` , `friendPlanetId`)
-    REFERENCES `friendshipTroopers`.`USER` (`id` , `planetId`)
+    FOREIGN KEY (`friendId` )
+    REFERENCES `friendshipTroopers`.`USER` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

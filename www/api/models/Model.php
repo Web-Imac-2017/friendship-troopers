@@ -91,7 +91,7 @@ abstract class Model {
 					$condition = [];
 					foreach ($request['conditions'] as $key => $value) {
 						if (strstr($key, '.') === false) {
-							$key = (isset($join['JoinTable']) ? $join['JoinTable'] : strtolower(array_pop($tmp))) . '.' . $key;
+							$key = $this->table . '.' . $key;
 						}
 						if (is_array($value)) {
 							if (isset($value['value']) and isset($value['cmp'])) {
@@ -135,10 +135,11 @@ abstract class Model {
 			if (isset($request['limit'])) {
 				$sql .= ' LIMIT ' . $request['limit'];
 			}
-			var_dump($sql);
+			echo '<pre>';
+			print_r($sql);
+			echo '</pre>';
 			// PREPARE THE REQUEST AND EXECUTE IT THEN RETURN AN OBJECT FROM YOUR DB
 			$prepareRequest = $this->pdo->prepare($sql);
-			var_dump($sql);
 			$prepareRequest->execute();
 
 			return ($prepareRequest->fetchAll(\PDO::FETCH_ASSOC));
