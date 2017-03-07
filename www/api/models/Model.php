@@ -33,7 +33,7 @@ abstract class Model {
 			$this->table = array_pop($tableName);
 		}
 
-		$this->metaData = json_decode(file_get_contents(ROOT.'/config/dbMetaData.json'), true)[$this->table];
+		//$this->metaData = json_decode(file_get_contents(ROOT.'/config/dbMetaData.json'), true)[$this->table];
 
 		//TRY TO OPPEN A CONNEXION TO THE DB
 		try {
@@ -75,6 +75,7 @@ abstract class Model {
 					$sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . $this->table . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
 				} else {
 					foreach ($request['leftJoin'] as $join) {
+
 						$tmp = explode("\\", get_class($this));
 						$sql .= ' LEFT JOIN ' . $join['table'] . ' AS ' . $join['alias'] . ' ON ' . (isset($join['JoinTable']) ? $join['JoinTable'] : strtolower(array_pop($tmp))) . '.' . $join['to'] . ' = ' . $join['alias'] . '.' . $join['from'];
 					}
@@ -134,6 +135,7 @@ abstract class Model {
 			if (isset($request['limit'])) {
 				$sql .= ' LIMIT ' . $request['limit'];
 			}
+			var_dump($sql);
 			// PREPARE THE REQUEST AND EXECUTE IT THEN RETURN AN OBJECT FROM YOUR DB
 			$prepareRequest = $this->pdo->prepare($sql);
 			var_dump($sql);
@@ -236,6 +238,8 @@ abstract class Model {
 			$sql = ' INSERT INTO ' . $this->table . ' SET '. implode(', ', $fields);
 			$action = 'insert';
 		}
+		// var_dump($sql);
+		// var_dump($currentData);
 		$prepareRequest = $this->pdo->prepare($sql);
 		$prepareRequest->execute($currentData);
 

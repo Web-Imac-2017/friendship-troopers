@@ -20,6 +20,12 @@ Router::post('/auth/logout','account#logout');
 Router::get('/auth/validate','account#validateUser', 'auth.validate');
 Router::get('/users/me','account#getCurrentUser', 'users.me');
 
+Router::get('/users/me/friends','friend#viewListFriend', 'users.me');
+Router::post('/users/:userId/add_friend','friend#addFriend', 'users.me.addFriend');
+Router::post('/users/:userId/confirm_friend','friend#confirmFriend', 'users.me.confirmFrien');
+Router::post('/users/:userId/delete_friend','friend#deleteFriend', 'users.me.deleteFriend');
+Router::get('/users/:userId/friends','friend#viewListFriend', 'users.me.viewListFriend');
+
 Router::post('/planets/:planet/posts', 'publication#create', 'planets.posts.create');
 Router::get('/planets/:planet/posts', 'publication#list', 'planets.posts.list');
 Router::patch('/planets/:planet/posts/:id', 'publication#update', 'planets.posts.update');
