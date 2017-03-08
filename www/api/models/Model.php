@@ -87,10 +87,10 @@ abstract class Model {
 				if (!is_array($request['conditions'])) {
 					$sql .= $request['conditions'];
 				} else {
-					$condition = [];
+					$condition = array();
 					foreach ($request['conditions'] as $key => $value) {
 						if (strstr($key, '.') === false) {
-							$key = (isset($join['JoinTable']) ? $join['JoinTable'] : strtolower(array_pop($tmp))) . '.' . $key;
+							$key = $this->table . '.' . $key;
 						}
 						if (is_array($value)) {
 							if (isset($value['value']) and isset($value['cmp'])) {
@@ -138,7 +138,6 @@ abstract class Model {
 			$prepareRequest = $this->pdo->prepare($sql);
 			var_dump($sql);
 			$prepareRequest->execute();
-
 			return ($prepareRequest->fetchAll(\PDO::FETCH_ASSOC));
 		}
 	}

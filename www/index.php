@@ -14,7 +14,7 @@ use \Utils\Router\Router;
 
 Router::init($_GET['url']);
 
-Router::post('/auth/signin','account#inscription'); 
+Router::post('/auth/signin','account#inscription');
 Router::post('/auth/login','account#login');
 Router::post('/auth/logout','account#logout');
 Router::get('/auth/validate','account#validateUser', 'auth.validate');
@@ -27,7 +27,7 @@ Router::delete('planets/:planet/posts/:id', 'publication#delete', 'planets.posts
 
 Router::post('/planets/:planet/posts/:publicationId/comments', 'comment#create', 'planets.posts.comments.create');
 Router::get('/planets/:planet/posts/:publicationId/comments', 'comment#list', 'planets.posts.comments.list');
-Router::patch('/planets/:planet/posts/:publicationId/comments/:id/:publishDate', 'comment#update', 'planets.posts.comments.update');
+Router::patch('/planets/:planet/posts/:publicationId/comments/:id', 'comment#update', 'planets.posts.comments.update');
 Router::delete('planets/:planet/posts/:publicationId/comments/:id', 'comment#delete', 'planets.posts.comments.delete');
 
 Router::get('/planets/:planet/news' , 'planet#getPlanetFeed');

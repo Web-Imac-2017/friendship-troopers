@@ -34,22 +34,50 @@ class Comment extends Controller {
 		}
 
 		$request = $this->Comment->find([
-			'fields' => ['comment.id', 'comment.content', 'comment.publishDate', 'comment.userId', 'comment.modified'],
+			'fields' => [
+				'DISTINCT comment.id', 'comment.content', 'comment.publishDate', 'comment.userId', 'comment.modified',
+				'user.username', 'listAvatar.imagePath',
+			],
 			'leftJoin' => [
-			[
-				'table' => 'publication',
-				'alias' => 'publication',
-				'from' => 'id',
-				'to' => 'publicationId',
+				[
+					'table' => 'publication',
+					'alias' => 'publication',
+					'from' => 'id',
+					'to' => 'publicationId',
+				],
+				[
+					'table' => 'user',
+					'alias' => 'user',
+					'from' => 'id',
+					'to' => 'userId',
+				],
+				[
+					'table' => 'user_avatar',
+					'alias' => 'avatar',
+					'from' => 'userId',
+					'to' => 'id',
+					'JoinTable' => 'user',
+				],
+				[
+					'table' => 'avatar',
+					'alias' => 'listAvatar',
+					'from' => 'id',
+					'to' => 'avatarId',
+					'JoinTable' => 'avatar',
+				],
 			],
+			'conditions' => [
+				'avatar.currentAvatar' => 1,
+				'publicationId' => $publicationId,
 			],
-				'limit' => "$offset, $limit",
-				'orderBy' => [
-				'key' => 'publishDate',
-				'order' => 'DESC',
+			'limit' => "$offset, $limit",
+			'orderBy' => [
+			'key' => 'publishDate',
+			'order' => 'DESC',
 			],
 		]);
 
+		var_dump($request);
 		$offset = $offset + $limit;
 		$listUrl = \Utils\Router\Router::url('planets.posts.comments.list', [
 			'planet' => $planetId,
@@ -113,39 +141,38 @@ class Comment extends Controller {
 	* @param  array 	$patches 				assosiativ array passed by method patch (datas)
 	* @return [type] 	[] 							[description]
 	*/
-	public function update ($planetId, $publicationId, $id, $date, $patches) {
+	public function update ($planetId, $publicationId, $id, $patches) {
 		if (!\Utils\Session::isLoggedIn()) {
-		throw new \Utils\RequestException('operation reservee aux membres', 401);
+			throw new \Utils\RequestException('operation reservee aux membres', 401);
 		}
 
 		$userId = \Utils\Session::user('id');
 		$commentUserId = $this->Comment->findFirst([
-		'fields' => 'userId',
-		'conditions' => [
-		'publicationId' => $publicationId,
-		'publishDate' => $date,
-		'id' => $id,
-		],
+			'fields' => 'userId',
+			'conditions' => [
+				'publicationId' => $publicationId,
+				'id' => $id,
+			],
 		]);
 
 		if (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $userId != $commentUserId) {
-		throw new \Utils\RequestException('action reservee aux administeurs', 403);
+			throw new \Utils\RequestException('action reservee aux administeurs', 403);
 		}
 
+		var_dump($patches);
 		$updates = [
-		'publicationId' => $publicationId,
-		'publishDate' => $date,
-		'id' => $id,
-		'modified' => true,
+			'id' => $id,
+			'publishDate' => Date('Y-m-d H:i:s'),
+			'modified' => true
 		];
 		foreach ($patches as $patch) {
-		switch ($patch['op']) {
-		case 'replace':
-		$updates[explode('/',$patch['path'])[1]] = $patch['value'];
-		break;
-		default:
-		throw new \Utils\RequestException('bad op', 400);
-		}
+			switch ($patch['op']) {
+				case 'replace':
+					$updates[explode('/',$patch['path'])[1]] = $patch['value'];
+					break;
+				default:
+					throw new \Utils\RequestException('bad op', 400);
+			}
 		}
 		$this->Comment->save($this->filterXSS($updates));
 	}
