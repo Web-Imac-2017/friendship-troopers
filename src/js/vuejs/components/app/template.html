@@ -3,6 +3,8 @@
 
       <h1>Menu temporaire</h1>
       <ul>
+        <li> <router-link :to="{ name: 'Friends', params: { user: 'pseudo' }}"> Voir les amis</router-link></li>
+      
         <li><router-link to="/"> Login/Accueil </router-link></li>
         <li><router-link to="/inscription/welcome-on-board"> Welcome On Board </router-link></li>
         <li><router-link to="/recherche"> Recherche </router-link></li>
