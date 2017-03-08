@@ -18,7 +18,7 @@ Router::post('/auth/signin','account#inscription');
 Router::post('/auth/login','account#login');
 Router::post('/auth/logout','account#logout');
 Router::get('/auth/validate','account#validateUser', 'auth.validate');
-Router::get('/users/me','account#getCurrentUser', 'users.me');
+Router::get('/users/me','account#getCurrentUser', 'users.me'); 
 
 Router::post('/planets/:planet/posts', 'publication#create', 'planets.posts.create');
 Router::get('/planets/:planet/posts', 'publication#list', 'planets.posts.list');
