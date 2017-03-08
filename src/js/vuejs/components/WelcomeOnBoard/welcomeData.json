@@ -54,9 +54,8 @@
         }
         ], 
         "nbQuestions" : 6,
-        "current" : 0,
-       
-        "answers": [],
+        "current" : 0,      
+        "answers": [-1, -1, -1, -1, -1, -1],
         "answerValidate" : [false,false,false,false,false,false],
         " planetUser" : "",
         "planetInfo" : [

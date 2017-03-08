@@ -167,10 +167,11 @@ h1, h2, h3, h4, h5, h6 {
       font-weight: lighter;
       opacity: 0.6;  
     }
-    
   }
   
-
+.fixed-height {
+  height: 8rem;
+}
  /*  width: 80%;
  height: 120%;
  margin: 2% auto;
@@ -217,6 +218,10 @@ h1, h2, h3, h4, h5, h6 {
 
   li{
     text-align: center;
+  }
+
+  .answer-selected {
+    background-color: $articles-background;
   }
 
 }
@@ -615,6 +620,10 @@ input[type="radio"] {
 
 .fullCircle {
   background-color: $grey;
+}
+
+.activeCircle {
+  background-color: $green-text;
 }
 
 .border-planet {

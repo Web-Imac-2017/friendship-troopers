@@ -24,6 +24,8 @@ const WelcomeOnBoard = Vue.extend({
       if (welcomeData.current < welcomeData.questions.length)
         welcomeData.current ++
       this.finished()
+      if (this.reached < welcomeData.current)
+        this.reached = welcomeData.current;
   },
     selected : function(index){
     welcomeData.answers[welcomeData.current] = welcomeData.questions[welcomeData.current].answer[index].planetID
@@ -31,6 +33,8 @@ const WelcomeOnBoard = Vue.extend({
     if (welcomeData.current < welcomeData.nbQuestions - 1) {
         welcomeData.current ++
     } 
+    if (this.reached < welcomeData.current)
+      this.reached = welcomeData.current;
     this.finished()
   },
   attributePlanet : function(){
@@ -57,24 +61,47 @@ const WelcomeOnBoard = Vue.extend({
   },
   backToQuestion : function(index){
     welcomeData.current = index;
-  }
+  },
+  selectedItem : function(index){
+        if (welcomeData.answerValidate[welcomeData.current] == true ){
+          if (welcomeData.answers[welcomeData.current] == index){
+            return {
+              'answer-selected' : true
+            }
+          }  
+        }
+      },
+    addClasses : function(index) {
+      var classArray = [];
+      var classSelected = this.selectedItem(index);
+      if ((index - 1) == 0 ) {
+        classArray.push('col-sm-offset-1');
+      }
+      classArray.push(classSelected);
+      return classArray;
+    }
 }, computed: {
     
     color: function () {
       if (planerUser != "")
         return welcomeData.planetInfo[welcomeData.planetUser].color;
-      } 
+    }
+
+    
+
+    
   },
   data () {
       return {
         introText:true,
         validateButton:false,
         welcomeData,
+        reached : 0,
         styleObject : {
-          borderColor : ''
+          borderColor : 'white'
         }, 
         styleObject2 : {
-          borderLeftColor : ''
+          borderLeftColor : 'white'
         }
     }
   }
