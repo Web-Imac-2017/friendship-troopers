@@ -13,6 +13,7 @@ class Friend extends Controller {
     /**
      * add a friend to the logged user
      * send a request to the potential 'friend' to be friend
+     * @param $friendId The id of the user that will become friend with the logged user
      */
     public function addFriend($friendId){
         if (\Utils\Session::isLoggedIn() == NULL) {
@@ -23,35 +24,35 @@ class Friend extends Controller {
         if (is_array($friendId) || empty($friendId) || !is_numeric($friendId)) {
           throw new \Utils\RequestException('user inconnu', 400);
         }
-        //the one asking for a friend
+        if ($friendId === $userId) {
+            throw new \Utils\RequestException('SCHIZOPHRENIE', 400); //code
+        }
         try {
-            $this->Friend->save($this->filterXSS([
+            //the one asking for a friend
+            $this->Friend->insert($this->filterXSS([
                 'userId' => $userId,
                 'friendId' => $friendId,
                 'status' => 0,
                 'seeker' => 1,
             ]));
-        } catch (\PDOException $e) {
-            throw new \Utils\RequestException('something went wrong', 400); //code
-        }
-        // the one being asked
-        try {
-            $this->Friend->save($this->filterXSS([
+            // the one being asked
+            $this->Friend->insert($this->filterXSS([
                 'userId' => $friendId,
                 'friendId' => $userId,
                 'status' => 0,
                 'seeker' => 0,
             ]));
         } catch (\PDOException $e) {
-            throw new \Utils\RequestException('something went wrong', 400); //code
+            throw new \Utils\RequestException('Impossible', 400);
         }
+        $this->response("SUCCESS", 200);
     }
 
     /**
      * The user gladly accept to be friend with a user (who wanna be friend tho)
      * @param  int $friendId The id of the friend the current user is aproving
      */
-    public function confirmFriend($friendId){
+    public function confirmFriend ($friendId) {
         if (\Utils\Session::isLoggedIn() == NULL) {
             throw new \Utils\RequestException('USER_NOT_LOGGED', 401);
         }
@@ -67,8 +68,13 @@ class Friend extends Controller {
                 'userId' => $userId,
                 'status' => 1,
             ]),$addKeys);
+            $addKeys['friendId'] = $userId;
+            $this->Friend->save($this->filterXSS([
+                'userId' => $friendId,
+                'status' => 1,
+            ]),$addKeys);
         } catch (\PDOException $e) {
-            throw new \Utils\RequestException("erreur dans la BDD", 400); //code
+            throw new \Utils\RequestException("erreur dans la BDD", 500); //code
         }
         $this->response("SUCCESS", 200);
     }
@@ -77,7 +83,7 @@ class Friend extends Controller {
      * The user refuse to be friend with a user (who wanna be friend tho)
      * @param  int $friendId The id of someone who will never be the current user friend.
      */
-    public function deleteFriend($friendId){
+    public function deleteFriend ($friendId) {
         if (\Utils\Session::isLoggedIn() == NULL) {
             throw new \Utils\RequestException('USER_NOT_LOGGED', 401);
         }
@@ -89,9 +95,11 @@ class Friend extends Controller {
             $this->Friend->delete($this->filterXSS([
                 'userId' => $userId,
                 'friendId' => $friendId,
+                'friendId' => $userId,
+                'userId' => $friendId,
             ]));
         } catch (\PDOException $e) {
-            throw new \Utils\RequestException($e, 400); //code
+            throw new \Utils\RequestException($e, 500); //code
         }
         $this->response("SUCCESS", 200);
     }
@@ -100,9 +108,14 @@ class Friend extends Controller {
      * The list of aproved friend of a user
      * @param  int $userId the user we want to see the friends list
      */
-    public function viewListFriend($userId){
+    public function listFriend ($userId) {
         if (\Utils\Session::isLoggedIn() == NULL) {
-            throw new \Utils\RequestException('Vous n\'êtes pas connecté', 401);
+            throw new \Utils\RequestException('USER_NOT_LOGGED', 401);
+        }
+        if(is_array($userId)){
+            if($userId['url'] === 'users/me/friends'){
+                $userId = \Utils\Session::user('id');
+            }
         }
         $this->filterXSS($userId);
         $result = $this->Friend->find([
@@ -161,7 +174,7 @@ class Friend extends Controller {
      * get all of the people who are willing to become the current user friend
      * @return json list of the users
      */
-    public function invitationList(){
+    public function invitationList () {
         if (\Utils\Session::isLoggedIn() == NULL) {
             throw new \Utils\RequestException('Vous n\'êtes pas connecté', 401);
         }
@@ -199,7 +212,6 @@ class Friend extends Controller {
                 'friend.status' => 0,
                 'friend.seeker' => 0,
                 'userAvatar.currentAvatar' => 1,
-                'userTitle.current' => 1,
             ],
         ]);
         $this->response($result, 200);

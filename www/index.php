@@ -19,13 +19,13 @@ Router::post('/auth/login','account#login');
 Router::post('/auth/logout','account#logout');
 Router::get('/auth/validate','account#validateUser', 'auth.validate');
 Router::get('/users/me','account#getCurrentUser', 'users.me');
-Router::get('/users/me/waiting_list_friend','friend#invitationList', 'users.me.invitationList');
 
-Router::get('/users/me/friends','friend#viewListFriend', 'users.me');
-Router::post('/users/:userId/add_friend','friend#addFriend', 'users.me.addFriend');
-Router::post('/users/:userId/confirm_friend','friend#confirmFriend', 'users.me.confirmFriend');
-Router::delete('/users/:userId/delete_friend','friend#deleteFriend', 'users.me.deleteFriend'); //same route for rejecting a friend
-Router::get('/users/:userId/friends','friend#viewListFriend', 'users.me.viewListFriend');
+Router::get('/users/me/waiting_list_friend','friend#invitationList', 'users.me.invitationList'); //ok
+Router::get('/users/me/friends','friend#listFriend', 'users.me.listUserFriend'); //ok
+Router::post('/users/:userId/add_friend','friend#addFriend', 'users.me.addFriend'); //ok
+Router::patch('/users/:userId/confirm_friend','friend#confirmFriend', 'users.me.confirmFriend'); //ok
+Router::delete('/users/:userId/delete_friend','friend#deleteFriend', 'users.me.deleteFriend'); //same route for rejecting a friend //ok
+Router::get('/users/:userId/friends','friend#listFriend', 'users.me.listFriend'); //ok
 
 Router::post('/planets/:planet/posts', 'publication#create', 'planets.posts.create');
 Router::get('/planets/:planet/posts', 'publication#list', 'planets.posts.list');
