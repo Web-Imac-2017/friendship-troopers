@@ -12,6 +12,10 @@ class Interest extends Controller {
     $this->loadModel('Interest');
   }
 
+/**
+ * listInterest list all interests from DB
+ * @return [type] [description]
+ */
   public function listInterest() {
     $interest = new \Models\Interest();
     $request = $interest->find([
@@ -22,26 +26,35 @@ class Interest extends Controller {
 
   }
 
-  /*Add a interest in the DB*/
-  public function addInterest ($newLabel) {
-
-      $this->Interest->save($this->filterXSS([
-        'label' => $newLabel['label'],
+  /**
+   * addInterest adds a new Interest in the DB
+   * @param string $newLabel [description]
+   */
+  public function addInterest ($newInterests) {
+    if(!is_array($newInterests)) {
+      throw new \Utils\RequestException('data erronées', 415); // code d'erreur ?
+    }
+    foreach($newInterests as $key => $value) {
+      echo $value;
+      $request = $this->Interest->save($this->filterXSS([
+        'label' => $value,
         'initInterest' => 0
       ]));
+    }
 
-      echo $newLabel['label'];
+      $this->response($request,200);
   }
 
   /**
-  * Add a new user_interest in the DB
-  * The interest must exist
-  * The user must to not already have this interest
-  * @param $data contains all of the interest choosen */
+   * addUserInterest add a new user_interest in the DB
+   * The interest must exist
+   * The user must to not already have this interest
+   * @param $data contains all of the interest choosen
+   */
   public function addUserInterest ($data) {
     /*Checking if $data is an array*/
     if(!is_array($data)) {
-      throw new \Utils\RequestException('data erronées', 403); // code d'erreur ?
+      throw new \Utils\RequestException('data erronées', 415); // code d'erreur ?
     }
       /*Checking if the user is logged in*/
     if (!\Utils\Session::isLoggedIn()) {
@@ -55,17 +68,18 @@ class Interest extends Controller {
 
     /*Save data*/
     foreach($data as $key => $value) {
-      echo 'on sauvegarde '.$value.' avec '.$userId;
-      $userInterest->save($this->filterXSS([
+      $request = $userInterest->save($this->filterXSS([
         'userId' => $userId,
         'interestId' => $value
       ]));
     }
+
+    $this->response($request,200);
   }
 
   /**
-   * [listuserInterest description]
-   * @return [type] [description]
+   * listuserInterest list all user_interest from DB
+   * @return  [type] [description]
    */
   public function listuserInterest() {
     $userInterest = new \Models\User_Interest();
@@ -90,8 +104,8 @@ class Interest extends Controller {
   }
 
   /**
-   * [delete_interest description]
-   * @param  [type] $data [description]
+   * delete_interest deletes one or more interests
+   * @param  array $data containing the interests
    * @return [type]       [description]
    */
   public function delete_interest($data) {
@@ -110,11 +124,13 @@ class Interest extends Controller {
     $userInterest = new \Models\User_Interest();
 
     foreach ($data as $key => $value) {
-      echo "$userId and $value";
-      $userInterest->delete(array('userId' => $userId,
+      $request1 = $userInterest->delete(array('userId' => $userId,
                                   'interestId' => $value));
-      $this->Interest->delete($value);
+      $request2 = $this->Interest->delete($value);
     }
+
+    $this->response($request1,200);
+    $this->response($request2,200);
   }
 
 }
