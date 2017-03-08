@@ -14,7 +14,7 @@ class Stardust extends Controller {
 
   public function list ($planetId, $publicationId, $get) {
     $count = $this->Stardust->findCount([
-      'conditions' => ['publicationId' => $publicationId],
+      'publicationId' => $publicationId,
     ]);
     var_dump($count);
   }

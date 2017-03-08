@@ -33,7 +33,7 @@ abstract class Model {
 			$this->table = array_pop($tableName);
 		}
 
-		$this->metaData = json_decode(file_get_contents(ROOT.'/config/dbMetaData.json'), true)[$this->table];
+		//$this->metaData = json_decode(file_get_contents(ROOT.'/config/dbMetaData.json'), true)[$this->table];
 
 		//TRY TO OPPEN A CONNEXION TO THE DB
 		try {
@@ -58,6 +58,7 @@ abstract class Model {
 	 * @return stdObject  ...               object containing all the occurences found in the DB
 	 */
 	public function find($request) {
+		var_dump($request);
 		$sql = 'SELECT ';
 		// MANAGE THE FIRST PART OF THE REQUEST [THE FIELDS]
 		if (isset($request['fields'])) {
@@ -162,12 +163,12 @@ abstract class Model {
 	public function findCount ($conditions = NULL) {
 		if ($conditions === NULL) {
 			return ($this->findFirst(array(
-				'fields' => 'COUNT(' . $this->primaryKey . ') AS count'))->count);
+				'fields' => ['COUNT(' . $this->primaryKey . ') AS count'])));
 		}
 		return ($this->findFirst(array(
-			'fields' => 'COUNT (' . $this->primaryKey . ') AS count',
+			'fields' => ['COUNT(' . $this->primaryKey . ') AS count'],
 			'conditions' => $conditions
-		))->count);
+		)));
 	}
 
 	/**
