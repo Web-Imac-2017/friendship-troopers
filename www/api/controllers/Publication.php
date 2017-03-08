@@ -45,6 +45,11 @@ class Publication extends Controller {
 			];
 		}
 
+		$where ['avatar.currentAvatar'] = [
+			'cmp' => '=',
+			'value' => 1,
+		];
+
 		$request = $this->Publication->find([
 			'fields' => [
 				'DISTINCT publication.userId', 'publication.id', 'publication.content', 'publication.publishDate', 'publication.modified',
