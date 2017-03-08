@@ -21,9 +21,18 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
   @include font-size(1.6);
   color:$main-title;
-  text-transform: uppercase;
+  text-transform: uppercase; 
   text-align: center;
 } 
+
+.admin, .Galaxie {color : $main-text;}
+.space-opera, .Multas {color : $planet-space-opera;}
+.parallel, .Paranose {color : $planet-parallel;}
+.robots, .Technome {color : $planet-robots;}
+.earth, .Terre {color : $planet-earth;}
+.alien, .Sautien {color : $planet-alien;}
+.pseudo {font-family: $title-font;}
+
 
 .container-colored{
   background:$articles-background;
@@ -47,23 +56,6 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   right:1rem;
   color:$grey;
-}
-
-.friend-list{
-  flex-flow: row wrap;
-  background:  none;
-
-  .item{
-    flex-grow:0;
-    background: $comments-background;
-    @include margin(1);
-  }
-
-  img{
-    width:100%;
-    @include padding(1);
-    @include border-radius(10);
-  }
 }
 
 .top-right{
@@ -156,6 +148,12 @@ body {
   color:$main-text;
 }
 
+html, body, #home {
+    height: 100%;
+    margin: 0;
+}
+
+
 
 .center{
   @extend %center;
@@ -169,7 +167,7 @@ body {
   text-align: right;
 }
 
-a{
+a {
   color:$main-text;
   text-decoration: underline;
   &:hover{
@@ -177,6 +175,15 @@ a{
     background-color: none;
   }
 }
+
+/*h1.pseudo a {
+  text-align: left;
+  text-decoration: none;
+  a:hover{
+    text-decoration: none;
+  }
+}
+*/
 
 .button-field{
   margin-top:1rem;
@@ -187,7 +194,6 @@ form{
       display:block;
       margin-bottom: 0;
       display: inline-block;
-      min-width: 19%;
       text-align: right;
       /* padding: 0 4%; */
     }
@@ -252,14 +258,23 @@ button{
 .login{
 /*   background-image: url("../images/background-image.jpg");
 background-repeat:no-repeat; */
-  .container{
-    width:900px;
+  min-height: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+/*   justify-content: center; */
+  padding-top: 10%;
+
+
+
+  #intro-txt{
+    @include margin4(0,0,3,0);
   }
   .row{
      @include padding(1);
   }
 
-  .col-sm-4 > .row{
+  .col-xs-4 > .row{
     @include padding2(0.5,0);
   }
  
@@ -324,7 +339,13 @@ background-repeat:no-repeat; */
     @include margin2(0.1,0);
   }
 
-  form > .row > .col-sm-3{
+  form {
+    p{
+      opacity: 0.7;
+    }
+  }
+
+  form > .row > .col-xs-3{
     text-align: right;
   }
 
@@ -337,13 +358,15 @@ background-repeat:no-repeat; */
 
     button{
       margin: 0 0 0 2%;
-      @include padding-button(2);
+      @include padding2(0.9,3.5); 
       color:$white;
+      position:relative;
 
       .img-rocket {
-        width: 3em;
+        width: 4em;
         position: absolute;
-        right:0em;
+        right: -1.5rem;
+        top: -0.5rem;
       }
     }
   }
@@ -358,25 +381,43 @@ small {
   @include font-size(1);
 }
 
-/* .content-block {
-  margin: 0% 0% 0% 100px;
-} */
+.content-block {
+ @include margin2(2, 0);
+} 
 
 .post {
   background-color: $articles-background;
-  padding: 2%;
-  margin-bottom: 2%;
+  @include padding(1);
+  @include margin(2);
 }
 .publish {
   background-color: $comments-background;
-  padding: 2%;
-  margin-bottom: 2%;
+  @include padding2(0.8, 1);
+  @include margin(2);
+  /*margin-bottom: 2%;*/
   textarea {
-    margin-left: 2%;
-    width: 98%;
+    width: 100%;
     background: $publish-background;
     color: $grey;
   }
+
+  button {
+    height: 4rem;
+  }
+
+  button.publish-button {
+    color: white;
+    @include padding2(0.3, 2);
+  }
+
+  img {
+    height: 3.5rem;
+  }
+}
+
+
+.pseudo-button{
+  cursor:pointer;
 }
 
 .pseudo {
@@ -396,7 +437,7 @@ small {
 }
 
 .avatar {
-  max-height: 6rem;
+  max-height: 8rem;
 /*   padding-right:0; */
   text-align:center;
     img{
@@ -407,18 +448,19 @@ small {
 }
 
 .post-content {
-  padding-left: 5rem;
+  padding-left: 4rem;
 }
 
 .your-comment{
   text-align: center;
-  background: $comments-background;
+  background: $comments-publish;
   width: 95%;
-  margin: 0 2.5%;
-  margin-top:2%;
+  @include margin4(1, 2, 0, 2);
   max-height: 8em;
+  @include padding2(1,0);
+
   .col-sm-1{
-    padding: 1%;
+    padding: 0;
   }
   img {
     max-height: 4em;
@@ -431,12 +473,18 @@ small {
   }
   textarea{
     color: $grey;
-    padding-left: 0;
+    background-color:  $comments-publish;
     text-align: left;
   }
 
+  .form-post {
+    padding-left: 0;
+  }
 }
 
+.form-post{
+  padding-left: 3rem;
+}
 
 /* @media screen and (min-width: 1200px) {
   .container-fluid {
@@ -467,7 +515,8 @@ input[type="radio"] {
 
 .uploadPicture {
   background: $articles-background;
-  width: 6rem;
+  width: 10rem;
+  margin-left: 3rem;
   img{
     width: 100%;
     height: 100%;
@@ -516,3 +565,114 @@ input[type="radio"] {
   border-left-width: 0.2rem;
 }
 
+.space-opera {color : $planet-space-opera;}
+.parallel {color : $planet-parallel;}
+.robots {color : $planet-robots;}
+.earth {color : $planet-earth;}
+.alien {color : $planet-alien;}
+.pseudo {font-family: $title-font;}
+
+.friend-list {
+  flex-flow: row wrap;
+  background:  none;
+
+  .wrapper {
+    @include flexbox();
+  }
+
+  .item {
+    @include flex(1);
+    flex-basis: 20%;
+    flex-grow: 0;
+  }
+
+  img {
+    width: 10rem;
+    margin-bottom : 15px;
+    @include border-radius(10);
+  }
+}
+
+p.honorific-title {
+  color: $grey;
+  font-style: italic;
+}
+
+.friends {
+  img.planet {
+    width: 12rem;
+    height: auto;
+    margin-bottom : 1rem;
+  }
+
+  .item {
+    padding: 20px 10px;
+  }
+
+  .planet-selected {
+    background-color: $articles-background;
+  }
+
+  .h-separator {
+      border-bottom: 1px solid $main-text;
+      width: 60%;
+      margin-bottom: 1rem;
+      margin-top: 1rem;
+  }
+}
+
+@media screen and (max-width: $break-small) {
+  #intro-form{
+    form{
+      .col-xs-3{
+        width: 100%;
+        text-align: left;
+        padding-bottom: 1rem;
+      }
+      .col-xs-9{
+        width: 100%; 
+      }
+    }
+    .form-button{
+      a{
+        margin-bottom: 2rem;
+        display: block;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $break-mid) {
+  #intro-form{
+    padding:0;
+  }
+}
+
+.comment {
+  background: $comments-background;
+  @include padding(0.5);
+  width: 95%;
+  @include margin4(1, 2, 0, 2);
+ /* margin: 0 2.5%;
+  margin-top:2%;*/
+  p.grey {
+    color: $grey;
+  }
+}
+
+small.date {
+    color: $grey;
+  }
+
+p.see {
+  cursor : pointer;
+  text-decoration: underline;
+}
+
+p.see:hover{
+  color: $green-text;
+}
+
+p.loadMore {
+  padding-left: 1rem;
+}

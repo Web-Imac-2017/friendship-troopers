@@ -10,7 +10,7 @@ import Router    from './router';
 Vue.use(VueRouter);
 Vue.use(VueRessource);
 
-const API_BASE_URL = "http://localhost/friendship-troopers/www/"
+const API_BASE_URL = "http://localhost/"
 Vue.http.options.root = API_BASE_URL + 'api';
 
 

@@ -1,41 +1,47 @@
 <div class="container col-sm-12">
   
   <div class="lateralMenuLeft">
+
+  <router-link :to="{ name: 'User', params: { user: user.username }}">
     <div class="lateralMenuAvatar">
-
-      <img :src="user.userAvatar" alt="your avatar" class="avatar">
-      <!-- <img :src="user.userPlanet.path" alt="your planet" class="planet"> -->
-      <h1> {{ user.username }} </h1> <br>
-      <p> {{ user.userBadge}} </p>
-
-   </div>
-  <div class="enigmes">
-    <h1> Enigmes </h1>
-    <a href="#"> Résoudre l'énigme en cours </a> <br>
-    <a href="#"> Voir la liste des enigmes </a> 
-  </div>
-  <div class="amis">
-    <h1> Amis </h1>
-    <a href="#"> Voir tous mes amis </a> <br>
-    <a href="#"> Accéder à la messagerie </a>
-    <div class="lastFriends">
-      <p> Derniers compagnons </p>
-      <ul>
-        <li v-for="friend in user.lastFriends">
-          <img :src="friend.avatar" :alt="friend.name">
-        </li>
-      </ul>
-    </div> 
+      <img :src="user.userAvatar" alt="your avatar" title="mon profil" class="avatarMenu">
+      <img :src="user.userPlanet.path" alt="your planet" class="planetMenu">
     </div>
+  </router-link>
+
+    <h1 class:user.userPlanet.name> {{ user.username }} </h1>
+    <p class="honor"> {{ user.userHonor }} </p>
+
+    <p class="enigmes"> Enigmes </p>
+
+      <router-link :to="{ name: 'EnigmeCurrent', params: { user: user.username }}"> Résoudre l'énigme en cours </router-link> <br/>
+      <router-link :to="{ name: 'EnigmeResolved', params: { user: user.username }}"> Voir la liste des énigmes résolues </router-link>
+
+    <p class="friends"> Amis </p>
+      <router-link :to="{ name: 'Friends', params: { user: user.username }}"> Voir tous mes amis </router-link> <br>
+      <router-link :to="{ name: 'Messages', params: { user: user.username }}"> Accéder à la messagerie </router-link> <br>
+
+      <div v-if="user.lastFriends.length > 0" class="lastFriends">
+        <p> Derniers compagnons : </p>
+        <ul>
+          <li v-for="friend in user.lastFriends">
+            <router-link :to="{ name: 'User', params: { user: friend.name }}"> <img :src="friend.avatar" :alt="friend.name" :title="friend.name"></router-link> 
+          </li>
+        </ul>
+      </div> 
+    </div>
+
+<!--   <div class="menu-deconnexion">
+      <p class="pseudo-button" v-on:click="deconnect">DéconnexionKK</p>
   </div>
 
-<div class="menu-deconnexion">
-    <p v-on:click="deconnect pseudo-button">Déconnexion</p>
-</div>
+  <div class="menuTools">
 
-<div class="menuTools">
+      <router-link to="/mentions-legales" class=""> Mentions légales </router-link> -
+      <router-link to="/aide" class=""> Aide </router-link> -
+      <router-link to="/problems" class=""> Signaler un problème </router-link> -
+      <router-link to="/a-propos" class=""> À propos </router-link> -
+      <router-link to="/FAQ" class=""> FAQ </router-link>
 
-    <router-link to="/mentions-legales" class=""> Mentions legales </router-link>
-
-</div>
+  </div> -->
 </div>

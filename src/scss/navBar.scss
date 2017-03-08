@@ -188,8 +188,7 @@ ul li {
 }
 
 
-
-@media screen and (max-width: 800px) {
+@media screen and (max-width: $break-mid) {
   ul li.navbar-right input[type=text], ul li.navbar-right .nav-profil, ul li.navbar-left .nav-home {
     display: none;
   }
@@ -198,7 +197,7 @@ ul li {
   }
 }
 
-@media screen and (min-width: 801px) {
+@media screen and (min-width: $break-mid) {
   ul li.navbar-right input[type=text], ul li.navbar-right .nav-profil, ul li.navbar-left .nav-home {
     display: inline-block;
   }
@@ -263,13 +262,6 @@ ul li.navbar-right .nav-icon .sub-menu {
       ul.sub-menu-item {
         background: none;
         display: inline-block;
-
-        .space-opera {color : $planet-space-opera;}
-        .parallel {color : $planet-parallel;}
-        .robots {color : $planet-robots;}
-        .earth {color : $planet-earth;}
-        .alien {color : $planet-alien;}
-        .pseudo {font-family: $title-font;}
 
 
         li {

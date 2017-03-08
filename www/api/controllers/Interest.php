@@ -89,7 +89,11 @@ class Interest extends Controller {
     $this->response($request, 200);
   }
 
-
+  /**
+   * [delete_interest description]
+   * @param  [type] $data [description]
+   * @return [type]       [description]
+   */
   public function delete_interest($data) {
     /*Checking if $data is an array*/
     if(!is_array($data)) {
