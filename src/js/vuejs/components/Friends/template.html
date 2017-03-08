@@ -6,19 +6,18 @@
       <menu-tools></menu-tools>
     </aside>
 
-    <section class="article col-sm-10">
+    <section class="article col-sm-8 container-transparent container">
       <div class="row">
-        <div class="col-sm-2" v-for="(item, index) in planets" v-on:click="selectedPlanet(index)">
-          <img :src="item.path" alt="planet" class="planet">
-          <h1 :class=item.type class="text-center">{{item.name}}</h1>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2 item" v-for="(item, index) in planets" v-on:click="selectPlanet(index)" v-bind:class="{ 'planet-selected' : item.selected }">
+          <img class="planet center" :src="item.path" alt="planet">
+          <h1 :class=item.type class="text-center">{{ item.name }}</h1>
+          <p class="text-center">{{ item.nbFriends }} au total</p>
         </div>
       </div>
 
-      <div class="row">
-        <img src="../assets/images/Avatar1.svg">
-        <h1> Amis de la planète</h1>
-        <p> {{ user.nbFriends }} au total</p>
-      </div>
+        <span class="h-separator center"></span>
+
       <friend-template :user="user"></friend-template>
     </section>
   </div>

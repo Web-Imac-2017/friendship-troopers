@@ -6,7 +6,7 @@ template     = eval(`\`${template}\``);
 
 import LateralMenuLeft from '../LateralMenuLeft/index.js'
 import MenuTools from '../MenuTools/index.js'
-import FriendTemplate from '../FriendTemplate/index.js'
+import FriendTemplate from './FriendTemplate/index.js'
 import NavBar from '../NavBar/index.js';
 
 const Friends = Vue.extend({
@@ -17,7 +17,7 @@ const Friends = Vue.extend({
     'menu-tools' : MenuTools,
     'navbar' : NavBar }, 
   methods : {
-    selectedPlanet : function(index) {
+    selectPlanet : function(index) {
       this.planets[this.currentPlanetIndex].selected = false;
       this.currentPlanetIndex = index;
       this.planets[index].selected = true;
@@ -31,31 +31,36 @@ const Friends = Vue.extend({
             name : "Terre",
             number : "#AA001",
             path : "../assets/images/planets/Terre.svg",
-            selected : true
+            selected : true,
+            nbFriends : 2
           },{
             type : "parallel",
             name : "Paranose",
             number : "#312LL",
             path : "../assets/images/planets/Paranose.svg",
-            selected : false
+            selected : false,
+            nbFriends : 1
           },{
             type : "robots",
             name : "Technome",
             number : "#8T077",
             path : "../assets/images/planets/Technome.svg",
-            selected : false
+            selected : false,
+            nbFriends : 1
           },{
             type : "alien",
             name : "Sautien",
             number : "#SS013",
             path : "../assets/images/planets/Sautien.svg",
-            selected : false
+            selected : false,
+            nbFriends : 1
           },{
             type : "space-opera",
             name : "Multas",
             number : "#781ST",
             path : "../assets/images/planets/Terre.svg",
-            selected : false
+            selected : false,
+            nbFriends : 1
           } ],
        currentPlanetIndex : 0,
        user: {
@@ -70,7 +75,7 @@ const Friends = Vue.extend({
             },{ 
               path : '../assets/images/Avatar1.svg',
               name : 'JeanLuc',
-              title : 'Baroudeur de l\'espace',
+              badge : 'Baroudeur de l\'espace',
               birthDate : '29 avril',
               planet : 'Multas'
             },{ 

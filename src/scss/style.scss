@@ -49,23 +49,6 @@ h1, h2, h3, h4, h5, h6 {
   color:$grey;
 }
 
-.friend-list{
-  flex-flow: row wrap;
-  background:  none;
-
-  .item{
-    flex-grow:0;
-    background: $comments-background;
-    @include margin(1);
-  }
-
-  img{
-    width:100%;
-    @include padding(1);
-    @include border-radius(10);
-  }
-}
-
 .top-right{
   top:1rem;
 }
@@ -549,14 +532,52 @@ input[type="radio"] {
 .alien {color : $planet-alien;}
 .pseudo {font-family: $title-font;}
 
-.friends {
-  img.planet {
-    width: 90%;
-    height: auto;
+.friend-list {
+  flex-flow: row wrap;
+  background:  none;
+
+  .wrapper {
+    @include flexbox();
   }
 
-  .planetSelected {
-  background-color: blue;
+  .item {
+    @include flex(1);
+    flex-basis: 20%;
+    flex-grow: 0;
+  }
+
+  img {
+    width: 10rem;
+    margin-bottom : 15px;
+    @include border-radius(10);
+  }
+}
+
+p.honorific-title {
+  color: $grey;
+  font-style: italic;
+}
+
+.friends {
+  img.planet {
+    width: 12rem;
+    height: auto;
+    margin-bottom : 1rem;
+  }
+
+  .item {
+    padding: 20px 10px;
+  }
+
+  .planet-selected {
+    background-color: $articles-background;
+  }
+
+  .h-separator {
+      border-bottom: 1px solid $main-text;
+      width: 60%;
+      margin-bottom: 1rem;
+      margin-top: 1rem;
   }
 }
 
