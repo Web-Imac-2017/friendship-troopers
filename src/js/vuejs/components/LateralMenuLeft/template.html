@@ -25,7 +25,7 @@
         <p> Derniers compagnons : </p>
         <ul>
           <li v-for="friend in user.lastFriends">
-            <img :src="friend.avatar" :alt="friend.name" :title="friend.name">
+            <router-link :to="{ name: 'User', params: { user: friend.name }}"> <img :src="friend.avatar" :alt="friend.name" :title="friend.name"></router-link> 
           </li>
         </ul>
       </div> 

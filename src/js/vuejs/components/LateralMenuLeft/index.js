@@ -6,27 +6,31 @@ let template = require('./template.html');
 template     = eval(`\`${template}\``);
 
 
+
+
 const LateralMenuLeft = Vue.extend({
     template,
     data () {
       return {
         user : {
-          userAvatar : '/assets/images/Avatar1.svg',
+          userAvatar : '/assets/images/avatars/Terre/miror.svg',
           username : 'LuckyPon', 
           userHonor : 'Baroudeuse de l\'espace', 
+          planet : 'Terre',
+          avatar : 'aliens',
           userPlanet : {
-            path : '/assets/images/planets/P1.svg',
-            name : 'space-opera'
+            path : '/assets/images/planets/Terre.svg',
+            name : 'Terre'
           }, 
           lastFriends : [ 
           {
-            avatar : '/assets/images/avatars/aliens/aliens.svg',
+            avatar : '/assets/images/avatars/Sautien/aliens.svg',
             name : 'Spockdu77'
           }, {
-            avatar : '/assets/images/avatars/earth/planets.svg',
+            avatar : '/assets/images/avatars/Terre/planets.svg',
             name : 'MartyDuPassé'
           }, {
-            avatar : '/assets/images/avatars/earth/miror.svg',
+            avatar : '/assets/images/avatars/Terre/miror.svg',
             name : 'JulieDuFutur'
           }
           ] 
