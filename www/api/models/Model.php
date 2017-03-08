@@ -136,6 +136,7 @@ abstract class Model {
 			}
 			// PREPARE THE REQUEST AND EXECUTE IT THEN RETURN AN OBJECT FROM YOUR DB
 			$prepareRequest = $this->pdo->prepare($sql);
+			var_dump($sql);
 			$prepareRequest->execute();
 
 			return ($prepareRequest->fetchAll(\PDO::FETCH_ASSOC));

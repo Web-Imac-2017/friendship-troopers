@@ -14,7 +14,7 @@ use \Utils\Router\Router;
 
 Router::init($_GET['url']);
 
-Router::post('/auth/signin','account#inscription'); 
+Router::post('/auth/signin','account#inscription');
 Router::post('/auth/login','account#login');
 Router::post('/auth/logout','account#logout');
 Router::get('/auth/validate','account#validateUser', 'auth.validate');
@@ -32,10 +32,15 @@ Router::delete('planets/:planet/posts/:publicationId/comments/:id', 'comment#del
 
 Router::get('/planets/:planet/news' , 'planet#getPlanetFeed');
 
+Router::post('planets/:planet/posts/:publicationId/stardust/' , 'stardust#create');
+Router::delete('planets/:planet/posts/:publicationId/stardust/' , 'stardust#delete');
+Router::get('planets/:planet/posts/:publicationId/stardust/' , 'stardust#list');
+
 Router::post('/riddles', 'riddle#create', 'riddle.create');
 Router::get('/riddles', 'riddle#list', 'riddle.list');
 Router::patch('/riddles/:id', 'riddle#update', 'riddle.update');
 Router::delete('/riddles/:id', 'riddle#delete', 'riddle.delete');
+
 
 try {
 	Router::run();

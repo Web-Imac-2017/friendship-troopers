@@ -8,28 +8,40 @@ namespace Controllers;
 
 class Stardust extends Controller {
 
+  public function __construct() {
+		$this->loadModel('Stardust');
+	}
+
+  public function list ($planetId, $publicationId, $get) {
+    $count = $this->Stardust->findCount([
+      'conditions' => ['publicationId' => $publicationId],
+    ]);
+    var_dump($count);
+  }
+
   /**
    * Create a stardust for a publication, there can only be one by user and publication
    * @param  POST     $post Post request from the route
    * @return boolean  ...   true if like created, false if not
    */
-  public function create ($post) {
-    $required = ['userId', 'publicationId'];
-    $missingFields = checkRequired($required, $post);
-    if (array_key_exists($required, $missingFields)) {
-      return $missingFields;
+
+  public function create ($planetId, $publicationId, $post) {
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
     }
 
-    if ($post['userId'] === NULL || $post['publicationId'] === NULL) {
-      throw new \Utils\RequestException('champ manquant', 400);
-    }
+    $userId = \Utils\Session::user('id');
 
-    $StardustModel = new \Models\Stardust();
-    $StardustModel->save(filterXSS([
-      'userId' => $post['userId'],
-      'publicationId' => $post['publicationId'],
-    ]));
-    return true;
+    try {
+			$id = $this->Stardust->insert($this->filterXSS([
+				'userId' => $userId,
+				'publicationId' => $publicationId,
+			]));
+		} catch (\PDOException $e) {
+			$this->response([
+				'error' => $e->getMessage(),
+			], 500);
+		}
   }
 
   /**
@@ -37,13 +49,30 @@ class Stardust extends Controller {
    * @param  POST     $post UserId and PublicationId, both primary keys of the stardust
    * @return boolean  ...   true if delete succed, false if like not found
    */
-  public function delete ($post) {
-    $StardustModel = new \Models\Stardust();
+  public function delete ($planetId, $publicationId, $delete) {
 
-    $StardustModel->delete([
-      'userId' =>$post['userId'],
-      'publicationId' => $post['publicationId'],
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
+    }
+
+    $userId = \Utils\Session::user('id');
+
+    $stardustUserId = $this->Stardust->findFirst([
+      'fields' => 'userId',
+      'condition' => ['publicationId' => $publicationId],
     ]);
-    return true;
+    var_dump($userId);
+    var_dump($stardustUserId);
+
+    if (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $userId != $stardustUserId['userId']) {
+			throw new \Utils\RequestException('action reservee aux administrateurs', 403);
+		}
+
+    $this->Stardust->delete([
+      'userId' => $userId,
+      'publicationId' => $publicationId,
+    ]);
+
+    $this->response(null, 204);
   }
 }
