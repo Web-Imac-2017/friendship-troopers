@@ -25,6 +25,15 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 } 
 
+.admin, .Galaxie {color : $main-text;}
+.space-opera, .Multas {color : $planet-space-opera;}
+.parallel, .Paranose {color : $planet-parallel;}
+.robots, .Technome {color : $planet-robots;}
+.earth, .Terre {color : $planet-earth;}
+.alien, .Sautien {color : $planet-alien;}
+.pseudo {font-family: $title-font;}
+
+
 .container-colored{
   background:$articles-background;
   @include margin4(0, 0, 1, 0);
@@ -158,7 +167,7 @@ html, body, #home {
   text-align: right;
 }
 
-a{
+a {
   color:$main-text;
   text-decoration: underline;
   &:hover{
@@ -166,6 +175,15 @@ a{
     background-color: none;
   }
 }
+
+/*h1.pseudo a {
+  text-align: left;
+  text-decoration: none;
+  a:hover{
+    text-decoration: none;
+  }
+}
+*/
 
 .button-field{
   margin-top:1rem;
@@ -363,26 +381,40 @@ small {
   @include font-size(1);
 }
 
-/* .content-block {
-  margin: 0% 0% 0% 100px;
-} */
+.content-block {
+ @include margin2(2, 0);
+} 
 
 .post {
   background-color: $articles-background;
-  padding: 2%;
-  margin-bottom: 2%;
+  @include padding(1);
+  @include margin(2);
 }
 .publish {
   background-color: $comments-background;
-  padding: 2%;
-  margin-bottom: 2%;
+  @include padding2(0.8, 1);
+  @include margin(2);
+  /*margin-bottom: 2%;*/
   textarea {
-    margin-left: 2%;
-    width: 98%;
+    width: 100%;
     background: $publish-background;
     color: $grey;
   }
+
+  button {
+    height: 4rem;
+  }
+
+  button.publish-button {
+    color: white;
+    @include padding2(0.3, 2);
+  }
+
+  img {
+    height: 3.5rem;
+  }
 }
+
 
 .pseudo-button{
   cursor:pointer;
@@ -405,7 +437,7 @@ small {
 }
 
 .avatar {
-  max-height: 6rem;
+  max-height: 8rem;
 /*   padding-right:0; */
   text-align:center;
     img{
@@ -416,18 +448,19 @@ small {
 }
 
 .post-content {
-  padding-left: 5rem;
+  padding-left: 4rem;
 }
 
 .your-comment{
   text-align: center;
-  background: $comments-background;
+  background: $comments-publish;
   width: 95%;
-  margin: 0 2.5%;
-  margin-top:2%;
+  @include margin4(1, 2, 0, 2);
   max-height: 8em;
+  @include padding2(1,0);
+
   .col-sm-1{
-    padding: 1%;
+    padding: 0;
   }
   img {
     max-height: 4em;
@@ -440,12 +473,18 @@ small {
   }
   textarea{
     color: $grey;
-    padding-left: 0;
+    background-color:  $comments-publish;
     text-align: left;
   }
 
+  .form-post {
+    padding-left: 0;
+  }
 }
 
+.form-post{
+  padding-left: 3rem;
+}
 
 /* @media screen and (min-width: 1200px) {
   .container-fluid {
@@ -476,7 +515,8 @@ input[type="radio"] {
 
 .uploadPicture {
   background: $articles-background;
-  width: 6rem;
+  width: 10rem;
+  margin-left: 3rem;
   img{
     width: 100%;
     height: 100%;
@@ -608,3 +648,31 @@ p.honorific-title {
   }
 }
 
+.comment {
+  background: $comments-background;
+  @include padding(0.5);
+  width: 95%;
+  @include margin4(1, 2, 0, 2);
+ /* margin: 0 2.5%;
+  margin-top:2%;*/
+  p.grey {
+    color: $grey;
+  }
+}
+
+small.date {
+    color: $grey;
+  }
+
+p.see {
+  cursor : pointer;
+  text-decoration: underline;
+}
+
+p.see:hover{
+  color: $green-text;
+}
+
+p.loadMore {
+  padding-left: 1rem;
+}

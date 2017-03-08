@@ -5,18 +5,17 @@
         </div>
         <div class="col-md-11 col-lg-11">
           <form class="form-post" v-on:submit.prevent="save">
-            <textarea rows="3" type="text" placeholder="Publier quelque chose" v-model="post.content" ></textarea>
+            <textarea rows="3" type="text" placeholder="Publier quelque chose ..." v-model="post.content" ></textarea>
           </form>
+          <div class="row button-field" >
+            <div class="col-sm-6">
+              <button v-on:click="uploadPicture" class="uploadPicture"> <img src="/assets/images/Image.svg" alt="Upload Picture" class="avatar"> </button>
+            </div>
+            <div class="col-sm-6 right">
+              <button v-on:click="publish" class="publish-button"> <img src="./assets/images/validation.svg">Publier</button>
+            </div> 
+          </div>
         </div>
       </div>
-      <div class="row button-field">
-        <div class="col-md-1 col-lg-1"></div>
-        <div class="col-sm-5 text-left">
-          <button v-on:click="uploadPicture" class="uploadPicture"> <img src="/assets/images/Image.svg" alt="Upload Picture" class="avatar"> </button>
-        </div>
-        <div class="col-sm-6 text-right">
-          <button v-on:click="publish">Publier</button>
-        </div> 
-      </div>
-      <pre> {{post.content}} </pre>
+     
     </div>

@@ -6,7 +6,24 @@ template     = eval(`\`${template}\``);
 
 
 const MenuTools = Vue.extend({
-  template
+    template,
+    methods:{
+      deconnect(){
+        this.$http.post(apiRoot() + 'auth/logout', {
+          emulateJSON: true
+        }).then(
+          (response) => {
+            console.log("success deconnexion !");
+            this.$router.push("/")
+          },
+          (response) => {
+            console.log("fail deconnexion !")
+          }
+        )
+       
+
+      }
+    }
 });
 
 
