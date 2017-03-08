@@ -167,7 +167,13 @@ class Friend extends Controller {
                 'userTitle.current' => 1,
             ],
         ]);
-        $this->response($result, 200);
+        $formatedResult = [];
+        foreach ($result as $key => $value) {
+            $planetId = $value['planetId'];
+            unset($value['planetId']);
+            $formatedResult[$planetId][]= $value;
+        }
+        $this->response($formatedResult, 200);
     }
 
     /**
@@ -213,6 +219,14 @@ class Friend extends Controller {
                 'friend.seeker' => 0,
                 'userAvatar.currentAvatar' => 1,
             ],
+        ]);
+        $this->response($result, 200);
+    }
+
+    public function countFriend ($userId) {
+        $result= $this->Friend->findCount([
+            'friend.userId' => $userId,
+            'friend.status' => 1,
         ]);
         $this->response($result, 200);
     }

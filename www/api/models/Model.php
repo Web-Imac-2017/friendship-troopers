@@ -166,13 +166,13 @@ abstract class Model {
 	 */
 	public function findCount ($conditions = NULL) {
 		if ($conditions === NULL) {
-			return ($this->findFirst(array(
-				'fields' => 'COUNT(' . $this->primaryKey . ') AS count'))->count);
+		return ($this->findFirst(array(
+		    'fields' => ['COUNT(' . $this->primaryKey . ') AS count'])));
 		}
 		return ($this->findFirst(array(
-			'fields' => 'COUNT (' . $this->primaryKey . ') AS count',
-			'conditions' => $conditions
-		))->count);
+		'fields' => ['COUNT(' . $this->primaryKey . ') AS count'],
+		'conditions' => $conditions
+		)));
 	}
 
 	/**
