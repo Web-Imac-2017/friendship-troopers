@@ -20,7 +20,8 @@ Router::post('/auth/logout','account#logout');
 Router::get('/auth/validate','account#validateUser', 'auth.validate');
 Router::get('/users/me','account#getCurrentUser', 'users.me');
 Router::get('/users/:userId/interest','interest#listUserInterest', 'users.me.listInterest');
-Router::post('/users/me/interest/update','interest#addUserInterest', 'users.me.updateUserInterest');
+Router::post('/users/me/interest/add_interest','interest#addUserInterest', 'users.me.updateUserInterest');
+Router::post('/users/me/interest/delete_interest','interest#delete_interest', 'users.me.updateUserInterest');
 
 Router::post('/planets/:planet/posts', 'publication#create', 'planets.posts.create');
 Router::get('/planets/:planet/posts', 'publication#list', 'planets.posts.list');

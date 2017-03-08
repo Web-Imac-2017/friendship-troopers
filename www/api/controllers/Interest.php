@@ -33,7 +33,11 @@ class Interest extends Controller {
       echo $newLabel['label'];
   }
 
-  /*$data contains all of the interest the user choose*/
+  /**
+  * Add a new user_interest in the DB
+  * The interest must exist
+  * The user must to not already have this interest
+  * @param $data contains all of the interest choosen */
   public function addUserInterest ($data) {
     /*Checking if $data is an array*/
     if(!is_array($data)) {
@@ -43,39 +47,27 @@ class Interest extends Controller {
     if (!\Utils\Session::isLoggedIn()) {
       throw new \Utils\RequestException('operation reservee aux membres', 401);
     }
-
+    /*pick up the user logged id*/
     $userId = \Utils\Session::user('id');
+
+    /*create a userInterest to save  new data*/
     $userInterest = new \Models\User_Interest();
 
-    /*Looking for the interest Id choosen*/
+    /*Save data*/
     foreach($data as $key => $value) {
-      if(!is_array($key)) {
-        $request = $this->Interest->find([
-          'fields' => ['interest.id']
-        ]);
-
-        foreach ($request as $tableKey => $tableValue) {
-          if ($value = $tableValue['id']) {
-
-            $response = $userInterest->find([
-              'fields' => ['userId','interestId']
-            ]);
-
-              foreach($response as $tableUserInterestKey => $tableUserInterestValue) {
-                if (in_array($userId,$tableUserInterestValue))
-                  echo $userId.'already set';
-            /*$userInterest->save($this->filterXSS([
-              'userId' => $userId,
-              'interestId' => $value
-            ]));*/
-          }
-        }
-      }
+      echo 'on sauvegarde '.$value.' avec '.$userId;
+      $userInterest->save($this->filterXSS([
+        'userId' => $userId,
+        'interestId' => $value
+      ]));
     }
   }
-}
 
-  public function listuserInterest(){
+  /**
+   * [listuserInterest description]
+   * @return [type] [description]
+   */
+  public function listuserInterest() {
     $userInterest = new \Models\User_Interest();
     $request = $userInterest->find([
       'fields' => ['interest.id', 'label'],
@@ -96,7 +88,29 @@ class Interest extends Controller {
     ]);
     $this->response($request, 200);
   }
+
+
+  public function delete_interest($data) {
+    /*Checking if $data is an array*/
+    if(!is_array($data)) {
+      throw new \Utils\RequestException('data erronées', 403); // code d'erreur ?
+    }
+      /*Checking if the user is logged in*/
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
+    }
+    /*pick up the user logged id*/
+    $userId = \Utils\Session::user('id');
+
+    /*create a userInterest to delete interests*/
+    $userInterest = new \Models\User_Interest();
+
+    foreach ($data as $key => $value) {
+      echo "$userId and $value";
+      $userInterest->delete(array('userId' => $userId,
+                                  'interestId' => $value));
+      $this->Interest->delete($value);
+    }
+  }
+
 }
-
-
- ?>
