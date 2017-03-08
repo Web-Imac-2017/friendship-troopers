@@ -43,7 +43,7 @@ ul {
     color: $notifs;
   }
 
-  .nav-home, .nav-enigmes {
+  .nav-home {
     margin: 0 1rem;
   }
   
@@ -82,7 +82,11 @@ ul {
 ul li {
   .navbar-brand  {
     line-height: 1.5rem;
-    margin: -0.75rem 0;
+    margin: -1rem 0 ;
+    padding: 0;
+  }
+  .nav-profil {
+    margin-right: 2rem;
   }
   .nav-link, .nav-item  {
     line-height: 1.5rem;
@@ -96,7 +100,7 @@ ul li {
     height: 2.5rem;
     display: inline-block;
     vertical-align: middle;
-    @include margin(1);
+    margin: 0.5rem 1rem;
   }
 
   .friends-icon {
@@ -187,24 +191,17 @@ ul li {
   display: inline-block;
 }
 
+ul li.navbar-right .nav-avatar {
+  padding: 0;
+  margin: 0rem;
+  position: absolute;
+  top: 0.5rem;
+  width: 3rem;
+  right: -1.5rem;
 
-@media screen and (max-width: $break-mid) {
-  ul li.navbar-right input[type=text], ul li.navbar-right .nav-profil, ul li.navbar-left .nav-home {
-    display: none;
-  }
-  ul li.navbar-right .nav-responsive{
-    display: inline-block;
-  }
+  /*background: orange;*/
 }
 
-@media screen and (min-width: $break-mid) {
-  ul li.navbar-right input[type=text], ul li.navbar-right .nav-profil, ul li.navbar-left .nav-home {
-    display: inline-block;
-  }
-  ul li.navbar-right .nav-responsive {
-    display: none;
-  }
-}
 
 menu-separator {
   vertical-align: middle;
@@ -212,6 +209,136 @@ menu-separator {
   border-right: 0.1rem solid $main-text;
   margin: 0 1.3rem;
 }
+
+
+
+@media screen and (min-width: $break-mid) {
+  .small-desktop, ul li.navbar-right img.nav-responsive {
+    display: none;
+  }
+  ul li.navbar-right, ul li.navbar-left {
+    .desktop,  input[type=text], .nav-home {
+      display: inline-block;
+    }   
+  }
+
+  .nav-enigmes {
+    margin: 0 1rem;
+  }
+  .mobile {
+    display: none;
+  }
+
+}
+
+
+@media screen and (max-width: $break-mid) {
+
+  ul li.navbar-right, ul li.navbar-left {
+      .navbar-brand .small-desktop {
+        display: inline-block;
+      }
+      .friends-icon, .messages-icon, .notifications-icon {
+        margin: 0.5rem 1rem;
+      }   
+    }
+
+  ul li.navbar-right .nav-avatar {
+    right: -1.5rem;
+    width: 3rem;
+    top: 0.5rem;
+  }
+
+
+  ul li.navbar-right, ul li.navbar-left {
+    .desktop,  input[type=text], .nav-home, .navbar-brand .mobile, .mobile {
+      display: none; 
+    }
+  }
+  ul li.navbar-right .small-desktop, .navbar-brand .small-desktop {
+    display: inline-block;
+  }
+  .navbar ul.nav {
+    margin: 0;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+    li.navbar-right {
+      position: absolute;
+      right: 3.5rem;
+    }
+  }
+  .nav-enigmes {
+    margin: 0rem;
+  }
+
+  menu-separator {
+    margin: 0 1.3rem;
+  }
+  .nav input.nav-search-icon {
+      &:active, &:hover, &:focus, & {
+      height: 80%;
+      background-size: 100%;
+    }
+}
+
+
+@media screen and (max-width: $break-small) {
+
+    ul li.navbar-right, ul li.navbar-left {
+      .navbar-brand .mobile {
+        display: inline-block;
+        padding-top: 0.75rem;
+        margin-left: -0.25rem;
+      } 
+      .mobile {
+        display: inline-block;
+      } 
+      .friends-icon, .messages-icon, .notifications-icon {
+        margin: 0.5rem 0.5rem;
+      }
+
+    }
+    ul li.navbar-right, ul li.navbar-left {
+      .navbar-brand .small-desktop, .navbar-brand .desktop {
+        display: none;
+      }   
+    }
+    menu-separator {
+      margin: 0.7rem;
+    }
+    ul li.navbar-right .nav-avatar {
+      right: 1.4rem;
+      top: 0.75rem;
+      width: 2.25rem;
+    }
+
+    ul li.navbar-right {
+      position: absolute;
+      right: -3rem;
+      .mobile img {
+        width: 2.25rem;
+        position: absolute;
+        right: -2.25rem;
+      }
+
+    }
+  }
+  .nav input.nav-search-icon {
+    &:active, &:hover, &:focus, & {
+
+        background-size: 80%;
+    }
+  }
+}
+
+
+
+
+
+
+
+
 
 
 ul li.navbar-right .nav-responsive{

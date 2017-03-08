@@ -101,7 +101,9 @@ const NavBar = Vue.extend({
                     {type:'3', post:'3'}     
         ], 
         subMenu : 0,
-        pseudo : 'luckypon'
+        pseudo : 'luckypon', 
+        avatar : '/assets/images/avatars/Multas/landscape.svg',
+        deconnexion : '/assets/images/deconnexion.svg'
 
         // subMenu : 0 /*1:friends / 2: messages / 3: notif*/
       }
