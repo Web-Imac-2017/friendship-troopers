@@ -12,7 +12,7 @@ import LateralMenuRight from '../LateralMenuRight/index.js'
 import MenuTools from '../MenuTools/index.js'
 import Post from '../Post/index.js'
 import CreatePost from '../CreatePost/index.js'
-import PageNav from './pageNav/index.js'
+import PageNav from './PageNav/index.js'
 import NavBar from '../NavBar/index.js';
 
 const Feed = Vue.extend({

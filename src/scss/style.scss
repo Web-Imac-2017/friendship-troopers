@@ -1,10 +1,11 @@
 @import "reset";
 @import "variables";
 @import "admin";
-@import "navBar";
-@import "lateralMenu";
+@import "navbar";
+@import "lateral-menu";
 @import "input-range";
 @import "bootstrap-custom";
+@import "user-profil";
 
 .wrapper {
   @include flexbox();
@@ -65,8 +66,6 @@ h1, h2, h3, h4, h5, h6 {
 .bottom-right{
   bottom:1rem;
 }
-
-
 
 /* .container-fluid{
   background:$articles-background;
@@ -613,12 +612,14 @@ p.honorific-title {
     background-color: $articles-background;
   }
 
-  .h-separator {
+  
+}
+
+.h-separator {
       border-bottom: 1px solid $main-text;
       width: 60%;
       margin-bottom: 1rem;
       margin-top: 1rem;
-  }
 }
 
 @media screen and (max-width: $break-small) {
@@ -669,7 +670,7 @@ p.see {
   text-decoration: underline;
 }
 
-p.see:hover{
+p.see:hover, .green{
   color: $green-text;
 }
 
