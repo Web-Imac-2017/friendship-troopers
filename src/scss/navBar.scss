@@ -1,6 +1,6 @@
 @import "variables";
 
-.nav{
+.nav {
   margin: 0px;
   position: fixed;
   top :0;
@@ -9,7 +9,7 @@
 }
 
 .nav > li {
-  display: inline-block !important;
+  display: inline-block;
 }
 
 input {
@@ -34,7 +34,6 @@ input {
 ul {
   padding: 0 1em;
   width: 100%;
-  background-color: $articles-background;
   color: $main-text;
   display : block;
   
@@ -47,6 +46,20 @@ ul {
     margin: 0 1rem;
   }
   
+  li.search-responsive {
+    text-align: center;
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    input[type=text] {
+      width: 80%;
+    }
+    img {
+      width: 4rem;
+    }
+  }
+
   li {
 
     .nav-link, .nav-item, .navbar-brand  {
@@ -133,6 +146,14 @@ ul li {
       background-size: 100%;
       background-repeat: no-repeat;
   }
+  .search-icon {
+
+    background-image: url("../images/search.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+ 
+  }
+
   .notif {
     @include border-radius-percent(100);
     background-color: $notifs;
@@ -147,16 +168,7 @@ ul li {
     top: 1.3rem;
     left: 1.3rem;
   }
-/*
-  .notifications-icon:hover, .messages-icon:hover , .friends-icon:hover {
-    .notif {
-      @include border-radius-percent(100);
-      border: 1px solid $notifs;
-      color: $notifs;
-      background-color: $menu-background;
-      @include font-size(1);
-    }
-  }*/
+
 }
 
 .nav input.nav-item {
@@ -198,8 +210,6 @@ ul li.navbar-right .nav-avatar {
   top: 0.5rem;
   width: 3rem;
   right: -1.5rem;
-
-  /*background: orange;*/
 }
 
 
@@ -211,15 +221,24 @@ menu-separator {
 }
 
 
-
 @media screen and (min-width: $break-mid) {
-  .small-desktop, ul li.navbar-right img.nav-responsive {
+   ul li.search-responsive {
     display: none;
+  }
+
+  ul li.navbar-right {
+    .small-desktop, .mobile, img.nav-responsive {
+      display: none;      
+    }
   }
   ul li.navbar-right, ul li.navbar-left {
     .desktop,  input[type=text], .nav-home {
       display: inline-block;
-    }   
+    }  
+ }
+
+  .nav input.nav-search-icon {
+    display: inline-block;
   }
 
   .nav-enigmes {
@@ -234,14 +253,19 @@ menu-separator {
 
 @media screen and (max-width: $break-mid) {
 
+  ul li.search-responsive {
+    display: block;
+    margin: 0rem;
+    padding: 0rem;
+  }
   ul li.navbar-right, ul li.navbar-left {
-      .navbar-brand .small-desktop {
-        display: inline-block;
-      }
-      .friends-icon, .messages-icon, .notifications-icon {
-        margin: 0.5rem 1rem;
-      }   
+    .navbar-brand .small-desktop {
+      display: inline-block;
     }
+    .friends-icon, .messages-icon, .notifications-icon {
+      margin: 0.5rem 1rem;
+    }   
+  }
 
   ul li.navbar-right .nav-avatar {
     right: -1.5rem;
@@ -276,11 +300,14 @@ menu-separator {
     margin: 0 1.3rem;
   }
   .nav input.nav-search-icon {
-      &:active, &:hover, &:focus, & {
-      height: 80%;
-      background-size: 100%;
+    display: none;
+  }
+
+  li.search-responsive {
+    input[type=text] {
+      width: 80%;
     }
-}
+  }
 
 
 @media screen and (max-width: $break-small) {
@@ -321,14 +348,22 @@ menu-separator {
         position: absolute;
         right: -2.25rem;
       }
+      .nav-icon.mobile img {
+        position: relative;
+        margin-right: 2rem;
+      }
 
     }
-  }
-  .nav input.nav-search-icon {
-    &:active, &:hover, &:focus, & {
 
-        background-size: 80%;
+    ul li.search-responsive {
+      input[type=text] {
+        width: 70%;
+      }
+      img {
+        width: 4rem;
+      }
     }
+
   }
 }
 
@@ -336,17 +371,6 @@ menu-separator {
 
 
 
-
-
-
-
-
-ul li.navbar-right .nav-responsive{
-  position: fixed;
-  top : 1rem;
-  right: 1rem;
-  cursor: pointer;
-}
 
 ul li.navbar-right .nav-icon .sub-menu {
   width: 20rem;
@@ -356,8 +380,9 @@ ul li.navbar-right .nav-icon .sub-menu {
   position: absolute;
   top: 5rem;
   margin-left: -10.1rem;
+  cursor: initial;
 
-  p {
+  p.sub-menu-header, p.sub-menu-footer {
     color : $sub-menu-border;
     font-weight: bold;
     text-align: center;
@@ -367,6 +392,7 @@ ul li.navbar-right .nav-icon .sub-menu {
       text-decoration: none;
     }
   }
+
   
   .separator {
     margin: 0.3rem 0;
@@ -376,7 +402,7 @@ ul li.navbar-right .nav-icon .sub-menu {
   ul.list {
     background-color: $sub-menu-list-item-background;
     padding: 0.2rem;
-    p {
+    p.content {
       color: $main-text;
       font-weight: normal;   
       font-size: 90%;
@@ -389,16 +415,27 @@ ul li.navbar-right .nav-icon .sub-menu {
       ul.sub-menu-item {
         background: none;
         display: inline-block;
-
+        width: 100%;
 
         li {
           padding: 0;
           margin : 0;
           display: inline-block;
           vertical-align: middle;
-          img {
-            min-width: 4rem;
+          img.avatar {
+            width: 4rem;
             margin : 0.5rem 0;
+            margin-right: 0.5rem;
+          }
+          .friend-validation {
+            width: 100%;
+            text-align : center; 
+            img{
+              width: 2rem;
+              margin: 0.5rem 1rem;
+              margin-top: 0rem;
+            }
+
           }
           p {
             text-align: left;
@@ -408,10 +445,16 @@ ul li.navbar-right .nav-icon .sub-menu {
               color: $grey;
           }
 
+
         }
       }
       .content {
-        font-size: 80%;           
+        padding: 0.75rem;           
+      }
+      .message {
+        font-size: 85%;
+        text-align: center;
+        color: $grey;
 
       }
     }

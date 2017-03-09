@@ -76,7 +76,24 @@ $title-font: earthOrbiter-font;
 
 
 // Padding and margin variables
-
+/*
+@mixin planetColor($planet) {
+  color:$sizeValue + rem;
+  font: $title-font;
+}
+@mixin pseudo-Multas {
+  color: §planet-space-opera;
+  font: $title-font;
+}
+@mixin pseudo-Terre {
+  color: §planet-earth;
+  font: $title-font;
+}
+@mixin pseudo-Sautien {
+  color: §planet-earth;
+  font: $title-font;
+}
+*/
 @mixin padding($sizeValue) {
   padding:$sizeValue + rem;
 }
