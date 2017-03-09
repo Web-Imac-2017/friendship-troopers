@@ -14,6 +14,19 @@ class Planet extends Controller {
     $this->loadModel('Planet');
   }
 
+  public function list($get){
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
+    }
+
+    if (!in_array(\Utils\Session::user('roleId'), [1, 2])) {
+      throw new \Utils\RequestException('action reservee aux administrateurs', 403);
+    }
+    $response = $this->Planet->find([
+      'fields' => '*',
+    ]);
+    $this->response($response, 200);
+  }
 
   public function create($post){
     if (!\Utils\Session::isLoggedIn()) {
@@ -24,15 +37,10 @@ class Planet extends Controller {
       throw new \Utils\RequestException('action reservee aux administrateurs', 403);
     }
 
-    $required = ['name','imagePath'];
-    if(count($this->checkRequired($required,$post)) > 0) {
-      //return json_encode($array);
-      throw new \Utils\RequestException('champs manquants', 404);
-    }
 
-    if(empty($post['name']) || empty($post['description']) || empty($post['imagePath'])) {
-      //return json_encode($array);
-      throw new \Utils\RequestException('champs vides', 404);
+    $required = ['name', 'imagePath'];
+    if (!empty($this->checkRequired($required, $post))) {
+      throw new \Utils\RequestException('champ manquant', 400);
     }
 
     $response = $this->Planet->save($this->filterXSS([
@@ -41,8 +49,7 @@ class Planet extends Controller {
       'imagePath' => $post['imagePath'],
       'history' => $post['history'] ?? 'none',
     ]));
-    var_dump($response);
-    $this->response(null, 204);
+    $this->response(null, 201);
   }
 
   public function delete($planetId, $delete){
@@ -60,19 +67,5 @@ class Planet extends Controller {
 
    $this->response(null, 204);
 }
-
-public function list($get){
-  if (!\Utils\Session::isLoggedIn()) {
-    throw new \Utils\RequestException('operation reservee aux membres', 401);
-  }
-
-  if (!in_array(\Utils\Session::user('roleId'), [1, 2])) {
-    throw new \Utils\RequestException('action reservee aux administrateurs', 403);
-  }
-  $response = $this->Planet->find([
-    'fields' => '*',
-  ]);
-  var_dump($response);
-  }
 
 }
