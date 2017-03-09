@@ -32,9 +32,9 @@ Router::delete('planets/:planet/posts/:publicationId/comments/:id', 'comment#del
 
 Router::get('/planets/:planet/news' , 'planet#getPlanetFeed');
 
-Router::post('planets/:planet/posts/:publicationId/stardust/' , 'stardust#create');
-Router::delete('planets/:planet/posts/:publicationId/stardust/' , 'stardust#delete');
-Router::get('planets/:planet/posts/:publicationId/stardust/' , 'stardust#list');
+Router::post('/posts/:publicationId/stardust' , 'stardust#create');
+Router::delete('/posts/:publicationId/stardust' , 'stardust#delete');
+Router::get('/posts/:publicationId/stardust' , 'stardust#list');
 
 Router::post('/riddles', 'riddle#create', 'riddle.create');
 Router::get('/riddles', 'riddle#list', 'riddle.list');

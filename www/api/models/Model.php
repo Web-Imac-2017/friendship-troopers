@@ -58,7 +58,6 @@ abstract class Model {
 	 * @return stdObject  ...               object containing all the occurences found in the DB
 	 */
 	public function find($request) {
-		var_dump($request);
 		$sql = 'SELECT ';
 		// MANAGE THE FIRST PART OF THE REQUEST [THE FIELDS]
 		if (isset($request['fields'])) {
@@ -137,7 +136,6 @@ abstract class Model {
 			}
 			// PREPARE THE REQUEST AND EXECUTE IT THEN RETURN AN OBJECT FROM YOUR DB
 			$prepareRequest = $this->pdo->prepare($sql);
-			var_dump($sql);
 			$prepareRequest->execute();
 
 			return ($prepareRequest->fetchAll(\PDO::FETCH_ASSOC));

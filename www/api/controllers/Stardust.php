@@ -12,11 +12,11 @@ class Stardust extends Controller {
 		$this->loadModel('Stardust');
 	}
 
-  public function list ($planetId, $publicationId, $get) {
+  public function list ($publicationId, $get) {
     $count = $this->Stardust->findCount([
       'publicationId' => $publicationId,
     ]);
-    var_dump($count);
+    $this->response($count, 200);
   }
 
   /**
@@ -25,13 +25,12 @@ class Stardust extends Controller {
    * @return boolean  ...   true if like created, false if not
    */
 
-  public function create ($planetId, $publicationId, $post) {
+  public function create ($publicationId, $post) {
     if (!\Utils\Session::isLoggedIn()) {
       throw new \Utils\RequestException('operation reservee aux membres', 401);
     }
 
     $userId = \Utils\Session::user('id');
-
     try {
 			$id = $this->Stardust->insert($this->filterXSS([
 				'userId' => $userId,
@@ -42,6 +41,8 @@ class Stardust extends Controller {
 				'error' => $e->getMessage(),
 			], 500);
 		}
+
+    $this->response(null, 201);
   }
 
   /**
@@ -49,7 +50,7 @@ class Stardust extends Controller {
    * @param  POST     $post UserId and PublicationId, both primary keys of the stardust
    * @return boolean  ...   true if delete succed, false if like not found
    */
-  public function delete ($planetId, $publicationId, $delete) {
+  public function delete ($publicationId, $delete) {
 
     if (!\Utils\Session::isLoggedIn()) {
       throw new \Utils\RequestException('operation reservee aux membres', 401);
@@ -61,8 +62,6 @@ class Stardust extends Controller {
       'fields' => 'userId',
       'condition' => ['publicationId' => $publicationId],
     ]);
-    var_dump($userId);
-    var_dump($stardustUserId);
 
     if (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $userId != $stardustUserId['userId']) {
 			throw new \Utils\RequestException('action reservee aux administrateurs', 403);
