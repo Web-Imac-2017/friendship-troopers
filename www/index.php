@@ -31,6 +31,8 @@ Router::delete('/users/:userId/delete_friend','friend#deleteFriend', 'users.me.d
 Router::get('/users/:userId/friends','friend#listFriend', 'users.me.listFriend'); //ok
 Router::get('/users/:userId/number_friends','friend#countFriend', 'users.me.countFriend'); //ok
 
+Router::post('/avatar','avatar#create', 'avatar.create'); 
+
 Router::post('/planets/:planet/posts', 'publication#create', 'planets.posts.create');
 Router::get('/planets/:planet/posts', 'publication#list', 'planets.posts.list');
 Router::patch('/planets/:planet/posts/:id', 'publication#update', 'planets.posts.update');
