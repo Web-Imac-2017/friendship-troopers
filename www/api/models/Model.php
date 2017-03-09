@@ -135,11 +135,6 @@ abstract class Model {
 				$sql .= ' LIMIT ' . $request['limit'];
 			}
 
-			echo '<pre>';
-			print_r($sql);
-			echo '</pre>';
-			//var_dump($sql);
-
 			// PREPARE THE REQUEST AND EXECUTE IT THEN RETURN AN OBJECT FROM YOUR DB
 			$prepareRequest = $this->pdo->prepare($sql);
 			$prepareRequest->execute();
@@ -166,12 +161,12 @@ abstract class Model {
 	 */
 	public function findCount ($conditions = NULL) {
 		if ($conditions === NULL) {
-		return ($this->findFirst(array(
-		    'fields' => ['COUNT(' . $this->primaryKey . ') AS count'])));
+			return ($this->findFirst(array(
+				'fields' => ['COUNT(' . $this->primaryKey . ') AS count'])));
 		}
 		return ($this->findFirst(array(
-		'fields' => ['COUNT(' . $this->primaryKey . ') AS count'],
-		'conditions' => $conditions
+			'fields' => ['COUNT(' . $this->primaryKey . ') AS count'],
+			'conditions' => $conditions
 		)));
 	}
 
@@ -196,7 +191,6 @@ abstract class Model {
 				$sql .= "$key = $value";
 			}
 		}
-		var_dump($sql);
 		$prepareRequest = $this->pdo->prepare($sql);
 		$prepareRequest->execute();
 	}
@@ -242,8 +236,6 @@ abstract class Model {
 			$sql = ' INSERT INTO ' . $this->table . ' SET '. implode(', ', $fields);
 			$action = 'insert';
 		}
-		var_dump($sql);
-		var_dump($currentData);
 		$prepareRequest = $this->pdo->prepare($sql);
 		$prepareRequest->execute($currentData);
 
