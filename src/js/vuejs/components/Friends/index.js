@@ -1,5 +1,6 @@
 'use strict';
 import Vue from 'vue/dist/vue';
+import {apiRoot} from '../../../../../config.js';
 
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
@@ -11,6 +12,9 @@ import NavBar from '../NavBar/index.js';
 
 const Friends = Vue.extend({
   template,
+  created :  function() {
+      console.log("COUCOU JE SUIS CREE");
+    },
   components: {
     'FriendTemplate' : FriendTemplate, 
     'lateral-menu-left' : LateralMenuLeft, 
@@ -21,6 +25,14 @@ const Friends = Vue.extend({
       this.planets[this.currentPlanetIndex].selected = false;
       this.currentPlanetIndex = index;
       this.planets[index].selected = true;
+
+      this.$http.get(apiRoot() + 'users/me/friends').then((response) => {
+      // gérer le succes, toutes les infos renvoyer sont dans response.data      
+        console.log(response);    
+      }, (response) => {
+      // gérer les erreurs avec response.status pour les code d'erreurs
+        console.log(response);
+      });
     }
   },
   data () {
@@ -64,6 +76,7 @@ const Friends = Vue.extend({
           } ],
        currentPlanetIndex : 0,
        user: {
+        userId : 1,
         nbFriends : 7, 
         friends : 
           [ { 
