@@ -21,11 +21,25 @@
   padding-bottom: 1rem;
 }
 
+.lateralMenuAvatar{
+	background-image: url("../images/LineAboveAvatar.svg");
+	background-size: 100%;
+	background-position-x: 0rem;
+	text-align: center;
+	background-repeat: no-repeat;
+  	background-position: center;
+  	vertical-align: middle;
+  	width: auto;
+  	position: relative;
+  	//height: 12rem;
+}
+
 .avatarMenu {
 	text-align: center;
   	width: 60%;
   	display: inline-block;
   	margin-top: 0rem;
+  	position: relative;
   	//padding-top: 3rem;
 
 }
@@ -33,9 +47,9 @@
 .planet {
 	display: inline-block;
   	width: 50%;
-  	position: relative;
-  	left: 3rem;
-  	top: -4rem;
+  	position: absolute;
+  	top: 40px;
+ 	left: 70px;
 }
 
 .menuTools{
@@ -54,14 +68,3 @@
 	text-decoration: none;
 }
 
-.lateralMenuAvatar{
-	background-image: url("../images/LineAboveAvatar.svg");
-	background-size: 100%;
-	background-position-x: 0rem;
-	text-align: center;
-	background-repeat: no-repeat;
-  	background-position: center;
-  	vertical-align: middle;
-  	width: auto;
-  	//height: 12rem;
-}

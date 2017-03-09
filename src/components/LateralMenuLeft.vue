@@ -13,18 +13,19 @@
     </div>
 
       <div>
-        <h1> {{ user.username }} </h1> <br>
-        <p> {{ user.userBadge}} </p>
+        <h1> <font size="14">{{ user.username }} </h1></font>
+        <center><font size="10">{{ user.userBadge }}</center></font>
+
       </div>
 
       <div>
-      <p class="enigmes"> <b>Enigmes</b> </p>
+      <br><p class="enigmes"><font color="#c33a78"> <b>Enigmes </b> </p>
       <router-link to=""> Résoudre l'énigme en cours </router-link> <br>
       <router-link to=""> Voir la liste des enigmes </router-link> 
       </div>
 
       <br><div>
-      <p class="amis"><b>Amis</b></p>
+      <p class="amis"><font color="#17d4b2"><font size="11"><b>Amis</font></b></p>
       <router-link to=""> Voir tous mes amis </router-link> <br/>
       <router-link to=""> Accéder à la messagerie </router-link>
       <div class="lastFriends">
@@ -57,7 +58,7 @@
         user : {
           userAvatar : '../assets/logo.png',
           username : 'LuckyPon', 
-          userBadge : 'Baroudeuse de l\'espace', 
+          userBadge : 'Astronaute Débutant', 
           userPlanet : {
             path : '../assets/Avatar1.svg',
             name : 'Planete X785-E'
