@@ -2,11 +2,12 @@
   <navbar></navbar>
   <div class="container-fluid">
     <div class="row">
-      <aside class="col-sm-2">
+      <aside class="col-sm-3 col-md-2">
         <lateral-menu-left></lateral-menu-left>
-        <menu-tools></menu-tools>
+        <deconnexion class="desktop"></deconnexion>
+        <menu-tools class="desktop"></menu-tools>
       </aside>
-      <section class="article col-sm-8  container-transparent">
+      <section class="article col-sm-9 col-md-8 container-transparent">
         <create-post></create-post>
         <page-nav></page-nav>
         <div v-for="post in posts">
@@ -14,9 +15,11 @@
         </div>
         <page-nav></page-nav>
       </section>
-      <div class="col-sm-2">
+      <div class="col-md-2">
          <lateral-menu-right></lateral-menu-right>
       </div>
+
+      <menu-tools class="mobile"></menu-tools>
 
     </div>
   </div>

@@ -10,6 +10,7 @@ template     = eval(`\`${template}\``);
 import LateralMenuLeft from '../LateralMenuLeft/index.js'
 import LateralMenuRight from '../LateralMenuRight/index.js'
 import MenuTools from '../MenuTools/index.js'
+import Deconnexion from '../Deconnexion/index.js'
 import Post from '../Post/index.js'
 import CreatePost from '../CreatePost/index.js'
 import PageNav from './pageNav/index.js'
@@ -21,7 +22,8 @@ const Feed = Vue.extend({
   	'create-post' : CreatePost, 
   	'lateral-menu-left' : LateralMenuLeft,
   	'lateral-menu-right' : LateralMenuRight, 
-  	'menu-tools' : MenuTools, 
+    'menu-tools' : MenuTools, 
+    'deconnexion' : Deconnexion, 
   	'post' : Post ,
     'page-nav' : PageNav,
     'navbar' : NavBar

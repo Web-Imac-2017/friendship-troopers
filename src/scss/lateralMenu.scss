@@ -27,7 +27,7 @@
   }
 }
 
-.lateralMenuLeft a{
+.lateralMenuLeft a {
 	text-decoration: none;
 }
 
@@ -72,15 +72,12 @@
 
 
 
-
-
 .menu-deconnexion {
   margin-top: 1rem;
   text-align: center;
 }
 
 .menuTools{
-  /* style and properties */
   margin-top: 1rem;
   display: inline-block;
   text-align: center;
@@ -88,7 +85,6 @@
 }
 
 .menuTools a{
-  /* style and properties for links (a) in menuTools */
   text-decoration: none;
   padding: 0 0.5rem;
 }
@@ -105,19 +101,17 @@
   /*height: 12rem;*/
   min-height: 13rem;
 
+
   img {
     vertical-align: middle;
   }
   .avatarMenu {
     vertical-align: middle;
-
-    /*position: relative;*/
     max-height: 10rem;
   }
   .planetMenu {
     position: absolute;
     max-height: 8rem;
-    /*left: 6rem;*/
     top: 6rem;
     left: 50%;
 
@@ -153,27 +147,33 @@ p.honor {
   font-style : italic;
 }
 
-/*
 
-@media screen and (max-width: $break-large) {
-  .lateralMenuRight {
-    display: none;
-  }
-}
 
-@media screen and (min-width: $break-large) {
-  .lateralMenuRight {
-    display: inline-block;
-  }
-}
 @media screen and (max-width: $break-mid) {
   .lateralMenuLeft {
     display: none;
   }
+  .menu-deconnexion {
+    display: none;
+  }
+  .mobile .menuTools {
+    display: block;
+  }
+  .desktop .menuTools, .desktop .menu-deconnexion, .lateralMenuRight {
+    display: none;
+  }
 }
-
 @media screen and (min-width: $break-mid) {
   .lateralMenuLeft {
     display: inline-block;
   }
-}*/
+  .menu-deconnexion {
+    display: inline-block;
+  }
+  .mobile .menuTools {
+    display: none;
+  }
+  .desktop .menuTools, .desktop .menu-deconnexion, .lateralMenuRight {
+    display: block;
+  }
+}
