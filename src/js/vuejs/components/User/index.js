@@ -1,6 +1,7 @@
 'use strict';
 
 import Vue from 'vue/dist/vue';
+import {apiRoot} from '../../../../../config.js';
 
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
@@ -27,6 +28,14 @@ const User = Vue.extend({
     'post' : Post,
     'navbar' : NavBar,
     'page-nav' : PageNav },
+  created : function() {
+    console.log("created profil");
+    this.$http.get(apiRoot() + 'users/me').then((response) => {
+      console.log(response);
+    }, (response) => {
+      console.log(response);
+    });
+  },
    methods: {
     profil: function(){
       if (this.myself) {

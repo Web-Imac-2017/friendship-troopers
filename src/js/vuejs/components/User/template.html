@@ -15,7 +15,7 @@
             <div class="col-sm-7">
               <p v-if="myself"> Mon profil </p>
               <p v-else> Profil de {{ user.username }} </p>
-              <p class="honorifique-title"> {{ user.userBadge }} </p>
+              <p class="honorific-title"> {{ user.userBadge }} </p>
               <p class="green" v-if="user.points < 2"> {{ user.points }} point </p>
               <p class="green" v-else> {{ user.points }} points </p>
             </div>
