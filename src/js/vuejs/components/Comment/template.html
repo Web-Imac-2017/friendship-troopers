@@ -2,15 +2,15 @@
   <div class="col-sm-1">
     <div class="avatar">
       <router-link :to="{ name: 'User', params: { user: comment.user}}">
-        <img :src="comment.avatar" alt="author avatar" class="avatar">
+        <img :src="comment.imagePath" alt="author avatar" class="avatar">
       </router-link>
     </div>
   </div>
   <div class="col-sm-11 post-content">
     <div class="row"> 
       <div class="col-sm-11 left">
-          <h1 class="pseudo" v-bind:style="{color : planetData[comment.planeteId] }" >{{ comment.user }}</h1>
-        <small class="date left"> {{ comment.date + " à " + comment.hour }}</small>
+          <h1 class="pseudo" v-bind:style="{color : planetData[comment.planeteId] }" >{{ comment.username }}</h1>
+        <small class="date left"> {{ formateDate(comment.publishDate) }}</small>
       </div>
     <div class="col-sm-1 right connect-buttons contain-img">
       <img src="/assets/images/Options.svg" alt="Options">

@@ -11,6 +11,13 @@ const Comment = Vue.extend({
     comment:Object
   },
   template,
+  methods : {
+    formateDate : function(date) {
+      var object = new Date(date); 
+      var months = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juill.", "août", "sept.", "oct.", "nov.", "déc."];
+      return object.getDate() + " " + months[object.getMonth()] + " à " + object.getHours() + ":" + object.getMinutes();
+    }
+  },
   data () {
     return {
       newComment : '',

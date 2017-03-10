@@ -28,52 +28,21 @@ const Feed = Vue.extend({
     'page-nav' : PageNav,
     'navbar' : NavBar
   },
-  created(){
-    // TEST POUR RECUPERER UN POST DE LA PLANETE 1
-    this.$http.get(apiRoot() + 'planets/1/posts', 
-        {
-          emulateJSON: true
-        }).then(
-          (response) => {
-            
-            console.log("success !");
-            console.log(response);
-            var postTab = response.data;
-            console.log("Test content "+postTab[0].content);
-          },
-          (response) => {
-            console.log("fail !");
-            console.log(response);
-          }
-        )
-
-
-    // TEST POUR RECUPERER UN POST DE L UTILISATEUR COULON : NE MARCHE PAS ENCORE
-    /*this.$http.get(apiRoot() + 'planets/1/posts',
-        {
-          'username' : 'coulon'
-        },{
-          emulateJSON: true
-        }).then(
-          (response) => {
-            
-            console.log("success"+response.data);
-            console.log(response.data);
-            var postTab = response.data;
-            console.log("Test content "+postTab[0].content);
-          },
-          (response) => {
-            console.log("fail !")
-            console.log(response)
-          }
-        )*/
-
+  created : function(){
+    // Récupérer les posts de la planète 1
+    this.$http.get(apiRoot() + 'planets/1/posts', { emulateJSON: true }).then(
+      (response) => {
+        this.bddPosts = response.data;
+      },
+      (response) => {
+        console.log(response);
+      }
+    )
     },
- 
   	data () {
       	return {
+          bddPosts: {},
       		posts : [{      /* admin / earth / parallel / robots / aliens / space-opera*/
-
         	  user: 'Lucky',
             avatar : "/assets/images/avatars/Paranose/astro.svg",
             planeteId : 2,
