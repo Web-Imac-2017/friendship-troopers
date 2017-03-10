@@ -7,30 +7,34 @@
         <deconnexion class="desktop"></deconnexion>
         <menu-tools class="desktop"></menu-tools>
       </aside>
-      <section class="article col-sm-9 col-md-9 col-lg-8">
-        <div class="row container-colored">
-          <div class="col-sm-2">
-            <img :src="user.userAvatar">
+      <section class="col-sm-8 container-transparent user">
+        <div class="container-colored">
+          <div class="row profil">
+            <div class="col-sm-2">
+              <img :src="user.userAvatar" class="user-avatar">
+            </div>
+            <div class="col-sm-7">
+              <p v-if="myself"> Mon profil </p>
+              <p v-else> Profil de {{ user.username }} </p>
+              <p class="honorifique-title"> {{ user.userBadge }} </p>
+              <p class="green" v-if="user.points < 2"> {{ user.points }} point </p>
+              <p class="green" v-else> {{ user.points }} points </p>
+            </div>
+            <div class="col-sm-1 border-right"></div>
+            <div class="col-sm-2 ">
+              <img :src="user.userPlanet.path" class="planet"> 
+              <p class="center"> {{ user.userPlanet.name }} </p>
+            </div>
           </div>
-          <div class="col-sm-8">
-            <p v-if="myself"> Mon profil </p>
-            <p v-else> Profil de {{ user.username }} </p>
-            <small> {{ user.userBadge }} </small>
-            <p> Né le {{ user.birthDate }} </p>
-          </div>
-          <div class="col-sm-2">
-            <img :src="user.userPlanet.path"> 
-            <p> {{ user.userPlanet.name }} </p>
-          </div>
-        </div>
         
         <option-bar :myself="myself"></option-bar>
-
+ 
         <statistics :user="user"></statistics>
-
         <button v-on:click="profil"> (debug) Profil change from public to private</button>  
+        </div>
+        <page-nav></page-nav>
+        <post :post="post"></post> 
 
-        <post></post>
       </section>
       <div class="col-lg-2">
          <lateral-menu-right></lateral-menu-right>
