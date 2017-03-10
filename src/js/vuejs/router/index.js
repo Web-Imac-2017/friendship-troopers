@@ -53,7 +53,7 @@ const router = new VueRouter({
     	component: Login 
 	},{
       name: 'WelcomeOnBoard',
-      path: '/inscription/welcome-on-board', 
+      path: '/welcome-on-board', 
       component : WelcomeOnBoard
   },{ 
       name : 'Search',
