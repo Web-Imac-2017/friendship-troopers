@@ -42,6 +42,11 @@ Router::get('/planets/:planet/news', 'planet#getPlanetFeed');
 Router::post('/interest/add' , 'interest#addInterest','interest.add');
 Router::get('/interest/view','interest#listInterest', 'interest.list');
 
+Router::post('/badge/add','badge#create','badge.add');
+Router::get('/badge/view','badge#read','badge.read');
+Router::post('/badge/update','badge#update','badge.update');
+Router::post('/badge/delete','badge#delete','badge.delete');
+
 Router::get('/planets/:planet/news' , 'planet#getPlanetFeed');
 Router::post('/planets/:planet/posts/:publicationId/comments', 'comment#create', 'planets.posts.comments.create');
 Router::get('/planets/:planet/posts/:publicationId/comments', 'comment#list', 'planets.posts.comments.list');
