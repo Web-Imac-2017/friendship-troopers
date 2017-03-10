@@ -1,0 +1,53 @@
+@import "variables";
+
+.messages {
+	.row {
+		margin-right: 0;
+		margin-left: 0;
+	}
+	
+	.conversation {
+		@include margin(1);
+		@include padding(2);
+		background: $comments-background ;
+	}
+
+	img {
+		@include padding(0.5);
+	}
+
+	.new-conv {
+		background: $comments-background ;
+		@include margin(1);
+		@include padding(0.5);
+	}
+
+	.new-conv img {
+		height: 5rem;
+	}
+
+	.conv-selected {
+		background: $comments-publish;
+	}
+
+	.message-perso {
+		background: $comments-publish;
+		@include margin2(1,0);
+		@include padding2(0.5,0);
+	}
+
+	.date {
+		color : $grey;
+		@include margin2(2,0);
+	}
+
+	.page-title {
+		text-align: left;
+		font-size: 2.5rem;
+		@include margin(2);
+	}
+
+	p {
+		@include margin2(2,0);
+	}
+}

@@ -1,13 +1,44 @@
 <div>
 <navbar></navbar>  
-  <div class="well">
-    <div class="row">
-      <div class="col-sm-5 text-right">
-        <img class="logo" src="../assets/logo.png">
+  <div class="row no-gutters">
+    <aside class="col-sm-3 col-md-3 col-lg-2">
+      <lateral-menu-left></lateral-menu-left>
+      <deconnexion class="desktop"></deconnexion>
+      <menu-tools class="desktop"></menu-tools>
+    </aside>
+    <section class="messages col-sm-9 col-md-9 col-lg-10 container">
+      <div class="row container-transparent">
+          <h1 class="page-title"> Messagerie </h1>
+          <div class="col-sm-3 col-md-3 col-lg-2">
+            <div class="container-colored">
+              <div class="new-conv pseudo-button">
+                <img src="/assets/images/new.svg" class=" center">
+                <p class="text-center"> Nouvelle conversation </p>
+              </div>
+              <div v-for="(friend,index) in friends" class="conversation pseudo-button" v-on:click="active(index)" v-bind:class="{ 'conv-selected' : friend.selected}">
+                <img :src="friend.avatar" class="avatar center">
+                <h1 v-bind:class="friend.planete"> {{ friend.name }} </h1>
+              </div>
+            </div>
+          </div>
+           <div class="col-sm-8 col-md-8 col-lg-9 container-colored">
+              <p class="text-center date">{{date}}</p>
+              <div v-for="message in conversation" class="row">
+                  <div class="col-sm-1 date"> à {{message.time }}</div>
+                  <div class="col-sm-11 message-perso" v-if="message.sender == 1">
+                    <img :src="friends[currentSelected].avatar" class="avatar left col-sm-1">
+                    <div class="col-sm-11 left">
+                      <h1 v-bind:class="friends[currentSelected].planete" class="pseudo"> {{ friends[currentSelected].name }} </h1>
+                      <p >  {{ message.content}} </p>
+                    </div>
+                  </div>
+                   <div class="col-sm-11 message-perso" v-else>
+                    <p class="col-sm-11 right"> {{ message.content}} </p>
+                    <img :src="myself.avatar"  class="avatar col-sm-1 right">
+                  </div>
+              </div>
+          </div>
       </div>
-      <div id="hello">
-        <h1>Page de chat avec un ami</h1>
-      </div>
-    </div>
+    </section>
   </div>
 </div>

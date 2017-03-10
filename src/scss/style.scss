@@ -6,6 +6,7 @@
 @import "input-range";
 @import "bootstrap-custom";
 @import "user-profil";
+@import "messagebox";
 
 .wrapper {
   @include flexbox();
@@ -655,6 +656,10 @@ input[type="radio"] {
 .vertical-align {
     display: flex;
     align-items: center;
+}
+.no-gutters  {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .border-left {
