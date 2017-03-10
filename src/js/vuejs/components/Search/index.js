@@ -4,14 +4,21 @@ import {apiRoot} from '../../../../../config.js';
 
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
+
+import LateralMenuLeft from '../LateralMenuLeft/index.js'
+import MenuTools from '../MenuTools/index.js'
 import NavBar from '../NavBar/index.js';
+import PageNav from '../Feed/pageNav/index.js'
 
 
 const Search = Vue.extend({
   template, 
-  components : {
-  	'navbar' : NavBar 
-  },
+  components: {
+    'lateral-menu-left' : LateralMenuLeft, 
+    'menu-tools' : MenuTools,
+    'navbar' : NavBar,
+    'page-nav' : PageNav
+  }, 
   created(){
     // TEST POUR VOIR SI ON EST LOGIN
     this.$http.post(apiRoot() + 'planets/1/posts', 
