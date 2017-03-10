@@ -6,21 +6,21 @@ template     = eval(`\`${template}\``);
 
 import AdminMenu from '../AdminMenu/index.js'
 import CreatePost from '../../CreatePost/index.js'
-import PostAdmin from './PostAdmin/index.js'
+import PostAdmin from '../../Post/index.js'
 
 const AdminCreatePost = Vue.extend({
   template,
    components : {
   	'admin-menu' : AdminMenu,
   	'create-post' : CreatePost,
-  	'post-admin' : PostAdmin
+  	'post-admin' : PostAdmin 
   },
   data () {
       	return {
       		posts : [{      /* earth / parallel / robots / aliens / space-opera*/
 
         	  user: 'Lucky',
-            avatar : "../../friendship-troopers/www/assets/images/avatars/parallel/astro.svg",
+            avatar : "../assets/images/avatars/parallel/astro.svg",
             planeteId : 2,
 	          date: '20 fev',
 	          hour: '12h04',
@@ -29,17 +29,19 @@ const AdminCreatePost = Vue.extend({
 	          comments: [
             {
               user : "Moi",
-              content : "la vie c'est du kiri"
+              content : "la vie c'est du kiri",
+              avatar : "../assets/images/avatars/parallel/astro.svg"
             }, {
               user : "Toi",
-              content : "Non, la vie c'est du kiwi"
+              content : "Non, la vie c'est du kiwi",
+              avatar : "../assets/images/avatars/parallel/astro.svg"
             }
             ],
             id : 1
 	        },
           {
             user: 'Lucky',
-            avatar : "../../friendship-troopers/www/assets/images/avatars/robots/landscape.svg",
+            avatar : "../assets/images/avatars/robots/landscape.svg",
             planeteId : 3,
             date: '20 fev',
             hour: '12h04',
@@ -48,17 +50,19 @@ const AdminCreatePost = Vue.extend({
             comments: [
             {
               user : "Moi",
-              content : "la vie c'est du kiri"
+              content : "la vie c'est du kiri",
+              avatar : "../assets/images/avatars/parallel/astro.svg"
             }, {
               user : "Toi",
-              content : "Non, la vie c'est du kiwi"
+              content : "Non, la vie c'est du kiwi",
+              avatar : "../assets/images/avatars/parallel/astro.svg"
             }
             ],
             id : 2
           },
           {
             user: 'Lucky',
-            avatar : "../../friendship-troopers/www/assets/images/avatars/aliens/landscape.svg",
+            avatar : "../assets/images/avatars/aliens/landscape.svg",
             planeteId : 4,
             date: '20 fev',
             hour: '12h04',
@@ -67,10 +71,12 @@ const AdminCreatePost = Vue.extend({
             comments: [
             {
               user : "Moi",
-              content : "la vie c'est du kiri"
+              content : "la vie c'est du kiri",
+              avatar : "../assets/images/avatars/parallel/astro.svg"
             }, {
               user : "Toi",
-              content : "Non, la vie c'est du kiwi"
+              content : "Non, la vie c'est du kiwi",
+              avatar : "../assets/images/avatars/parallel/astro.svg"
             }
             ],
             id : 3

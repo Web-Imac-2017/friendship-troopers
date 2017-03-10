@@ -1,0 +1,40 @@
+<div class="post">
+    <div class="row"> 
+      <div class="col-sm-1">
+          <div class="avatar">
+            <router-link :to="{ name: 'User', params: { user: post.user}}">
+                <img :src="post.avatar" alt="author avatar" class="avatar">
+            </router-link>
+          </div>
+      </div>
+      <div class="col-sm-11 post-content">
+        <div class="row"> 
+          <div class="col-sm-11 left">
+            <h1 class="pseudo" v-bind:style="{color : planetData[post.planeteId] }" >
+              {{ post.user }}
+            </h1>
+            <small class="date"> {{ post.date + " à " + post.hour }}</small>
+          </div>
+          <div class="col-sm-1 right connect-buttons contain-img pseudo-button">
+            <img src="/assets/images/Options.svg" alt="Options">
+          </div>
+        </div>
+        <div class="row">  
+          <div class="col-sm-12">
+            <p class="content-block" v-if="!showFullPost"> {{ post.content.slice(0,200) }} </p>
+            <p class="content-block" v-else> {{ post.content}} </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-10 left"  v-if="post.content.length > 200 && showFullPost == false">
+            <p class="see" v-on:click="showFullPost = true">Voir plus </p>
+          </div>
+          <div class="col-sm-10 left"  v-else-if="showFullPost == true">
+            <p class="see" v-on:click="showFullPost = false">Voir moins </p>
+          </div>
+          <div class="col-sm-12 left" v-else></div>
+        </div>
+      </div>
+    </div>
+      
+  </div>
