@@ -5,6 +5,8 @@ import LateralMenuRight from '../LateralMenuRight/index.js'
 import MenuTools from '../MenuTools/index.js'
 import topParameters from './topParameters/index.js'
 import bottomParameters from './bottomParameters/index.js'
+import NavBar from '../NavBar/index.js';
+
 
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
@@ -17,7 +19,8 @@ const Parameters = Vue.extend({
   	'lateral-menu-right' : LateralMenuRight, 
   	'menu-tools' : MenuTools, 
   	'top-parameters' : topParameters,
-    'bottom-parameters' : bottomParameters  
+    'bottom-parameters' : bottomParameters, 
+    'navbar' : NavBar
   }, 
   data () {
     return {

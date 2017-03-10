@@ -34,27 +34,11 @@ const Login = Vue.extend({
 	        day:'',
 	        month:'',
 	        year:'',
-	        dayTab : [ 1,28, 29, 30, 31],
-	        monthTab : [ 1, 2, 3,4,5,6,7,8,9,10,11,12],
-	        yearTab : [ 1975, 1996, 2000, 2016]
         },
         userLogin:{
         	mail:'',
         	password:''
         },
-        loginTab : [{
-          username:'Test1',
-        	mail:'test1@gmail.com',
-        	password:'123456789a'
-        },{
-          username:'Test2',
-        	mail:'test2@gmail.com',
-        	password:'password123'
-        },{
-          username:'Test3',
-        	mail:'test3@gmail.com',
-        	password:'password123'
-        }],
         signIn:true,
         nullMessage:"Veuillez remplir ce champs svp!"
       }

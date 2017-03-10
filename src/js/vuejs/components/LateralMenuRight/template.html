@@ -1,11 +1,21 @@
+<div class="container col-sm-12">
+
  <div class="lateralMenuRight">
-    <b>Actualité 1</b><br/>
-    Je suis une actualite<br/><br/>
+ 	<div v-if="actualite.intergalactique.length > 0"> 
+ 		<p class="lateral-actu-type top">Actualité intergalactique</p>
+        <intergalactique-item v-for="item in actualite.intergalactique" v-bind:intergalactique="item"></intergalactique-item>
+ 	</div>
 
-	<b>Actualité 2</b><br/>
-    Je suis une actualite<br/><br/>
+ 	<div v-if="actualite.galactique.length > 0"> 
+ 		<p class="lateral-actu-type">Actualité galactique</p>
+        <galactique-item v-for="item in actualite.galactique" v-bind:galactique="item"></galactique-item>
+ 	</div>
 
-    <b>Actualité 3</b><br/>
-    Je suis une actualite<br/><br/>
+
+ 	<div v-if="actualite.planetaire.length > 0"> 
+ 		<p class="lateral-actu-type">Actualité planetaire</p>
+        <planetaire-item v-for="item in actualite.planetaire" v-bind:planetaire="item"></planetaire-item>
+ 	</div>
 
   </div>
+</div>

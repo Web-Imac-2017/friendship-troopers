@@ -6,47 +6,35 @@ let template = require('./template.html');
 template     = eval(`\`${template}\``);
 
 
+
+
 const LateralMenuLeft = Vue.extend({
     template,
     data () {
       return {
         user : {
-          userAvatar : '../../friendship-troopers/www/assets/images/Avatar1.svg',
+          userAvatar : '/assets/images/avatars/Terre/miror.svg',
           username : 'LuckyPon', 
-          userBadge : 'Baroudeuse de l\'espace', 
+          userHonor : 'Baroudeuse de l\'espace', 
+          planet : 'Terre',
+          avatar : 'aliens',
           userPlanet : {
-            path : '../../friendship-troopers/www/assets/images/Avatar1.svg',
-            name : 'Planete X785-E'
+            path : '/assets/images/planets/Terre.svg',
+            name : 'Terre'
           }, 
-          lastFriends : [ {
-            avatar : '../../friendship-troopers/www/assets/images/Avatar1.svg',
+          lastFriends : [ 
+          {
+            avatar : '/assets/images/avatars/Sautien/aliens.svg',
             name : 'Spockdu77'
           }, {
-            avatar : '../../friendship-troopers/www/assets/images/Avatar1.svg',
+            avatar : '/assets/images/avatars/Terre/planets.svg',
             name : 'MartyDuPassé'
           }, {
-            avatar : '../../friendship-troopers/www/assets/images/Avatar1.svg',
+            avatar : '/assets/images/avatars/Terre/miror.svg',
             name : 'JulieDuFutur'
           }
           ] 
         }
-      }
-    },
-    methods:{
-      deconnect(){
-        this.$http.post(apiRoot() + 'auth/logout', {
-          emulateJSON: true
-        }).then(
-          (response) => {
-            console.log("success deconnexion !");
-            this.$router.push("/")
-          },
-          (response) => {
-            console.log("fail deconnexion !")
-          }
-        )
-       
-
       }
     }
 });

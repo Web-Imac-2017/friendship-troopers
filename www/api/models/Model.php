@@ -33,7 +33,7 @@ abstract class Model {
 			$this->table = array_pop($tableName);
 		}
 
-		$this->metaData = json_decode(file_get_contents(ROOT.'/config/dbMetaData.json'), true)[$this->table];
+		//$this->metaData = json_decode(file_get_contents(ROOT.'/config/dbMetaData.json'), true)[$this->table];
 
 		//TRY TO OPPEN A CONNEXION TO THE DB
 		try {
@@ -134,6 +134,12 @@ abstract class Model {
 			if (isset($request['limit'])) {
 				$sql .= ' LIMIT ' . $request['limit'];
 			}
+
+			echo '<pre>';
+			print_r($sql);
+			echo '</pre>';
+			//var_dump($sql);
+
 			// PREPARE THE REQUEST AND EXECUTE IT THEN RETURN AN OBJECT FROM YOUR DB
 			$prepareRequest = $this->pdo->prepare($sql);
 			$prepareRequest->execute();
@@ -160,13 +166,13 @@ abstract class Model {
 	 */
 	public function findCount ($conditions = NULL) {
 		if ($conditions === NULL) {
-			return ($this->findFirst(array(
-				'fields' => 'COUNT(' . $this->primaryKey . ') AS count'))->count);
+		return ($this->findFirst(array(
+		    'fields' => ['COUNT(' . $this->primaryKey . ') AS count'])));
 		}
 		return ($this->findFirst(array(
-			'fields' => 'COUNT (' . $this->primaryKey . ') AS count',
-			'conditions' => $conditions
-		))->count);
+		'fields' => ['COUNT(' . $this->primaryKey . ') AS count'],
+		'conditions' => $conditions
+		)));
 	}
 
  	/**
@@ -190,6 +196,7 @@ abstract class Model {
 				$sql .= "$key = $value";
 			}
 		}
+		var_dump($sql);
 		$prepareRequest = $this->pdo->prepare($sql);
 		$prepareRequest->execute();
 	}
@@ -229,12 +236,14 @@ abstract class Model {
 				foreach ($addKeys as $key => $value) {
 					$sql .= ' AND ' . $key . '=:' . $key;
 				}
-				$this->primaryKeyValue = $data[$key];
+				$this->primaryKeyValue = $data[$Pkey];
 				$action = 'update';
 		} else {
 			$sql = ' INSERT INTO ' . $this->table . ' SET '. implode(', ', $fields);
 			$action = 'insert';
 		}
+		var_dump($sql);
+		var_dump($currentData);
 		$prepareRequest = $this->pdo->prepare($sql);
 		$prepareRequest->execute($currentData);
 
