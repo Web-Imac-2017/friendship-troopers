@@ -1,35 +1,60 @@
 <div id= "home">
-      <router-view></router-view>      
+    <router-view></router-view>      
 
-      <h1>Menu temporaire</h1>
-      <ul>
-        <li> <router-link :to="{ name: 'Friends', params: { user: 'pseudo' }}"> Voir les amis</router-link></li>
+    <div style="background:#272c48; margin-top:10rem; vertical-align:top;">  
+  
+    <h1>Menu temporaire</h1>
+
+    <div style="display:inline-block; width:20%;position : relative;vertical-align: top; margin-top: 3rem;">
+    <h2>Pages parfaites</h2>
+        <p style="display:block; padding: 1rem 3rem;"> <router-link :to="{ name: 'Login'}"> Login/Accueil</router-link></p>
+        <p style="display:block; padding: 1rem 3rem;"> <router-link :to="{ name: 'Friends', params: { user: 'pseudo' }}"> Amis</router-link></p>
+    </div>
+    
+    <div style="display:inline-block; width:20%;position : relative;vertical-align: top; margin-top: 3rem;">
+       <h2>Pages à lier faites</h2>
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'WelcomeOnBoard'}"> Welcome On Board </router-link></p>
+
+    </div>
+
+    <div style="display:inline-block; width:20%;position : relative; vertical-align: top; margin-top: 3rem;">
+        <h2>Pages en cours</h2>
+        <p style="display:block; padding: 1rem 3rem;"> <router-link :to="{ name: 'User', params: { user: 'pseudo' }}"> Profil</router-link></p>
+        <p style="display:block; padding: 1rem 3rem;"> <router-link :to="{ name: 'Parameters', params: { user: 'pseudo' }}"> Paramètre profil</router-link></p>
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Feed'}"> Fil d'actualité </router-link></p>
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Enigme', params: { user: 'pseudo' }}"> Enigme débuter </router-link></p>
+
+    </div>
+
+    <div style="display:inline-block; width:20%;position : relative; vertical-align: top; margin-top: 3rem;">
+        <h2>Pages pas faites</h2>
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Search'}"> Recherche </router-link></p>
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Chat', params: { user: 'pseudo' }}"> Chat </router-link></p>
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'EnigmeResolved', params: { user: 'pseudo' }}"> Enigmes résolues </router-link></p>
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'EnigmeCurrent', params: { user: 'pseudo' }}"> Enigmes en cours </router-link></p>
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'EnigmeCurrentChat', params: { user: 'pseudo' }}"> Chat de l'enigme </router-link></p>
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Post', params: {planet:'Terre', id:'2'}}"> Post </router-link></p>
+
+    </div>
+    
+
+    <div style="display:inline-block; width:20%;position : relative; vertical-align: top; margin-top: 3rem;">
+        <h2>Pages bonus</h2>
       
-        <li><router-link to="/"> Login/Accueil </router-link></li>
-        <li><router-link to="/inscription/welcome-on-board"> Welcome On Board </router-link></li>
-        <li><router-link to="/recherche"> Recherche </router-link></li>
-        <li><router-link to="/utilisateur"> Profil </router-link></li>
-        <li><router-link to="/utilisateur/parametres"> Paramètre d'un profil </router-link></li>
-        <li><router-link to="/utilisateur/amis"> Amis </router-link></li>
-        <li><router-link to="/utilisateur/conversations/utilisateur"> Chat </router-link></li>
-        <li><router-link to="/utilisateur/enigmes"> Enigme débuter </router-link></li>
-        <li><router-link to="/utilisateur/enigmes/resolues"> Enigmes résolues </router-link></li>
-        <li><router-link to="/utilisateur/enigmes/en-cours"> Enigmes en cours </router-link></li>
-        <li><router-link to="/utilisateur/enigmes/en-cours/chatbox"> Chat de l'enigme </router-link></li>
-        <li><router-link to="/actualites"> Fil d'actualité </router-link></li>
-        <li><router-link to="/univers/evenement"> Evenement </router-link></li>
-        <li><router-link to="/univers/planete/post/2"> Post </router-link></li>
-        <li><router-link to="/univers/planete/wiki"> Wiki d'une planète </router-link></li>
-        <li><router-link to="/marche-intergalactique"> Marché </router-link></li>
-        <li><router-link to="/a-propos"> À propos </router-link></li>
-        <li><router-link to="/FAQ"> FAQ </router-link></li>
-        <li><router-link to="/admin/nouvel-administrateur"> Administrateur : Ajout compte admin </router-link></li>
-        <li><router-link to="/admin/creer-post"> Administrateur : Créer post intergalactique </router-link></li>
-        <li><router-link to="/admin/signalement"> Administrateur : Signalement </router-link></li>
-        <li><router-link to="/admin/ajout-badge"> Administrateur : Ajout badge</router-link></li>
-        <li><router-link to="/admin/ajout-avatar"> Administrateur : Ajout avatar</router-link></li>
-        <li><router-link to="/admin/ajout-enigme"> Administrateur : Ajout énigme</router-link></li>
-        <li><router-link to="/error404"> Erreur 404 </router-link></li>
-      </ul>
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Event'}"> Evenement </router-link></p>
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Wiki'}"> Wiki d'une planète </router-link></p>
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Market'}"> Marché </router-link></p>
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'About'}"> À propos </router-link></p>
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'FAQ'}"> FAQ </router-link></p>
+     <!--    <li><router-link :to="/admin/nouvel-administrateur"> Administrateur : Ajout compte admin </router-link></li>
+        <li><router-link :to="/admin/creer-post"> Administrateur : Créer post intergalactique </router-link></li>
+        <li><router-link :to="/admin/signalement"> Administrateur : Signalement </router-link></li>
+        <li><router-link :to="/admin/ajout-badge"> Administrateur : Ajout badge</router-link></li>
+        <li><router-link :to="/admin/ajout-avatar"> Administrateur : Ajout avatar</router-link></li>
+        <li><router-link :to="/admin/ajout-enigme"> Administrateur : Ajout énigme</router-link></li> -->
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Error404'}"> Erreur 404 </router-link></p>
+      </div>
+      </div>
+
     </div>
   </div>

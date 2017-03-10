@@ -94,7 +94,9 @@ const formUser = Vue.extend({
 					this.falseDate = false;
 					this.errorDB = false;
 		          	console.log("inscription faite !");
-		            this.$router.push("/inscription/welcome-on-board");
+		            this.$router.push({
+					    name: 'WelcomeOnBoard' 
+					});
 		          },
 		          (response) => {
 		            if(response.data.error == "USER_EXISTING"){
