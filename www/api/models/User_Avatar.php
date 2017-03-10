@@ -6,7 +6,7 @@
 */
 namespace Models;
 
-class User_Interest extends Model {
+class User_Avatar extends Model {
   function __construct($params = false) {
 		parent::__construct();
 		$this->table = 'user_avatar';

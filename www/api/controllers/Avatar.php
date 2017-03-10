@@ -9,7 +9,7 @@ namespace Controllers;
 class Avatar extends Controller {
     public function __construct() {
       $this->loadModel('Avatar');
-      //$this->loadModel('User_Avatar');
+      $this->loadModel('User_Avatar');
     }
 
     /**
@@ -42,6 +42,39 @@ class Avatar extends Controller {
             throw new \Utils\RequestException('erreur BDD', 400);
         }
         $this->response('ok',200);
+    }
+
+    /**
+     * The list of avatar the user own (include the default avatar)
+     */
+    public function listUserAvatar() {
+        if(\Utils\Session::isLoggedIn() == NULL){
+            throw new \Utils\RequestException('NOT_LOGGED', 401);
+        }
+        $userId = \Utils\Session::user('id');
+
+        $request = $this->Avatar->find([
+            'fields' => ['DISTINCT avatar.id', 'avatar.imagePath', 'avatar.description', 'avatar.altText', 'currentAvatar'],
+            'leftJoin'=> [
+                [
+                'table' => 'user_avatar',
+                		'alias' => 'user_avatar',
+                		'from' => 'avatarId',
+                		'to' => 'id',
+                        'JoinTable' => 'avatar',
+                ],
+                [
+                'table' => 'user',
+                		'alias' => 'user',
+                		'from' => 'id',
+                		'to' => 'userId',
+                        'JoinTable' => 'user_avatar',
+                ],
+            ],
+            'conditions' => ["or" => ['user.id' => $userId, 'avatar.pack' => 0]],
+        ]);
+
+        $this->response($request, 200);
     }
 
 }
