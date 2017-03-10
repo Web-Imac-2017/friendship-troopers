@@ -149,6 +149,47 @@ p.honor {
 
 
 
+@media screen and (min-width: $break-x-large) {
+  .lateralMenuAvatar{
+    min-height: 13rem;
+    .avatarMenu {
+      margin-top: 0rem;
+      max-height: 10rem;
+    }
+    .planetMenu {
+      max-height: 8rem;
+      top: 6rem;
+      left: 50%;
+
+    }
+  }
+}
+@media screen and (max-width: $break-large) {
+  .lateralMenuAvatar{
+    min-height: 13rem;
+    .avatarMenu {
+      margin-top: 0.5rem;
+      max-height: 9rem;
+    }
+    .planetMenu {
+      max-height: 6rem;
+      top: 7rem;
+      left: 50%;
+
+    }
+  }
+}
+
+@media screen and (max-width: $break-x-large) {
+  .lateralMenuRight {
+    display: none;
+  }
+}
+@media screen and (min-width: $break-x-large) {
+  .lateralMenuRight {
+    display: block;
+  }
+}
 @media screen and (max-width: $break-mid) {
   .lateralMenuLeft {
     display: none;
@@ -173,7 +214,7 @@ p.honor {
   .mobile .menuTools {
     display: none;
   }
-  .desktop .menuTools, .desktop .menu-deconnexion, .lateralMenuRight {
+  .desktop .menuTools, .desktop .menu-deconnexion {
     display: block;
   }
 }
