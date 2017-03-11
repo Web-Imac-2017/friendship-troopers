@@ -210,7 +210,6 @@ class Account extends Controller{
 			$fields[] = 'user.lastname';
 			$fields[] = 'user.birthdate';
 		}
-		var_dump($fields);
 		$request= $this->User->find([
 			'fields' => $fields,
 			'leftJoin' => [

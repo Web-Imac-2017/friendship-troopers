@@ -29,15 +29,11 @@ const User = Vue.extend({
     'navbar' : NavBar,
     'page-nav' : PageNav },
   created : function() {
-    console.log("created profil");
-    this.$http.get(apiRoot() + 'users/me').then((response) => {
-      console.log(response);
-    }, (response) => {
-      console.log(response);
-    });
+       this.getProfil(apiRoot() + 'users/me'); 
+
   },
    methods: {
-    profil: function(){
+    profilType: function(){
       if (this.myself) {
         this.myself = false;
         this.user.myself = false;
@@ -46,11 +42,26 @@ const User = Vue.extend({
         this.user.myself = true;
       }
        
+    }, 
+    getProfil : function(route) {
+       this.$http.get(route,{ emulateJSON: true }).then((response) => {
+          this.profil = response.data;
+          console.log(JSON.stringify(this.profil));
+      }, (response) => {
+        console.log(response);
+      })
+     
+    this.$http.get(apiRoot() + 'users/1/interest').then((response) => {
+      console.log(response);
+    }, (response) => {
+      console.log(response);
+    });
     }
   }, 
   data () {
       return {
-      start : 5,
+        profil : {},
+        start : 5,
        user: {
         userAvatar : '/assets/images/avatars/Multas/aliens.svg',
         username : 'LuckyPon', 
