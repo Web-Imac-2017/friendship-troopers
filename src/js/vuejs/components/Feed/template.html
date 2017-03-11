@@ -9,9 +9,9 @@
       </aside>
       <section class="article col-sm-9 col-md-9 col-lg-8 container-transparent">
         <create-post></create-post>
-        <page-nav></page-nav>
+        <page-nav v-on:next="showNextPage" v-on:prev="showPrevPage"></page-nav>
         <div v-for="post in bddPosts">
-          <post :post="post"></post>
+          <post ref="postComponent" :new="true" :post="post"></post>
         </div>
         <page-nav></page-nav>
       </section>
