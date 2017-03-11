@@ -213,11 +213,12 @@ ul li.navbar-right .nav-avatar {
 }
 
 
-menu-separator {
+.menu-separator {
   vertical-align: middle;
   height: 1.5rem;
   border-right: 0.1rem solid $main-text;
   margin: 0 1.3rem;
+  display: inline-block;
 }
 
 
@@ -296,7 +297,7 @@ menu-separator {
     margin: 0rem;
   }
 
-  menu-separator {
+  .menu-separator {
     margin: 0 1.3rem;
   }
   .nav input.nav-search-icon {
@@ -331,7 +332,7 @@ menu-separator {
         display: none;
       }   
     }
-    menu-separator {
+    .menu-separator {
       margin: 0.7rem;
     }
     ul li.navbar-right .nav-avatar {

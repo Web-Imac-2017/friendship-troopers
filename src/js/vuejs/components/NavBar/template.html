@@ -10,7 +10,7 @@
 
       <li class="navbar-left">
         <router-link to="/actualites" class="navbar-brand"> <p class="desktop small-desktop"> Friendship<br/>Troopers</p> <p class="mobile"> FT </p> </router-link>
-        <menu-separator></menu-separator>
+        <div class="menu-separator"></div>
         <router-link to="/actualites" class="nav-item nav-link nav-home desktop"> Accueil </router-link>
         <router-link :to="{ name: 'Enigme', params: { user: pseudo }}" class="nav-item nav-link nav-enigmes"> Énigmes </router-link>
       </li>
@@ -22,7 +22,7 @@
           <img src="/assets/images/search.svg" alt="recherche" title="Effectuer une recherche">
         </div>
         
-        <menu-separator></menu-separator>
+        <div class="menu-separator"></div>
         
         <div class="nav-item nav-icon">
           <div class="friends-icon" v-on:click="showSubMenu(1)" title="Mes demandes d'amis">
@@ -36,8 +36,11 @@
             <p class="sub-menu-header" v-else>Pas de nouvelles demandes d'ami</p>
 
             <div class="separator"> </div>
-            <ul class="list" v-if = "friends.length > 0">
+          <!--   <ul class="list" v-if = "friends.length > 0">
               <friend-item v-for="item in friends" v-bind:friend="item"></friend-item>
+            </ul> -->
+            <ul class="list" v-if = "friends.length > 0" v-for="friend in friends">
+              <friends :friend="friend"></friends>
             </ul>
             <div  v-if = "friends.length > 0" class="separator"></div>
 
@@ -57,8 +60,8 @@
             <p class="sub-menu-header" v-else>Pas de nouveaux messages</p>
 
             <div class="separator"> </div>
-            <ul class="list" v-if = "messages.length > 0">
-              <message-item v-for="item in messages" v-bind:message="item"></message-item>
+            <ul class="list" v-if = "messages.length > 0" v-for="message in messages">
+              <messages :message="message"></messages>
             </ul>
             <div  v-if = "messages.length > 0" class="separator"></div>
 
@@ -81,8 +84,8 @@
             <p class="sub-menu-header" v-else>Rien de nouveau à signaler</p>
 
             <div class="separator"> </div>
-            <ul class="list" v-if = "notifications.length > 0">
-              <notification-item v-for="item in notifications" v-bind:notification="item"></notification-item>
+            <ul class="list" v-if = "notifications.length > 0" v-for="notification in notifications">
+              <notifications :notification="notification"></notifications>
             </ul>
             <div  v-if = "notifications.length > 0" class="separator"></div>
 
@@ -91,9 +94,9 @@
         </div>
 
 
-        <menu-separator></menu-separator>
+        <div class="menu-separator"></div>
         <router-link :to="{ name: 'User', params: { user: pseudo }}" class="nav-item nav-link nav-profil"> <p class="desktop"> Mon profil</p> <img class="small-desktop mobile nav-avatar" :src=avatar alt="Mon profil" title="Mon profil"> </router-link>
-        <div class="mobile"> <menu-separator></menu-separator> <img :src=deconnexion alt="Déconnexion" title="Déconnexion"></div>
+        <div class="mobile"> <div class="menu-separator"></div> <img src=/assets/images/deconnexion.svg alt="Déconnexion" title="Déconnexion"></div>
 
 
       </li>
