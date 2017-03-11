@@ -12,6 +12,10 @@ class Avatar extends Controller {
       $this->loadModel('User_Avatar');
     }
 
+            /***********************************
+                   ADMINISTRATION FUNCTIONS
+            ***********************************/
+
     /**
      * add an avatar into the database
      * @param  array $post datas from view
@@ -44,8 +48,34 @@ class Avatar extends Controller {
         $this->response('ok',200);
     }
 
+            /***********************************
+                       USER FUNCTIONS
+            ***********************************/
+
+    /**
+     *  set the current avatar of the user
+     */
+    public function setCurrentAvatar($avatarId) {
+        if(\Utils\Session::isLoggedIn() == NULL){
+            throw new \Utils\RequestException('NOT_LOGGED', 401);
+        }
+        $userId = \Utils\Session::user('id');
+        $addKeys = $this->filterXSS([
+            'userId' => $userId,
+            'avatarId' => $avatarId
+        ]);
+        try {
+            $this->Avatar_User->save([
+                'currentAvatar' => '1',
+            ], $addKeys);
+        } catch (\PDOException $e) {
+            throw new \Utils\RequestException('erreur BDD', 400);
+        }
+    }
+
     /**
      * The list of avatar the user own (include the default avatar)
+     * need some thinking on the processus
      */
     public function listUserAvatar() {
         if(\Utils\Session::isLoggedIn() == NULL){
