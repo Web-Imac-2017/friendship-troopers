@@ -14,8 +14,11 @@ Vue.component('friends', {
           <img :src=friend.avatar alt="avatar" class="avatar"> 
         </li>
         <li>
-          <p :class=friend.planet class="pseudo">{{friend.pseudo }}</p> 
-          <p class="date"> {{friend.date}}</p>
+          <p :class=friend.planet class="pseudo">{{friend.pseudo}}</p>
+          <div  class="friend-validation" > 
+            <img src="/assets/images/validation.svg" alt="valider" title="Valider">
+            <img src="/assets/images/Cross.svg" alt="refuser" title="Refuser">
+          </div>
         </li>
       </ul>
     </li>
@@ -31,11 +34,12 @@ Vue.component('messages', {
           <img :src=message.avatar alt="avatar" class="avatar"> 
         </li>
         <li>
-          <p :class=message.planet class="pseudo">{{message.pseudo }}</p> 
+          <p :class=message.planet class="pseudo">{{message.pseudo}}</p> 
           <p class="date"> {{message.date}}</p>
         </li>
       </ul>
-      <p class="content"> {{message.begining}} </p>
+      <p class="content message" v-if="message.content.length>30" >  {{message.content.slice(0,30)}}...  </p>
+      <p class="content message" v-else>  {{message.content}}  </p>
     </li>`
 })
 
@@ -73,7 +77,12 @@ Vue.component('notifications', {
 const NavBar = Vue.extend({
   template,
     methods: {
-    showMenuResponsive: function(){
+    showSearch: function(){
+      if (this.search == 1) 
+        this.search = 0
+      else {
+        this.search = 1
+      }
     },
     showSubMenu: function(idMenu){
       if (this.subMenu == idMenu) 
@@ -85,14 +94,14 @@ const NavBar = Vue.extend({
   }, 
    data () {
       return {
-        friends: [ {pseudo: 'luckypon', avatar:'/assets/images/avatars/Terre/astro.svg', planet :'Terre',date : '12/03/13'},
-                    {pseudo: 'luckyLuke', avatar:'/assets/images/avatars/Sautien/astro.svg', planet :'Sautien', date : '12/03/13'},
-                    {pseudo: 'titi', avatar:'/assets/images/avatars/Technome/landscape.svg', planet :'Technome', date : '12/03/13'},
-                    {pseudo: 'tot', avatar:'/assets/images/avatars/Multas/astro.svg', planet :'Multas', date : '12/03/13'}
+        friends: [ {pseudo: 'luckypon', avatar:'/assets/images/avatars/Terre/astro.svg', planet :'Terre'},
+                    {pseudo: 'luckyLuke', avatar:'/assets/images/avatars/Sautien/astro.svg', planet :'Sautien'},
+                    {pseudo: 'titi', avatar:'/assets/images/avatars/Technome/landscape.svg', planet :'Technome'},
+                    {pseudo: 'tot', avatar:'/assets/images/avatars/Multas/astro.svg', planet :'Multas'}
                  ],
-        messages: [ {pseudo: 'luckypon',avatar:'/assets/images/avatars/Terre/astro.svg', planet :'earth', begining:"Je t'envoie un message toto !", date : '12/03/13'},
-                    {pseudo: 'tintin', avatar:'/assets/images/avatars/Multas/landscape.svg', planet :'Multas',begining:"Je t'envoie un message toto !", date : '11/02/12'},
-                    {pseudo: 'kirikoukou', avatar:'/assets/images/avatars/Multas/landscape.svg', planet :'Multas', begining:"Je t'envoie un message toto !", date : '01/03/13'}
+        messages: [ {pseudo: 'luckypon',avatar:'/assets/images/avatars/Terre/astro.svg', planet :'earth', content:"Ok, comment ç va, t'as reçu un vélociratop à noel ? Oki doc !", date : '12/03/13'},
+                    {pseudo: 'tintin', avatar:'/assets/images/avatars/Multas/landscape.svg', planet :'Multas', content:"Je t'envoie un message toto !", date : '11/02/12'},
+                    {pseudo: 'kirikoukou', avatar:'/assets/images/avatars/Multas/landscape.svg', planet :'Multas', content:"Je t'envoie un message toto !", date : '01/03/13'}
                  ], 
         notifications: [
         /*  type 1 : post intergalactique / type 2 : ami news  /  type 3 : last post */
