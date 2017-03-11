@@ -12,7 +12,7 @@
 
 .item {
   @include flex(1 200px);
-  @include order(2);
+  @include order(2); 
 }
 
 
@@ -722,6 +722,119 @@ p.honorific-title {
 
 .pseudo-button {
   cursor : pointer;
+}
+
+
+#search{
+  h1{ 
+    text-align: left;
+  }
+  #filters{
+    
+    
+    flex-wrap:wrap;
+
+
+
+    .item{
+      background: $articles-background;   
+      text-align: center;
+      @include margin(0.5);
+      
+
+      @media all and (max-width: $break-mid) {
+        font-size: 1.3rem;
+        @include padding(1);
+      }
+
+      @media all and (min-width: $break-mid) {
+        font-size: 1.5rem;
+        @include padding(2);
+      }
+
+      &:hover{
+        outline:1px solid $grey;
+      }
+
+      &:focus, &:active{
+        background: $main-title;
+      }
+
+    }
+    .active{
+        background: $main-title;
+      }
+  }
+
+  #searchBar{
+    margin:2rem auto;
+    text-align: center;
+
+    .searchInput{
+      color: $main-text;
+      min-width:20rem;
+      width:25%;
+      background: none;
+      border: 1px solid white;
+      text-align: center;
+      @include margin2(0.5,1);
+    }
+
+    .searchImage{
+        background: url(../images/search.svg) center no-repeat;
+        background-size: 100%;
+        width:auto;
+        padding:1rem;
+    }
+
+  }
+
+  #searchResult{
+    @include margin2(2,0);
+
+    .userSearch{
+      .pseudo-button{
+        background: $articles-background;
+        @include padding(2);
+        @include margin2(1.5,0);
+        p{
+          color:$secondary-text;
+          font-size: 1.2rem;
+          margin: 1rem 0;
+          display: inline;
+        }
+        div:first-child, div:last-child{
+          text-align: center;
+        }
+
+        @media all and (max-width: $break-small) {
+          @include padding(1);
+          h1{
+            font-size:1.2rem;
+          }
+          p{
+            font-size:1rem;
+          }
+          .avatar{
+            max-height: 4rem;
+          }
+          div:first-child, div:last-child{
+            padding:0;
+          }
+        }
+      }
+      
+      
+    }
+
+  }
+  
+
+  
+
+  .page-nav{
+    @include margin2(3,0);
+  }
 }
 
 

@@ -8,25 +8,26 @@
     </aside>
 
     <section class="article col-sm-9 col-md-9 col-lg-10 container-transparent container">
-		<div class="row">
-			<h1> Page de recherche </h1>
-		</div>
-		<div class="row">
-			<div class="col-sm-3 col-md-4"></div>
-			<div class="col-xs-12 col-sm-6 col-md-4">
-				<input type ="text" placeholder="Recherche précedente" value =""></input>
-				<input type="submit" class="nav-search-icon" value=""></input>
-			</div>
-			<div class="col-sm-3 col-md-4"></div>
-		</div>
-		<div class="wrapper">
-	        <div class="item">Pseudo</div>
-	        <div class="item">Titre honorifique</div>
-	        <div class="item">Centre d'intérêts</div>
-	        <div class="item">Planète</div>
-	        <div class="item">Tous</div>
+    	<pre>{{usersResult}}</pre>
+		<h1> Résultats de la recherche </h1>
+		<form class="row" id="searchBar" v-on:submit.prevent.stop="searchBar">
+			<input type="text" v-model="search" class="searchInput" placeholder="Recherche..." :value ="search"></input>
+	        <input type="submit" class="pseudo-button searchImage" value=""></input>
+		</form>
+		<div id="filters" class="wrapper">
+	        <div v-for="filter in filtersTab" v-on:click="toggleActive(filter)" v-bind:class="{ active: filter.value }" class="pseudo-button item">{{ filter.name }}</div>
    		</div>
-   		<page-nav></page-nav>
+   		<div class="row page-nav">
+   			<page-nav></page-nav>
+   		</div>
+
+   		<div class="row" id="searchResult">
+          	<user-component :user="user" v-for="user in usersResult"></user-component>
+   		</div>
+   		<div class="row page-nav">
+   			<page-nav></page-nav>
+   		</div>
+
     </section>
 
     <menu-tools class="mobile"></menu-tools>
