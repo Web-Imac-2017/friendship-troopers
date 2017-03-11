@@ -36,9 +36,7 @@
             <p class="sub-menu-header" v-else>Pas de nouvelles demandes d'ami</p>
 
             <div class="separator"> </div>
-          <!--   <ul class="list" v-if = "friends.length > 0">
-              <friend-item v-for="item in friends" v-bind:friend="item"></friend-item>
-            </ul> -->
+
             <ul class="list" v-if = "friends.length > 0" v-for="friend in friends">
               <friends :friend="friend"></friends>
             </ul>
