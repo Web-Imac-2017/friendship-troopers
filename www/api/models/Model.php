@@ -135,9 +135,9 @@ abstract class Model {
 				$sql .= ' LIMIT ' . $request['limit'];
 			}
 
-			echo '<pre>';
+			/*echo '<pre>';
 			print_r($sql);
-			echo '</pre>';
+			echo '</pre>';*/
 			//var_dump($sql);
 
 			// PREPARE THE REQUEST AND EXECUTE IT THEN RETURN AN OBJECT FROM YOUR DB
