@@ -19,9 +19,11 @@ Router::post('/auth/login','account#login');
 Router::post('/auth/logout','account#logout');
 Router::get('/auth/validate','account#validateUser', 'auth.validate');
 Router::get('/users/me','account#getCurrentUser', 'users.me');
+Router::get('/users/:userId','account#getUser', 'users.profil');
 Router::get('/users/:userId/interest','interest#listUserInterest', 'users.me.listInterest');
 Router::post('/users/me/interest/add_interest','interest#addUserInterest', 'users.me.updateUserInterest');
 Router::post('/users/me/interest/delete_interest','interest#delete_interest', 'users.me.updateUserInterest');
+Router::get('/users/me/avatars','avatar#listUserAvatar', 'users.me.listAvatar');
 
 Router::get('/users/me/waiting_list_friend','friend#invitationList', 'users.me.invitationList'); //ok
 Router::get('/users/me/friends','friend#listFriend', 'users.me.listUserFriend'); //ok
@@ -30,6 +32,8 @@ Router::patch('/users/:userId/confirm_friend','friend#confirmFriend', 'users.me.
 Router::delete('/users/:userId/delete_friend','friend#deleteFriend', 'users.me.deleteFriend'); //same route for rejecting a friend //ok
 Router::get('/users/:userId/friends','friend#listFriend', 'users.me.listFriend'); //ok
 Router::get('/users/:userId/number_friends','friend#countFriend', 'users.me.countFriend'); //ok
+
+Router::post('/avatar','avatar#create', 'avatar.create');
 
 Router::post('/planets/:planet/posts', 'publication#create', 'planets.posts.create');
 Router::get('/planets/:planet/posts', 'publication#list', 'planets.posts.list');

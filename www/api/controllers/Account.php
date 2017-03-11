@@ -191,43 +191,72 @@ class Account extends Controller{
 		//logout -> userModel
 	}
 
+
 	/**
-	 *get a user
+	 * get a user
 	 * @return [type] [description]
 	 */
-	public function getUser($username) {
-		echo "getUser start";
-		if(!isset($username) || empty($username)){
-			return 0;
+	public function getUser($id, $current = false) {
+		if (\Utils\Session::isLoggedIn() == NULL) {
+            throw new \Utils\RequestException('Vous n\'êtes pas connecté', 401);
+        }
+        $userId = \Utils\Session::user('id');
+		$fields =  ['user.id', 'user.planetId', 'planet.name' , 'user.description', 'user.points', 'username',
+					'avatar.imagePath', 'avatar.altText',
+					'title.honorificTitle'];
+
+		if($userId=$id && $current === true) {
+			$fields[] = 'user.firstname';
+			$fields[] = 'user.lastname';
+			$fields[] = 'user.birthdate';
 		}
-		$user = new \Models\User();
-		$request = array();
-		if(array_key_exists('user',$_SESSION) && $username == $_SESSION['user']['username']){
-			$request['fields'] = '*';
-		} else {
-			$request['fields'] = array(
-				'username',
-				'description',
-				'avatarId'
-			);
+		var_dump($fields);
+		$request= $this->User->find([
+			'fields' => $fields,
+			'leftJoin' => [
+				[
+				'table' => 'user_avatar',
+				'alias' => 'UA',
+				'to' => 'id',
+				'from' => 'userId'
+				],
+				[
+				'table' => 'avatar',
+				'alias' => 'avatar',
+				'from' => 'id',
+				'to' => 'avatarId',
+				'JoinTable' =>  'UA',
+				],
+				[
+				'table' => 'user_title',
+				'alias' => 'userTitle',
+				'from' => 'userId',
+				'to' => 'id',
+				'JoinTable' =>  'user',
+				],
+				[
+				'table' => 'title',
+				'alias' => 'title',
+				'from' => 'id',
+				'to' => 'titleId',
+				'JoinTable' => 'userTitle',
+				],
+				[
+				'table' => 'planet',
+				'alias' => 'planet',
+				'to' => 'planetId',
+				'from' => 'id'
+				],
+			],
+			'conditions' => ['user.id' => $id],
+		]);
+		$this->response($request, 200);
+	}
+	public function getCurrentUser(){
+		if (\Utils\Session::isLoggedIn() == NULL) {
+			throw new \Utils\RequestException('Vous n\'êtes pas connecté', 401);
 		}
-		$request['leftJoin'] = array(
-			'table' => 'user_avatar',
-			'alias' => 'UA',
-			'to' => 'id',
-			'from' => 'userId'
-		);
-		// SELECT username, description, avatarId FROM user AS user
-		// LEFT JOIN user_avatar AS UA ON User.id = UA.userId
-		// WHERE user.username='lol' AND UA.currentAvatar=1
-		$request['conditions'] = array(
-			'username' => $username
-		);
-		$result = $user->find($request);
-		if(count($result) == 1){
-			var_dump($result);
-		} else {
-			echo 'user not found';
-		}
+		$userId = \Utils\Session::user('id');
+		$this->getUser($userId, true);
 	}
 }

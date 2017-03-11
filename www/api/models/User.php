@@ -77,7 +77,7 @@ class User extends Model{
 		if(isset($this->$attr)) {
 			return $this->$attr;
 		} else {
-			//throw new Exception("Unknown attribute",1);
+			throw new \Utils\RequestException('Unknown attribute', 400);
 		}
 	}
 	//----------[ FUNCTIONS ]----------
