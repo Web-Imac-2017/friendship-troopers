@@ -83,7 +83,7 @@ class Comment extends Controller {
 			'publicationId' => $publicationId,
 		]);
 		$this->response($request, 200, [
-			'Link' => "\"$listUrl?offset=$offset&limit=$limit\"; rel=\"next\", \"$listUrl?page=$offset&limit=$limit\"; rel=\"last\"",
+			'Link' => "\"$listUrl?offset=$offset&limit=$limit\"; rel=\"next\", \"$listUrl?offset=$offset&limit=$limit\"; rel=\"last\"",
 		]);
 	}
 

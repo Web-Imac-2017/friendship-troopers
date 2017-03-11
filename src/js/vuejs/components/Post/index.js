@@ -41,13 +41,13 @@ const Post = Vue.extend({
     loadMoreComment : function() {
       this.loadMore += this.loadMore;
       
-      this.getComments(this.prevComments);
+      this.getComments(this.prevComments, true);
       //TODO
     },
     formateDate : function(date) {
       var object = new Date(date); 
       var months = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juill.", "août", "sept.", "oct.", "nov.", "déc."];
-      return object.getDate() + " " + months[object.getMonth()] + " à " + object.getHours() + ":" + object.getMinutes();
+      return object.getDate() + " " + months[object.getMonth()] + " à " + object.getHours() + ":" + ('0'+object.getMinutes()).slice(-2);
     },
     getLikes : function() {
       this.$http.get(apiRoot() + 'posts/' + this.post.id + "/stardust", { emulateJSON: true}).then(
@@ -59,10 +59,15 @@ const Post = Vue.extend({
         }
       );
     },
-    getComments(route) {
+    getComments(route, concat) {
       this.$http.get(route, { emulateJSON: true }).then(
         (response) => {
-          this.comments = response.data;
+          if (concat) {
+            this.comments = this.comments.concat(response.data);
+          } else {
+            this.comments = response.data;
+          }
+          console.log(this.comments);
           var tmp = response.headers.get("Link").split(",")[1].split(";")[0];
           this.prevComments = apiRoot() + tmp.substring(2, tmp.length-1);
         },
@@ -78,7 +83,7 @@ const Post = Vue.extend({
     //TODO
 
     // Récupérer les 10 derniers commentaires du post
-    this.getComments(apiRoot() + "planets/1/posts/" + this.post.id + "/comments?limit=" + this.loadMore);
+    this.getComments(apiRoot() + "planets/1/posts/" + this.post.id + "/comments?limit=" + this.loadMore, false);
 
     // Récupérer le nombre de likes
     this.getLikes();
@@ -87,7 +92,7 @@ const Post = Vue.extend({
     if (this.new) {
       this.new = false;
 
-      this.getComments(apiRoot() + "planets/1/posts/" + this.post.id + "/comments?limit=" + this.loadMore);
+      this.getComments(apiRoot() + "planets/1/posts/" + this.post.id + "/comments?limit=" + this.loadMore, false);
       this.getLikes();
     }
   },

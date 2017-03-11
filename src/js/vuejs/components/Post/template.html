@@ -45,7 +45,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-11 pseudo-button comment" v-if="comments.length > loadMore" v-on:click="loadMoreComment">
+        <div class="col-sm-11 pseudo-button comment" v-on:click="loadMoreComment">
           <p class="grey loadMore">Charger les commentaires précédents</p>
         </div>
         <div v-for="(comment,index) in reversedComments" v-if="index < loadMore" class="col-sm-11 comment">
