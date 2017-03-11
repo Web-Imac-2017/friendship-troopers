@@ -29,40 +29,64 @@ const User = Vue.extend({
     'navbar' : NavBar,
     'page-nav' : PageNav },
   created : function() {
-       this.getProfil(apiRoot() + 'users/me'); 
-
-  },
-   methods: {
-    profilType: function(){
-      if (this.myself) {
-        this.myself = false;
-        this.user.myself = false;
-      } else {
-         this.myself = true;
-        this.user.myself = true;
-      }
-       
-    }, 
-    getProfil : function(route) {
-       this.$http.get(route,{ emulateJSON: true }).then((response) => {
-          this.profil = response.data;
-          console.log(JSON.stringify(this.profil));
+        this.$http.get(apiRoot() + 'users/me',{ emulateJSON: true }).then((response) => {
+          this.profil = response.data[0];
+          console.log(response);
+          this.getNbFriends(apiRoot() + '/users/' + this.profil.id + '/number_friends');
+          this.getInterest(apiRoot() + 'users/' + this.profil.id + '/interest');
       }, (response) => {
         console.log(response);
       })
      
-    this.$http.get(apiRoot() + 'users/1/interest').then((response) => {
-      console.log(response);
-    }, (response) => {
-      console.log(response);
-    });
+
+  },
+   methods: {
+    getInterest : function(route){
+      this.$http.get(route).then((response) => {
+        this.interests = response.data;
+      }, (response) => {
+        console.log(response);
+      });
+
+    }, getNbFriends : function(route){
+      this.$http.get(route).then((response) => {
+        this.nbFriends =  response.data.count;
+      }, (response) => {
+        console.log(response);
+      });
+    },
+    profilType: function(){
+      if (this.myself) {
+        this.myself = false;
+        this.myself = false;
+      } else {
+         this.myself = true;
+        this.myself = true;
+      }
+       
+    }, 
+    showMore : function() {
+      this.start = this.user.interests.length;
+    },
+    showLess : function() {
+      this.start = 5;
     }
   }, 
+  computed : {
+    planetName : function() {
+      return this.planetPath = "/assets/images/planets/" + this.profil.name +".svg";
+    } 
+  },
   data () {
       return {
         profil : {},
+        planetPath : '',
+        interests : [],
+        nbRiddleSolved : 0,
+        myself : false,
+        nbFriends : '',
         start : 5,
-       user: {
+        user: {
         userAvatar : '/assets/images/avatars/Multas/aliens.svg',
         username : 'LuckyPon', 
         userBadge : 'Baroudeuse de l\'espace', 
@@ -71,12 +95,10 @@ const User = Vue.extend({
           path : '/assets/images/planets/Paranose.svg',
           name : 'Planete X785-E'
         }, 
-        nbFriends : 53, 
-        nbRiddleSolved : 2,
         points : 745,
         interests : [ "natation", "tigrous", "francois fillion", "caniches", "cachalots",
         "nadine morano", "trumpette"],
-        myself : false
+        
       }, post :
         {
             user: 'Lucky',
