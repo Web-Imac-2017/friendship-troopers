@@ -5,7 +5,7 @@
 		margin-right: 0;
 		margin-left: 0;
 	}
-	
+
 	.conversation {
 		@include margin(1);
 		@include padding(2);
@@ -17,13 +17,17 @@
 	}
 
 	.new-conv {
-		background: $comments-background ;
+		/*background: $comments-background ;*/
 		@include margin(1);
 		@include padding(0.5);
 	}
 
 	.new-conv img {
 		height: 5rem;
+	}
+
+	.specific-conv, .conv {
+		@include margin2(1, 2);
 	}
 
 	.conv-selected {
@@ -34,6 +38,10 @@
 		background: $comments-publish;
 		@include margin2(1,0);
 		@include padding2(0.5,0);
+	}
+
+	.my-message {
+		margin-top: 3rem;
 	}
 
 	.date {
@@ -50,4 +58,18 @@
 	p {
 		@include margin2(2,0);
 	}
+
+	form {
+		textarea {
+			background: $comments-publish;
+			color: $main-text;
+		}
+
+		img {
+			@include padding(0);
+			@include margin(0);
+			max-height: 4rem;
+		}
+	}
+	
 }

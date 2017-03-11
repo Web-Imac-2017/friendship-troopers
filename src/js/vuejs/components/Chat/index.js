@@ -23,10 +23,15 @@ const Chat = Vue.extend({
   		this.friends[this.currentSelected].selected = false;
   		this.friends[index].selected = true;
   		this.currentSelected = index;
-  	}
+  	},
+    postNewMessage : function(){
+      console.log(this.newMessage);
+      this.newMessage = '';
+    }
   },
   data () {
   	return {
+      newMessage: '',
   		date : '17 fevrier 1980',
   		currentSelected : 0,
   		friends : [
