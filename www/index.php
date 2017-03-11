@@ -18,12 +18,15 @@ Router::post('/auth/signin','account#inscription');
 Router::post('/auth/login','account#login');
 Router::post('/auth/logout','account#logout');
 Router::get('/auth/validate','account#validateUser', 'auth.validate');
-Router::get('/users/me','account#getCurrentUser', 'users.me');
-Router::get('/users/:userId','account#getUser', 'users.profil');
+
+Router::get('/users/list','user#usersList', 'users.list');
+Router::get('/users/me','account#getCurrentUser', 'users.me'); //ok
+Router::get('/users/:userId','account#getUser', 'users.profil'); //ok
 Router::get('/users/:userId/interest','interest#listUserInterest', 'users.me.listInterest');
 Router::post('/users/me/interest/add_interest','interest#addUserInterest', 'users.me.updateUserInterest');
 Router::post('/users/me/interest/delete_interest','interest#delete_interest', 'users.me.updateUserInterest');
 Router::get('/users/me/avatars','avatar#listUserAvatar', 'users.me.listAvatar');
+
 
 Router::get('/users/me/waiting_list_friend','friend#invitationList', 'users.me.invitationList'); //ok
 Router::get('/users/me/friends','friend#listFriend', 'users.me.listUserFriend'); //ok

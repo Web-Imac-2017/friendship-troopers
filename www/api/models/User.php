@@ -102,15 +102,6 @@ class User extends Model{
 		$data['planetId'] = $planet; // TERRE
 		$data['roleId'] = $role; // user par défaut
 
-		$result=$this->save($data);
-		$this->password="ok";
-	}
-
-	public function getUserProfil($username) {
-		// SELECT username, description, avatarId FROM user AS user
-		// LEFT JOIN user_avatar AS UA ON User.id = UA.userId
-		// WHERE user.username=? AND UA.currentAvatar=1
+		return $this->save($data);
 	}
 }
-
-?>

@@ -48,38 +48,46 @@ class Account extends Controller{
 	* @return [type] [description]
 	*/
 	public function logout() {
-		Session::destroy();
+		\Utils\Session::destroy();
 
 		$this->response(null, 204);
 	}
+
+/**
+* ////////////////////////////
+*  	  INSCRIPTION FUNCTIONS
+* ////////////////////////////
+*/
 
 	/**
 	* validate the user's registration
 	* @return [type] [description]
 	*/
 	public function validateUser($get) {
-		if(isset($get['email']) && !empty($get['email']) AND isset($get['activated']) && !empty($get['activated'])){
-			$data = array(
-				'mail'=>$get['email'],
-				'activated' => $get['activated']
-			);
-			$request = array(
-				'fields' => array(
-					'mail',
-					'activated'),
-					'conditions' => $data
-				);
-				$result = $this->find($request);
-				if(count($result) > 0){
-					$data['activated'] = 1;
-					$this->save($data);
-				}else{
-					$error = array(0=>'lien invalide');
-					return json_encode($error);
-				}
-		} else {
-			header("HTTP/1.0 404 Not Found");
+		$required = ['email' , "activated"];
+		if(empty($this->checkRequired($required, $get))){
+			throw new \Utils\RequestException('MISSING_FIELDS', 400);
 		}
+
+		$data = array(
+			'mail'=>$get['email'],
+			'activated' => $get['activated'],
+		);
+		$request =[
+			'fields' => [
+				'mail',
+				'activated'
+			],
+			'conditions' => $data
+		];
+		$result = $this->find($request);
+		if(count($result) > 0){
+			$data['activated'] = 1;
+			$this->save($data);
+		}else{
+			throw new \Utils\RequestException('INVALID_DATA', 400);
+		}
+
 	}
 
 	/**
@@ -107,7 +115,6 @@ class Account extends Controller{
 	* @return [type] [description]
 	*/
 	public function inscription($post) {
-		$error = array();
 		$required = ['username','mail', 'birthdate', 'password'];
 		$error = $this->checkRequired($required, $post);
 		if(!empty($error)){
@@ -128,17 +135,20 @@ class Account extends Controller{
 				"mail" => $post['mail'],
 				"birthdate" => $birthdate,
 				"password" => $password,
-				"activated" => 0,
+				"activated" => md5(rand(0,1000)),
 			];
 			$this->filterXSS($data);
 			$user = new \Models\User();
 			$data['password']=password_hash($password, PASSWORD_DEFAULT);
-
+			$avatar = new Avatar();
 			try {
 				$user->addUser($data);
+				$avatar->addUserAvatar(1);
+				// $avatar->setCurrentAvatar(1);
 			} catch (\PDOException $e) {
-					throw new \Utils\RequestException('utilisateur existe deja', 400);
+				throw new \Utils\RequestException('utilisateur existe deja', 400);
 			}
+
 			$this->sendValidationMail($data);
 			unset($data['password']);
 			unset($data['activated']);
@@ -152,7 +162,12 @@ class Account extends Controller{
 	 * @param  array $post data received from user
 	 */
 	public function updateAccountInfos($post){
-		$data = array();
+		if(\Utils\Session::isLoggedIn() == NULL){
+            throw new \Utils\RequestException('NOT_LOGGED', 401);
+        }
+		$data =[];
+		$data['id'] = \Utils\Session::user('id');
+
 		if(isset($post['mail']) || !empty($post['mail'])){
 			$data['mail'] = $post['mail'];
 		}
@@ -193,8 +208,7 @@ class Account extends Controller{
 
 
 	/**
-	 * get a user
-	 * @return [type] [description]
+	 * get a user profil
 	 */
 	public function getUser($id, $current = false) {
 		if (\Utils\Session::isLoggedIn() == NULL) {
@@ -210,7 +224,6 @@ class Account extends Controller{
 			$fields[] = 'user.lastname';
 			$fields[] = 'user.birthdate';
 		}
-		var_dump($fields);
 		$request= $this->User->find([
 			'fields' => $fields,
 			'leftJoin' => [
@@ -252,6 +265,10 @@ class Account extends Controller{
 		]);
 		$this->response($request, 200);
 	}
+
+	/**
+	 * get the full infos of the current User
+	 */
 	public function getCurrentUser(){
 		if (\Utils\Session::isLoggedIn() == NULL) {
 			throw new \Utils\RequestException('Vous n\'êtes pas connecté', 401);

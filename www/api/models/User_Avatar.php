@@ -12,4 +12,15 @@ class User_Avatar extends Model {
 		$this->table = 'user_avatar';
 	}
 
+    public function insert ($avatarId, $userId) {
+        $sql = 'INSERT INTO ' . $this->table . ' (idUser, idAvatar, ) VALUES ';
+        if(is_array($avatarId)){
+            foreach ($avatarId as $value) {
+                $sql += '(? , ?),';
+                $insert_data[] = ['avatarId' => $value, 'userId' => $userId] ;
+            }
+        }
+        $prepareRequest = $this->pdo->prepare($sql);
+		$prepareRequest->execute($currentData);
+    }
 }

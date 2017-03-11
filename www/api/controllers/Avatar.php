@@ -107,4 +107,11 @@ class Avatar extends Controller {
         $this->response($request, 200);
     }
 
+    public function gainAvatar($idAvatar){
+        if(\Utils\Session::isLoggedIn() == NULL){
+            throw new \Utils\RequestException('NOT_LOGGED', 401);
+        }
+        $userId = \Utils\Session::user('id');
+        $this->User_Avatar->insert();
+    }
 }
