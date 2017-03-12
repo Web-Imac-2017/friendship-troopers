@@ -124,12 +124,11 @@ class Interest extends Controller {
     $userInterest = new \Models\User_Interest();
 
     foreach ($data as $key => $value) {
-      $request1 = $userInterest->delete(array('userId' => $userId,
+      $userInterest->delete(array('userId' => $userId,
                                   'interestId' => $value));
-      $request2 = $this->Interest->delete($value);
+      $request = $this->Interest->delete($value);
     }
 
-    $this->response($request1,200);
     $this->response($request2,200);
   }
 
