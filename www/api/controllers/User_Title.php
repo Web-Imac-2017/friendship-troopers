@@ -12,12 +12,46 @@ class User_Title extends Controller {
     $this->loadModel('User_Title');
   }
 
-  public function add ($userId, $post) {
+  public function list ($userId, $get){
     if (!\Utils\Session::isLoggedIn()) {
       throw new \Utils\RequestException('operation reservee aux membres', 401);
     }
 
     if (!in_array(\Utils\Session::user('roleId'), [1, 2])) {
+      $fields = ['user.username','label', 'price'];
+    } else {
+      $fields = ['user.id', 'user.username', 'titleId', 'label', 'price'];
+    }
+
+    $find = $this->User_Title->find([
+      'fields' => $fields,//['user.id', 'label'],
+      'leftJoin' => [
+        [
+          'table' => 'user',
+  				'alias' => 'User',
+  				'from' => 'id',
+  				'to' => 'userId',
+        ],
+        [
+          'table' => 'title',
+  				'alias' => 'title',
+  				'from' => 'id',
+  				'to' => 'titleId',
+        ],
+      ],
+    ]);
+
+    $this->response($find, 200);
+  }
+
+
+  public function add ($userId, $post) {
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
+    }
+
+    $currentUserId = \Utils\Session::user('id');
+    if (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $userId != $currentUserId) {
       throw new \Utils\RequestException('action reservee aux administeurs', 403);
     }
 
