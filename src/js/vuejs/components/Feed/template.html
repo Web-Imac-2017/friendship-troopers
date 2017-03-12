@@ -8,12 +8,12 @@
         <menu-tools class="desktop"></menu-tools>
       </aside>
       <section class="article col-sm-9 col-md-9 col-lg-8 container-transparent">
-        <create-post></create-post>
-        <page-nav v-on:next="showNextPage" v-on:prev="showPrevPage"></page-nav>
+        <create-post v-on:newpost="createPost"></create-post>
+        <page-nav :page="currentPage" :more="morePage" v-on:next="showNextPage" v-on:prev="showPrevPage"></page-nav>
         <div v-for="post in bddPosts">
           <post ref="postComponent" :new="true" :planetId="planetId" :post="post"></post>
         </div>
-        <page-nav></page-nav>
+        <page-nav :page="currentPage" :more="morePage" v-on:next="showNextPage" v-on:prev="showPrevPage"></page-nav>
       </section>
       <div class="col-lg-2">
          <lateral-menu-right></lateral-menu-right>

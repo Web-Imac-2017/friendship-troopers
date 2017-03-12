@@ -37,6 +37,10 @@ const Feed = Vue.extend({
     this.getPublications(apiRoot() + 'planets/'+ this.planetId + '/posts');
   },
   methods : {
+    createPost : function(post) {
+      console.log("Feed : createPost Coucou tu crée un post !");
+      console.log(post.avatar);
+    },
     getPublications : function(route) {
       this.$http.get(route, { emulateJSON: true }).then(
         (response) => {
@@ -54,16 +58,30 @@ const Feed = Vue.extend({
         });
     },
     showNextPage : function() {
-      console.log("Feed : Next page");
-      this.getPublications(this.routeNextPost);
+      if (this.currentPage*10 < this.totalPublications) {
+        this.currentPage++;
+        this.getPublications(this.routeNextPost);
+      }
+      if (this.totalPublications-(this.currentPage*10) > 10) {
+        this.morePage = true;
+      } else {
+        this.morePage = false;
+      }
     },
     showPrevPage : function() {
-      console.log("Feed : Previous page");
+      this.currentPage--;
       this.getPublications(this.routePrevPost);
+      if (this.totalPublications-(this.currentPage*10) < 10) {
+        this.morePage = true;
+      } else {
+        this.morePage = false;
+      }
     }
   },
   data () {
    	return {
+      currentPage: 1,
+      morePage: true,
       planetId: 0,
       bddPosts: {},
       routeNextPost: '',
