@@ -5,9 +5,6 @@ import {apiRoot} from '../../../../../config.js';
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
 
-
-
-
 const LateralMenuLeft = Vue.extend({
     template,
     data () {
@@ -18,6 +15,7 @@ const LateralMenuLeft = Vue.extend({
           userHonor : 'Baroudeuse de l\'espace', 
           planet : 'Terre',
           avatar : 'aliens',
+          planetId: 3,
           userPlanet : {
             path : '/assets/images/planets/Terre.svg',
             name : 'Terre'

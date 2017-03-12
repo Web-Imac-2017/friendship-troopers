@@ -29,8 +29,12 @@ const Feed = Vue.extend({
     'navbar' : NavBar
   },
   created : function(){
-    // Récupérer les premiers posts de la planète 1
-    this.getPublications(apiRoot() + 'planets/1/posts');
+  },
+  mounted : function() {
+    // Récupérer les premiers posts de la planète de l'utilisateur
+    this.planetId = this.$refs.menu.user.planetId;
+    console.log(this.planetId);
+    this.getPublications(apiRoot() + 'planets/'+ this.planetId + '/posts');
   },
   methods : {
     getPublications : function(route) {
@@ -46,24 +50,25 @@ const Feed = Vue.extend({
 
         },
         (response) => {
-          console.log(response);
+          console.log("Feed : getPublications " + response);
         });
     },
     showNextPage : function() {
-      console.log("Next page");
+      console.log("Feed : Next page");
       this.getPublications(this.routeNextPost);
-     // console.log("Likes : " + this.$refs.postComponent.nbLikes);
     },
     showPrevPage : function() {
-      console.log("Previous page");
+      console.log("Feed : Previous page");
       this.getPublications(this.routePrevPost);
     }
   },
   data () {
    	return {
+      planetId: 0,
       bddPosts: {},
       routeNextPost: '',
-      routePrevPost: ''
+      routePrevPost: '',
+      totalPublications: 15
     }
   }
 });
