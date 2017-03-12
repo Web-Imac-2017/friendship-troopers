@@ -2,7 +2,7 @@
        "questions": [ {
          "number" : "1",
          "title" : "Ta couleur : ",
-         "answer" : [ {"text": "bleu", "image" : "../assets/images/welcomeOnBoard/1_planete-bleue.jpg", "planetID" : "1"},
+         "answer" : [ {"text": "bleu", "image" : "/assets/images/welcomeOnBoard/1_planete-bleue.jpg", "planetID" : "1"},
                    {"text":"vert", "image" : "/assets/images/welcomeOnBoard/1_planete-verte.jpg", "planetID" : "2"},
                     {"text":"violet","image" : "/assets/images/welcomeOnBoard/1_planete-violette.jpg", "planetID" : "3"},
                     {"text":"rouge", "image" : "/assets/images/welcomeOnBoard/1_planete-rouge.jpg", "planetID" : "4"},
@@ -46,16 +46,17 @@
         },{
           "number" : "6",
           "title" : "Tu aimes :" ,
-          "answer" : [{"text": "passer du temps dans ton bunker", "image" : "/assets/images/Avatar1.svg", "planetID" : "1"}, 
-                    {"text":"les rencontres du 3ième type", "image" : "/assets/images/Avatar1.svg", "planetID" : "2"}, 
-                    {"text":"trafiquer le droïde ménager de maman", "image" : "/assets/images/Avatar1.svg", "planetID" : "3"}, 
-                    {"text":"créer des paradoxes", "image" : "/assets/images/Avatar1.svg", "planetID" : "4"}, 
-                   {"text": "aller en croisière muni de ton multipass", "image" : "/assets/images/Avatar1.svg", "planetID" : "5"}         ] 
+          "answer" : [{"text": "passer du temps dans ton bunker", "image" : "/assets/images/welcomeOnBoard/bunker.jpg", "planetID" : "1"}, 
+                    {"text":"les rencontres du 3ième type", "image" : "/assets/images/welcomeOnBoard/3eme-type.jpg", "planetID" : "2"}, 
+                    {"text":"trafiquer le droïde ménager de maman", "image" : "/assets/images/welcomeOnBoard/droide-menager.jpg", "planetID" : "3"}, 
+                    {"text":"créer des paradoxes", "image" : "/assets/images/welcomeOnBoard/paradoxes.jpg", "planetID" : "4"}, 
+                   {"text": "aller en croisière muni de ton multipass", "image" : "/assets/images/welcomeOnBoard/multipass.jpg", "planetID" : "5"}         ] 
         }
         ], 
         "nbQuestions" : 6,
-        "current" : 0,      
-        "answers": [-1, -1, -1, -1, -1, -1],
+        "current" : 0,
+       
+        "answers": [],
         "answerValidate" : [false,false,false,false,false,false],
         " planetUser" : "",
         "planetInfo" : [
@@ -63,32 +64,32 @@
             "planetID" : "1",
             "name" : "Terre  #AA001",
             "info" : "La Terre… Ce nom vous semble peut-être familière, mais la connaissez vous vraiment ? Depuis la démocratisation des voyages intersidéraux on y est plus à son aise ! Finis les embouteillages, les métropoles polluées et les files d’attentes aux supermarchés. Maintenant on peut vivre où on le souhaite, plus de loyers à payer. S’endormir en Alaska, admirant une aurore boréale et le lendemain, remettre ça face aux ruines magnifiques de Buenos Aires est devenu chose commune.", 
-            "path" : "/assets/images/planets/P1.svg",
+            "path" : "/assets/images/planets/Terre.svg",
             "color": "#3eb6df"
           }, {
             "planetID" : "2",
             "name" : "Paranose #312LL",
-            "info" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at porta odio. Sed eleifend, odio eget dictum molestie, sem purus sagittis velit,sit amet pharetra nulla arcu a ligula. Aenean rhoncus finibus est, id pretium dolor. Vivamus placerat nec neque non molestie. Donec egestas tincidunt arcu sed semper",
-            "path" : "/assets/images/planets/P1.svg",
+            "info" : "Paranose : une planète, plusieurs univers. Un ciel bleu, un autre vert ou voire même pas de ciel du tout… Les limites sont celles de l’imagination. Celle planète est longtemps restée gardée secrète, rares sont toujours aujourd’hui ceux qui en connaissent l’existence. Explorer ses différents univers vous assure des expériences toutes plus inoubliables les unes que les autres !",
+            "path" : "/assets/images/planets/Paranose.svg",
             "color" : "#ef4646"
           },{
             "planetID" : "3",
             "name" : "Technome #8T077",
-            "info" : " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at porta odio. Sed eleifend, odio eget dictum molestie, sem purus sagittis velit, sit amet pharetra nulla arcu a ligula. Aenean rhoncus finibus est, id pretium dolor. Vivamus placerat nec neque non molestie. Donec egestas tincidunt arcu sed semper",
-            "path" : "/assets/images/planets/P1.svg",
+            "info" : "Quand tout devient possible, que les limites ne servent qu’à être dépassées, n’est-ce pas là que commence la liberté ? Voici là le quotidiens des robots de Technome ! Tantôt magnifiques tantôt effrayants de réalisme; ces êtres dotés d’une excellente conversation et d’un humour raffiné vous accueilleront les bras ouverts chez eux ! N’oubliez pas néanmoins qu’ils ont construits seuls leur civilisation, alors admirez ce dont la technologie est capable mais ne vous avisez surtout pas de les prendre de haut ! Ils sauront vous faire savoir que vous les avez déçus...",
+            "path" : "/assets/images/planets/Technome.svg",
             "color" : "#767fe2"
           },{
             "planetID" : "4",
             "name" : "Sautien #SS013",
             "info" : "Avide d’aventures ? Tant mieux ! Vous voilà maintenant sur la planète Sautien, première planète alien découverte par l’explorateur Cari-Hu ! Vos charmants petits compatriotes se cachent principalement vers les montagnes Jighs. Bien que ces montagnes soient absolument charmante, nous vous conseillons de ne pas l’oubliez au cours de vos randonnées !",
-             "path" : "/assets/images/planets/P1.svg",
+            "path" : "/assets/images/planets/Sautien.svg",
             "color" :"#72b51a"
           },{
             "planetID" : "5",
             "name" : "Multas #781ST",
-            "info" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at porta odio. Sed eleifend, odio eget dictum molestie, sem purus sagittis velit, sit amet pharetra nulla arcu a ligula. Aenean rhoncus finibus est, id pretium dolor. Vivamus placerat nec neque non molestie. Donec egestas tincidunt arcu sed semper",
-           "path" : "/assets/images/planets/P1.svg",
-             "color" :"#f9a519"
+            "info" : "Vous venez d'atterrir sur la planète Multas, c’est ici que se conçoivent les vaisseaux spatiaux les plus pointus et que se planifient les explorations galactiques les plus osées. Un esprit conquérant et une curiosité sans limites définissent l'atmosphère qui règne ici. L’univers ? Il ne sert qu’à être exploré. Mais c’est toujours ici, de retour sur cette planète qu’on se sent vraiment chez soi; que le voyage s’achève et qu’un autre se prépare.",
+            "path" : "/assets/images/planets/Multas.svg",
+            "color" :"#f9a519"
           }
        ]
       }
