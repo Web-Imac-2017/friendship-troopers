@@ -10,29 +10,31 @@ const LateralMenuLeft = Vue.extend({
     data () {
       return {
         user : {
-          userAvatar : '/assets/images/avatars/Terre/miror.svg',
-          username : 'LuckyPon', 
-          userHonor : 'Baroudeuse de l\'espace', 
-          planet : 'Terre',
-          avatar : 'aliens',
-          planetId: 3,
-          userPlanet : {
-            path : '/assets/images/planets/Terre.svg',
-            name : 'Terre'
-          }, 
-          lastFriends : [ 
-          {
-            avatar : '/assets/images/avatars/Sautien/aliens.svg',
-            name : 'Spockdu77'
-          }, {
-            avatar : '/assets/images/avatars/Terre/planets.svg',
-            name : 'MartyDuPassé'
-          }, {
-            avatar : '/assets/images/avatars/Terre/miror.svg',
-            name : 'JulieDuFutur'
-          }
-          ] 
+          id: 1,
+          planetId: 1,
+          name: "Terre",
+          description: null,
+          points: null,
+          username: "coulon",
+          imagePath: "/assets/images/avatars/earth/aliens.svg",
+          altText: "avatar",
+          honorificTitle: "Astronaute Intermédiaire",
+          firstname: null,
+          lastname: null,
+          birthdate: "2013-02-05"
+        },
+        lastFriends : [ 
+        {
+          avatar : '/assets/images/avatars/Sautien/aliens.svg',
+          name : 'Spockdu77'
+        }, {
+          avatar : '/assets/images/avatars/Terre/planets.svg',
+          name : 'MartyDuPassé'
+        }, {
+          avatar : '/assets/images/avatars/Terre/miror.svg',
+          name : 'JulieDuFutur'
         }
+        ] 
       }
     }
 });
