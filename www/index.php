@@ -55,6 +55,7 @@ Router::delete('/riddles/:id', 'riddle#delete', 'riddle.delete');
 
 Router::post('/titles', 'title#create');
 Router::get('/titles', 'title#list');
+Router::patch('/titles/:id', 'title#update');
 //Router::delete('/titles/:id', 'title#delete');
 
 try {

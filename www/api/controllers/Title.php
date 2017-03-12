@@ -53,6 +53,29 @@ class Title extends Controller {
     $this->response(null, 200);
   }
 
+  public function update ($id, $patches) {
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
+    }
+
+    if (!in_array(\Utils\Session::user('roleId'), [1, 2])) {
+      throw new \Utils\RequestException('action reservee aux administeurs', 403);
+    }
+
+    $updates = ['id' => $id];
+    foreach ($patches as $patch) {
+      switch ($patch['op']) {
+        case 'replace':
+          $updates[explode('/',$patch['path'])[1]] = $patch['value'];
+          break;
+        default:
+          throw new \Utils\RequestException('bad op', 400);
+      }
+    }
+    $this->Title->save($this->filterXSS($updates));
+    $this->response(null, 200);
+  }
+
 /*
   public function delete ($id, $delete) {
     if (!\Utils\Session::isLoggedIn()) {
