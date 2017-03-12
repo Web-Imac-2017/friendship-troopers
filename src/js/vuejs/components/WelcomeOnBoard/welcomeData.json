@@ -46,11 +46,11 @@
         },{
           "number" : "6",
           "title" : "Tu aimes :" ,
-          "answer" : [{"text": "passer du temps dans ton bunker", "image" : "/assets/images/welcomeOnBoard/bunker.jpg", "planetID" : "1"}, 
-                    {"text":"les rencontres du 3ième type", "image" : "/assets/images/welcomeOnBoard/3eme-type.jpg", "planetID" : "2"}, 
-                    {"text":"trafiquer le droïde ménager de maman", "image" : "/assets/images/welcomeOnBoard/droide-menager.jpg", "planetID" : "3"}, 
-                    {"text":"créer des paradoxes", "image" : "/assets/images/welcomeOnBoard/paradoxes.jpg", "planetID" : "4"}, 
-                   {"text": "aller en croisière muni de ton multipass", "image" : "/assets/images/welcomeOnBoard/multipass.jpg", "planetID" : "5"}         ] 
+          "answer" : [{"text": "passer du temps dans ton bunker", "image" : "/assets/images/welcomeOnBoard/6_bunker.jpg", "planetID" : "1"}, 
+                    {"text":"les rencontres du 3ième type", "image" : "/assets/images/welcomeOnBoard/6_3eme-type.jpg", "planetID" : "2"}, 
+                    {"text":"trafiquer le droïde familial", "image" : "/assets/images/welcomeOnBoard/6_droide-familial.jpg", "planetID" : "3"}, 
+                    {"text":"créer des paradoxes", "image" : "/assets/images/welcomeOnBoard/6_paradoxes.jpg", "planetID" : "4"}, 
+                    {"text": "te balader muni de ton multipass", "image" : "/assets/images/welcomeOnBoard/6_multipass.jpg", "planetID" : "5"}         ] 
         }
         ], 
         "nbQuestions" : 6,
