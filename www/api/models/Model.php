@@ -89,33 +89,68 @@ abstract class Model {
 				} else {
 					$condition = array();
 					foreach ($request['conditions'] as $key => $value) {
-						if (strstr($key, '.') === false) {
+						if (strstr($key, '.') === false && $key != "AND") {
 							$key = $this->table . '.' . $key;
 						}
-						if (is_array($value)) {
+						if (is_array($value) && $key !== 'AND') {
 							if (isset($value['value']) and isset($value['cmp'])) {
 								if (!is_numeric($value['value'])) {
 									$value['value'] = $this->pdo->quote($value['value']);
 								}
 								$condition[] = $key . ' ' . $value['cmp'] . ' ' . $value['value'];
-							} else {
+							} else{
 								$otherConditions = array();
 								foreach ($value as $orKey => $valueOfValue) {
-									if(!is_numeric($valueOfValue)){
-										$valueOfValue=$this->pdo->quote($valueOfValue);
+									// case a same attribut may have several value
+									if(is_array($valueOfValue)){
+										foreach ($valueOfValue as $keyOr => $keyValue) {
+											if(!is_numeric($keyValue)){
+												$keyValue=$this->pdo->quote($keyValue);
+											}
+											$otherConditions[] = "$orKey=$keyValue";
+										}
+									} else {
+										if(!is_numeric($valueOfValue)){
+											$valueOfValue=$this->pdo->quote($valueOfValue);
+										}
+										$otherConditions[] = "$orKey=$valueOfValue";
 									}
-									$otherConditions[] = "$orKey=$valueOfValue";
 								}
 								$condition[] = '(' . implode(' OR ', $otherConditions) . ')';
 							}
 						} else {
-							if(!is_numeric($value)) {
-								$condition[] = $key . '=' . $this->pdo->quote($value);
+							if(is_array($value)) { // multiple value for the same attribut
+
+								foreach ($value as $andKey => $valueOfValue) {
+
+									// case a same attribut may have several value
+									if(is_array($valueOfValue)){
+
+										foreach ($valueOfValue as $keyAnd => $keyValue) {
+
+											if(!is_numeric($keyValue)){
+												$keyValue=$this->pdo->quote($keyValue);
+											}
+											$condition[] = "$andKey=$keyValue";
+
+										}
+									} else {
+										if(!is_numeric($valueOfValue)){
+											$valueOfValue=$this->pdo->quote($valueOfValue);
+										}
+										$condition[] = "$andKey=$valueOfValue";
+									}
+								}
 							} else {
-								$condition[] = $key . '=' . $value;
+								if(!is_numeric($value)) {
+									$condition[] = $key . '=' . $this->pdo->quote($value);
+								} else {
+									$condition[] = $key . '=' . $value;
+								}
 							}
 						}
 					}
+					var_dump($condition);
 					$sql .= implode(' AND ', $condition);
 				}
 			}
