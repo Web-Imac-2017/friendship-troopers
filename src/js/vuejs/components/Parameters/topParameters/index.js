@@ -8,12 +8,15 @@ template     = eval(`\`${template}\``);
 const topParameters = Vue.extend({
   template,
   props: {
-    value:Object,
+    user:Object,
+    value:Object
   },
   data(){
     return{
-      user:JSON.parse(JSON.stringify(this.value)),
+      titleTab : [ "Astronaute débutant", "Astronaute Intermédiaire","Super alien", "Cacahuete planétaire"],
       imgDiv:false
+      /*user:JSON.parse(JSON.stringify(this.value)),
+      */
     }
   },
   methods:{

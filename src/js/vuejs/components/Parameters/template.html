@@ -4,14 +4,14 @@
   <div class="container-fluid user-params">
     <div class="row">
       <aside class="col-sm-3 col-md-3 col-lg-2">
-        <lateral-menu-left></lateral-menu-left>
+        <lateral-menu-left ref="menu"></lateral-menu-left>
         <deconnexion class="desktop"></deconnexion>
         <menu-tools class="desktop"></menu-tools>
       </aside>
 
       <section class="article col-sm-9 col-lg-8 container-transparent ">
         <h1 class="page-title"> Modifier mes informations </h1>
-        <top-parameters v-model="user">
+        <top-parameters :user="user">
           <p slot="changeDone">Vos paramètres ont été appliqués</p>
         </top-parameters>
         <bottom-parameters v-model="user">
@@ -21,7 +21,7 @@
           <p slot="errorWrongPassword">Vous vous êtes trompé dans votre mot de passe</p>
           <p slot="errorNoChange">Vous n'avez rien changé..</p>
         </bottom-parameters>
-        <router-link to="/utilisateur">Retour au profil</router-link>
+        <router-link :to="{ name: 'User', params: { user: user.username, userId : user.id }}">Retour au profil</router-link>
         
   
       </section>
