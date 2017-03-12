@@ -4,12 +4,17 @@ import Vue from 'vue/dist/vue';
 
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
+
 import NavBar from '../NavBar/index.js';
-  
+import MenuTools from '../MenuTools/index.js';
+import Deconnexion from '../Deconnexion/index.js'
+
 const Legals = Vue.extend({
   template,
   components : {
-  	'navbar' : NavBar
+    'menu-tools' : MenuTools, 
+    'deconnexion' : Deconnexion, 
+    'navbar' : NavBar
   }
 });
 

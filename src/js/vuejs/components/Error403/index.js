@@ -9,7 +9,7 @@ import NavBar from '../NavBar/index.js';
 import MenuTools from '../MenuTools/index.js';
 import Deconnexion from '../Deconnexion/index.js'
 
-const About = Vue.extend({
+const Error403 = Vue.extend({
   template,
   components : {
     'menu-tools' : MenuTools, 
@@ -19,4 +19,4 @@ const About = Vue.extend({
 });
 
 
-export default About;
+export default Error403;

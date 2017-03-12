@@ -39,6 +39,8 @@ import AddAvatar from '../components/admin/AddAvatar.vue'
 import AddEmoji from '../components/admin/AddEmoji.vue'
 import AddEnigme from '../components/admin/AddEnigme.vue'*/
 
+import Error401 from '../components/Error401'
+import Error403 from '../components/Error403'
 import Error404 from '../components/Error404'
 
 
@@ -141,6 +143,14 @@ const router = new VueRouter({
       name : 'Legals',
       path: '/mentions-legales', 
       component : Legals
+  },{ 
+      name : 'Error401',
+      path: '/erreur401', 
+      component : Error401
+  },{ 
+      name : 'Error403',
+      path: '/erreur403', 
+      component : Error403
   },{ 
       name : 'Error404',
       path: '/erreur404', 
