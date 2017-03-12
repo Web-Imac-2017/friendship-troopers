@@ -1,144 +1,68 @@
 <div class="post">
-
-
-
-
-<!--   <div class="row"> 
-
-    <div class="col-sm-2 col-xs-3 col-lg-2 col-md-2">
-      <div class="avatar">
-        <router-link :to="{ name: 'User', params: { user: post.user}}">
-          <img :src="post.avatar" alt="author avatar" class="avatar">
-        </router-link>
-      </div>
-    </div>
-    
-    <div class="col-sm-10 col-xs-9 col-lg-10 col-md-10">
-      <div class="row"> 
-        <div class="col-xs-9 col-sm-10 col-md-11 left">
-          <h1 class="pseudo" v-bind:style="{color : planetData[post.planeteId] }" >
-            {{ post.user }}
-          </h1>
-          <small class="date"> {{ post.date + " à " + post.hour }}</small>
-        </div>
-        <div class="col-xs-3 col-sm-2 col-md-1  right connect-buttons contain-img pseudo-button">
-          <img src="/assets/images/Options.svg" alt="Options">
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-
-
   <div class="row no-gutters"> 
-
     <div class="col-sm-10 col-xs-9 col-lg-10 col-md-10">
       <div class="avatar post-author-avatar">
         <router-link :to="{ name: 'User', params: { user: post.user}}">
-          <img :src="post.avatar" alt="author avatar" class="avatar">
+          <img :src="post.imagePath" alt="author avatar" class="avatar">
         </router-link>
       </div>
       <div class="user-pseudo">
         <h1 class="pseudo" v-bind:style="{color : planetData[post.planeteId] }" >
-                {{ post.user }}
+        {{ post.username }}
         </h1>
-        <small class="date"> {{ post.date + " à " + post.hour }}</small>
+        <small class="date"> {{ formateDate(post.publishDate) }}</small>
       </div>
     </div>
+
 
     <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 right connect-buttons contain-img pseudo-button">
       <img src="/assets/images/Options.svg" alt="Options" title="Option">
     </div>
-
   </div>
-
-
-
-
-
-<!-- post-content  -->
-<!--   <div class="row right">  
-    <div class="col-lg-2 col-md-2 col-sm-2"></div>
-          
-    <div class="left col-lg-10 col-md-10 col-sm-10 col-xs-12">  
-    <div class="right">  
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 left">
-        <p class="content-block" v-if="!showFullPost"> {{ post.content.slice(0,200) }} </p>
-        <p class="content-block" v-else> {{ post.content}} </p>
-        <div class="row">
-          <div class="col-sm-8 col-xs-7 left"  v-if="post.content.length > 200 && showFullPost == false">
-            <p class="see" v-on:click="showFullPost = true">Voir plus</p>
-          </div>
-          <div class="col-sm-8 col-xs-7 left"  v-else-if="showFullPost == true">
-            <p class="see" v-on:click="showFullPost = false">Voir moins </p>
-          </div>
-          <div class="col-sm-8 col-xs-7 left" v-else></div>
-          <div class="col-sm-2 col-xs-2 connect-buttons contain-img" v-on:click="like">
-            <img class="like-icon" src="/assets/images/Like.svg" alt="likes">
-            <span> {{ post.likes }} </span>
-          </div>
-          
-          <div class="col-sm-2 col-xs-2 connect-buttons contain-img">
-            <img src="/assets/images/Comment.svg" alt="comments"> 
-            <span> {{ post.comments.length }} </span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div> -->
-
 
   <div class="row no-gutters">  
-<!--     <div class="col-lg-2 col-md-2 col-sm-2"></div>
- -->          
-<!--     <div class="left col-lg-10 col-md-10 col-sm-10 col-xs-12">  
-    <div class="right"> --> 
-      <div class="post-content">
-        <p class="content-block" v-if="!showFullPost"> {{ post.content.slice(0,200) }} </p>
-        <p class="content-block" v-else> {{ post.content}} </p>
-        <div class="row">
-          <div class="col-sm-8 col-xs-7"  v-if="post.content.length > 200 && showFullPost == false">
-            <p class="see" v-on:click="showFullPost = true">Voir plus</p>
-          </div>
-          <div class="col-sm-8 col-xs-7 left"  v-else-if="showFullPost == true">
-            <p class="see" v-on:click="showFullPost = false">Voir moins </p>
-          </div>
-          <div class="col-sm-8 col-xs-7 left" v-else></div>
-          <div class="col-sm-2 col-xs-2 connect-buttons contain-img" v-on:click="like">
-            <img class="like-icon" src="/assets/images/Like.svg" alt="likes">
-            <span> {{ post.likes }} </span>
-          </div>
-          
-          <div class="col-sm-2 col-xs-2 connect-buttons contain-img">
-            <img src="/assets/images/Comment.svg" alt="comments"> 
-            <span> {{ post.comments.length }} </span>
-          </div>
+    <div class="post-content">
+      <p class="content-block" v-if="!showFullPost"> {{ post.content.slice(0,200) }} </p>
+      <p class="content-block" v-else> {{ post.content}} </p>
+      <div class="row">
+        <div class="col-sm-8 col-xs-7"  v-if="post.content.length > 200 && showFullPost == false">
+          <p class="see" v-on:click="showFullPost = true">Voir plus </p>
+        </div>
+        <div class="col-sm-8 col-xs-7 left"  v-else-if="showFullPost == true">
+          <p class="see" v-on:click="showFullPost = false">Voir moins </p>
+        </div>
+        <div class="col-sm-8 col-xs-7 left" v-else></div>
+        <div class="col-sm-2 col-xs-2 connect-buttons contain-img" v-on:click="like">
+          <img class="like-icon" src="/assets/images/Like.svg" alt="likes">
+          <span> {{ nbLikes }} </span>
         </div>
 
-<!--       </div>
-    </div> -->
-  </div>
-
-
-  <div class="row no-gutters">
-    <div class="col-sm-10 col-xs-10 pseudo-button comment" v-if="post.comments.length > 1" v-on:click="loadMoreComment">
-      <p class="grey loadMore">Charger les commentaires précédents</p>
-    </div>
-    <div v-for="(comment,index) in post.comments" v-if="index < loadMore" class="col-sm-10  col-xs-10 comment">
-      <comment :comment="comment"></comment>
-    </div>
-    <div class="col-sm-10 col-xs-10 your-comment"> 
-      <div class="col-sm-1 desktop">
-        <div class="avatar">
-          <img src="/assets/images/Avatar1.svg" alt="default avatar" class="avatar">
+        <div class="col-sm-2 col-xs-2 connect-buttons contain-img">
+          <img src="/assets/images/Comment.svg" alt="comments"> 
+          <span> {{ comments.length }} </span>
         </div>
       </div>
-      <div class="col-sm-11 col-xs-12">
-        <form class="form-post">
-          <textarea rows="3" type="text" placeholder="Votre commentaire"  class="col-sm-11 col-xs-10" v-model="newComment"></textarea>
-          <img class="validate col-sm-1 col-xs-2" src="./assets/images/validation.svg" v-on:click="publishNewComment">
-        </form>
+    </div>
+
+    <div class="row no-gutters">
+      <div class="col-sm-10 col-xs-10 pseudo-button comment" v-on:click="loadMoreComment">
+        <p class="grey loadMore">Charger les commentaires précédents</p>
+      </div>
+      <div v-for="(comment,index) in reversedComments" v-if="index < loadMore" class="col-sm-10 col-xs-10 comment">
+        <comment :comment="comment"></comment>
+      </div>
+      <div class="col-sm-10 col-xs-10 your-comment"> 
+        <div class="col-sm-1 desktop">
+          <div class="avatar">
+            <img src="/assets/images/Avatar1.svg" alt="default avatar" class="avatar">
+          </div>
+        </div>
+        <div class="col-sm-11 col-xs-12">
+          <form class="form-post">
+            <textarea rows="3" type="text" placeholder="Votre commentaire"  class="col-sm-11 col-xs-10" v-model="newComment"></textarea>
+            <img class="col-sm-1 col-xs-2" src="./assets/images/validation.svg" v-on:click="publishNewComment">
+          </form>
+        </div>
       </div>
     </div>
   </div>
