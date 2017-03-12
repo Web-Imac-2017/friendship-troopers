@@ -12,6 +12,25 @@ class Title extends Controller {
     $this->loadModel('Title');
   }
 
+  public function list($get){
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
+    }
+
+    if (!in_array(\Utils\Session::user('roleId'), [1, 2])) {
+      $fields = ['label', 'price'];
+    } else {
+      $fields = '*';
+    }
+
+    $find = $this->Title->find([
+      'fields' => $fields,
+    ]);
+
+    $this->response($find, 200);
+
+  }
+
   public function create ($post) {
     if (!\Utils\Session::isLoggedIn()) {
       throw new \Utils\RequestException('operation reservee aux membres', 401);
