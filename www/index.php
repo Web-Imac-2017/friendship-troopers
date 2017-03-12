@@ -53,6 +53,8 @@ Router::get('/riddles', 'riddle#list', 'riddle.list');
 Router::patch('/riddles/:id', 'riddle#update', 'riddle.update');
 Router::delete('/riddles/:id', 'riddle#delete', 'riddle.delete');
 
+Router::post('/titles', 'title#create');
+
 try {
   Router::run();
 } catch (\Utils\RequestException $e) {
