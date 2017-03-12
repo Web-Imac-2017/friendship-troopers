@@ -19,8 +19,9 @@ Router::post('/auth/login','account#login');
 Router::post('/auth/logout','account#logout');
 Router::get('/auth/validate','account#validateUser', 'auth.validate');
 
-Router::get('/users/list','user#usersList', 'users.list');
+Router::get('/users/list','user#usersList', 'users.list'); //ok. prend comme param planetId ou role (l'id)
 Router::get('/users/me','account#getCurrentUser', 'users.me'); //ok
+Router::patch('/users/me','account#updateAccountInfos', 'users.me'); //ok
 Router::get('/users/:userId','account#getUser', 'users.profil'); //ok
 Router::get('/users/:userId/interest','interest#listUserInterest', 'users.me.listInterest');
 Router::post('/users/me/interest/add_interest','interest#addUserInterest', 'users.me.updateUserInterest');

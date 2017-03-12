@@ -17,7 +17,6 @@ class User extends Controller{
 	 * @return [type]      [description]
 	 */
 	public function usersList($get){
-		var_dump($get);
 		if(\Utils\Session::isLoggedIn() == NULL){
             throw new \Utils\RequestException('NOT_LOGGED', 401);
         }

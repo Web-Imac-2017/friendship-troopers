@@ -76,18 +76,19 @@ class Account extends Controller{
 		$request =[
 			'fields' => [
 				'mail',
-				'activated'
+				'activated',
+				'id',
 			],
 			'conditions' => $data
 		];
 		$result = $this->find($request);
 		if(count($result) > 0){
 			$data['activated'] = 1;
+			$data['id'] = $result['id'];
 			$this->save($data);
-		}else{
+		} else {
 			throw new \Utils\RequestException('INVALID_DATA', 400);
 		}
-
 	}
 
 	/**
@@ -161,35 +162,37 @@ class Account extends Controller{
 	 * Allow user to change some of his intel
 	 * @param  array $post data received from user
 	 */
-	public function updateAccountInfos($post){
+	public function updateAccountInfos($patches){
 		if(\Utils\Session::isLoggedIn() == NULL){
             throw new \Utils\RequestException('NOT_LOGGED', 401);
         }
-		$data =[];
-		$data['id'] = \Utils\Session::user('id');
+		if(array_key_exists('id', $patches)) {
+			throw new \Utils\RequestException('HACKER_SPOTTED', 400);
+		}
 
-		if(isset($post['mail']) || !empty($post['mail'])){
-			$data['mail'] = $post['mail'];
+		foreach ($patches as $patch) {
+			switch ($patch['op']) {
+				case 'replace':
+					$updates[explode('/',$patch['path'])[1]] = $patch['value'];
+					break;
+				default:
+					throw new \Utils\RequestException('bad op', 400);
+			}
 		}
-		if(isset($post['password']) || !empty($post['password'])){
-			$data['password'] = password_hash($post['password']);
+		$notAllowed = ['planetId', 'id', 'registerDate', 'activated', 'username', 'password'];
+		$fieldsNotAllowed = $this->checkNotAllowed($notAllowed, $updates);
+		foreach ($fieldsNotAllowed as $value) {
+			unset($updates[$value]);
 		}
-		if(isset($post['avatar']) || !empty($post['avatar'])){
-			$data['avatar'] = $post['avatar'];
+
+		$updates['id'] = \Utils\Session::user('id');
+		try{
+			$this->User->save($updates);
+		} catch (\PDOException $e) {
+			throw new \Utils\RequestException('erreur', 400);
 		}
-		if(isset($post['description']) || !empty($post['description'])){
-			$data['description'] = $post['description'];
-		}
-		if(isset($post['firstname']) || !empty($post['firstname'])){
-			$data['firstname'] = $post['firstname'];
-		}
-		if(isset($post['lastname']) || !empty($post['lastname'])){
-			$data['lastname'] = $post['lastname'];
-		}
-		$user = new \Models\User();
-		$this->filterXSS($data);
-		$reponse = $user->save($data);
-		var_dump($reponse);
+
+		$this->response(null, 200);
 	}
 
 	/**
