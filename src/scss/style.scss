@@ -729,28 +729,41 @@ p.honorific-title {
   h1{ 
     text-align: left;
   }
-  #filters{
-    
-    
+  h2{
+    font-size:1.4rem;
+    @include margin(1);
+  }
+  h3{
+    font-size:1.2rem;
+    @include margin(1);
+  }
+  #filtersPlanetId{
     flex-wrap:wrap;
+    justify-content: center;
 
-
+    img{
+      height: 8rem;
+      width: 8rem;
+    }
 
     .item{
       background: $articles-background;   
       text-align: center;
       @include margin(0.5);
+      flex-basis: auto;
+      flex-grow:0;
+      @include padding(2);
       
 
-      @media all and (max-width: $break-mid) {
-        font-size: 1.3rem;
-        @include padding(1);
-      }
-
-      @media all and (min-width: $break-mid) {
-        font-size: 1.5rem;
-        @include padding(2);
-      }
+    /*   @media all and (max-width: $break-mid) {
+      font-size: 1.3rem;
+      @include padding(1);
+    }
+    
+    @media all and (min-width: $break-mid) {
+      font-size: 1.5rem;
+      @include padding(2);
+    } */
 
       &:hover{
         outline:1px solid $grey;
@@ -766,7 +779,7 @@ p.honorific-title {
       }
   }
 
-  #searchBar{
+  #searchBarUsername, #searchBarFilters{
     margin:2rem auto;
     text-align: center;
 
@@ -780,6 +793,13 @@ p.honorific-title {
       @include margin2(0.5,1);
     }
 
+    .search{
+      min-width: 13rem;
+      width: 10%;
+      outline: 1px solid #fff;
+      margin: auto;
+    }
+
     .searchImage{
         background: url(../images/search.svg) center no-repeat;
         background-size: 100%;
@@ -787,6 +807,58 @@ p.honorific-title {
         padding:1rem;
     }
 
+
+  }
+
+  select{
+    width:auto;
+    @include margin(1);
+  }
+
+  .selectFilters{
+    text-align: center;
+
+    .wrapper{
+      align-item:center;
+
+      @media all and (max-width: $break-small) {
+        flex-direction: column;
+      }
+      
+      @media all and (min-width: $break-small) {
+        flex-direction: row;
+      }
+    }
+
+    .item{
+      flex-grow:0;
+      background: $main-title;
+      padding: 1rem;
+      margin: 2rem;
+      position: relative;
+      overflow: hidden;
+
+
+      @media all and (max-width: $break-small) {
+       @include margin(1);
+       flex:0 1 auto;
+      }
+           
+      @media all and (min-width: $break-small) {
+       @include margin(2);
+      } 
+
+      &:hover, &:focus, &:active{
+        outline:1px solid $grey;
+      }
+
+      img{
+        position: absolute;
+        right: 0;
+        width: 4rem;
+        top:0;
+      }
+    }
   }
 
   #searchResult{
@@ -794,6 +866,10 @@ p.honorific-title {
 
     .userSearch{
       .pseudo-button{
+        &:hover, &:focus, &:active{
+          outline:1px solid $grey;
+        }
+
         background: $articles-background;
         @include padding(2);
         @include margin2(1.5,0);
