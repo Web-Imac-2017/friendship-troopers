@@ -307,10 +307,11 @@ form{
     input{
     background: $comments-background ;
     border: none;
-    @include padding-button(1);
+    padding: .9rem .7rem;
     outline: 0;
     display: inline-block;
     width:80%;
+    color: $main-text;
   }
   
   textarea {

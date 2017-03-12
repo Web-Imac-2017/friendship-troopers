@@ -5,9 +5,9 @@
         <div class="col-sm-8">
           <p class="subtitle">Modifier votre avatar</p>
           <img class="block center" :src="user.avatar">
-          <a class="text-center" v-on:click="showAvatars">Choisir un nouvel avatar</a>
+          <a class="text-center center" v-on:click="showAvatars">Choisir un nouvel avatar</a>
           <div v-if="imgDiv">
-            <ul v-for="option in user.avatarPathTab">
+            <ul v-for="option in user.avatarPathTab" class="avatar-list">
               <li>
                 <input type="radio" :value="option" v-model="user.avatar">
                 <label for=""><img :src="option"></label>
@@ -30,7 +30,5 @@
       </div>
     </div>
    
-    <div>
-      A Envoyer au back : avatar : {{ user.avatar }}, title : {{ user.title }} 
-    </div>
+    <!-- A Envoyer au back : avatar : {{ user.avatar }}, title : {{ user.title }}  -->
   </form>
