@@ -32,7 +32,9 @@ const formLogin = Vue.extend({
 		          (response) => {
 		            console.log("success !");
 		            this.cantSubmit=false;
-		            this.$router.push("/actualites")
+		            this.$router.push({
+					    name: 'Feed' 
+					});
 		          },
 		          (response) => {
 		            console.log("fail !")

@@ -71,15 +71,110 @@ h1, h2, h3, h4, h5, h6 {
   background:$articles-background;
 } */
 
+#welcome-on-board-container{
+  min-height: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10%;
+
+  .intro-text{
+    text-align:center;
+    line-height: 1.5;
+    h1{
+      @include padding(2); 
+    }
+    button{
+      @include margin(2); 
+    }
+  }
+  .row{
+    .col-xs-12{
+      text-align: center;
+      padding-top: 2rem;
+    }
+  }
+
+  #planetAttribution{
+    font-weight: 300;
+    line-height: 2.5rem;
+
+    .container-transparent > .row{
+      padding: 4rem;
+    }
+
+    h1{
+      font-size:3rem;
+    }
+
+
+
+    a{
+      text-decoration: none;
+      border-bottom: 2px solid $white;
+      padding-bottom:0.4rem;
+    }
+    a:hover{
+      border-bottom: 2px solid $main-title;
+    }
+
+    .row {
+      margin: 1rem 3rem;
+    }
+
+    .exploration-button{
+      text-align: right;
+      margin-top:4rem;
+      font-size: 1.8rem;
+    }
+
+    
+
+  }
+  
+
+}
+
 .welcome-on-board{
-  width: 80%;
-  height: 120%;
-  margin: 2% auto;
-  @include padding(2);
-  @include font-size(1.3);
+  @include font-size(1.5);
+
+  .arrows-row{
+    div:first-child{
+      text-align:right;
+    }
+    div:nth-child(2) > .col-xs-2{
+      padding-top:0.5rem;
+      margin-bottom: 1rem;
+    }
+    div:last-child{
+      text-align:left;
+    }
+    img{
+      padding: 0 2rem;
+    }
+    p{
+      display: inline;
+      font-size: 1.7rem;
+      font-weight: lighter;
+      opacity: 0.6;  
+    }
+  }
+  
+.fixed-height {
+  height: 8rem;
+}
+ /*  width: 80%;
+ height: 120%;
+ margin: 2% auto;
+ @include padding(2);
+ @include font-size(1.3); */
 
   .row{
     @include margin2(1,5);
+  }
+
+  .active{
+    border:2px solid white;
   }
 
   .row:nth-child(2){
@@ -105,7 +200,19 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   img.planet {
-      height: 40rem;
+      height: 25rem;
+  }
+
+  .not-clickable {
+    color: $dark-grey;
+  }
+
+  li{
+    text-align: center;
+  }
+
+  .answer-selected {
+    background-color: $articles-background;
   }
 
 }
@@ -244,8 +351,10 @@ select {
 
 button{
   background: $main-title ;
+  cursor:pointer;
+  color:$white;
   border: none;
-  @include padding-button(1);
+  @include padding-button(1.5);
   outline: 0;
   display: inline-block;
   &:hover{
@@ -255,13 +364,10 @@ button{
 
 
 .login{
-/*   background-image: url("../images/background-image.jpg");
-background-repeat:no-repeat; */
   min-height: 100%;
   align-items: center;
   display: flex;
   flex-direction: column;
-/*   justify-content: center; */
   padding-top: 10%;
 
 
@@ -388,7 +494,48 @@ small {
   background-color: $articles-background;
   @include padding(1);
   @include margin(2);
+
+  h1 {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+  .post-author-avatar {
+    display:inline-block;
+  }
+  .user-pseudo {
+    margin: 1rem 0;
+    display: inline-block;
+  }
+
+  @media screen and (min-width: $break-mid) {
+    @include padding(1);
+    @include margin(2);
+    
+    .post-author-avatar img {
+      width : 8rem;
+      @include margin2(0,1);
+    }
+    h1 {
+      @include font-size(1.7);
+    }
+  } 
+
+  @media screen and (max-width: $break-mid) {
+    @include padding2(1,2);
+    @include margin2(1, 0);  
+   
+    .post-author-avatar img {
+      width : 6rem;
+      @include margin2(0,0.5);
+    }
+    h1 {
+      @include font-size(1.5);
+    }
+  }
+
 }
+
 .publish {
   background-color: $comments-background;
   @include padding2(0.8, 1);
@@ -415,6 +562,7 @@ small {
 }
 
 
+
 .pseudo-button{
   cursor:pointer;
 }
@@ -422,6 +570,9 @@ small {
 .pseudo {
   margin: 0px 1px 0.5px 2px;
 }
+
+
+
 
 .connect-buttons {
   text-align: right;
@@ -446,20 +597,39 @@ small {
     }
 }
 
-.post-content {
-  padding-left: 4rem;
+
+@media screen and (min-width: $break-mid) {
+  .post-content {
+    margin-left: 11rem;
+    margin-right: 4rem;
+  }
+} 
+
+@media screen and (max-width: $break-mid) {
+  .post-content {
+    margin: 0 2rem;
+  }
 }
+
 
 .your-comment{
   text-align: center;
   background: $comments-publish;
-  width: 95%;
-  @include margin4(1, 2, 0, 2);
+  /*width: 95%;*/
+  /*@include margin4(1, 2, 0, 2);*/
   max-height: 8em;
   @include padding2(1,0);
 
-  .col-sm-1{
+  width: 90%;
+  margin: 0.5rem 5%;
+
+  .col-sm-1, .col-xs-1 {
     padding: 0;
+  }
+  .avatar {
+    padding-left: 0.5rem;
+    position: relative;
+    z-index: 2;
   }
   img {
     max-height: 4em;
@@ -479,18 +649,24 @@ small {
   .form-post {
     padding-left: 0;
   }
+  @media screen and (max-width: $break-mid) {
+    .desktop {
+      display: none;
+      position: relative;
+    }
+  }
+  @media screen and (min-width: $break-large) {
+    .desktop {
+      display: inline-block;
+      position: relative;
+      left: 0rem;
+    }
+  } 
 }
 
 .form-post{
   padding-left: 3rem;
 }
-
-/* @media screen and (min-width: 1200px) {
-  .container-fluid {
-    width: 1170px;
-  }
-} */
-
 
 .like-icon:hover {
   background-image: url("../images/LikeFull.svg");
@@ -526,11 +702,11 @@ input[type="radio"] {
     -webkit-border-radius:8px;
     -moz-border-radius:8px;
     border-radius:8px;
-    border:2px solid $comments-background;
-    width:20px;
-    height:20px;
+    border:2px solid $grey;
+    width:1.5rem;
+    height:1.5rem;
     background-color: $transparent-background;
-    margin:0;
+    margin: 0;
 }
 
 
@@ -538,20 +714,28 @@ input[type="radio"] {
     -webkit-border-radius:8px;
     -moz-border-radius:8px;
     border-radius:8px;
+   /* border:2px solid $grey;
+    width:1.5rem;
+    height:1.5rem;*/
     border:2px solid $comments-background;
-    width:15px;
-    height:15px;
+    width:12px;
+    height:12px;
+
     background-color: $transparent-background;
     margin: 0;
 }
 
 .fullCircle {
-  background-color: $comments-background;
+  background-color: $grey;
+}
+
+.activeCircle {
+  background-color: $green-text;
 }
 
 .border-planet {
   border-style: solid;
-  border-width: 1.5rem;
+  border-width: 1.3rem;
 }
 
 .vertical-align {
@@ -563,6 +747,7 @@ input[type="radio"] {
   border-left-style: solid;
   border-left-width: 0.2rem;
 }
+
 
 .space-opera {color : $planet-space-opera;}
 .parallel {color : $planet-parallel;}
@@ -599,7 +784,7 @@ p.honorific-title {
 
 .friends {
   img.planet {
-    width: 12rem;
+    width: 75%;
     height: auto;
     margin-bottom : 1rem;
   }
@@ -620,9 +805,20 @@ p.honorific-title {
       width: 60%;
       margin-bottom: 1rem;
       margin-top: 1rem;
+  }
+
+  .error {
+    margin: 20px 0;
+    color: $grey;
+  }
 }
 
-@media screen and (max-width: $break-small) {
+.pseudo-button {
+  cursor : pointer;
+}
+
+
+@media all and (max-width: $break-small) {
   #intro-form{
     form{
       .col-xs-3{
@@ -641,9 +837,84 @@ p.honorific-title {
       }
     }
   }
+
+  #welcome-on-board-container {
+    .container-transparent{
+      li{
+        width:100%;
+      }
+
+    }
+    .button-text{
+       display:none !important;
+    }
+    .welcome-on-board .arrows-row img {
+        padding: 0;
+    }
+
+    p{
+      text-align:center !important;
+    }
+      
+  }
+
+  .welcome-on-board .row {
+      @include margin2(0,1);
+  }
+
+  .border-planet {
+      border-width: 0;
+  }
+
+  #welcome-on-board-container #planetAttribution .container-transparent > .row {
+    padding: 0;
+  }
+  #welcome-on-board-container #planetAttribution .row {
+      margin: 0;
+  }
+
+  .exploration-button {
+    margin: 3rem !important;
+    text-align: center !important;
+  }
 }
 
-@media screen and (max-width: $break-mid) {
+
+
+
+
+
+@media all and (max-width: $break-small-welcome-on-board) {
+  #welcome-on-board-container {
+    
+    .container-transparent{
+      li{
+        width:100%;
+      }
+      
+    }
+  }
+}
+
+
+  
+
+@media all and (min-width:$break-small-welcome-on-board) and (max-width: $break-mid) {
+  #welcome-on-board-container {
+    .container-transparent{
+      li{
+        width:50%;
+      }
+      li:last-child{
+        width:100%;
+      }
+
+    }
+  }
+
+}
+
+@media all and (min-width:$break-small) and (max-width: $break-mid) {
   #intro-form{
     padding:0;
   }
@@ -652,18 +923,91 @@ p.honorific-title {
 .comment {
   background: $comments-background;
   @include padding(0.5);
-  width: 95%;
-  @include margin4(1, 2, 0, 2);
- /* margin: 0 2.5%;
-  margin-top:2%;*/
+  width: 90%;
+  /*@include margin4(1, 2, 0, 2);*/
+  margin: 0.5rem 5%;
+  /*margin-top:2%;*/
   p.grey {
     color: $grey;
   }
+  .avatar {
+    width: 6rem;
+    /*@include padding2(0,2.5);*/
+    display:inline-block;
+    @include margin2(0,1);
+  }
+  .post-content {
+      margin: 0 4rem;
+  }
+  @media screen and (min-width: $break-mid) {
+    .post-content {
+      margin-left: 7rem;
+      margin-right: 4rem;
+    }
+    h1 {
+      @include font-size(1.6);
+    }
+    .avatar {
+      width: 6rem;
+      @include margin2(0,1);
+    }
+    .user-pseudo {
+      margin: 0rem 1rem;
+      padding-top: 1rem;
+
+    }
+  } 
+
+  @media screen and (max-width: $break-mid) {
+    .post-content {
+      margin: 0 2rem;
+    }
+    h1 {
+      @include font-size(1.3);
+    }
+    .avatar {
+      width: 4rem;
+      @include margin2(0,1);
+      padding-top: 0;
+    }
+    .user-pseudo {
+      margin: 0rem 0.5rem;
+    }
+  }
+
 }
 
 small.date {
     color: $grey;
   }
+
+@media all and (max-width: $break-col-xs) {
+  #welcome-on-board-container {
+    .container-transparent{
+      li{
+        padding-bottom: 2rem;
+        padding-top: 2rem;
+      }
+
+      .button-text{
+         font-size:1.5rem!important;
+      }
+
+    } 
+  }
+}
+
+@media (max-width: $screen-md-min) { 
+
+  .border-left {
+      border-left-width: 0;
+  }
+
+  
+
+
+ }
+
 
 p.see {
   cursor : pointer;
@@ -676,4 +1020,29 @@ p.see:hover, .green{
 
 p.loadMore {
   padding-left: 1rem;
+}
+
+
+@media screen and (min-width: $break-small) {
+  .pageNav .small-circle {
+    display: inline-block;
+   
+  }
+}
+@media screen and (max-width: $break-small) {
+  .pageNav .small-circle {
+    display: none;
+  }
+}
+
+@media screen and (min-width: $break-large) {
+  .publish .avatar.desktop {
+    display: inline-block;
+   
+  }
+}
+@media screen and (max-width: $break-large) {
+  .publish .avatar.desktop {
+    display: none;
+  }
 }

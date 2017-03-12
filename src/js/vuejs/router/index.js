@@ -53,7 +53,7 @@ const router = new VueRouter({
     	component: Login 
 	},{
       name: 'WelcomeOnBoard',
-      path: '/inscription/welcome-on-board', 
+      path: '/welcome-on-board', 
       component : WelcomeOnBoard
   },{ 
       name : 'Search',
@@ -77,11 +77,13 @@ const router = new VueRouter({
   },{ 
       name : 'Chat',
       path: '/:user/conversations/utilisateur', 
-      component : Chat
+      component : Chat,
+      props: true
   },{ 
       name : 'Messages',
       path: '/:user/conversations', 
-      component : Messages
+      component : Messages,
+      props: true
   } ,{ 
       name : 'Enigme',
       path: '/:user/enigmes', 
@@ -100,7 +102,9 @@ const router = new VueRouter({
   },{ 
       name : 'EnigmeCurrentChat',
       path: '/:user/enigmes/en-cours/chatbox', 
-      component : EnigmeCurrentChat
+      component : EnigmeCurrentChat,
+      props: true
+
   },{ 
       name : 'Feed',
       path: '/actualites', 
@@ -113,11 +117,14 @@ const router = new VueRouter({
   },{ 
       name : 'Post',
       path: '/univers/:planet/post/:id', 
-      component : Post
+      component : Post,
+      props: true
+
   },{ 
       name : 'Wiki',
       path: '/univers/:planet/wiki', 
-      component : Wiki
+      component : Wiki,
+      props: true
   },{ 
       name : 'Market',
       path: '/marche-intergalactique', 

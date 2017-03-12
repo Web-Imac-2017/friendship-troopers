@@ -1,9 +1,5 @@
-  <div>
-    <ul class="wrapper friend-list">
-      <li class="item" v-for="(friend, index) in user.friends"> 
-        	<img class="center" :src="friend.path"> 
-	        <h1> {{ friend.name }} </h1>
-	        <p class="text-center honorific-title"> {{ friend.badge }} </p>
-      </li>
-    </ul>
+<div>       
+	<img class="center" :src="friend.imagePath"> 
+	<h1> {{ friend.username }} </h1>
+	<p class="text-center honorific-title"> {{ friend.honorificTitle }} </p>
 </div>

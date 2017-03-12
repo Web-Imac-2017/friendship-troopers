@@ -30,7 +30,9 @@ const Search = Vue.extend({
             console.log(response);
             if(response.status == 401){
             	console.log("connectez vous !!!");
-            	this.$router.push("/");
+            	this.$router.push({
+                name: 'Login' 
+            });
             }
             	
           }
