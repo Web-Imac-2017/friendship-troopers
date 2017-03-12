@@ -35,7 +35,8 @@ const User = Vue.extend({
    },
    methods: { 
     getRouteParams : function(){
-        if (this.$route.params.user == 'me'){
+      
+      if (this.$route.params.user == 'me'){
         this.getUser(apiRoot() + 'users/me');
         this.myself = true;
       } else {
@@ -46,10 +47,9 @@ const User = Vue.extend({
    getUser : function(route){
       this.$http.get(route).then((response) => {
           this.profil = response.data[0];
-          console.log(response);
           this.getNbFriends(apiRoot() + 'users/' + this.profil.id + '/number_friends');
           this.getInterest(apiRoot() + 'users/' + this.profil.id + '/interest');
-          this.getPosts(apiRoot() + '/planets/' + this.profil.planetId + '/posts', { 'user' : this.profil.id});
+          this.getPosts(apiRoot() + 'planets/' + this.profil.planetId + '/posts', { 'user' : 2});
       }, (response) => {
         console.log(response);
       })
@@ -68,13 +68,14 @@ const User = Vue.extend({
         console.log(response);
       });     
     }, 
-    getPosts : function(route) {
-      this.$http.get(route).then((response) => {
+    getPosts : function(route, option) {
+      this.$http.get(route, option, {emulateJSON : true}).then((response) => {
           console.log(response);
-        // this.pos =  response.data.count;
+          this.posts =  response.data;
       }, (response) => {
         console.log(response);
       });     
+
     },
     showMore : function() {
       this.start = this.user.interests.length;
@@ -85,9 +86,11 @@ const User = Vue.extend({
   },
   updated : function() {
  
-    if (this.myself){
+    console.log(this.$route.params);
+ /*   if (this.myself){
       if (this.$route.params.user != 'me') {
         this.updated = true;
+        this.myself = false;
       }
     } else {
       if (this.$route.params.user != this.profil.username) {
@@ -95,8 +98,8 @@ const User = Vue.extend({
        }
     }
 
-    console.log(this.updated);
-    /*if (this.updated) {
+    console.log("updates" + this.updated);
+    if (this.updated) {
       this.getRouteParams();
       this.updated = false;
     }*/
@@ -116,48 +119,7 @@ const User = Vue.extend({
         myself : false,
         nbFriends : '',
         start : 5,
-        user: {
-        userAvatar : '/assets/images/avatars/Multas/aliens.svg',
-        username : 'LuckyPon', 
-        userBadge : 'Baroudeuse de l\'espace', 
-        birthDate : '29 avril',
-        userPlanet : {
-          path : '/assets/images/planets/Paranose.svg',
-          name : 'Planete X785-E'
-        }, 
-        points : 745,
-        interests : [ "natation", "tigrous", "francois fillion", "caniches", "cachalots",
-        "nadine morano", "trumpette"],
-        
-      }, post :
-        {
-            user: 'Lucky',
-            avatar : "/assets/images/avatars/Technome/landscape.svg",
-            planeteId : 3,
-            date: '20 fev',
-            hour: '12h04',
-            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut tortor eu ipsum laoreet faucibus. Etiam mattis eros id leo maximus blandit. Proin id massa in risus gravida suscipit non eu arcu. Aenean auctor lacus risus, porttitor sodales odio vehicula eu. Curabitur luctus ut ligula a iaculis. Aliquam erat volutpat. Pellentesque magna nibh, aliquam sit amet consectetur eget, auctor quis neque. BLJozeuoaugoeugo',
-            likes: 50,
-            comments: [
-            {
-              user : "Moi",
-               planeteId : 2,
-              avatar : "/assets/images/avatars/Paranose/astro.svg",
-              content : "la vie c'est du kiri",
-              date: '20 fev',
-              hour: '12h04'
-            }, {
-              user : "Toi",
-               planeteId : 2,
-              avatar : "/assets/images/avatars/Paranose/astro.svg",
-              content : "Non, la vie c'est du kiwi",
-              date: '20 fev',
-              hour: '12h04'
-            }
-            ],
-            id : 2
-          },
-      myself : false
+        posts : {}
   }
 
   }

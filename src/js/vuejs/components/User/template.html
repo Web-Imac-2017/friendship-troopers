@@ -17,8 +17,8 @@
               <p v-if="myself"> Mon profil </p>
               <p v-else> Profil de {{ profil.username }} </p>
               <p class="honorific-title"> {{ profil.honorificTitle }} </p>
-              <p class="green" v-if="profil.points < 2"> {{ profil.points}} point </p>
               <p class="green" v-if="profil.points == null"> 0 point </p>
+              <p class="green" v-else-if="profil.points < 2"> {{ profil.points}} point </p>
               <p class="green" v-else> {{ profil.points }} points </p>
             </div>
             <div class="col-sm-1 border-right"></div>
@@ -63,8 +63,9 @@
       </div>
         </div>
         <page-nav></page-nav>
-        <post :post="post"></post> 
-
+        <div  v-for="post in posts" >
+          <post :post="post"></post> 
+        </div>
       </section>
       <div class="col-lg-2">
          <lateral-menu-right></lateral-menu-right>
