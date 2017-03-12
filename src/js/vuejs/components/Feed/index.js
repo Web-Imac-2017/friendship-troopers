@@ -73,6 +73,7 @@ const Feed = Vue.extend({
       		posts : [{      /* admin / earth / parallel / robots / aliens / space-opera*/
 
         	  user: 'Lucky',
+            userId : 1,
             avatar : "/assets/images/avatars/Paranose/astro.svg",
             planeteId : 2,
 	          date: '20 fev',
@@ -126,9 +127,10 @@ const Feed = Vue.extend({
             id : 2
           },
           {
-            user: 'Lucky',
+            user: 'Moi',
             avatar : "/assets/images/avatars/Sautien/dashboard.svg",
             planeteId : 4,
+            userId : 3,
             date: '20 fev',
             hour: '12h04',
             content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut tortor eu ipsum laoreet faucibus. Etiam mattis eros id leo maximus blandit. Proin id massa in risus gravida suscipit non eu arcu. Aenean auctor lacus risus, porttitor sodales odio vehicula eu. Curabitur luctus ut ligula a iaculis. Aliquam erat volutpat. Pellentesque magna nibh, aliquam sit amet consectetur eget, auctor quis neque.',

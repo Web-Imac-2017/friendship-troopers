@@ -12,16 +12,18 @@ import LateralMenuRight from '../LateralMenuRight/index.js'
 import MenuTools from '../MenuTools/index.js'
 import Post from '../Post/index.js'
 import optionBar from './OptionBar/index.js'
-import statistics from './Statistics/index.js'
 import NavBar from '../NavBar/index.js'
 import PageNav from "../Feed/PageNav/index.js"
 
 
 const User = Vue.extend({
   template,
+  props : {
+    userId : Number
+  }
+  ,
    components: {
     'option-bar' : optionBar, 
-    'statistics' : statistics, 
     'lateral-menu-left' : LateralMenuLeft,
     'lateral-menu-right' : LateralMenuRight, 
     'menu-tools' : MenuTools, 
@@ -29,18 +31,29 @@ const User = Vue.extend({
     'navbar' : NavBar,
     'page-nav' : PageNav },
   created : function() {
-        this.$http.get(apiRoot() + 'users/me',{ emulateJSON: true }).then((response) => {
+    this.getRouteParams();
+   },
+   methods: { 
+    getRouteParams : function(){
+        if (this.$route.params.user == 'me'){
+        this.getUser(apiRoot() + 'users/me');
+        this.myself = true;
+      } else {
+        this.getUser(apiRoot() + 'users/' + this.$route.params.userId);
+        this.myself = false;
+      }
+    },
+   getUser : function(route){
+      this.$http.get(route).then((response) => {
           this.profil = response.data[0];
           console.log(response);
-          this.getNbFriends(apiRoot() + '/users/' + this.profil.id + '/number_friends');
+          this.getNbFriends(apiRoot() + 'users/' + this.profil.id + '/number_friends');
           this.getInterest(apiRoot() + 'users/' + this.profil.id + '/interest');
+          this.getPosts(apiRoot() + '/planets/' + this.profil.planetId + '/posts', { 'user' : this.profil.id});
       }, (response) => {
         console.log(response);
       })
-     
-
-  },
-   methods: {
+   },    
     getInterest : function(route){
       this.$http.get(route).then((response) => {
         this.interests = response.data;
@@ -53,25 +66,41 @@ const User = Vue.extend({
         this.nbFriends =  response.data.count;
       }, (response) => {
         console.log(response);
-      });
-    },
-    profilType: function(){
-      if (this.myself) {
-        this.myself = false;
-        this.myself = false;
-      } else {
-         this.myself = true;
-        this.myself = true;
-      }
-       
+      });     
     }, 
+    getPosts : function(route) {
+      this.$http.get(route).then((response) => {
+          console.log(response);
+        // this.pos =  response.data.count;
+      }, (response) => {
+        console.log(response);
+      });     
+    },
     showMore : function() {
       this.start = this.user.interests.length;
     },
     showLess : function() {
       this.start = 5;
     }
-  }, 
+  },
+  updated : function() {
+ 
+    if (this.myself){
+      if (this.$route.params.user != 'me') {
+        this.updated = true;
+      }
+    } else {
+      if (this.$route.params.user != this.profil.username) {
+          this.updated = true;
+       }
+    }
+
+    console.log(this.updated);
+    /*if (this.updated) {
+      this.getRouteParams();
+      this.updated = false;
+    }*/
+  },
   computed : {
     planetName : function() {
       return this.planetPath = "/assets/images/planets/" + this.profil.name +".svg";
@@ -79,6 +108,7 @@ const User = Vue.extend({
   },
   data () {
       return {
+        updated : false,
         profil : {},
         planetPath : '',
         interests : [],

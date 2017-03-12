@@ -2,7 +2,7 @@
       <div class="row"> 
         <div class="col-sm-1">
             <div class="avatar">
-              <router-link :to="{ name: 'User', params: { user: post.user}}">
+              <router-link :to="{ name: 'User', params: { user: post.user, userId : post.userId, new : true}}">
                   <img :src="post.avatar" alt="author avatar" class="avatar">
               </router-link>
             </div>
