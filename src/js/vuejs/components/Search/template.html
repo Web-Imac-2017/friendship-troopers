@@ -8,7 +8,7 @@
     </aside>
 
     <section class="article col-sm-9 col-md-9 col-lg-10 container-transparent container">
-  		<h1> Recherche </h1>
+  		<h1 class="mainTitle"> Recherche </h1>
       <div class="container-colored">
         <h2>Rechercher par pseudo </h2>
         <form class="row" id="searchBarUsername" v-on:submit.prevent.stop="searchBarUsername">
@@ -61,28 +61,29 @@
         </div>
         <div id="searchBarFilters" class="col-xs-12">
            <form class="pseudo-button search" v-on:submit.prevent.stop="searchBarFilters">
-          Rechercher
-          <input type="submit" class="pseudo-button searchImage" value=""></input>
-        </form>
+            Rechercher
+            <input type="submit" class="pseudo-button searchImage" value=""></input>
+          </form>
           
-        </div>
-       
-      
-          
-        
+        </div>  
       </div>
 
-   		<div class="row page-nav">
-   			<page-nav></page-nav>
-   		</div>
-
-   		<div class="row" id="searchResult">
-          	<user-component :user="result" :key="result.id" v-for="result in usersResult"></user-component>
-   		</div>
-
-   		<div class="row page-nav">
-   			<page-nav></page-nav>
-   		</div>
+   		
+      <div v-if="usersExist">
+        <div class="row page-nav">
+          <page-nav></page-nav>
+        </div>
+        <div  class="row" id="searchResult">
+            <user-component :user="result" :key="result.id" v-for="result in usersResult"></user-component>
+        </div>
+        <div class="row page-nav">
+          <page-nav></page-nav>
+        </div>
+        
+      </div>
+      <div v-else style="margin: 2rem 0" class="row">
+        <h1 style="text-align:center">Aucun utilisateur ne correspond à votre requête !</h1>
+      </div>
 
     </section>
 

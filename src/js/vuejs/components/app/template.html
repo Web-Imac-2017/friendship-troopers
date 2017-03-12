@@ -14,6 +14,7 @@
     <div style="display:inline-block; width:20%;position : relative;vertical-align: top; margin-top: 3rem;">
        <h2>Pages à lier faites</h2>
         <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'WelcomeOnBoard'}"> Welcome On Board </router-link></p>
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Search'}"> Recherche </router-link></p>
 
     </div>
 
@@ -28,7 +29,6 @@
 
     <div style="display:inline-block; width:20%;position : relative; vertical-align: top; margin-top: 3rem;">
         <h2>Pages pas faites</h2>
-        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Search'}"> Recherche </router-link></p>
         <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Chat', params: { user: 'pseudo' }}"> Chat </router-link></p>
         <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'EnigmeResolved', params: { user: 'pseudo' }}"> Enigmes résolues </router-link></p>
         <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'EnigmeCurrent', params: { user: 'pseudo' }}"> Enigmes en cours </router-link></p>

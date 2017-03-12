@@ -108,7 +108,8 @@ const Search = Vue.extend({
       usersResult : [],
       interestsPrint : [],
       titlesPrint : [],
-      activePlanet:  -1
+      activePlanet:  -1,
+      usersExist : false
     }
   },
   methods:{
@@ -186,14 +187,22 @@ const Search = Vue.extend({
       this.reinitialize();
       this.searchUsername();
       this.requestUsersResult();
+      if(this.usersResult.length > 0)
+        this.usersExist = true;
+      else
+        this.usersExist = false;
       
     },
     searchBarFilters(){
       this.reinitialize();
       this.searchFilters();
       this.requestUsersResult();
-      
+      if(this.usersResult.length > 0)
+        this.usersExist = true;
+      else
+        this.usersExist = false;
     }
+      
   },
   created(){
     // TEST POUR VOIR SI ON EST LOGIN
@@ -221,7 +230,6 @@ const Search = Vue.extend({
           }
         )*/
 
-// FAIRE RIEN NE CORRESPOND A LA RECHERCHE
   }
 });
 

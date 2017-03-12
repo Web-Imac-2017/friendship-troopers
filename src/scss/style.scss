@@ -834,7 +834,7 @@ p.honorific-title {
 
 
 #search{
-  h1{ 
+  h1{
     text-align: left;
   }
   h2{
@@ -844,6 +844,9 @@ p.honorific-title {
   h3{
     font-size:1.2rem;
     @include margin(1);
+  }
+  .mainTitle{
+    margin-bottom: 2rem;
   }
   #filtersPlanetId{
     flex-wrap:wrap;
@@ -861,17 +864,6 @@ p.honorific-title {
       flex-basis: auto;
       flex-grow:0;
       @include padding(2);
-      
-
-    /*   @media all and (max-width: $break-mid) {
-      font-size: 1.3rem;
-      @include padding(1);
-    }
-    
-    @media all and (min-width: $break-mid) {
-      font-size: 1.5rem;
-      @include padding(2);
-    } */
 
       &:hover{
         outline:1px solid $grey;
