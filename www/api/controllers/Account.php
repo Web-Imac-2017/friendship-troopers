@@ -58,13 +58,41 @@ class Account extends Controller{
 *  	  INSCRIPTION FUNCTIONS
 * ////////////////////////////
 */
-
+	/**
+	 * check if a username is free or not
+	 * @param  array  $post contain username
+	 * @return boolean       true if free to use
+	 */
+	public function isUsernameFree($post) {
+		if(!empty($this->checkRequired(['username'], $post))) {
+			throw new \Utils\RequestException('MISSING_FIELDS', 400);
+		}
+		$result = $this->User->findFirst([
+			'fields' => ['username'],
+			'conditions' => ['username' => $post['username']]
+		]);
+		$this->response(!(count($result) > 0 && $result != false), 200);
+	}
+	/**
+	 * check if a mail is free or not
+	 * @param  array  $post contain username
+	 * @return boolean       true if free to use
+	 */
+	public function isMailFree($post) {
+		if(!empty($this->checkRequired(['mail'], $post))) {
+			throw new \Utils\RequestException('MISSING_FIELDS', 400);
+		}
+		$result = $this->User->findFirst([
+			'fields' => ['mail'],
+			'conditions' => ['mail' => $post['mail']]
+		]);
+		$this->response(!(count($result) > 0 && $result != false), 200);
+	}
 	/**
 	* validate the user's registration
 	* @return [type] [description]
 	*/
 	public function validateUser($get) {
-		var_dump($get);
 		$required = ['mail' , 'activated'];
 		if(!empty($this->checkRequired($required, $get))){
 			throw new \Utils\RequestException('MISSING_FIELDS', 400);
@@ -112,7 +140,7 @@ class Account extends Controller{
 
 		Il est tant maintenant de valider votre arrivée, simplement en cliquant sur le lien ci dessous !
 
-		'.$_SERVER['DOCUMENT_ROOT'] .'/' . \Utils\Router\Router::url('auth.validate') . '?email='.$to.'&hash='.$data['activated'];
+		'.$_SERVER['DOCUMENT_ROOT'] .'/' . \Utils\Router\Router::url('auth.validate') . '?mail='.$to.'&activated='.$data['activated'];
 
 		$headers = 'From:noreply@fst.dev' . "\r\n";
 		mail($to, $subject, $message, $headers);

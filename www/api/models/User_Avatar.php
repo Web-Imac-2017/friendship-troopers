@@ -14,6 +14,7 @@ class User_Avatar extends Model {
 	}
 
     public function insert ($data) {
+        // Format des datas :
         // $data = [
         //     'fields' => ['userId, avatarId, currentAvatar'],
         //     'values' => [
@@ -26,10 +27,10 @@ class User_Avatar extends Model {
         //checlRequired on userId et AvatarId
         switch ($nbFields) {
             case 2:
-                $prepare = '(:'.$data['fields'][0] .' , :'.$data['fields'][1] .'),';
+                $prepare = '( ? , ? ),';
                 break;
             case 3:
-                $prepare = '(? , ? , ?) ';
+                $prepare = '(? , ? , ?), ';
                 break;
             default:
                 throw new \Utils\RequestException('Mauvais nombre de champs', 400);
@@ -43,8 +44,6 @@ class User_Avatar extends Model {
         } else {
             $sql .= $prepare;
         }
-        var_dump($data['values']);
-        var_dump($sql);
         $prepareRequest = $this->pdo->prepare($sql);
 		$prepareRequest->execute($data['values']);
     }

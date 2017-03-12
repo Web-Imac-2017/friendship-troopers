@@ -15,6 +15,8 @@ use \Utils\Router\Router;
 Router::init($_GET['url']);
 
 Router::post('/auth/signin','account#inscription');
+Router::post('/auth/signin/username','account#isUsernameFree', 'users.me.usernameFree');
+Router::post('/auth/signin/mail','account#isMailFree', 'users.me.mailFree');
 Router::post('/auth/login','account#login');
 Router::post('/auth/logout','account#logout');
 Router::get('/auth/validate','account#validateUser', 'auth.validate'); //ok
@@ -27,6 +29,7 @@ Router::get('/users/:userId/interest','interest#listUserInterest', 'users.me.lis
 Router::post('/users/me/interest/add_interest','interest#addUserInterest', 'users.me.updateUserInterest');
 Router::post('/users/me/interest/delete_interest','interest#delete_interest', 'users.me.updateUserInterest');
 Router::get('/users/me/avatars','avatar#listUserAvatar', 'users.me.listAvatar');
+
 
 
 Router::get('/users/me/waiting_list_friend','friend#invitationList', 'users.me.invitationList'); //ok
