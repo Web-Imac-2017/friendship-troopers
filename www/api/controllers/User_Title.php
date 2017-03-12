@@ -24,7 +24,46 @@ class User_Title extends Controller {
     }
 
     $find = $this->User_Title->find([
-      'fields' => $fields,//['user.id', 'label'],
+      'fields' => $fields,
+      'conditions' => [
+        'user.id' => $userId,
+      ],
+      'leftJoin' => [
+        [
+          'table' => 'user',
+  				'alias' => 'User',
+  				'from' => 'id',
+  				'to' => 'userId',
+        ],
+        [
+          'table' => 'title',
+  				'alias' => 'title',
+  				'from' => 'id',
+  				'to' => 'titleId',
+        ],
+      ],
+    ]);
+
+    $this->response($find, 200);
+  }
+
+  public function viewCurrent ($userId, $get){
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
+    }
+
+    if (!in_array(\Utils\Session::user('roleId'), [1, 2])) {
+      $fields = ['user.username','label', 'price'];
+    } else {
+      $fields = ['user.id', 'user.username', 'titleId', 'label', 'price'];
+    }
+
+    $find = $this->User_Title->find([
+      'fields' => $fields,
+      'conditions' => [
+        'user.id' => $userId,
+        'current' => 1,
+      ],
       'leftJoin' => [
         [
           'table' => 'user',
