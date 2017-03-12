@@ -112,6 +112,6 @@ class Avatar extends Controller {
             throw new \Utils\RequestException('NOT_LOGGED', 401);
         }
         $userId = \Utils\Session::user('id');
-        $this->User_Avatar->insert();
+        $this->User_Avatar->insert($idAvatar, $userId);
     }
 }

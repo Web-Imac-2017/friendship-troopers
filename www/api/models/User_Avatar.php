@@ -7,20 +7,46 @@
 namespace Models;
 
 class User_Avatar extends Model {
-  function __construct($params = false) {
+    protected $primaryKey = 'userId';
+    function __construct($params = false) {
 		parent::__construct();
 		$this->table = 'user_avatar';
 	}
 
-    public function insert ($avatarId, $userId) {
-        $sql = 'INSERT INTO ' . $this->table . ' (idUser, idAvatar, ) VALUES ';
-        if(is_array($avatarId)){
-            foreach ($avatarId as $value) {
-                $sql += '(? , ?),';
-                $insert_data[] = ['avatarId' => $value, 'userId' => $userId] ;
-            }
+    public function insert ($data) {
+        // $data = [
+        //     'fields' => ['userId, avatarId, currentAvatar'],
+        //     'values' => [
+        //         ['1','1','1'],
+        //         ['1','2','0'],
+        //         ['1','3','0'],
+        //     ]
+        // ];
+        $nbFields = count($data['fields']);
+        //checlRequired on userId et AvatarId
+        switch ($nbFields) {
+            case 2:
+                $prepare = '(:'.$data['fields'][0] .' , :'.$data['fields'][1] .'),';
+                break;
+            case 3:
+                $prepare = '(? , ? , ?) ';
+                break;
+            default:
+                throw new \Utils\RequestException('Mauvais nombre de champs', 400);
+                break;
         }
+        $sql = 'INSERT INTO ' . $this->table .' ('. implode(', ', $data['fields']) .') VALUES ';
+        if(is_array($data['values'][0])){
+            foreach ($data['values'] as $value) {
+                $sql .= $prepare;
+            }
+        } else {
+            $sql .= $prepare;
+        }
+        var_dump($data['values']);
+        var_dump($sql);
         $prepareRequest = $this->pdo->prepare($sql);
-		$prepareRequest->execute($currentData);
+		$prepareRequest->execute($data['values']);
     }
+
 }

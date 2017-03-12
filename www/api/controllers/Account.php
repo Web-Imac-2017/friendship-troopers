@@ -64,13 +64,13 @@ class Account extends Controller{
 	* @return [type] [description]
 	*/
 	public function validateUser($get) {
-		$required = ['email' , "activated"];
+		$required = ['mail' , "activated"];
 		if(empty($this->checkRequired($required, $get))){
 			throw new \Utils\RequestException('MISSING_FIELDS', 400);
 		}
 
 		$data = array(
-			'mail'=>$get['email'],
+			'mail'=>$get['mail'],
 			'activated' => $get['activated'],
 		);
 		$request =[
@@ -117,8 +117,7 @@ class Account extends Controller{
 	*/
 	public function inscription($post) {
 		$required = ['username','mail', 'birthdate', 'password'];
-		$error = $this->checkRequired($required, $post);
-		if(!empty($error)){
+		if(!empty($this->checkRequired($required, $post))){
 			throw new \Utils\RequestException('champs manquants', 400);
 		} else {
 			$birthdate = $post['birthdate'];
@@ -141,18 +140,31 @@ class Account extends Controller{
 			$this->filterXSS($data);
 			$user = new \Models\User();
 			$data['password']=password_hash($password, PASSWORD_DEFAULT);
-			$avatar = new Avatar();
 			try {
-				$user->addUser($data);
-				$avatar->addUserAvatar(1);
-				// $avatar->setCurrentAvatar(1);
+				$data['id'] = $user->addUser($data);
 			} catch (\PDOException $e) {
 				throw new \Utils\RequestException('utilisateur existe deja', 400);
 			}
+			$this->loadModel('User_Avatar');
+			$this->loadModel('Avatar');
+			$defaultavatar = $this->Avatar->find(
+				['fields' => ['id'],
+				'conditions' => ['pack' => 0], ]
+			);
+			try{
+				$this->User_Avatar->insert([
+		            'fields' => ['userId', 'avatarId', 'currentAvatar'],
+		            'values' => [$data['id'],'1','1'],
 
+		        ]);
+			} catch (\PDOException $e) {
+				throw new \Utils\RequestException('oups', 400);
+			}
 			$this->sendValidationMail($data);
 			unset($data['password']);
 			unset($data['activated']);
+
+			\Utils\Session::write('User', $data);
 			$this->response($data, 201);
 		}
 	}
@@ -179,7 +191,7 @@ class Account extends Controller{
 					throw new \Utils\RequestException('bad op', 400);
 			}
 		}
-		$notAllowed = ['planetId', 'id', 'registerDate', 'activated', 'username', 'password'];
+		$notAllowed = ['planetId', 'id', 'registerDate', 'activated', 'username', 'password', 'points'];
 		$fieldsNotAllowed = $this->checkNotAllowed($notAllowed, $updates);
 		foreach ($fieldsNotAllowed as $value) {
 			unset($updates[$value]);
@@ -279,4 +291,5 @@ class Account extends Controller{
 		$userId = \Utils\Session::user('id');
 		$this->getUser($userId, true);
 	}
+
 }

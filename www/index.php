@@ -41,6 +41,7 @@ Router::post('/avatar','avatar#create', 'avatar.create');
 
 Router::post('/planets/:planet/posts', 'publication#create', 'planets.posts.create');
 Router::get('/planets/:planet/posts', 'publication#list', 'planets.posts.list');
+Router::get('/planets/:planet/posts/count', 'publication#count', 'planets.posts.count');
 Router::patch('/planets/:planet/posts/:id', 'publication#update', 'planets.posts.update');
 Router::delete('/planets/:planet/posts/:id', 'publication#delete', 'planets.posts.delete');
 
@@ -51,6 +52,7 @@ Router::get('/interest/view','interest#listInterest', 'interest.list');
 
 Router::post('/planets/:planet/posts/:publicationId/comments', 'comment#create', 'planets.posts.comments.create');
 Router::get('/planets/:planet/posts/:publicationId/comments', 'comment#list', 'planets.posts.comments.list');
+Router::get('/planets/:planet/posts/:publicationId/comments/count', 'comment#count', 'planets.posts.comments.count');
 Router::patch('/planets/:planet/posts/:publicationId/comments/:id', 'comment#update', 'planets.posts.comments.update');
 Router::delete('planets/:planet/posts/:publicationId/comments/:id', 'comment#delete', 'planets.posts.comments.delete');
 

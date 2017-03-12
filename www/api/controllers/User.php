@@ -13,8 +13,7 @@ class User extends Controller{
 	 * get the list of user. Depend on get parameters.
 	 * Allow search bu planetId and role
 	 * Restriction on role 'banni'. only admin and modo can access that list
-	 * @param  [type] $get [description]
-	 * @return [type]      [description]
+	 * @param  array $get get data from view
 	 */
 	public function usersList($get){
 		if(\Utils\Session::isLoggedIn() == NULL){
