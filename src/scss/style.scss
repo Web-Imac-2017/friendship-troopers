@@ -802,7 +802,7 @@ p.honorific-title {
 
 .friends {
   img.planet {
-    width: 12rem;
+    width: 75%;
     height: auto;
     margin-bottom : 1rem;
   }
@@ -820,6 +820,11 @@ p.honorific-title {
       width: 60%;
       margin-bottom: 1rem;
       margin-top: 1rem;
+  }
+
+  .error {
+    margin: 20px 0;
+    color: $grey;
   }
 }
 
