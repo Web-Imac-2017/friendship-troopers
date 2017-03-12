@@ -24,5 +24,4 @@ const topParameters = Vue.extend({
   }
 });
 
-
 export default  topParameters;

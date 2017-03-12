@@ -1,17 +1,18 @@
 <div>
 <navbar></navbar>
-  <div class="container-fluid">
+
+  <div class="container-fluid user-params">
     <div class="row">
       <aside class="col-sm-3 col-md-3 col-lg-2">
         <lateral-menu-left></lateral-menu-left>
         <deconnexion class="desktop"></deconnexion>
         <menu-tools class="desktop"></menu-tools>
       </aside>
-      <section class="article col-sm-9 col-md-9 col-lg-8">
-        <h1> Modifier mes informations </h1>
+
+      <section class="article col-sm-9 col-lg-8 container-transparent ">
+        <h1 class="page-title"> Modifier mes informations </h1>
         <top-parameters v-model="user">
           <p slot="changeDone">Vos paramètres ont été appliqués</p>
-
         </top-parameters>
         <bottom-parameters v-model="user">
           <p slot="errorMail">L'adresse mail n'est pas juste !</p>
@@ -19,7 +20,6 @@
           <p slot="errorLowPassword">Le mot de passe n'est pas suffisament compliqué! Il doit comporter 1 chiffre, 1 lettre et au minimum 8 caractères.</p>
           <p slot="errorWrongPassword">Vous vous êtes trompé dans votre mot de passe</p>
           <p slot="errorNoChange">Vous n'avez rien changé..</p>
-
         </bottom-parameters>
         <router-link to="/utilisateur">Retour au profil</router-link>
         
