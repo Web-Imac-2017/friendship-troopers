@@ -23,6 +23,12 @@ Router::get('/users/:userId/interest','interest#listUserInterest', 'users.me.lis
 Router::post('/users/me/interest/add_interest','interest#addUserInterest', 'users.me.updateUserInterest');
 Router::post('/users/me/interest/delete_interest','interest#delete_interest', 'users.me.updateUserInterest');
 
+//Router::get('/users/:userId/user_title','user_title#viewCurrent');
+//Router::get('/users/:userId/user_title','user_title#list');
+Router::post('/users/:userId/user_title','user_title#add');
+//Router::patch('/users/:userId/user_title','user_title#update');
+//Router::delete('/users/:userId/user_title','user_title#delete');
+
 Router::get('/users/me/waiting_list_friend','friend#invitationList', 'users.me.invitationList'); //ok
 Router::get('/users/me/friends','friend#listFriend', 'users.me.listUserFriend'); //ok
 Router::post('/users/:userId/add_friend','friend#addFriend', 'users.me.addFriend'); //ok
