@@ -3,7 +3,7 @@
 // Colors variables
 
 $white: #fff; 
-
+ 
 
 $main-title: #46bfa9;
 $username: #349994;
@@ -82,24 +82,7 @@ $title-font: earthOrbiter-font;
 
 
 // Padding and margin variables
-/*
-@mixin planetColor($planet) {
-  color:$sizeValue + rem;
-  font: $title-font;
-}
-@mixin pseudo-Multas {
-  color: §planet-space-opera;
-  font: $title-font;
-}
-@mixin pseudo-Terre {
-  color: §planet-earth;
-  font: $title-font;
-}
-@mixin pseudo-Sautien {
-  color: §planet-earth;
-  font: $title-font;
-}
-*/
+
 @mixin padding($sizeValue) {
   padding:$sizeValue + rem;
 }
