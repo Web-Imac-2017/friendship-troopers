@@ -230,4 +230,99 @@ class Account extends Controller{
 			echo 'user not found';
 		}
 	}
+
+	public function search($get) {
+		$isRequired = $this->checkRequired(['username', 'interest', 'title', 'planet'],$get);
+		if(!empty($isRequired) && count($isRequired) === 4) {
+			throw new \Utils\RequestException('champs manquant', 400);
+		}
+		$offset = +($get['offset'] ?? 0);
+		$limit = +($get['limit'] ?? 15);
+		if ($limit > 15) {
+			throw new \Utils\RequestException('limit trop elevee', 416);
+		}
+
+        $fields =  ['DISTINCT user.id','user.username',
+					'avatar.imagePath', 'avatar.altText',
+					'title.honorificTitle'
+                ];
+		$this->filterXSS($get);
+		$where = [
+			'userTitle.current' => '1',
+			'UA.currentAvatar' => '1',
+		];
+		if(array_key_exists('interest', $get)) {
+			$where['AND'] = ['userInterest.interestId' => $get['interest']];
+		}
+		if(array_key_exists('title', $get)) {
+			$where['OR'] = ['userTitle.titleId' => $get['title']];
+		}
+		if(array_key_exists('planet', $get)) {
+			$where['user.planetId'] = $get['planet'];
+		}
+		if(array_key_exists('username', $get)) {
+			$where['user.username'] = [
+				'cmp' => 'LIKE',
+				'value' => $get['username'].'%',
+			];
+		}
+        $request = $this->User->find([
+			'fields' => $fields,
+			'leftJoin' => [
+				[
+				'table' => 'user_avatar',
+				'alias' => 'UA',
+				'to' => 'id',
+				'from' => 'userId'
+				],
+				[
+				'table' => 'avatar',
+				'alias' => 'avatar',
+				'from' => 'id',
+				'to' => 'avatarId',
+				'JoinTable' =>  'UA',
+				],
+				[
+				'table' => 'user_title',
+				'alias' => 'userTitle',
+				'from' => 'userId',
+				'to' => 'id',
+				'JoinTable' =>  'user',
+				],
+				[
+				'table' => 'title',
+				'alias' => 'title',
+				'from' => 'id',
+				'to' => 'titleId',
+				'JoinTable' => 'userTitle',
+				],
+                [
+				'table' => 'user_interest',
+				'alias' => 'userInterest',
+				'from' => 'userId',
+				'to' => 'id',
+				'JoinTable' =>  'user',
+				],
+				[
+				'table' => 'interest',
+				'alias' => 'interest',
+				'from' => 'id',
+				'to' => 'interestId',
+				'JoinTable' => 'userInterest',
+				],
+			],
+			'conditions' => $where,
+            'orderBy' => [
+			'key' => 'username',
+			'order' => 'ASC',
+			],
+		]);
+		$offsetPrev = $offset - $limit;
+		$offset = $offset + $limit;
+
+		$listUrl = \Utils\Router\Router::url('users.search');
+		$this->response($request, 200, [
+			'Link' => "\"$listUrl?offset=$offset&limit=$limit\"; rel=\"next\", \"$listUrl?offset=$offsetPrev&limit=$limit\"; rel=\"last\"",
+		]);
+    }
 }
