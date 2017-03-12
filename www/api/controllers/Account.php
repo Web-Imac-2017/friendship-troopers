@@ -64,8 +64,9 @@ class Account extends Controller{
 	* @return [type] [description]
 	*/
 	public function validateUser($get) {
-		$required = ['mail' , "activated"];
-		if(empty($this->checkRequired($required, $get))){
+		var_dump($get);
+		$required = ['mail' , 'activated'];
+		if(!empty($this->checkRequired($required, $get))){
 			throw new \Utils\RequestException('MISSING_FIELDS', 400);
 		}
 
@@ -73,19 +74,25 @@ class Account extends Controller{
 			'mail'=>$get['mail'],
 			'activated' => $get['activated'],
 		);
-		$request =[
+		$request = [
 			'fields' => [
+				'id',
 				'mail',
 				'activated',
-				'id',
 			],
 			'conditions' => $data
 		];
-		$result = $this->find($request);
+		$result = $this->User->find($request);
+		var_dump($result);
 		if(count($result) > 0){
 			$data['activated'] = 1;
-			$data['id'] = $result['id'];
-			$this->save($data);
+			$data['id'] = $result[0]['id'];
+			try {
+				$this->User->save($data);
+			} catch (\PDOException $e) {
+				throw new \Utils\RequestException('oups', 400);
+			}
+
 		} else {
 			throw new \Utils\RequestException('INVALID_DATA', 400);
 		}

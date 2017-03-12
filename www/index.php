@@ -17,7 +17,7 @@ Router::init($_GET['url']);
 Router::post('/auth/signin','account#inscription');
 Router::post('/auth/login','account#login');
 Router::post('/auth/logout','account#logout');
-Router::get('/auth/validate','account#validateUser', 'auth.validate');
+Router::get('/auth/validate','account#validateUser', 'auth.validate'); //ok
 
 Router::get('/users/list','user#usersList', 'users.list'); //ok. prend comme param planetId ou role (l'id)
 Router::get('/users/me','account#getCurrentUser', 'users.me'); //ok
