@@ -64,6 +64,8 @@ Router::post('/planets', 'planet#create');
 Router::delete('/planets/:planet', 'planet#delete');
 Router::get('/planets', 'planet#list');
 
+Router::get('/users/search','search#search', 'users.search');
+
 try {
   Router::run();
 } catch (\Utils\RequestException $e) {

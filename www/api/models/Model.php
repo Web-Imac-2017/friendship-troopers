@@ -134,7 +134,7 @@ abstract class Model {
 			if (isset($request['limit'])) {
 				$sql .= ' LIMIT ' . $request['limit'];
 			}
-
+			var_dump($sql);
 			// PREPARE THE REQUEST AND EXECUTE IT THEN RETURN AN OBJECT FROM YOUR DB
 			$prepareRequest = $this->pdo->prepare($sql);
 			$prepareRequest->execute();
