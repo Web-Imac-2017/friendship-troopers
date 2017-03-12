@@ -110,7 +110,7 @@ const NavBar = Vue.extend({
                     {type:'3', post:'3'}     
         ], 
         subMenu : 0,
-        pseudo : 'coulon',
+        username : 'coulon',
         id : 1,
         avatar : '/assets/images/avatars/Terre/astro.svg',
         search : 0

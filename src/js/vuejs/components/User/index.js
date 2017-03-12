@@ -19,7 +19,7 @@ import PageNav from "../Feed/PageNav/index.js"
 const User = Vue.extend({
   template,
   props : {
-    userId : Number
+    userId : Object
   }
   ,
    components: {
@@ -30,13 +30,22 @@ const User = Vue.extend({
     'post' : Post,
     'navbar' : NavBar,
     'page-nav' : PageNav },
-  created : function() {
+     watch: {
+      /*Watch if the route of an other profil is required and updates the data*/
+      '$route': function() {
+            this.getRouteParams();
+       }  
+      },
+    mounted : function() {
+      /*Get all the user informations */
     this.getRouteParams();
    },
    methods: { 
     getRouteParams : function(){
-      
-      if (this.$route.params.user == 'me'){
+      console.log(this.$refs.menu.user.username);
+      console.log(this.$route.params.user);
+      if (this.$route.params.user == this.$refs.menu.user.username){
+        console.log("equals");
         this.getUser(apiRoot() + 'users/me');
         this.myself = true;
       } else {
@@ -49,7 +58,7 @@ const User = Vue.extend({
           this.profil = response.data[0];
           this.getNbFriends(apiRoot() + 'users/' + this.profil.id + '/number_friends');
           this.getInterest(apiRoot() + 'users/' + this.profil.id + '/interest');
-          this.getPosts(apiRoot() + 'planets/' + this.profil.planetId + '/posts', { 'user' : 2});
+          this.getPosts(apiRoot() + 'planets/' + this.profil.planetId + '/posts', { 'user' : '2'});
       }, (response) => {
         console.log(response);
       })
@@ -69,7 +78,7 @@ const User = Vue.extend({
       });     
     }, 
     getPosts : function(route, option) {
-      this.$http.get(route, option, {emulateJSON : true}).then((response) => {
+      this.$http.get(apiRoot() + 'planets/' + this.profil.planetId + '/posts', { 'user' : 2 }, {emulateJSON : true}).then((response) => {
           console.log(response);
           this.posts =  response.data;
       }, (response) => {
@@ -77,32 +86,13 @@ const User = Vue.extend({
       });     
 
     },
+    /*functions to manage interests*/
     showMore : function() {
       this.start = this.user.interests.length;
     },
     showLess : function() {
       this.start = 5;
     }
-  },
-  updated : function() {
- 
-    console.log(this.$route.params);
- /*   if (this.myself){
-      if (this.$route.params.user != 'me') {
-        this.updated = true;
-        this.myself = false;
-      }
-    } else {
-      if (this.$route.params.user != this.profil.username) {
-          this.updated = true;
-       }
-    }
-
-    console.log("updates" + this.updated);
-    if (this.updated) {
-      this.getRouteParams();
-      this.updated = false;
-    }*/
   },
   computed : {
     planetName : function() {
