@@ -98,11 +98,15 @@ abstract class Model {
 								if (!is_numeric($value['value'])) {
 									$value['value'] = $this->pdo->quote($value['value']);
 								}
-								$condition[] = $key . ' ' . $value['cmp'] . ' ' . $value['value'];
+								if($value['cmp'] === 'IN') {
+									$condition[] = $key . ' ' . $value['cmp'] . ' (' . $value['value'] .') ';
+								} else {
+									$condition[] = $key . ' ' . $value['cmp'] . ' ' . $value['value'];
+								}
 							} else{
 								$otherConditions = array();
 								foreach ($value as $orKey => $valueOfValue) {
-									// case a same attribut may have several value
+									// case a same attribut may have several value and dev not using IN clause
 									if(is_array($valueOfValue)){
 										foreach ($valueOfValue as $keyOr => $keyValue) {
 											if(!is_numeric($keyValue)){
@@ -120,34 +124,10 @@ abstract class Model {
 								$condition[] = '(' . implode(' OR ', $otherConditions) . ')';
 							}
 						} else {
-							if(is_array($value)) { // multiple value for the same attribut
-
-								foreach ($value as $andKey => $valueOfValue) {
-
-									// case a same attribut may have several value
-									if(is_array($valueOfValue)){
-
-										foreach ($valueOfValue as $keyAnd => $keyValue) {
-
-											if(!is_numeric($keyValue)){
-												$keyValue=$this->pdo->quote($keyValue);
-											}
-											$condition[] = "$andKey=$keyValue";
-
-										}
-									} else {
-										if(!is_numeric($valueOfValue)){
-											$valueOfValue=$this->pdo->quote($valueOfValue);
-										}
-										$condition[] = "$andKey=$valueOfValue";
-									}
-								}
+							if(!is_numeric($value)) {
+								$condition[] = $key . '=' . $this->pdo->quote($value);
 							} else {
-								if(!is_numeric($value)) {
-									$condition[] = $key . '=' . $this->pdo->quote($value);
-								} else {
-									$condition[] = $key . '=' . $value;
-								}
+								$condition[] = $key . '=' . $value;
 							}
 						}
 					}
