@@ -1,5 +1,6 @@
 'use strict';
 import Vue from 'vue/dist/vue';
+import {apiRoot} from '../../../../../config.js';
 import MessagesSubMenu from './MessagesSubMenu/index.js';
 import FriendsSubMenu from './FriendsSubMenu/index.js';
 import DashboardSubMenu from './DashboardSubMenu/index.js';
@@ -14,6 +15,16 @@ const NavBar = Vue.extend({
     'friends' : FriendsSubMenu,
     'messages' : MessagesSubMenu,
     'dashboard' : DashboardSubMenu
+  },
+  created : function() {
+    this.$http.get(apiRoot() + "/users/me/waiting_list_friend", { emulateJSON: true }).then(
+    (response) => {
+      this.friendsRequest = response.data;
+      console.log("Friends request received !");
+    },
+    (response) => {
+      console.log(response);
+    });
   },
   methods: {
     showSearch: function(){
@@ -33,6 +44,7 @@ const NavBar = Vue.extend({
   }, 
    data () {
       return {
+        friendsRequest : [],
         friends: [ {pseudo: 'luckypon', avatar:'/assets/images/avatars/Terre/astro.svg', planet :'Terre'},
                     {pseudo: 'luckyLuke', avatar:'/assets/images/avatars/Sautien/astro.svg', planet :'Sautien'},
                     {pseudo: 'titi', avatar:'/assets/images/avatars/Technome/landscape.svg', planet :'Technome'},

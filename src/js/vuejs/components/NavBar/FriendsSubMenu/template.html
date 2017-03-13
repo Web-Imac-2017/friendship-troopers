@@ -6,8 +6,8 @@
      <li>
        <p :class=friend.planet class="pseudo">{{friend.pseudo}}</p>
        <div  class="friend-validation" > 
-         <img src="/assets/images/validation.svg" alt="valider" title="Valider">
-         <img src="/assets/images/Cross.svg" alt="refuser" title="Refuser">
+         <img src="/assets/images/validation.svg" alt="valider" v-on:click="validateInvitation" title="Valider">
+         <img src="/assets/images/Cross.svg" alt="refuser" v-on:click="refuseInvitation" title="Refuser">
        </div>
     </li>
   </ul>

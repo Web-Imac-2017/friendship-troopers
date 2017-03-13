@@ -33,7 +33,7 @@ const Post = Vue.extend({
           console.log("Comment created !");
           this.newComment = '';
         },(response) => {
-          console.log("Echec");
+          //console.log("Echec");
         }
       );
       // TODO Actualiser les commentaires
@@ -67,18 +67,18 @@ const Post = Vue.extend({
           } else {
             this.comments = response.data;
           }
-          console.log(this.comments);
+          //console.log(this.comments);
           var tmp = response.headers.get("Link").split(",")[1].split(";")[0];
           this.prevComments = apiRoot() + tmp.substring(2, tmp.length-1);
         },
         (response) => {
-          console.log(response);
+          //console.log(response);
         }
       );
     }
   },
   created : function() {
-    console.log("Created with post id = " + this.post.id);
+    //console.log("Created with post id = " + this.post.id);
     // Savoir si l'utilisateur a déjà liké le post ?
     //TODO
 
@@ -110,7 +110,7 @@ const Post = Vue.extend({
   },
   computed: {
     reversedComments : function() {
-      return this.comments.reverse();
+      return this.comments;
     }
   }
 });

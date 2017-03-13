@@ -9,6 +9,14 @@ const FriendsSubMenu = Vue.extend({
   template,
   props : {
     friend: Object
+  },
+  methods: {
+  	validateInvitation: function() {
+
+  	},
+  	refuseInvitation : function() {
+  		
+  	}
   }
 });
 
