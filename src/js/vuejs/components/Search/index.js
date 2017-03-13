@@ -23,40 +23,6 @@ const Search = Vue.extend({
   },
   data () {
     return {
-      // RECUPERER LISTE USERS DANS BDD
-      users : [{   
-        username: 'LuckyPon',
-        title: "Seigneur de l'enfer",
-        avatar : "/assets/images/avatars/Paranose/astro.svg",
-        planetId : 2,
-        interest : "Dormir",
-        planetPath : "/assets/images/planets/Paranose.svg",
-        result:false
-      },{
-        username: 'LLittlePonyn',
-        title: "Seigneur des abricots",
-        avatar : "/assets/images/avatars/Technome/landscape.svg",
-        planetId : 3,
-        interest : "Dormir",
-        planetPath : "/assets/images/planets/Technome.svg",
-        result:false
-      },{
-        username: 'JulieCapucine',
-        title: "Lady Jolie",
-        avatar : "/assets/images/avatars/Sautien/dashboard.svg",
-        planetId : 4,
-        interest : "Dormir",
-        planetPath : "/assets/images/planets/Sautien.svg",
-        result:false
-      },{
-        username: 'LuckyPonnette',
-        title: "Alien",
-        avatar : "/assets/images/avatars/Terre/dashboard.svg",
-        planetId : 1,
-        interest : "Dormir",
-        planetPath : "/assets/images/planets/Terre.svg",
-        result:false
-      }],
       filtersPlanets: [{
         path:"/assets/images/planets/Terre.svg",
         id:1,
@@ -83,7 +49,7 @@ const Search = Vue.extend({
         name:"Multas",
         value:false
       }],
-      // RECUPERER LISTE TITLES DANS BDD
+      // RECUPERER LISTE TITLES DANS BDD : enlever apres
       filtersTitles: [{
         id:4,
         name:"Alien"
@@ -94,7 +60,7 @@ const Search = Vue.extend({
         id:3,
         name:"Lord de l'enfer"
       }],
-      // RECUPERER LISTE INTERESTS DANS BDD
+      // RECUPERER LISTE INTERESTS DANS BDD : enlever apres
       filtersInterests: [{
         id:4,
         name:"Jazz"
@@ -126,7 +92,7 @@ const Search = Vue.extend({
       // TABLEAU DE TITRES COCHES A ENVOYER A LA BDD
       titlesPrint : [],
       titlesDB : [],
-      // PLANETE A ENVOYER A LA BDD, -1 SI AUCUNE SELECTIONNEE
+      // PLANETE A ENVOYER A LA BDD, "" SI AUCUNE SELECTIONNEE
       activePlanet:  "",
       // SI AUCUN UTILISATEURS NE CORRESPOND, METTRE A FALSE
       usersExist : false,
@@ -264,13 +230,6 @@ const Search = Vue.extend({
     tabDelete(index, tab){
       tab.splice(index,1);
     },
-    // A ENLEVER QUAND LIEN AVEC BDD ?
-    reinitialize(){
-      for(var i = 0; i < this.users.length ; i++){
-        this.users[i].result = false;
-      }
-      this.usersResult = [];
-    },
     assignIdToTab(newTab, oldTab){
       for(var i = 0; i < oldTab.length ; i++){
         newTab[i] = oldTab[i].id;
@@ -279,7 +238,6 @@ const Search = Vue.extend({
     searchBarUsername(){
       var data = {username: this.searchUser};
       this.getUsers(apiRoot() + 'users/search', data);    
-      console.log("searchbarusername");
     },
     searchBarFilters(){
       this.titlesDB = [];
