@@ -46,10 +46,11 @@ Router::get('/interest/view','interest#listInterest', 'interest.list');
 
 Router::post('/badge/add','badge#create','badge.add');
 Router::get('/badge/view','badge#read','badge.read');
-Router::post('/badge/update','badge#update','badge.update');
-Router::post('/badge/delete','badge#delete','badge.delete');
-Router::post('/user/add/newBadge','badge#addUserBadge','badge.addUserBadge');
-Router::post('/user/me/getBadges','badge#readUserBadge','badge.readUserBadge');
+Router::patch('/badge/update','badge#update','badge.update');
+Router::delete('/badge/delete','badge#delete','badge.delete');
+Router::post('/user/me/badge/add','badge#addUserBadge','badge.addUserBadge');
+Router::get('/user/me/badge/view','badge#readUserBadge','badge.readUserBadge');
+Router::delete('/user/me/badge/delete','badge#deleteUserBadge','badge.deleteUserBadge');
 
 Router::get('/planets/:planet/news' , 'planet#getPlanetFeed');
 Router::post('/planets/:planet/posts/:publicationId/comments', 'comment#create', 'planets.posts.comments.create');
