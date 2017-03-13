@@ -31,7 +31,7 @@ Router::delete('/users/:userId/delete_friend','friend#deleteFriend', 'users.me.d
 Router::get('/users/:userId/friends','friend#listFriend', 'users.me.listFriend'); //ok
 Router::get('/users/:userId/number_friends','friend#countFriend', 'users.me.countFriend'); //ok
 
-Router::get('/users/search','account#search', 'users.search'); 
+Router::get('/users/search','account#search', 'users.search');
 
 
 Router::post('/planets/:planet/posts', 'publication#create', 'planets.posts.create');
@@ -56,6 +56,7 @@ Router::get('/planets/:planet/news' , 'planet#getPlanetFeed');
 Router::post('/posts/:publicationId/stardust' , 'stardust#create');
 Router::delete('/posts/:publicationId/stardust' , 'stardust#delete');
 Router::get('/posts/:publicationId/stardust' , 'stardust#list');
+Router::get('/posts/:publicationId/stardust/exist' , 'stardust#exist');
 
 Router::post('/riddles', 'riddle#create', 'riddle.create');
 Router::get('/riddles', 'riddle#list', 'riddle.list');
