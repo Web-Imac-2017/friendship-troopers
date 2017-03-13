@@ -1,13 +1,44 @@
 <div>
 <navbar></navbar>
-<div class="well">
-    <div class="row">
-      <div class="col-sm-5 text-right">
-        <img class="logo" src="../assets/logo.png">
-      </div>
-      <div id="hello">
-        <h1>Page Enigme</h1>
-      </div>
-    </div>
-  </div>
+<div class="container-fluid">
+  <div class="row">
+    <aside class="col-sm-2">
+      <lateral-menu-left></lateral-menu-left>
+      <menu-tools></menu-tools>
+    </aside>
+    <section class="col-sm-8 container-transparent current-riddle">
+	    <h1 class="pink title"> Qui suis-je </h1>
+	    <div class="row container-colored">
+        	<div class="col-sm-12" v-for="(player, index) in riddle.players">
+	          	<div class="col-lg-9 col-md-8 col-sm-6">
+	          		<div class="col-md-2 col-lg-1  col-xs-4 no-nothing">
+	          			<img :src="player.imagePath" class="avatar center">
+	          		</div>
+	          		<h1 class="pseudo col-lg-9 col-md-7" v-bind:style="{color : planetData[player.planetId] }" >{{ player.name }} </h1>
+	          		<p class="col-sm-7 col-xs-12 pseudo-button message"> lui envoyer un message </p>
+	          	</div>
+	          	<div class="col-lg-3 col-md-4 col-sm-6 right" v-if="index = 1">
+	          		<div class="col-sm-12 right points">
+		          		<p v-if="riddle < 2"> <span>{{ riddle.points }}</span> point</p>
+		          		<p v-else> <span>{{ riddle.points }} </span> points</p>
+		          	</div>
+		          	<div class="col-sm-12 pseudo-button">
+		          		<p><img class="small" src="/assets/images/enigmes/abandon.svg"> Abandonner </p>
+		          	</div>
+	          	</div>
+            </div>
+            <span class="col-sm-10 col-sm-offset-1 border-bottom text-center"></span>
+	        <div class="col-sm-12 content text-center" v-html="riddle.content">
+	        	{{ riddle.content }}
+	        </div>
+	    </div>
+	    <form class="row response pink">
+	    	<textarea class="right col-sm-offset-7 col-sm-4" rows="1" type="text" placeholder="Proposer une réponse" v-model="response"></textarea>
+	    	<img class="small pseudo-button col-sm-1" src="/assets/images/validation.svg">
+	    </form>
+  	</section>
+   <div class="col-sm-2">
+   <lateral-menu-right></lateral-menu-right>
  </div>
+</div>
+</div>

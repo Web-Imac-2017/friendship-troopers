@@ -55,3 +55,95 @@
   	height: 3rem;
   }
 }
+
+.current-riddle {
+  
+  img.small  {
+    height: 3rem;
+  }
+
+  .message {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .title {
+    @include padding2(4,0);
+  }
+
+  span {
+    font-weight: lighter;
+    font-size: 2rem;
+  }
+
+  .content {
+    @include margin2(4,2);
+    @include padding2(6,1);
+    font-size: 1.5rem;
+    line-height: 3rem;
+  }
+
+  .border-bottom {
+    border-bottom-color: $grey;
+    border-bottom-width: 0.01rem;
+    @include padding2(0.5, 0);
+  }
+
+  img.avatar {
+    height: 6rem;
+  }
+
+  .response {
+    @include margin(0);
+    @include padding(1);
+    background: $lateral-menu-background;
+  }
+
+  textarea {
+     background: $lateral-menu-background;
+     color: $notifs;
+     border-bottom: 0.1rem solid $notifs;
+  }
+
+  .container-colored {
+    margin: 0;
+  }
+
+  .points {
+    font-size: 1.5rem;
+  }
+
+  .pseudo {
+    text-align: left;
+  }
+
+  .underline  {
+    border-bottom-color: $notifs;
+    border-bottom-width: 0.1rem;
+    @include padding2(0.5, 0);
+  }
+
+    /* do not group these rules */
+  *::-webkit-input-placeholder {
+      color: $notifs;
+  }
+  *:-moz-placeholder {
+      /* FF 4-18 */
+      color: $notifs;
+  }
+  *::-moz-placeholder {
+      /* FF 19+ */
+      color: $notifs;
+  }
+  *:-ms-input-placeholder {
+      /* IE 10+ */
+      color: $notifs;
+  }
+
+  @media screen and (max-width: 991px) {
+  .message {
+    padding: 0;
+    font-size: 1.3rem;
+  }
+}
+}

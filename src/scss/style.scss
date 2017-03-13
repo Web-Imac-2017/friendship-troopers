@@ -249,7 +249,6 @@ button{
   }
 }
 
-
 .login{
 /*   background-image: url("../images/background-image.jpg");
 background-repeat:no-repeat; */
@@ -524,4 +523,21 @@ input[type="radio"] {
 .border-bottom {
   border-bottom-style: solid;
   border-bottom-width: 0.2rem;
+}
+
+.pink {
+  color : $notifs;
+}
+
+.no-margin{
+  @include margin(0);
+}
+
+.no-padding {
+  @include padding(0);
+}
+
+.no-nothing {
+  @extend .no-padding;
+  @extend .no-margin;
 }
