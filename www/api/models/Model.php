@@ -98,7 +98,11 @@ abstract class Model {
 								if (!is_numeric($value['value'])) {
 									$value['value'] = $this->pdo->quote($value['value']);
 								}
-								$condition[] = $key . ' ' . $value['cmp'] . ' ' . $value['value'];
+								if($value['cmp'] === 'IN') {
+									$condition[] = $key . ' ' . $value['cmp'] . ' (' . $value['value'] .') ';
+								} else {
+									$condition[] = $key . ' ' . $value['cmp'] . ' ' . $value['value'];
+								}
 							} else{
 								$otherConditions = array();
 								foreach ($value as $orKey => $valueOfValue) {

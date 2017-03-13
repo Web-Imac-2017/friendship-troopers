@@ -236,6 +236,7 @@ class Account extends Controller{
 		if(!empty($isRequired) && count($isRequired) === 4) {
 			throw new \Utils\RequestException('champs manquant', 400);
 		}
+
 		$offset = +($get['offset'] ?? 0);
 		$limit = +($get['limit'] ?? 15);
 		if ($limit > 15) {
@@ -247,12 +248,16 @@ class Account extends Controller{
 					'title.honorificTitle'
                 ];
 		$this->filterXSS($get);
+		//$get['interest'] = ['7','7'];
 		$where = [
 			'userTitle.current' => '1',
 			'UA.currentAvatar' => '1',
 		];
 		if(array_key_exists('interest', $get)) {
-			$where['AND'] = ['userInterest.interestId' => $get['interest']];
+			$where['userInterest.interestId'] = [
+				'cmp' => 'IN',
+				'value' => implode(', ', $get['interest']),
+			];
 		}
 		if(array_key_exists('title', $get)) {
 			$where['OR'] = ['userTitle.titleId' => $get['title']];
