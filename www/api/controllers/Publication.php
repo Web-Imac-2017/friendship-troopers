@@ -45,27 +45,43 @@ class Publication extends Controller {
 			];
 		}
 
+		$where ['avatar.currentAvatar'] = [
+			'cmp' => '=',
+			'value' => 1,
+		];
+
 		$request = $this->Publication->find([
-			'fields' => ['publication.id', 'publication.content', 'publication.publishDate', 'publication.userId', 'publication.modified'],
+			'fields' => [
+				'DISTINCT publication.userId', 'publication.id', 'publication.content', 'publication.publishDate', 'publication.modified',
+				'user.username', 'listAvatar.imagePath'
+		],
 			'leftJoin' => [
-			[
-				'table' => 'user',
-				'alias' => 'UserPlanet',
-				'from' => 'id',
-				'to' => 'userId',
+				[
+					'table' => 'user',
+					'alias' => 'user',
+					'from' => 'id',
+					'to' => 'userId',
+				],
+				[
+					'table' => 'user_avatar',
+					'alias' => 'avatar',
+					'from' => 'userId',
+					'to' => 'id',
+					'JoinTable' => 'user',
+				],
+				[
+					'table' => 'avatar',
+					'alias' => 'listAvatar',
+					'from' => 'id',
+					'to' => 'avatarId',
+					'JoinTable' => 'avatar',
+				],
 			],
-			[
-				'table' => 'stardust',
-				'alias' => 'publicationStardust',
-				'from' => 'publicationId',
-				'to' => 'id',
-			]
-			],
-				'conditions' => $where,
-				'limit' => "$offset, $limit",
-				'orderBy' => [
-				'key' => 'publishDate',
-				'order' => 'DESC',
+			'conditions' => $where,
+			'limit' => "$offset, $limit",
+			'orderBy' => [
+			'key' => 'publishDate',
+			'order' => 'DESC',
 			],
 		]);
 

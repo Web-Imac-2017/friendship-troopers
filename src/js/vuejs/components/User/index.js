@@ -9,7 +9,6 @@ template     = eval(`\`${template}\``);
 import LateralMenuLeft from '../LateralMenuLeft/index.js'
 import LateralMenuRight from '../LateralMenuRight/index.js'
 import MenuTools from '../MenuTools/index.js'
-import FriendTemplate from '../FriendTemplate/index.js'
 import Post from '../Post/index.js'
 import optionBar from './optionBar/index.js'
 import statistics from './Statistics/index.js'
