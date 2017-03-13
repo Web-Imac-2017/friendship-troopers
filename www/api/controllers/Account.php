@@ -247,25 +247,32 @@ class Account extends Controller{
 					'avatar.imagePath', 'avatar.altText',
 					'title.honorificTitle'
                 ];
-		$this->filterXSS($get);
-		//$get['interest'] = ['7','7'];
+
 		$where = [
 			'userTitle.current' => '1',
 			'UA.currentAvatar' => '1',
 		];
 		if(array_key_exists('interest', $get)) {
+			$interest = $get['interest'];
+			if(is_array($get['interest'])){
+				$interest = implode(', ', $get['interest']);
+			}
+			$this->filterXSS($interest);
 			$where['userInterest.interestId'] = [
 				'cmp' => 'IN',
-				'value' => implode(', ', $get['interest']),
+				'value' => $interest,
 			];
 		}
 		if(array_key_exists('title', $get)) {
+			$this->filterXSS($get['title']);
 			$where['OR'] = ['userTitle.titleId' => $get['title']];
 		}
 		if(array_key_exists('planet', $get)) {
+				$this->filterXSS($get['planet']);
 			$where['user.planetId'] = $get['planet'];
 		}
 		if(array_key_exists('username', $get)) {
+			$this->filterXSS($get['username']);
 			$where['user.username'] = [
 				'cmp' => 'LIKE',
 				'value' => $get['username'].'%',
@@ -317,11 +324,13 @@ class Account extends Controller{
 				],
 			],
 			'conditions' => $where,
+			'limit' => "$offset, $limit",
             'orderBy' => [
-			'key' => 'username',
-			'order' => 'ASC',
+				'key' => 'username',
+				'order' => 'ASC',
 			],
 		]);
+		
 		$offsetPrev = $offset - $limit;
 		$offset = $offset + $limit;
 
