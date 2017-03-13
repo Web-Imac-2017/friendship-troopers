@@ -92,6 +92,17 @@ const User = Vue.extend({
     },
     showLess : function() {
       this.start = 5;
+    },
+    addFriend : function() {
+      //Router::post('/users/:userId/add_friend','friend#addFriend', 'users.me.addFriend'); //ok
+      this.$http.post(apiRoot() + "users/" + this.profil.id + "/add_friend", {emulateJSON: true}).then(
+        (response) => {
+          console.log("Demande envoyée");
+        },
+        (response) => {
+
+        });
+      console.log("User : Adding friend");
     }
   },
   computed : {
