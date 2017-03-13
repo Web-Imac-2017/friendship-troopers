@@ -74,7 +74,7 @@ class Avatar extends Controller {
             }
         }
         try {
-            $this->Title->save($this->filterXSS($updates));
+            $this->Avatar->save($this->filterXSS($updates));
         } catch (\PDOException $e) {
             throw new \Utils\RequestException('erreur BDD', 400);
         }
@@ -93,27 +93,37 @@ class Avatar extends Controller {
             throw new \Utils\RequestException('NOT_LOGGED', 401);
         }
         $userId = \Utils\Session::user('id');
-
-        $oldAvatarId = $this->User_Title->findFirst([
+        $ownAvatar = $this->User_Avatar->find([
             'fields' => ['avatarId'],
             'conditions' => [
                 'userId' => $userId,
-                'current' => 1,
+                'avatarId' => $avatarId,
+            ],
+        ]);
+        if(empty($ownAvatar)){
+            throw new \Utils\RequestException('Vous ne possédez pas cette avatar', 400);
+        }
+        $oldAvatarId = $this->User_Avatar->findFirst([
+            'fields' => ['avatarId'],
+            'conditions' => [
+                'userId' => $userId,
+                'currentAvatar' => 1,
             ],
         ]);
         $addKeysNew = $this->filterXSS([
             'userId' => $userId,
-            'avatarId' => $avatarId
+            'avatarId' => $avatarId,
         ]);
         $addKeysOld = $this->filterXSS([
-            'userId' => $userId,
-            'avatarId' => $oldAvatarId
+            'avatarId' => $oldAvatarId['avatarId'],
         ]);
         try {
-            $this->Avatar_User->save([
+            $this->User_Avatar->save([
+                'userId' => $userId,
                 'currentAvatar' => '0',
             ], $addKeysOld);
-            $this->Avatar_User->save([
+            $this->User_Avatar->save([
+                'userId' => $userId,
                 'currentAvatar' => '1',
             ], $addKeysNew);
         } catch (\PDOException $e) {
@@ -161,6 +171,11 @@ class Avatar extends Controller {
             throw new \Utils\RequestException('NOT_LOGGED', 401);
         }
         $userId = \Utils\Session::user('id');
-        $this->User_Avatar->insert($idAvatar, $userId);
+
+        try {
+            $this->User_Avatar->insert($idAvatar, $userId);
+        } catch (\PDOException $e) {
+            throw new \Utils\RequestException('erreur BDD', 400);
+        }
     }
 }
