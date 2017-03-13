@@ -326,8 +326,9 @@ class Account extends Controller{
 		$userId = \Utils\Session::user('id');
 		$this->getUser($userId, true);
 	}
-	
+
 	public function search($get) {
+		var_dump($get);
 		$isRequired = $this->checkRequired(['username', 'interest', 'title', 'planet'],$get);
 		if(!empty($isRequired) && count($isRequired) === 4) {
 			throw new \Utils\RequestException('champs manquant', 400);
@@ -341,7 +342,7 @@ class Account extends Controller{
 
         $fields =  ['DISTINCT user.id','user.username',
 					'avatar.imagePath', 'avatar.altText',
-					'title.honorificTitle'
+					'title.honorificTitle', 'planetId'
                 ];
 
 		$where = [
