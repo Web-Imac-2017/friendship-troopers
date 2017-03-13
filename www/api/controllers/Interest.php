@@ -103,12 +103,7 @@ class Interest extends Controller {
     $this->response($request, 200);
   }
 
-  /**
-   * delete_interest deletes one or more interests
-   * @param  array $data containing the interests
-   * @return [type]       [description]
-   */
-  public function delete_interest($data) {
+  public function deleteUserInterest($data) {
     /*Checking if $data is an array*/
     if(!is_array($data)) {
       throw new \Utils\RequestException('data erronées', 403); // code d'erreur ?
@@ -117,20 +112,35 @@ class Interest extends Controller {
     if (!\Utils\Session::isLoggedIn()) {
       throw new \Utils\RequestException('operation reservee aux membres', 401);
     }
-    /*pick up the user logged id*/
+    /*bring back the user logged id*/
     $userId = \Utils\Session::user('id');
 
     /*create a userInterest to delete interests*/
     $userInterest = new \Models\User_Interest();
 
+    /*delete the interest*/
     foreach ($data as $key => $value) {
-      $request1 = $userInterest->delete(array('userId' => $userId,
+      $request = $userInterest->delete(array('userId' => $userId,
                                   'interestId' => $value));
-      $request2 = $this->Interest->delete($value);
-    }
 
-    $this->response($request1,200);
-    $this->response($request2,200);
+    }
+    var_dump($request);
+    $this->response($request,200);
+  }
+
+  /**
+   * deleteInterest deletes one or more interests
+   * @param  array $data containing the interests
+   * @return [type]       [description]
+   */
+  public function deleteInterest($data) {
+    $this->deleteUserInterest($data);
+
+    foreach($data as $key => $value) {
+      $request = $this->Interest->delete($value);
+    }
+    echo $request;
+    $this->response($request,200);
   }
 
   /**
@@ -151,7 +161,7 @@ class Interest extends Controller {
     $planetResult = array('Terre' => 0, 'Sautien' => 0,'Technome' => 0,'Paranose' => 0,'Multas' => 0);
 
     /*add interests for the user*/
-    /*$this->addUserInterest($interestList[0]);*/
+    $this->addUserInterest($interestList[0]);
 
     /*Calculate max interest points*/
     foreach($interestList[0] as $key => $value) {
