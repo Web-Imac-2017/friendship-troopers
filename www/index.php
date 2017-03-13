@@ -32,7 +32,7 @@ Router::get('/planets/:planet/news', 'planet#getPlanetFeed');
 
 Router::post('/interest/add' , 'interest#addInterest','interest.add');
 Router::get('/interest/view','interest#listInterest', 'interest.list');
-Router::get('/interest/delete','interest#deleteInterest','interest.delete');
+Router::post('/interest/delete','interest#deleteInterest','interest.delete');
 Router::patch('/interest/WelcomeOnBoard' , 'interest#WelcomeOnBoard','interest.WelcomeOnBoard');
 
 Router::post('/planets/:planet/posts/:publicationId/comments', 'comment#create', 'planets.posts.comments.create');

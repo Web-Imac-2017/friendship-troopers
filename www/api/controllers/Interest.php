@@ -103,6 +103,11 @@ class Interest extends Controller {
     $this->response($request, 200);
   }
 
+  /**
+   * deleteUserInterest function
+   * @param  array $data containing user's interests
+   * @return [type]       [description]
+   */
   public function deleteUserInterest($data) {
     /*Checking if $data is an array*/
     if(!is_array($data)) {
@@ -124,7 +129,7 @@ class Interest extends Controller {
                                   'interestId' => $value));
 
     }
-    var_dump($request);
+
     $this->response($request,200);
   }
 
