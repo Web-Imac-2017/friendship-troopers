@@ -17,16 +17,17 @@ const NavBar = Vue.extend({
     'dashboard' : DashboardSubMenu
   },
   created : function() {
-    this.$http.get(apiRoot() + "/users/me/waiting_list_friend", { emulateJSON: true }).then(
-    (response) => {
-      this.friendsRequest = response.data;
-      console.log("Friends request received !");
-    },
-    (response) => {
-      console.log(response);
-    });
+    this.actualizeFriendsRequest();
   },
   methods: {
+    actualizeFriendsRequest : function() {
+      this.$http.get(apiRoot() + "/users/me/waiting_list_friend", { emulateJSON: true }).then(
+      (response) => {
+        this.friendsRequest = response.data;
+      },
+      (response) => {
+      });
+    },
     showSearch: function(){
       if (this.search == 1) 
         this.search = 0
@@ -45,11 +46,6 @@ const NavBar = Vue.extend({
    data () {
       return {
         friendsRequest : [],
-        friends: [ {pseudo: 'luckypon', avatar:'/assets/images/avatars/Terre/astro.svg', planet :'Terre'},
-                    {pseudo: 'luckyLuke', avatar:'/assets/images/avatars/Sautien/astro.svg', planet :'Sautien'},
-                    {pseudo: 'titi', avatar:'/assets/images/avatars/Technome/landscape.svg', planet :'Technome'},
-                    {pseudo: 'tot', avatar:'/assets/images/avatars/Multas/astro.svg', planet :'Multas'}
-                 ],
         messages: [ {pseudo: 'luckypon',avatar:'/assets/images/avatars/Terre/astro.svg', planet :'earth', content:"Ok, comment ç va, t'as reçu un vélociratop à noel ? Oki doc !", date : '12/03/13'},
                     {pseudo: 'tintin', avatar:'/assets/images/avatars/Multas/landscape.svg', planet :'Multas', content:"Je t'envoie un message toto !", date : '11/02/12'},
                     {pseudo: 'kirikoukou', avatar:'/assets/images/avatars/Multas/landscape.svg', planet :'Multas', content:"Je t'envoie un message toto !", date : '01/03/13'}

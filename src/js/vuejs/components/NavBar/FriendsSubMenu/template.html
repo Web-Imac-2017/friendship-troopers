@@ -1,10 +1,10 @@
 <li> 
   <ul class = "sub-menu-item">
     <li>
-       <img :src=friend.avatar alt="avatar" class="avatar"> 
+       <img :src=friend.imagePath alt="avatar" class="avatar"> 
     </li>
      <li>
-       <p :class=friend.planet class="pseudo">{{friend.pseudo}}</p>
+       <p :class=friend.planet class="pseudo">{{friend.username}}</p>
        <div  class="friend-validation" > 
          <img src="/assets/images/validation.svg" alt="valider" v-on:click="validateInvitation" title="Valider">
          <img src="/assets/images/Cross.svg" alt="refuser" v-on:click="refuseInvitation" title="Refuser">
