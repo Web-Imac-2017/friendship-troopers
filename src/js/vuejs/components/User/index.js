@@ -78,7 +78,12 @@ const User = Vue.extend({
       });     
     }, 
     getPosts : function(route, option) {
-      this.$http.get(apiRoot() + 'planets/' + this.profil.planetId + '/posts', { 'user' : 2 }, {emulateJSON : true}).then((response) => {
+      var data = { 'user' : this.profil.id }
+      this.$http.get(apiRoot() + 'planets/' + this.profil.planetId + '/posts', {
+          params : data
+        },{
+          emulateJSON: true 
+        }).then((response) => {
           console.log(response);
           this.posts =  response.data;
       }, (response) => {
