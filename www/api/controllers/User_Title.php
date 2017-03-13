@@ -157,4 +157,25 @@ class User_Title extends Controller {
     //$this->response(null, 200);
   }
 
+  public function delete ($userId, $titleId, $delete) {
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
+    }
+
+    $currentUserId = \Utils\Session::user('id');
+    /*non-admins can't delete the default title*/
+    if (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $userId != $currentUserId || (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $titleId == 1)) {
+      throw new \Utils\RequestException('action reservee aux administeurs', 403);
+    }
+
+    $this->User_Title->delete([
+      'userId'=> $userId,
+      'titleId'=> $titleId,
+    ]);
+    $this->response(null, 200);
+  }
+
+
+
+
 }
