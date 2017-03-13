@@ -5,7 +5,6 @@ import {apiRoot} from '../../../../../config.js';
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
 
-
 const LateralMenuLeft = Vue.extend({
     template,
     data () {

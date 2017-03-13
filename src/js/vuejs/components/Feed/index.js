@@ -29,10 +29,22 @@ const Feed = Vue.extend({
     'navbar' : NavBar
   },
   created : function(){
-    // Récupérer les premiers posts de la planète 1
-    this.getPublications(apiRoot() + 'planets/1/posts');
+  },
+  mounted : function() {
+    // Récupérer les premiers posts de la planète de l'utilisateur
+    this.planetId = this.$refs.menu.user.planetId;
+    this.getPublications(apiRoot() + 'planets/'+ this.planetId + '/posts');
   },
   methods : {
+    createPost : function(post) {
+      //Router::post('/planets/:planet/posts', 'publication#create', 'planets.posts.create');
+      this.$http.post(apiRoot() + "planets/" + this.planetId + "/posts", { 'content' : post.content}, {emulateJSON : true}).then(
+        (response) => {
+          post.content = '';
+        },(response) => {
+        }
+      );
+    },
     getPublications : function(route) {
       this.$http.get(route, { emulateJSON: true }).then(
         (response) => {
@@ -46,24 +58,38 @@ const Feed = Vue.extend({
 
         },
         (response) => {
-          console.log(response);
         });
     },
     showNextPage : function() {
-      console.log("Next page");
-      this.getPublications(this.routeNextPost);
-     // console.log("Likes : " + this.$refs.postComponent.nbLikes);
+      if (this.currentPage*10 < this.totalPublications) {
+        this.currentPage++;
+        this.getPublications(this.routeNextPost);
+      }
+      if (this.totalPublications-(this.currentPage*10) > 10) {
+        this.morePage = true;
+      } else {
+        this.morePage = false;
+      }
     },
     showPrevPage : function() {
-      console.log("Previous page");
+      this.currentPage--;
       this.getPublications(this.routePrevPost);
+      if (this.totalPublications-(this.currentPage*10) < 10) {
+        this.morePage = true;
+      } else {
+        this.morePage = false;
+      }
     }
   },
   data () {
    	return {
+      currentPage: 1,
+      morePage: true,
+      planetId: 0,
       bddPosts: {},
       routeNextPost: '',
-      routePrevPost: ''
+      routePrevPost: '',
+      totalPublications: 15
     }
   }
 });
