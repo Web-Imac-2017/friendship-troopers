@@ -127,7 +127,6 @@ class Interest extends Controller {
     foreach ($data as $key => $value) {
       $request = $userInterest->delete(array('userId' => $userId,
                                   'interestId' => $value));
-
     }
 
     $this->response($request,200);
@@ -187,7 +186,7 @@ class Interest extends Controller {
 
     $result = array_search(max($planetResult),$planetResult);
 
-    /*Get the associated planet*/
+    /*Get the associated planet id*/
     switch($result) {
       case 'Terre' : $planet = 1;
       break;
