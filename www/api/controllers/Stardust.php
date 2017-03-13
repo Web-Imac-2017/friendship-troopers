@@ -19,27 +19,6 @@ class Stardust extends Controller {
     $this->response($count, 200);
   }
 
-  public function exist ($publicationId, $get) {
-
-    if (!\Utils\Session::isLoggedIn()) {
-      throw new \Utils\RequestException('operation reservee aux membres', 401);
-    }
-
-    $userId = \Utils\Session::user('id');
-
-    $count = $this->Stardust->findCount([
-      'publicationId' => $publicationId,
-      'userId' => $userId,
-    ]);
-    
-    if ($count['count'] != 0) {
-      $count['count'] = 1;
-    }
-
-    $this->response($count['count'] , 200);
-  }
-
-
   /**
    * Create a stardust for a publication, there can only be one by user and publication
    * @param  POST     $post Post request from the route
@@ -65,7 +44,6 @@ class Stardust extends Controller {
 
     $this->response(null, 201);
   }
-
 
   /**
    * Delete a stardust from a publication
