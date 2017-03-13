@@ -8,7 +8,7 @@ template     = eval(`\`${template}\``);
 import LateralMenuLeft from '../LateralMenuLeft/index.js'
 import MenuTools from '../MenuTools/index.js'
 import NavBar from '../NavBar/index.js';
-import PageNav from '../Feed/pageNav/index.js'
+import PageNav from '../PageNav/index.js'
 import UserComponent from './UserComponent/index.js'
 
 
@@ -145,14 +145,14 @@ const Search = Vue.extend({
     getUsers : function(route) {
       this.$http.get(route,
         {
-          'username' : 'marion',
-          'interest' : ['1', '2'], 
-          'title' : ['1', '2'],   
-          'planet' : '1'
+          'username' : 'michel'
         },{ 
           emulateJSON: true 
         }).then(
         (response) => {
+          console.log("cool");
+          console.log(response.data);
+          // changer la variable quand ça marchera
           this.usersResult = response.data;
 
           var linkNext = response.headers.get("Link").split(",")[0].split(";")[0];
@@ -188,6 +188,7 @@ const Search = Vue.extend({
         this.morePage = false;
       }
     },
+    // Permet de sélectionner la planète active
     toggleActive(filter){
       for(var i = 0; i < this.filtersPlanets.length ; i++){
         if(filter.id == this.filtersPlanets[i].id){
@@ -212,6 +213,7 @@ const Search = Vue.extend({
         }
       }
     },
+    // Trouve un objet dans un tableau en fonction de l'id envoyé
     tabFind(id, tab){
       for(var i = 0; i < tab.length ; i++){
         if(tab[i].id == id){
@@ -219,6 +221,7 @@ const Search = Vue.extend({
         }
       }
     },
+    // Vérifie que l'id n'existe pas déjà dans le tableau
     noDouble(id, tab){
       for(var i = 0; i < tab.length ; i++){
         if(tab[i].id == id){
@@ -227,6 +230,7 @@ const Search = Vue.extend({
       }
       return true;
     },
+     // Rajoute un objet dans le tableau
     tabAdd(id, tab, oldTab){
       if(this.noDouble(id, tab))
         tab.push(this.tabFind(id, oldTab));
@@ -236,6 +240,7 @@ const Search = Vue.extend({
         this.interestSelected = "Sélectionner";
       }
     },
+    // Enlève un objet dans le tableau
     tabDelete(index, tab){
       tab.splice(index,1);
     },
@@ -264,6 +269,7 @@ const Search = Vue.extend({
       this.reinitialize();
       this.searchUsername();
       this.requestUsersResult();
+      // a enlever quand lien bdd ?
       if(this.usersResult.length > 0)
         this.usersExist = true;
       else
@@ -274,6 +280,7 @@ const Search = Vue.extend({
       this.reinitialize();
       this.searchFilters();
       this.requestUsersResult();
+      // a enlever quand lien bdd ?
       if(this.usersResult.length > 0)
         this.usersExist = true;
       else
