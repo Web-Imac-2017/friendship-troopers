@@ -5,6 +5,7 @@
 @import "lateralMenu";
 @import "input-range";
 @import "bootstrap-custom";
+@import "riddle";
 
 .wrapper {
   @include flexbox();
@@ -562,20 +563,6 @@ small {
   }
 }
 
-/*<<<<<<< HEAD
-.pseudo {
-=======
-
-.pseudo-button{
-  cursor:pointer;
-}
-
-/*.pseudo {
->>>>>>> responsiveFeed
-  margin: 0px 1px 0.5px 2px;
-}*/
-
-
 
 /*.pseudo {
   margin: 0px 1px 0.5px 2px;
@@ -765,7 +752,6 @@ input[type="radio"] {
   border-left-style: solid;
   border-left-width: 0.2rem;
 }
-
 
 .space-opera {color : $planet-space-opera;}
 .parallel {color : $planet-parallel;}
@@ -1268,4 +1254,9 @@ p.loadMore {
 
 .error {
   text-align: center;
+}
+
+.border-bottom {
+  border-bottom-style: solid;
+  border-bottom-width: 0.2rem;
 }
