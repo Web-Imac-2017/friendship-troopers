@@ -102,9 +102,59 @@ class User_Title extends Controller {
     $this->User_Title->save($this->filterXSS([
       'titleId' => $post['titleId'],
       'userId' => $userId,
-      'current' => $post['$current'] ?? 0,
+      'current' => $post['current'] ?? 0,
     ]));
 
     $this->response(null, 200);
   }
+
+
+  public function setCurrent ($userId, $titleId, $patch) {
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
+    }
+
+    $currentUserId = \Utils\Session::user('id');
+    if (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $userId != $currentUserId) {
+      throw new \Utils\RequestException('action reservee aux administeurs', 403);
+    }
+
+    //find which title is set to current = true
+    $oldCurrent = $this->User_Title->findFirst([
+      'fields' => ['titleId'],
+      'conditions' => [
+        'user.id' => $userId,
+        'current' => 1,
+      ],
+      'leftJoin' => [
+        [
+          'table' => 'user',
+          'alias' => 'User',
+          'from' => 'id',
+          'to' => 'userId',
+        ],
+        [
+          'table' => 'title',
+          'alias' => 'title',
+          'from' => 'id',
+          'to' => 'titleId',
+        ],
+      ],
+    ]);
+    var_dump($oldCurrent['titleId']);
+    //set the old current title to current = false
+    $oldKeys = ['userId'=> $userId, 'titleId' => $oldCurrent['titleId']];
+    $current = ['current'=>'0'];
+    var_dump($oldKeys);
+    $this->User_Title->saveCurrent($this->filterXSS($current), $this->filterXSS($oldKeys));
+
+    //set the new current title to current = 1
+    $newKeys = ['userId'=> $userId, 'titleId' => $titleId];
+    $current = ['current'=>'1'];
+    var_dump($newKeys);
+    $this->User_Title->saveCurrent($this->filterXSS($current), $this->filterXSS($newKeys));
+
+    //$this->response(null, 200);
+  }
+
 }

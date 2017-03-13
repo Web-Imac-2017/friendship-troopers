@@ -26,7 +26,7 @@ Router::post('/users/me/interest/delete_interest','interest#delete_interest', 'u
 Router::get('/users/:userId/user_title/current_title','user_title#viewCurrent');
 Router::get('/users/:userId/user_title','user_title#list');
 Router::post('/users/:userId/user_title','user_title#add');
-//Router::patch('/users/:userId/user_title','user_title#update');
+Router::patch('/users/:userId/user_title/set_current/:titleId','user_title#setCurrent');
 //Router::delete('/users/:userId/user_title','user_title#delete');
 
 Router::get('/users/me/waiting_list_friend','friend#invitationList', 'users.me.invitationList'); //ok
