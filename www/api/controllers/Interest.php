@@ -134,17 +134,26 @@ class Interest extends Controller {
   }
 
   public function WelcomeOnBoard ($interestList) {
+    /*Checking if the user is logged in*/
+  if (!\Utils\Session::isLoggedIn()) {
+    throw new \Utils\RequestException('operation reservee aux membres', 401);
+  }
+    /*bring back the user logged id*/
+    $userId = \Utils\Session::user('id');
+
     $planetResult = array('Terre' => 0,
                           'Paranose' => 0,
                           'Technome' => 0,
                           'Sautien' => 0,
                           'Multas' => 0);
-    /*ADD INTERESTS*/
-    foreach($interestList as $key => $value) {
-      echo $value;
-      /*$this->addUserInterest($value);*/
 
-      switch($value) {
+    $interestListUnic = array();
+
+    /*Calculate the user planet*/
+    foreach($interestList as $key => $value) {
+      switch($value%5) {
+        case 0 : $planetResult['Multas']++;
+        break;
         case 1 : $planetResult['Terre']++;
         break;
         case 2 : $planetResult['Paranose']++;
@@ -153,19 +162,27 @@ class Interest extends Controller {
         break;
         case 4 : $planetResult['Sautien']++;
         break;
-        case 5 : $planetResult['Multas']++;
-        break;
         default : echo 'Unknown planet<br>';
       }
+
+      if(!in_array($value,$interestListUnic)) {
+        $interestListUnic[] = $value;
+      }
     }
+
+    print_r($interestListUnic);
+    /*add interests for the user*/
+    $this->addUserInterest($interestListUnic);
 
     $index = 0;
 
     foreach($planetResult as $key => $value) {
-      if($index < $value)
-        $result = $key;
+      if($index < $value) {
+        $index = $value;
+          $result = $key;
+      }
     }
 
-    echo "Resultats : le user appartient à la planete $key";
+    echo "Resultats : le user appartient à la planete $result";
   }
 }
