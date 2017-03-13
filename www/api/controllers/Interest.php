@@ -147,7 +147,8 @@ class Interest extends Controller {
                           'Sautien' => 0,
                           'Multas' => 0);
 
-    $interestListUnic = array();
+    /*add interests for the user*/
+    $this->addUserInterest($interestList);
 
     /*Calculate the user planet*/
     foreach($interestList as $key => $value) {
@@ -164,16 +165,8 @@ class Interest extends Controller {
         break;
         default : echo 'Unknown planet<br>';
       }
-
-      if(!in_array($value,$interestListUnic)) {
-        $interestListUnic[] = $value;
-      }
     }
-
-    print_r($interestListUnic);
-    /*add interests for the user*/
-    $this->addUserInterest($interestListUnic);
-
+    
     $index = 0;
 
     foreach($planetResult as $key => $value) {
