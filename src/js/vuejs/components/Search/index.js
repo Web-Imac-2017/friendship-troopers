@@ -141,14 +141,15 @@ const Search = Vue.extend({
     this.getUsers(apiRoot() + 'users/search');
   },
   methods : {
-    // A TESTER, renvoit champs manquants pour l'instant
+    // A TESTER, renvoit INTERNAL SERVER ERROR
     getUsers : function(route) {
-      this.$http.get(route,
-        {
-          'username' : 'michel'
-        },{ 
+      var data = {username: "coulon"};
+        this.$http.post(apiRoot() + 'users/search', {params:{username: "coulon"}},{
           emulateJSON: true 
-        }).then(
+        },{
+          method: "GET"
+        }
+        ).then(
         (response) => {
           console.log("cool");
           console.log(response.data);
@@ -163,7 +164,8 @@ const Search = Vue.extend({
         },
         (response) => {
           console.log("User : getUsers ");
-          console.log(response.data);
+          console.log(response);
+          console.log("fin erreur");
         });
     },
     // A TESTER
