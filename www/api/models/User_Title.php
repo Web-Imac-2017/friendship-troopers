@@ -26,9 +26,7 @@ class User_Title extends Model {
     foreach ($addKeys as $key => $value) {
       $sql .= ' AND ' . $key . '=:' . $key;
     }
-
-		var_dump($sql);
-		var_dump($currentData);
+    
 		$prepareRequest = $this->pdo->prepare($sql);
 		$prepareRequest->execute($currentData);
 

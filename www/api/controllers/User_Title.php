@@ -187,7 +187,7 @@ class User_Title extends Controller {
         'userId'=> $userId,
         'titleId'=> $titleId,
       ]);
-    } catch {
+    } catch (\PDOException $e) {
       $this->response([
         'error' => $e->getMessage(),
       ], 500);

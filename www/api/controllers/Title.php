@@ -45,10 +45,16 @@ class Title extends Controller {
       throw new \Utils\RequestException('champ manquant', 400);
     }
 
-    $this->Title->save($this->filterXSS([
-      'label' => $post['label'],
-      'price' => $post['price'],
-    ]));
+    try{
+      $this->Title->save($this->filterXSS([
+        'label' => $post['label'],
+        'price' => $post['price'],
+      ]));
+    } catch (\PDOException $e) {
+      $this->response([
+        'error' => $e->getMessage(),
+      ], 500);
+    }
 
     $this->response(null, 200);
   }
@@ -72,6 +78,15 @@ class Title extends Controller {
           throw new \Utils\RequestException('bad op', 400);
       }
     }
+
+    try{
+    $this->Title->save($this->filterXSS($updates));
+    } catch (\PDOException $e) {
+      $this->response([
+        'error' => $e->getMessage(),
+      ], 500);
+    }
+
     $this->Title->save($this->filterXSS($updates));
     $this->response(null, 200);
   }
@@ -86,9 +101,15 @@ class Title extends Controller {
       throw new \Utils\RequestException('action reservee aux administeurs', 403);
     }
 
+    try{
     $this->Title->delete([
-      'id'=> $id,
+    'id'=> $id,
     ]);
+    } catch (\PDOException $e) {
+      $this->response([
+        'error' => $e->getMessage(),
+      ], 500);
+    }
 
     $this->response(null, 200);
   }
