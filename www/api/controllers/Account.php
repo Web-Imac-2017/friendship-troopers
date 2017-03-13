@@ -229,7 +229,7 @@ class Account extends Controller{
 		} else {
 			echo 'user not found';
 		}
-	}
+	} 
 
 	public function search($get) {
 		$isRequired = $this->checkRequired(['username', 'interest', 'title', 'planet'],$get);

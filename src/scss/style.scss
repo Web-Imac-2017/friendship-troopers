@@ -920,6 +920,7 @@ p.honorific-title {
 
     .wrapper{
       align-item:center;
+      flex-wrap: wrap;
 
       @media all and (max-width: $break-small) {
         flex-direction: column;

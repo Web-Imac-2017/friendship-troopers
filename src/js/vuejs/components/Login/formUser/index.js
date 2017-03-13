@@ -74,7 +74,7 @@ const formUser = Vue.extend({
 	    	else
 	    		this.falseDate = false;
 	    },
-		save(){
+		save(){ 
 			this.$emit('input', this.userSignIn);
 			if(this.checkInputs()){
 				var birthdate = this.userSignIn.year + '-' + this.userSignIn.month + '-' + this.userSignIn.day;

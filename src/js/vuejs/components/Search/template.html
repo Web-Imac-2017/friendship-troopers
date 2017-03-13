@@ -71,13 +71,13 @@
    		
       <div v-if="usersExist">
         <div class="row page-nav">
-          <page-nav></page-nav>
+          <page-nav :page="currentPage" :more="morePage" v-on:next="showNextPage" v-on:prev="showPrevPage"></page-nav>
         </div>
-        <div  class="row" id="searchResult">
-            <user-component :user="result" :key="result.id" v-for="result in usersResult"></user-component>
+        <div class="row" id="searchResult"> 
+          <user-component v-for="result in usersResult" :user="result" :key="result.id"></user-component> 
         </div>
         <div class="row page-nav">
-          <page-nav></page-nav>
+          <page-nav :page="currentPage" :more="morePage" v-on:next="showNextPage" v-on:prev="showPrevPage"></page-nav>
         </div>
         
       </div>

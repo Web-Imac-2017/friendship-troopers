@@ -23,11 +23,12 @@ const Search = Vue.extend({
   },
   data () {
     return {
+      // RECUPERER LISTE USERS DANS BDD
       users : [{   
         username: 'LuckyPon',
         title: "Seigneur de l'enfer",
         avatar : "/assets/images/avatars/Paranose/astro.svg",
-        planeteId : 2,
+        planetId : 2,
         interest : "Dormir",
         planetPath : "/assets/images/planets/Paranose.svg",
         result:false
@@ -35,7 +36,7 @@ const Search = Vue.extend({
         username: 'LLittlePonyn',
         title: "Seigneur des abricots",
         avatar : "/assets/images/avatars/Technome/landscape.svg",
-        planeteId : 3,
+        planetId : 3,
         interest : "Dormir",
         planetPath : "/assets/images/planets/Technome.svg",
         result:false
@@ -43,7 +44,7 @@ const Search = Vue.extend({
         username: 'JulieCapucine',
         title: "Lady Jolie",
         avatar : "/assets/images/avatars/Sautien/dashboard.svg",
-        planeteId : 4,
+        planetId : 4,
         interest : "Dormir",
         planetPath : "/assets/images/planets/Sautien.svg",
         result:false
@@ -51,7 +52,7 @@ const Search = Vue.extend({
         username: 'LuckyPonnette',
         title: "Alien",
         avatar : "/assets/images/avatars/Terre/dashboard.svg",
-        planeteId : 1,
+        planetId : 1,
         interest : "Dormir",
         planetPath : "/assets/images/planets/Terre.svg",
         result:false
@@ -77,11 +78,12 @@ const Search = Vue.extend({
         name:"Sautien",
         value:false
       },{
-        path:"/assets/images/planets/P1.svg",
+        path:"/assets/images/planets/Multas.svg",
         id:5,
         name:"Multas",
         value:false
       }],
+      // RECUPERER LISTE TITLES DANS BDD
       filtersTitles: [{
         id:1,
         name:"Alien"
@@ -90,8 +92,9 @@ const Search = Vue.extend({
         name:"Seigneur des abricots"
       },{
         id:3,
-        name:"Seigneur de l'enfer"
+        name:"Lord de l'enfer"
       }],
+      // RECUPERER LISTE INTERESTS DANS BDD
       filtersInterests: [{
         id:1,
         name:"Jazz"
@@ -101,18 +104,90 @@ const Search = Vue.extend({
       },{
         id:3,
         name:"Dormir"
+      },{
+        id:4,
+        name:"Les champignons"
+      },{
+        id:5,
+        name:"Les pieds"
+      },{
+        id:6,
+        name:"Sherlock Holmes"
       }],
       searchUser : "LuckyPon",
       interestSelected : "Sélectionner",
       titleSelected : "Sélectionner",
+      // ENLEVER QUAND LIEN AVEC BDD
       usersResult : [],
+      // TABLEAU D INTERETS COCHES A ENVOYER A LA BDD
       interestsPrint : [],
+      // TABLEAU DE TITRES COCHES A ENVOYER A LA BDD
       titlesPrint : [],
+      // PLANETE A ENVOYER A LA BDD, -1 SI AUCUNE SELECTIONNEE
       activePlanet:  -1,
-      usersExist : false
+      // SI AUCUN UTILISATEURS NE CORRESPOND, METTRE A FALSE
+      usersExist : false,
+
+
+      currentPage: 1,
+      morePage: true,
+      planetId: 0,
+      routeNextUser: '',
+      routePrevUser: '',
+      totalUsers: 15
     }
   },
-  methods:{
+  mounted : function() {
+    this.getUsers(apiRoot() + 'users/search');
+  },
+  methods : {
+    // A TESTER, renvoit champs manquants pour l'instant
+    getUsers : function(route) {
+      this.$http.get(route,
+        {
+          'username' : 'marion',
+          'interest' : ['1', '2'], 
+          'title' : ['1', '2'],   
+          'planet' : '1'
+        },{ 
+          emulateJSON: true 
+        }).then(
+        (response) => {
+          this.usersResult = response.data;
+
+          var linkNext = response.headers.get("Link").split(",")[0].split(";")[0];
+          this.routeNextUser = apiRoot() + linkNext.substring(2, linkNext.length-1);
+
+          var linkPrev = response.headers.get("Link").split(",")[1].split(";")[0];
+          this.routePrevUser = apiRoot() + linkPrev.substring(2, linkPrev.length-1);
+        },
+        (response) => {
+          console.log("User : getUsers ");
+          console.log(response.data);
+        });
+    },
+    // A TESTER
+    showNextPage : function() {
+      if (this.currentPage*10 < this.totalUsers) {
+        this.currentPage++;
+        this.getUsers(this.routeNextPost);
+      }
+      if (this.totalUsers-(this.currentPage*10) > 10) {
+        this.morePage = true;
+      } else {
+        this.morePage = false;
+      }
+    },
+    // A TESTER
+    showPrevPage : function() {
+      this.currentPage--;
+      this.getUsers(this.routePrevPost);
+      if (this.totalUsers-(this.currentPage*10) < 10) {
+        this.morePage = true;
+      } else {
+        this.morePage = false;
+      }
+    },
     toggleActive(filter){
       for(var i = 0; i < this.filtersPlanets.length ; i++){
         if(filter.id == this.filtersPlanets[i].id){
@@ -129,6 +204,7 @@ const Search = Vue.extend({
         
       } 
     },
+    // A ENLEVER QUAND LIEN AVEC BDD ?
     requestUsersResult(){
       for(var i = 0; i < this.users.length ; i++){
         if(this.users[i].result == true){
@@ -163,24 +239,25 @@ const Search = Vue.extend({
     tabDelete(index, tab){
       tab.splice(index,1);
     },
+    // A ENLEVER QUAND LIEN AVEC BDD ?
     reinitialize(){
       for(var i = 0; i < this.users.length ; i++){
         this.users[i].result = false;
       }
       this.usersResult = [];
     },
+    // SEPARER LES DEUX RECHERCHES ?
     searchUsername(){
       for(var i = 0; i < this.users.length ; i++){
         this.users[i].result = (this.searchUser == this.users[i].username) ? true : false;
       }
     },
+    // SEPARER LES DEUX RECHERCHES ?
     searchFilters(){
       for(var i = 0; i < this.users.length ; i++){
         if(this.titlesPrint.length > 0)
           this.users[i].result = (this.titlesPrint[0].name == this.users[i].title) ? true : false;
       }
-      // REQUETE ICI, ENVOI DE interestsPrint, titlesPrint et activePlanet
-      // RECUPERER LISTE USERS 
 
     },
     searchBarUsername(){
@@ -202,35 +279,10 @@ const Search = Vue.extend({
       else
         this.usersExist = false;
     }
-      
-  },
-  created(){
-    // TEST POUR VOIR SI ON EST LOGIN
-    /*this.$http.post(apiRoot() + 'planets/1/posts', 
-	   	{
-	   		'content' : "contenttttttt", 
-	   		'title': "titleeeeee" 
-	   	},{
-          emulateJSON: true
-        }).then(
-          (response) => {
-            
-            console.log("success !");
-          },
-          (response) => {
-            console.log("fail !");
-            console.log(response);
-            if(response.status == 401){
-            	console.log("connectez vous !!!");
-            	this.$router.push({
-                name: 'Login' 
-            });
-            }
-            	
-          }
-        )*/
-
+    
   }
+    
+
 });
 
 
