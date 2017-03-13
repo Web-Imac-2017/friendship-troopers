@@ -133,4 +133,39 @@ class Interest extends Controller {
     $this->response($request2,200);
   }
 
+  public function WelcomeOnBoard ($interestList) {
+    $planetResult = array('Terre' => 0,
+                          'Paranose' => 0,
+                          'Technome' => 0,
+                          'Sautien' => 0,
+                          'Multas' => 0);
+    /*ADD INTERESTS*/
+    foreach($interestList as $key => $value) {
+      echo $value;
+      /*$this->addUserInterest($value);*/
+
+      switch($value) {
+        case 1 : $planetResult['Terre']++;
+        break;
+        case 2 : $planetResult['Paranose']++;
+        break;
+        case 3 : $planetResult['Technome']++;
+        break;
+        case 4 : $planetResult['Sautien']++;
+        break;
+        case 5 : $planetResult['Multas']++;
+        break;
+        default : echo 'Unknown planet<br>';
+      }
+    }
+
+    $index = 0;
+
+    foreach($planetResult as $key => $value) {
+      if($index < $value)
+        $result = $key;
+    }
+
+    echo "Resultats : le user appartient à la planete $key";
+  }
 }
