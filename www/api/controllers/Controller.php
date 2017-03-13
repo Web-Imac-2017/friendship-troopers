@@ -14,6 +14,14 @@ abstract class Controller {
     });
   }
 
+  public function checkNotAllowed ($notAllowed, $post) {
+    // MAK SURE EACH REQUIRED FIELDS EXISTS IN $_POST
+    return array_filter($notAllowed, function ($r) use ($post) {
+      return array_key_exists($r, $post);
+    });
+  }
+
+
   /**
    * Filter XSS attempts comming from users
    * @param  [type] $data [description]
