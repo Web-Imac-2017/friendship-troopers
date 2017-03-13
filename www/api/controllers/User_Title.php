@@ -102,7 +102,6 @@ class User_Title extends Controller {
     $this->User_Title->save($this->filterXSS([
       'titleId' => $post['titleId'],
       'userId' => $userId,
-      'current' => $post['current'] ?? 0,
     ]));
 
     $this->response(null, 200);
@@ -123,38 +122,21 @@ class User_Title extends Controller {
     $oldCurrent = $this->User_Title->findFirst([
       'fields' => ['titleId'],
       'conditions' => [
-        'user.id' => $userId,
+        'userId' => $userId,
         'current' => 1,
       ],
-      'leftJoin' => [
-        [
-          'table' => 'user',
-          'alias' => 'User',
-          'from' => 'id',
-          'to' => 'userId',
-        ],
-        [
-          'table' => 'title',
-          'alias' => 'title',
-          'from' => 'id',
-          'to' => 'titleId',
-        ],
-      ],
     ]);
-    var_dump($oldCurrent['titleId']);
     //set the old current title to current = false
     $oldKeys = ['userId'=> $userId, 'titleId' => $oldCurrent['titleId']];
     $current = ['current'=>'0'];
-    var_dump($oldKeys);
     $this->User_Title->saveCurrent($this->filterXSS($current), $this->filterXSS($oldKeys));
 
     //set the new current title to current = 1
     $newKeys = ['userId'=> $userId, 'titleId' => $titleId];
     $current = ['current'=>'1'];
-    var_dump($newKeys);
     $this->User_Title->saveCurrent($this->filterXSS($current), $this->filterXSS($newKeys));
 
-    //$this->response(null, 200);
+    $this->response(null, 200);
   }
 
   public function delete ($userId, $titleId, $delete) {
@@ -166,6 +148,18 @@ class User_Title extends Controller {
     /*non-admins can't delete the default title*/
     if (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $userId != $currentUserId || (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $titleId == 1)) {
       throw new \Utils\RequestException('action reservee aux administeurs', 403);
+    }
+
+    $titleCurrent = $this->User_Title->find([
+      'fields' => ['current'],
+      'conditions' => [
+        'userId' => $userId,
+        'titleId' => $titleId,
+      ],
+    ]);
+    /*if it is the user's current title, return an error*/
+    if($titleCurrent[0]['current'] == '1'){
+      throw new \Utils\RequestException('impossible de suprimmer le titre courant', 404);
     }
 
     $this->User_Title->delete([
