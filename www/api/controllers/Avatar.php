@@ -47,7 +47,40 @@ class Avatar extends Controller {
         }
         $this->response('ok',200);
     }
+    /**
+     * update the infos of an avatar
+     * admin only
+     * @param  int $id      id of the avatar
+     * @param  array $patches data send by the front
+     * @return json          null if success
+     */
+    public function update ($id, $patches)
+    {
+        if (!\Utils\Session::isLoggedIn()) {
+            throw new \Utils\RequestException('operation reservee aux membres', 401);
+        }
+        if (!in_array(\Utils\Session::user('roleId'), [1, 2])) {
+            throw new \Utils\RequestException('action reservee aux administeurs', 403);
+        }
+        $updates = ['id' => $id];
+        foreach ($patches as $patch) {
+            switch ($patch['op']) {
+            case 'replace':
+                $updates[explode('/',$patch['path'])[1]] = $patch['value'];
+                break;
+            default:
+                throw new \Utils\RequestException('bad op', 400);
+                break;
+            }
+        }
+        try {
+            $this->Title->save($this->filterXSS($updates));
+        } catch (\PDOException $e) {
+            throw new \Utils\RequestException('erreur BDD', 400);
+        }
 
+        $this->response(null, 200);
+    }
             /***********************************
                        USER FUNCTIONS
             ***********************************/
@@ -60,17 +93,33 @@ class Avatar extends Controller {
             throw new \Utils\RequestException('NOT_LOGGED', 401);
         }
         $userId = \Utils\Session::user('id');
-        $addKeys = $this->filterXSS([
+
+        $oldAvatarId = $this->User_Title->findFirst([
+            'fields' => ['avatarId'],
+            'conditions' => [
+                'userId' => $userId,
+                'current' => 1,
+            ],
+        ]);
+        $addKeysNew = $this->filterXSS([
             'userId' => $userId,
             'avatarId' => $avatarId
         ]);
+        $addKeysOld = $this->filterXSS([
+            'userId' => $userId,
+            'avatarId' => $oldAvatarId
+        ]);
         try {
             $this->Avatar_User->save([
+                'currentAvatar' => '0',
+            ], $addKeysOld);
+            $this->Avatar_User->save([
                 'currentAvatar' => '1',
-            ], $addKeys);
+            ], $addKeysNew);
         } catch (\PDOException $e) {
             throw new \Utils\RequestException('erreur BDD', 400);
         }
+        $this->response(null, 200);
     }
 
     /**
