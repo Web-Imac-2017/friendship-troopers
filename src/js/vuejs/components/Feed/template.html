@@ -11,7 +11,7 @@
         <create-post v-on:newpost="createPost"></create-post>
         <page-nav :page="currentPage" :more="morePage" v-on:next="showNextPage" v-on:prev="showPrevPage"></page-nav>
         <div v-for="post in bddPosts">
-          <post ref="postComponent" :new="true" :planetId="planetId" :post="post"></post>
+          <post ref="postComponent" :planetId="planetId" :post="post"></post>
         </div>
         <page-nav :page="currentPage" :more="morePage" v-on:next="showNextPage" v-on:prev="showPrevPage"></page-nav>
       </section>
