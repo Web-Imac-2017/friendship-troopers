@@ -18,7 +18,7 @@ class Title extends Controller {
     }
 
     if (!in_array(\Utils\Session::user('roleId'), [1, 2])) {
-      $fields = ['label', 'price'];
+      $fields = ['honorificTitle', 'price'];
     } else {
       $fields = '*';
     }
@@ -40,14 +40,14 @@ class Title extends Controller {
       throw new \Utils\RequestException('action reservee aux administeurs', 403);
     }
 
-    $required = ['label', 'price'];
+    $required = ['honorificTitle', 'price'];
     if (!empty($this->checkRequired($required, $post))) {
       throw new \Utils\RequestException('champ manquant', 400);
     }
 
     try{
       $this->Title->save($this->filterXSS([
-        'label' => $post['label'],
+        'honorificTitle' => $post['honorificTitle'],
         'price' => $post['price'],
       ]));
     } catch (\PDOException $e) {

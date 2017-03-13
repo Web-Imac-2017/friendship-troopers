@@ -18,9 +18,9 @@ class User_Title extends Controller {
     }
 
     if (!in_array(\Utils\Session::user('roleId'), [1, 2])) {
-      $fields = ['user.username','label', 'price'];
+      $fields = ['user.username','honorificTitle', 'price'];
     } else {
-      $fields = ['user.id', 'user.username', 'titleId', 'label', 'price'];
+      $fields = ['user.id', 'user.username', 'titleId', 'honorificTitle', 'price'];
     }
 
     $find = $this->User_Title->find([
@@ -47,15 +47,27 @@ class User_Title extends Controller {
     $this->response($find, 200);
   }
 
+  public function count ($userId, $get){
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
+    }
+/*
+    $count = $this->User_Title->findCount([
+        'userId' => $userId,
+      ]);*/
+
+    $this->response($count, 200);
+  }
+
   public function viewCurrent ($userId, $get){
     if (!\Utils\Session::isLoggedIn()) {
       throw new \Utils\RequestException('operation reservee aux membres', 401);
     }
 
     if (!in_array(\Utils\Session::user('roleId'), [1, 2])) {
-      $fields = ['user.username','label', 'price'];
+      $fields = ['user.username','honorificTitle', 'price'];
     } else {
-      $fields = ['user.id', 'user.username', 'titleId', 'label', 'price'];
+      $fields = ['user.id', 'user.username', 'titleId', 'honorificTitle', 'price'];
     }
 
     $find = $this->User_Title->find([
@@ -163,10 +175,7 @@ class User_Title extends Controller {
       throw new \Utils\RequestException('operation reservee aux membres', 401);
     }
 
-    $currentUserId = \Utils\Session::user('id');
-    /*non-admins can't delete the default title*/
-    if (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $userId != $currentUserId
-    || (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $titleId == 1)) {
+    if (!in_array(\Utils\Session::user('roleId'), [1, 2])) {
       throw new \Utils\RequestException('action reservee aux administeurs', 403);
     }
 
