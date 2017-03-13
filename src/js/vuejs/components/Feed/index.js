@@ -33,13 +33,17 @@ const Feed = Vue.extend({
   mounted : function() {
     // Récupérer les premiers posts de la planète de l'utilisateur
     this.planetId = this.$refs.menu.user.planetId;
-    console.log(this.planetId);
     this.getPublications(apiRoot() + 'planets/'+ this.planetId + '/posts');
   },
   methods : {
     createPost : function(post) {
-      console.log("Feed : createPost Coucou tu crée un post !");
-      console.log(post.avatar);
+      //Router::post('/planets/:planet/posts', 'publication#create', 'planets.posts.create');
+      this.$http.post(apiRoot() + "planets/" + this.planetId + "/posts", { 'content' : post.content}, {emulateJSON : true}).then(
+        (response) => {
+          post.content = '';
+        },(response) => {
+        }
+      );
     },
     getPublications : function(route) {
       this.$http.get(route, { emulateJSON: true }).then(
@@ -54,7 +58,6 @@ const Feed = Vue.extend({
 
         },
         (response) => {
-          console.log("Feed : getPublications " + response);
         });
     },
     showNextPage : function() {
