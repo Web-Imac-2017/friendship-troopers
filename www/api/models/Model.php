@@ -93,7 +93,7 @@ abstract class Model {
 							$key = $this->table . '.' . $key;
 						}
 						if (is_array($value) && $key !== 'AND') {
-							var_dump($value);
+							//var_dump($value);
 							if (isset($value['value']) and isset($value['cmp'])) {
 								if (!is_numeric($value['value'])) {
 									$value['value'] = $this->pdo->quote($value['value']);
@@ -151,7 +151,7 @@ abstract class Model {
 							}
 						}
 					}
-					var_dump($condition);
+					//var_dump($condition);
 					$sql .= implode(' AND ', $condition);
 				}
 			}
@@ -170,9 +170,9 @@ abstract class Model {
 			if (isset($request['limit'])) {
 				$sql .= ' LIMIT ' . $request['limit'];
 			}
-			echo '<pre>';
+			/*echo '<pre>';
 			print_r($sql);
-			echo '</pre>';
+			echo '</pre>';*/
 			// PREPARE THE REQUEST AND EXECUTE IT THEN RETURN AN OBJECT FROM YOUR DB
 			$prepareRequest = $this->pdo->prepare($sql);
 			$prepareRequest->execute();
