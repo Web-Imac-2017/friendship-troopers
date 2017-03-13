@@ -11,7 +11,6 @@ class User_Title extends Model {
   public function saveCurrent($data, $addKeys) {
 		$fields = array();
 		$currentData = array();
-		$action = null;
 
 		// REQUIREMENTS BEFORE INSERTION OR UPDATE INTO DB (HELP TO PREPARE THE REQUEST)
 		foreach ($data as $key => $value) {
@@ -27,8 +26,6 @@ class User_Title extends Model {
     foreach ($addKeys as $key => $value) {
       $sql .= ' AND ' . $key . '=:' . $key;
     }
-
-		$action = 'update';
 
 		var_dump($sql);
 		var_dump($currentData);

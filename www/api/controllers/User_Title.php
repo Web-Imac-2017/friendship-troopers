@@ -99,10 +99,16 @@ class User_Title extends Controller {
       throw new \Utils\RequestException('champ manquant', 400);
     }
 
-    $this->User_Title->save($this->filterXSS([
-      'titleId' => $post['titleId'],
-      'userId' => $userId,
-    ]));
+    try {
+      $this->User_Title->save($this->filterXSS([
+        'titleId' => $post['titleId'],
+        'userId' => $userId,
+      ]));
+    } catch (\PDOException $e) {
+      $this->response([
+        'error' => $e->getMessage(),
+      ], 500);
+    }
 
     $this->response(null, 200);
   }
@@ -129,12 +135,25 @@ class User_Title extends Controller {
     //set the old current title to current = false
     $oldKeys = ['userId'=> $userId, 'titleId' => $oldCurrent['titleId']];
     $current = ['current'=>'0'];
-    $this->User_Title->saveCurrent($this->filterXSS($current), $this->filterXSS($oldKeys));
+    try {
+      $this->User_Title->saveCurrent($this->filterXSS($current), $this->filterXSS($oldKeys));
+    } catch (\PDOException $e) {
+      $this->response([
+        'error' => $e->getMessage(),
+      ], 500);
+    }
+
 
     //set the new current title to current = 1
     $newKeys = ['userId'=> $userId, 'titleId' => $titleId];
     $current = ['current'=>'1'];
-    $this->User_Title->saveCurrent($this->filterXSS($current), $this->filterXSS($newKeys));
+    try {
+      $this->User_Title->saveCurrent($this->filterXSS($current), $this->filterXSS($newKeys));
+    } catch (\PDOException $e) {
+      $this->response([
+        'error' => $e->getMessage(),
+      ], 500);
+    }
 
     $this->response(null, 200);
   }
@@ -146,7 +165,8 @@ class User_Title extends Controller {
 
     $currentUserId = \Utils\Session::user('id');
     /*non-admins can't delete the default title*/
-    if (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $userId != $currentUserId || (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $titleId == 1)) {
+    if (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $userId != $currentUserId
+    || (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $titleId == 1)) {
       throw new \Utils\RequestException('action reservee aux administeurs', 403);
     }
 
@@ -162,10 +182,17 @@ class User_Title extends Controller {
       throw new \Utils\RequestException('impossible de suprimmer le titre courant', 404);
     }
 
-    $this->User_Title->delete([
-      'userId'=> $userId,
-      'titleId'=> $titleId,
-    ]);
+    try{
+      $this->User_Title->delete([
+        'userId'=> $userId,
+        'titleId'=> $titleId,
+      ]);
+    } catch {
+      $this->response([
+        'error' => $e->getMessage(),
+      ], 500);
+    }
+
     $this->response(null, 200);
   }
 
