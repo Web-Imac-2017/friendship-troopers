@@ -133,6 +133,13 @@ class Interest extends Controller {
     $this->response($request2,200);
   }
 
+  /**
+   * WelcomeOnBoard function
+   * add interests in the user_interest table
+   * find which planet corresponding to the current user
+   * @param array $interestList containing interestId
+   * @return the new planetId
+   */
   public function WelcomeOnBoard ($interestList) {
     /*Checking if the user is logged in*/
   if (!\Utils\Session::isLoggedIn()) {
@@ -142,40 +149,61 @@ class Interest extends Controller {
     $userId = \Utils\Session::user('id');
 
     $planetResult = array('Terre' => 0,
-                          'Paranose' => 0,
-                          'Technome' => 0,
                           'Sautien' => 0,
+                          'Technome' => 0,
+                          'Paranose' => 0,
                           'Multas' => 0);
 
     /*add interests for the user*/
-    $this->addUserInterest($interestList);
+    $this->addUserInterest($interestList[0]);
 
-    /*Calculate the user planet*/
-    foreach($interestList as $key => $value) {
+    /*Calculate max interest points*/
+    foreach($interestList[0] as $key => $value) {
       switch($value%5) {
         case 0 : $planetResult['Multas']++;
         break;
         case 1 : $planetResult['Terre']++;
         break;
-        case 2 : $planetResult['Paranose']++;
+        case 2 : $planetResult['Sautien']++;
         break;
         case 3 : $planetResult['Technome']++;
         break;
-        case 4 : $planetResult['Sautien']++;
+        case 4 : $planetResult['Paranose']++;
         break;
         default : echo 'Unknown planet<br>';
       }
     }
-    
-    $index = 0;
 
+    $index = 0;
     foreach($planetResult as $key => $value) {
       if($index < $value) {
         $index = $value;
-          $result = $key;
+        $result = $key;
       }
     }
 
-    echo "Resultats : le user appartient à la planete $result";
+    /*Get the associated planet*/
+    switch($result) {
+      case 'Terre' : $planet = 1;
+      break;
+      case 'Paranose' : $planet = 2;
+      break;
+      case 'Technome' : $planet = 3;
+      break;
+      case 'Sautien' : $planet = 4;
+      break;
+      case 'Multas' : $planet = 5;
+      break;
+      default : echo 'Unknow planet<br>';
+    }
+
+    /*Change the user planet*/
+    $user = new \Models\User();
+    $request = $user->save($this->filterXSS([
+      'id' => $userId,
+      'planetId' => $planet
+    ]));
+
+    $this->response($request,200);
   }
 }
