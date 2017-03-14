@@ -15,6 +15,13 @@ class Comment extends Controller {
 		$this->loadModel('Comment');
 	}
 
+	public function count ($publicationId, $get) {
+		$count = $this->Comment->findCount([
+			'publicationId' => $publicationId,
+		]);
+		$this->response($count, 200);
+	}
+
 	/**
 	* list comments for a publication. Show the first one, then the 5 next etc.
 	* @param  int 		$planetId 			planet id passed by road
