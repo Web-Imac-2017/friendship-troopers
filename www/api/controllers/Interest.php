@@ -20,7 +20,6 @@ class Interest extends Controller {
     $interest = new \Models\Interest();
     $request = $interest->find([
       'fields' => ['id','label','initInterest'],
-      'conditions' => 'initInterest = 0'
     ]);
     $this->response($request,200);
 
