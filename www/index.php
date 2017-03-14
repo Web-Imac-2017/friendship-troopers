@@ -45,6 +45,7 @@ Router::get('/users/search','account#search', 'users.search');
 
 Router::post('/planets/:planet/posts', 'publication#create', 'planets.posts.create');
 Router::get('/planets/:planet/posts', 'publication#list', 'planets.posts.list');
+Router::get('/planets/:planet/posts/count', 'publication#count', 'planets.posts.count');
 Router::get('/planets/:planet/posts/:id','publication#view', 'planets.posts.view');
 
 Router::post('/avatar','avatar#create', 'avatar.create');
