@@ -18,10 +18,13 @@ const Post = Vue.extend({
   },
   template,
   watch: {
-    post: function() {
-      this.getComments(apiRoot() + "planets/1/posts/" + this.post.id + "/comments?limit=" + this.loadMore, false);
+    post : function() {
+      this.isLiked();
       this.getLikes();
-    }  
+      //TODO
+      //this.getComments(apiRoot() + "planets/" + this.planetId + "/posts/" + this.post.id + "/comments?limit=" + this.loadMore, false);
+      //this.countComments();
+    }
   },
    methods : {
     like : function() {
@@ -63,6 +66,15 @@ const Post = Vue.extend({
       var months = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juill.", "août", "sept.", "oct.", "nov.", "déc."];
       return object.getDate() + " " + months[object.getMonth()] + " à " + object.getHours() + ":" + ('0'+object.getMinutes()).slice(-2);
     },
+    countComments : function() {
+      this.$http.get(apiRoot() + "planets/" + this.planetId + "/posts/" + this.post.id + "/comments/count", { emulateJSON: true }).then(
+        (response) => {
+          this.totalComments = response.data.count;
+          console.log("POST totalcomments " + this.totalComments + "for id " + this.post.id);
+        },
+        (response) => {
+        });
+    },
     getLikes : function() {
       this.$http.get(apiRoot() + 'posts/' + this.post.id + "/stardust", { emulateJSON: true}).then(
         (response) => {
@@ -85,7 +97,6 @@ const Post = Vue.extend({
           this.prevComments = apiRoot() + tmp.substring(2, tmp.length-1);
         },
         (response) => {
-          console.log("Post.js : getComments " + response);
         }
       );
     },
@@ -105,6 +116,8 @@ const Post = Vue.extend({
         (response) => {
           if (response.data == 1) {
             this.liked = true;
+          } else {
+            this.liked = false;
           }
         }, 
         (response) => {
@@ -117,10 +130,10 @@ const Post = Vue.extend({
     this.isLiked();
 
     // Récupèrer le nombre total de commentaires (pour savoir s'il faut en charger plus)
-    //TODO BACK this.getTotalComments();
+    //this.countComments();
 
     // Récupérer les 10 derniers commentaires du post
-    this.getComments(apiRoot() + "planets/1/posts/" + this.post.id + "/comments?limit=" + this.loadMore, false);
+    //this.getComments(apiRoot() + "planets/" + this.planetId + "/posts/" + this.post.id + "/comments?limit=" + this.loadMore, false);
 
     // Récupérer le nombre de likes
     this.getLikes();
@@ -132,7 +145,7 @@ const Post = Vue.extend({
       liked : false,
       newComment : '',
       prevComments: '',
-      totalComments: 3,
+      totalComments: 0,
       loadMore : 5,
       showFullPost : false,
       /* admin / earth / parallel / robots / aliens / space-opera*/
