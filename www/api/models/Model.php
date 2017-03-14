@@ -33,7 +33,7 @@ abstract class Model {
 			$this->table = array_pop($tableName);
 		}
 
-		$this->metaData = json_decode(file_get_contents(ROOT.'/config/dbMetaData.json'), true)[$this->table];
+		//$this->metaData = json_decode(file_get_contents(ROOT.'/config/dbMetaData.json'), true)[$this->table];
 
 		//TRY TO OPPEN A CONNEXION TO THE DB
 		try {
@@ -89,22 +89,37 @@ abstract class Model {
 				} else {
 					$condition = array();
 					foreach ($request['conditions'] as $key => $value) {
-						if (strstr($key, '.') === false) {
+						if (strstr($key, '.') === false && $key != "AND") {
 							$key = $this->table . '.' . $key;
 						}
-						if (is_array($value)) {
+						if (is_array($value) && $key !== 'AND') {
+							//var_dump($value);
 							if (isset($value['value']) and isset($value['cmp'])) {
 								if (!is_numeric($value['value'])) {
 									$value['value'] = $this->pdo->quote($value['value']);
 								}
-								$condition[] = $key . ' ' . $value['cmp'] . ' ' . $value['value'];
-							} else {
+								if($value['cmp'] === 'IN') {
+									$condition[] = $key . ' ' . $value['cmp'] . ' (' . $value['value'] .') ';
+								} else {
+									$condition[] = $key . ' ' . $value['cmp'] . ' ' . $value['value'];
+								}
+							} else{
 								$otherConditions = array();
 								foreach ($value as $orKey => $valueOfValue) {
-									if(!is_numeric($valueOfValue)){
-										$valueOfValue=$this->pdo->quote($valueOfValue);
+									// case a same attribut may have several value and dev not using IN clause
+									if(is_array($valueOfValue)){
+										foreach ($valueOfValue as $keyOr => $keyValue) {
+											if(!is_numeric($keyValue)){
+												$keyValue=$this->pdo->quote($keyValue);
+											}
+											$otherConditions[] = "$orKey=$keyValue";
+										}
+									} else {
+										if(!is_numeric($valueOfValue)){
+											$valueOfValue=$this->pdo->quote($valueOfValue);
+										}
+										$otherConditions[] = "$orKey=$valueOfValue";
 									}
-									$otherConditions[] = "$orKey=$valueOfValue";
 								}
 								$condition[] = '(' . implode(' OR ', $otherConditions) . ')';
 							}
@@ -116,6 +131,7 @@ abstract class Model {
 							}
 						}
 					}
+					//var_dump($condition);
 					$sql .= implode(' AND ', $condition);
 				}
 			}
@@ -134,6 +150,9 @@ abstract class Model {
 			if (isset($request['limit'])) {
 				$sql .= ' LIMIT ' . $request['limit'];
 			}
+			/*echo '<pre>';
+			print_r($sql);
+			echo '</pre>';*/
 			// PREPARE THE REQUEST AND EXECUTE IT THEN RETURN AN OBJECT FROM YOUR DB
 			$prepareRequest = $this->pdo->prepare($sql);
 			$prepareRequest->execute();
@@ -161,12 +180,12 @@ abstract class Model {
 	public function findCount ($conditions = NULL) {
 		if ($conditions === NULL) {
 			return ($this->findFirst(array(
-				'fields' => 'COUNT(' . $this->primaryKey . ') AS count'))->count);
+				'fields' => ['COUNT(' . $this->primaryKey . ') AS count'])));
 		}
 		return ($this->findFirst(array(
-			'fields' => 'COUNT (' . $this->primaryKey . ') AS count',
+			'fields' => ['COUNT(' . $this->primaryKey . ') AS count'],
 			'conditions' => $conditions
-		))->count);
+		)));
 	}
 
  	/**
@@ -229,7 +248,7 @@ abstract class Model {
 				foreach ($addKeys as $key => $value) {
 					$sql .= ' AND ' . $key . '=:' . $key;
 				}
-				$this->primaryKeyValue = $data[$key];
+				$this->primaryKeyValue = $data[$Pkey];
 				$action = 'update';
 		} else {
 			$sql = ' INSERT INTO ' . $this->table . ' SET '. implode(', ', $fields);

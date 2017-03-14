@@ -8,5 +8,5 @@
 namespace Models;
 
 class Avatar extends Model {
-
+    
 }

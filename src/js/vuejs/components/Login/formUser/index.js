@@ -1,6 +1,7 @@
 'use strict';
 
 import Vue from 'vue/dist/vue';
+import {apiRoot} from '../../../../../../config.js';
  
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
@@ -16,13 +17,15 @@ const formUser = Vue.extend({
 			alreadyUsedUsername:false,
 			alreadyUsedMail:false,
 			falseMail:false,
+			longUsername:false,
 			lowPassword:false,
 			falsePassword:false,
 			falseDate:false,
 			nullUsername:false,
 			nullMail:false,
 			nullPassword:false,
-			nullPasswordChecked:false
+			nullPasswordChecked:false,
+			errorDB:false
 		}
 	},
 	methods:{
@@ -37,39 +40,144 @@ const formUser = Vue.extend({
 			if(!this.falsePassword)
 				this.lowPassword = (!regex.test(this.userSignIn.password)) ? true : false;
 		},
-		checkDatabase(){
-			var i = 0;
-			this.alreadyUsedUsername = false;
-			this.alreadyUsedMail = false;
-			for(var i; i < this.$parent.loginTab.length; i++){
-				if(this.userSignIn.username == this.$parent.loginTab[i].username){
-					this.alreadyUsedUsername = true;
-				}
-				if(this.userSignIn.mail == this.$parent.loginTab[i].mail){
-					this.alreadyUsedMail = true;
-				}
-				if(this.alreadyUsedUsername || this.alreadyUsedMail) return false;
-			}
-			this.alreadyUsedUsername = false;
-			this.alreadyUsedMail = false;
-			return true;
+		checkUsername(){
+			var username = this.userSignIn.username;
+			this.longUsername = (username.length > 20) ? true : false;
+			this.nullUsername = (username == '') ? true : false;
+			
+		},
+		checkDB(){
+			console.log(this.userSignIn.mail);
+			/*this.$http.post(apiRoot() + 'auth/signin/mail', 
+		       	{
+		       		'mail' : this.userSignIn.mail
+		       	},{
+		        	emulateJSON: true
+		        }).then(
+		          (response) => {
+		          	this.alreadyUsedMail = false;
+		          	this.$http.post(apiRoot() + 'auth/signin/username', 
+			       	{
+			       		'username' : this.userSignIn.username
+			       	},{
+			        	emulateJSON: true
+			        }).then(
+			          (response) => {
+			          	this.alreadyUsedUsername = false;
+			          	console.log(response.data);
+			          	var birthdate = this.userSignIn.year + '-' + this.userSignIn.month + '-' + this.userSignIn.day;
+
+						this.$http.post(apiRoot() + 'auth/signin', 
+				       	{
+				       		'username' : this.userSignIn.username,
+				       		'mail' : this.userSignIn.mail, 
+				       		'birthdate' : birthdate, 
+				       		'password': this.userSignIn.password 
+				       	},{
+				        	emulateJSON: true
+				        }).then(
+				          (response) => {
+				          	this.alreadyUsedUsername = false;
+							this.alreadyUsedMail = false;
+							this.falseDate = false;
+							this.errorDB = false;
+				          	console.log("inscription faite !");
+				            this.$router.push({
+							    name: 'WelcomeOnBoard' 
+							});
+				          },
+				          (response) => {
+				            if(response.data.error == "USER_EXISTING"){
+				            	this.alreadyUsedUsername = true;
+								this.alreadyUsedMail = true;
+				            }
+				            else if(response.data.error == "INVALID_DATE"){
+				            	this.falseDate = true;
+				            }
+				            else{
+				            	this.errorDB = true;
+				            }
+				          }
+				        )
+			          },
+			          (response) => {
+			            this.alreadyUsedUsername = true;
+			            console.log("pas ok username");
+			          }
+			        )
+		          },
+		          (response) => {
+		            this.alreadyUsedMail = true;
+		            console.log("pas ok mail");
+		          }
+		        )*/
+				
+	          	this.$http.post(apiRoot() + 'auth/signin/username', 
+		       	{
+		       		'username' : this.userSignIn.username
+		       	},{
+		        	emulateJSON: true
+		        }).then(
+		          (response) => {
+		          	this.alreadyUsedUsername = false;
+		          	console.log(response.data);
+		          	var birthdate = this.userSignIn.year + '-' + this.userSignIn.month + '-' + this.userSignIn.day;
+
+					this.$http.post(apiRoot() + 'auth/signin', 
+			       	{
+			       		'username' : this.userSignIn.username,
+			       		'mail' : this.userSignIn.mail, 
+			       		'birthdate' : birthdate, 
+			       		'password': this.userSignIn.password 
+			       	},{
+			        	emulateJSON: true
+			        }).then(
+			          (response) => {
+			          	this.alreadyUsedUsername = false;
+						this.alreadyUsedMail = false;
+						this.falseDate = false;
+						this.errorDB = false;
+			          	console.log("inscription faite !");
+			            this.$router.push({
+						    name: 'WelcomeOnBoard' 
+						});
+			          },
+			          (response) => {
+			            if(response.data.error == "USER_EXISTING"){
+			            	this.alreadyUsedUsername = true;
+							this.alreadyUsedMail = true;
+			            }
+			            else if(response.data.error == "INVALID_DATE"){
+			            	this.falseDate = true;
+			            }
+			            else{
+			            	this.errorDB = true;
+			            }
+			          }
+			        )
+		          },
+		          (response) => {
+		            this.alreadyUsedUsername = true;
+		            console.log("pas ok username");
+		          }
+		        )
+
+			
 		},
 		checkInputs(){
-			this.nullUsername = (this.userSignIn.username == '') ? true : false;
+			
 			this.nullMail = (this.userSignIn.mail == '') ? true : false;
 			this.nullPassword = (this.userSignIn.password == '') ? true : false;
 			this.nullPasswordChecked = (this.userSignIn.passwordChecked == '') ? true : false;
 
 			
-			
+			this.checkUsername();
 			this.checkPassword();
 	      	this.checkDate();
 	      	this.checkMail();
-	      	this.checkDatabase();
 
-	      	return ((!this.nullUsername)&&(!this.nullMail)&&(!this.lowPassword)&&(!this.nullPassword)
-	      		&&(!this.nullPasswordChecked)&&(!this.alreadyUsedMail)&&(!this.alreadyUsedUsername)
-	      		&&(!this.falsePassword)&&(!this.falseDate)&&(!this.falseMail)) ? true : false;
+	      	return ((!this.nullUsername)&&(!this.nullMail)&&(!this.longUsername)&&(!this.lowPassword)&&(!this.nullPassword)
+	      		&&(!this.nullPasswordChecked)&&(!this.falsePassword)&&(!this.falseDate)&&(!this.falseMail)) ? true : false;
 		},
 		isBissextile(value){
 			return ((value % 4 == 0 && value%100 != 0) || value%400 == 0) ? true : false;
@@ -85,35 +193,12 @@ const formUser = Vue.extend({
 	    	else
 	    		this.falseDate = false;
 	    },
-		save(){
+		save(){ 
 			this.$emit('input', this.userSignIn);
 			if(this.checkInputs()){
-				/*this.$http.post(apiRoot() + 'auth/signin', 
-		       	{
-		       		'mail' : this.userLogin.mail, 
-		       		'password': this.userLogin.password 
-		       	},{
-		        	emulateJSON: true
-		        }).then(
-		          (response) => {
-		            console.log("success !");
-		            this.cantSubmit=false;
-		            this.$router.push("/actualites")
-		          },
-		          (response) => {
-		            console.log("fail !")
-		            this.cantSubmit=true;
-		          }
-		        )*/
-
-
-				
-				console.log("inscription faite !");
-				this.$router.push("/inscription/welcome-on-board");
+				this.checkDB();
 			}
 
-			
-		       	
 		    
 
     	}

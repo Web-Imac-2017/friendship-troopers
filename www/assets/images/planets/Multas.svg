@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="238px" height="231px" viewBox="0 0 238 231" enable-background="new 0 0 238 231" xml:space="preserve">
+<g id="P5">
+	<path fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" d="M78.441,60.396
+		c20.655-13.127,63.12-13.999,84.429,0.308l-10.815,11.549H71.732L78.441,60.396z"/>
+	<path display="none" fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" d="M202.777,131.05
+		c-3.199,42.638-38.809,76.237-82.266,76.237c-34.173,0-63.492-20.777-76.017-50.389C-1.25,159,7,131.007,38.245,131.007
+		c-0.282-2.772-0.232-3.373-0.232-6.221c0-45.563,36.937-82.5,82.5-82.5c38.395,0,70.662,26.227,79.866,61.743
+		c18.62-3.529,27.726-0.113,29.404,3.471C234,116.5,226.5,124.787,202.777,131.05z"/>
+	<path display="none" fill="none" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" d="M42.013,115.5
+		C14.5,120.5-13,158,35,156s178.5-21,193.766-38c16.68-18.575-12.468-17.947-25.617-18.224"/>
+	<path display="none" fill="none" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" d="M42.419,157.007
+		c31.581,0,121.429-12.603,160.358-25.957"/>
+	<path display="none" fill="none" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" d="M200.38,104.029
+		c-0.626-2.279,1.188,5.423,1.37,9.221C162.676,126.182,71,141.007,39.419,141.007c0,0-0.657-3.801-1.037-9.957
+		c-0.154-2.495-0.262-5.377-0.262-8.55"/>
+	<path fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" d="M203,124.787c0,29.175-15.145,54.812-38,69.48
+		c-12.839,8.24-28.111,13.02-44.5,13.02c-17.686,0-34.071-5.564-47.502-15.04C51.827,177.312,38,152.665,38,124.787
+		C38,96.4,52.337,71.362,74.165,56.518C91,65.5,103.323,66.5,120.5,66.5c16.708,0,31.005-4,45.248-10.709
+		C188.186,70.536,203,95.931,203,124.787z"/>
+	<defs>
+		<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="22" y="72" width="198.5" height="35.538">
+			<feFlood  style="flood-color:white;flood-opacity:1" result="back"/>
+			<feBlend  in="SourceGraphic" in2="back" mode="normal"/>
+		</filter>
+	</defs>
+	<mask maskUnits="userSpaceOnUse" x="22" y="72" width="198.5" height="35.538" id="SVGID_1_">
+		<g filter="url(#Adobe_OpacityMaskFilter)">
+			<polygon points="54.667,82.667 53.007,78.673 56.843,74.85 118.093,66.857 185.221,75.182 188.98,78.308 185.671,78.461 
+				179.667,82.667 			"/>
+		</g>
+	</mask>
+	
+		<ellipse mask="url(#SVGID_1_)" fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="121.25" cy="89.769" rx="98.25" ry="16.769"/>
+	<defs>
+		<filter id="Adobe_OpacityMaskFilter_1_" filterUnits="userSpaceOnUse" x="9.09" y="104.199" width="224.5" height="41.5">
+			<feFlood  style="flood-color:white;flood-opacity:1" result="back"/>
+			<feBlend  in="SourceGraphic" in2="back" mode="normal"/>
+		</filter>
+	</defs>
+	<mask maskUnits="userSpaceOnUse" x="9.09" y="104.199" width="224.5" height="41.5" id="SVGID_2_">
+		<g filter="url(#Adobe_OpacityMaskFilter_1_)">
+			<polygon points="48,112.519 38.001,113 41.75,108.5 121.604,98.753 200.441,107.456 201.254,112.188 174,115.5 			"/>
+		</g>
+	</mask>
+	
+		<ellipse mask="url(#SVGID_2_)" fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="121.34" cy="124.949" rx="111.25" ry="19.75"/>
+	<defs>
+		<filter id="Adobe_OpacityMaskFilter_2_" filterUnits="userSpaceOnUse" x="22" y="145.619" width="194" height="36.484">
+			<feFlood  style="flood-color:white;flood-opacity:1" result="back"/>
+			<feBlend  in="SourceGraphic" in2="back" mode="normal"/>
+		</filter>
+	</defs>
+	<mask maskUnits="userSpaceOnUse" x="22" y="145.619" width="194" height="36.484" id="SVGID_3_">
+		<g filter="url(#Adobe_OpacityMaskFilter_2_)">
+			<polygon points="206.023,141.124 198.029,154.009 195.455,155.012 122.092,168.25 50.984,159.995 46.471,154.557 42.978,154.254 
+				33.499,138.176 			"/>
+		</g>
+	</mask>
+	
+		<ellipse mask="url(#SVGID_3_)" fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="119" cy="163.861" rx="96" ry="17.242"/>
+	<ellipse fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="215" cy="123.5" rx="8" ry="3"/>
+	
+		<ellipse transform="matrix(-0.02 -0.9998 0.9998 -0.02 60.6536 322.4601)" fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="188.361" cy="131.504" rx="3" ry="7.364"/>
+	
+		<ellipse transform="matrix(-0.0412 -0.9992 0.9992 -0.0412 30.7677 298.5432)" fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="158.629" cy="134.509" rx="3" ry="7.126"/>
+	<ellipse fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="121.5" cy="136.5" rx="6.5" ry="3"/>
+	
+		<ellipse transform="matrix(-0.0412 0.9992 -0.9992 -0.0412 227.7366 54.4473)" fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="87.744" cy="136.495" rx="3" ry="7.125"/>
+	
+		<ellipse transform="matrix(-0.0199 0.9998 -0.9998 -0.0199 187.5358 81.1442)" fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="53.997" cy="132.489" rx="3" ry="7.364"/>
+	<ellipse fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="26.75" cy="123.949" rx="8" ry="3"/>
+	
+		<ellipse fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="199.125" cy="162.755" rx="6.984" ry="2.619"/>
+	
+		<ellipse transform="matrix(-0.0199 -0.9998 0.9998 -0.0199 12.9076 350.1224)" fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="178.057" cy="168.735" rx="2.619" ry="6.429"/>
+	
+		<ellipse transform="matrix(-0.041 -0.9992 0.9992 -0.041 -16.2431 329.3211)" fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="149.918" cy="172.456" rx="2.619" ry="6.22"/>
+	
+		<ellipse fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="117.5" cy="174.194" rx="5.674" ry="2.619"/>
+	
+		<ellipse transform="matrix(-0.0411 0.9992 -0.9992 -0.0411 264.5979 92.2645)" fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="88.026" cy="173.099" rx="2.618" ry="6.22"/>
+	
+		<ellipse transform="matrix(-0.02 0.9998 -0.9998 -0.02 230.4262 113.3522)" fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="59.662" cy="169.603" rx="2.619" ry="6.429"/>
+	
+		<ellipse fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="40.239" cy="163.146" rx="6.984" ry="2.619"/>
+	<path display="none" fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" d="M39.044,111.66
+		c8.266,2.333,95.956,15.29,162.915,0"/>
+	<path display="none" fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" d="M62.295,66.533
+		c5.896,1.6,69.492,10.479,117.258,0"/>
+	<path display="none" fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" d="M47.803,162.889
+		c7.358,1.995,86.714,13.074,146.318,0"/>
+	
+		<ellipse fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="199.943" cy="88.019" rx="6.983" ry="2.619"/>
+	
+		<ellipse transform="matrix(-0.0199 -0.9998 0.9998 -0.0199 88.4628 274.7125)" fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="178.875" cy="93.999" rx="2.619" ry="6.429"/>
+	
+		<ellipse transform="matrix(-0.0412 -0.9992 0.9992 -0.0412 59.3126 252.3503)" fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="150.736" cy="97.717" rx="2.619" ry="6.22"/>
+	
+		<ellipse fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="118.319" cy="99.458" rx="5.674" ry="2.619"/>
+	
+		<ellipse transform="matrix(-0.0411 0.9992 -0.9992 -0.0411 190.7848 13.6398)" fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="88.847" cy="98.367" rx="2.618" ry="6.22"/>
+	
+		<ellipse transform="matrix(-0.02 0.9998 -0.9998 -0.02 156.5414 36.2984)" fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="60.482" cy="94.867" rx="2.619" ry="6.429"/>
+	
+		<ellipse fill="#EDEDED" stroke="#F7A700" stroke-width="2" stroke-miterlimit="10" cx="41.057" cy="88.412" rx="6.984" ry="2.619"/>
+</g>
+</svg>

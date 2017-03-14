@@ -12,6 +12,7 @@ import User from '../components/User'
 import Parameters from '../components/Parameters'
 import Friends from '../components/Friends'
 import Chat from '../components/Chat'
+import Messages from '../components/Messages'
 import Enigme from '../components/Enigme'
 import EnigmeResolved from '../components/EnigmeResolved'
 import EnigmeCurrent from '../components/EnigmeCurrent'
@@ -26,7 +27,8 @@ import Market from '../components/Market'
 import About from '../components/About'
 import FAQ from '../components/FAQ'
 import Legals from '../components/Legals'
-/*
+
+/*import AdminCreatePost from '../components/admin/CreatePost.vue'
 import AdminCreatePost from '../components/admin/CreatePost.vue'
 import AdminCreateEvent from '../components/admin/CreateEvent.vue'
 import AdminAddAdmin from '../components/admin/AddAdmin.vue'
@@ -37,7 +39,10 @@ import AddAvatar from '../components/admin/AddAvatar.vue'
 import AddEmoji from '../components/admin/AddEmoji.vue'
 import AddEnigme from '../components/admin/AddEnigme.vue'*/
 
+import Error401 from '../components/Error401'
+import Error403 from '../components/Error403'
 import Error404 from '../components/Error404'
+
 
 // ==================== Router registration ====================
 const router = new VueRouter({
@@ -50,7 +55,7 @@ const router = new VueRouter({
     	component: Login 
 	},{
       name: 'WelcomeOnBoard',
-      path: '/inscription/welcome-on-board', 
+      path: '/welcome-on-board', 
       component : WelcomeOnBoard
   },{ 
       name : 'Search',
@@ -58,44 +63,50 @@ const router = new VueRouter({
       component : Search
   },{ 
       name : 'User',
-      path: '/utilisateur', 
-      component : User
-      // mettre $username : unique pour chaque utilisateur
+      path: '/utilisateur/:user', 
+      component: User, 
+      props: true
   },{ 
       name : 'Parameters',
-      path: '/utilisateur/parametres', 
-      component : Parameters
-      // mettre $username : unique pour chaque utilisateur
+      path: '/:user/parametres', 
+      component : Parameters,
+      props: true
   },{ 
       name : 'Friends',
-      path: '/utilisateur/amis', 
-      component : Friends
-      // mettre $username : unique pour chaque utilisateur
+      path: '/:user/amis', 
+      component : Friends,
+      props: true
   },{ 
       name : 'Chat',
-      path: '/utilisateur/conversations/utilisateur', 
-      component : Chat
-      // mettre $username : unique pour chaque utilisateur
+      path: '/:user/conversations/utilisateur', 
+      component : Chat,
+      props: true
   },{ 
+      name : 'Messages',
+      path: '/:user/conversations', 
+      component : Messages,
+      props: true
+  } ,{ 
       name : 'Enigme',
-      path: '/utilisateur/enigmes', 
-      component : Enigme
-      // mettre $username : unique pour chaque utilisateur
+      path: '/:user/enigmes', 
+      component: Enigme, 
+      props: true
   },{ 
       name : 'EnigmeResolved',
-      path: '/utilisateur/enigmes/resolues', 
-      component : EnigmeResolved
-      // mettre $username : unique pour chaque utilisateur
+      path: '/:user/enigmes/resolues', 
+      component : EnigmeResolved,
+      props: true
   },{ 
       name : 'EnigmeCurrent',
-      path: '/utilisateur/enigmes/en-cours', 
-      component : EnigmeCurrent
-      // mettre $username : unique pour chaque utilisateur
+      path: '/:user/enigmes/en-cours', 
+      component : EnigmeCurrent,
+      props: true
   },{ 
       name : 'EnigmeCurrentChat',
-      path: '/utilisateur/enigmes/en-cours/chatbox', 
-      component : EnigmeCurrentChat
-      // mettre $username : unique pour chaque utilisateur
+      path: '/:user/enigmes/en-cours/chatbox', 
+      component : EnigmeCurrentChat,
+      props: true
+
   },{ 
       name : 'Feed',
       path: '/actualites', 
@@ -107,14 +118,15 @@ const router = new VueRouter({
       component : Event
   },{ 
       name : 'Post',
-      path: '/univers/planete/post/:id', 
-      component : Post
-      // mettre $planet : unique pour chaque planete
+      path: '/univers/:planet/post/:id', 
+      component : Post,
+      props: true
+
   },{ 
       name : 'Wiki',
-      path: '/univers/planete/wiki', 
-      component : Wiki
-      // mettre $planet : unique pour chaque planete
+      path: '/univers/:planet/wiki', 
+      component : Wiki,
+      props: true
   },{ 
       name : 'Market',
       path: '/marche-intergalactique', 
@@ -131,6 +143,14 @@ const router = new VueRouter({
       name : 'Legals',
       path: '/mentions-legales', 
       component : Legals
+  },{ 
+      name : 'Error401',
+      path: '/erreur401', 
+      component : Error401
+  },{ 
+      name : 'Error403',
+      path: '/erreur403', 
+      component : Error403
   },{ 
       name : 'Error404',
       path: '/erreur404', 
@@ -172,9 +192,12 @@ const router = new VueRouter({
       path: '/admin/ajout-enigme', 
       component : AddEnigme
   }*/,{ 
-    	path: '*', 
-    	redirect: '/erreur404'
-	}
+      path: '/index.html', 
+      redirect: {name:'Feed'}
+  },{ 
+      path: '*', 
+      redirect: '/erreur404'
+  }
   ]
 })
 

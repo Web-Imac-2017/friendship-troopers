@@ -6,7 +6,7 @@ template     = eval(`\`${template}\``);
 
 
 const MenuTools = Vue.extend({
-  template
+    template
 });
 
 

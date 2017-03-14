@@ -2,11 +2,12 @@
 <navbar></navbar>  
 <div class="container-fluid">
     <div class="row">
-      <aside class="col-sm-2">
+      <aside class="col-sm-3 col-md-3 col-lg-2">
         <lateral-menu-left></lateral-menu-left>
-        <menu-tools></menu-tools>
+        <deconnexion class="desktop"></deconnexion>
+        <menu-tools class="desktop"></menu-tools>
       </aside>
-      <section class="article col-sm-8">
+      <section class="article col-sm-9 col-md-9 col-lg-8">
         <div class="row container-colored">
           <div class="col-sm-2">
             <img :src="user.userAvatar">
@@ -25,15 +26,18 @@
         
         <option-bar :myself="myself"></option-bar>
 
-        <statistics  :user="user"></statistics>
+        <statistics :user="user"></statistics>
 
         <button v-on:click="profil"> (debug) Profil change from public to private</button>  
 
         <post></post>
       </section>
-      <div class="col-sm-2">
+      <div class="col-lg-2">
          <lateral-menu-right></lateral-menu-right>
       </div>
+      
+      <menu-tools class="mobile"></menu-tools>
+
     </div>
   </div>
 </div>

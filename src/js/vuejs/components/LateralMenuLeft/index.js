@@ -5,48 +5,32 @@ import {apiRoot} from '../../../../../config.js';
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
 
-
 const LateralMenuLeft = Vue.extend({
     template,
+    created: function() {
+      this.$http.get(apiRoot() + "users/me", {emulateJSON: true}).then(
+        (response) => {
+          this.user = response.data[0];
+          this.$emit("userinfos");
+        }, (response) => {
+          this.$router.push({name : "Login"});
+        });
+    },
     data () {
       return {
-        user : {
-          userAvatar : '/assets/images/Avatar1.svg',
-          username : 'LuckyPon', 
-          userBadge : 'Baroudeuse de l\'espace', 
-          userPlanet : {
-            path : '/assets/images/planets/P1.svg',
-            name : 'Planete X785-E'
-          }, 
-          lastFriends : [ {
-            avatar : '/assets/images/avatars/aliens/aliens.svg',
-            name : 'Spockdu77'
-          }, {
-            avatar : '/assets/images/avatars/earth/planets.svg',
-            name : 'MartyDuPassé'
-          }, {
-            avatar : '/assets/images/avatars/earth/miror.svg',
-            name : 'JulieDuFutur'
-          }
-          ] 
+        user : {},
+        lastFriends : [ 
+        {
+          avatar : '/assets/images/avatars/Sautien/aliens.svg',
+          name : 'Spockdu77'
+        }, {
+          avatar : '/assets/images/avatars/Terre/planets.svg',
+          name : 'MartyDuPassé'
+        }, {
+          avatar : '/assets/images/avatars/Terre/miror.svg',
+          name : 'JulieDuFutur'
         }
-      }
-    },
-    methods:{
-      deconnect(){
-        this.$http.post(apiRoot() + 'auth/logout', {
-          emulateJSON: true
-        }).then(
-          (response) => {
-            console.log("success deconnexion !");
-            this.$router.push("/")
-          },
-          (response) => {
-            console.log("fail deconnexion !")
-          }
-        )
-       
-
+        ] 
       }
     }
 });

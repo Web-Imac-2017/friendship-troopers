@@ -27,7 +27,7 @@ class Route {
 		}
 		array_shift($matches);
 		$this->matches = $matches;
-		if ($_SERVER['CONTENT_TYPE'] === 'application/json') {
+		if ($_SERVER['CONTENT_TYPE'] === 'application/json' && $_SERVER['REQUEST_METHOD'] == 'PATCH') {
 			$this->matches['method'] = json_decode(file_get_contents('php://input'), true);
 		} else {
 			switch ($_SERVER['REQUEST_METHOD']) {
