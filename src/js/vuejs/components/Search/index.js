@@ -28,9 +28,7 @@ const Search = Vue.extend({
       if((this.$route.params.searchInput != "") && !(this.alreadyInThePage)){
         this.alreadyInThePage = true;
         this.searchBarUsername(this.$route.params.searchInput);
-      }
-
-        
+      }        
       return this.$route.params.searchInput;
     } 
   },
@@ -89,7 +87,7 @@ const Search = Vue.extend({
       planetId: 0,
       routeNextUser: '',
       routePrevUser: '',
-      totalUsers: 7, // A TROUVE AVEC LA BDD
+      totalUsers: 7, // à changer : A TROUVE AVEC LA BDD
       dataForDB : {},
       alreadyInThePage: false
     }
@@ -100,14 +98,12 @@ const Search = Vue.extend({
           this.filtersInterests = response.data;      
         },
         (response) => {
-          console.log(response);
         });
     this.$http.get(apiRoot() + 'titles',{emulateJSON: true }).then(
         (response) => {
-          this.filtersTitles = response.data;         
+          this.filtersTitles = response.data;       
         },
         (response) => {
-          console.log(response);
         });
   },
   methods : {
@@ -130,15 +126,13 @@ const Search = Vue.extend({
           this.routePrevUser = linkPrev.substring(2, linkPrev.length-1);
         },
         (response) => {
-          console.log("Erreur getUsers ");
           this.usersExist = false;
           this.usersResult = {};
-          console.log(response);
         });
          
     },
     showMoreLink : function() {
-      if (this.currentPage*10 < this.totalUsers) {
+      if (this.currentPage*10 < this.totalUsers) { //10 à changer
         this.morePage = true;
       } else {
         this.morePage = false;
@@ -146,7 +140,7 @@ const Search = Vue.extend({
     },
     // A TESTER
     showNextPage : function() {
-      if (this.currentPage*10 < this.totalUsers) {
+      if (this.currentPage*10 < this.totalUsers) {//10 à changer
         this.currentPage++;
         this.getUsers(this.routeNextUser, this.dataForDB);
         this.showMoreLink();
@@ -245,7 +239,6 @@ const Search = Vue.extend({
       if(this.activePlanet != ""){
         this.dataForDB.planet = this.activePlanet ;
       }
-      console.log(JSON.stringify(this.dataForDB.planet));
 
 
       this.getUsers('users/search?limit=10', this.dataForDB);
