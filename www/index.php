@@ -50,7 +50,6 @@ Router::get('/users/:userId/friends','friend#listFriend', 'users.me.listFriend')
 Router::get('/users/:userId/number_friends','friend#countFriend', 'users.me.countFriend'); //ok
 
 Router::get('/users/:userId/interest','interest#listUserInterest', 'users.me.listInterest');
-Router::patch('/user/:userId/interests' , 'interest#WelcomeOnBoard','interest.WelcomeOnBoard');
 
 Router::post('/avatar','avatar#create', 'avatar.create');
 Router::patch('/avatar/:id','avatar#update', 'avatar.update');
@@ -58,6 +57,7 @@ Router::patch('/avatar/:id','avatar#update', 'avatar.update');
 Router::post('/interest/add' , 'interest#addInterest','interest.add');
 Router::get('/interest/view','interest#listInterest', 'interest.list');
 Router::post('/interest/delete','interest#deleteInterest','interest.delete');
+Router::post('/user/:userId/interests' , 'interest#WelcomeOnBoard','interest.WelcomeOnBoard');
 
 Router::get('/planets', 'planet#list');
 Router::post('/planets', 'planet#create');
