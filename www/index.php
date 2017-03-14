@@ -29,7 +29,7 @@ Router::get('/users/:userId','account#getUser', 'users.profil'); //ok
 
 Router::get('/users/:userId/interest','interest#listUserInterest', 'users.me.listInterest');
 Router::post('/users/me/interest/add_interest','interest#addUserInterest', 'users.me.updateUserInterest');
-Router::post('/users/me/interest/delete_interest','interest#delete_interest', 'users.me.updateUserInterest');
+Router::post('/users/me/interest/delete_interest','interest#deleteUserInterest', 'users.me.updateUserInterest');
 
 Router::get('/users/me/avatars','avatar#listUserAvatar', 'users.me.listAvatar');
 Router::patch('/users/me/avatars/:avatarId/current','avatar#setCurrentAvatar', 'users.me.setCurrentAvatar');
@@ -58,6 +58,8 @@ Router::get('/planets/:planet/news', 'planet#getPlanetFeed');
 
 Router::post('/interest/add' , 'interest#addInterest','interest.add');
 Router::get('/interest/view','interest#listInterest', 'interest.list');
+Router::post('/interest/delete','interest#deleteInterest','interest.delete');
+Router::patch('/interest/WelcomeOnBoard' , 'interest#WelcomeOnBoard','interest.WelcomeOnBoard');
 
 Router::get('/planets/:planet/news' , 'planet#getPlanetFeed');
 Router::post('/planets/:planet/posts/:publicationId/comments', 'comment#create', 'planets.posts.comments.create');
