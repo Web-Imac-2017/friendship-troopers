@@ -64,6 +64,10 @@
 
 #current-riddle {
   
+  a {
+    text-decoration: none;
+  }
+
   img.small  {
     height: 3rem;
   }
@@ -104,6 +108,7 @@
 
   img.avatar {
     height: 6rem;
+    @include padding2(0,0.2);
   }
 
   .response {
@@ -126,10 +131,13 @@
     font-size: 1.5rem;
   }
 
-  .pseudo {
+  .left {
     text-align: left;
   }
 
+  .player {
+    @include margin2(1,0);
+  }
   .underline  {
     border-bottom-color: $notifs;
     border-bottom-width: 0.1rem;

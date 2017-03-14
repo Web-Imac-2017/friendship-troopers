@@ -10,6 +10,7 @@ import LateralMenuRight from '../LateralMenuRight/index.js'
 import MenuTools from '../MenuTools/index.js'
 import NavBar from '../NavBar/index.js';
 import Deconnexion from '../Deconnexion/index.js';
+import EnigmeLayout from '../EnigmeLayout/index.js';
 
 
 const Enigme = Vue.extend({
@@ -19,33 +20,12 @@ const Enigme = Vue.extend({
   	'lateral-menu-right' : LateralMenuRight,
   	'menu-tools' : MenuTools,
     'navbar' : NavBar,
-    'deconnexion' : Deconnexion
-  },
-  mounted: function(){
-    
-  },
-  methods:{
-    findMe:function(){
-      this.me = this.$refs.menu.user;
-      console.log("COUCOU");
-      console.log(JSON.stringify(this.$refs.menu));
-    }
+    'deconnexion' : Deconnexion,
+    'enigme-layout' : EnigmeLayout
   },
   data () {
   	return {
-  		riddle : {
-  			content : 'Je plonge d\'une falaise de 10 mètre de haut. <br\> Je nage sous l\'eau pendant plus d\'une heure. <br\> Je chasse le requin avec les dents. <br\> Chaque matin je traverse la Méditarranée à la brasse ...',
-  			players : [{
-  				username : 'Marmitton',
-  				imagePath : '/assets/images/avatars/aliens/aliens.svg',
-  				planetId : 1
-  			}
-  			],
-  			points : 125
-  		},
-  		planetData: ["#3e3e3e", "#3eb6df", "#ef4646", "#767fe2", "#72b51a", "#f9a519" ],
-  		response : '',
-      me:{}
+      chat : false
   	}
   }
 });
