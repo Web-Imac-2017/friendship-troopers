@@ -114,7 +114,7 @@ const Search = Vue.extend({
         (response) => {
           this.filtersInterests = response.data;
           console.log("liste d'interets");
-          console.log(response.data);
+          console.log(JSON.stringify(response.data));
           (this.filtersInterests.length > 0) ? console.log(this.filtersInterests[0].id) : console.log("vide");
             
         },

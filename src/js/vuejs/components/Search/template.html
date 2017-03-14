@@ -48,7 +48,7 @@
           <h3>Filtrer par centres d'intérêts </h3>
           <select v-on:change="tabAdd(interestSelected, interestsPrint, filtersInterests)" v-model="interestSelected">
             <option v-bind:value="result.id" v-for="result in filtersInterests">
-              {{ result.name }}
+              {{ result.label }}
             </option>
           </select>
           <div class="wrapper">
