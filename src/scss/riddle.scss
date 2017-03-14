@@ -1,9 +1,19 @@
 @import "variables";
 
-.riddle {
+#riddle {
   @include padding(2);
   @include font-size(1.5);
   margin: 5rem 0;
+
+  #formSubmit{
+    input:first-child{
+      text-align:left;
+    }
+    input:last-child{
+      background-image: url("../assets/images/validation-pink-bolder.svg");
+    }
+    
+  }
 
   ul {
   	 @include padding(2);
@@ -21,7 +31,7 @@
   ul li img {
     height: 90%;
     width: 90%;
-
+ 
   }
   p {
   	text-align: center;
@@ -56,7 +66,7 @@
   }
 }
 
-.current-riddle {
+#current-riddle {
   
   img.small  {
     height: 3rem;
