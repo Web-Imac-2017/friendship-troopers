@@ -21,12 +21,21 @@ Router::post('/auth/login','account#login');
 Router::post('/auth/logout','account#logout');
 Router::get('/auth/validate','account#validateUser', 'auth.validate'); //ok
 
+
 Router::get('/users/search','account#search', 'users.search');
 Router::get('/users/list','user#usersList', 'users.list'); //ok. prend comme param planetId ou role (l'id)
 Router::get('/users/me','account#getCurrentUser', 'users.me.current');
 Router::patch('/users/me','account#updateAccountInfos', 'users.me.update');
 Router::get('/users/me/avatars','avatar#listUserAvatar', 'users.me.listAvatar');
 Router::patch('/users/me/avatars/:avatarId/current','avatar#setCurrentAvatar', 'users.me.setCurrentAvatar');
+
+Router::post('/users/:userId/user_title','user_title#add');
+Router::get('/users/:userId/user_title/list','user_title#list');
+Router::get('/users/:userId/user_title/current_title','user_title#viewCurrent');
+Router::get('/users/:userId/user_title/count','user_title#count');
+Router::patch('/users/:userId/user_title/set_current/:titleId','user_title#setCurrent');
+Router::delete('/users/:userId/user_title/:titleId','user_title#delete');
+
 Router::get('/users/me/waiting_list_friend','friend#invitationList', 'users.me.invitationList'); //ok
 Router::get('/users/me/friends','friend#listFriend', 'users.me.listUserFriend'); //ok
 
@@ -78,6 +87,10 @@ Router::get('/planets', 'planet#list');
 Router::post('/planets', 'planet#create');
 Router::delete('/planets/:planet', 'planet#delete');
 
+Router::post('/titles', 'title#create');
+Router::get('/titles', 'title#list');
+Router::patch('/titles/:id', 'title#update');
+//Router::delete('/titles/:id', 'title#delete');
 
 try {
   Router::run();
