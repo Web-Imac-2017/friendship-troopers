@@ -38,28 +38,20 @@ const User = Vue.extend({
   data () {
       return {
        user: {
-        userAvatar : '/assets/images/avatars/earth/miror.svg',
+        userAvatar : '/assets/images/avatars/earth/astro.svg',
         username : 'LuckyPon', 
         userBadge : 'Baroudeuse de l\'espace', 
         birthDate : '29 avril',
         userPlanet : {
-          path : '../assets/images/planets/P1.svg',
+          path : '/assets/images/planets/Paranose.svg',
           name : 'Planete X785-E'
         }, 
         nbFriends : 53, 
         nbRiddleSolved : 2,
-        points : 745,
-        lastBadges : 
-          [ { path  : '/assets/images/badges/logo.png',
-            name : 'Resoudre une énigme'},
-            { path : '/assets/images/badges/logo.png',
-            name : 'Ajouter un ami'},
-            { path : '/assets/images/badges/logo.png',
-            name : 'Inscription'}
-          ]
-       }, 
-       myself : false
-    }
+        points : 745
+      },
+      myself : false
+  }
 
   }
 });

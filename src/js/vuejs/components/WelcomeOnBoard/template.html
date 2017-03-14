@@ -1,64 +1,73 @@
-<div id="home">
-<div class="container-fluid welcome-on-board" v-if="welcomeData.current < welcomeData.nbQuestions">
-  <div class="container-transparent">
-    <div class="row title">
-      <div> {{ welcomeData.questions[welcomeData.current].number }}.</div>  
-      <div> {{ welcomeData.questions[welcomeData.current].title }} </div>
-    </div>
-    <div class="row">
-      <ul>
-        <li class="col-md-2 col-md-offset-1" v-on:click="selected(0)">
-          <img :src="welcomeData.questions[welcomeData.current].answer[0].image" class="square">
-          <div class="text-center">{{ welcomeData.questions[welcomeData.current].answer[0].text }} </div>
-        </li>
-        <li class="col-md-2" v-on:click="selected(1)">
-           <img :src="welcomeData.questions[welcomeData.current].answer[1].image" class="square"> 
-          <div class="text-center">{{ welcomeData.questions[welcomeData.current].answer[1].text }} </div> 
-        </li>
-        <li class="col-md-2" v-on:click="selected(2)">
-         <img :src="welcomeData.questions[welcomeData.current].answer[2].image" class="square"> 
-         <div class="text-center">{{ welcomeData.questions[welcomeData.current].answer[2].text }}</div> 
-       </li>
-       <li class="col-md-2" v-on:click="selected(3)">
-          <img :src="welcomeData.questions[welcomeData.current].answer[3].image" class="square"> 
-         <div class="text-center">{{ welcomeData.questions[welcomeData.current].answer[3].text }}</div>  
-       </li>
-       <li class="col-md-2" v-on:click="selected(4)" >
-         <img :src="welcomeData.questions[welcomeData.current].answer[4].image" class="square"> 
-        <div class="text-center">{{ welcomeData.questions[welcomeData.current].answer[4].text }}</div> 
-      </li>
-    </ul>
-    </div>
-    <div class="row slider">
-      <input type="range" v-model.number="welcomeData.current" min="0" :max="welcomeData.nbQuestions - 1" step="1" class="col-sm-10 "> </input>
+<div id="welcome-on-board-container">
+  <div v-show="introText" class="container welcome-on-board">
+    <div class="container-transparent intro-text">
+      <h1>Coucou texte d'introduction</h1>
+      <p>Il va falloir expliquer des trucs ici !!! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat maxime dignissimos eaque nemo. Ad consectetur magnam, ab nemo quam dolorum animi culpa reiciendis, quisquam, pariatur totam beatae officia saepe, doloremque.</p>
+      <button v-on:click="introText = false">Commencer le questionnaire</button>
     </div>
   </div>
-  <div class="row align-items-start"> 
-      <div v-on:click="decrement" class="col-sm-3 col-sm-offset-1 pseudo-button"> <img src="../assets/images/fleche-gauche.svg">Revenir en arrière </div>
-      <div class="col-sm-4">
-         <div class="col-sm-2" v-for="(validate, index) in welcomeData.answerValidate">
-          <div class="circle" v-bind:class="{ fullCircle : validate}" v-on:click="backToQuestion(index)"> </div>
-       </div>
-       </div>
-      <div v-on:click="increment" v-if="!welcomeData.finish" class="col-sm-4 pseudo-button"> Passer la question <img src="../assets/images/fleche-droite.svg"></div>
-      <div v-on:click="submit" class="col-sm-3 align-self-end pseudo-button" v-else > Submit  <img src="../assets/images/fleche-droite.svg"></div>
+
+
+  <div v-show="!introText" class="container welcome-on-board" v-if="welcomeData.current < welcomeData.nbQuestions">
+    <div class="container-transparent">
+      <div class="row title">
+        <div> {{ welcomeData.questions[welcomeData.current].number }}.</div>  
+        <div> {{ welcomeData.questions[welcomeData.current].title }} </div>
+      </div>
+      <div class="row">
+        <ul>
+          <li class="pseudo-button col-xs-4 col-md-2" v-on:click="selected(index - 1)" v-for="index in welcomeData.questions.length - 1" v-bind:class="addClasses(index)">
+            <img :src="welcomeData.questions[welcomeData.current].answer[index - 1].image" class="square">
+            <div class="fixed-height">{{ welcomeData.questions[welcomeData.current].answer[index - 1].text }} </div>
+          </li>
+      </ul>
+      <div v-show="welcomeData.finish" class="col-xs-12 submit-button">
+        <button v-on:click="submit" >
+          Valider le formulaire
+        </button>
+      </div>
+      
+      <!-- <div class="row slider">
+        <input type="range" v-model.number="welcomeData.current" min="0" :max="welcomeData.nbQuestions - 1" step="1" class="col-sm-10 "> </input>
+      </div> -->
     </div>
-</div>
-<div class="container-fluid welcome-on-board border-planet" v-bind:style="styleObject" v-else>
-  <div class="container-transparent">
-    <div class="row no-gutters vertical-align">
-      <div class="col-sm-6">
-        <img :src="welcomeData.planetInfo[welcomeData.planetUser].path" alt="planet" class="center planet">
-        <h1> {{ welcomeData.planetInfo[welcomeData.planetUser].name }}</h1>
-      </div>
-      <div class="col-sm-6 border-left"  v-bind:style="styleObject2">
-        <div class="row no-gutters">
-        <p > {{ welcomeData.planetInfo[welcomeData.planetUser].info }} </p> </div>
-      <div class="row "> 
-        <router-link to="/actualites" class="col-sm-3 col-sm-offset-9 pseudo-button">Explorer! </router-link>
-      </div>
+    <div class="arrows-row row align-items-start"> 
+
+        <div v-on:click="decrement" class="col-xs-3 col-sm-4 pseudo-button" v-if="welcomeData.current > 0"> <img src="/assets/images/fleche-gauche.svg"><p class="button-text">Revenir en arrière </p></div>
+        <div class="col-xs-3 col-sm-4" v-else></div>
+
+
+        <div class="col-xs-6 col-sm-4">
+          <div class="col-xs-2" v-for="(validate, index) in welcomeData.answerValidate">
+            <div class="circle pseudo-button" v-bind:class="{ fullCircle : validate, activeCircle : welcomeData.current == index}" v-on:click="backToQuestion(index)"> </div>
+         </div>
+         </div>
+
+
+       <!--  <div  v-if="welcomeData.current < reached" class="col-xs-3 col-sm-4 align-self-end not-clickable"><p> Valider </p><img src="/assets/images/fleche-droite.svg"></div> -->
+        <div  v-if="welcomeData.current < reached" v-on:click="increment" class="col-xs-3 col-sm-4 align-self-end pseudo-button"><p> Question suivante  </p><img src="/assets/images/fleche-droite.svg"></div>
+            </div>
     </div>
   </div>
-</div>
+  <div id="planetAttribution" class="container welcome-on-board border-planet" v-bind:style="styleObject" v-else>
+    <div class="container-transparent">
+      <div class="row no-gutters ">
+        <div class="col-xs-12 col-md-6">
+          <img :src="welcomeData.planetInfo[welcomeData.planetUser].path" alt="planet" class="center planet">
+          <h1> {{ welcomeData.planetInfo[welcomeData.planetUser].name }}</h1>
+        </div>
+        <div class="col-xs-12 col-md-6 border-left"  v-bind:style="styleObject2">
+          <div class="row no-gutters">
+            <p style="text-align:left" > {{ welcomeData.planetInfo[welcomeData.planetUser].info }} </p> 
+          </div>
+          <div class="row exploration-button"> 
+            <router-link to="/actualites"  class="pseudo-button"> Explorer ! </router-link>
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+  </div>
 </div>
 

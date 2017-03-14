@@ -1,13 +1,94 @@
-<div>
-<navbar></navbar>
-<div class="well">
-    <div class="row">
-      <div class="col-sm-5 text-right">
-        <img class="logo" src="../assets/logo.png">
+<div class="container-fluid" id="search">
+  <navbar></navbar>
+    <aside class="col-sm-3 col-md-3 col-lg-2">
+      <lateral-menu-left></lateral-menu-left>
+      <deconnexion class="desktop"></deconnexion>
+      <menu-tools class="desktop"></menu-tools>
+    </aside>
+
+    <section class="article col-sm-9 col-md-9 col-lg-10 container-transparent container">
+  		<h1 class="mainTitle"> Recherche </h1>
+      <div class="container-colored">
+        <h2>Rechercher par pseudo </h2>
+        <form class="row" id="searchBarUsername" v-on:submit.prevent.stop="searchBarUsername">
+          <input type="text" v-model="searchUser" class="searchInput" placeholder="Recherche..." :value ="searchUser"></input>
+          <input href="#searchBarFilters" type="submit" class="pseudo-button searchImage" value=""></input>
+        </form>
       </div>
-      <div id="hello">
-        <h1>Page de recherche</h1>
-      </div>
-    </div>
-  </div>
- </div>
+        
+       <h2>OU</h2>
+      <div class="container-colored row">
+        <h2>Rechercher par filtres </h2>
+        <div class="col-xs-12">
+          <h3>Filtrer par planète </h3>
+          <div id="filtersPlanetId" class="wrapper">
+            <div v-for="planet in filtersPlanets" v-on:click="toggleActive(planet)" v-bind:class="{ active: planet.value }" class="pseudo-button item">
+              <img :src="planet.path" :alt="planet.id">
+            </div>
+      
+          </div>
+        
+        </div>
+        <div class="col-xs-12 selectFilters">
+          <h3>Filtrer par titre honorifique </h3>
+          <select v-on:change="tabAdd(titleSelected, titlesPrint, filtersTitles)" v-model="titleSelected">
+            <option v-bind:value="result.id" v-for="result in filtersTitles">
+              {{ result.honorificTitle }}
+            </option>
+          </select>
+          
+          <div class="wrapper">
+            <div v-for="(option, index) in titlesPrint" v-on:click="tabDelete(index, titlesPrint)" class="pseudo-button item">
+              {{ option.honorificTitle }} <img src="/assets/images/Cross.svg">
+            </div>
+          </div>
+          
+        </div>
+        <div class="col-xs-12 selectFilters">
+          <h3>Filtrer par centres d'intérêts </h3>
+          <select v-on:change="tabAdd(interestSelected, interestsPrint, filtersInterests)" v-model="interestSelected">
+            <option v-bind:value="result.id" v-for="result in filtersInterests">
+              {{ result.label }}
+            </option>
+          </select>
+          <div class="wrapper">
+            <div v-for="(option, index) in interestsPrint" v-on:click="tabDelete(index, interestsPrint)" class="pseudo-button item">
+              {{ option.label }} <img src="/assets/images/Cross.svg">
+            </div>
+          </div>
+          
+      
+        </div>
+        <div id="searchBarFilters" class="col-xs-12">
+           <form class="pseudo-button search" v-on:click="searchBarFilters" v-on:submit.prevent.stop="">
+            Rechercher
+            <input type="submit" class="pseudo-button searchImage" value=""></input>
+          </form>
+          
+        </div>  
+      </div> 
+
+      <transition id="scrollToDiv"name="bounce">
+        <div key="exist" v-if="usersExist">
+          <div class="row page-nav">
+            <page-nav :page="currentPage" :more="morePage" v-on:next="showNextPage" v-on:prev="showPrevPage"></page-nav>
+          </div>
+          <div class="row" id="searchResult"> 
+            <user-component v-for="result in usersResult" :user="result" :key="result.id"></user-component> 
+          </div>
+          <div class="row page-nav">
+            <page-nav :page="currentPage" :more="morePage" v-on:next="showNextPage" v-on:prev="showPrevPage"></page-nav>
+          </div>
+          
+        </div>
+ 
+        <div key="doesntExist" v-else style="margin: 2rem 0" class="row">
+          <h1 style="text-align:center">Aucun utilisateur ne correspond à votre requête !</h1>
+        </div>
+      </transition>
+   
+
+    </section>
+
+    <menu-tools class="mobile"></menu-tools>
+</div>

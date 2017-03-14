@@ -1,9 +1,9 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400italic,700italic,400,700);
+@import url(http://fonts.googleapis.com/css?family=Roboto:300,400|Open+Sans:400italic,700italic,400,700);
 
 // Colors variables
 
 $white: #fff; 
-
+ 
 
 $main-title: #46bfa9;
 $username: #349994;
@@ -12,6 +12,7 @@ $planets: #206671;
 $main-text: #e7e8e8;
 
 $grey : #cdcccc;
+$dark-grey: #2c3539;
 $secondary-text : #999999;
 
 $transparent-background : rgba(47,60,79,0.2);
@@ -62,9 +63,14 @@ $main-font: 'Roboto', serif;
 
 // Media queries
 
-$break-large: 1024px;    
-$break-mid: 768px;    
-$break-small: 467px;    
+$break-x-large: 1200px;    
+$break-large: 992px;    
+$break-mid: 768px; 
+$break-col-xs: 991px;       
+$break-small: 467px;  
+$break-small-welcome-on-board: 500px;   
+$screen-md-min : 992px;
+
 
 
 @font-face {

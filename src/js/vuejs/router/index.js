@@ -39,13 +39,14 @@ import AddAvatar from '../components/admin/AddAvatar.vue'
 import AddEmoji from '../components/admin/AddEmoji.vue'
 import AddEnigme from '../components/admin/AddEnigme.vue'*/
 
+import Error401 from '../components/Error401'
+import Error403 from '../components/Error403'
 import Error404 from '../components/Error404'
 
 
 // ==================== Router registration ====================
 const router = new VueRouter({
   mode: 'history',
-  base  : '',
   routes: [
     { 
       name : 'Login',
@@ -53,7 +54,7 @@ const router = new VueRouter({
     	component: Login 
 	},{
       name: 'WelcomeOnBoard',
-      path: '/inscription/welcome-on-board', 
+      path: '/welcome-on-board', 
       component : WelcomeOnBoard
   },{ 
       name : 'Search',
@@ -77,11 +78,13 @@ const router = new VueRouter({
   },{ 
       name : 'Chat',
       path: '/:user/conversations/utilisateur', 
-      component : Chat
+      component : Chat,
+      props: true
   },{ 
       name : 'Messages',
       path: '/:user/conversations', 
-      component : Messages
+      component : Messages,
+      props: true
   } ,{ 
       name : 'Enigme',
       path: '/:user/enigmes', 
@@ -100,7 +103,9 @@ const router = new VueRouter({
   },{ 
       name : 'EnigmeCurrentChat',
       path: '/:user/enigmes/en-cours/chatbox', 
-      component : EnigmeCurrentChat
+      component : EnigmeCurrentChat,
+      props: true
+
   },{ 
       name : 'Feed',
       path: '/actualites', 
@@ -113,11 +118,14 @@ const router = new VueRouter({
   },{ 
       name : 'Post',
       path: '/univers/:planet/post/:id', 
-      component : Post
+      component : Post,
+      props: true
+
   },{ 
       name : 'Wiki',
       path: '/univers/:planet/wiki', 
-      component : Wiki
+      component : Wiki,
+      props: true
   },{ 
       name : 'Market',
       path: '/marche-intergalactique', 
@@ -134,6 +142,14 @@ const router = new VueRouter({
       name : 'Legals',
       path: '/mentions-legales', 
       component : Legals
+  },{ 
+      name : 'Error401',
+      path: '/erreur401', 
+      component : Error401
+  },{ 
+      name : 'Error403',
+      path: '/erreur403', 
+      component : Error403
   },{ 
       name : 'Error404',
       path: '/erreur404', 
@@ -178,7 +194,7 @@ const router = new VueRouter({
       path: '/index.html', 
       redirect: {name:'Feed'}
   },{ 
-      path: '*', 
+      path: '/*', 
       redirect: '/erreur404'
   }
   ]

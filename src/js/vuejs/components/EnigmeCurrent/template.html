@@ -6,74 +6,36 @@
       <lateral-menu-left></lateral-menu-left>
       <menu-tools></menu-tools>
     </aside>
-    <section class="article col-sm-8">
+    <section class="col-sm-8 container-transparent riddle">
       <h1> Résoudre une nouvelle enigme </h1>
       <div class="row container-colored">
-        <form class="form-enigme">
-         
-        <div class="row">
-          
-         <div class="col-sm-12">
-          <p> Niveau de l'enigme <p>
-         <label for="debutant" class="col-sm-3"> 
-            <img src="../../www/assets/images/Avatar1.svg" alt="default avatar" class="col-sm-12"> 
-           
-            <p class="left"><input type="radio" name="level" id="debutant" value="debutant"/>  Débutant  </p>
-          </label>
-           <label for="amateur" class="col-sm-3">
-            <img src="../../www/assets/images/Avatar1.svg" alt="default avatar" class="col-sm-12"> 
-           
-            <p class="left"><input type="radio" name="level" id="amateur" value="amateur" />  Amateur </p>
-          </label>
-          <label for="expert" class="col-sm-3">
-            <img src="../../www/assets/images/Avatar1.svg" alt="default avatar" class="col-sm-12"> 
-         
-             <p class="left"><input type="radio" name="level" id="expert" value="expert" />    Expert </p>
-           </label>
-           <label for="every_level" class="col-sm-3">
-            <img src="../../www/assets/images/Avatar1.svg" alt="default avatar" class="col-sm-12"> 
-           
-           <p class="left"> <input type="radio" name="level" id="every_level" value="every_level" />  Tous niveaux </p>
-          </label>
-        </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <p> Mode de jeu</p>
-          <label for="solo" class="col-sm-6"> 
-            <img src="../../www/assets/images/Avatar1.svg" alt="default avatar" class="col-sm-12">
-           
-            <p class="left"><input type="radio" name="game-mode" id="solo" value="solo"/>  Solo </p>
-          </label>
-           <label for="multi" class="col-sm-6">
-            <img src="../../www/assets/images/Avatar1.svg" alt="default avatar" class="col-sm-12"> 
-            
-             <p class="left"> <input type="radio" name="game-mode" id="multi" value="multi"/> Multijoueurs</p>
-          </label>
-           
+          <div class="col-sm-12">
+            <p><strong> Niveau de l'enigme</strong></p>
+            <ul class="row">
+              <li class="col-sm-3" v-on:click="selectedLevel(index)" v-for="(level, index) in levels">
+               <img :src="level.image" :alt="level.text" v-if="index != levelSelected">
+               <img :src="level.imageSelected" :alt="level.text" v-else>
+               <p>{{ level.text }} </p></li> 
+            </ul>
+            <span class="border-bottom center"></span>
+            <p><strong> Mode de jeu</strong></p>
+            <ul class="row justify-content-center">
+              <li class="col-sm-3 col-sm-offset-3" v-on:click="selectedMode(0)">  
+               <img :src="modes[0].image" :alt="modes[0].text" v-if="0 != modeSelected">
+               <img :src="modes[0].imageSelected" :alt="modes[0].text" v-else>
+               <p>{{ modes[0].text }} </p></li> 
+                <li class="col-sm-3" v-on:click="selectedMode(1)">  
+               <img :src="modes[1].image" :alt="modes[1].text" v-if="1 != modeSelected">
+               <img :src="modes[1].imageSelected" :alt="modes[1].text" v-else>
+               <p>{{ modes[1].text }} </p></li> 
+            </ul>
           </div>
-          <div class="col-sm-6">
-            <div class="col-sm-12 invite-friends">
-            <p> Inviter un ami </p>
-            <p> Seuls les amis actuellement en ligne peuvent être invités </p>
-            <label for="friends-online"> Pseudo </label>
-            <select name="friends-online" size="1">
-              <option v-for="friends in friendsOnline"> {{ friends }} </option>
-            </select>
-          </div>
-          <div class="col-sm-3">
-             <button v-on:click.prevent="create">Créer</button>
-          </div>
-           
-          </div>
-          
-        </div>
-      </form>
-    </div>
+      </div>
+      <button class="center" v-on:click.prevent="create">Résoudre <img src="/assets/images/validation.svg" alt="validation"></button>
+
   </section>
   <div class="col-sm-2">
    <lateral-menu-right></lateral-menu-right>
  </div>
-</div>
 </div>
 </div>

@@ -1,0 +1,18 @@
+<div class="userSearch col-xs-12 col-lg-6">
+  <router-link :alt="user.username" :to="{ name: 'User', params: { user: user.username }}"> 
+    <div class="row pseudo-button">
+      <div class="col-xs-3 col-sm-2 col-lg-3">
+        <img :src="user.imagePath" :alt="user.username" class="avatar">
+      </div>
+      <div class="col-xs-6 col-sm-8 col-lg-6">
+        <h1 class="pseudo" v-bind:style="{color : planetData[user.planetId] }" >
+          {{ user.username }}
+        </h1>
+        <p>{{ user.honorificTitle }}</p>
+      </div>
+      <div class="col-xs-3 col-sm-2 col-lg-3">
+        <img :src="user.planetPath" :alt="user.planetId" class="avatar">
+      </div>
+    </div>
+  </router-link>
+</div>

@@ -22,7 +22,7 @@ class Interest extends Controller {
       'fields' => ['id','label','initInterest'],
     ]);
     $this->response($request,200);
-
+ 
   }
 
   /**

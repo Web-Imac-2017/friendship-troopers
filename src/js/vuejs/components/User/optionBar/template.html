@@ -1,28 +1,30 @@
 <div>
     <ul class="wrapper" v-if="myself">
       <li class="item container-colored">
-        <img src="../assets/Friends.svg">
-        <p> Debloquer des récompenses </p>
+        <img src="/assets/images/Friends.svg">
+        <p>Obtenir des récompenses</p>
       </li>
       <li class="item container-colored">
-        <img src="../assets/Messages.svg">
-        <router-link to="/utilisateur/parametres"> Modifier mes informations</router-link>
+        <img src="/assets/images/Messages.svg">
+        <router-link to="/utilisateur/parametres">Modifier mes informations</router-link>
       </li>
       <li class="item container-colored">
-        <p> Autres actions </p>
+        <img src="/assets/images/Cross.svg">
+        <p>Supprimer mon compte</p>
       </li>
     </ul>
+
     <ul class="wrapper" v-else>
       <li class="item container-colored">
         <img src="/assets/images/Friends.svg">
-        <p> Ajouter à mes amis </p>
+        <p>Ajouter à mes amis</p>
       </li>
       <li class="item container-colored">
-        <img src="/assets/images//Messages.svg">
-        <p> Envoyer un message </p>
+        <img src="/assets/images/Messages.svg">
+        <p>Envoyer un message</p>
       </li>
       <li class="item container-colored">
-        <p> Autres actions </p>
+        <p>Autres actions</p>
       </li>
     </ul>
   </div>

@@ -15,6 +15,13 @@ class Comment extends Controller {
 		$this->loadModel('Comment');
 	}
 
+	public function count ($publicationId, $get) {
+		$count = $this->Comment->findCount([
+			'publicationId' => $publicationId,
+		]);
+		$this->response($count, 200);
+	}
+
 	/**
 	* list comments for a publication. Show the first one, then the 5 next etc.
 	* @param  int 		$planetId 			planet id passed by road
@@ -77,14 +84,13 @@ class Comment extends Controller {
 			],
 		]);
 
-		var_dump($request);
 		$offset = $offset + $limit;
 		$listUrl = \Utils\Router\Router::url('planets.posts.comments.list', [
 			'planet' => $planetId,
 			'publicationId' => $publicationId,
 		]);
 		$this->response($request, 200, [
-			'Link' => "\"$listUrl?offset=$offset&limit=$limit\"; rel=\"next\", \"$listUrl?page=$offset&limit=$limit\"; rel=\"last\"",
+			'Link' => "\"$listUrl?offset=$offset&limit=$limit\"; rel=\"next\", \"$listUrl?offset=$offset&limit=$limit\"; rel=\"last\"",
 		]);
 	}
 
