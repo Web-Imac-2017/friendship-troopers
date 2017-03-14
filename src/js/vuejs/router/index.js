@@ -47,7 +47,6 @@ import Error404 from '../components/Error404'
 // ==================== Router registration ====================
 const router = new VueRouter({
   mode: 'history',
-  base  : '',
   routes: [
     { 
       name : 'Login',
@@ -195,7 +194,7 @@ const router = new VueRouter({
       path: '/index.html', 
       redirect: {name:'Feed'}
   },{ 
-      path: '*', 
+      path: '/*', 
       redirect: '/erreur404'
   }
   ]

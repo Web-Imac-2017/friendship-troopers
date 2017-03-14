@@ -26,21 +26,21 @@
         
         <div class="nav-item nav-icon">
           <div class="friends-icon" v-on:click="showSubMenu(1)" title="Mes demandes d'amis">
-            <p v-if="friends.length > 99" class="notif">99+</p> 
-            <p v-else-if="friends.length > 0" class="notif"> {{ friends.length }} </p> 
+            <p v-if="friendsRequest.length > 99" class="notif">99+</p> 
+            <p v-else-if="friendsRequest.length > 0" class="notif"> {{ friendsRequest.length }} </p> 
           </div>
 
           <div v-if="subMenu == 1" class="sub-menu menu-friends"> 
             <div class ="sub-menu-triangle"></div>
-            <p class="sub-menu-header" v-if = "friends.length > 0"> Mes demandes d'amis</p>
+            <p class="sub-menu-header" v-if = "friendsRequest.length > 0"> Mes demandes d'amis</p>
             <p class="sub-menu-header" v-else>Pas de nouvelles demandes d'ami</p>
 
             <div class="separator"> </div>
 
-            <ul class="list" v-if = "friends.length > 0" v-for="friend in friends">
-              <friends :friend="friend"></friends>
+            <ul class="list" v-if = "friendsRequest.length > 0" v-for="friend in friendsRequest">
+              <friends v-on:friendaction="actualizeFriendsRequest" :friend="friend"></friends>
             </ul>
-            <div  v-if = "friends.length > 0" class="separator"></div>
+            <div  v-if = "friendsRequest.length > 0" class="separator"></div>
 
             <p class="sub-menu-footer"> <router-link :to="{ name: 'Friends', params: { user: pseudo }}"> Voir tous mes amis</router-link></p>
           </div>
@@ -83,7 +83,7 @@
 
             <div class="separator"> </div>
             <ul class="list" v-if = "notifications.length > 0" v-for="notification in notifications">
-              <notifications :notification="notification"></notifications>
+              <dashboard :notification="notification"></dashboard>
             </ul>
             <div  v-if = "notifications.length > 0" class="separator"></div>
 
