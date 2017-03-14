@@ -51,42 +51,14 @@ const Search = Vue.extend({
         name:"Multas",
         value:false
       }],
-      // RECUPERER LISTE TITLES DANS BDD : enlever apres
-      filtersTitles: [{
-        id:4,
-        name:"Alien"
-      },{
-        id:2,
-        name:"Seigneur des abricots"
-      },{
-        id:3,
-        name:"Lord de l'enfer"
-      }],
-      // RECUPERER LISTE INTERESTS DANS BDD : enlever apres
-      /*filtersInterests: [{
-        id:4,
-        name:"Jazz"
-      },{
-        id:7,
-        name:"La piscine"
-      },{
-        id:3,
-        name:"Dormir"
-      },{
-        id:1,
-        name:"Les champignons"
-      },{
-        id:5,
-        name:"Les pieds"
-      },{
-        id:6,
-        name:"Sherlock Holmes"
-      }],*/
+      // Liste des intérêts 
       filtersInterests : {},
+      // Liste des titres
+      filtersTitles : {},
       searchUser : "",
       interestSelected : "Sélectionner",
       titleSelected : "Sélectionner",
-      // ENLEVER QUAND LIEN AVEC BDD
+      // LISTE DES UTILISATEURS RENVOYES
       usersResult : {},
       // TABLEAU D INTERETS COCHES A ENVOYER A LA BDD
       interestsPrint : [],
@@ -112,9 +84,16 @@ const Search = Vue.extend({
   created : function(){
     this.$http.get(apiRoot() + 'interest/view',{emulateJSON: true }).then(
         (response) => {
-          this.filtersInterests = response.data;
-          console.log("liste d'interets");
-          console.log(response.data);
+          this.filtersInterests = response.data;      
+        },
+        (response) => {
+          console.log(response);
+        });
+    this.$http.get(apiRoot() + 'titles',{emulateJSON: true }).then(
+        (response) => {
+          this.filtersTitles = response.data;
+          console.log("liste titles");
+          console.log(JSON.stringify(response.data));
           (this.filtersInterests.length > 0) ? console.log(this.filtersInterests[0].id) : console.log("vide");
             
         },
@@ -131,12 +110,9 @@ const Search = Vue.extend({
           emulateJSON: true 
         }).then(
         (response) => {
-
-           console.log("Bonne reponse de users/search ");
           this.usersResult = response.data;
           this.totalUsers = this.usersResult.length;
           this.assignPlanetPath();
-         // console.log(this.usersResult[0]);
 
           this.usersExist = (this.usersResult.length > 0) ? true : false;
 

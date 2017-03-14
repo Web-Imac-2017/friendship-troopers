@@ -42,7 +42,7 @@ const formUser = Vue.extend({
 		},
 		checkUsername(){
 			var username = this.userSignIn.username;
-			this.longUsername = (username.length > 20) ? true : false;
+			this.longUsername = (username.length > 15) ? true : false;
 			this.nullUsername = (username == '') ? true : false;
 			
 		},

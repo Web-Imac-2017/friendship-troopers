@@ -33,13 +33,13 @@
           <h3>Filtrer par titre honorifique </h3>
           <select v-on:change="tabAdd(titleSelected, titlesPrint, filtersTitles)" v-model="titleSelected">
             <option v-bind:value="result.id" v-for="result in filtersTitles">
-              {{ result.name }}
+              {{ result.honorificTitle }}
             </option>
           </select>
           
           <div class="wrapper">
             <div v-for="(option, index) in titlesPrint" v-on:click="tabDelete(index, titlesPrint)" class="pseudo-button item">
-              {{ option.name }} <img src="/assets/images/Cross.svg">
+              {{ option.honorificTitle }} <img src="/assets/images/Cross.svg">
             </div>
           </div>
           
@@ -48,12 +48,12 @@
           <h3>Filtrer par centres d'intérêts </h3>
           <select v-on:change="tabAdd(interestSelected, interestsPrint, filtersInterests)" v-model="interestSelected">
             <option v-bind:value="result.id" v-for="result in filtersInterests">
-              {{ result.name }}
+              {{ result.label }}
             </option>
           </select>
           <div class="wrapper">
             <div v-for="(option, index) in interestsPrint" v-on:click="tabDelete(index, interestsPrint)" class="pseudo-button item">
-              {{ option.name }} <img src="/assets/images/Cross.svg">
+              {{ option.label }} <img src="/assets/images/Cross.svg">
             </div>
           </div>
           
