@@ -30,7 +30,7 @@ class Publication extends Controller {
 				'to' => 'userId',
 			],
 		]);
-		$this->response($count, 200);
+		$this->response($count[0], 200);
 	}
 
 	/**
