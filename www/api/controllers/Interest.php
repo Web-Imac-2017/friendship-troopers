@@ -78,10 +78,12 @@ class Interest extends Controller {
   }
 
   /**
-   * listuserInterest list all user_interest from DB
-   * @return  [type] [description]
+   * listuserInterest from
+   * list all user's interests
+   * @param int user's id
+   * @return  JSON interests info
    */
-  public function listuserInterest() {
+  public function listuserInterest($userId) {
     $userInterest = new \Models\User_Interest();
     $request = $userInterest->find([
       'fields' => ['interest.id', 'label'],
@@ -99,6 +101,7 @@ class Interest extends Controller {
   				'to' => 'interestId',
         ],
       ],
+      'conditions' => ['userId' => $userId]
     ]);
     $this->response($request, 200);
   }
