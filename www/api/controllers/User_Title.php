@@ -12,6 +12,21 @@ class User_Title extends Controller {
     $this->loadModel('User_Title');
   }
 
+  public function count ($userId, $get){
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
+    }
+    
+    $count = $this->User_Title->find([
+      'fields' =>['COUNT(userId) AS nbTitle'],
+      'conditions' => [
+        'UserId' => 1,
+      ],
+    ]);
+
+    $this->response($count, 200);
+  }
+
   public function list ($userId, $get){
     if (!\Utils\Session::isLoggedIn()) {
       throw new \Utils\RequestException('operation reservee aux membres', 401);
@@ -46,17 +61,6 @@ class User_Title extends Controller {
     $this->response($find, 200);
   }
 
-  public function count ($userId, $get){
-    if (!\Utils\Session::isLoggedIn()) {
-      throw new \Utils\RequestException('operation reservee aux membres', 401);
-    }
-    var_dump($userId);
-    $count = $this->User_Title->findCount([
-        'userId' => 1,
-      ]);
-
-    $this->response($count, 200);
-  }
 
   public function viewCurrent ($userId, $get){
     if (!\Utils\Session::isLoggedIn()) {
