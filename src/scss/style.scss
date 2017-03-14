@@ -23,8 +23,6 @@
   transform: translateY(30px);
 }
 
-
-
 h1, h2, h3, h4, h5, h6 {
   font-family: $title-font;
   font-weight: normal;
@@ -269,8 +267,6 @@ html, body, #home {
     margin: 0;
 }
 
-
-
 .center{
   @extend %center;
 }
@@ -284,10 +280,21 @@ html, body, #home {
 }
 
 a {
+  text-decoration: none;
+  color: $main-text;
+}
+
+a:hover {
+  text-decoration: none;
+  color: $main-text;
+}
+
+.sublink {
   color:$main-text;
-  text-decoration: underline;
+  transition: .3s;
   &:hover{
     color:$main-title;
+    transition: .3s;
     background-color: none;
   }
 }
@@ -572,20 +579,46 @@ small {
 }
 
 
-/*.pseudo {
-  margin: 0px 1px 0.5px 2px;
-}
-*/
 .pseudo-button{
   cursor:pointer;
 }
 
-/*.pseudo {
-  margin: 0px 1px 0.5px 2px;
-}*/
+.option-button img {
+  cursor:pointer;
+  position: absolute;
+  top:0;right: 1rem;
+  width: 2.5rem;    
+}
 
+.comment {
+  .option-button img {
+    top:0;right: 4rem;
+  }
+}
 
+.post-footer {
+  min-height: 2.5rem;
+  width: 100%;
+  margin: 0%;
+}
 
+.post-footer-likes, .post-footer-comments {
+  margin: 0 5%;
+  position: absolute;
+  right: 10rem; 
+  max-width: 4rem;
+  display:inline-block;
+  img {
+    max-height: 2rem;
+    max-width: 2rem;
+  }
+}
+.post-footer-likes {
+  right: 10rem;
+}
+.post-footer-comments {
+   right: 2rem;
+}
 
 .connect-buttons {
   text-align: right;
