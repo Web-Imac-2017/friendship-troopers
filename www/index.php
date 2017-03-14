@@ -65,6 +65,8 @@ Router::get('/planets/:planet/news', 'planet#getPlanetFeed');
 
 Router::post('/interest/add' , 'interest#addInterest','interest.add');
 Router::get('/interest/view','interest#listInterest', 'interest.list');
+Router::post('/interest/delete','interest#deleteInterest','interest.delete');
+Router::patch('/user/:userId/interests' , 'interest#WelcomeOnBoard','interest.WelcomeOnBoard');
 
 Router::get('/planets/:planet/news' , 'planet#getPlanetFeed');
 Router::post('/planets/:planet/posts/:publicationId/comments', 'comment#create', 'planets.posts.comments.create');
@@ -72,7 +74,6 @@ Router::get('/planets/:planet/posts/:publicationId/comments', 'comment#list', 'p
 Router::get('/planets/:planet/posts/:publicationId/comments/count', 'comment#count', 'planets.posts.comments.count');
 Router::patch('/planets/:planet/posts/:publicationId/comments/:id', 'comment#update', 'planets.posts.comments.update');
 Router::delete('planets/:planet/posts/:publicationId/comments/:id', 'comment#delete', 'planets.posts.comments.delete');
-
 
 Router::post('/posts/:publicationId/stardust' , 'stardust#create');
 Router::delete('/posts/:publicationId/stardust' , 'stardust#delete');

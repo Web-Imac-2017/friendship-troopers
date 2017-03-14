@@ -20,7 +20,6 @@ class Interest extends Controller {
     $interest = new \Models\Interest();
     $request = $interest->find([
       'fields' => ['id','label','initInterest'],
-      'conditions' => 'initInterest = 0'
     ]);
     $this->response($request,200);
  
@@ -157,21 +156,28 @@ class Interest extends Controller {
    * @param array $interestList containing interestId
    * @return the new planetId
    */
-  public function WelcomeOnBoard ($interestList) {
+  public function WelcomeOnBoard ($userId,$interestList) {
     /*Checking if the user is logged in*/
-  if (!\Utils\Session::isLoggedIn()) {
-    throw new \Utils\RequestException('operation reservee aux membres', 401);
-  }
-    /*bring back the user logged id*/
-    $userId = \Utils\Session::user('id');
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
+    }
 
+    /*bring back the user logged id*/
+    $userIdLogged = \Utils\Session::user('id');
+
+    /*Check if the current user is the same user*/
+    if($userIdLogged != $userId) {
+      throw new \Utils\RequestException('probleme d\'utilisateur : l\'utilisateur courant est different', 401);
+    }
+
+    /*initialize a data array*/
     $planetResult = array('Terre' => 0, 'Sautien' => 0,'Technome' => 0,'Paranose' => 0,'Multas' => 0);
 
     /*add interests for the user*/
-    $this->addUserInterest($interestList[0]);
+    $this->addUserInterest($interestList[0]['value']);
 
     /*Calculate max interest points*/
-    foreach($interestList[0] as $key => $value) {
+    foreach($interestList[0]['value'] as $key => $value) {
       switch($value%5) {
         case 0 : $planetResult['Multas']++;
         break;
@@ -187,6 +193,7 @@ class Interest extends Controller {
       }
     }
 
+    /*get the planet name corresponding to the interest*/
     $result = array_search(max($planetResult),$planetResult);
 
     /*Get the associated planet id*/
