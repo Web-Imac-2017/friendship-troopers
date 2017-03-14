@@ -59,7 +59,8 @@ const router = new VueRouter({
   },{ 
       name : 'Search',
       path: '/recherche', 
-      component : Search
+      component : Search,
+      props:true
   },{ 
       name : 'User',
       path: '/utilisateur/:user', 

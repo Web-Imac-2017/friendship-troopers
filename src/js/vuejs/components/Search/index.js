@@ -23,6 +23,16 @@ const Search = Vue.extend({
     'user-component' : UserComponent,
     'deconnexion' : Deconnexion
   },
+  computed: {
+    searchUser:function(){
+      console.log(this.$route.params.searchInput);
+      if(this.$route.params.searchInput != ""){
+        this.searchBarUsername(this.$route.params.searchInput);
+      }
+        
+      return this.$route.params.searchInput;
+    } 
+  },
   data () {
     return {
       filtersPlanets: [{
@@ -55,7 +65,7 @@ const Search = Vue.extend({
       filtersInterests : {},
       // Liste des titres
       filtersTitles : {},
-      searchUser : "",
+      
       interestSelected : "Sélectionner",
       titleSelected : "Sélectionner",
       // LISTE DES UTILISATEURS RENVOYES
@@ -70,6 +80,7 @@ const Search = Vue.extend({
       activePlanet:  "",
       // SI AUCUN UTILISATEURS NE CORRESPOND, METTRE A FALSE
       usersExist : false,
+      searchUserInput : "",
 
 
       currentPage: 1,
@@ -216,8 +227,10 @@ const Search = Vue.extend({
         newTab[i] = oldTab[i].id;
       }
     },
-    searchBarUsername(){
-      var data = {username: this.searchUser};
+    searchBarUsername(value){
+      console.log(this.searchUserInput);
+      console.log(value);
+      var data = {username: value};
       this.getUsers(apiRoot() + 'users/search', data);    
     },
     searchBarFilters(){

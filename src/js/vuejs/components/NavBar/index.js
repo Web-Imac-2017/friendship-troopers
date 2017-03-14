@@ -41,10 +41,20 @@ const NavBar = Vue.extend({
       else {
         this.subMenu = idMenu
       }
+    },
+    searchUsername: function(){
+      if(this.searchByUser != ""){
+        this.$router.push({
+            name: 'Search',
+            params: { searchInput : this.searchByUser }
+        });
+      }
+      
     }
   }, 
    data () {
       return {
+        searchByUser : "",
         friendsRequest : [],
         messages: [ {pseudo: 'luckypon',avatar:'/assets/images/avatars/Terre/astro.svg', planet :'earth', content:"Ok, comment ç va, t'as reçu un vélociratop à noel ? Oki doc !", date : '12/03/13'},
                     {pseudo: 'tintin', avatar:'/assets/images/avatars/Multas/landscape.svg', planet :'Multas', content:"Je t'envoie un message toto !", date : '11/02/12'},
