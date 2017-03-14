@@ -16,9 +16,9 @@ class Publication extends Controller {
 	}
 
 	public function count ($planet, $get) {
-		$find = $this->Publication->find([
+		$count = $this->Publication->find([
 			'fields' => [
-				'userId',
+				'COUNT(userId) as nbPost',
 			],
 			'conditions' => [
 				'user.planetId' => $planet,
@@ -30,7 +30,6 @@ class Publication extends Controller {
 				'to' => 'userId',
 			],
 		]);
-		$count = sizeof($find);
 		$this->response($count, 200);
 	}
 
