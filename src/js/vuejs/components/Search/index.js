@@ -10,6 +10,7 @@ import MenuTools from '../MenuTools/index.js'
 import NavBar from '../NavBar/index.js';
 import PageNav from '../PageNav/index.js'
 import UserComponent from './UserComponent/index.js'
+import Deconnexion from '../Deconnexion/index.js'
 
 
 const Search = Vue.extend({
@@ -19,7 +20,8 @@ const Search = Vue.extend({
     'menu-tools' : MenuTools,
     'navbar' : NavBar,
     'page-nav' : PageNav,
-    'user-component' : UserComponent
+    'user-component' : UserComponent,
+    'deconnexion' : Deconnexion
   },
   data () {
     return {

@@ -37,7 +37,8 @@ const formLogin = Vue.extend({
 					});
 		          },
 		          (response) => {
-		            console.log("fail !")
+		            console.log("fail !");
+		            console.log(response);
 		            this.cantSubmit=true;
 		          }
 		        )
