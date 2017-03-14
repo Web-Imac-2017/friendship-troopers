@@ -22,7 +22,7 @@ class Interest extends Controller {
       'fields' => ['id','label','initInterest'],
     ]);
     $this->response($request,200);
- 
+
   }
 
   /**
@@ -153,7 +153,7 @@ class Interest extends Controller {
    * WelcomeOnBoard function
    * update the current user planetId
    * @param array $interestList containing interestId
-   * @return JSON user's planetId
+   * @return JSON user's id
    */
   public function WelcomeOnBoard ($userId,$data) {
     /*Checking if the user is logged in*/
