@@ -218,6 +218,7 @@ class Interest extends Controller {
       'planetId' => $planet
     ]));
 
-    $this->response($request,200);
+    print_r($request);
+    //$this->response($request,200);
   }
 }
