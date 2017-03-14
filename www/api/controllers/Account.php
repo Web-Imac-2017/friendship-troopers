@@ -111,7 +111,7 @@ class Account extends Controller{
 			'conditions' => $data
 		];
 		$result = $this->User->find($request);
-		var_dump($result);
+		//var_dump($result);
 		if(count($result) > 0){
 			$data['activated'] = 1;
 			$data['id'] = $result[0]['id'];
@@ -161,7 +161,7 @@ class Account extends Controller{
 			$month = $tmpBirth[1];
 			$year = $tmpBirth[0];
 			if(!checkdate($month,$day,$year)) {
-				throw new \Utils\RequestException('Date invalide', 400);
+				throw new \Utils\RequestException('INVALID_DATE', 400);
 			}
 			$birthdate = $year . '-' . $month . '-' . $day;
 			$password = $post['password'] ;
@@ -178,7 +178,7 @@ class Account extends Controller{
 			try {
 				$data['id'] = $user->addUser($data);
 			} catch (\PDOException $e) {
-				throw new \Utils\RequestException('utilisateur existe deja', 400);
+				throw new \Utils\RequestException('"USER_EXISTING"', 400);
 			}
 			$this->loadModel('User_Avatar');
 			$this->loadModel('Avatar');
@@ -328,7 +328,6 @@ class Account extends Controller{
 	}
 
 	public function search($get) {
-		var_dump($get);
 		$isRequired = $this->checkRequired(['username', 'interest', 'title', 'planet'],$get);
 		if(!empty($isRequired) && count($isRequired) === 4) {
 			throw new \Utils\RequestException('champs manquant', 400);

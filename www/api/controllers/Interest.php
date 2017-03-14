@@ -23,7 +23,7 @@ class Interest extends Controller {
       'conditions' => 'initInterest = 0'
     ]);
     $this->response($request,200);
-
+ 
   }
 
   /**

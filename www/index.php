@@ -20,6 +20,7 @@ Router::post('/auth/signin/mail','account#isMailFree', 'users.me.mailFree');
 Router::post('/auth/login','account#login');
 Router::post('/auth/logout','account#logout');
 Router::get('/auth/validate','account#validateUser', 'auth.validate'); //ok
+Router::get('/users/search','account#search', 'users.search');
 
 Router::get('/users/list','user#usersList', 'users.list'); //ok. prend comme param planetId ou role (l'id)
 Router::get('/users/me','account#getCurrentUser', 'users.me'); //ok
@@ -41,7 +42,7 @@ Router::delete('/users/:userId/delete_friend','friend#deleteFriend', 'users.me.d
 Router::get('/users/:userId/friends','friend#listFriend', 'users.me.listFriend'); //ok
 Router::get('/users/:userId/number_friends','friend#countFriend', 'users.me.countFriend'); //ok
 
-Router::get('/users/search','account#search', 'users.search');
+
 
 Router::post('/planets/:planet/posts', 'publication#create', 'planets.posts.create');
 Router::get('/planets/:planet/posts', 'publication#list', 'planets.posts.list');

@@ -80,7 +80,7 @@ const Search = Vue.extend({
         id:6,
         name:"Sherlock Holmes"
       }],
-     /* filtersInterests : {},*/
+      //filtersInterests : {},
       searchUser : "",
       interestSelected : "Sélectionner",
       titleSelected : "Sélectionner",
@@ -103,7 +103,7 @@ const Search = Vue.extend({
       planetId: 0,
       routeNextUser: '',
       routePrevUser: '',
-      totalUsers: 15,
+      totalUsers: 7,
 
     }
   },
@@ -123,14 +123,18 @@ const Search = Vue.extend({
   },
   methods : {
     getUsers : function(route, data) {
-        this.$http.get(apiRoot() + 'users/search', {
+        this.$http.get(apiRoot() + 'users/search?limit=2', {
           params : data
         },{
           emulateJSON: true 
         }).then(
         (response) => {
+
+           console.log("Bonne reponse de users/search ");
           this.usersResult = response.data;
+          this.totalUsers = this.usersResult.length;
           this.assignPlanetPath();
+         // console.log(this.usersResult[0]);
 
           this.usersExist = (this.usersResult.length > 0) ? true : false;
 
@@ -141,7 +145,7 @@ const Search = Vue.extend({
           this.routePrevUser = apiRoot() + linkPrev.substring(2, linkPrev.length-1);
         },
         (response) => {
-          console.log("Erreur ");
+          console.log("Erreur getUsers ");
           this.usersExist = false;
           this.usersResult = {};
           console.log(response);
@@ -150,11 +154,11 @@ const Search = Vue.extend({
     },
     // A TESTER
     showNextPage : function() {
-      if (this.currentPage*10 < this.totalUsers) {
+      if (this.currentPage*2 < this.totalUsers) {
         this.currentPage++;
-        this.getUsers(this.routeNextPost);
+        this.getUsers(this.routeNextUser);
       }
-      if (this.totalUsers-(this.currentPage*10) > 10) {
+      if (this.totalUsers-(this.currentPage*2) > 2) {
         this.morePage = true;
       } else {
         this.morePage = false;
@@ -163,8 +167,8 @@ const Search = Vue.extend({
     // A TESTER
     showPrevPage : function() {
       this.currentPage--;
-      this.getUsers(this.routePrevPost);
-      if (this.totalUsers-(this.currentPage*10) < 10) {
+      this.getUsers(this.routePrevUser);
+      if (this.totalUsers-(this.currentPage*2) < 2) {
         this.morePage = true;
       } else {
         this.morePage = false;
@@ -193,7 +197,6 @@ const Search = Vue.extend({
     assignPlanetPath(){
       for(var i = 0; i < this.usersResult.length ; i++){
         // a enlever quand fonction updater
-        this.usersResult[i].planetId = 1;
         var planet = this.tabFind(this.usersResult[i].planetId, this.filtersPlanets);
         this.usersResult[i].planetPath = planet.path;
       }

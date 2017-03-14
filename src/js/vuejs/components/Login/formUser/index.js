@@ -32,6 +32,21 @@ const formUser = Vue.extend({
 		checkMail(){
 			var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
 			this.falseMail = (!regex.test(this.userSignIn.mail)) ? true : false;
+			if(!(this.falseMail)){
+				this.$http.post(apiRoot() + 'auth/signin/mail', 
+		       	{
+		       		'mail' : this.userSignIn.mail
+		       	},{
+		        	emulateJSON: true
+		        }).then(
+		          (response) => {
+		          	this.alreadyUsedMail = false;
+		          },
+		          (response) => {
+		            this.alreadyUsedMail = true;
+		          }
+		        )
+		    }
 		},
 		checkPassword(){
 			var regex = /^.*(?=.{8,})(?=.*\d)(?=.*[a-zA-Z]).*$/;
@@ -44,6 +59,25 @@ const formUser = Vue.extend({
 			var username = this.userSignIn.username;
 			this.longUsername = (username.length > 20) ? true : false;
 			this.nullUsername = (username == '') ? true : false;
+			if(!(this.longUsername)&&!(this.longUsername)){
+				console.log("username is "+username);
+				this.$http.post(apiRoot() + 'auth/signin/username', 
+		       	{
+		       		'username' : username
+		       	},{
+		        	emulateJSON: true
+		        }).then(
+		          (response) => {
+		          	this.alreadyUsedUsername = false;
+		          	console.log("ok username");
+		          },
+		          (response) => {
+		            this.alreadyUsedUsername = true;
+		            console.log("pas ok username");
+		          }
+		        )
+			}
+			
 		},
 		checkInputs(){
 			
@@ -58,7 +92,8 @@ const formUser = Vue.extend({
 	      	this.checkMail();
 
 	      	return ((!this.nullUsername)&&(!this.nullMail)&&(!this.longUsername)&&(!this.lowPassword)&&(!this.nullPassword)
-	      		&&(!this.nullPasswordChecked)&&(!this.falsePassword)&&(!this.falseDate)&&(!this.falseMail)) ? true : false;
+	      		&&(!this.nullPasswordChecked)&&(!this.falsePassword)&&(!this.falseDate)&&(!this.falseMail)&&(!this.alreadyUsedUsername)
+	      		&&(!this.alreadyUsedMail)) ? true : false;
 		},
 		isBissextile(value){
 			return ((value % 4 == 0 && value%100 != 0) || value%400 == 0) ? true : false;
