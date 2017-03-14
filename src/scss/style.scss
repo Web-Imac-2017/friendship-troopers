@@ -521,14 +521,11 @@ small {
   }
 }
 
-<<<<<<< HEAD
-=======
 
 .pseudo-button{
   cursor:pointer;
 }
 
->>>>>>> origin/interestFunctions
 .pseudo {
   margin: 0px 1px 0.5px 2px;
 }
@@ -671,12 +668,6 @@ input[type="radio"] {
   border-left-width: 0.2rem;
 }
 
-<<<<<<< HEAD
-.pseudo-button {
-  cursor : pointer;
-}
-
-=======
 .space-opera {color : $planet-space-opera;}
 .parallel {color : $planet-parallel;}
 .robots {color : $planet-robots;}
@@ -732,7 +723,6 @@ p.honorific-title {
       margin-top: 1rem;
   }
 }
->>>>>>> origin/interestFunctions
 
 @media all and (max-width: $break-small) {
   #intro-form{
@@ -836,7 +826,6 @@ p.honorific-title {
   }
 }
 
-<<<<<<< HEAD
 @media all and (max-width: $break-col-xs) {
   #welcome-on-board-container {
     .container-transparent{
@@ -864,7 +853,6 @@ p.honorific-title {
 
  }
 
-=======
 .comment {
   background: $comments-background;
   @include padding(0.5);
@@ -880,7 +868,6 @@ p.honorific-title {
 small.date {
     color: $grey;
   }
->>>>>>> origin/interestFunctions
 
 p.see {
   cursor : pointer;

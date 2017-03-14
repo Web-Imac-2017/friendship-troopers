@@ -165,6 +165,7 @@ class Interest extends Controller {
     $planetResult = array('Terre' => 0, 'Sautien' => 0,'Technome' => 0,'Paranose' => 0,'Multas' => 0);
 
     /*add interests for the user*/
+    echo ($interestList[0]);
     $this->addUserInterest($interestList[0]);
 
     /*Calculate max interest points*/
