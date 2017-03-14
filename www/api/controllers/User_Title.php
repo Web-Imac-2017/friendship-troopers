@@ -16,7 +16,7 @@ class User_Title extends Controller {
     if (!\Utils\Session::isLoggedIn()) {
       throw new \Utils\RequestException('operation reservee aux membres', 401);
     }
-    
+
     $count = $this->User_Title->find([
       'fields' =>['COUNT(userId) AS nbTitle'],
       'conditions' => [
@@ -137,6 +137,18 @@ class User_Title extends Controller {
     $currentUserId = \Utils\Session::user('id');
     if (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $userId != $currentUserId) {
       throw new \Utils\RequestException('action reservee aux administeurs', 403);
+    }
+
+    $checkTitle = $this->User_Title->findFirst([
+      'fields' => ['userId'],
+      'conditions' => [
+        'titleId' => $titleId,
+        'userId' => $userId,
+      ],
+    ]);
+    
+    if ($checkTitle == false){
+      throw new \Utils\RequestException('ce titre n\'appartient pas a l\utilisateur', 403);
     }
 
     //find which title is set to current = true
