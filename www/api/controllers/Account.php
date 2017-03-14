@@ -1,6 +1,8 @@
-﻿<?php //ApplicationModel
+<?php
 /**
-* Account functions
+* ////////////////////////////
+* @var StardustController
+* ////////////////////////////
 */
 namespace Controllers;
 
