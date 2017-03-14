@@ -43,7 +43,6 @@ class User_Title extends Controller {
         ],
       ],
     ]);
-
     $this->response($find, 200);
   }
 
@@ -51,10 +50,10 @@ class User_Title extends Controller {
     if (!\Utils\Session::isLoggedIn()) {
       throw new \Utils\RequestException('operation reservee aux membres', 401);
     }
-/*
+    var_dump($userId);
     $count = $this->User_Title->findCount([
-        'userId' => $userId,
-      ]);*/
+        'userId' => 1,
+      ]);
 
     $this->response($count, 200);
   }
