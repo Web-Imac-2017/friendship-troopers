@@ -14,7 +14,7 @@
           <input type="text" v-model="searchUserInput" class="searchInput" placeholder="Recherche..." :value ="searchUserInput"></input>
           <input href="#searchBarFilters" type="submit" class="pseudo-button searchImage" value=""></input>
         </form>
-        <form style="display:none" class="row"  v-on:submit.prevent.stop="searchBarUsername(searchUser)">
+        <form style="display:none" class="row"  v-on:submit.prevent.stop="">
           <input type="text" v-model="searchUser" class="searchInput" placeholder="Recherche..." :value ="searchUser"></input>
           <input href="#searchBarFilters" type="submit" class="pseudo-button searchImage" value=""></input>
         </form>

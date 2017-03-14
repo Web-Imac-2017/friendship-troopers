@@ -25,10 +25,11 @@ const Search = Vue.extend({
   },
   computed: {
     searchUser:function(){
-      console.log(this.$route.params.searchInput);
-      if(this.$route.params.searchInput != ""){
+      if((this.$route.params.searchInput != "") && !(this.alreadyInThePage)){
+        this.alreadyInThePage = true;
         this.searchBarUsername(this.$route.params.searchInput);
       }
+
         
       return this.$route.params.searchInput;
     } 
@@ -88,8 +89,9 @@ const Search = Vue.extend({
       planetId: 0,
       routeNextUser: '',
       routePrevUser: '',
-      totalUsers: 7,
-
+      totalUsers: 7, // A TROUVE AVEC LA BDD
+      dataForDB : {},
+      alreadyInThePage: false
     }
   },
   created : function(){
@@ -102,20 +104,15 @@ const Search = Vue.extend({
         });
     this.$http.get(apiRoot() + 'titles',{emulateJSON: true }).then(
         (response) => {
-          this.filtersTitles = response.data;
-          console.log("liste titles");
-          console.log(JSON.stringify(response.data));
-          (this.filtersInterests.length > 0) ? console.log(this.filtersInterests[0].id) : console.log("vide");
-            
+          this.filtersTitles = response.data;         
         },
         (response) => {
-          console.log("Error liste interests");
           console.log(response);
         });
   },
   methods : {
     getUsers : function(route, data) {
-        this.$http.get(apiRoot() + 'users/search?limit=2', {
+        this.$http.get(apiRoot() + route, {
           params : data
         },{
           emulateJSON: true 
@@ -126,14 +123,11 @@ const Search = Vue.extend({
           this.assignPlanetPath();
           this.usersExist = true;
 
-          //this.usersExist = (this.usersResult.length > 0) ? true : false; //nop, si t'es ici, c'est que t'as eu au moins une
-          // réponse, donc pourquoi ça serait false? Après, ça gène pas, mais je suis pas sure que ça soit utile
-
           var linkNext = response.headers.get("Link").split(",")[0].split(";")[0];
-          this.routeNextUser = apiRoot() + linkNext.substring(2, linkNext.length-1);
+          this.routeNextUser = linkNext.substring(2, linkNext.length-1);
 
           var linkPrev = response.headers.get("Link").split(",")[1].split(";")[0];
-          this.routePrevUser = apiRoot() + linkPrev.substring(2, linkPrev.length-1);
+          this.routePrevUser = linkPrev.substring(2, linkPrev.length-1);
         },
         (response) => {
           console.log("Erreur getUsers ");
@@ -143,27 +137,27 @@ const Search = Vue.extend({
         });
          
     },
-    // A TESTER
-    showNextPage : function() {
-      if (this.currentPage*2 < this.totalUsers) {
-        this.currentPage++;
-        this.getUsers(this.routeNextUser); //TODO La requete renvoie un 'champ manquant', il manque le deuxieme argument de ta fonction : les data !!
-      }
-      if (this.totalUsers-(this.currentPage*2) > 2) {
+    showMoreLink : function() {
+      if (this.currentPage*10 < this.totalUsers) {
         this.morePage = true;
       } else {
         this.morePage = false;
       }
     },
     // A TESTER
+    showNextPage : function() {
+      if (this.currentPage*10 < this.totalUsers) {
+        this.currentPage++;
+        this.getUsers(this.routeNextUser, this.dataForDB);
+        this.showMoreLink();
+      }
+      
+    },
+    // A TESTER
     showPrevPage : function() {
       this.currentPage--;
-      this.getUsers(this.routePrevUser); //TODO La requete renvoie un 'champ manquant', il manque le deuxieme argument de ta fonction : les data !!
-      if (this.totalUsers-(this.currentPage*2) < 2) {
-        this.morePage = true;
-      } else {
-        this.morePage = false;
-      }
+      this.getUsers(this.routePrevUser, this.dataForDB); 
+      this.showMoreLink();
     },
 
 
@@ -230,10 +224,9 @@ const Search = Vue.extend({
       }
     },
     searchBarUsername(value){
-      console.log(this.searchUserInput);
-      console.log(value);
-      var data = {username: value};
-      this.getUsers(apiRoot() + 'users/search', data);    
+      this.dataForDB = {};    
+      this.dataForDB = {username: value};
+      this.getUsers('users/search?limit=10', this.dataForDB);    
     },
     searchBarFilters(){
       this.titlesDB = [];
@@ -242,19 +235,20 @@ const Search = Vue.extend({
       this.assignIdToTab(this.titlesDB, this.titlesPrint);
       this.assignIdToTab(this.interestsDB, this.interestsPrint);
 
-      var data = {};
+      this.dataForDB = {};
       if ( this.titlesDB.length > 0 ) {
-          data.title = this.titlesDB;
+          this.dataForDB.title = this.titlesDB;
       }
       if ( this.interestsDB.length > 0 ) {
-          data.interest = this.interestsDB ;
+          this.dataForDB.interest = this.interestsDB ;
       }
       if(this.activePlanet != ""){
-        data.planet = this.activePlanet ;
+        this.dataForDB.planet = this.activePlanet ;
       }
+      console.log(JSON.stringify(this.dataForDB.planet));
 
-      console.log(data);
-      this.getUsers(apiRoot() + 'users/search', data);
+
+      this.getUsers('users/search?limit=10', this.dataForDB);
       
     }
 
