@@ -3,8 +3,9 @@
 <div class="container-fluid">
   <div class="row">
     <aside class="col-sm-2">
-      <lateral-menu-left></lateral-menu-left>
+      <lateral-menu-left v-on:userinfo="findMe" ref="menu"></lateral-menu-left>
       <menu-tools></menu-tools>
+      <deconnexion></deconnexion>
     </aside>
     <section id="riddle" class="col-sm-8 container-transparent">
       <h1> Résoudre une nouvelle enigme </h1>
@@ -12,26 +13,31 @@
           <div class="col-sm-12">
             <p><strong> Niveau de l'enigme</strong></p>
             <ul class="row">
-              <li class="col-sm-3" v-on:click="selectedLevel(index)" v-for="(level, index) in levels">
+              <li class="col-sm-3 pseudo-button" v-on:click="selectedLevel(index)" v-for="(level, index) in levels">
                <img :src="level.image" :alt="level.text" v-if="index != levelSelected">
                <img :src="level.imageSelected" :alt="level.text" v-else>
-               <p>{{ level.text }} </p></li> 
+               <p>{{ level.text }} </p>
+             </li> 
             </ul>
             <span class="border-bottom center"></span>
             <p><strong> Mode de jeu</strong></p>
             <ul class="row justify-content-center">
-              <li class="col-sm-3 col-sm-offset-3" v-on:click="selectedMode(0)">  
+              <li class="col-sm-3 col-sm-offset-3 pseudo-button" v-on:click="selectedMode(0)">  
                <img :src="modes[0].image" :alt="modes[0].text" v-if="0 != modeSelected">
                <img :src="modes[0].imageSelected" :alt="modes[0].text" v-else>
                <p>{{ modes[0].text }} </p></li> 
-                <li class="col-sm-3" v-on:click="selectedMode(1)">  
+                <li class="col-sm-3 pseudo-button" v-on:click="selectedMode(1)">  
                <img :src="modes[1].image" :alt="modes[1].text" v-if="1 != modeSelected">
                <img :src="modes[1].imageSelected" :alt="modes[1].text" v-else>
                <p>{{ modes[1].text }} </p></li> 
             </ul>
           </div>
       </div>
-      <button class="center" v-on:click.prevent="create">Résoudre <img src="/assets/images/validation.svg" alt="validation"></button>
+      <router-link :to="{ name: 'Enigme', params: { user: me.username }}">
+      <button class="center">
+          Résoudre <img src="../assets/images/validation.svg" alt="validation">
+      </button>
+      </router-link>
 
   </section>
   <div class="col-sm-2">

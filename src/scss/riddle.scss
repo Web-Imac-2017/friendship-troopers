@@ -5,15 +5,7 @@
   @include font-size(1.5);
   margin: 5rem 0;
 
-  #formSubmit{
-    input:first-child{
-      text-align:left;
-    }
-    input:last-child{
-      background-image: url("../assets/images/validation-pink-bolder.svg");
-    }
-    
-  }
+ 
 
   ul {
   	 @include padding(2);
@@ -59,6 +51,10 @@
   	 color: $main-text;
   	 background: none;
   	 border: 0.2rem solid $enigme-title;
+
+     &:hover, &:focus, &:active {
+      background: $enigme-title;
+    }
   }
 
   button img {
@@ -70,6 +66,13 @@
   
   img.small  {
     height: 3rem;
+  }
+
+   #formSubmit{
+    textarea{
+      text-align:left;
+    }
+    
   }
 
   .message {

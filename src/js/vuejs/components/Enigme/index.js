@@ -20,9 +20,16 @@ const Enigme = Vue.extend({
   	'menu-tools' : MenuTools,
     'navbar' : NavBar,
     'deconnexion' : Deconnexion
-  }, 
-  created: function(){
-    this.user = this.$refs.menu.user;
+  },
+  mounted: function(){
+    
+  },
+  methods:{
+    findMe:function(){
+      this.me = this.$refs.menu.user;
+      console.log("COUCOU");
+      console.log(JSON.stringify(this.$refs.menu));
+    }
   },
   data () {
   	return {
@@ -38,7 +45,7 @@ const Enigme = Vue.extend({
   		},
   		planetData: ["#3e3e3e", "#3eb6df", "#ef4646", "#767fe2", "#72b51a", "#f9a519" ],
   		response : '',
-      user:{}
+      me:{}
   	}
   }
 });

@@ -9,6 +9,7 @@ import LateralMenuLeft from '../LateralMenuLeft/index.js'
 import LateralMenuRight from '../LateralMenuRight/index.js'
 import MenuTools from '../MenuTools/index.js'
 import NavBar from '../NavBar/index.js';
+import Deconnexion from '../Deconnexion/index.js';
 
 const EnigmeCurrent = Vue.extend({
   template,
@@ -16,20 +17,28 @@ const EnigmeCurrent = Vue.extend({
   	'lateral-menu-left' : LateralMenuLeft,
   	'lateral-menu-right' : LateralMenuRight,
   	'menu-tools' : MenuTools,
-    'navbar' : NavBar
+    'navbar' : NavBar,
+    'deconnexion' : Deconnexion
   },
+ 
   methods : {
-    selectedLevel : function(index) {
+    selectedLevel : function(index) { 
       this.levelSelected = index;
     },
     selectedMode : function(index) {
       this.modeSelected = index;
+    },
+    findMe:function(){
+      this.me = this.$refs.menu.user;
+      console.log("COUCOU");
+      console.log(JSON.stringify(this.$refs.menu));
     }
   },
   data () {
       return {
        	levelSelected : 0,
         modeSelected : 0,
+        me:{},
         levels: [ {
           image : '/assets/images/enigmes/debutant.svg',
           imageSelected : '/assets/images/enigmes/debutant-selected.svg',
