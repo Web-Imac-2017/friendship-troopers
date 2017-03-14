@@ -61,7 +61,7 @@ const Search = Vue.extend({
         name:"Lord de l'enfer"
       }],
       // RECUPERER LISTE INTERESTS DANS BDD : enlever apres
-      filtersInterests: [{
+      /*filtersInterests: [{
         id:4,
         name:"Jazz"
       },{
@@ -79,8 +79,8 @@ const Search = Vue.extend({
       },{
         id:6,
         name:"Sherlock Holmes"
-      }],
-      //filtersInterests : {},
+      }],*/
+      filtersInterests : {},
       searchUser : "",
       interestSelected : "Sélectionner",
       titleSelected : "Sélectionner",
@@ -108,7 +108,7 @@ const Search = Vue.extend({
     }
   },
   created : function(){
-    /*this.$http.get(apiRoot() + 'interest/view',{emulateJSON: true }).then(
+    this.$http.get(apiRoot() + 'interest/view',{emulateJSON: true }).then(
         (response) => {
           this.filtersInterests = response.data;
           console.log("liste d'interets");
@@ -119,7 +119,7 @@ const Search = Vue.extend({
         (response) => {
           console.log("Error liste interests");
           console.log(response);
-        });*/
+        });
   },
   methods : {
     getUsers : function(route, data) {
