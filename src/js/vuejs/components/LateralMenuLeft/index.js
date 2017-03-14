@@ -13,6 +13,7 @@ const LateralMenuLeft = Vue.extend({
           this.user = response.data[0];
           this.$emit("userinfos");
         }, (response) => {
+          this.$router.push({name : "Login"});
         });
     },
     data () {
