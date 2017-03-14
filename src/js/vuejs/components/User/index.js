@@ -45,7 +45,6 @@ const User = Vue.extend({
       console.log(this.$refs.menu.user.username);
       console.log(this.$route.params.user);
       if (this.$route.params.user == this.$refs.menu.user.username){
-        console.log("equals");
         this.getUser(apiRoot() + 'users/me');
         this.myself = true;
       } else {
@@ -93,10 +92,10 @@ const User = Vue.extend({
     },
     /*functions to manage interests*/
     showMore : function() {
-      this.start = this.user.interests.length;
+      this.start = this.interests.length;
     },
     showLess : function() {
-      this.start = 5;
+      this.start = 6;
     },
     addFriend : function() {
       //Router::post('/users/:userId/add_friend','friend#addFriend', 'users.me.addFriend'); //ok
@@ -124,7 +123,7 @@ const User = Vue.extend({
         nbRiddleSolved : 0,
         myself : false,
         nbFriends : '',
-        start : 5,
+        start : 6,
         posts : {}
   }
 
