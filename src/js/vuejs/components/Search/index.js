@@ -51,12 +51,14 @@ const Search = Vue.extend({
         name:"Multas",
         value:false
       }],
+      // Liste des intérêts 
       filtersInterests : {},
+      // Liste des titres
       filtersTitles : {},
       searchUser : "",
       interestSelected : "Sélectionner",
       titleSelected : "Sélectionner",
-      // ENLEVER QUAND LIEN AVEC BDD
+      // LISTE DES UTILISATEURS RENVOYES
       usersResult : {},
       // TABLEAU D INTERETS COCHES A ENVOYER A LA BDD
       interestsPrint : [],
