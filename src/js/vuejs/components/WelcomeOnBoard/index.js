@@ -55,16 +55,15 @@ const WelcomeOnBoard = Vue.extend({
     return index;
   },
   submit : function(){
-    var data = [
-  {"op":"replace","path":"/user_interest","value":{"0":"1","1":"9","2":"14","3":"16","4":"24","5":"29"}}
-]
-   /* var data = [0,0,0,0,0,0];
-     for (var i = 0; i < welcomeData.answers.length; i++) {
-        data[i] = Number(welcomeData.answers[i])
-    }*/
+    /*var data = [
+    {"op":"replace","path":"/user_interest","value":{"0":"1","1":"9","2":"14","3":"16","4":"24","5":"29"}}
+    ]
     console.log("data" + JSON.stringify(data));
         this.$http.patch(apiRoot() + 'interest/WelcomeOnBoard', data, {
-          emulateJSON: true
+          emulateHTTP: true,
+          headers: { 
+            'Content-Type': 'application/json'
+          }
         }).then(
           (response) => {
             console.log("success !");
@@ -74,7 +73,7 @@ const WelcomeOnBoard = Vue.extend({
             console.log("fail !");
             console.log(response);
           }
-        )
+        )*/
     welcomeData.planetUser = this.attributePlanet()
     this.styleObject.borderColor = welcomeData.planetInfo[welcomeData.planetUser].color
     this.styleObject2.borderLeftColor = welcomeData.planetInfo[welcomeData.planetUser].color
