@@ -328,7 +328,7 @@ class Account extends Controller{
 	}
 
 	public function search($get) {
-		var_dump($get);
+		//var_dump($get);
 		$isRequired = $this->checkRequired(['username', 'interest', 'title', 'planet'],$get);
 		if(!empty($isRequired) && count($isRequired) === 4) {
 			throw new \Utils\RequestException('champs manquant', 400);

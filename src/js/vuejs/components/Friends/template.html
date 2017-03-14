@@ -13,8 +13,8 @@
         <div class="row">
           <div class="col-sm-1 col-md-1"></div>
           <div class="col-sm-2 col-md-2 item" v-for="(item, index) in planets" v-on:click="selectPlanet(index)" v-bind:class="{ 'planet-selected' : item.selected }">
-            <img class="planet center" :src="item.path" alt="planet">
-            <h1 :class=item.type class="text-center">{{item.name}}</h1>
+            <img class="planet center" :src="item.imagePath" alt="item.name">
+            <h1 :class=item.name class="text-center">{{item.name}}</h1>
             <p v-if="isKey(index+1)" class="text-center">{{allFriends[index+1].length}} au total</p>
             <p v-else class="text-center">0 au total</p>
           </div>
