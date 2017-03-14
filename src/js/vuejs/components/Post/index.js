@@ -65,15 +65,10 @@ const Post = Vue.extend({
           } else {
             this.comments = response.data;
           }
-<<<<<<< HEAD
-=======
-          //console.log(this.comments);
->>>>>>> navbar
           var tmp = response.headers.get("Link").split(",")[1].split(";")[0];
           this.prevComments = apiRoot() + tmp.substring(2, tmp.length-1);
         },
         (response) => {
-<<<<<<< HEAD
           console.log("Post.js : getComments " + response);
         }
       );
@@ -85,18 +80,11 @@ const Post = Vue.extend({
         },
         (response) => {
           console.log("Post.js : getTotalComments " + response);
-=======
-          //console.log(response);
->>>>>>> navbar
         }
       );
     }
   },
   created : function() {
-<<<<<<< HEAD
-=======
-    //console.log("Created with post id = " + this.post.id);
->>>>>>> navbar
     // Savoir si l'utilisateur a déjà liké le post ?
     //TODO
 
@@ -133,11 +121,6 @@ const Post = Vue.extend({
   computed: {
     reversedComments : function() {
       return this.comments;
-<<<<<<< HEAD
-      //return Object.keys(this.comments).sort().reverse();
-      //return this.comments.reverse();
-=======
->>>>>>> navbar
     }
   }
 });
