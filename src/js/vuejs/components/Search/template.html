@@ -10,7 +10,11 @@
   		<h1 class="mainTitle"> Recherche </h1>
       <div class="container-colored">
         <h2>Rechercher par pseudo </h2>
-        <form class="row" id="searchBarUsername" v-on:submit.prevent.stop="searchBarUsername">
+        <form class="row" id="searchBarUsername" v-on:submit.prevent.stop="searchBarUsername(searchUserInput)">
+          <input type="text" v-model="searchUserInput" class="searchInput" placeholder="Recherche..." :value ="searchUserInput"></input>
+          <input href="#searchBarFilters" type="submit" class="pseudo-button searchImage" value=""></input>
+        </form>
+        <form style="display:none" class="row"  v-on:submit.prevent.stop="">
           <input type="text" v-model="searchUser" class="searchInput" placeholder="Recherche..." :value ="searchUser"></input>
           <input href="#searchBarFilters" type="submit" class="pseudo-button searchImage" value=""></input>
         </form>

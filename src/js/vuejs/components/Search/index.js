@@ -23,6 +23,15 @@ const Search = Vue.extend({
     'user-component' : UserComponent,
     'deconnexion' : Deconnexion
   },
+  computed: {
+    searchUser:function(){
+      if((this.$route.params.searchInput != "") && !(this.alreadyInThePage)){
+        this.alreadyInThePage = true;
+        this.searchBarUsername(this.$route.params.searchInput);
+      }        
+      return this.$route.params.searchInput;
+    } 
+  },
   data () {
     return {
       filtersPlanets: [{
@@ -55,7 +64,7 @@ const Search = Vue.extend({
       filtersInterests : {},
       // Liste des titres
       filtersTitles : {},
-      searchUser : "",
+      
       interestSelected : "Sélectionner",
       titleSelected : "Sélectionner",
       // LISTE DES UTILISATEURS RENVOYES
@@ -70,6 +79,7 @@ const Search = Vue.extend({
       activePlanet:  "",
       // SI AUCUN UTILISATEURS NE CORRESPOND, METTRE A FALSE
       usersExist : false,
+      searchUserInput : "",
 
 
       currentPage: 1,
@@ -77,8 +87,9 @@ const Search = Vue.extend({
       planetId: 0,
       routeNextUser: '',
       routePrevUser: '',
-      totalUsers: 7,
-
+      totalUsers: 7, // à changer : A TROUVE AVEC LA BDD
+      dataForDB : {},
+      alreadyInThePage: false
     }
   },
   created : function(){
@@ -87,70 +98,60 @@ const Search = Vue.extend({
           this.filtersInterests = response.data;      
         },
         (response) => {
-          console.log(response);
         });
     this.$http.get(apiRoot() + 'titles',{emulateJSON: true }).then(
         (response) => {
-          this.filtersTitles = response.data;
-          console.log("liste titles");
-          console.log(JSON.stringify(response.data));
-          (this.filtersInterests.length > 0) ? console.log(this.filtersInterests[0].id) : console.log("vide");
-            
+          this.filtersTitles = response.data;       
         },
         (response) => {
-          console.log("Error liste interests");
-          console.log(response);
         });
   },
   methods : {
     getUsers : function(route, data) {
-        this.$http.get(apiRoot() + 'users/search?limit=2', {
+        this.$http.get(apiRoot() + route, {
           params : data
         },{
           emulateJSON: true 
         }).then(
         (response) => {
           this.usersResult = response.data;
-          this.totalUsers = this.usersResult.length;
+          //this.totalUsers = this.usersResult.length; // ta route te renvoie que deux users max, vu que limit = 2
           this.assignPlanetPath();
-
-          this.usersExist = (this.usersResult.length > 0) ? true : false;
+          this.usersExist = true;
 
           var linkNext = response.headers.get("Link").split(",")[0].split(";")[0];
-          this.routeNextUser = apiRoot() + linkNext.substring(2, linkNext.length-1);
+          this.routeNextUser = linkNext.substring(2, linkNext.length-1);
 
           var linkPrev = response.headers.get("Link").split(",")[1].split(";")[0];
-          this.routePrevUser = apiRoot() + linkPrev.substring(2, linkPrev.length-1);
+          this.routePrevUser = linkPrev.substring(2, linkPrev.length-1);
         },
         (response) => {
-          console.log("Erreur getUsers ");
           this.usersExist = false;
           this.usersResult = {};
-          console.log(response);
         });
          
     },
-    // A TESTER
-    showNextPage : function() {
-      if (this.currentPage*2 < this.totalUsers) {
-        this.currentPage++;
-        this.getUsers(this.routeNextUser);
-      }
-      if (this.totalUsers-(this.currentPage*2) > 2) {
+    showMoreLink : function() {
+      if (this.currentPage*10 < this.totalUsers) { //10 à changer
         this.morePage = true;
       } else {
         this.morePage = false;
       }
+    },
+    // A TESTER
+    showNextPage : function() {
+      if (this.currentPage*10 < this.totalUsers) {//10 à changer
+        this.currentPage++;
+        this.getUsers(this.routeNextUser, this.dataForDB);
+        this.showMoreLink();
+      }
+      
     },
     // A TESTER
     showPrevPage : function() {
       this.currentPage--;
-      this.getUsers(this.routePrevUser);
-      if (this.totalUsers-(this.currentPage*2) < 2) {
-        this.morePage = true;
-      } else {
-        this.morePage = false;
-      }
+      this.getUsers(this.routePrevUser, this.dataForDB); 
+      this.showMoreLink();
     },
 
 
@@ -216,9 +217,10 @@ const Search = Vue.extend({
         newTab[i] = oldTab[i].id;
       }
     },
-    searchBarUsername(){
-      var data = {username: this.searchUser};
-      this.getUsers(apiRoot() + 'users/search', data);    
+    searchBarUsername(value){
+      this.dataForDB = {};    
+      this.dataForDB = {username: value};
+      this.getUsers('users/search?limit=10', this.dataForDB);    
     },
     searchBarFilters(){
       this.titlesDB = [];
@@ -227,19 +229,19 @@ const Search = Vue.extend({
       this.assignIdToTab(this.titlesDB, this.titlesPrint);
       this.assignIdToTab(this.interestsDB, this.interestsPrint);
 
-      var data = {};
+      this.dataForDB = {};
       if ( this.titlesDB.length > 0 ) {
-          data.title = this.titlesDB;
+          this.dataForDB.title = this.titlesDB;
       }
       if ( this.interestsDB.length > 0 ) {
-          data.interest = this.interestsDB ;
+          this.dataForDB.interest = this.interestsDB ;
       }
       if(this.activePlanet != ""){
-        data.planet = this.activePlanet ;
+        this.dataForDB.planet = this.activePlanet ;
       }
 
-      console.log(data);
-      this.getUsers(apiRoot() + 'users/search', data);
+
+      this.getUsers('users/search?limit=10', this.dataForDB);
       
     }
 

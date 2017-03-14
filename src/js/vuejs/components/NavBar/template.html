@@ -2,9 +2,9 @@
     <ul class="nav navbar-nav">
       <li class="search-responsive">
         <div v-if="search">
-          <input type ="text" class="nav-item" placeholder="Recherche" value =""></input>
-          <img src="/assets/images/validation.svg" alt="valider" title="Valider">
-          <img v-on:click="showSearch()" src="/assets/images/Cross.svg"  alt="fermer" title="Fermer">
+          <input type ="text" class="nav-item" placeholder="Recherche" v-model="searchByUser"></input>
+          <img v-on:click="searchUsername()" class="pseudo-button" src="/assets/images/validation.svg" alt="valider" title="Valider"> <!-- petite recherche lien -->
+          <img class="pseudo-button" v-on:click="showSearch()" src="/assets/images/Cross.svg"  alt="fermer" title="Fermer">
         </div>
       </li>
 
@@ -16,11 +16,12 @@
       </li>
 
       <li class="navbar-right">
-        <input type ="text" class="nav-item desktop" placeholder="Recherche" value =""></input>
-        <input type="submit" class="nav-item nav-search-icon desktop" value=""></input>
-        <div v-on:click="showSearch()" class="nav-item nav-icon mobile small-desktop">
-          <img src="/assets/images/search.svg" alt="recherche" title="Effectuer une recherche">
-        </div>
+          <input type ="text" class="nav-item desktop" placeholder="Recherche" v-model="searchByUser"></input>
+          <input v-on:click="searchUsername()" type="submit" class="pseudo-button nav-item nav-search-icon desktop" value=""></input> <!-- grande recherche lien -->
+          <div v-on:click="showSearch()" class="nav-item nav-icon mobile small-desktop pseudo-button">
+            <img src="/assets/images/search.svg" alt="recherche" title="Effectuer une recherche">
+          </div>
+        
         
         <div class="menu-separator"></div>
         
