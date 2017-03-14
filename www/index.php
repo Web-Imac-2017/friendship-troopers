@@ -15,13 +15,24 @@ use \Utils\Router\Router;
 Router::init($_GET['url']);
 
 Router::post('/auth/signin','account#inscription');
+Router::post('/auth/signin/username','account#isUsernameFree', 'users.me.usernameFree');
+Router::post('/auth/signin/mail','account#isMailFree', 'users.me.mailFree');
 Router::post('/auth/login','account#login');
 Router::post('/auth/logout','account#logout');
-Router::get('/auth/validate','account#validateUser', 'auth.validate');
-Router::get('/users/me','account#getCurrentUser', 'users.me');
+Router::get('/auth/validate','account#validateUser', 'auth.validate'); //ok
+Router::get('/users/search','account#search', 'users.search');
+
+Router::get('/users/list','user#usersList', 'users.list'); //ok. prend comme param planetId ou role (l'id)
+Router::get('/users/me','account#getCurrentUser', 'users.me'); //ok
+Router::patch('/users/me','account#updateAccountInfos', 'users.me'); //ok
+Router::get('/users/:userId','account#getUser', 'users.profil'); //ok
+
 Router::get('/users/:userId/interest','interest#listUserInterest', 'users.me.listInterest');
 Router::post('/users/me/interest/add_interest','interest#addUserInterest', 'users.me.updateUserInterest');
 Router::post('/users/me/interest/delete_interest','interest#delete_interest', 'users.me.updateUserInterest');
+
+Router::get('/users/me/avatars','avatar#listUserAvatar', 'users.me.listAvatar');
+Router::patch('/users/me/avatars/:avatarId/current','avatar#setCurrentAvatar', 'users.me.setCurrentAvatar');
 
 Router::get('/users/me/waiting_list_friend','friend#invitationList', 'users.me.invitationList'); //ok
 Router::get('/users/me/friends','friend#listFriend', 'users.me.listUserFriend'); //ok
@@ -31,12 +42,15 @@ Router::delete('/users/:userId/delete_friend','friend#deleteFriend', 'users.me.d
 Router::get('/users/:userId/friends','friend#listFriend', 'users.me.listFriend'); //ok
 Router::get('/users/:userId/number_friends','friend#countFriend', 'users.me.countFriend'); //ok
 
-Router::get('/users/search','account#search', 'users.search');
 
 
 Router::post('/planets/:planet/posts', 'publication#create', 'planets.posts.create');
 Router::get('/planets/:planet/posts', 'publication#list', 'planets.posts.list');
 Router::get('/planets/:planet/posts/:id','publication#view', 'planets.posts.view');
+
+Router::post('/avatar','avatar#create', 'avatar.create');
+Router::patch('/avatar/:id','avatar#update', 'avatar.update');
+
 Router::patch('/planets/:planet/posts/:id', 'publication#update', 'planets.posts.update');
 Router::delete('/planets/:planet/posts/:id', 'publication#delete', 'planets.posts.delete');
 
@@ -48,6 +62,7 @@ Router::get('/interest/view','interest#listInterest', 'interest.list');
 Router::get('/planets/:planet/news' , 'planet#getPlanetFeed');
 Router::post('/planets/:planet/posts/:publicationId/comments', 'comment#create', 'planets.posts.comments.create');
 Router::get('/planets/:planet/posts/:publicationId/comments', 'comment#list', 'planets.posts.comments.list');
+Router::get('/planets/:planet/posts/:publicationId/comments/count', 'comment#count', 'planets.posts.comments.count');
 Router::patch('/planets/:planet/posts/:publicationId/comments/:id', 'comment#update', 'planets.posts.comments.update');
 Router::delete('planets/:planet/posts/:publicationId/comments/:id', 'comment#delete', 'planets.posts.comments.delete');
 

@@ -9,6 +9,7 @@ import LateralMenuLeft from '../LateralMenuLeft/index.js'
 import MenuTools from '../MenuTools/index.js'
 import FriendTemplate from './FriendTemplate/index.js'
 import NavBar from '../NavBar/index.js';
+import Deconnexion from '../Deconnexion/index.js'
 
 const Friends = Vue.extend({
   template,
@@ -16,17 +17,26 @@ const Friends = Vue.extend({
       this.$http.get(apiRoot() + 'users/me/friends').then((response) => {
       // gérer le succes, toutes les infos renvoyer sont dans response.data      
         this.allFriends = response.data;
-        this.selectPlanet(0);
       }, (response) => {
-      // gérer les erreurs avec response.status pour les code d'erreurs
-        console.log(response);
       });
+
+      this.$http.get(apiRoot() + 'planets/').then(
+        (response) => {
+          this.planets = response.data;
+          for (var i = 0; i < this.planets.length; i++) {
+            this.planets[i].selected = false;
+          }
+          
+          this.selectPlanet(0);
+        },(response) => {
+        });
   },
   components: {
     'FriendTemplate' : FriendTemplate, 
     'lateral-menu-left' : LateralMenuLeft, 
     'menu-tools' : MenuTools,
-    'navbar' : NavBar }, 
+    'navbar' : NavBar,
+    'deconnexion' : Deconnexion }, 
   methods : {
     isKey : function(index) {
       return (index) in this.allFriends;
@@ -48,47 +58,7 @@ const Friends = Vue.extend({
         allFriends : {},
         displayedFriends : {},
         currentPlanetIndex : 0,
-        planets :
-          [{
-            type : "earth",
-            name : "Terre",
-            number : "#AA001",
-            path : "../assets/images/planets/Terre.svg",
-            selected : true,
-            nbFriends : 2
-          },
-          {
-            type : "parallel",
-            name : "Paranose",
-            number : "#312LL",
-            path : "../assets/images/planets/Paranose.svg",
-            selected : false,
-            nbFriends : 1
-          },
-          {
-            type : "robots",
-            name : "Technome",
-            number : "#8T077",
-            path : "../assets/images/planets/Technome.svg",
-            selected : false,
-            nbFriends : 1
-          },
-          {
-            type : "alien",
-            name : "Sautien",
-            number : "#SS013",
-            path : "../assets/images/planets/Sautien.svg",
-            selected : false,
-            nbFriends : 1
-          },
-          {
-            type : "space-opera",
-            name : "Multas",
-            number : "#781ST",
-            path : "../assets/images/planets/Terre.svg",
-            selected : false,
-            nbFriends : 1
-          }]
+        planets : {}
     }
 
   }

@@ -31,11 +31,14 @@ const Feed = Vue.extend({
   created : function(){
   },
   mounted : function() {
-    // Récupérer les premiers posts de la planète de l'utilisateur
-    this.planetId = this.$refs.menu.user.planetId;
-    this.getPublications(apiRoot() + 'planets/'+ this.planetId + '/posts');
+    
   },
   methods : {
+    initialize : function() {
+      // Récupérer les premiers posts de la planète de l'utilisateur
+      this.planetId = this.$refs.menu.user.planetId;
+      this.getPublications(apiRoot() + 'planets/'+ this.planetId + '/posts');
+    },
     createPost : function(post) {
       //Router::post('/planets/:planet/posts', 'publication#create', 'planets.posts.create');
       this.$http.post(apiRoot() + "planets/" + this.planetId + "/posts", { 'content' : post.content}, {emulateJSON : true}).then(

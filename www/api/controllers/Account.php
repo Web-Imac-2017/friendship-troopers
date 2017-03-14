@@ -1,4 +1,4 @@
-<?php //ApplicationModel
+﻿<?php //ApplicationModel
 /**
 * Account functions
 */
@@ -48,37 +48,81 @@ class Account extends Controller{
 	* @return [type] [description]
 	*/
 	public function logout() {
-		Session::destroy();
+		\Utils\Session::destroy();
 
 		$this->response(null, 204);
 	}
 
+/**
+* ////////////////////////////
+*  	  INSCRIPTION FUNCTIONS
+* ////////////////////////////
+*/
+	/**
+	 * check if a username is free or not
+	 * @param  array  $post contain username
+	 * @return boolean       true if free to use
+	 */
+	public function isUsernameFree($post) {
+		if(!empty($this->checkRequired(['username'], $post))) {
+			throw new \Utils\RequestException('MISSING_FIELDS', 400);
+		}
+		$result = $this->User->findFirst([
+			'fields' => ['username'],
+			'conditions' => ['username' => $post['username']]
+		]);
+		$this->response(!(count($result) > 0 && $result != false), 200);
+	}
+	/**
+	 * check if a mail is free or not
+	 * @param  array  $post contain username
+	 * @return boolean       true if free to use
+	 */
+	public function isMailFree($post) {
+		if(!empty($this->checkRequired(['mail'], $post))) {
+			throw new \Utils\RequestException('MISSING_FIELDS', 400);
+		}
+		$result = $this->User->findFirst([
+			'fields' => ['mail'],
+			'conditions' => ['mail' => $post['mail']]
+		]);
+		$this->response(!(count($result) > 0 && $result != false), 200);
+	}
 	/**
 	* validate the user's registration
 	* @return [type] [description]
 	*/
 	public function validateUser($get) {
-		if(isset($get['email']) && !empty($get['email']) AND isset($get['activated']) && !empty($get['activated'])){
-			$data = array(
-				'mail'=>$get['email'],
-				'activated' => $get['activated']
-			);
-			$request = array(
-				'fields' => array(
-					'mail',
-					'activated'),
-					'conditions' => $data
-				);
-				$result = $this->find($request);
-				if(count($result) > 0){
-					$data['activated'] = 1;
-					$this->save($data);
-				}else{
-					$error = array(0=>'lien invalide');
-					return json_encode($error);
-				}
+		$required = ['mail' , 'activated'];
+		if(!empty($this->checkRequired($required, $get))){
+			throw new \Utils\RequestException('MISSING_FIELDS', 400);
+		}
+
+		$data = array(
+			'mail'=>$get['mail'],
+			'activated' => $get['activated'],
+		);
+		$request = [
+			'fields' => [
+				'id',
+				'mail',
+				'activated',
+			],
+			'conditions' => $data
+		];
+		$result = $this->User->find($request);
+		//var_dump($result);
+		if(count($result) > 0){
+			$data['activated'] = 1;
+			$data['id'] = $result[0]['id'];
+			try {
+				$this->User->save($data);
+			} catch (\PDOException $e) {
+				throw new \Utils\RequestException('oups', 400);
+			}
+
 		} else {
-			header("HTTP/1.0 404 Not Found");
+			throw new \Utils\RequestException('INVALID_DATA', 400);
 		}
 	}
 
@@ -96,7 +140,7 @@ class Account extends Controller{
 
 		Il est tant maintenant de valider votre arrivée, simplement en cliquant sur le lien ci dessous !
 
-		'.$_SERVER['DOCUMENT_ROOT'] .'/' . \Utils\Router\Router::url('auth.validate') . '?email='.$to.'&hash='.$data['activated'];
+		'.$_SERVER['DOCUMENT_ROOT'] .'/' . \Utils\Router\Router::url('auth.validate') . '?mail='.$to.'&activated='.$data['activated'];
 
 		$headers = 'From:noreply@fst.dev' . "\r\n";
 		mail($to, $subject, $message, $headers);
@@ -107,10 +151,8 @@ class Account extends Controller{
 	* @return [type] [description]
 	*/
 	public function inscription($post) {
-		$error = array();
 		$required = ['username','mail', 'birthdate', 'password'];
-		$error = $this->checkRequired($required, $post);
-		if(!empty($error)){
+		if(!empty($this->checkRequired($required, $post))){
 			throw new \Utils\RequestException('champs manquants', 400);
 		} else {
 			$birthdate = $post['birthdate'];
@@ -119,7 +161,7 @@ class Account extends Controller{
 			$month = $tmpBirth[1];
 			$year = $tmpBirth[0];
 			if(!checkdate($month,$day,$year)) {
-				throw new \Utils\RequestException('Date invalide', 400);
+				throw new \Utils\RequestException('INVALID_DATE', 400);
 			}
 			$birthdate = $year . '-' . $month . '-' . $day;
 			$password = $post['password'] ;
@@ -128,20 +170,36 @@ class Account extends Controller{
 				"mail" => $post['mail'],
 				"birthdate" => $birthdate,
 				"password" => $password,
-				"activated" => 0,
+				"activated" => md5(rand(0,1000)),
 			];
 			$this->filterXSS($data);
 			$user = new \Models\User();
 			$data['password']=password_hash($password, PASSWORD_DEFAULT);
-
 			try {
-				$user->addUser($data);
+				$data['id'] = $user->addUser($data);
 			} catch (\PDOException $e) {
-					throw new \Utils\RequestException('utilisateur existe deja', 400);
+				throw new \Utils\RequestException('"USER_EXISTING"', 400);
+			}
+			$this->loadModel('User_Avatar');
+			$this->loadModel('Avatar');
+			$defaultavatar = $this->Avatar->find(
+				['fields' => ['id'],
+				'conditions' => ['pack' => 0], ]
+			);
+			try{
+				$this->User_Avatar->insert([
+		            'fields' => ['userId', 'avatarId', 'currentAvatar'],
+		            'values' => [$data['id'],'1','1'],
+
+		        ]);
+			} catch (\PDOException $e) {
+				throw new \Utils\RequestException('oups', 400);
 			}
 			$this->sendValidationMail($data);
 			unset($data['password']);
 			unset($data['activated']);
+
+			\Utils\Session::write('User', $data);
 			$this->response($data, 201);
 		}
 	}
@@ -151,30 +209,37 @@ class Account extends Controller{
 	 * Allow user to change some of his intel
 	 * @param  array $post data received from user
 	 */
-	public function updateAccountInfos($post){
-		$data = array();
-		if(isset($post['mail']) || !empty($post['mail'])){
-			$data['mail'] = $post['mail'];
+	public function updateAccountInfos($patches){
+		if(\Utils\Session::isLoggedIn() == NULL){
+            throw new \Utils\RequestException('NOT_LOGGED', 401);
+        }
+		if(array_key_exists('id', $patches)) {
+			throw new \Utils\RequestException('HACKER_SPOTTED', 400);
 		}
-		if(isset($post['password']) || !empty($post['password'])){
-			$data['password'] = password_hash($post['password']);
+
+		foreach ($patches as $patch) {
+			switch ($patch['op']) {
+				case 'replace':
+					$updates[explode('/',$patch['path'])[1]] = $patch['value'];
+					break;
+				default:
+					throw new \Utils\RequestException('bad op', 400);
+			}
 		}
-		if(isset($post['avatar']) || !empty($post['avatar'])){
-			$data['avatar'] = $post['avatar'];
+		$notAllowed = ['planetId', 'id', 'registerDate', 'activated', 'username', 'password', 'points'];
+		$fieldsNotAllowed = $this->checkNotAllowed($notAllowed, $updates);
+		foreach ($fieldsNotAllowed as $value) {
+			unset($updates[$value]);
 		}
-		if(isset($post['description']) || !empty($post['description'])){
-			$data['description'] = $post['description'];
+
+		$updates['id'] = \Utils\Session::user('id');
+		try{
+			$this->User->save($updates);
+		} catch (\PDOException $e) {
+			throw new \Utils\RequestException('erreur', 400);
 		}
-		if(isset($post['firstname']) || !empty($post['firstname'])){
-			$data['firstname'] = $post['firstname'];
-		}
-		if(isset($post['lastname']) || !empty($post['lastname'])){
-			$data['lastname'] = $post['lastname'];
-		}
-		$user = new \Models\User();
-		$this->filterXSS($data);
-		$reponse = $user->save($data);
-		var_dump($reponse);
+
+		$this->response(null, 200);
 	}
 
 	/**
@@ -191,45 +256,76 @@ class Account extends Controller{
 		//logout -> userModel
 	}
 
+
 	/**
-	 *get a user
-	 * @return [type] [description]
+	 * get a user profil
 	 */
-	public function getUser($username) {
-		echo "getUser start";
-		if(!isset($username) || empty($username)){
-			return 0;
+	public function getUser($id, $current = false) {
+		if (\Utils\Session::isLoggedIn() == NULL) {
+            throw new \Utils\RequestException('Vous n\'êtes pas connecté', 401);
+        }
+        $userId = \Utils\Session::user('id');
+		$fields =  ['user.id', 'user.planetId', 'planet.name' , 'user.description', 'user.points', 'username',
+					'avatar.imagePath', 'avatar.altText',
+					'title.honorificTitle'];
+
+		if($userId=$id && $current === true) {
+			$fields[] = 'user.firstname';
+			$fields[] = 'user.lastname';
+			$fields[] = 'user.birthdate';
 		}
-		$user = new \Models\User();
-		$request = array();
-		if(array_key_exists('user',$_SESSION) && $username == $_SESSION['user']['username']){
-			$request['fields'] = '*';
-		} else {
-			$request['fields'] = array(
-				'username',
-				'description',
-				'avatarId'
-			);
+		$request= $this->User->find([
+			'fields' => $fields,
+			'leftJoin' => [
+				[
+				'table' => 'user_avatar',
+				'alias' => 'UA',
+				'to' => 'id',
+				'from' => 'userId'
+				],
+				[
+				'table' => 'avatar',
+				'alias' => 'avatar',
+				'from' => 'id',
+				'to' => 'avatarId',
+				'JoinTable' =>  'UA',
+				],
+				[
+				'table' => 'user_title',
+				'alias' => 'userTitle',
+				'from' => 'userId',
+				'to' => 'id',
+				'JoinTable' =>  'user',
+				],
+				[
+				'table' => 'title',
+				'alias' => 'title',
+				'from' => 'id',
+				'to' => 'titleId',
+				'JoinTable' => 'userTitle',
+				],
+				[
+				'table' => 'planet',
+				'alias' => 'planet',
+				'to' => 'planetId',
+				'from' => 'id'
+				],
+			],
+			'conditions' => ['user.id' => $id],
+		]);
+		$this->response($request, 200);
+	}
+
+	/**
+	 * get the full infos of the current User
+	 */
+	public function getCurrentUser(){
+		if (\Utils\Session::isLoggedIn() == NULL) {
+			throw new \Utils\RequestException('Vous n\'êtes pas connecté', 401);
 		}
-		$request['leftJoin'] = array(
-			'table' => 'user_avatar',
-			'alias' => 'UA',
-			'to' => 'id',
-			'from' => 'userId'
-		);
-		// SELECT username, description, avatarId FROM user AS user
-		// LEFT JOIN user_avatar AS UA ON User.id = UA.userId
-		// WHERE user.username='lol' AND UA.currentAvatar=1
-		$request['conditions'] = array(
-			'username' => $username
-		);
-		$result = $user->find($request);
-		if(count($result) == 1){
-			var_dump($result);
-		} else {
-			echo 'user not found';
-		}
-	} 
+		$userId = \Utils\Session::user('id');
+		$this->getUser($userId, true);
+	}
 
 	public function search($get) {
 		$isRequired = $this->checkRequired(['username', 'interest', 'title', 'planet'],$get);
@@ -245,7 +341,7 @@ class Account extends Controller{
 
         $fields =  ['DISTINCT user.id','user.username',
 					'avatar.imagePath', 'avatar.altText',
-					'title.honorificTitle'
+					'title.honorificTitle', 'planetId'
                 ];
 
 		$where = [
@@ -330,7 +426,7 @@ class Account extends Controller{
 				'order' => 'ASC',
 			],
 		]);
-		
+
 		$offsetPrev = $offset - $limit;
 		$offset = $offset + $limit;
 
