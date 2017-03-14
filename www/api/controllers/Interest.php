@@ -165,10 +165,12 @@ class Interest extends Controller {
     /*bring back the user logged id*/
     $userId = \Utils\Session::user('id');
 
+    print_r($interestList);
+
     $planetResult = array('Terre' => 0, 'Sautien' => 0,'Technome' => 0,'Paranose' => 0,'Multas' => 0);
 
     /*add interests for the user*/
-    $this->addUserInterest($interestList[0]);
+    //$this->addUserInterest($interestList[0]);
 
     /*Calculate max interest points*/
     foreach($interestList[0] as $key => $value) {
