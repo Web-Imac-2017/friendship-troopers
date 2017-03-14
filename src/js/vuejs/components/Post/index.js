@@ -14,18 +14,34 @@ const Post = Vue.extend({
   },
   props : {
     post: Object,
-    new : Boolean,
     planetId : Number
   },
   template,
+  watch: {
+    post: function() {
+      this.getComments(apiRoot() + "planets/1/posts/" + this.post.id + "/comments?limit=" + this.loadMore, false);
+      this.getLikes();
+    }  
+  },
    methods : {
     like : function() {
-      this.$http.post(apiRoot() + "/posts/" + this.post.id + "/stardust").then(
-        (response) => {
-          this.getLikes(); // On met à jour le nombre de likes affichés
-        },
-        (response) => {
-        });
+      if (!this.liked) { // Si l'utilisateur n'a pas déjà liké, il like
+        this.$http.post(apiRoot() + "/posts/" + this.post.id + "/stardust").then(
+          (response) => {
+            this.getLikes(); // On met à jour le nombre de likes affichés
+            this.liked = true;
+          },
+          (response) => {
+          });
+      } else { // S'il a déjà liké, il délike
+        this.$http.delete(apiRoot() + "/posts/" + this.post.id + "/stardust").then(
+          (response) => {
+            this.getLikes(); // On met à jour le nombre de likes affichés
+            this.liked = false;
+          },
+          (response) => {
+          });
+      }
     },
     publishNewComment : function() {
       this.$http.post(apiRoot() + "planets/" + this.planetId + "/posts/" + this.post.id + "/comments", { 'content' : this.newComment}, {emulateJSON : true}).then(
@@ -82,11 +98,23 @@ const Post = Vue.extend({
           console.log("Post.js : getTotalComments " + response);
         }
       );
+    },
+    isLiked : function() {
+      ///posts/:publicationId/stardust/exist
+      this.$http.get(apiRoot() + "/posts/" + this.post.id + "/stardust/exist", {emulateJSON: true}).then(
+        (response) => {
+          if (response.data == 1) {
+            this.liked = true;
+          }
+        }, 
+        (response) => {
+        }
+      );
     }
   },
   created : function() {
     // Savoir si l'utilisateur a déjà liké le post ?
-    //TODO
+    this.isLiked();
 
     // Récupèrer le nombre total de commentaires (pour savoir s'il faut en charger plus)
     //TODO BACK this.getTotalComments();
@@ -97,18 +125,11 @@ const Post = Vue.extend({
     // Récupérer le nombre de likes
     this.getLikes();
   },
-  updated: function() {
-    if (this.new) {
-      this.new = false;
-
-      this.getComments(apiRoot() + "planets/1/posts/" + this.post.id + "/comments?limit=" + this.loadMore, false);
-      this.getLikes();
-    }
-  },
   data () {
     return {
       comments : {},
       nbLikes : 0,
+      liked : false,
       newComment : '',
       prevComments: '',
       totalComments: 3,
