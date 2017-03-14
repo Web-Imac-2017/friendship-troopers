@@ -122,10 +122,12 @@ const Search = Vue.extend({
         }).then(
         (response) => {
           this.usersResult = response.data;
-          this.totalUsers = this.usersResult.length;
+          //this.totalUsers = this.usersResult.length; // ta route te renvoie que deux users max, vu que limit = 2
           this.assignPlanetPath();
+          this.usersExist = true;
 
-          this.usersExist = (this.usersResult.length > 0) ? true : false;
+          //this.usersExist = (this.usersResult.length > 0) ? true : false; //nop, si t'es ici, c'est que t'as eu au moins une
+          // réponse, donc pourquoi ça serait false? Après, ça gène pas, mais je suis pas sure que ça soit utile
 
           var linkNext = response.headers.get("Link").split(",")[0].split(";")[0];
           this.routeNextUser = apiRoot() + linkNext.substring(2, linkNext.length-1);
@@ -145,7 +147,7 @@ const Search = Vue.extend({
     showNextPage : function() {
       if (this.currentPage*2 < this.totalUsers) {
         this.currentPage++;
-        this.getUsers(this.routeNextUser);
+        this.getUsers(this.routeNextUser); //TODO La requete renvoie un 'champ manquant', il manque le deuxieme argument de ta fonction : les data !!
       }
       if (this.totalUsers-(this.currentPage*2) > 2) {
         this.morePage = true;
@@ -156,7 +158,7 @@ const Search = Vue.extend({
     // A TESTER
     showPrevPage : function() {
       this.currentPage--;
-      this.getUsers(this.routePrevUser);
+      this.getUsers(this.routePrevUser); //TODO La requete renvoie un 'champ manquant', il manque le deuxieme argument de ta fonction : les data !!
       if (this.totalUsers-(this.currentPage*2) < 2) {
         this.morePage = true;
       } else {
