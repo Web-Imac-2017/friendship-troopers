@@ -17,14 +17,8 @@ class Title extends Controller {
       throw new \Utils\RequestException('operation reservee aux membres', 401);
     }
 
-    if (!in_array(\Utils\Session::user('roleId'), [1, 2])) {
-      $fields = ['honorificTitle', 'price'];
-    } else {
-      $fields = '*';
-    }
-
     $find = $this->Title->find([
-      'fields' => $fields,
+      'fields' => '*',
     ]);
 
     $this->response($find, 200);
