@@ -17,8 +17,8 @@ Router::init($_GET['url']);
 Router::post('/auth/signin','account#inscription');
 Router::post('/auth/signin/username','account#isUsernameFree', 'users.me.usernameFree');
 Router::post('/auth/signin/mail','account#isMailFree', 'users.me.mailFree');
-Router::post('/auth/login','account#login');
-Router::post('/auth/logout','account#logout');
+Router::post('/auth/login','account#login','user.login');
+Router::post('/auth/logout','account#logout','user.logout');
 Router::get('/auth/validate','account#validateUser', 'auth.validate'); //ok
 
 
@@ -26,6 +26,12 @@ Router::get('/users/search','account#search', 'users.search');
 Router::get('/users/list','user#usersList', 'users.list'); //ok. prend comme param planetId ou role (l'id)
 Router::get('/users/me','account#getCurrentUser', 'users.me');
 Router::patch('/users/me','account#updateAccountInfos', 'users.me.update');
+<<<<<<< HEAD
+=======
+Router::delete('/users/me','account#delete', 'users.me.delete');
+Router::post('/users/password','account#lostPassword', 'users.me.lostPassword');
+Router::post('/users/password/new','account#setNewPassword', 'users.me.newPassword');
+>>>>>>> userFunctions
 Router::get('/users/me/avatars','avatar#listUserAvatar', 'users.me.listAvatar');
 Router::patch('/users/me/avatars/:avatarId/current','avatar#setCurrentAvatar', 'users.me.setCurrentAvatar');
 
@@ -34,7 +40,11 @@ Router::get('/users/:userId/user_title/list','user_title#list');
 Router::get('/users/:userId/user_title/current_title','user_title#viewCurrent');
 Router::get('/users/:userId/user_title/count','user_title#count');
 Router::patch('/users/:userId/user_title/set_current/:titleId','user_title#setCurrent');
+<<<<<<< HEAD
 Router::delete('/users/:userId/user_title/:titleId','user_title#delete'); 
+=======
+Router::delete('/users/:userId/user_title/:titleId','user_title#delete');
+>>>>>>> userFunctions
 
 Router::get('/users/me/waiting_list_friend','friend#invitationList', 'users.me.invitationList'); //ok
 Router::get('/users/me/friends','friend#listFriend', 'users.me.listUserFriend'); //ok

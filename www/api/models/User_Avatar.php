@@ -14,38 +14,44 @@ class User_Avatar extends Model {
 	}
 
     public function insert ($data) {
-        // Format des datas :
+        //Format des datas :
         // $data = [
-        //     'fields' => ['userId, avatarId, currentAvatar'],
+        //     'fields' => ['userId', 'avatarId', 'currentAvatar'],
         //     'values' => [
         //         ['1','1','1'],
         //         ['1','2','0'],
-        //         ['1','3','0'],
         //     ]
         // ];
+        $insertData = [];
         $nbFields = count($data['fields']);
         //checlRequired on userId et AvatarId
         switch ($nbFields) {
             case 2:
-                $prepare = '( ? , ? ),';
+                $prepare = '( ? , ? )';
                 break;
             case 3:
-                $prepare = '(? , ? , ?), ';
+                $prepare = '(? , ? , ?) ';
                 break;
             default:
                 throw new \Utils\RequestException('Mauvais nombre de champs', 400);
                 break;
         }
-        $sql = 'INSERT INTO ' . $this->table .' ('. implode(', ', $data['fields']) .') VALUES ';
+        $sql = 'INSERT IGNORE INTO ' . $this->table .' ('. implode(', ', $data['fields']) .') VALUES ';
         if(is_array($data['values'][0])){
-            foreach ($data['values'] as $value) {
-                $sql .= $prepare;
+            foreach ($data['values'] as $key =>$value) {
+                $insertData = array_merge($insertData, $value);
+                if($key != count($data['values'])-1){
+                    $sql .= $prepare . ', ';
+                } else {
+                    $sql .= $prepare ;
+                }
+
             }
         } else {
             $sql .= $prepare;
         }
         $prepareRequest = $this->pdo->prepare($sql);
-		$prepareRequest->execute($data['values']);
+		$prepareRequest->execute($insertData);
     }
 
 }

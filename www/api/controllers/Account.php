@@ -7,7 +7,7 @@
 namespace Controllers;
 
 class Account extends Controller{
-	public function __construct() { 
+	public function __construct() {
 		$this->loadModel('User');
 	}
 
@@ -51,7 +51,6 @@ class Account extends Controller{
 	*/
 	public function logout() {
 		\Utils\Session::destroy();
-
 		$this->response(null, 204);
 	}
 
@@ -95,37 +94,38 @@ class Account extends Controller{
 	* @return [type] [description]
 	*/
 	public function validateUser($get) {
-		$required = ['mail' , 'activated'];
+		$required = ['mail' , 'hash'];
 		if(!empty($this->checkRequired($required, $get))){
 			throw new \Utils\RequestException('MISSING_FIELDS', 400);
 		}
 
 		$data = array(
 			'mail'=>$get['mail'],
-			'activated' => $get['activated'],
+			'hash' => $get['hash'],
 		);
 		$request = [
 			'fields' => [
 				'id',
 				'mail',
-				'activated',
+				'hash',
 			],
 			'conditions' => $data
 		];
-		$result = $this->User->find($request);
-		//var_dump($result);
+		$result = $this->User->findFirst($request);
+
 		if(count($result) > 0){
 			$data['activated'] = 1;
-			$data['id'] = $result[0]['id'];
+			$data['id'] = $result['id'];
 			try {
 				$this->User->save($data);
 			} catch (\PDOException $e) {
-				throw new \Utils\RequestException('oups', 400);
+				throw new \Utils\RequestException('Erreur BDD', 400);
 			}
-
 		} else {
 			throw new \Utils\RequestException('INVALID_DATA', 400);
 		}
+
+		$this->response(null, 200);
 	}
 
 	/**
@@ -142,7 +142,7 @@ class Account extends Controller{
 
 		Il est tant maintenant de valider votre arrivée, simplement en cliquant sur le lien ci dessous !
 
-		'.$_SERVER['DOCUMENT_ROOT'] .'/' . \Utils\Router\Router::url('auth.validate') . '?mail='.$to.'&activated='.$data['activated'];
+		'.$_SERVER['DOCUMENT_ROOT'] .'/' . \Utils\Router\Router::url('auth.validate') . '?mail='.$to.'&hash='.$data['hash'];
 
 		$headers = 'From:noreply@fst.dev' . "\r\n";
 		mail($to, $subject, $message, $headers);
@@ -157,6 +157,9 @@ class Account extends Controller{
 		if(!empty($this->checkRequired($required, $post))){
 			throw new \Utils\RequestException('champs manquants', 400);
 		} else {
+			if(!filter_var($post['mail'], FILTER_SANITIZE_EMAIL)){
+				throw new \Utils\RequestException('email invalide', 400);
+			}
 			$birthdate = $post['birthdate'];
 			$tmpBirth = explode('-', $birthdate);
 			$day = $tmpBirth[2];
@@ -172,7 +175,7 @@ class Account extends Controller{
 				"mail" => $post['mail'],
 				"birthdate" => $birthdate,
 				"password" => $password,
-				"activated" => md5(rand(0,1000)),
+				"hash" => md5(rand(0,1000)),
 			];
 			$this->filterXSS($data);
 			$user = new \Models\User();
@@ -184,23 +187,61 @@ class Account extends Controller{
 			}
 			$this->loadModel('User_Avatar');
 			$this->loadModel('Avatar');
-			$defaultavatar = $this->Avatar->find(
+			$this->loadModel('User_Title');
+			$this->loadModel('Title');
+			$defaultAvatar = $this->Avatar->find(
 				['fields' => ['id'],
 				'conditions' => ['pack' => 0], ]
 			);
+			$user = $this->User->find([
+				'fields' => ['id'],
+				'conditions' => [
+					'mail' => $data['mail'],
+					'username' => $data['username'],
+					]
+				]);
+			$data['id'] = $user[0]['id'];
+			foreach ($defaultAvatar as $key => $idAvatar) {
+				if($key != 0) {
+						$valueA[] = [$data['id'], $idAvatar['id'], 0 ];
+				} else {
+					$valueA[] = [$data['id'], $idAvatar['id'], 1];
+				}
+			}
+
+			$defaultTitle = $this->Title->find(
+				['fields' => ['id'],]
+			);
+
+			foreach ($defaultTitle as $key => $idTitle) {
+				if($key != 0) {
+						$valueT[] = [$data['id'], $idTitle['id'], 0 ];
+				} else {
+					$valueT[] = [$data['id'], $idTitle['id'], 1];
+				}
+			}
 			try{
 				$this->User_Avatar->insert([
 		            'fields' => ['userId', 'avatarId', 'currentAvatar'],
-		            'values' => [$data['id'],'1','1'],
+		            'values' => $valueA,
 
 		        ]);
 			} catch (\PDOException $e) {
-				throw new \Utils\RequestException('oups', 400);
+				throw new \Utils\RequestException($e, 400);
+			}
+
+			try{
+				$this->User_Title->insert([
+		            'fields' => ['userId', 'titleId', 'current'],
+		            'values' => $valueT,
+
+		        ]);
+			} catch (\PDOException $e) {
+				throw new \Utils\RequestException($e, 400);
 			}
 			$this->sendValidationMail($data);
 			unset($data['password']);
-			unset($data['activated']);
-
+			unset($data['hash']);
 			\Utils\Session::write('User', $data);
 			$this->response($data, 201);
 		}
@@ -228,7 +269,7 @@ class Account extends Controller{
 					throw new \Utils\RequestException('bad op', 400);
 			}
 		}
-		$notAllowed = ['planetId', 'id', 'registerDate', 'activated', 'username', 'password', 'points'];
+		$notAllowed = ['planetId', 'id', 'registerDate', 'hash', 'username', 'password', 'points'];
 		$fieldsNotAllowed = $this->checkNotAllowed($notAllowed, $updates);
 		foreach ($fieldsNotAllowed as $value) {
 			unset($updates[$value]);
@@ -276,7 +317,7 @@ class Account extends Controller{
 			$fields[] = 'user.lastname';
 			$fields[] = 'user.birthdate';
 		}
-		$request= $this->User->find([
+		$request= $this->User->findFirst([
 			'fields' => $fields,
 			'leftJoin' => [
 				[
@@ -313,8 +354,15 @@ class Account extends Controller{
 				'from' => 'id'
 				],
 			],
-			'conditions' => ['user.id' => $id],
+			'conditions' => [
+				'user.id' => $id,
+				'UA.currentAvatar' => 1,
+				'userTitle.current' => 1,
+			],
 		]);
+		if(empty($request)) {
+			throw new \Utils\RequestException('Unknown user', 404);
+		}
 		$this->response($request, 200);
 	}
 
@@ -437,4 +485,92 @@ class Account extends Controller{
 			'Link' => "\"$listUrl?offset=$offset&limit=$limit\"; rel=\"next\", \"$listUrl?offset=$offsetPrev&limit=$limit\"; rel=\"last\"",
 		]);
     }
+
+	/**
+	 * lost password procedure
+	 * @param  [type] $post [description]
+	 * @return [type]       [description]
+	 */
+	public function lostPassword($post){
+		if(!filter_var($post['mail'], FILTER_SANITIZE_EMAIL)){
+			throw new \Utils\RequestException('email invalide', 400);
+		}
+		$mail = $post['mail'];
+		$user = $this->User->findFirst([
+			'fields' => ['id', 'username', 'hash', 'mail'],
+			'conditions' => ['mail' => $mail],
+		]);
+		if(!empty($user)) {
+			try {
+				$this->User->save([
+					'hash' => md5(rand(0,1000)),
+					'id' => $user['id'],
+				]);
+			} catch (\PDOException $e) {
+				throw new \Utils\RequestException('erreur BDD', 400);
+			}
+			unset($user['id']);
+			$this->sendPasswordMail($user);
+		}
+	}
+
+	/**
+	 * send a mail to
+	 * @param  array  $data   [description]
+	 * @param  boolean $resend
+	 */
+	public function sendPasswordMail($data){
+		$to      = $data['mail'];
+		$subject = '[Friendship Trooper]Inscription | Validation';
+		$message = '
+		Salut '. $data['username'] .'
+		Friendship Trooper est heureux de te rendre ton mot de pass !
+
+		Clique sur le lien ci-dessous pour retrouver ton mot de passe.
+
+		'.$_SERVER['DOCUMENT_ROOT'] .'/' . \Utils\Router\Router::url('users.me.newPassword') . '?mail='.$to.'&hash='.$data['hash'];
+
+		$headers = 'From:noreply@fst.dev' . "\r\n";
+		mail($to, $subject, $message, $headers);
+	}
+
+	/**
+	 * change the password
+	 * @param array $post
+	 */
+	public function setNewPassword($post){
+		$required = ['mail' , 'hash', 'password'];
+		if(!empty($this->checkRequired($required, $post))){
+			throw new \Utils\RequestException('MISSING_FIELDS', 400);
+		}
+		$data = array(
+			'mail'=>$post['mail'],
+			'hash' => $post['hash'],
+		);
+		$request = [
+			'fields' => [
+				'id',
+				'mail',
+				'hash',
+			],
+			'conditions' => $data
+		];
+		$result = $this->User->findFirst($request);
+		if(count($result) > 0){
+			$password=password_hash($post['password'], PASSWORD_DEFAULT);
+			try {
+				$this->User->save([
+					'id' => $result['id'],
+					'password' => $password,
+					'hash' => md5(rand(0,1000)),
+				]);
+			} catch (\PDOException $e) {
+				throw new \Utils\RequestException('Erreur BDD', 400);
+			}
+		} else {
+			throw new \Utils\RequestException('INVALID_DATA', 400);
+		}
+
+		$this->response(null, 200);
+	}
 }
