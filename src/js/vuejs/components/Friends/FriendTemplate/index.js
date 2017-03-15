@@ -7,11 +7,7 @@ template     = eval(`\`${template}\``);
 
 const FriendTemplate = Vue.extend({
   template,
-  props: ['user'] ,
-  user: {
-        nbFriends : 7,
-        planetSelected : 'Eat-712'
-  }
+  props: ['friend']
 });
 
 

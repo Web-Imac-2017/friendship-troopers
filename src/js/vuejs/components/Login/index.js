@@ -27,13 +27,13 @@ const Login = Vue.extend({
 	data () {
       return {
         userSignIn:{
-        	username: '',
-	        mail: '',
-	        password: '',
-	        passwordChecked: '',
-	        day:'',
-	        month:'',
-	        year:'',
+        	username: 'coulon',
+	        mail: 'test@live.fr',
+	        password: 'password123',
+	        passwordChecked: 'password123',
+	        day:'1',
+	        month:'1',
+	        year:'1993',
         },
         userLogin:{
         	mail:'',
