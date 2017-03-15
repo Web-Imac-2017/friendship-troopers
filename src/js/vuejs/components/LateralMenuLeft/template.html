@@ -2,7 +2,7 @@
   
   <div class="lateralMenuLeft">
 
-  <router-link :to="{ name: 'User', params: { user: user.username }}">
+  <router-link :to="{ name: 'User', params: { user: user.username, userId: user.userId }}">
     <div class="lateralMenuAvatar">
       <img :src="user.imagePath" alt="your avatar" title="mon profil" class="avatarMenu">
      <!--<img :src="user.userPlanet.path" alt="your planet" class="planetMenu">-->

@@ -1273,7 +1273,7 @@ p.loadMore {
 }
 
 
-.legals, .about, .error {
+.legals, .about, .error, .FAQ {
   .legals-content, .about-content, .error-content {
       @include padding2(4,8);
       margin: 3rem 10%;

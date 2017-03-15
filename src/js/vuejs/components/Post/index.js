@@ -21,6 +21,7 @@ const Post = Vue.extend({
       this.getPlanetPublications();
       this.isLiked();
       this.getLikes();
+      this.loadMore = 5;
     }
   },
    methods : {
