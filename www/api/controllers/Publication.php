@@ -52,8 +52,9 @@ class Publication extends Controller {
 
 		$request = $this->Publication->find([
 			'fields' => [
-				'DISTINCT publication.userId', 'publication.id', 'publication.content', 'publication.publishDate', 'publication.modified',
-				'user.username', 'listAvatar.imagePath'
+				'DISTINCT publication.userId', 'publication.id', 'publication.content',
+				'publication.publishDate', 'publication.modified',
+				'user.username', 'listAvatar.imagePath', 'images.imagePath',
 		],
 			'leftJoin' => [
 				[
@@ -61,6 +62,12 @@ class Publication extends Controller {
 					'alias' => 'user',
 					'from' => 'id',
 					'to' => 'userId',
+				],
+				[
+					'table' => 'imgUpload',
+					'alias' => 'images',
+					'from' => 'id',
+					'to' => 'imageUploadId',
 				],
 				[
 					'table' => 'user_avatar',
@@ -115,25 +122,40 @@ class Publication extends Controller {
 			throw new \Utils\RequestException('champ manquant', 400);
 		}
 
+		if (!empty($_FILES)) {
+			if (count($_FILES) > 1) {
+				throw new \Utils\RequestException('trop d\'images', 400);
+			}
+
+			$file = current($_FILES);
+
+			if (!empty($this->checkRequired(['alt'], $post))) {
+				throw new \Utils\RequestException('alt manquant', 400);
+			}
+
+			$imageId = $this->checkImages($file['tmp_name'], $post['alt']);
+		}
+
 		try {
 			$id = $this->Publication->save($this->filterXSS([
 				'userId' => $userId,
 				'content' => $post['content'],
+				'imageUploadId' => $imageId ?? null,
 				'publicationTypeId' => $post['publicationType'] ?? 3,
 			]));
 		} catch (\PDOException $e) {
-			$this->response([
+			return $this->response([
 				'error' => $e->getMessage(),
 			], 500);
 		}
 
 		$this->response([
 			'publicationId' => $id,
-			], 201, [
-				'Location' => \Utils\Router\Router::url('planets.posts.view', [
+		], 201, [
+			/*'Location' => \Utils\Router\Router::url('planets.posts.view', [
 				'planet' => $planet,
 				'id' => $id,
-			]),
+			]),*/
 		]);
 	}
 
@@ -192,7 +214,7 @@ class Publication extends Controller {
 			'conditions' => ['id' => $id],
 		]);
 
-		if (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $userId != $publiUserId) {
+		if (!in_array(\Utils\Session::user('roleId'), [1, 2]) && $userId != $publiUserId['userId']) {
 			throw new \Utils\RequestException('action reservee aux administeurs', 403);
 		}
 
