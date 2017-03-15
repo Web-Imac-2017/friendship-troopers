@@ -878,10 +878,6 @@ small.date {
   .border-left {
       border-left-width: 0;
   }
-
-  
-
-
  }
 
 
@@ -896,4 +892,17 @@ p.see:hover, .green{
 
 p.loadMore {
   padding-left: 1rem;
+}
+
+.not-done {
+  background: $sub-menu-list-item-background;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  height: 6rem;
+  z-index: 15;
+  width: 100%;
+  font-family: $title-font;
+  @include padding(2);
+
 }
