@@ -13,7 +13,8 @@ import MenuTools from '../MenuTools/index.js'
 import Post from '../Post/index.js'
 import optionBar from './OptionBar/index.js'
 import NavBar from '../NavBar/index.js'
-import PageNav from "../PageNav/index.js"
+import PageNav from '../PageNav/index.js'
+import Deconnexion from '../Deconnexion/index.js'
 
 
 const User = Vue.extend({
@@ -29,7 +30,9 @@ const User = Vue.extend({
     'menu-tools' : MenuTools, 
     'post' : Post,
     'navbar' : NavBar,
-    'page-nav' : PageNav },
+    'page-nav' : PageNav,
+    'deconnexion' : Deconnexion
+     },
      watch: {
       /*Watch if the route of an other profil is required and updates the data*/
       '$route': function() {
@@ -44,12 +47,16 @@ const User = Vue.extend({
     getRouteParams : function(){
       this.$http.get(apiRoot() + 'users/me').then((response) => {
           this.profil = response.data;
-          if (this.$route.params.userId == response.data.userId){
+          console.log(response.data.id)
+          console.log(this.$route.params.userId)
+          if (this.$route.params.userId == response.data.id){
+            this.myself = true
             this.getNbFriends(apiRoot() + 'users/' + this.profil.id + '/number_friends');
             this.getInterest(apiRoot() + 'users/' + this.profil.id + '/interest');
             this.getPosts(apiRoot() + 'planets/' + this.profil.planetId + '/posts', { 'user' : this.profil.id });
           } else {
             this.getUser(apiRoot() + 'users/' + this.$route.params.userId);
+            this.myself = false
           }
           
       }, (response) => {

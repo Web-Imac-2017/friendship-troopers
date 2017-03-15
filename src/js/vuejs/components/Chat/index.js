@@ -1,6 +1,7 @@
 'use strict';
 
 import Vue from 'vue/dist/vue';
+import {apiRoot} from '../../../../../config.js';
 
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
@@ -18,6 +19,16 @@ const Chat = Vue.extend({
   	'deconnexion' : Deconnexion,
   	'menu-tools' : MenuTools
   }, 
+  created : function(){
+    this.$http.get(apiRoot() + 'users/me/friends').then((response) => {
+      // gérer le succes, toutes les infos renvoyer sont dans response.data      
+      console.log(response)
+        this.allFriends = response.data;
+        console.log(this.allFriends);
+      }, (response) => {
+      });
+
+  },
   methods : {
     showFriends : function(){
       if (this.showAllFriends == true)
@@ -55,6 +66,7 @@ const Chat = Vue.extend({
   },
   data () {
   	return {
+      allFriends:'',
       newMessage: '',
   		date : '17 fevrier 1980',
   		currentSelected : 0,
