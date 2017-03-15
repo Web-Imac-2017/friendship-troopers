@@ -26,7 +26,6 @@ const Friends = Vue.extend({
           for (var i = 0; i < this.planets.length; i++) {
             this.planets[i].selected = false;
           }
-          
           this.selectPlanet(0);
         },(response) => {
         });

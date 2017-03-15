@@ -17,9 +17,20 @@ const NavBar = Vue.extend({
     'dashboard' : DashboardSubMenu
   },
   created : function() {
+    this.getUser();
     this.actualizeFriendsRequest();
   },
   methods: {
+    getUser : function() {
+      this.$http.get(apiRoot() + "users/me", {emulateJSON: true}).then(
+        (response) => {
+          this.user = response.data;
+        },
+        (response) => {
+
+        }
+        );
+    },
     actualizeFriendsRequest : function() {
       this.$http.get(apiRoot() + "/users/me/waiting_list_friend", { emulateJSON: true }).then(
       (response) => {
@@ -69,7 +80,8 @@ const NavBar = Vue.extend({
         subMenu : 0,
         pseudo : 'luckypon',
         avatar : '/assets/images/avatars/Terre/astro.svg',
-        search : 0
+        search : 0,
+        user: {}
 
         // subMenu : 0 /*1:friends / 2: messages / 3: notif*/
       }

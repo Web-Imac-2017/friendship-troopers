@@ -43,7 +43,7 @@
             </ul>
             <div  v-if = "friendsRequest.length > 0" class="separator"></div>
 
-            <p class="sub-menu-footer"> <router-link :to="{ name: 'Friends', params: { user: pseudo }}"> Voir tous mes amis</router-link></p>
+            <p class="sub-menu-footer"> <router-link :to="{ name: 'Friends', params: { user: user.username }}"> Voir tous mes amis</router-link></p>
           </div>
         </div>
 
