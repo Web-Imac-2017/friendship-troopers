@@ -3,28 +3,30 @@
 	<div class="container-fluid">
  		<div class="row">
 		    <aside class="col-sm-3 col-md-3 col-lg-2">
-		      <lateral-menu-left></lateral-menu-left>
+		      <lateral-menu-left ref="menu"></lateral-menu-left>
 		      <menu-tools class="desktop"></menu-tools>
 		      <deconnexion class="desktop"></deconnexion>
 		    </aside>
 		   <section id="resolved-riddle" class="riddle col-sm-9 col-md-9 col-lg-8 container">
 		   		<div class="row to-current">
-			   			<p class="col-sm-10"> Vous avez une énigme en cours </p>
+			   			<p class="col-sm-10 left"> Vous avez une énigme en cours </p>
 			   			<router-link :to="{name :'EnigmeCurrent', params: { user: me.username } }" class="col-sm-2"> <button class="green-button"> Voir l'enigme </button> </router-link>
 			   	</div>
+
 			   		<div class="row container-transparent">
+			   			<div class="row">
 					  		<h1 class="pink title"> Enigmes résolues </h1>
 					        <div class="stat">
 						        <div class="row center-row no-gutters">  
 						          <div class="col-sm-4 pink text-center">
 						            <p class="inline"><span class="fat"> {{ riddleSolved.length }} </span> </p>
-						            <p class="inline left" v-if="riddleSolved.length > 2"> enigmes <br> résolues </p>
-						            <p class="inline left" v-else> enigmes <br> résolues </p>
+						            <p class="inline left" v-if="riddleSolved.length > 2"> enigmes résolues </p>
+						            <p class="inline left" v-else> enigme résolue </p>
 						          </div>  
 						          <div class="col-sm-4 pink text-center">
 						            <span class="fat inline" v-if="me.points != null"> {{ me.points }} </span>
 						             <span class="fat inline" v-else> 0 </span>
-						            <p v-if="riddle.points > 2" class="inline center"> points gagnés </p>
+						            <p v-if="me.points > 2" class="inline center"> points gagnés </p>
 						            <p v-else class="inline center"> point gagné</p>
 						          </div>
 						            <div class="col-sm-4 pink text-center">
@@ -34,7 +36,7 @@
 						          </div>
 						        </div>
 					   		</div>
-					</div>
+						</div>
 
 						<div class="row container-colored" v-for="riddle in riddleSolved">
 					          <div class="col-sm-12">
@@ -52,7 +54,7 @@
 					               <img :src="'/assets/images/enigmes/Horloge.svg'" alt="date" class="center horloge">
 					               <p>{{ riddle.date }} </p>
 					             </li>
-					             <li class="col-sm-3">
+					             <li class="col-sm-3 text-center points">
 					               <span class="fat inline"> {{ riddle.points }} </span>
 					               <p v-if="riddle.points > 2"> points </p>
 					               <p v-else> points </p>
@@ -61,16 +63,19 @@
 					            <span class="border-bottom center"></span>
 					            <p><strong> Mode de jeu</strong></p>
 					            <ul class="row justify-content-center">
-					              	<li class="col-sm-3">  
+					              	<li class="col-sm-3 col-sm-offset-3">  
 					              		<img :src="me.imagePath" alt="avatar">
 					                	<p class="pseudo">{{ me.username }} </p></li> 
 					                <li class="col-sm-3 pseudo-button" v-for="player in riddle.players"> 
-						               <img :src="player.imagePath" alt="avatar">
+					                <router-link :to="{ name: 'User', params: { user: player.username, userId : player.userId}}">
+          									 <img :src="player.imagePath" alt="avatar">
+        							</router-link>
 						               <p class="pseudo">{{ player.username }} </p></li> 
 					            </ul>
 					          </div>
 					          </div>
 					      </div>
+					    </div>
 			   	</div>
 					   
 		   </section>

@@ -5,8 +5,8 @@
       <div v-for="(player, index) in riddle.players">
         <div class="col-lg-9 col-md-8 col-sm-6 player">
           <div class="col-md-2 col-lg-1  col-xs-4 no-nothing">
-            <router-link :to="{ name: 'User', params: { user: player.username }}">
-            <img :src="player.imagePath" class="avatar center">
+            <router-link :to="{ name: 'User', params: { user: player.username, userId : player.userId}}">
+              <img :src="player.imagePath" class="avatar center">
             </router-link>
           </div>
           <h1 class="pseudo left col-lg-9 col-md-7" v-bind:style="{color : planetData[player.planetId] }" >{{ player.username }} </h1>

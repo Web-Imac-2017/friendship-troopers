@@ -34,6 +34,8 @@ const EnigmeResolved = Vue.extend({
   data () {
   	return {
   		me : {},
+  		points : 30,
+  		nbBadges : 2,
   		riddleSolved : [
   		{
   			name :'Le trésor caché aux confins du Connecticut ',
@@ -42,7 +44,8 @@ const EnigmeResolved = Vue.extend({
   			date :'18 fev',
   			points : 30,
   			players : [ {
-  				username : 'Marmitton',
+  				username : 'Connor',
+          userId : 4,
   				imagePath : '/assets/images/avatars/aliens/aliens.svg',
   				planetId : 1
   			}]

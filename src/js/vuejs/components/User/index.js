@@ -13,7 +13,7 @@ import MenuTools from '../MenuTools/index.js'
 import Post from '../Post/index.js'
 import optionBar from './OptionBar/index.js'
 import NavBar from '../NavBar/index.js'
-import PageNav from "../Feed/PageNav/index.js"
+import PageNav from "../PageNav/index.js"
 
 
 const User = Vue.extend({

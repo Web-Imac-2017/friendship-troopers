@@ -17,7 +17,7 @@ const EnigmeLayout = Vue.extend({
    mounted: function() {
         if (this.chat){
   			this.$http.get(apiRoot() + 'users/me').then((response) => {
-       		 	this.me = response.data[0];
+       		 	this.me = response.data;
        		 	this.riddle.players.unshift(this.me)
       		}, (response) => {
         		console.log(response);
@@ -30,7 +30,8 @@ const EnigmeLayout = Vue.extend({
   		riddle : {
   			content : 'Je plonge d\'une falaise de 10 mètre de haut. <br\> Je nage sous l\'eau pendant plus d\'une heure. <br\> Je chasse le requin avec les dents. <br\> Chaque matin je traverse la Méditarranée à la brasse ...',
   			players : [{
-  				username : 'Marmitton',
+  				username : 'Connor',
+          userId : 4,
   				imagePath : '/assets/images/avatars/aliens/aliens.svg',
   				planetId : 1
   			}

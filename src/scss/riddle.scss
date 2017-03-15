@@ -170,14 +170,25 @@
 }
 
 #resolved-riddle {
+  @include margin(0);
 
   .to-current {
     background-color: $comments-publish ;
-    @include margin4(0, 0, 1, 0);
+    @include margin4(0, 0, 2, 0);
     @include padding(1);
   }
 
-  .horloge {
-    width: 60%;
+  h1 {
+    text-align: center;
+  }
+
+  .points {
+    @include padding2(3,0);
+  }
+
+  button {
+    background-color: $green-text;
+    border: none;
+    font-size: 1.5rem;
   }
 }
