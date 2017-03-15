@@ -237,8 +237,11 @@ class Account extends Controller{
 
 		        ]);
 			} catch (\PDOException $e) {
-				throw new \Utils\RequestException($e, 400);
+				$this->response([
+					'error' => $e->getMessage(),
+				], 500);
 			}
+			$data['roleId'] = 3;
 			$this->sendValidationMail($data);
 			unset($data['password']);
 			unset($data['hash']);
@@ -425,8 +428,9 @@ class Account extends Controller{
 			];
 		}
 
+
 		$count = $this->User->findFirst([
-			'fields' => [' COUNT(user.id) AS nbuser'],
+			'fields' => [' COUNT(DISTINCT  user.id) AS nbuser'],
 			'leftJoin' => [
 				[
 				'table' => 'user_avatar',
@@ -455,7 +459,7 @@ class Account extends Controller{
 				'to' => 'titleId',
 				'JoinTable' => 'userTitle',
 				],
-                [
+				[
 				'table' => 'user_interest',
 				'alias' => 'userInterest',
 				'from' => 'userId',
@@ -471,15 +475,9 @@ class Account extends Controller{
 				],
 			],
 			'conditions' => $where,
-			'limit' => "$offset, $limit",
-            'orderBy' => [
-				'key' => 'username',
-				'order' => 'ASC',
-			],
 		]);
-		$request[] = ['count' => $count['nbuser']];
-
-        $request += $this->User->find([
+		$response[0] = ['count' => $count['nbuser']];
+        $request= $this->User->find([
 			'fields' => $fields,
 			'leftJoin' => [
 				[
@@ -537,7 +535,7 @@ class Account extends Controller{
 		$offset = $offset + $limit;
 
 		$listUrl = \Utils\Router\Router::url('users.search');
-		$this->response($request, 200, [
+		$this->response(array_merge($response, $request), 200, [
 			'Link' => "\"$listUrl?offset=$offset&limit=$limit\"; rel=\"next\", \"$listUrl?offset=$offsetPrev&limit=$limit\"; rel=\"last\"",
 		]);
     }
