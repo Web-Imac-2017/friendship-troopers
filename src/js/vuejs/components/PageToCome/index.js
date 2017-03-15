@@ -5,10 +5,15 @@ import Vue from 'vue/dist/vue';
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
 
-const optionBar = Vue.extend({
+import NavBar from '../NavBar/index.js';
+  
+
+const PageToCome = Vue.extend({
   template,
-  props: ['myself']
+  components : {
+  	'navbar' : NavBar
+  }
 });
 
 
-export default optionBar;
+export default PageToCome;

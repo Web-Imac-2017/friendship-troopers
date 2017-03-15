@@ -1,0 +1,86 @@
+@import "variables";
+
+.user {
+	.border-right {
+		border-right: 0.1rem solid $main-text;
+		@include margin2(1, 0);
+		height: 8rem;
+	}
+
+	.center-row {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	img.planet {
+		height: 10rem;
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+	}
+
+	img.user-avatar {
+		height: 12rem;
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+	}
+	
+	img {
+		display : inline-block;
+	}
+
+	.colored {
+		background-color: $comments-background;
+		@include padding2(1,5);
+		@include margin2(0, 1);
+		text-align: center;
+	}
+
+	.interests {
+		background-color: $comments-background;
+		@include margin2(1, 5);
+		@include padding2(0.5, 2);
+		/*height: 5rem;*/
+	}
+
+	.interest {
+		@include padding2(0.7, 2.5);
+		font-size: 1.7rem;
+		text-align: center;
+	}
+
+	.pseudo-button p{
+		display: inline-block;
+	}
+
+	ul {
+		background: none;
+	}
+
+	p.inline {
+		display: inline-block;
+	}
+
+	p {
+		@include padding2(0.5, 1);
+	}
+
+	p.center {
+  		vertical-align: middle;
+	}
+
+	.pink {
+		color: $notifs;
+	}
+
+	span.fat {
+		font-size: 5rem;
+	}
+
+	.profil, .option-bar, .stat {
+		margin-bottom: 3rem;
+	}
+
+
+}

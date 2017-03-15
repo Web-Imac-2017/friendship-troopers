@@ -5,14 +5,15 @@ import Vue from 'vue/dist/vue';
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
 
-const Statistics = Vue.extend({
+const optionBar = Vue.extend({
   template,
-  props: ['user'],
-  user: {
-        nbFriends : 7,
-        planetSelected : 'Eat-712'
+  props: ['myself'],
+  methods: {
+  	addFriend: function() {
+  		this.$emit("addfriend");
+  	}
   }
 });
 
 
-export default Statistics;
+export default optionBar;

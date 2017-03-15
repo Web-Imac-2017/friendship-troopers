@@ -123,8 +123,6 @@ const Post = Vue.extend({
   computed: {
     reversedComments : function() {
       return this.comments;
-      //return Object.keys(this.comments).sort().reverse();
-      //return this.comments.reverse();
     }
   }
 });

@@ -42,6 +42,7 @@ import AddEnigme from '../components/admin/AddEnigme.vue'*/
 import Error401 from '../components/Error401'
 import Error403 from '../components/Error403'
 import Error404 from '../components/Error404'
+import PageToCome from '../components/PageToCome'
 
 
 // ==================== Router registration ====================
@@ -155,6 +156,10 @@ const router = new VueRouter({
       name : 'Error404',
       path: '/erreur404', 
       component : Error404
+  },{ 
+      name : 'PageToCome',
+      path: '/page-to-come', 
+      component : PageToCome
   }/*,{ 
       name : 'AdminCreatePost',
       path: '/admin/creer-post', 
