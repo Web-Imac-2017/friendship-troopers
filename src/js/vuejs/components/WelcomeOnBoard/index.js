@@ -47,7 +47,6 @@ const WelcomeOnBoard = Vue.extend({
         planet[welcomeData.answers[i]-1] += 1
     }
     var max = 0, index = 0;
-    console.log("Planete :" + planet);
     for (i = 0; i < planet.length; i++) {
       if (planet[i] > max ){
         max = planet[i]
@@ -66,15 +65,13 @@ const WelcomeOnBoard = Vue.extend({
     }).then(
       (response) => {
 
-        this.$http.post(apiRoot() + 'user/'+ response.data[0].id +'/interests', 
+        this.$http.post(apiRoot() + 'user/'+ response.data.id +'/interests', 
         {
           'planetId' : welcomeData.planetUser + 1
         },{
           emulateJSON: true,
         }).then(
           (response) => {
-            console.log("success planet !");
-            console.log(response);
           },
           (response) => {
           }
