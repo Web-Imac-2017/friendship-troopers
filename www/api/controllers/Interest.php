@@ -151,7 +151,7 @@ class Interest extends Controller {
 
   /**
    * WelcomeOnBoard function
-   * update the current user planetId 
+   * update the current user planetId
    * @param array $interestList containing interestId
    * @return JSON user's id
    */
@@ -176,6 +176,9 @@ class Interest extends Controller {
       'id' => $userId,
       'planetId' => $data['planetId']
     ]));
+
+    /*update the planetId in the session*/
+    $_SESSION['User']['planetId'] = $data['planetId'];
 
     $this->response($request,200);
   }
