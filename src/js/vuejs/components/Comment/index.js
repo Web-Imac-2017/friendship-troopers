@@ -12,6 +12,9 @@ const Comment = Vue.extend({
     planet : String
   },
   template,
+  mounted : function(){
+    console.log(JSON.stringify(this.comment));
+  },
   methods : {
     formateDate : function(date) {
       var object = new Date(date); 

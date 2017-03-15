@@ -1,0 +1,65 @@
+<div class="col-sm-8 container-transparent">
+  <h1 class="pink title"> Qui suis-je </h1>
+  <div class="row container-colored">
+    <div class="col-sm-12" v-if="!chat">
+      <div v-for="(player, index) in riddle.players">
+        <div class="col-lg-9 col-md-8 col-sm-6 player">
+          <div class="col-md-2 col-lg-1  col-xs-4 no-nothing">
+            <router-link :to="{ name: 'User', params: { user: player.username, userId : player.userId}}">
+              <img :src="player.imagePath" class="avatar center">
+            </router-link>
+          </div>
+          <h1 class="pseudo left col-lg-9 col-md-7" v-bind:style="{color : planetData[player.planetId] }" >{{ player.username }} </h1>
+          <router-link :to="{name: 'EnigmeCurrentChat', params: { user: username } }">
+          <p class="col-sm-7 col-xs-12 pseudo-button message"> lui envoyer un message </p>
+          </router-link>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6 right" v-if="index == 0">
+        <div class="col-sm-12 right points">
+          <p v-if="riddle < 2"> <span>{{ riddle.points }}</span> point</p>
+          <p v-else> <span>{{ riddle.points }} </span> points</p>
+        </div>
+        <div class="col-sm-12 pseudo-button">
+          <router-link :to="{ name: 'EnigmeCurrent'}">
+            <p><img class="small" src="/assets/images/enigmes/abandon.svg"> Abandonner </p>
+          </router-link>
+        </div>
+      </div>
+      <span class="col-sm-10 col-sm-offset-1 border-bottom text-center"></span>
+    </div>
+  </div>
+
+  <div class="col-sm-12" v-else>
+    <div class="col-sm-8">
+      <div class="col-sm-4" v-for="(player, index) in riddle.players">
+       <router-link :alt="player.username" :to="{ name: 'User', params: { user: player.username, userId: player.userId }}">
+        <img :src="player.imagePath" class="avatar center">
+        <h1 class="pseudo text-center" v-bind:style="{color : planetData[player.planetId] }" >{{ player.username }} </h1>
+      </router-link>
+      </div>
+    </div>
+    <div class="col-sm-4 right">
+      <div class="col-sm-12 right points">
+        <p v-if="riddle < 2"> <span>{{ riddle.points }}</span> point</p>
+        <p v-else> <span>{{ riddle.points }} </span> points</p>
+      </div>
+      <div class="col-sm-12 pseudo-button">
+        <router-link :to="{ name: 'EnigmeCurrent'}">
+          <p><img class="small" src="/assets/images/enigmes/abandon.svg"> Abandonner </p>
+        </router-link>
+      </div>
+    </div>
+     <span class="col-sm-10 col-sm-offset-1 border-bottom text-center"></span>
+  </div>
+
+  
+   
+    <div class="col-sm-12 content text-center" v-html="riddle.content">
+      {{ riddle.content }}
+    </div>
+  </div>
+  <form v-on:submit.prevent.stop="" class="row response pink">
+    <textarea class="col-sm-offset-7 col-sm-4" rows="1" type="text" placeholder="Proposer une réponse" v-model="response"></textarea>
+    <img class="small pseudo-button col-sm-1" src="/assets/images/validation-pink-bolder.svg">
+  </form>
+</div>

@@ -379,7 +379,6 @@ button{
   }
 }
 
-
 .login{
   min-height: 100%;
   align-items: center;
@@ -577,7 +576,6 @@ small {
     height: 3.5rem;
   }
 }
-
 
 .pseudo-button{
   cursor:pointer;
@@ -1297,10 +1295,30 @@ p.loadMore {
 .error {
   text-align: center;
 }
+
+
 .border-bottom {
   border-bottom-style: solid;
   border-bottom-width: 0.2rem;
-  }
+}
+
+.pink {
+  color : $notifs;
+}
+
+.no-margin{
+  @include margin(0);
+}
+
+.no-padding {
+  @include padding(0);
+}
+
+.no-nothing {
+  @extend .no-padding;
+  @extend .no-margin;
+
+}
 
 .user-params {
   .page-title {

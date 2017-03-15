@@ -52,13 +52,13 @@
         </div>
         <span class="h-separator center"></span>
         <div class="row interests">
-            <p class="interest p col-sm-2 center" v-for="(interest, index) in interests" v-if="index < start">
-             {{interest}} 
+            <p class="interest col-sm-2 center" v-for="(interest, index) in interests" v-if="index < start">
+             {{interest.label}} 
             </p>
-            <div class="col-sm-2 center see-more pseudo-button" v-on:click="showMore" v-if=" start == 5"> <small class="center"> + </small> Voir plus </div>
-            <div class="col-sm-2 center see-more pseudo-button" v-on:click="showLess" v-else> <small class="center"> - </small> Voir moins</div>
         </div>
         <span class="h-separator center"></span>
+        <div class="col-sm-12 text-center pseudo-button" v-on:click="showMore" v-if=" start == 6"> + Voir plus + </div>
+        <div class="col-sm-12 text-center pseudo-button" v-on:click="showLess" v-else> - Voir moins - </div>
         
       </div>
         </div>

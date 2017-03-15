@@ -5,6 +5,8 @@
   @include font-size(1.5);
   margin: 5rem 0;
 
+ 
+
   ul {
   	 @include padding(2);
 
@@ -21,7 +23,7 @@
   ul li img {
     height: 90%;
     width: 90%;
-
+ 
   }
   p {
   	text-align: center;
@@ -49,9 +51,160 @@
   	 color: $main-text;
   	 background: none;
   	 border: 0.2rem solid $enigme-title;
+
+     &:hover, &:focus, &:active {
+      background: $enigme-title;
+    }
   }
 
   button img {
   	height: 3rem;
+  }
+}
+
+#current-riddle {
+  
+  a {
+    text-decoration: none;
+  }
+
+  img.small  {
+    height: 3rem;
+  }
+
+   #formSubmit{
+    textarea{
+      text-align:left;
+    }
+    
+  }
+
+  .message {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .title {
+    @include padding2(4,0);
+  }
+
+  span {
+    font-weight: lighter;
+    font-size: 2rem;
+  }
+
+  .content {
+    @include margin2(4,2);
+    @include padding2(6,1);
+    font-size: 1.5rem;
+    line-height: 3rem;
+  }
+
+  .border-bottom {
+    border-bottom-color: $grey;
+    border-bottom-width: 0.01rem;
+    @include padding2(0.5, 0);
+  }
+
+  img.avatar {
+    height: 6rem;
+    @include padding2(0,0.2);
+  }
+
+  .response {
+    @include margin(0);
+    @include padding(1);
+    background: $lateral-menu-background;
+  }
+
+  textarea {
+     background: $lateral-menu-background;
+     color: $notifs;
+     border-bottom: 0.1rem solid $notifs;
+  }
+
+  .container-colored {
+    margin: 0;
+  }
+
+  .points {
+    font-size: 1.5rem;
+  }
+
+  .left {
+    text-align: left;
+  }
+
+  .player {
+    @include margin2(1,0);
+  }
+  .underline  {
+    border-bottom-color: $notifs;
+    border-bottom-width: 0.1rem;
+    @include padding2(0.5, 0);
+  }
+
+    /* do not group these rules */
+  *::-webkit-input-placeholder {
+      color: $notifs;
+  }
+  *:-moz-placeholder {
+      /* FF 4-18 */
+      color: $notifs;
+  }
+  *::-moz-placeholder {
+      /* FF 19+ */
+      color: $notifs;
+  }
+  *:-ms-input-placeholder {
+      /* IE 10+ */
+      color: $notifs;
+  }
+
+  @media screen and (max-width: 991px) {
+  .message {
+    padding: 0;
+    font-size: 1.3rem;
+  }
+}
+}
+
+#resolved-riddle {
+  @include margin(0);
+
+  .to-current {
+    background-color: $comments-publish ;
+    @include margin4(0, 0, 2, 0);
+    @include padding2(1,0);
+  }
+
+  .to-current p {
+    @include padding(0.5);
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  .points {
+    @include padding2(3,0);
+  }
+
+ button{
+  background: $main-title ;
+  cursor:pointer;
+  color:$white;
+  border: none;
+  font-size: 1.5rem;
+  @include padding-button(1.5);
+  outline: 0;
+  display: inline-block;
+  &:hover{
+    background: $username;
+  }
+}
+
+  p.left{
+    text-align:left;
   }
 }
