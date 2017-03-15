@@ -8,6 +8,9 @@ template     = eval(`\`${template}\``);
 
 const WelcomeOnBoard = Vue.extend({
   template,
+  created : function(){
+    
+  },
   methods: {
   finished : function(){
     welcomeData.finish = true;
@@ -55,28 +58,31 @@ const WelcomeOnBoard = Vue.extend({
     return index;
   },
   submit : function(){
-    /*var data = [
-    {"op":"replace","path":"/user_interest","value":{"0":"1","1":"9","2":"14","3":"16","4":"24","5":"29"}}
-    ]
-    console.log("data" + JSON.stringify(data));
-        this.$http.patch(apiRoot() + 'interest/WelcomeOnBoard', data, {
-          emulateHTTP: true,
-          headers: { 
-            'Content-Type': 'application/json'
-          }
-        }).then(
-          (response) => {
-            console.log("success !");
-            console.log(response);
-          },
-          (response) => {
-            console.log("fail !");
-            console.log(response);
-          }
-        )*/
     welcomeData.planetUser = this.attributePlanet()
     this.styleObject.borderColor = welcomeData.planetInfo[welcomeData.planetUser].color
     this.styleObject2.borderLeftColor = welcomeData.planetInfo[welcomeData.planetUser].color
+    this.$http.get(apiRoot() + 'users/me', {
+      emulateJSON: true,
+    }).then(
+      (response) => {
+
+        this.$http.post(apiRoot() + 'user/'+ response.data[0].id +'/interests', 
+        {
+          'planetId' : welcomeData.planetUser + 1
+        },{
+          emulateJSON: true,
+        }).then(
+          (response) => {
+            console.log("success planet !");
+            console.log(response);
+          },
+          (response) => {
+          }
+        )
+      },
+      (response) => {
+      }
+    )
   },
   backToQuestion : function(index){
     welcomeData.current = index;
@@ -121,7 +127,8 @@ const WelcomeOnBoard = Vue.extend({
         }, 
         styleObject2 : {
           borderLeftColor : 'white'
-        }
+        },
+        currentUser : {}
     }
   }
 });

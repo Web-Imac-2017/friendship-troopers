@@ -583,10 +583,6 @@ small {
   cursor:pointer;
 }
 
-<<<<<<< HEAD
-.pseudo {
-  margin: 0px 1px 0.5px 2px;
-=======
 .option-button img {
   cursor:pointer;
   position: absolute;
@@ -622,7 +618,6 @@ small {
 }
 .post-footer-comments {
    right: 2rem;
->>>>>>> dev
 }
 
 .connect-buttons {
@@ -859,8 +854,6 @@ p.honorific-title {
     color: $grey;
   }
 }
-<<<<<<< HEAD
-=======
 
 .pseudo-button {
   cursor : pointer;
@@ -1048,7 +1041,6 @@ p.honorific-title {
   }
 }
 
->>>>>>> dev
 
 @media all and (max-width: $break-small) {
   #intro-form{
@@ -1152,8 +1144,6 @@ p.honorific-title {
   }
 }
 
-<<<<<<< HEAD
-=======
 .comment {
   background: $comments-background;
   @include padding(0.5);
@@ -1215,7 +1205,6 @@ small.date {
     color: $grey;
   }
 
->>>>>>> dev
 @media all and (max-width: $break-col-xs) {
   #welcome-on-board-container {
     .container-transparent{
@@ -1243,24 +1232,6 @@ small.date {
 
  }
 
-<<<<<<< HEAD
-.comment {
-  background: $comments-background;
-  @include padding(0.5);
-  width: 95%;
-  @include margin4(1, 2, 0, 2);
- /* margin: 0 2.5%;
-  margin-top:2%;*/
-  p.grey {
-    color: $grey;
-  }
-}
-
-small.date {
-    color: $grey;
-  }
-=======
->>>>>>> dev
 
 p.see {
   cursor : pointer;

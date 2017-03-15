@@ -151,7 +151,7 @@ class Interest extends Controller {
 
   /**
    * WelcomeOnBoard function
-   * update the current user planetId
+   * update the current user planetId 
    * @param array $interestList containing interestId
    * @return JSON user's id
    */

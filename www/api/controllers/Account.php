@@ -7,7 +7,7 @@
 namespace Controllers;
 
 class Account extends Controller{
-	public function __construct() {
+	public function __construct() { 
 		$this->loadModel('User');
 	}
 

@@ -34,7 +34,7 @@ Router::get('/users/:userId/user_title/list','user_title#list');
 Router::get('/users/:userId/user_title/current_title','user_title#viewCurrent');
 Router::get('/users/:userId/user_title/count','user_title#count');
 Router::patch('/users/:userId/user_title/set_current/:titleId','user_title#setCurrent');
-Router::delete('/users/:userId/user_title/:titleId','user_title#delete');
+Router::delete('/users/:userId/user_title/:titleId','user_title#delete'); 
 
 Router::get('/users/me/waiting_list_friend','friend#invitationList', 'users.me.invitationList'); //ok
 Router::get('/users/me/friends','friend#listFriend', 'users.me.listUserFriend'); //ok
