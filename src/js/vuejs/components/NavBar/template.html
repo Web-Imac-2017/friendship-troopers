@@ -43,7 +43,7 @@
             </ul>
             <div  v-if = "friendsRequest.length > 0" class="separator"></div>
 
-            <p class="sub-menu-footer"> <router-link :to="{ name: 'Friends', params: { user: pseudo }}"> Voir tous mes amis</router-link></p>
+            <p class="sub-menu-footer"> <router-link :to="{ name: 'Friends', params: { user: user.username }}"> Voir tous mes amis</router-link></p>
           </div>
         </div>
 
@@ -91,13 +91,10 @@
           </div> 
      
         </div>
-
-
         <div class="menu-separator"></div>
-        <router-link :to="{ name: 'User', params: { user: pseudo }}" class="nav-item nav-link nav-profil"> <p class="desktop"> Mon profil</p> <img class="small-desktop mobile nav-avatar" :src=avatar alt="Mon profil" title="Mon profil"> </router-link>
+        <router-link :to="{ name: 'User', params: { user: username, userId : id }}" class="nav-item nav-link nav-profil"><p class="desktop"> Mon profil</p> <img class="small-desktop mobile nav-avatar" :src=avatar alt="Mon profil" title="Mon profil"> </router-link>
         <div class="mobile"> <div class="menu-separator"></div> <img src=/assets/images/deconnexion.svg alt="Déconnexion" title="Déconnexion"></div>
-
-
+        
       </li>
     </ul>
   </div>

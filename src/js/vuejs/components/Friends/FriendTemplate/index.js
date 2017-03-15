@@ -7,7 +7,10 @@ template     = eval(`\`${template}\``);
 
 const FriendTemplate = Vue.extend({
   template,
-  props: ['friend']
+  props: {
+  	friend: Object,
+  	planet : String
+  }
 });
 
 
