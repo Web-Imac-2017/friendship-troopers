@@ -106,7 +106,6 @@ abstract class Model {
 								$otherConditions = array();
 								foreach ($value as $orKey => $valueOfValue) {
 									// case a same attribut may have several value and dev not using IN clause
-									var_dump($valueOfValue);
 									if(is_array($valueOfValue)){
 										if (isset($valueOfValue['value']) and isset($valueOfValue['cmp'])) {
 											if($valueOfValue['cmp'] === 'IN') {
