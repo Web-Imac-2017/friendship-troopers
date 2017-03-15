@@ -317,7 +317,6 @@ class Account extends Controller{
 			$fields[] = 'user.lastname';
 			$fields[] = 'user.birthdate';
 		}
-		
 		$request= $this->User->findFirst([
 			'fields' => $fields,
 			'leftJoin' => [
