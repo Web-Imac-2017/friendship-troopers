@@ -29,10 +29,12 @@ const formUser = Vue.extend({
 		}
 	},
 	methods:{
+		// vérifie si le mail ressemble à une vraie adresse mail
 		checkMail(){
 			var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
 			this.falseMail = (!regex.test(this.userSignIn.mail)) ? true : false;
 		},
+		// vérifie si le mot de passe est suffisamment compliqué et si les deux mots de passe rentrés sont les mêmes
 		checkPassword(){
 			var regex = /^.*(?=.{8,})(?=.*\d)(?=.*[a-zA-Z]).*$/;
 			
@@ -40,11 +42,103 @@ const formUser = Vue.extend({
 			if(!this.falsePassword)
 				this.lowPassword = (!regex.test(this.userSignIn.password)) ? true : false;
 		},
+		// vérifie si le pseudo n'est pas trop long et n'est pas nul
 		checkUsername(){
 			var username = this.userSignIn.username;
-			this.longUsername = (username.length > 20) ? true : false;
+			this.longUsername = (username.length > 15) ? true : false;
 			this.nullUsername = (username == '') ? true : false;
 		},
+		// envoie à la bdd
+		checkDB(){
+			// vérifie si le mail n'existe pas déjà
+			this.$http.post(apiRoot() + 'auth/signin/mail', 
+		   	{
+		   		'mail' : this.userSignIn.mail
+		   	},{
+		    	emulateJSON: true
+		    }).then(
+		      (response) => {
+		      	if(response.data == true){
+		      		this.alreadyUsedMail = false;
+		      		// vérifie si le pseudo n'existe pas déjà
+		          	this.$http.post(apiRoot() + 'auth/signin/username', 
+			       	{
+			       		'username' : this.userSignIn.username
+			       	},{
+			        	emulateJSON: true
+			        }).then(
+			          (response) => {
+			          	if(response.data == true){
+			          		this.alreadyUsedUsername = false;
+			          		var birthdate = this.userSignIn.year + '-' + this.userSignIn.month + '-' + this.userSignIn.day;
+			          		console.log(this.userSignIn.username);
+			          		console.log(this.userSignIn.mail);
+			          		console.log(this.userSignIn.password);
+			          		console.log(birthdate);
+			          		// envoie les paramètres pour l'inscription à la bdd
+			          		this.$http.post(apiRoot() + 'auth/signin', 
+					       	{
+					       		'username' : this.userSignIn.username,
+					       		'mail' : this.userSignIn.mail, 
+					       		'birthdate' : birthdate, 
+					       		'password': this.userSignIn.password 
+					       	},{
+					        	emulateJSON: true
+					        }).then(
+					          (response) => {
+					          	console.log(JSON.stringify(response.data));
+								this.falseDate = false;
+								this.errorDB = false;
+					          	console.log("inscription faite !");
+					            this.$router.push({
+								    name: 'WelcomeOnBoard' 
+								});
+					          },
+					          (response) => {
+					            if(response.data.error == "USER_EXISTING"){
+					            	this.alreadyUsedUsername = true;
+									this.alreadyUsedMail = true;
+									console.log(response);
+									console.log(JSON.stringify(response.data));
+					            }
+					            else if(response.data.error == "INVALID_DATE"){
+					            	this.falseDate = true;
+					            	console.log(response);
+					            	console.log(JSON.stringify(response.data));
+					            }
+					            else if(response.data.error == "OUPS"){
+					            	console.log("OUPS");
+					            	console.log(response);
+					            	console.log(JSON.stringify(response.data));
+					            }
+					            else if(response.data.error == "MISSING_FIELDS"){
+					            	console.log("MISSING_FIELDS");
+					            	console.log(response);
+					            	console.log(JSON.stringify(response.data));
+					            }
+					            else{
+					            	this.errorDB = true;
+					            	console.log(response);
+					            	console.log(JSON.stringify(response.data));
+					            }
+					          }
+					        )
+			          	}else{
+			          		this.alreadyUsedUsername = true;
+			          	}
+			          	
+			          },
+			          (response) => {}
+			        )
+		      	}else{
+		      		this.alreadyUsedMail = true;
+		      	}
+		      },
+		      (response) => {}
+		     )
+	
+		},
+		// vérifie si les champs sont remplis
 		checkInputs(){
 			
 			this.nullMail = (this.userSignIn.mail == '') ? true : false;
@@ -60,9 +154,11 @@ const formUser = Vue.extend({
 	      	return ((!this.nullUsername)&&(!this.nullMail)&&(!this.longUsername)&&(!this.lowPassword)&&(!this.nullPassword)
 	      		&&(!this.nullPasswordChecked)&&(!this.falsePassword)&&(!this.falseDate)&&(!this.falseMail)) ? true : false;
 		},
+		// vérifie si l'année est bissextile
 		isBissextile(value){
 			return ((value % 4 == 0 && value%100 != 0) || value%400 == 0) ? true : false;
 		},
+		// vérifie si la date de naissance rentrée est valide
 		checkDate(){
 	    	if((this.userSignIn.day == 30 || this.userSignIn.day == 31) && this.userSignIn.month == 2)
 	    		this.falseDate = true;
@@ -74,47 +170,13 @@ const formUser = Vue.extend({
 	    	else
 	    		this.falseDate = false;
 	    },
-		save(){
+	    // fonction appelée au clic sur le bouton s'inscrire
+		save(){ 
 			this.$emit('input', this.userSignIn);
 			if(this.checkInputs()){
-				var birthdate = this.userSignIn.year + '-' + this.userSignIn.month + '-' + this.userSignIn.day;
-
-				this.$http.post(apiRoot() + 'auth/signin', 
-		       	{
-		       		'username' : this.userSignIn.username,
-		       		'mail' : this.userSignIn.mail, 
-		       		'birthdate' : birthdate, 
-		       		'password': this.userSignIn.password 
-		       	},{
-		        	emulateJSON: true
-		        }).then(
-		          (response) => {
-		          	this.alreadyUsedUsername = false;
-					this.alreadyUsedMail = false;
-					this.falseDate = false;
-					this.errorDB = false;
-		          	console.log("inscription faite !");
-		            this.$router.push("/inscription/welcome-on-board");
-		          },
-		          (response) => {
-		            if(response.data.error == "USER_EXISTING"){
-		            	this.alreadyUsedUsername = true;
-						this.alreadyUsedMail = true;
-		            }
-		            else if(response.data.error == "INVALID_DATE"){
-		            	this.falseDate = true;
-		            }
-		            else{
-		            	this.errorDB = true;
-		            }
-		          }
-		        )
-
-    	
+				this.checkDB();
 			}
 
-			
-		       	
 		    
 
     	}

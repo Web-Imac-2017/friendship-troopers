@@ -1,64 +1,77 @@
   <div class="navbar">
     <ul class="nav navbar-nav">
+      <li class="search-responsive">
+        <div v-if="search">
+          <input type ="text" class="nav-item" placeholder="Recherche" v-model="searchByUser"></input>
+          <img v-on:click="searchUsername()" class="pseudo-button" src="/assets/images/validation.svg" alt="valider" title="Valider"> <!-- petite recherche lien -->
+          <img class="pseudo-button" v-on:click="showSearch()" src="/assets/images/Cross.svg"  alt="fermer" title="Fermer">
+        </div>
+      </li>
+
       <li class="navbar-left">
-        <router-link to="/actualites" class="navbar-brand"> Friendship<br/>Troopers</router-link>
-        <menu-separator></menu-separator>
-        <router-link to="/actualites" class="nav-item nav-link nav-home"> Accueil </router-link>
+        <router-link to="/actualites" class="navbar-brand"> <p class="desktop small-desktop"> Friendship<br/>Troopers</p> <p class="mobile"> FT </p> </router-link>
+        <div class="menu-separator"></div>
+        <router-link to="/actualites" class="nav-item nav-link nav-home desktop"> Accueil </router-link>
         <router-link :to="{ name: 'Enigme', params: { user: pseudo }}" class="nav-item nav-link nav-enigmes"> Énigmes </router-link>
       </li>
 
       <li class="navbar-right">
-        <input type ="text" class="nav-item" placeholder="Recherche" value =""></input>
-        <input type="submit" class="nav-item nav-search-icon" value=""></input>
+          <input type ="text" class="nav-item desktop" placeholder="Recherche" v-model="searchByUser"></input>
+          <input v-on:click="searchUsername()" type="submit" class="pseudo-button nav-item nav-search-icon desktop" value=""></input> <!-- grande recherche lien -->
+          <div v-on:click="showSearch()" class="nav-item nav-icon mobile small-desktop pseudo-button">
+            <img src="/assets/images/search.svg" alt="recherche" title="Effectuer une recherche">
+          </div>
         
-        <menu-separator></menu-separator>
+        
+        <div class="menu-separator"></div>
         
         <div class="nav-item nav-icon">
-          <div class="friends-icon" v-on:click="showSubMenu(1)">
-            <p v-if="friends.length > 99" class="notif">99+</p> 
-            <p v-else-if="friends.length > 0" class="notif"> {{ friends.length }} </p> 
+          <div class="friends-icon" v-on:click="showSubMenu(1)" title="Mes demandes d'amis">
+            <p v-if="friendsRequest.length > 99" class="notif">99+</p> 
+            <p v-else-if="friendsRequest.length > 0" class="notif"> {{ friendsRequest.length }} </p> 
           </div>
 
           <div v-if="subMenu == 1" class="sub-menu menu-friends"> 
             <div class ="sub-menu-triangle"></div>
-            <p v-if = "friends.length > 0"> Mes demandes d'amis</p>
-            <p v-else>Pas de nouvelles demandes d'ami</p>
+            <p class="sub-menu-header" v-if = "friendsRequest.length > 0"> Mes demandes d'amis</p>
+            <p class="sub-menu-header" v-else>Pas de nouvelles demandes d'ami</p>
 
             <div class="separator"> </div>
-            <ul class="list" v-if = "friends.length > 0">
-              <friend-item v-for="item in friends" v-bind:friend="item"></friend-item>
-            </ul>
-            <div  v-if = "friends.length > 0" class="separator"></div>
 
-            <p> <router-link :to="{ name: 'Friends', params: { user: pseudo }}"> Voir tous les amis</router-link></p>
+            <ul class="list" v-if = "friendsRequest.length > 0" v-for="friend in friendsRequest">
+              <friends v-on:friendaction="actualizeFriendsRequest" :friend="friend"></friends>
+            </ul>
+            <div  v-if = "friendsRequest.length > 0" class="separator"></div>
+
+            <p class="sub-menu-footer"> <router-link :to="{ name: 'Friends', params: { user: user.username }}"> Voir tous mes amis</router-link></p>
           </div>
         </div>
 
         <div class="nav-item nav-icon">
-          <div class="messages-icon" v-on:click="showSubMenu(2)">
+          <div class="messages-icon" v-on:click="showSubMenu(2)" title="Mes nouveaux messages">
             <p v-if="messages.length > 99" class="notif">99+</p>
             <p v-else-if="messages.length > 0" class="notif"> {{ messages.length }}</p>
           </div>
 
           <div v-if="subMenu == 2" class="sub-menu menu-messages"> 
             <div class ="sub-menu-triangle"></div>
-            <p v-if = "messages.length > 0">Mes messages</p>
-            <p v-else>Pas de nouveaux messages</p>
+            <p class="sub-menu-header" v-if = "messages.length > 0">Mes messages</p>
+            <p class="sub-menu-header" v-else>Pas de nouveaux messages</p>
 
             <div class="separator"> </div>
-            <ul class="list" v-if = "messages.length > 0">
-              <message-item v-for="item in messages" v-bind:message="item"></message-item>
+            <ul class="list" v-if = "messages.length > 0" v-for="message in messages">
+              <messages :message="message"></messages>
             </ul>
             <div  v-if = "messages.length > 0" class="separator"></div>
 
-            <p> <a href ="/messagerie">Accéder à ma messagerie</a></p>
+            <p class="sub-menu-footer"> <a href ="/messagerie">Accéder à ma messagerie</a></p>
 
           </div> 
         </div>
         
 
         <div class="nav-item nav-icon">
-          <div class="notifications-icon" v-on:click="showSubMenu(3)">
+          <div class="notifications-icon nav-icon" v-on:click="showSubMenu(3)" title="Mon tableau de bord">
             <p v-if="notifications.length > 99" class="notif">99+</p> 
             <p v-else-if="notifications.length > 0" class="notif"> {{ notifications.length }}</p> 
           </div>
@@ -66,23 +79,22 @@
           <div v-if="subMenu == 3" class="sub-menu menu-notifications"> 
             <div class ="sub-menu-triangle"></div>
 
-            <p v-if = "notifications.length > 0">Tableau de bord</p>
-            <p v-else>Rien de nouveau à signaler</p>
+            <p class="sub-menu-header" v-if = "notifications.length > 0">Tableau de bord</p>
+            <p class="sub-menu-header" v-else>Rien de nouveau à signaler</p>
 
             <div class="separator"> </div>
-            <ul class="list" v-if = "notifications.length > 0">
-              <notification-item v-for="item in notifications" v-bind:notification="item"></notification-item>
+            <ul class="list" v-if = "notifications.length > 0" v-for="notification in notifications">
+              <dashboard :notification="notification"></dashboard>
             </ul>
             <div  v-if = "notifications.length > 0" class="separator"></div>
 
           </div> 
      
         </div>
-
-
-        <menu-separator></menu-separator>
-        <router-link :to="{ name: 'User', params: { user: pseudo }}" class="nav-item nav-link nav-profil"> Mon profil </router-link>
-
+        <div class="menu-separator"></div>
+        <router-link :to="{ name: 'User', params: { user: username, userId : id }}" class="nav-item nav-link nav-profil"><p class="desktop"> Mon profil</p> <img class="small-desktop mobile nav-avatar" :src=avatar alt="Mon profil" title="Mon profil"> </router-link>
+        <div class="mobile"> <div class="menu-separator"></div> <img src=/assets/images/deconnexion.svg alt="Déconnexion" title="Déconnexion"></div>
+        
       </li>
     </ul>
   </div>

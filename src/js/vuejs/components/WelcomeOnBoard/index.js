@@ -1,12 +1,16 @@
 'use strict';
 import Vue from 'vue/dist/vue';
 import welcomeData from './welcomeData.json';
+import {apiRoot} from '../../../../../config.js';
 
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
 
 const WelcomeOnBoard = Vue.extend({
   template,
+  created : function(){
+    
+  },
   methods: {
   finished : function(){
     welcomeData.finish = true;
@@ -24,6 +28,8 @@ const WelcomeOnBoard = Vue.extend({
       if (welcomeData.current < welcomeData.questions.length)
         welcomeData.current ++
       this.finished()
+      if (this.reached < welcomeData.current)
+        this.reached = welcomeData.current;
   },
     selected : function(index){
     welcomeData.answers[welcomeData.current] = welcomeData.questions[welcomeData.current].answer[index].planetID
@@ -31,6 +37,8 @@ const WelcomeOnBoard = Vue.extend({
     if (welcomeData.current < welcomeData.nbQuestions - 1) {
         welcomeData.current ++
     } 
+    if (this.reached < welcomeData.current)
+      this.reached = welcomeData.current;
     this.finished()
   },
   attributePlanet : function(){
@@ -51,29 +59,76 @@ const WelcomeOnBoard = Vue.extend({
   },
   submit : function(){
     welcomeData.planetUser = this.attributePlanet()
-    this.styleObject.borderColor = welcomeData.planetInfo[welcomeData.planetUser].color;
-    this.styleObject2.borderLeftColor = welcomeData.planetInfo[welcomeData.planetUser].color;
-    
+    this.styleObject.borderColor = welcomeData.planetInfo[welcomeData.planetUser].color
+    this.styleObject2.borderLeftColor = welcomeData.planetInfo[welcomeData.planetUser].color
+    this.$http.get(apiRoot() + 'users/me', {
+      emulateJSON: true,
+    }).then(
+      (response) => {
+
+        this.$http.post(apiRoot() + 'user/'+ response.data[0].id +'/interests', 
+        {
+          'planetId' : welcomeData.planetUser + 1
+        },{
+          emulateJSON: true,
+        }).then(
+          (response) => {
+            console.log("success planet !");
+            console.log(response);
+          },
+          (response) => {
+          }
+        )
+      },
+      (response) => {
+      }
+    )
   },
   backToQuestion : function(index){
     welcomeData.current = index;
-  }
+  },
+  selectedItem : function(index){
+        if (welcomeData.answerValidate[welcomeData.current] == true ){
+          if (welcomeData.answers[welcomeData.current] == index){
+            return {
+              'answer-selected' : true
+            }
+          }  
+        }
+      },
+    addClasses : function(index) {
+      var classArray = [];
+      var classSelected = this.selectedItem(index);
+      if ((index - 1) == 0 ) {
+        classArray.push('col-sm-offset-1');
+      }
+      classArray.push(classSelected);
+      return classArray;
+    }
 }, computed: {
     
     color: function () {
       if (planerUser != "")
         return welcomeData.planetInfo[welcomeData.planetUser].color;
-      } 
+    }
+
+    
+
+    
   },
   data () {
       return {
+        introText:true,
+        validateButton:false,
         welcomeData,
+        reached : 0,
         styleObject : {
-          borderColor : ''
+          borderColor : 'white'
         }, 
         styleObject2 : {
-          borderLeftColor : ''
-        }
+          borderLeftColor : 'white'
+        },
+        currentUser : {}
     }
   }
 });

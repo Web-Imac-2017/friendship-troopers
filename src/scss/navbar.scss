@@ -1,0 +1,480 @@
+@import "variables";
+
+.nav {
+  margin: 0px;
+  position: fixed;
+  top :0;
+  z-index: 10;
+  background-color: $menu-background;
+}
+ 
+.nav > li {
+  display: inline-block;
+}
+
+input {
+  border:none;
+  @include padding-input(1);    
+}
+
+
+.navbar-brand {
+  font-family: $title-font;
+  text-decoration: none;
+  /*position: relative;*/
+  height: auto;
+  line-height: 3rem;
+  padding: 0;
+  margin: 0;
+}
+.navbar-brand:hover {
+  background-color: none;
+}
+
+ul {
+  padding: 0 1em;
+  width: 100%;
+  /*background-color: $articles-background;*/
+  color: $main-text;
+  display : block;
+  
+  .nav-enigmes {
+    font-weight: bold;
+    color: $notifs;
+  }
+
+  .nav-home {
+    margin: 0 1rem;
+  }
+  
+  li.search-responsive {
+    text-align: center;
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    input[type=text] {
+      width: 80%;
+    }
+    img {
+      width: 4rem;
+    }
+  }
+
+  li {
+
+    .nav-link, .nav-item, .navbar-brand  {
+      display : inline-block;
+      text-decoration: none;
+      background: none;
+
+      &:hover{
+        text-decoration: none;
+        background: none;
+
+      }
+      &:active{
+        text-decoration: none;
+        background: none;
+
+      }
+      &:focus{
+        text-decoration: none;
+        background: none;
+      }
+
+    }
+
+    img {
+      width: 2em;
+      height: auto;
+    }
+  }
+}
+
+
+ul li {
+  .navbar-brand  {
+    line-height: 1.5rem;
+    margin: -1rem 0 ;
+    padding: 0;
+  }
+  .nav-profil {
+    margin-right: 2rem;
+  }
+  .nav-link, .nav-item  {
+    line-height: 1.5rem;
+  }
+  .nav-icon {
+    cursor: pointer;
+  }
+
+  .friends-icon, .messages-icon, .notifications-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0.5rem 1rem;
+  }
+
+  .friends-icon {
+    background-image: url("../images/Friends.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+  .friends-icon:hover {
+    background-image: url("../images/FriendsHover.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+  .messages-icon {
+      background-image: url("../images/Messages.svg");
+      background-size: 100%;
+      background-repeat: no-repeat;
+  }
+  .messages-icon:hover {
+      background-image: url("../images/MessagesHover.svg");
+      background-size: 100%;
+      background-repeat: no-repeat;
+  }
+  .notifications-icon {
+      background-image: url("../images/Notifications.svg");
+      background-size: 100%;
+      background-repeat: no-repeat;
+  }
+  .notifications-icon:hover, .notifications-icon:active, .notifications-icon:focus {
+      background-image: url("../images/NotificationsHover.svg");
+      background-size: 100%;
+      background-repeat: no-repeat;
+  }
+  .search-icon {
+
+    background-image: url("../images/search.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+ 
+  }
+
+  .notif {
+    @include border-radius-percent(100);
+    background-color: $notifs;
+    color: $menu-background;
+    @include font-size(1);
+    width: 1.8rem;
+    height: 1.8rem;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 0.15rem;
+    position: relative;
+    top: 1.3rem;
+    left: 1.3rem;
+  }
+
+}
+
+.nav input.nav-item {
+  &:active, &:hover, &:focus, & {
+      color: $main-text;
+      background: $input-background;
+  }
+  background-position: center;
+  vertical-align: middle; 
+}
+
+.nav input.nav-search-icon {
+  &:active, &:hover, &:focus, & {
+    height: 80%;
+    width: auto;
+    background: none;
+    background-image: url("../images/search.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;  
+  }
+}
+
+
+.navbar-left {
+  vertical-align: middle;
+  height: auto;
+}
+
+.nav>li.navbar-left {
+  display: inline-block;
+}
+
+ul li.navbar-right .nav-avatar {
+  padding: 0;
+  margin: 0rem;
+  position: absolute;
+  top: 0.5rem;
+  width: 3rem;
+  right: -1.5rem;
+}
+
+
+.menu-separator {
+  vertical-align: middle;
+  height: 1.5rem;
+  border-right: 0.1rem solid $main-text;
+  margin: 0 1.3rem;
+  display: inline-block;
+}
+
+
+@media screen and (min-width: $break-mid) {
+   ul li.search-responsive {
+    display: none;
+  }
+
+  ul li.navbar-right {
+    .small-desktop, .mobile, img.nav-responsive {
+      display: none;      
+    }
+  }
+  ul li.navbar-right, ul li.navbar-left {
+    .desktop,  input[type=text], .nav-home {
+      display: inline-block;
+    }  
+ }
+
+  .nav input.nav-search-icon {
+    display: inline-block;
+  }
+
+  .nav-enigmes {
+    margin: 0 1rem;
+  }
+  .mobile {
+    display: none;
+  }
+
+}
+
+
+@media screen and (max-width: $break-mid) {
+
+  ul li.search-responsive {
+    display: block;
+    margin: 0rem;
+    padding: 0rem;
+  }
+  ul li.navbar-right, ul li.navbar-left {
+    .navbar-brand .small-desktop {
+      display: inline-block;
+    }
+    .friends-icon, .messages-icon, .notifications-icon {
+      margin: 0.5rem 1rem;
+    }   
+  }
+
+  ul li.navbar-right .nav-avatar {
+    right: -1.5rem;
+    width: 3rem;
+    top: 0.5rem;
+  }
+
+
+  ul li.navbar-right, ul li.navbar-left {
+    .desktop,  input[type=text], .nav-home, .navbar-brand .mobile, .mobile {
+      display: none; 
+    }
+  }
+  ul li.navbar-right .small-desktop, .navbar-brand .small-desktop {
+    display: inline-block;
+  }
+  .navbar ul.nav {
+    margin: 0;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+    li.navbar-right {
+      position: absolute;
+      right: 3.5rem;
+    }
+  }
+  .nav-enigmes {
+    margin: 0rem;
+  }
+
+  .menu-separator {
+    margin: 0 1.3rem;
+  }
+  .nav input.nav-search-icon {
+    display: none;
+  }
+
+  li.search-responsive {
+    input[type=text] {
+      width: 80%;
+    }
+  }
+
+
+@media screen and (max-width: $break-small) {
+
+    ul li.navbar-right, ul li.navbar-left {
+      .navbar-brand .mobile {
+        display: inline-block;
+        padding-top: 0.75rem;
+        margin-left: -0.25rem;
+      } 
+      .mobile {
+        display: inline-block;
+      } 
+      .friends-icon, .messages-icon, .notifications-icon {
+        margin: 0.5rem 0.5rem;
+      }
+
+    }
+    ul li.navbar-right, ul li.navbar-left {
+      .navbar-brand .small-desktop, .navbar-brand .desktop {
+        display: none;
+      }   
+    }
+    .menu-separator {
+      margin: 0.7rem;
+    }
+    ul li.navbar-right .nav-avatar {
+      right: 1.4rem;
+      top: 0.75rem;
+      width: 2.25rem;
+    }
+
+    ul li.navbar-right {
+      position: absolute;
+      right: -3rem;
+      .mobile img {
+        width: 2.25rem;
+        position: absolute;
+        right: -2.25rem;
+      }
+      .nav-icon.mobile img {
+        position: relative;
+        margin-right: 2rem;
+      }
+
+    }
+
+    ul li.search-responsive {
+      input[type=text] {
+        width: 70%;
+      }
+      img {
+        width: 4rem;
+      }
+    }
+
+  }
+}
+
+
+
+
+
+
+ul li.navbar-right .nav-icon .sub-menu {
+  width: 20rem;
+  background-color: $sub-menu-background;
+  padding: 0.8rem;
+  border: 0.2rem solid $sub-menu-border;
+  position: absolute;
+  top: 5rem;
+  margin-left: -10.1rem;
+  cursor: initial;
+
+  p.sub-menu-header, p.sub-menu-footer {
+    color : $sub-menu-border;
+    font-weight: bold;
+    text-align: center;
+
+    a {
+      color: $sub-menu-border;
+      text-decoration: none;
+    }
+  }
+
+  
+  .separator {
+    margin: 0.3rem 0;
+    border-top: 0.1rem solid $sub-menu-border;
+  }
+
+  ul.list {
+    background-color: $sub-menu-list-item-background;
+    padding: 0.2rem;
+
+    p.content {
+      color: $main-text;
+      font-weight: normal;   
+      font-size: 90%;
+    }
+
+    li {
+      margin: 0 0.5rem;
+      background-color: $sub-menu-item-background;
+
+      ul.sub-menu-item {
+        background: none;
+        display: inline-block;
+        width: 100%;
+
+        li {
+          padding: 0;
+          margin : 0;
+          display: inline-block;
+          vertical-align: middle;
+          img.avatar {
+            width: 4rem;
+            margin : 0.5rem 0;
+            margin-right: 0.5rem;
+          }
+          .friend-validation {
+            width: 100%;
+            text-align : center; 
+            img{
+              width: 2rem;
+              margin: 0.5rem 1rem;
+              margin-top: 0rem;
+            }
+
+          }
+          p {
+            text-align: left;
+            font-weight: normal;
+          }
+          .date {
+              color: $grey;
+          }
+
+
+        }
+      }
+      .content {
+        padding: 0.75rem;           
+      }
+      .message {
+        font-size: 85%;
+        text-align: center;
+        color: $grey;
+
+      }
+    }
+  }
+
+  .sub-menu-triangle {
+    z-index: 5;
+    background-color: $sub-menu-background;
+    border-left: 0.2rem solid $sub-menu-border;
+    border-top: 0.2rem solid $sub-menu-border;
+    position: absolute;
+    top: -1.1rem;
+    margin-left: 10.1rem;
+    width: 2rem;
+    height: 2rem;
+    transform: rotateZ(45deg);
+    -moz-transform: rotateZ(45deg);
+    -webkit-transform: rotateZ(45deg);
+  }
+}

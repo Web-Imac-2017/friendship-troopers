@@ -1,0 +1,220 @@
+@import "variables";
+
+.lateralMenuLeft, .lateralMenuLeft ul, .lateralMenuRight, .menuTools, .menu-deconnexion {
+  /* common properties */
+  background-color: $lateral-menu-background;
+  padding: 1rem;
+  margin: 0;
+  width: 100%;
+
+}
+
+.lateralMenuLeft {
+
+  /* style and properties */
+	text-decoration: none;
+	display: inline-block;
+  p {
+    padding: 1rem 0;
+    margin-top: 1rem; 
+  }
+  p.enigmes {
+    font-weight: bold;
+    color: $notifs;
+  }
+  p.friends, p.enigmes {
+    font-weight: bold;
+  }
+}
+
+.lateralMenuLeft a {
+	text-decoration: none;
+}
+
+.lateralMenuRight {
+
+  .lateral-actu-type {
+    color: $green-text;
+    font-weight: bold;
+    margin: 2rem 0;
+  }
+  .actu-intergalactique , .actu-galactique, .actu-planetaire {
+    background: none;
+    ul {
+      background: none;
+      margin: 0;
+      padding: 0;
+      li {
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        vertical-align: middle;
+        .avatar{
+          margin: 0;
+          padding: 0;
+          min-width: 3.5rem;
+          text-align: center;
+          height: auto;
+        }
+      }
+    }
+    .content {
+      margin: 1rem 0;
+      color: $grey;
+      font-size: 95%;
+    }
+  }
+  .top {
+    margin-top: 1rem;
+  }
+
+}
+
+
+
+.menu-deconnexion {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.menuTools{
+  margin-top: 1rem;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+}
+
+.menuTools a{
+  text-decoration: none;
+  padding: 0 0.5rem;
+}
+
+.lateralMenuAvatar{
+
+	background-image: url("../images/LineAboveAvatar.svg");
+	background-size: 100%;
+	text-align: center;
+	background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+  width: auto;
+  /*height: 12rem;*/
+  min-height: 13rem;
+
+
+  img {
+    vertical-align: middle;
+  }
+  .avatarMenu {
+    vertical-align: middle;
+    max-height: 10rem;
+  }
+  .planetMenu {
+    position: absolute;
+    max-height: 8rem;
+    top: 6rem;
+    left: 50%;
+
+  }
+}
+
+.lastFriends {
+  p {
+    text-decoration: underline;
+  }
+    ul {
+    width: 100%;
+    text-align: center;
+    padding: 0;
+
+    li {
+      width: 33%;
+      padding: 0;
+      margin: 0;   
+      display: inline-block;
+    }
+  }
+}
+
+
+p.honor {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 1rem;
+  font-size: 95%;
+  color: $grey;
+  font-style : italic;
+}
+
+
+
+@media screen and (min-width: $break-x-large) {
+  .lateralMenuAvatar{
+    min-height: 13rem;
+    .avatarMenu {
+      margin-top: 0rem;
+      max-height: 10rem;
+    }
+    .planetMenu {
+      max-height: 8rem;
+      top: 6rem;
+      left: 50%;
+
+    }
+  }
+}
+@media screen and (max-width: $break-large) {
+  .lateralMenuAvatar{
+    min-height: 13rem;
+    .avatarMenu {
+      margin-top: 0.5rem;
+      max-height: 9rem;
+    }
+    .planetMenu {
+      max-height: 6rem;
+      top: 7rem;
+      left: 50%;
+
+    }
+  }
+}
+
+@media screen and (max-width: $break-x-large) {
+  .lateralMenuRight {
+    display: none;
+  }
+}
+@media screen and (min-width: $break-x-large) {
+  .lateralMenuRight {
+    display: block;
+  }
+}
+@media screen and (max-width: $break-mid) {
+  .lateralMenuLeft {
+    display: none;
+  }
+  .menu-deconnexion {
+    display: none;
+  }
+  .mobile .menuTools {
+    display: block;
+  }
+  .desktop .menuTools, .desktop .menu-deconnexion, .lateralMenuRight {
+    display: none;
+  }
+}
+@media screen and (min-width: $break-mid) {
+  .lateralMenuLeft {
+    display: inline-block;
+  }
+  .menu-deconnexion {
+    display: inline-block;
+  }
+  .mobile .menuTools {
+    display: none;
+  }
+  .desktop .menuTools, .desktop .menu-deconnexion {
+    display: block;
+  }
+}

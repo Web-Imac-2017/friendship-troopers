@@ -1,6 +1,7 @@
 'use strict';
 
 import Vue from 'vue/dist/vue';
+import {apiRoot} from '../../../../../config.js';
 
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
@@ -9,58 +10,123 @@ template     = eval(`\`${template}\``);
 import LateralMenuLeft from '../LateralMenuLeft/index.js'
 import LateralMenuRight from '../LateralMenuRight/index.js'
 import MenuTools from '../MenuTools/index.js'
-import FriendTemplate from '../FriendTemplate/index.js'
 import Post from '../Post/index.js'
-import optionBar from './optionBar/index.js'
-import statistics from './Statistics/index.js'
-
-import NavBar from '../NavBar/index.js';
+import optionBar from './OptionBar/index.js'
+import NavBar from '../NavBar/index.js'
+import PageNav from "../PageNav/index.js"
 
 
 const User = Vue.extend({
   template,
+  props : {
+    userId : Object
+  }
+  ,
    components: {
     'option-bar' : optionBar, 
-    'statistics' : statistics, 
     'lateral-menu-left' : LateralMenuLeft,
     'lateral-menu-right' : LateralMenuRight, 
     'menu-tools' : MenuTools, 
     'post' : Post,
-    'navbar' : NavBar },
-   methods: {
-    profil: function(){
-      if (this.myself)
-        this.myself = false
-      else 
-        this.myself = true
-      console.log(this.myself)
+    'navbar' : NavBar,
+    'page-nav' : PageNav },
+     watch: {
+      /*Watch if the route of an other profil is required and updates the data*/
+      '$route': function() {
+            this.getRouteParams();
+       }  
+      },
+    mounted : function() {
+      /*Get all the user informations */
+    this.getRouteParams();
+   },
+   methods: { 
+    getRouteParams : function(){
+      console.log(this.$refs.menu.user.username);
+      console.log(this.$route.params.user);
+      if (this.$route.params.user == this.$refs.menu.user.username){
+        console.log("equals");
+        this.getUser(apiRoot() + 'users/me');
+        this.myself = true;
+      } else {
+        this.getUser(apiRoot() + 'users/' + this.$route.params.userId);
+        this.myself = false;
+      }
+    },
+   getUser : function(route){
+      this.$http.get(route).then((response) => {
+          this.profil = response.data[0];
+          this.getNbFriends(apiRoot() + 'users/' + this.profil.id + '/number_friends');
+          this.getInterest(apiRoot() + 'users/' + this.profil.id + '/interest');
+          this.getPosts(apiRoot() + 'planets/' + this.profil.planetId + '/posts', { 'user' : '2'});
+      }, (response) => {
+        console.log(response);
+      })
+   },    
+    getInterest : function(route){
+      this.$http.get(route).then((response) => {
+        this.interests = response.data;
+      }, (response) => {
+        console.log(response);
+      });
+
+    }, getNbFriends : function(route){
+      this.$http.get(route).then((response) => {
+        this.nbFriends =  response.data.count;
+      }, (response) => {
+        console.log(response);
+      });     
+    }, 
+    getPosts : function(route, option) {
+      var data = { 'user' : this.profil.id }
+      this.$http.get(apiRoot() + 'planets/' + this.profil.planetId + '/posts', {
+          params : data
+        },{
+          emulateJSON: true 
+        }).then((response) => {
+          console.log(response);
+          this.posts =  response.data;
+      }, (response) => {
+        console.log(response);
+      });     
+
+    },
+    /*functions to manage interests*/
+    showMore : function() {
+      this.start = this.user.interests.length;
+    },
+    showLess : function() {
+      this.start = 5;
+    },
+    addFriend : function() {
+      //Router::post('/users/:userId/add_friend','friend#addFriend', 'users.me.addFriend'); //ok
+      this.$http.post(apiRoot() + "users/" + this.profil.id + "/add_friend", {emulateJSON: true}).then(
+        (response) => {
+          console.log("Demande envoyée");
+        },
+        (response) => {
+
+        });
+      console.log("User : Adding friend");
     }
-  }, 
+  },
+  computed : {
+    planetName : function() {
+      return this.planetPath = "/assets/images/planets/" + this.profil.name +".svg";
+    } 
+  },
   data () {
       return {
-       user: {
-        userAvatar : '/assets/images/avatars/earth/miror.svg',
-        username : 'LuckyPon', 
-        userBadge : 'Baroudeuse de l\'espace', 
-        birthDate : '29 avril',
-        userPlanet : {
-          path : '../assets/images/planets/P1.svg',
-          name : 'Planete X785-E'
-        }, 
-        nbFriends : 53, 
-        nbRiddleSolved : 2,
-        points : 745,
-        lastBadges : 
-          [ { path  : '/assets/images/badges/logo.png',
-            name : 'Resoudre une énigme'},
-            { path : '/assets/images/badges/logo.png',
-            name : 'Ajouter un ami'},
-            { path : '/assets/images/badges/logo.png',
-            name : 'Inscription'}
-          ]
-       }, 
-       myself : false
-    }
+        updated : false,
+        profil : {},
+        planetPath : '',
+        interests : [],
+        nbRiddleSolved : 0,
+        myself : false,
+        nbFriends : '',
+        start : 5,
+        posts : {}
+  }
 
   }
 });

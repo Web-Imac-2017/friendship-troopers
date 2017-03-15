@@ -15,6 +15,24 @@ class Publication extends Controller {
 		$this->loadModel('Publication');
 	}
 
+	public function count ($planet, $get) {
+		$count = $this->Publication->find([
+			'fields' => [
+				'COUNT(userId) as nbPost',
+			],
+			'conditions' => [
+				'user.planetId' => $planet,
+			],
+			'leftJoin' => [
+				'table' => 'user',
+				'alias' => 'user',
+				'from' => 'id',
+				'to' => 'userId',
+			],
+		]);
+		$this->response($count[0], 200);
+	}
+
 	/**
 	* list publications by user or for a simple feed of one particular planet.
 	* generate next road to ease front's job

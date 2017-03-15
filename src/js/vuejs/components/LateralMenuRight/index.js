@@ -5,7 +5,7 @@ let template = require('./template.html');
 template     = eval(`\`${template}\``);
 
 
-Vue.component('intergalactique-item', {
+Vue.component('intergalactique', {
   props: ['intergalactique'],
   template:
     `<div class="actu-intergalactique"> 
@@ -25,7 +25,7 @@ Vue.component('intergalactique-item', {
 })
 
 
-Vue.component('galactique-item', {
+Vue.component('galactique', {
   props: ['galactique'],
   template:
     `<div class="actu-galactique"> 
@@ -45,7 +45,7 @@ Vue.component('galactique-item', {
 })
 
 
-Vue.component('planetaire-item', {
+Vue.component('planetaire', {
   props: ['planetaire'],
   template:
     `<div class="actu-planetaire"> 

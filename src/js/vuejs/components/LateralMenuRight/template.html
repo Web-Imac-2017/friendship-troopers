@@ -3,18 +3,24 @@
  <div class="lateralMenuRight">
  	<div v-if="actualite.intergalactique.length > 0"> 
  		<p class="lateral-actu-type top">Actualité intergalactique</p>
-        <intergalactique-item v-for="item in actualite.intergalactique" v-bind:intergalactique="item"></intergalactique-item>
+  		<div v-for="actualite in actualite.intergalactique">
+	        <intergalactique :intergalactique="actualite"></intergalactique>
+        </div>
  	</div>
 
  	<div v-if="actualite.galactique.length > 0"> 
  		<p class="lateral-actu-type">Actualité galactique</p>
-        <galactique-item v-for="item in actualite.galactique" v-bind:galactique="item"></galactique-item>
+ 		<div v-for="actualite in actualite.galactique">
+        	<galactique :galactique="actualite"></galactique>
+        </div>
  	</div>
 
 
  	<div v-if="actualite.planetaire.length > 0"> 
  		<p class="lateral-actu-type">Actualité planetaire</p>
-        <planetaire-item v-for="item in actualite.planetaire" v-bind:planetaire="item"></planetaire-item>
+ 		<div v-for="actualite in actualite.planetaire">
+        	<planetaire :planetaire="actualite"></planetaire>
+        </div>
  	</div>
 
   </div>

@@ -18,11 +18,48 @@ const EnigmeCurrent = Vue.extend({
   	'menu-tools' : MenuTools,
     'navbar' : NavBar
   },
+  methods : {
+    selectedLevel : function(index) {
+      this.levelSelected = index;
+    },
+    selectedMode : function(index) {
+      this.modeSelected = index;
+    }
+  },
   data () {
       return {
-       	friendsOnline : [
-       		'aaaa', 'bbbb', 'cccc', 'dddd', 'eeee', 'ffff', 'gggg'
-       	]
+       	levelSelected : 0,
+        modeSelected : 0,
+        levels: [ {
+          image : '/assets/images/enigmes/debutant.svg',
+          imageSelected : '/assets/images/enigmes/debutant-selected.svg',
+          text : 'Debutant'
+        }, {
+          image : '/assets/images/enigmes/amateur.svg',
+          imageSelected : '/assets/images/enigmes/amateur-selected.svg',
+          text : 'Amateur'
+        },
+        {
+          image : '/assets/images/enigmes/expert.svg',
+          imageSelected : '/assets/images/enigmes/expert-selected.svg',
+          text : 'Expert'
+        }, {
+          image : '/assets/images/enigmes/tous-niveaux.svg',
+          imageSelected : '/assets/images/enigmes/tous-niveaux-selected.svg',
+          text : 'Tous niveaux'
+        }
+        ],
+        modes : [
+        {
+          image : '/assets/images/enigmes/solo.svg',
+          imageSelected : '/assets/images/enigmes/solo-selected.svg',
+          text : 'Solo'
+        }, {
+          image : '/assets/images/enigmes/multijoueur.svg',
+          imageSelected : '/assets/images/enigmes/multijoueur-selected.svg',
+          text : 'Multijoueurs'
+        }
+        ]
        }
    }
 });

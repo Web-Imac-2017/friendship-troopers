@@ -1,0 +1,13 @@
+<div class="container-fluid"> 
+	<div class="row no-gutters pageNav"> 
+	<div v-on:click="previousPage" v-if="page != 1" class="col-sm-4 col-xs-4 pseudo-button left sublink"> <img src="/assets/images/fleche-gauche.svg">Page précédente </div>
+	<div v-else class="col-sm-4 col-xs-4 pseudo-button left"></div>
+	<div class="col-sm-4 col-xs-4">
+		<div class="col-sm-1 col-xs-1" v-for="index in 7">
+			<div class="small-circle pseudo-button" v-if="index != page%7"> </div>
+			<div v-else> {{ page }} </div> 
+		</div>
+	</div>
+	<div v-on:click="nextPage" v-if="more" class="col-sm-4 col-xs-4 pseudo-button right sublink"> Page suivante <img src="/assets/images/fleche-droite.svg"></div>
+</div>
+</div>

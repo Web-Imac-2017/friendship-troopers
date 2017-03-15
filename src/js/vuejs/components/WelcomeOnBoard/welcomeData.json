@@ -1,56 +1,56 @@
 {       "finish" : false,
        "questions": [ {
-         "number" : "1",
+         "number" : 1,
          "title" : "Ta couleur : ",
-         "answer" : [ {"text": "bleu", "image" : "/assets/images/welcomeOnBoard/1_planete-bleue.jpg", "planetID" : "1"},
-                   {"text":"vert", "image" : "/assets/images/welcomeOnBoard/1_planete-verte.jpg", "planetID" : "2"},
-                    {"text":"violet","image" : "/assets/images/welcomeOnBoard/1_planete-violette.jpg", "planetID" : "3"},
-                    {"text":"rouge", "image" : "/assets/images/welcomeOnBoard/1_planete-rouge.jpg", "planetID" : "4"},
-                    {"text":"orange", "image" : "/assets/images/welcomeOnBoard/1_planete-orange.jpg", "planetID" : "5"}
+         "answer" : [ {"text": "Bleu", "image" : "/assets/images/welcomeOnBoard/1_planete-bleue.jpg", "planetID" : "1"},
+                   {"text":"Vert", "image" : "/assets/images/welcomeOnBoard/1_planete-verte.jpg", "planetID" : "2"},
+                    {"text":"Violet","image" : "/assets/images/welcomeOnBoard/1_planete-violette.jpg", "planetID" : "3"},
+                    {"text":"Rouge", "image" : "/assets/images/welcomeOnBoard/1_planete-rouge.jpg", "planetID" : "4"},
+                    {"text":"Orange", "image" : "/assets/images/welcomeOnBoard/1_planete-orange.jpg", "planetID" : "5"}
          ]
         }, {
-          "number" : "2",
+          "number" : 2,
           "title" : "Ton compagnon :",
-          "answer" : [ {"text":"un petit vélociraptor", "image" : "/assets/images/welcomeOnBoard/2_velociraptor.jpg", "planetID" : "1"},
-                     {"text":"un mini Groot", "image" : "/assets/images/welcomeOnBoard/2_groot.png", "planetID" : "2"}, 
-                     {"text":"une charmante androïde", "image" : "/assets/images/welcomeOnBoard/2_android.png", "planetID" : "3"}, 
+          "answer" : [ {"text":"Un petit vélociraptor", "image" : "/assets/images/welcomeOnBoard/2_velociraptor.jpg", "planetID" : "1"},
+                     {"text":"Un mini Groot", "image" : "/assets/images/welcomeOnBoard/2_groot.png", "planetID" : "2"}, 
+                     {"text":"Une charmante androïde", "image" : "/assets/images/welcomeOnBoard/2_android.png", "planetID" : "3"}, 
                      {"text":"Doc", "image" : "/assets/images/welcomeOnBoard/2_Doc.jpg", "planetID" : "4"}, 
-                     {"text":"un Choubacca", "image" : "/assets/images/welcomeOnBoard/2_choubacca.jpeg", "planetID" : "5"} 
+                     {"text":"Chewbacca", "image" : "/assets/images/welcomeOnBoard/2_choubacca.jpeg", "planetID" : "5"} 
          ] 
         }, {
-          "number" : "3",
+          "number" : 3,
           "title" : "Tes vacances parfaites :" ,
-          "answer" : [ {"text":"un week-end romantique à New New York", "image" : "/assets/images/welcomeOnBoard/3_new-new-york.jpg", "planetID" : "1"},
-                     {"text":"tester les spécialités culinaires de Vulcain", "image" : "/assets/images/welcomeOnBoard/3_vulcain.jpg", "planetID" : "2"},
-                     {"text":"relire tes classiques", "image" : "/assets/images/welcomeOnBoard/3_lire-classiques.jpg", "planetID" : "3"}, 
-                     {"text":"arpenter un trou noir", "image" : "/assets/images/welcomeOnBoard/3_trous-noirs.jpg", "planetID" : "4"},
-                     {"text":"faire la course de la Bounta", "image" : "/assets/images/welcomeOnBoard/3_bounta.jpg", "planetID" : "5"}
+          "answer" : [ {"text":"Un week-end romantique à New New York", "image" : "/assets/images/welcomeOnBoard/3_new-new-york.jpg", "planetID" : "1"},
+                     {"text":"Tester les spécialités culinaires de Vulcain", "image" : "/assets/images/welcomeOnBoard/3_vulcain.jpg", "planetID" : "2"},
+                     {"text":"Relire tes classiques", "image" : "/assets/images/welcomeOnBoard/3_lire-classiques.jpg", "planetID" : "3"}, 
+                     {"text":"Arpenter un trou noir", "image" : "/assets/images/welcomeOnBoard/3_trous-noirs.jpg", "planetID" : "4"},
+                     {"text":"Faire la course de la Bounta", "image" : "/assets/images/welcomeOnBoard/3_bounta.jpg", "planetID" : "5"}
          ] 
         },{
-          "number" : "4",
+          "number" : 4,
           "title" : "L\"intelligence artificielle pour gérer ta maison :" ,
-          "answer" : [{"text": "la Matrice", "image" : "/assets/images/welcomeOnBoard/4_matrice.jpg", "planetID" : "1"}, 
-                    {"text":"le Brain Bug", "image" : "/assets/images/welcomeOnBoard/4_brainBug.jpg", "planetID" : "2"}, 
+          "answer" : [{"text": "La Matrice", "image" : "/assets/images/welcomeOnBoard/4_matrice.jpg", "planetID" : "1"}, 
+                    {"text":"Le Brain Bug", "image" : "/assets/images/welcomeOnBoard/4_brainBug.jpg", "planetID" : "2"}, 
                     {"text":"GladOS", "image" : "/assets/images/welcomeOnBoard/4_Glados.jpg", "planetID" : "3"}, 
                     {"text":"La Reine Rouge", "image" : "/assets/images/welcomeOnBoard/4_red-queen.png", "planetID" : "4"}, 
-                   {"text":"AUTO", "image" : "../../../friendship-troopers/www/assets/images/welcomeOnBoard/4_AUTO.jpg", "planetID" : "5"}
+                   {"text":"AUTO", "image" : "/assets/images/welcomeOnBoard/4_AUTO.jpg", "planetID" : "5"}
          ]},{
-          "number" : "5",
+          "number" : 5,
           "title" : "Ton moyen de transport de prédilection :" , 
-          "answer" : [ {"text":"le TARDIS", "image" : "/assets/images/welcomeOnBoard/5_tardis.jpg", "planetID" : "1"},
-                     {"text":"la Porte des Etoiles", "image" : "/assets/images/welcomeOnBoard/5_porte-des-etoiles.jpg", "planetID" : "2"},
-                     {"text":"l\"astro-stop", "image" : "/assets/images/welcomeOnBoard/5_astro-stop.jpg", "planetID" : "3"},
-                     {"text":"la DeLorean", "image" : "/assets/images/welcomeOnBoard/5_deLorean.jpg", "planetID" : "4"}, 
-                     {"text":"l\"Arcadia", "image" : "/assets/images/welcomeOnBoard/5_arcadia.jpg", "planetID" : "5"}
+          "answer" : [ {"text":"Le TARDIS", "image" : "/assets/images/welcomeOnBoard/5_tardis.jpg", "planetID" : "1"},
+                     {"text":"La Porte des Etoiles", "image" : "/assets/images/welcomeOnBoard/5_porte-des-etoiles.jpg", "planetID" : "2"},
+                     {"text":"L\"astro-stop", "image" : "/assets/images/welcomeOnBoard/5_astro-stop.jpg", "planetID" : "3"},
+                     {"text":"La DeLorean", "image" : "/assets/images/welcomeOnBoard/5_deLorean.jpg", "planetID" : "4"}, 
+                     {"text":"L\"Arcadia", "image" : "/assets/images/welcomeOnBoard/5_arcadia.jpg", "planetID" : "5"}
          ] 
         },{
-          "number" : "6",
+          "number" : 6,
           "title" : "Tu aimes :" ,
-          "answer" : [{"text": "passer du temps dans ton bunker", "image" : "../../../friendship-troopers/www/assets/images/Avatar1.svg", "planetID" : "1"}, 
-                    {"text":"les rencontres du 3ième type", "image" : "../../../friendship-troopers/www/assets/images/Avatar1.svg", "planetID" : "2"}, 
-                    {"text":"trafiquer le droïde ménager de maman", "image" : "../../../friendship-troopers/www/assets/images/Avatar1.svg", "planetID" : "3"}, 
-                    {"text":"créer des paradoxes", "image" : "../../../friendship-troopers/www/assets/images/Avatar1.svg", "planetID" : "4"}, 
-                   {"text": "aller en croisière muni de ton multipass", "image" : "../../../friendship-troopers/www/assets/images/Avatar1.svg", "planetID" : "5"}         ] 
+          "answer" : [{"text": "Passer du temps dans ton bunker", "image" : "/assets/images/welcomeOnBoard/6_bunker.jpg", "planetID" : "1"}, 
+                    {"text":"Les rencontres du 3ème type", "image" : "/assets/images/welcomeOnBoard/6_3eme-type.jpg", "planetID" : "2"}, 
+                    {"text":"Trafiquer le droïde familial", "image" : "/assets/images/welcomeOnBoard/6_droide-familial.jpg", "planetID" : "3"}, 
+                    {"text":"Créer des paradoxes", "image" : "/assets/images/welcomeOnBoard/6_paradoxes.jpg", "planetID" : "4"}, 
+                    {"text": "Te balader muni de ton multipass", "image" : "/assets/images/welcomeOnBoard/6_multipass.jpg", "planetID" : "5"}         ] 
         }
         ], 
         "nbQuestions" : 6,
@@ -61,35 +61,35 @@
         " planetUser" : "",
         "planetInfo" : [
           {
-            "planetID" : "1",
+            "planetID" : 1,
             "name" : "Terre  #AA001",
-            "info" : "La Terre… Ce nom vous semble peut-être familière, mais la connaissez vous vraiment ? Depuis la démocratisation des voyages intersidéraux on y est plus à son aise ! Finis les embouteillages, les métropoles polluées et les files d’attentes aux supermarchés. Maintenant on peut vivre où on le souhaite, plus de loyers à payer. S’endormir en Alaska, admirant une aurore boréale et le lendemain, remettre ça face aux ruines magnifiques de Buenos Aires est devenu chose commune.", 
-            "path" : "../../../friendship-troopers/www/assets/images/P1.svg",
+            "info" : "La Terre… Ce nom vous semble peut-être familier, mais la connaissez vous vraiment ? Depuis la démocratisation des voyages intersidéraux on y est plus à son aise ! Finis les embouteillages, les métropoles polluées et les files d’attentes aux supermarchés. Maintenant on peut vivre où on le souhaite, plus de loyers à payer. S’endormir en Alaska, en admirant une aurore boréale et le lendemain, remettre ça face aux ruines magnifiques de Buenos Aires est devenu chose commune.", 
+            "path" : "/assets/images/planets/Terre.svg",
             "color": "#3eb6df"
           }, {
-            "planetID" : "2",
+            "planetID" : 2,
             "name" : "Paranose #312LL",
-            "info" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at porta odio. Sed eleifend, odio eget dictum molestie, sem purus sagittis velit,sit amet pharetra nulla arcu a ligula. Aenean rhoncus finibus est, id pretium dolor. Vivamus placerat nec neque non molestie. Donec egestas tincidunt arcu sed semper",
-            "path" : "../../../friendship-troopers/www/assets/images/P1.svg",
+            "info" : "Paranose : une planète, plusieurs univers. Un ciel bleu, un autre vert ou voire même pas de ciel du tout… Les limites sont celles de l’imagination. Celle planète est longtemps restée gardée secrète, rares sont aujourd’hui ceux qui en connaissent l’existence. Explorer ses différents univers vous assure des expériences toutes plus inoubliables les unes que les autres !",
+            "path" : "/assets/images/planets/Paranose.svg",
             "color" : "#ef4646"
           },{
-            "planetID" : "3",
+            "planetID" : 3,
             "name" : "Technome #8T077",
-            "info" : " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at porta odio. Sed eleifend, odio eget dictum molestie, sem purus sagittis velit, sit amet pharetra nulla arcu a ligula. Aenean rhoncus finibus est, id pretium dolor. Vivamus placerat nec neque non molestie. Donec egestas tincidunt arcu sed semper",
-            "path" : "../../../friendship-troopers/www/assets/images/P1.svg",
+            "info" : "Quand tout devient possible, que les limites ne servent qu’à être dépassées, n’est-ce pas là que commence la liberté ? Voici là le quotidien des robots de Technome ! Tantôt magnifiques, tantôt effrayants de réalisme; ces êtres dotés d’une excellente conversation et d’un humour raffiné vous accueilleront les bras ouverts chez eux ! N’oubliez pas néanmoins qu’ils ont construits seuls leur civilisation, alors admirez ceux dont la technologie est capable mais ne vous avisez surtout pas de les prendre de haut ! Ils sauront vous faire savoir que vous les avez déçus...",
+            "path" : "/assets/images/planets/Technome.svg",
             "color" : "#767fe2"
           },{
-            "planetID" : "4",
+            "planetID" : 4,
             "name" : "Sautien #SS013",
-            "info" : "Avide d’aventures ? Tant mieux ! Vous voilà maintenant sur la planète Sautien, première planète alien découverte par l’explorateur Cari-Hu ! Vos charmants petits compatriotes se cachent principalement vers les montagnes Jighs. Bien que ces montagnes soient absolument charmante, nous vous conseillons de ne pas l’oubliez au cours de vos randonnées !",
-             "path" : "../../../friendship-troopers/www/assets/images/P1.svg",
+            "info" : "Avide d’aventures ? Tant mieux ! Vous voilà maintenant sur la planète Sautien, première planète alien découverte par l’explorateur Cari-Hu ! Vos charmants petits compatriotes se cachent principalement vers les montagnes Jighs. Bien que ces montagnes soient absolument charmantes, nous vous conseillons de ne pas les oubliez au cours de vos randonnées !",
+            "path" : "/assets/images/planets/Sautien.svg",
             "color" :"#72b51a"
           },{
-            "planetID" : "5",
+            "planetID" : 5,
             "name" : "Multas #781ST",
-            "info" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse at porta odio. Sed eleifend, odio eget dictum molestie, sem purus sagittis velit, sit amet pharetra nulla arcu a ligula. Aenean rhoncus finibus est, id pretium dolor. Vivamus placerat nec neque non molestie. Donec egestas tincidunt arcu sed semper",
-           "path" : "../../../friendship-troopers/www/assets/images/P1.svg",
-             "color" :"#f9a519"
+            "info" : "Vous venez d'atterrir sur la planète Multas, c’est ici que se conçoivent les vaisseaux spatiaux les plus pointus et que se planifient les explorations galactiques les plus osées. Un esprit conquérant et une curiosité sans limites définissent l'atmosphère qui règne ici. L’univers ? Il ne sert qu’à être exploré. Mais c’est toujours ici, de retour sur cette planète qu’on se sent vraiment chez soi; que le voyage s’achève et qu’un autre se prépare.",
+            "path" : "/assets/images/planets/Multas.svg",
+            "color" :"#f9a519"
           }
        ]
       }

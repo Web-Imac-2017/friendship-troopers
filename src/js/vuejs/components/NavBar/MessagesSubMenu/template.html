@@ -1,0 +1,13 @@
+<li> 
+      <ul class = "sub-menu-item">
+        <li>
+          <img :src=message.avatar alt="avatar" class="avatar"> 
+        </li>
+        <li>
+          <p :class=message.planet class="pseudo">{{message.pseudo}}</p> 
+          <p class="date"> {{message.date}}</p>
+        </li>
+      </ul>
+      <p class="content message" v-if="message.content.length>30" >  {{message.content.slice(0,30)}}...  </p>
+      <p class="content message" v-else>  {{message.content}}  </p>
+</li>
