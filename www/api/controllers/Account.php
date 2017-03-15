@@ -238,8 +238,11 @@ class Account extends Controller{
 
 		        ]);
 			} catch (\PDOException $e) {
-				throw new \Utils\RequestException($e, 400);
+				$this->response([
+					'error' => $e->getMessage(),
+				], 500);
 			}
+			$data['roleId'] = 3;
 			$this->sendValidationMail($data);
 			unset($data['password']);
 			unset($data['hash']);
