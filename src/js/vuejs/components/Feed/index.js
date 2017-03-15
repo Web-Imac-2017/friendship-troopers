@@ -36,9 +36,9 @@ const Feed = Vue.extend({
   methods : {
     initialize : function() {
       // Récupérer les premiers posts de la planète de l'utilisateur
-      this.planetId = this.$refs.menu.user.planetId;
-      this.getPublications(apiRoot() + 'planets/'+ this.planetId + '/posts');
-      this.countPublications();
+          this.planetId = this.$refs.menu.user.planetId;
+          this.getPublications(apiRoot() + 'planets/'+ this.planetId + '/posts');
+          this.countPublications();
     },
     createPost : function(post) {
       this.$http.post(apiRoot() + "planets/" + this.planetId + "/posts", { 'content' : post.content}, {emulateJSON : true}).then(

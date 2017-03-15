@@ -124,8 +124,8 @@ const Post = Vue.extend({
     getPlanetPublications : function() {
       this.$http.get(apiRoot() + "users/me", {emulateJSON: true}).then(
         (response) => {
-          this.planetId = response.data[0].planetId;
-          this.planetName = response.data[0].name;
+          this.planetId = response.data.planetId;
+          this.planetName = response.data.name;
           this.countComments();
           this.getComments(apiRoot() + "planets/" + this.planetId + "/posts/" + this.post.id + "/comments?limit=" + this.loadMore, false);
         }, 

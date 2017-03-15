@@ -29,7 +29,7 @@
         <div v-else>
           <ul class="wrapper friend-list">
             <li class="item" v-for="(friend, index) in displayedFriends">
-              <friend-template :friend="friend"></friend-template>
+              <friend-template :friend="friend" :planet="planets[currentPlanetIndex].name"></friend-template>
             </li>
           </ul>
         </div>

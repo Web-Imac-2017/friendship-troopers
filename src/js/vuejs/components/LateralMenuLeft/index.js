@@ -10,7 +10,7 @@ const LateralMenuLeft = Vue.extend({
     created: function() {
       this.$http.get(apiRoot() + "users/me", {emulateJSON: true}).then(
         (response) => {
-          this.user = response.data[0];
+          this.user = response.data;
           this.$emit("userinfos");
         }, (response) => {
           this.$router.push({name : "Login"});
