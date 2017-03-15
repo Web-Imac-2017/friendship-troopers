@@ -49,24 +49,19 @@ const User = Vue.extend({
             this.getInterest(apiRoot() + 'users/' + this.profil.id + '/interest');
             this.getPosts(apiRoot() + 'planets/' + this.profil.planetId + '/posts', { 'user' : this.profil.id });
           } else {
-            console.log(JSON.stringify(this.$route.params));
-            console.log("GEt rour params" + JSON.stringify(response.data))
             this.getUser(apiRoot() + 'users/' + this.$route.params.userId);
           }
           
       }, (response) => {
-        console.log("GEt route fails arams" + JSON.stringify(response.data))
       })
     },
    getUser : function(route){
       this.$http.get(route).then((response) => {
-          console.log("GEt USER" + JSON.stringify(response.data))
           this.profil = response.data;
           this.getNbFriends(apiRoot() + 'users/' + this.profil.id + '/number_friends');
           this.getInterest(apiRoot() + 'users/' + this.profil.id + '/interest');
           this.getPosts(apiRoot() + 'planets/' + this.profil.planetId + '/posts', { 'user' : this.profil.id });
       }, (response) => {
-        console.log("GEtFailUSER" + JSON.stringify(response.data))
       })
    },    
     getInterest : function(route){
