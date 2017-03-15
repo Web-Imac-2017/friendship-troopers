@@ -1,0 +1,57 @@
+@import "variables";
+
+.riddle {
+  @include padding(2);
+  @include font-size(1.5);
+  margin: 5rem 0;
+
+  ul {
+  	 @include padding(2);
+
+  }
+
+  h1 {
+  	text-align: left;
+  }
+
+  .container-colored {
+  	margin: 4rem 0;
+  }
+
+  ul li img {
+    height: 90%;
+    width: 90%;
+
+  }
+  p {
+  	text-align: center;
+  }
+
+  strong {
+  	font-weight: bold;
+  	@include font-size(1.8);
+
+  }
+
+  .border-bottom {
+  	border-bottom-color: $main-title;
+  }
+
+  span  {
+  	width: 60%;
+  	margin-bottom: 2rem;
+  }
+
+  button {
+  	 @include padding2(0.5, 2);
+  	 @include font-size(2);
+  	 font-weight: light;
+  	 color: $main-text;
+  	 background: none;
+  	 border: 0.2rem solid $enigme-title;
+  }
+
+  button img {
+  	height: 3rem;
+  }
+}

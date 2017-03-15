@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<defs>
+	<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="6.951" y="13.139" width="85.236" height="85.236">
+		<feFlood  style="flood-color:white;flood-opacity:1" result="back"/>
+		<feBlend  in="SourceGraphic" in2="back" mode="normal"/>
+	</filter>
+</defs>
+<mask maskUnits="userSpaceOnUse" x="6.951" y="13.139" width="85.236" height="85.236" id="SVGID_1_">
+	<g filter="url(#Adobe_OpacityMaskFilter)">
+		<polygon points="38.469,10 47.017,45 50.541,45 60.737,10 		"/>
+	</g>
+</mask>
+<path mask="url(#SVGID_1_)" fill="none" stroke="#E6E6E6" stroke-width="7" stroke-miterlimit="10" d="M88.687,55.756
+	c0,21.605-17.514,39.119-39.116,39.119c-21.604,0-39.12-17.514-39.12-39.119c0-21.601,17.516-39.117,39.12-39.117
+	C71.173,16.639,88.687,34.155,88.687,55.756z"/>
+<line fill="none" stroke="#E6E6E6" stroke-width="5" stroke-miterlimit="10" x1="49.5" y1="5" x2="49.5" y2="45"/>
+</svg>
