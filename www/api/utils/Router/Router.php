@@ -48,7 +48,7 @@ class Router {
 
     static public function url($name, $params = []) {
         if(!isset(self::$namedRoutes[$name])) {
-            throw new \Utils\RequestException('not found', 404);
+            throw new \Exception('route not found ' . $name);
         }
         return '/' . self::$namedRoutes[$name]->getUrl($params);
     }

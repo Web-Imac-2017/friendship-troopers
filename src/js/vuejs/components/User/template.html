@@ -3,7 +3,7 @@
 <div class="container-fluid">
     <div class="row">
       <aside class="col-sm-3 col-md-3 col-lg-2">
-        <lateral-menu-left></lateral-menu-left>
+        <lateral-menu-left ref="menu"></lateral-menu-left>
         <deconnexion class="desktop"></deconnexion>
         <menu-tools class="desktop"></menu-tools>
       </aside>
@@ -11,30 +11,61 @@
         <div class="container-colored">
           <div class="row profil">
             <div class="col-sm-2">
-              <img :src="user.userAvatar" class="user-avatar">
+              <img :src="profil.imagePath" class="user-avatar">
             </div>
             <div class="col-sm-7">
               <p v-if="myself"> Mon profil </p>
-              <p v-else> Profil de {{ user.username }} </p>
-              <p class="honorifique-title"> {{ user.userBadge }} </p>
-              <p class="green" v-if="user.points < 2"> {{ user.points }} point </p>
-              <p class="green" v-else> {{ user.points }} points </p>
+              <p v-else> Profil de {{ profil.username }} </p>
+              <p class="honorific-title"> {{ profil.honorificTitle }} </p>
+              <p class="green" v-if="profil.points == null"> 0 point </p>
+              <p class="green" v-else-if="profil.points < 2"> {{ profil.points}} point </p>
+              <p class="green" v-else> {{ profil.points }} points </p>
             </div>
             <div class="col-sm-1 border-right"></div>
             <div class="col-sm-2 ">
-              <img :src="user.userPlanet.path" class="planet"> 
-              <p class="center"> {{ user.userPlanet.name }} </p>
+              <img :src="planetName" class="planet"> 
+              <p class="text-center"> {{ profil.name }} </p>
             </div>
           </div>
         
-        <option-bar :myself="myself"></option-bar>
+        <option-bar :myself="myself" v-on:addfriend="addFriend"></option-bar>
  
-        <statistics :user="user"></statistics>
-        <button v-on:click="profil"> (debug) Profil change from public to private</button>  
+                <div class="stat">
+        <div class="row center-row no-gutters">  
+          <div class="col-sm-4 pink text-center">
+            <p class="inline"><span class="fat"> {{ nbFriends }} </span> </p>
+            <p class="inline left"> amis dans <br>
+                <span v-if="myself">ton escouade </span> 
+                <span v-else >son escouade </span>
+            </p>
+          </div>  
+          <div class="col-sm-4 pink text-center">
+            <span class="fat inline"> {{ nbRiddleSolved }} </span>
+            <p v-if="nbRiddleSolved > 1" class="inline center"> énigmes résolues </p>
+            <p v-else class="inline center"> énigme résolue</p>
+          </div>
+            <div class="col-sm-4 pink text-center">
+            <span class="fat inline"> {{ interests.length }} </span>
+            <p  class="inline center" v-if="interests.length > 1"> centres d'intérêts </p>
+            <p class="inline center" v-else> centre d'intérêt </p>
+          </div>
+        </div>
+        <span class="h-separator center"></span>
+        <div class="row interests">
+            <p class="interest col-sm-2 center" v-for="(interest, index) in interests" v-if="index < start">
+             {{interest.label}} 
+            </p>
+        </div>
+        <span class="h-separator center"></span>
+        <div class="col-sm-12 text-center pseudo-button" v-on:click="showMore" v-if=" start == 6"> + Voir plus + </div>
+        <div class="col-sm-12 text-center pseudo-button" v-on:click="showLess" v-else> - Voir moins - </div>
+        
+      </div>
         </div>
         <page-nav></page-nav>
-        <post :post="post"></post> 
-
+        <div  v-for="post in posts" >
+          <post :post="post"></post> 
+        </div>
       </section>
       <div class="col-lg-2">
          <lateral-menu-right></lateral-menu-right>

@@ -1,12 +1,16 @@
 'use strict';
 import Vue from 'vue/dist/vue';
 import welcomeData from './welcomeData.json';
+import {apiRoot} from '../../../../../config.js';
 
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
 
 const WelcomeOnBoard = Vue.extend({
   template,
+  created : function(){
+    
+  },
   methods: {
   finished : function(){
     welcomeData.finish = true;
@@ -43,7 +47,6 @@ const WelcomeOnBoard = Vue.extend({
         planet[welcomeData.answers[i]-1] += 1
     }
     var max = 0, index = 0;
-    console.log("Planete :" + planet);
     for (i = 0; i < planet.length; i++) {
       if (planet[i] > max ){
         max = planet[i]
@@ -55,9 +58,28 @@ const WelcomeOnBoard = Vue.extend({
   },
   submit : function(){
     welcomeData.planetUser = this.attributePlanet()
-    this.styleObject.borderColor = welcomeData.planetInfo[welcomeData.planetUser].color;
-    this.styleObject2.borderLeftColor = welcomeData.planetInfo[welcomeData.planetUser].color;
-    
+    this.styleObject.borderColor = welcomeData.planetInfo[welcomeData.planetUser].color
+    this.styleObject2.borderLeftColor = welcomeData.planetInfo[welcomeData.planetUser].color
+    this.$http.get(apiRoot() + 'users/me', {
+      emulateJSON: true,
+    }).then(
+      (response) => {
+
+        this.$http.post(apiRoot() + 'user/'+ response.data.id +'/interests', 
+        {
+          'planetId' : welcomeData.planetUser + 1
+        },{
+          emulateJSON: true,
+        }).then(
+          (response) => {
+          },
+          (response) => {
+          }
+        )
+      },
+      (response) => {
+      }
+    )
   },
   backToQuestion : function(index){
     welcomeData.current = index;
@@ -102,7 +124,8 @@ const WelcomeOnBoard = Vue.extend({
         }, 
         styleObject2 : {
           borderLeftColor : 'white'
-        }
+        },
+        currentUser : {}
     }
   }
 });

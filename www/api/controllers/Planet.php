@@ -20,10 +20,10 @@ class Planet extends Controller {
     }
 
     if (!in_array(\Utils\Session::user('roleId'), [1, 2])) {
-      throw new \Utils\RequestException('action reservee aux administrateurs', 403);
-    }
+      $fields = ['name', 'description', 'history', 'imagePath'];
+    } else $fields = '*';
     $response = $this->Planet->find([
-      'fields' => '*',
+      'fields' => $fields,
     ]);
     $this->response($response, 200);
   }

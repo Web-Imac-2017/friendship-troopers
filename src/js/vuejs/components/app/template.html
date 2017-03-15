@@ -7,13 +7,17 @@
 
     <div style="display:inline-block; width:20%;position : relative;vertical-align: top; margin-top: 3rem;">
     <h2>Pages parfaites</h2>
-        <p style="display:block; padding: 1rem 3rem;"> <router-link :to="{ name: 'Login'}"> Login/Accueil</router-link></p>
+        
         <p style="display:block; padding: 1rem 3rem;"> <router-link :to="{ name: 'Friends', params: { user: 'pseudo' }}"> Amis</router-link></p>
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Search'}"> Recherche </router-link></p>
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'WelcomeOnBoard'}"> Welcome On Board </router-link></p>
+        <p style="display:block; padding: 1rem 3rem;"> <router-link :to="{ name: 'Login'}"> Login/Accueil</router-link></p>
     </div>
     
     <div style="display:inline-block; width:20%;position : relative;vertical-align: top; margin-top: 3rem;">
        <h2>Pages à lier faites</h2>
-        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'WelcomeOnBoard'}"> Welcome On Board </router-link></p>
+        
+        
 
     </div>
 
@@ -28,7 +32,6 @@
 
     <div style="display:inline-block; width:20%;position : relative; vertical-align: top; margin-top: 3rem;">
         <h2>Pages pas faites</h2>
-        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Search'}"> Recherche </router-link></p>
         <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Chat', params: { user: 'pseudo' }}"> Chat </router-link></p>
         <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'EnigmeResolved', params: { user: 'pseudo' }}"> Enigmes résolues </router-link></p>
         <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'EnigmeCurrent', params: { user: 'pseudo' }}"> Enigmes en cours </router-link></p>
@@ -42,7 +45,7 @@
         <h2>Pages bonus</h2>
       
         <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Event'}"> Evenement </router-link></p>
-        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Wiki'}"> Wiki d'une planète </router-link></p>
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Wiki',  params: {planet:'Terre'}}"> Wiki d'une planète </router-link></p>
         <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Market'}"> Marché </router-link></p>
         <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'About'}"> À propos </router-link></p>
         <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'FAQ'}"> FAQ </router-link></p>
@@ -52,6 +55,8 @@
         <li><router-link :to="/admin/ajout-badge"> Administrateur : Ajout badge</router-link></li>
         <li><router-link :to="/admin/ajout-avatar"> Administrateur : Ajout avatar</router-link></li>
         <li><router-link :to="/admin/ajout-enigme"> Administrateur : Ajout énigme</router-link></li> -->
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Error401'}"> Erreur 401 </router-link></p>
+        <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Error403'}"> Erreur 403 </router-link></p>
         <p style="display:block; padding: 1rem 3rem;"><router-link :to="{ name: 'Error404'}"> Erreur 404 </router-link></p>
       </div>
       </div>

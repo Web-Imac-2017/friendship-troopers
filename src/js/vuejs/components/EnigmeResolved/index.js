@@ -4,13 +4,54 @@ import Vue from 'vue/dist/vue';
 
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
+import {apiRoot} from '../../../../../config.js';
 
+
+import LateralMenuLeft from '../LateralMenuLeft/index.js'
+import LateralMenuRight from '../LateralMenuRight/index.js'
+import MenuTools from '../MenuTools/index.js'
 import NavBar from '../NavBar/index.js';
+import Deconnexion from '../Deconnexion/index.js';
 
 const EnigmeResolved = Vue.extend({
   template,
   components : {
-  	'navbar' : NavBar
+  'lateral-menu-left' : LateralMenuLeft,
+  	'lateral-menu-right' : LateralMenuRight,
+  	'menu-tools' : MenuTools,
+    'navbar' : NavBar,
+    'deconnexion' : Deconnexion,
+  },
+  created : function(){
+  	this.$http.get(apiRoot() + 'users/me').then((response) => {
+          this.me = response.data;
+      }, (response) => {
+        console.log(response);
+      })
+  	this.username = this.$route.params.user;
+  	console.log(this.username);
+  }, 
+  data () {
+  	return {
+  		me : {},
+  		points : 30,
+  		nbBadges : 2,
+  		riddleSolved : [
+  		{
+  			name :'Le trésor caché aux confins du Connecticut ',
+  			level :'debutant',
+  			mode :'multijoueur',
+  			date :'18 fev',
+  			points : 30,
+  			players : [ {
+  				username : 'Connor',
+          userId : 4,
+  				imagePath : '/assets/images/avatars/aliens/aliens.svg',
+  				planetId : 1
+  			}]
+  		}],
+  		nbBadges : 2
+  	}
   }
 });
 

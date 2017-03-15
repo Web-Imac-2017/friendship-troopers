@@ -8,9 +8,17 @@ template     = eval(`\`${template}\``);
 
 const Comment = Vue.extend({
   props : {
-    comment:Object
+    comment:Object,
+    planet : String
   },
   template,
+  methods : {
+    formateDate : function(date) {
+      var object = new Date(date); 
+      var months = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juill.", "août", "sept.", "oct.", "nov.", "déc."];
+      return object.getDate() + " " + months[object.getMonth()] + " à " + object.getHours() + ":" + ('0'+object.getMinutes()).slice(-2);
+    }
+  },
   data () {
     return {
       newComment : '',

@@ -1,27 +1,41 @@
-<div class="container-fluid friends">
+<div>
   <navbar></navbar>
-  <div class="row">
-    <aside class="col-sm-3 col-md-3 col-lg-2">
-      <lateral-menu-left></lateral-menu-left>
-      <deconnexion class="desktop"></deconnexion>
-      <menu-tools class="desktop"></menu-tools>
-    </aside>
 
-    <section class="article col-sm-9 col-md-9 col-lg-10 container-transparent container">
-      <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-2 item" v-for="(item, index) in planets" v-on:click="selectPlanet(index)" v-bind:class="{ 'planet-selected' : item.selected }">
-          <img class="planet center" :src="item.path" alt="planet">
-          <h1 :class=item.type class="text-center">{{ item.name }}</h1>
-          <p class="text-center">{{ item.nbFriends }} au total</p>
+  <div class="container-fluid friends">
+    <div class="row">
+      <aside class="col-sm-2">
+        <lateral-menu-left></lateral-menu-left>
+        <deconnexion class="desktop"></deconnexion>
+        <menu-tools class="desktop"></menu-tools>
+      </aside>
+
+      <section class="article col-sm-9 col-md-9 col-lg-10 container-transparent">
+        <div class="row">
+          <div class="col-sm-1 col-md-1"></div>
+          <div class="col-sm-2 col-md-2 item" v-for="(item, index) in planets" v-on:click="selectPlanet(index)" v-bind:class="{ 'planet-selected' : item.selected }">
+            <img class="planet center" :src="item.imagePath" alt="item.name">
+            <h1 :class=item.name class="text-center">{{item.name}}</h1>
+            <p v-if="isKey(index+1)" class="text-center">{{allFriends[index+1].length}} au total</p>
+            <p v-else class="text-center">0 au total</p>
+          </div>
         </div>
-      </div>
 
         <span class="h-separator center"></span>
 
-      <friend-template :user="user"></friend-template>
-    </section>
+        <div v-if="Object.keys(this.displayedFriends).length == 0">
+          <p class="error text-center">Vous n'avez pas d'amis dans cette planète...</p>
+        </div>
 
-    <menu-tools class="mobile"></menu-tools>
+        <div v-else>
+          <ul class="wrapper friend-list">
+            <li class="item" v-for="(friend, index) in displayedFriends">
+              <friend-template :friend="friend" :planet="planets[currentPlanetIndex].name"></friend-template>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <menu-tools class="mobile"></menu-tools>
+    </div>
   </div>
 </div>

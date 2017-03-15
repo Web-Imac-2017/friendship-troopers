@@ -20,7 +20,6 @@ class Interest extends Controller {
     $interest = new \Models\Interest();
     $request = $interest->find([
       'fields' => ['id','label','initInterest'],
-      'conditions' => 'initInterest = 0'
     ]);
     $this->response($request,200);
 
@@ -78,10 +77,12 @@ class Interest extends Controller {
   }
 
   /**
-   * listuserInterest list all user_interest from DB
-   * @return  [type] [description]
+   * listuserInterest from
+   * list all user's interests
+   * @param int user's id
+   * @return  JSON interests info
    */
-  public function listuserInterest() {
+  public function listuserInterest($userId) {
     $userInterest = new \Models\User_Interest();
     $request = $userInterest->find([
       'fields' => ['interest.id', 'label'],
@@ -99,16 +100,17 @@ class Interest extends Controller {
   				'to' => 'interestId',
         ],
       ],
+      'conditions' => ['userId' => $userId]
     ]);
     $this->response($request, 200);
   }
 
   /**
-   * delete_interest deletes one or more interests
-   * @param  array $data containing the interests
+   * deleteUserInterest function
+   * @param  array $data containing user's interests
    * @return [type]       [description]
    */
-  public function delete_interest($data) {
+  public function deleteUserInterest($data) {
     /*Checking if $data is an array*/
     if(!is_array($data)) {
       throw new \Utils\RequestException('data erronées', 403); // code d'erreur ?
@@ -117,20 +119,67 @@ class Interest extends Controller {
     if (!\Utils\Session::isLoggedIn()) {
       throw new \Utils\RequestException('operation reservee aux membres', 401);
     }
-    /*pick up the user logged id*/
+    /*bring back the user logged id*/
     $userId = \Utils\Session::user('id');
 
     /*create a userInterest to delete interests*/
     $userInterest = new \Models\User_Interest();
 
+    /*delete the interest*/
     foreach ($data as $key => $value) {
-      $request1 = $userInterest->delete(array('userId' => $userId,
+      $request = $userInterest->delete(array('userId' => $userId,
                                   'interestId' => $value));
-      $request2 = $this->Interest->delete($value);
     }
 
-    $this->response($request1,200);
-    $this->response($request2,200);
+    $this->response($request,200);
   }
 
+  /**
+   * deleteInterest deletes one or more interests
+   * @param  array $data containing the interests
+   * @return [type]       [description]
+   */
+  public function deleteInterest($data) {
+    $this->deleteUserInterest($data);
+
+    foreach($data as $key => $value) {
+      $request = $this->Interest->delete($value);
+    }
+    echo $request;
+    $this->response($request,200);
+  }
+
+  /**
+   * WelcomeOnBoard function
+   * update the current user planetId
+   * @param array $interestList containing interestId
+   * @return JSON user's id
+   */
+  public function WelcomeOnBoard ($userId,$data) {
+    /*Checking if the user is logged in*/
+
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
+    }
+
+    /*bring back the user logged id*/
+    $userIdLogged = \Utils\Session::user('id');
+
+    /*Check if the current user is the same user*/
+    if($userIdLogged != $userId) {
+      throw new \Utils\RequestException('probleme d\'utilisateur : l\'utilisateur courant est different', 401);
+    }
+
+    /*Change the user planet*/
+    $user = new \Models\User();
+    $request = $user->save($this->filterXSS([
+      'id' => $userId,
+      'planetId' => $data['planetId']
+    ]));
+
+    /*update the planetId in the session*/
+    $_SESSION['User']['planetId'] = $data['planetId'];
+
+    $this->response($request,200);
+  }
 }

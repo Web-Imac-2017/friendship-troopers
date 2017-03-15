@@ -3,7 +3,7 @@
 // Colors variables
 
 $white: #fff; 
-
+ 
 
 $main-title: #46bfa9;
 $username: #349994;
@@ -43,6 +43,7 @@ $articles-background : #272c48;
 $notifs: #c33a78; 
 $enigme-title: $notifs;
 $green-text: #17d4b2;
+$dark-green-text: #388793;
 
 //Administration colors
 $report-red : #ef3824;
@@ -63,6 +64,7 @@ $main-font: 'Roboto', serif;
 
 // Media queries
 
+
 $break-x-large: 1200px;    
 $break-large: 992px;    
 $break-mid: 768px; 
@@ -70,7 +72,6 @@ $break-col-xs: 991px;
 $break-small: 467px;  
 $break-small-welcome-on-board: 500px;   
 $screen-md-min : 992px;
-
 
 
 @font-face {
@@ -82,24 +83,7 @@ $title-font: earthOrbiter-font;
 
 
 // Padding and margin variables
-/*
-@mixin planetColor($planet) {
-  color:$sizeValue + rem;
-  font: $title-font;
-}
-@mixin pseudo-Multas {
-  color: §planet-space-opera;
-  font: $title-font;
-}
-@mixin pseudo-Terre {
-  color: §planet-earth;
-  font: $title-font;
-}
-@mixin pseudo-Sautien {
-  color: §planet-earth;
-  font: $title-font;
-}
-*/
+
 @mixin padding($sizeValue) {
   padding:$sizeValue + rem;
 }
