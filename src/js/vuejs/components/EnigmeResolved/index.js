@@ -24,7 +24,7 @@ const EnigmeResolved = Vue.extend({
   },
   created : function(){
   	this.$http.get(apiRoot() + 'users/me').then((response) => {
-          this.me = response.data[0];
+          this.me = response.data;
       }, (response) => {
         console.log(response);
       })

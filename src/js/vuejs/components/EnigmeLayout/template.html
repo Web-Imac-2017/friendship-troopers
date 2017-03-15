@@ -32,7 +32,7 @@
   <div class="col-sm-12" v-else>
     <div class="col-sm-8">
       <div class="col-sm-4" v-for="(player, index) in riddle.players">
-       <router-link :alt="player.username" :to="{ name: 'User', params: { user: player.username }}">
+       <router-link :alt="player.username" :to="{ name: 'User', params: { user: player.username, userId: player.userId }}">
         <img :src="player.imagePath" class="avatar center">
         <h1 class="pseudo text-center" v-bind:style="{color : planetData[player.planetId] }" >{{ player.username }} </h1>
       </router-link>

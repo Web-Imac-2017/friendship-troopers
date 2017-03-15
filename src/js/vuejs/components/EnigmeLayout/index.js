@@ -15,9 +15,10 @@ const EnigmeLayout = Vue.extend({
   	this.username = this.$route.params.user;
   },
    mounted: function() {
-        if (this.chat){
+      if (this.chat){
   			this.$http.get(apiRoot() + 'users/me').then((response) => {
        		 	this.me = response.data;
+            console.log(this.me);
        		 	this.riddle.players.unshift(this.me)
       		}, (response) => {
         		console.log(response);

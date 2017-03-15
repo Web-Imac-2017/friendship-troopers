@@ -30,8 +30,6 @@ const EnigmeCurrent = Vue.extend({
     },
     findMe:function(){
       this.me = this.$refs.menu.user;
-      console.log("COUCOU");
-      console.log(JSON.stringify(this.$refs.menu));
     }
   },
   data () {
