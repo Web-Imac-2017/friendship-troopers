@@ -28,6 +28,7 @@ Router::get('/users/me','account#getCurrentUser', 'users.me');
 Router::patch('/users/me','account#updateAccountInfos', 'users.me.update');
 Router::delete('/users/me','account#delete', 'users.me.delete');
 Router::post('/users/password','account#lostPassword', 'users.me.lostPassword');
+Router::post('/users/password/new','account#setNewPassword', 'users.me.newPassword');
 Router::get('/users/me/avatars','avatar#listUserAvatar', 'users.me.listAvatar');
 Router::patch('/users/me/avatars/:avatarId/current','avatar#setCurrentAvatar', 'users.me.setCurrentAvatar');
 

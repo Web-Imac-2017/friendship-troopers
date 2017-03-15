@@ -122,6 +122,8 @@ class Account extends Controller{
 		} else {
 			throw new \Utils\RequestException('INVALID_DATA', 400);
 		}
+
+		$this->response(null, 200);
 	}
 
 	/**
@@ -410,9 +412,49 @@ class Account extends Controller{
 
 		Clique sur le lien ci-dessous pour retrouver ton mot de passe.
 
-		'.$_SERVER['DOCUMENT_ROOT'] .'/' . \Utils\Router\Router::url('auth.validate') . '?mail='.$to.'&hash='.$data['hash'];
+		'.$_SERVER['DOCUMENT_ROOT'] .'/' . \Utils\Router\Router::url('users.me.newPassword') . '?mail='.$to.'&hash='.$data['hash'];
 
 		$headers = 'From:noreply@fst.dev' . "\r\n";
 		mail($to, $subject, $message, $headers);
+	}
+
+	/**
+	 * change the password
+	 * @param array $post
+	 */
+	public function setNewPassword($post){
+		$required = ['mail' , 'hash', 'password'];
+		if(!empty($this->checkRequired($required, $post))){
+			throw new \Utils\RequestException('MISSING_FIELDS', 400);
+		}
+		$data = array(
+			'mail'=>$post['mail'],
+			'hash' => $post['hash'],
+		);
+		$request = [
+			'fields' => [
+				'id',
+				'mail',
+				'hash',
+			],
+			'conditions' => $data
+		];
+		$result = $this->User->findFirst($request);
+		if(count($result) > 0){
+			$password=password_hash($post['password'], PASSWORD_DEFAULT);
+			try {
+				$this->User->save([
+					'id' => $result['id'],
+					'password' => $password,
+					'hash' => md5(rand(0,1000)),
+				]);
+			} catch (\PDOException $e) {
+				throw new \Utils\RequestException('Erreur BDD', 400);
+			}
+		} else {
+			throw new \Utils\RequestException('INVALID_DATA', 400);
+		}
+
+		$this->response(null, 200);
 	}
 }
