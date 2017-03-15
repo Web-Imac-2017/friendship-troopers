@@ -175,7 +175,11 @@
   .to-current {
     background-color: $comments-publish ;
     @include margin4(0, 0, 2, 0);
-    @include padding(1);
+    @include padding2(1,0);
+  }
+
+  .to-current p {
+    @include padding(0.5);
   }
 
   h1 {
@@ -186,9 +190,21 @@
     @include padding2(3,0);
   }
 
-  button {
-    background-color: $green-text;
-    border: none;
-    font-size: 1.5rem;
+ button{
+  background: $main-title ;
+  cursor:pointer;
+  color:$white;
+  border: none;
+  font-size: 1.5rem;
+  @include padding-button(1.5);
+  outline: 0;
+  display: inline-block;
+  &:hover{
+    background: $username;
+  }
+}
+
+  p.left{
+    text-align:left;
   }
 }

@@ -12,7 +12,7 @@
         <router-link to="/actualites" class="navbar-brand"> <p class="desktop small-desktop"> Friendship<br/>Troopers</p> <p class="mobile"> FT </p> </router-link>
         <div class="menu-separator"></div>
         <router-link to="/actualites" class="nav-item nav-link nav-home desktop"> Accueil </router-link>
-        <router-link :to="{ name: 'Enigme', params: { user: pseudo }}" class="nav-item nav-link nav-enigmes"> Énigmes </router-link>
+        <router-link :to="{ name: 'Enigme', params: { user: user.username }}" class="nav-item nav-link nav-enigmes"> Énigmes </router-link>
       </li>
 
       <li class="navbar-right">
@@ -92,7 +92,7 @@
      
         </div>
         <div class="menu-separator"></div>
-        <router-link :to="{ name: 'User', params: { user: username, userId : id }}" class="nav-item nav-link nav-profil"><p class="desktop"> Mon profil</p> <img class="small-desktop mobile nav-avatar" :src=avatar alt="Mon profil" title="Mon profil"> </router-link>
+        <router-link :to="{ name: 'User', params: { user: user.username, userId : user.id }}" class="nav-item nav-link nav-profil"><p class="desktop"> Mon profil</p> <img class="small-desktop mobile nav-avatar" :src=avatar alt="Mon profil" title="Mon profil"> </router-link>
         <div class="mobile"> <div class="menu-separator"></div> <img src=/assets/images/deconnexion.svg alt="Déconnexion" title="Déconnexion"></div>
         
       </li>

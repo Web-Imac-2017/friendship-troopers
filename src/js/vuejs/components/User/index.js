@@ -42,24 +42,31 @@ const User = Vue.extend({
    },
    methods: { 
     getRouteParams : function(){
-      console.log(this.$refs.menu.user.username);
-      console.log(this.$route.params.user);
-      if (this.$route.params.user == this.$refs.menu.user.username){
-        this.getUser(apiRoot() + 'users/me');
-        this.myself = true;
-      } else {
-        this.getUser(apiRoot() + 'users/' + this.$route.params.userId);
-        this.myself = false;
-      }
+      this.$http.get(apiRoot() + 'users/me').then((response) => {
+          this.profil = response.data;
+          if (this.$route.params.userId == response.data.userId){
+            this.getNbFriends(apiRoot() + 'users/' + this.profil.id + '/number_friends');
+            this.getInterest(apiRoot() + 'users/' + this.profil.id + '/interest');
+            this.getPosts(apiRoot() + 'planets/' + this.profil.planetId + '/posts', { 'user' : this.profil.id });
+          } else {
+            console.log(JSON.stringify(this.$route.params));
+            console.log("GEt rour params" + JSON.stringify(response.data))
+            this.getUser(apiRoot() + 'users/' + this.$route.params.userId);
+          }
+          
+      }, (response) => {
+        console.log("GEt route fails arams" + JSON.stringify(response.data))
+      })
     },
    getUser : function(route){
       this.$http.get(route).then((response) => {
+          console.log("GEt USER" + JSON.stringify(response.data))
           this.profil = response.data;
           this.getNbFriends(apiRoot() + 'users/' + this.profil.id + '/number_friends');
           this.getInterest(apiRoot() + 'users/' + this.profil.id + '/interest');
-          this.getPosts(apiRoot() + 'planets/' + this.profil.planetId + '/posts', { 'user' : '2'});
+          this.getPosts(apiRoot() + 'planets/' + this.profil.planetId + '/posts', { 'user' : this.profil.id });
       }, (response) => {
-        console.log(response);
+        console.log("GEtFailUSER" + JSON.stringify(response.data))
       })
    },    
     getInterest : function(route){

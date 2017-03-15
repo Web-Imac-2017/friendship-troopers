@@ -31,7 +31,6 @@ const Feed = Vue.extend({
   created : function(){
   },
   mounted : function() {
-    
   },
   methods : {
     initialize : function() {
