@@ -29,13 +29,23 @@
 		height: 5rem;
 	}
 
+	.clicked {
+		background: $sub-menu-border;
+	}
+
 	.responsive-all-friends, .responsive-lasts-friends {
 		@include padding(2);
+		@include margin2(1,0);
 		width: 47.5%;
 	}
 	.responsive-lasts-friends {
 		margin-left: 2.5%;
 	}
+	 
+	.show-responsive-lasts-friends, .show-responsive-all-friends {
+		@include margin(0);
+		@include padding(0);
+	}	
 
 	@media all {
 
@@ -55,6 +65,10 @@
 		.responsive-all-friends, .responsive-lasts-friends {
 			display: none;
 			text-align: center;
+			@include margin2(1,0);
+		}
+		.show-responsive-lasts-friends, .show-responsive-all-friends {
+			display: none;
 		}
 		.responsive-all-friends-list, .responsive-lasts-friends-list {
 			background: $lateral-menu-background;
@@ -84,12 +98,12 @@
 			max-height: 15rem;
 			margin-bottom: 1rem !important;
 		}
-		.responsive-all-friends {
+		.responsive-all-friends, .show-responsive-all-friends  {
 			display: inline-block;
 			width: 100%;
 			margin-left : 0;
 		}
-		.responsive-lasts-friends {
+		.responsive-lasts-friends, .show-responsive-lasts-friends {
 			display: none;
 		}
 
@@ -108,6 +122,10 @@
 				display: inline-block;
 				width: 47.5%;
 				margin-left: 2.5%;				
+			}
+			.show-responsive-lasts-friends, .show-responsive-all-friends {
+				display: inline-block;
+				width: 100%;
 			}
 			
 			.responsive-all-friends {

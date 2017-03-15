@@ -13,40 +13,46 @@
         <!-- RESPONSIVE -->
         <div class="row">
     
-          <div v-on:click="showAllFriendsResponsive()" class="container-colored responsive-all-friends">
+          <div v-on:click="showAllFriendsResponsive()" v-bind:class="{ 'clicked' : showAllResponsiveFriends}" class="container-colored responsive-all-friends pseudo-button">
             Tous mes amis 
           </div>
     
-          <div v-on:click="showLastsFriendsResponsive()" class="container-colored responsive-lasts-friends">
+          <div v-on:click="showLastsFriendsResponsive()" v-bind:class="{ 'clicked' : showLastsResponsiveFriends}" class="container-colored responsive-lasts-friends pseudo-button">
             Mes correspondants récents
           </div>
 
+        <div class="row no-gutters">
 
-          <div v-if="showLastsResponsiveFriends" class="container-colored responsive-lasts-friends-list">
+          <div class="col-xs-12 col-sm-12 no-gutters show-responsive-lasts-friends">
+            <div v-if="showLastsResponsiveFriends" class="container-colored responsive-lasts-friends-list">
 
-            <div v-if="friends.length < 5">
-              <div v-for="(friend,index) in friends" class="conversation pseudo-button" v-on:click="active(index)" v-bind:class="{ 'conv-selected' : friend.selected}">
-                <img :src="friend.avatar" class="avatar center">
-                <h1 v-bind:class="friend.planete"> {{ friend.name }} </h1>
+              <div v-if="friends.length < 5">
+                <div v-for="(friend,index) in friends" class="conversation pseudo-button" v-on:click="active(index)" v-bind:class="{ 'conv-selected' : friend.selected}">
+                  <img :src="friend.avatar" class="avatar center">
+                  <h1 v-bind:class="friend.planete"> {{ friend.name }} </h1>
+                </div>
               </div>
+              <div v-else> 
+                <div v-for="i in 5"  class="conversation pseudo-button" v-on:click="active(i)" v-bind:class="{ 'conv-selected' : friends[i].selected}">
+                  <img :src="friends[i].avatar" class="avatar center">
+                  <h1 v-bind:class="friends[i].planete"> {{ friends[i].name }} </h1>
+                </div>
+              </div> 
             </div>
-            <div v-else> 
-              <div v-for="i in 5"  class="conversation pseudo-button" v-on:click="active(i)" v-bind:class="{ 'conv-selected' : friends[i].selected}">
-                <img :src="friends[i].avatar" class="avatar center">
-                <h1 v-bind:class="friends[i].planete"> {{ friends[i].name }} </h1>
-              </div>
-            </div> 
           </div>
 
-          <div v-if="showAllResponsiveFriends" class="container-colored responsive-lasts-friends-list" v-on:click="showFriendsResponsive()" >
-            <div class="all-friends col-sm-12">
-              <p v-for="(friend,index) in allFriends" v-on:click="active(index)" v-bind:class="{ 'conv-selected' : friend.selected}" :class="friend.planete" class="pseudo all-friends-list"> <img :src="friend.avatar" class="small-avatar center"> {{ friend.name }} </p>
+          <div class="col-xs-12 col-sm-12 no-gutters show-responsive-all-friends">
+
+            <div v-if="showAllResponsiveFriends" class="container-colored responsive-lasts-friends-list" v-on:click="showFriendsResponsive()" >
+              <div class="all-friends col-sm-12">
+                <p v-for="(friend,index) in allFriends" v-on:click="active(index)" v-bind:class="{ 'conv-selected' : friend.selected}" :class="friend.planete" class="pseudo all-friends-list"> <img :src="friend.avatar" class="small-avatar center"> {{ friend.name }} </p>
+              </div>
             </div>
           </div>
         </div>
+</div>
 
-
-        <!-- RESPONSIVE -->
+        <!-- DESKTOP -->
 
       <!-- Voir mes conversations récentes -->
 
@@ -79,7 +85,7 @@
                 Mes amis <img  v-on:click="showFriends()" src="/assets/images/Cross.svg" class="right">
           </div>
           <div class="all-friends col-sm-12">
-            <p v-for="friend in allFriends"  :class="friend.planete" class="pseudo all-friends-list"> <img :src="friend.avatar" class="small-avatar center"> {{ friend.name }} </p>
+            <p v-for="friend in allFriends"  :class="friend.planete" class="pseudo pseudo-button all-friends-list"> <img :src="friend.avatar" class="small-avatar center"> {{ friend.name }} </p>
           </div>
         </div>
 
