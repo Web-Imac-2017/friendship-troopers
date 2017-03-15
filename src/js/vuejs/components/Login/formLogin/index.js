@@ -30,15 +30,12 @@ const formLogin = Vue.extend({
 		        	emulateJSON: true
 		        }).then(
 		          (response) => {
-		            console.log("success !");
 		            this.cantSubmit=false;
 		            this.$router.push({
 					    name: 'Feed' 
 					});
 		          },
 		          (response) => {
-		            console.log("fail !");
-		            console.log(response);
 		            this.cantSubmit=true;
 		          }
 		        )
