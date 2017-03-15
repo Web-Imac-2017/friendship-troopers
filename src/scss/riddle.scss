@@ -1,6 +1,6 @@
 @import "variables";
 
-#riddle {
+.riddle {
   @include padding(2);
   @include font-size(1.5);
   margin: 5rem 0;
@@ -167,4 +167,17 @@
     font-size: 1.3rem;
   }
 }
+}
+
+#resolved-riddle {
+
+  .to-current {
+    background-color: $comments-publish ;
+    @include margin4(0, 0, 1, 0);
+    @include padding(1);
+  }
+
+  .horloge {
+    width: 60%;
+  }
 }

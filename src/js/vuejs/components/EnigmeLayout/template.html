@@ -4,13 +4,15 @@
     <div class="col-sm-12" v-if="!chat">
       <div v-for="(player, index) in riddle.players">
         <div class="col-lg-9 col-md-8 col-sm-6 player">
-         <router-link :alt="player.username" :to="{ name: 'User', params: { user: player.username }}">
           <div class="col-md-2 col-lg-1  col-xs-4 no-nothing">
+            <router-link :to="{ name: 'User', params: { user: player.username }}">
             <img :src="player.imagePath" class="avatar center">
+            </router-link>
           </div>
           <h1 class="pseudo left col-lg-9 col-md-7" v-bind:style="{color : planetData[player.planetId] }" >{{ player.username }} </h1>
+          <router-link :to="{name: 'EnigmeCurrentChat', params: { user: username } }">
           <p class="col-sm-7 col-xs-12 pseudo-button message"> lui envoyer un message </p>
-        </router-link>
+          </router-link>
       </div>
       <div class="col-lg-3 col-md-4 col-sm-6 right" v-if="index == 0">
         <div class="col-sm-12 right points">
