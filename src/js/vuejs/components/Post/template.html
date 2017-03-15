@@ -7,7 +7,7 @@
         </router-link>
       </div>
       <div class="user-pseudo">
-        <h1 class="pseudo" v-bind:style="{color : planetData[post.planeteId] }" >
+        <h1 class="pseudo" :class="planetName" >
           {{ post.username }}
         </h1>
         <small class="date"> {{ formateDate(post.publishDate) }}</small>
@@ -50,7 +50,7 @@
         <p class="grey loadMore">Charger les commentaires précédents</p>
       </div>
       <div v-for="(comment,index) in reversedComments" v-if="index < loadMore" class="comment">
-        <comment :comment="comment"></comment>
+        <comment :comment="comment" :planet="planetName"></comment>
       </div>
       <div class="row your-comment"> 
         <div class="col-sm-1 desktop">

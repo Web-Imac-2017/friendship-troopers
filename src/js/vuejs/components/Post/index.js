@@ -13,17 +13,14 @@ const Post = Vue.extend({
     'comment' : Comment
   },
   props : {
-    post: Object,
-    planetId : Number
+    post: Object
   },
   template,
   watch: {
     post : function() {
+      this.getPlanetPublications();
       this.isLiked();
       this.getLikes();
-      //TODO
-      //this.getComments(apiRoot() + "planets/" + this.planetId + "/posts/" + this.post.id + "/comments?limit=" + this.loadMore, false);
-      //this.countComments();
     }
   },
    methods : {
@@ -70,7 +67,6 @@ const Post = Vue.extend({
       this.$http.get(apiRoot() + "planets/" + this.planetId + "/posts/" + this.post.id + "/comments/count", { emulateJSON: true }).then(
         (response) => {
           this.totalComments = response.data.count;
-          console.log("POST totalcomments " + this.totalComments + "for id " + this.post.id);
         },
         (response) => {
         });
@@ -81,7 +77,6 @@ const Post = Vue.extend({
           this.nbLikes = response.data.count;
         },
         (response) => {
-          console.log("Post.js : getLikes " + response)
         }
       );
     },
@@ -90,9 +85,12 @@ const Post = Vue.extend({
         (response) => {
           if (concat) {
             this.comments = this.comments.concat(response.data);
+
           } else {
             this.comments = response.data;
           }
+          this.reversedComments = this.comments.slice(0);
+          this.reversedComments.reverse();
           var tmp = response.headers.get("Link").split(",")[1].split(";")[0];
           this.prevComments = apiRoot() + tmp.substring(2, tmp.length-1);
         },
@@ -106,7 +104,6 @@ const Post = Vue.extend({
           this.totalComments = response.data.count;
         },
         (response) => {
-          console.log("Post.js : getTotalComments " + response);
         }
       );
     },
@@ -123,24 +120,30 @@ const Post = Vue.extend({
         (response) => {
         }
       );
+    },
+    getPlanetPublications : function() {
+      this.$http.get(apiRoot() + "users/me", {emulateJSON: true}).then(
+        (response) => {
+          this.planetId = response.data[0].planetId;
+          this.planetName = response.data[0].name;
+          this.countComments();
+          this.getComments(apiRoot() + "planets/" + this.planetId + "/posts/" + this.post.id + "/comments?limit=" + this.loadMore, false);
+        }, 
+        (response) => {
+        }
+      );
     }
   },
   created : function() {
     // Savoir si l'utilisateur a déjà liké le post ?
+    this.getPlanetPublications();
     this.isLiked();
-
-    // Récupèrer le nombre total de commentaires (pour savoir s'il faut en charger plus)
-    //this.countComments();
-
-    // Récupérer les 10 derniers commentaires du post
-    //this.getComments(apiRoot() + "planets/" + this.planetId + "/posts/" + this.post.id + "/comments?limit=" + this.loadMore, false);
-
-    // Récupérer le nombre de likes
     this.getLikes();
   },
   data () {
     return {
       comments : {},
+      reversedComments : {},
       nbLikes : 0,
       liked : false,
       newComment : '',
@@ -148,15 +151,15 @@ const Post = Vue.extend({
       totalComments: 0,
       loadMore : 5,
       showFullPost : false,
-      /* admin / earth / parallel / robots / aliens / space-opera*/
-      planetData: ["#3e3e3e", "#3eb6df", "#ef4646", "#767fe2", "#72b51a", "#f9a519" ]
+      planetName: "Terre",
+      planetId: 1
     }
-  },
+  }/*,
   computed: {
     reversedComments : function() {
-      return this.comments;
+      return this.comments.reverse();
     }
-  }
+  }*/
 });
 
 

@@ -8,7 +8,8 @@ template     = eval(`\`${template}\``);
 
 const Comment = Vue.extend({
   props : {
-    comment:Object
+    comment:Object,
+    planet : String
   },
   template,
   methods : {
