@@ -45,7 +45,10 @@
 
             <div v-if="showAllResponsiveFriends" class="container-colored responsive-lasts-friends-list" v-on:click="showFriendsResponsive()" >
               <div class="all-friends col-sm-12">
-                <p v-for="(friend,index) in allFriends" v-on:click="active(index)" v-bind:class="{ 'conv-selected' : friend.selected}" :class="friend.planete" class="pseudo all-friends-list"> <img :src="friend.avatar" class="small-avatar center"> {{ friend.name }} </p>
+                <div v-for="(string, key) in stringIndex">
+                  <p v-for="(friend,index) in allFriends[string]" v-on:click="active(index)" v-bind:class="{ 'conv-selected' : friend.selected}" v-bind:style="{color : planetData[key]}" class="pseudo all-friends-list"> <img :src="friend.imagePath" class="small-avatar center"> {{ friend.username }} </p>
+                  
+                </div>
               </div>
             </div>
           </div>
@@ -85,8 +88,10 @@
                 Mes amis <img  v-on:click="showFriends()" src="/assets/images/Cross.svg" class="right">
           </div>
           <div class="all-friends col-sm-12">
-            <p v-for="friend in allFriends"  :class="friend.planete" class="pseudo pseudo-button all-friends-list"> <img :src="friend.avatar" class="small-avatar center"> {{ friend.name }} </p>
-          </div>
+            <div v-for="(string, key) in stringIndex">
+                  <p v-for="(friend,index) in allFriends[string]" v-on:click="active(index)" v-bind:class="{ 'conv-selected' : friend.selected}" v-bind:style="{color : planetData[key]}" class="pseudo all-friends-list col-sm-12"> <img :src="friend.imagePath" class="small-avatar center"> {{ friend.username }} </p> 
+                </div>
+              </div>
         </div>
 
 

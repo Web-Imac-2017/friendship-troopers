@@ -29,7 +29,6 @@ const EnigmeResolved = Vue.extend({
         console.log(response);
       })
   	this.username = this.$route.params.user;
-  	console.log(this.username);
   }, 
   data () {
   	return {

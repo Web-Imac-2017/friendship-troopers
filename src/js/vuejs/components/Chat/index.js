@@ -22,12 +22,25 @@ const Chat = Vue.extend({
   created : function(){
     this.$http.get(apiRoot() + 'users/me/friends').then((response) => {
       // gérer le succes, toutes les infos renvoyer sont dans response.data      
-      console.log(response)
         this.allFriends = response.data;
-        console.log(this.allFriends);
+        console.log(response.data["1"]);
+        console.log(JSON.stringify(response.data["1"]));
       }, (response) => {
       });
+    console.log(this.planetData.length)
+     console.log(this.allFriends[1])
 
+  },
+  computed: {
+    // a computed getter
+    stringIndex: function () {
+      var array = [];
+      for (var i = 0; i < this.planetData.length; i++){
+        array[i] = i.toString();
+      }
+      console.log(array)
+      return array;
+    }
   },
   methods : {
     showFriends : function(){
@@ -66,7 +79,8 @@ const Chat = Vue.extend({
   },
   data () {
   	return {
-      allFriends:'',
+      allFriends : [
+      ],
       newMessage: '',
   		date : '17 fevrier 1980',
   		currentSelected : 0,
@@ -129,104 +143,13 @@ const Chat = Vue.extend({
           sender : 1
         }
       ],
-      allFriends : [
-        {
-          name : "George Micheal",
-          avatar : "/assets/images/avatars/Multas/aliens.svg",
-          planete : "Multas",
-          selected : false
-        }, {
-          name : "John Lennon",
-          avatar : "/assets/images/avatars/Paranose/astro.svg",
-          planete : "Paranose",
-          selected : false
-        },
-        {
-          name : "Patti Smith",
-          avatar : "/assets/images/avatars/Sautien/dashboard.svg",
-          planete : "Sautien",
-          selected : false
-
-        }, {
-          name : "Nina Hagen",
-          avatar : "/assets/images/avatars/Multas/aliens.svg",
-          planete : "Multas",
-          selected : false
-
-        }, {
-          name : "Genesis",
-          avatar : "/assets/images/avatars/Paranose/astro.svg",
-          planete : "Paranose",
-          selected : false
-
-        },
-        {
-          name : "George Micheal",
-          avatar : "/assets/images/avatars/Multas/aliens.svg",
-          planete : "Multas",
-          selected : false
-        }, {
-          name : "John Lennon",
-          avatar : "/assets/images/avatars/Paranose/astro.svg",
-          planete : "Paranose",
-          selected : false
-        },
-        {
-          name : "Patti Smith",
-          avatar : "/assets/images/avatars/Sautien/dashboard.svg",
-          planete : "Sautien",
-          selected : false
-
-        }, {
-          name : "Nina Hagen",
-          avatar : "/assets/images/avatars/Multas/aliens.svg",
-          planete : "Multas",
-          selected : false
-
-        }, {
-          name : "Genesis",
-          avatar : "/assets/images/avatars/Paranose/astro.svg",
-          planete : "Paranose",
-          selected : false
-
-        },
-        {
-          name : "George Micheal",
-          avatar : "/assets/images/avatars/Multas/aliens.svg",
-          planete : "Multas",
-          selected : false
-        }, {
-          name : "John Lennon",
-          avatar : "/assets/images/avatars/Paranose/astro.svg",
-          planete : "Paranose",
-          selected : false
-        },
-        {
-          name : "Patti Smith",
-          avatar : "/assets/images/avatars/Sautien/dashboard.svg",
-          planete : "Sautien",
-          selected : false
-
-        }, {
-          name : "Nina Hagen",
-          avatar : "/assets/images/avatars/Multas/aliens.svg",
-          planete : "Multas",
-          selected : false
-
-        }, {
-          name : "Genesis",
-          avatar : "/assets/images/avatars/Paranose/astro.svg",
-          planete : "Paranose",
-          selected : false
-
-        }
-      ],
   		myself : {
   			avatar : '/assets/images/avatars/Sautien/dashboard.svg'
   		}, 
       showAllFriends : false,
       showLastsResponsiveFriends : false,
-      showAllResponsiveFriends : false
+      showAllResponsiveFriends : false,
+      planetData: ["#3e3e3e", "#3eb6df", "#ef4646", "#767fe2", "#72b51a", "#f9a519" ]
   	}
   }
 });
