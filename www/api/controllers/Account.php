@@ -274,7 +274,7 @@ class Account extends Controller{
 			$fields[] = 'user.lastname';
 			$fields[] = 'user.birthdate';
 		}
-		$request= $this->User->find([
+		$request= $this->User->findFirst([
 			'fields' => $fields,
 			'leftJoin' => [
 				[
@@ -311,8 +311,15 @@ class Account extends Controller{
 				'from' => 'id'
 				],
 			],
-			'conditions' => ['user.id' => $id],
+			'conditions' => [
+				'user.id' => $id,
+				'UA.currentAvatar' => 1,
+				'userTitle.current' => 1,
+			],
 		]);
+		if(empty($request)) {
+			throw new \Utils\RequestException('Unknown user', 404);
+		}
 		$this->response($request, 200);
 	}
 
