@@ -100,6 +100,7 @@ class Avatar extends Controller {
                 'avatarId' => $avatarId,
             ],
         ]);
+
         if(empty($ownAvatar)){
             throw new \Utils\RequestException('Vous ne possédez pas cette avatar', 400);
         }
@@ -160,12 +161,21 @@ class Avatar extends Controller {
                         'JoinTable' => 'user_avatar',
                 ],
             ],
-            'conditions' => ["or" => ['user.id' => $userId, 'avatar.pack' => 0]],
+            'conditions' => ["or" => [
+                'user.id' => $userId,
+                'avatar.pack' => 0
+                ]
+            ],
         ]);
 
         $this->response($request, 200);
     }
 
+    /**
+     * add an avatar  to the user
+     * @param  int $idAvatar the avatar id
+     * @return json           
+     */
     public function gainAvatar($idAvatar){
         if(\Utils\Session::isLoggedIn() == NULL){
             throw new \Utils\RequestException('NOT_LOGGED', 401);
@@ -177,5 +187,6 @@ class Avatar extends Controller {
         } catch (\PDOException $e) {
             throw new \Utils\RequestException('erreur BDD', 400);
         }
+        $this->response(null,200);
     }
 }

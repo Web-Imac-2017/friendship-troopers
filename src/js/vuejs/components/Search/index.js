@@ -23,6 +23,15 @@ const Search = Vue.extend({
     'user-component' : UserComponent,
     'deconnexion' : Deconnexion
   },
+  computed: {
+    searchUser:function(){
+      if((this.$route.params.searchInput != "") && !(this.alreadyInThePage)){
+        this.alreadyInThePage = true;
+        this.searchBarUsername(this.$route.params.searchInput);
+      }        
+      return this.$route.params.searchInput;
+    } 
+  },
   data () {
     return {
       filtersPlanets: [{
@@ -51,42 +60,14 @@ const Search = Vue.extend({
         name:"Multas",
         value:false
       }],
-      // RECUPERER LISTE TITLES DANS BDD : enlever apres
-      filtersTitles: [{
-        id:4,
-        name:"Alien"
-      },{
-        id:2,
-        name:"Seigneur des abricots"
-      },{
-        id:3,
-        name:"Lord de l'enfer"
-      }],
-      // RECUPERER LISTE INTERESTS DANS BDD : enlever apres
-      /*filtersInterests: [{
-        id:4,
-        name:"Jazz"
-      },{
-        id:7,
-        name:"La piscine"
-      },{
-        id:3,
-        name:"Dormir"
-      },{
-        id:1,
-        name:"Les champignons"
-      },{
-        id:5,
-        name:"Les pieds"
-      },{
-        id:6,
-        name:"Sherlock Holmes"
-      }],*/
+      // Liste des intérêts 
       filtersInterests : {},
-      searchUser : "",
+      // Liste des titres
+      filtersTitles : {},
+      
       interestSelected : "Sélectionner",
       titleSelected : "Sélectionner",
-      // ENLEVER QUAND LIEN AVEC BDD
+      // LISTE DES UTILISATEURS RENVOYES
       usersResult : {},
       // TABLEAU D INTERETS COCHES A ENVOYER A LA BDD
       interestsPrint : [],
@@ -98,6 +79,7 @@ const Search = Vue.extend({
       activePlanet:  "",
       // SI AUCUN UTILISATEURS NE CORRESPOND, METTRE A FALSE
       usersExist : false,
+      searchUserInput : "",
 
 
       currentPage: 1,
@@ -105,76 +87,72 @@ const Search = Vue.extend({
       planetId: 0,
       routeNextUser: '',
       routePrevUser: '',
-      totalUsers: 7,
-
+      totalUsers: '', 
+      dataForDB : {},
+      alreadyInThePage: false
     }
   },
   created : function(){
     this.$http.get(apiRoot() + 'interest/view',{emulateJSON: true }).then(
         (response) => {
-          this.filtersInterests = response.data;
-          console.log("liste d'interets");
-          console.log(response.data);
-          (this.filtersInterests.length > 0) ? console.log(this.filtersInterests[0].id) : console.log("vide");
-            
+          this.filtersInterests = response.data;      
         },
         (response) => {
-          console.log("Error liste interests");
-          console.log(response);
+        });
+    this.$http.get(apiRoot() + 'titles',{emulateJSON: true }).then(
+        (response) => {
+          this.filtersTitles = response.data;       
+        },
+        (response) => {
         });
   },
   methods : {
     getUsers : function(route, data) {
-        this.$http.get(apiRoot() + 'users/search?limit=2', {
+        this.$http.get(apiRoot() + route, {
           params : data
         },{
           emulateJSON: true 
         }).then(
         (response) => {
-
-           console.log("Bonne reponse de users/search ");
-          this.usersResult = response.data;
-          this.totalUsers = this.usersResult.length;
+          this.totalUsers = response.data[0]['count'];
+          this.usersExist = (this.totalUsers == 0) ? false : true
+          this.usersResult = response.data.slice(1,this.totalUsers+1);
+          
           this.assignPlanetPath();
-         // console.log(this.usersResult[0]);
-
-          this.usersExist = (this.usersResult.length > 0) ? true : false;
 
           var linkNext = response.headers.get("Link").split(",")[0].split(";")[0];
-          this.routeNextUser = apiRoot() + linkNext.substring(2, linkNext.length-1);
+          this.routeNextUser = linkNext.substring(2, linkNext.length-1);
 
           var linkPrev = response.headers.get("Link").split(",")[1].split(";")[0];
-          this.routePrevUser = apiRoot() + linkPrev.substring(2, linkPrev.length-1);
+          this.routePrevUser = linkPrev.substring(2, linkPrev.length-1);
         },
         (response) => {
-          console.log("Erreur getUsers ");
           this.usersExist = false;
           this.usersResult = {};
-          console.log(response);
         });
          
     },
-    // A TESTER
-    showNextPage : function() {
-      if (this.currentPage*2 < this.totalUsers) {
-        this.currentPage++;
-        this.getUsers(this.routeNextUser);
-      }
-      if (this.totalUsers-(this.currentPage*2) > 2) {
+    showMoreLink : function() {
+      if (this.currentPage*10 < this.totalUsers) { //10 à changer
         this.morePage = true;
       } else {
         this.morePage = false;
       }
+    },
+    // A TESTER
+    showNextPage : function() {
+      if (this.currentPage*10 < this.totalUsers) {//10 à changer
+        this.currentPage++;
+        this.getUsers(this.routeNextUser, this.dataForDB);
+        this.showMoreLink();
+      }
+      
     },
     // A TESTER
     showPrevPage : function() {
       this.currentPage--;
-      this.getUsers(this.routePrevUser);
-      if (this.totalUsers-(this.currentPage*2) < 2) {
-        this.morePage = true;
-      } else {
-        this.morePage = false;
-      }
+      this.getUsers(this.routePrevUser, this.dataForDB); 
+      this.showMoreLink();
     },
 
 
@@ -240,9 +218,10 @@ const Search = Vue.extend({
         newTab[i] = oldTab[i].id;
       }
     },
-    searchBarUsername(){
-      var data = {username: this.searchUser};
-      this.getUsers(apiRoot() + 'users/search', data);    
+    searchBarUsername(value){
+      this.dataForDB = {};    
+      this.dataForDB = {username: value};
+      this.getUsers('users/search?limit=10', this.dataForDB);    
     },
     searchBarFilters(){
       this.titlesDB = [];
@@ -251,19 +230,19 @@ const Search = Vue.extend({
       this.assignIdToTab(this.titlesDB, this.titlesPrint);
       this.assignIdToTab(this.interestsDB, this.interestsPrint);
 
-      var data = {};
+      this.dataForDB = {};
       if ( this.titlesDB.length > 0 ) {
-          data.title = this.titlesDB;
+          this.dataForDB.title = this.titlesDB;
       }
       if ( this.interestsDB.length > 0 ) {
-          data.interest = this.interestsDB ;
+          this.dataForDB.interest = this.interestsDB ;
       }
       if(this.activePlanet != ""){
-        data.planet = this.activePlanet ;
+        this.dataForDB.planet = this.activePlanet ;
       }
 
-      console.log(data);
-      this.getUsers(apiRoot() + 'users/search', data);
+
+      this.getUsers('users/search?limit=10', this.dataForDB);
       
     }
 

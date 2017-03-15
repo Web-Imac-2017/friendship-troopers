@@ -54,7 +54,7 @@ const User = Vue.extend({
     },
    getUser : function(route){
       this.$http.get(route).then((response) => {
-          this.profil = response.data[0];
+          this.profil = response.data;
           this.getNbFriends(apiRoot() + 'users/' + this.profil.id + '/number_friends');
           this.getInterest(apiRoot() + 'users/' + this.profil.id + '/interest');
           this.getPosts(apiRoot() + 'planets/' + this.profil.planetId + '/posts', { 'user' : '2'});

@@ -1,57 +1,58 @@
 <div class="post">
   <div class="row no-gutters"> 
-    <div class="col-sm-10 col-xs-9 col-lg-10 col-md-10">
+    <div class="col-sm-12 col-xs-12">
       <div class="avatar post-author-avatar">
         <router-link :to="{ name: 'User', params: { user: post.username, userId : post.userId}}">
           <img :src="post.imagePath" alt="author avatar" class="avatar">
         </router-link>
       </div>
       <div class="user-pseudo">
-        <h1 class="pseudo" v-bind:style="{color : planetData[post.planeteId] }" >
-        {{ post.username }}
+        <h1 class="pseudo" :class="planetName" >
+          {{ post.username }}
         </h1>
         <small class="date"> {{ formateDate(post.publishDate) }}</small>
       </div>
-    </div>
-
-
-    <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 right connect-buttons contain-img pseudo-button">
-      <img src="/assets/images/Options.svg" alt="Options" title="Option">
+      <div class="option-button">
+        <img src="/assets/images/Options.svg" alt="Options" title="Option">
+      </div>
     </div>
   </div>
 
   <div class="row no-gutters">  
     <div class="post-content">
-      <p class="content-block" v-if="!showFullPost"> {{ post.content.slice(0,200) }} </p>
-      <p class="content-block" v-else> {{ post.content}} </p>
       <div class="row">
-        <div class="col-sm-8 col-xs-7"  v-if="post.content.length > 200 && showFullPost == false">
-          <p class="see" v-on:click="showFullPost = true">Voir plus </p>
-        </div>
-        <div class="col-sm-8 col-xs-7 left"  v-else-if="showFullPost == true">
-          <p class="see" v-on:click="showFullPost = false">Voir moins </p>
-        </div>
-        <div class="col-sm-8 col-xs-7 left" v-else></div>
-        <div class="col-sm-2 col-xs-2 connect-buttons contain-img" v-on:click="like">
-          <img class="like-icon" src="/assets/images/Like.svg" alt="likes">
-          <span> {{ nbLikes }} </span>
-        </div>
+        <p class="content-block" v-if="!showFullPost"> {{ post.content.slice(0,200) }} </p>
+        <p class="content-block" v-else> {{ post.content}} </p>
+        <div class="row post-footer">
+          <div class="see-more"  v-if="post.content.length > 200 && showFullPost == false">
+            <p class="see" v-on:click="showFullPost = true">Voir plus </p>
+          </div>
+          <div class="left see-left"  v-else-if="showFullPost == true">
+            <p class="see" v-on:click="showFullPost = false">Voir moins </p>
+          </div>
 
-        <div class="col-sm-2 col-xs-2 connect-buttons contain-img">
-          <img src="/assets/images/Comment.svg" alt="comments"> 
-          <span> {{ comments.length }} </span>
+          <div class="connect-buttons contain-img post-footer-likes" v-on:click="like">
+            <img v-if="liked" class="like-icon" src="/assets/images/LikeFull.svg" alt="likes">
+            <img v-else class="like-icon" src="/assets/images/Like.svg" alt="likes">
+            <span> {{ nbLikes }} </span>
+          </div>
+
+          <div class="connect-buttons contain-img post-footer-comments">
+            <img src="/assets/images/Comment.svg" alt="comments"> 
+            <span> {{ comments.length }} </span>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="row no-gutters">
-      <div class="col-sm-10 col-xs-10 pseudo-button comment" v-if="totalComments > loadMore" v-on:click="loadMoreComment">
+    <div class="row">
+      <div class="pseudo-button comment" v-if="totalComments > loadMore" v-on:click="loadMoreComment">
         <p class="grey loadMore">Charger les commentaires précédents</p>
       </div>
-      <div v-for="(comment,index) in reversedComments" v-if="index < loadMore" class="col-sm-10 col-xs-10 comment">
-        <comment :comment="comment"></comment>
+      <div v-for="(comment,index) in reversedComments" v-if="index < loadMore" class="comment">
+        <comment :comment="comment" :planet="planetName"></comment>
       </div>
-      <div class="col-sm-10 col-xs-10 your-comment"> 
+      <div class="row your-comment"> 
         <div class="col-sm-1 desktop">
           <div class="avatar">
             <img src="/assets/images/Avatar1.svg" alt="default avatar" class="avatar">

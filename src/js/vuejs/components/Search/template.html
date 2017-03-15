@@ -10,7 +10,11 @@
   		<h1 class="mainTitle"> Recherche </h1>
       <div class="container-colored">
         <h2>Rechercher par pseudo </h2>
-        <form class="row" id="searchBarUsername" v-on:submit.prevent.stop="searchBarUsername">
+        <form class="row" id="searchBarUsername" v-on:submit.prevent.stop="searchBarUsername(searchUserInput)">
+          <input type="text" v-model="searchUserInput" class="searchInput" placeholder="Recherche..." :value ="searchUserInput"></input>
+          <input href="#searchBarFilters" type="submit" class="pseudo-button searchImage" value=""></input>
+        </form>
+        <form style="display:none" class="row"  v-on:submit.prevent.stop="">
           <input type="text" v-model="searchUser" class="searchInput" placeholder="Recherche..." :value ="searchUser"></input>
           <input href="#searchBarFilters" type="submit" class="pseudo-button searchImage" value=""></input>
         </form>
@@ -33,13 +37,13 @@
           <h3>Filtrer par titre honorifique </h3>
           <select v-on:change="tabAdd(titleSelected, titlesPrint, filtersTitles)" v-model="titleSelected">
             <option v-bind:value="result.id" v-for="result in filtersTitles">
-              {{ result.name }}
+              {{ result.honorificTitle }}
             </option>
           </select>
           
           <div class="wrapper">
             <div v-for="(option, index) in titlesPrint" v-on:click="tabDelete(index, titlesPrint)" class="pseudo-button item">
-              {{ option.name }} <img src="/assets/images/Cross.svg">
+              {{ option.honorificTitle }} <img src="/assets/images/Cross.svg">
             </div>
           </div>
           
@@ -48,12 +52,12 @@
           <h3>Filtrer par centres d'intérêts </h3>
           <select v-on:change="tabAdd(interestSelected, interestsPrint, filtersInterests)" v-model="interestSelected">
             <option v-bind:value="result.id" v-for="result in filtersInterests">
-              {{ result.name }}
+              {{ result.label }}
             </option>
           </select>
           <div class="wrapper">
             <div v-for="(option, index) in interestsPrint" v-on:click="tabDelete(index, interestsPrint)" class="pseudo-button item">
-              {{ option.name }} <img src="/assets/images/Cross.svg">
+              {{ option.label }} <img src="/assets/images/Cross.svg">
             </div>
           </div>
           

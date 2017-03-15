@@ -20,10 +20,9 @@ class Interest extends Controller {
     $interest = new \Models\Interest();
     $request = $interest->find([
       'fields' => ['id','label','initInterest'],
-      'conditions' => 'initInterest = 0'
     ]);
     $this->response($request,200);
- 
+
   }
 
   /**
@@ -152,64 +151,34 @@ class Interest extends Controller {
 
   /**
    * WelcomeOnBoard function
-   * add interests in the user_interest table
-   * find which planet corresponding to the current user
+   * update the current user planetId
    * @param array $interestList containing interestId
-   * @return the new planetId
+   * @return JSON user's id
    */
-  public function WelcomeOnBoard ($interestList) {
+  public function WelcomeOnBoard ($userId,$data) {
     /*Checking if the user is logged in*/
-  if (!\Utils\Session::isLoggedIn()) {
-    throw new \Utils\RequestException('operation reservee aux membres', 401);
-  }
-    /*bring back the user logged id*/
-    $userId = \Utils\Session::user('id');
 
-    $planetResult = array('Terre' => 0, 'Sautien' => 0,'Technome' => 0,'Paranose' => 0,'Multas' => 0);
-
-    /*add interests for the user*/
-    $this->addUserInterest($interestList[0]);
-
-    /*Calculate max interest points*/
-    foreach($interestList[0] as $key => $value) {
-      switch($value%5) {
-        case 0 : $planetResult['Multas']++;
-        break;
-        case 1 : $planetResult['Terre']++;
-        break;
-        case 2 : $planetResult['Sautien']++;
-        break;
-        case 3 : $planetResult['Technome']++;
-        break;
-        case 4 : $planetResult['Paranose']++;
-        break;
-        default : echo 'Unknown planet<br>';
-      }
+    if (!\Utils\Session::isLoggedIn()) {
+      throw new \Utils\RequestException('operation reservee aux membres', 401);
     }
 
-    $result = array_search(max($planetResult),$planetResult);
+    /*bring back the user logged id*/
+    $userIdLogged = \Utils\Session::user('id');
 
-    /*Get the associated planet id*/
-    switch($result) {
-      case 'Terre' : $planet = 1;
-      break;
-      case 'Paranose' : $planet = 2;
-      break;
-      case 'Technome' : $planet = 3;
-      break;
-      case 'Sautien' : $planet = 4;
-      break;
-      case 'Multas' : $planet = 5;
-      break;
-      default : echo 'Unknow planet<br>';
+    /*Check if the current user is the same user*/
+    if($userIdLogged != $userId) {
+      throw new \Utils\RequestException('probleme d\'utilisateur : l\'utilisateur courant est different', 401);
     }
 
     /*Change the user planet*/
     $user = new \Models\User();
     $request = $user->save($this->filterXSS([
       'id' => $userId,
-      'planetId' => $planet
+      'planetId' => $data['planetId']
     ]));
+
+    /*update the planetId in the session*/
+    $_SESSION['User']['planetId'] = $data['planetId'];
 
     $this->response($request,200);
   }

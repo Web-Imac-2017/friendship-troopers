@@ -19,7 +19,7 @@
 	<div class="row" v-if="cantSubmit"><div class="col-xs-3"></div><div class="col-xs-9"><slot name="errorLogin"></slot></div></div>	
 	<div class="row form-button">
 		<div class="col-xs-12">
-			<a href="">J'ai oublié mon mot de passe</a> 
+			<router-link :to="{ name: 'PasswordForgotten'}"> J'ai oublié mon mot de passe</router-link>
 			<button class="pseudo-button">Se connecter<img class="img-rocket" src="/assets/images/FuseeFirstPage.svg"> </button>
 		</div>
 	</div>
