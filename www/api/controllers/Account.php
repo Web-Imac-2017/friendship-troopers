@@ -424,7 +424,62 @@ class Account extends Controller{
 				'value' => $get['username'].'%',
 			];
 		}
-        $request = $this->User->find([
+
+		$count = $this->User->findFirst([
+			'fields' => [' COUNT(user.id) AS nbuser'],
+			'leftJoin' => [
+				[
+				'table' => 'user_avatar',
+				'alias' => 'UA',
+				'to' => 'id',
+				'from' => 'userId'
+				],
+				[
+				'table' => 'avatar',
+				'alias' => 'avatar',
+				'from' => 'id',
+				'to' => 'avatarId',
+				'JoinTable' =>  'UA',
+				],
+				[
+				'table' => 'user_title',
+				'alias' => 'userTitle',
+				'from' => 'userId',
+				'to' => 'id',
+				'JoinTable' =>  'user',
+				],
+				[
+				'table' => 'title',
+				'alias' => 'title',
+				'from' => 'id',
+				'to' => 'titleId',
+				'JoinTable' => 'userTitle',
+				],
+                [
+				'table' => 'user_interest',
+				'alias' => 'userInterest',
+				'from' => 'userId',
+				'to' => 'id',
+				'JoinTable' =>  'user',
+				],
+				[
+				'table' => 'interest',
+				'alias' => 'interest',
+				'from' => 'id',
+				'to' => 'interestId',
+				'JoinTable' => 'userInterest',
+				],
+			],
+			'conditions' => $where,
+			'limit' => "$offset, $limit",
+            'orderBy' => [
+				'key' => 'username',
+				'order' => 'ASC',
+			],
+		]);
+		$request[] = ['count' => $count['nbuser']];
+
+        $request += $this->User->find([
 			'fields' => $fields,
 			'leftJoin' => [
 				[
@@ -476,6 +531,7 @@ class Account extends Controller{
 				'order' => 'ASC',
 			],
 		]);
+
 
 		$offsetPrev = $offset - $limit;
 		$offset = $offset + $limit;
