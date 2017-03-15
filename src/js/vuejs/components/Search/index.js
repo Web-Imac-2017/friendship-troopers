@@ -114,15 +114,11 @@ const Search = Vue.extend({
           emulateJSON: true 
         }).then(
         (response) => {
-          console.log("coucou 2");
-          console.log(JSON.stringify(response.data));
           this.totalUsers = response.data[0]['count'];
-          console.log("coucou");
-          console.log(this.totalUsers);
-          this.usersResult = response.data.slice(1,this.totalUsers);
+          this.usersExist = (this.totalUsers == 0) ? false : true
+          this.usersResult = response.data.slice(1,this.totalUsers+1);
           
           this.assignPlanetPath();
-          this.usersExist = true;
 
           var linkNext = response.headers.get("Link").split(",")[0].split(";")[0];
           this.routeNextUser = linkNext.substring(2, linkNext.length-1);
