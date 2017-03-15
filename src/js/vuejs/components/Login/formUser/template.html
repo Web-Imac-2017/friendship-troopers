@@ -49,15 +49,13 @@
 			<div class="col-xs-9 wrapper">
 				<div class="item">
 					<select v-model.number="userSignIn.day" name="day" id="day" required>
-<!-- 			       	<option v-for="option in userSignIn.dayTab">
-	 -->			     <option v-for="index in 31">
+					     <option v-for="index in 31">
 				            {{ index }}
 				        </option>
 		       		</select>
 				</div>
 				<div class="item">
 					<select v-model.number="userSignIn.month" name="month" id="month" required>
-			       	<!-- <option v-for="option in userSignIn.monthTab"> -->
 				       	<option v-for="index in 12">
 				            {{ index }}
 				        </option>
@@ -65,7 +63,6 @@
 				</div>
 				<div class="item">
 					<select v-model.number="userSignIn.year" name="year" id="year" required>
-			       	<!-- <option v-for="option in userSignIn.yearTab"> -->
 				       	<option v-for="index in 100">
 				            {{ 2017 - index }}
 				        </option>

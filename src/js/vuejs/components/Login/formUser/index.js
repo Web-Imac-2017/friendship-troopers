@@ -71,10 +71,6 @@ const formUser = Vue.extend({
 			          	if(response.data == true){
 			          		this.alreadyUsedUsername = false;
 			          		var birthdate = this.userSignIn.year + '-' + this.userSignIn.month + '-' + this.userSignIn.day;
-			          		console.log(this.userSignIn.username);
-			          		console.log(this.userSignIn.mail);
-			          		console.log(this.userSignIn.password);
-			          		console.log(birthdate);
 			          		// envoie les paramètres pour l'inscription à la bdd
 			          		this.$http.post(apiRoot() + 'auth/signin', 
 					       	{
@@ -86,10 +82,8 @@ const formUser = Vue.extend({
 					        	emulateJSON: true
 					        }).then(
 					          (response) => {
-					          	console.log(JSON.stringify(response.data));
 								this.falseDate = false;
 								this.errorDB = false;
-					          	console.log("inscription faite !");
 					            this.$router.push({
 								    name: 'WelcomeOnBoard' 
 								});
@@ -98,28 +92,12 @@ const formUser = Vue.extend({
 					            if(response.data.error == "USER_EXISTING"){
 					            	this.alreadyUsedUsername = true;
 									this.alreadyUsedMail = true;
-									console.log(response);
-									console.log(JSON.stringify(response.data));
 					            }
 					            else if(response.data.error == "INVALID_DATE"){
 					            	this.falseDate = true;
-					            	console.log(response);
-					            	console.log(JSON.stringify(response.data));
-					            }
-					            else if(response.data.error == "OUPS"){
-					            	console.log("OUPS");
-					            	console.log(response);
-					            	console.log(JSON.stringify(response.data));
-					            }
-					            else if(response.data.error == "MISSING_FIELDS"){
-					            	console.log("MISSING_FIELDS");
-					            	console.log(response);
-					            	console.log(JSON.stringify(response.data));
 					            }
 					            else{
 					            	this.errorDB = true;
-					            	console.log(response);
-					            	console.log(JSON.stringify(response.data));
 					            }
 					          }
 					        )
