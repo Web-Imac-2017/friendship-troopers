@@ -87,7 +87,7 @@ const Search = Vue.extend({
       planetId: 0,
       routeNextUser: '',
       routePrevUser: '',
-      totalUsers: 7, // à changer : A TROUVE AVEC LA BDD
+      totalUsers: '', 
       dataForDB : {},
       alreadyInThePage: false
     }
@@ -114,8 +114,13 @@ const Search = Vue.extend({
           emulateJSON: true 
         }).then(
         (response) => {
-          this.usersResult = response.data;
-          //this.totalUsers = this.usersResult.length; // ta route te renvoie que deux users max, vu que limit = 2
+          console.log("coucou 2");
+          console.log(JSON.stringify(response.data));
+          this.totalUsers = response.data[0]['count'];
+          console.log("coucou");
+          console.log(this.totalUsers);
+          this.usersResult = response.data.slice(1,this.totalUsers);
+          
           this.assignPlanetPath();
           this.usersExist = true;
 

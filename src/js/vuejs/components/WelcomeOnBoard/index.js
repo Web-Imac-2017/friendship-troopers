@@ -81,6 +81,7 @@ const WelcomeOnBoard = Vue.extend({
         )
       },
       (response) => {
+        console.log(JSON.stringify(response.data));
       }
     )
   },
