@@ -1,15 +1,15 @@
 @import "variables";
 
-.nav{
+.nav {
   margin: 0px;
   position: fixed;
   top :0;
   z-index: 10;
   background-color: $menu-background;
 }
-
+ 
 .nav > li {
-  display: inline-block !important;
+  display: inline-block;
 }
 
 input {
@@ -34,7 +34,6 @@ input {
 ul {
   padding: 0 1em;
   width: 100%;
-  background-color: $articles-background;
   color: $main-text;
   display : block;
   
@@ -43,10 +42,24 @@ ul {
     color: $notifs;
   }
 
-  .nav-home, .nav-enigmes {
+  .nav-home {
     margin: 0 1rem;
   }
   
+  li.search-responsive {
+    text-align: center;
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    input[type=text] {
+      width: 80%;
+    }
+    img {
+      width: 4rem;
+    }
+  }
+
   li {
 
     .nav-link, .nav-item, .navbar-brand  {
@@ -82,7 +95,11 @@ ul {
 ul li {
   .navbar-brand  {
     line-height: 1.5rem;
-    margin: -0.75rem 0;
+    margin: -1rem 0 ;
+    padding: 0;
+  }
+  .nav-profil {
+    margin-right: 2rem;
   }
   .nav-link, .nav-item  {
     line-height: 1.5rem;
@@ -96,7 +113,7 @@ ul li {
     height: 2.5rem;
     display: inline-block;
     vertical-align: middle;
-    @include margin(1);
+    margin: 0.5rem 1rem;
   }
 
   .friends-icon {
@@ -129,6 +146,14 @@ ul li {
       background-size: 100%;
       background-repeat: no-repeat;
   }
+  .search-icon {
+
+    background-image: url("../images/search.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+ 
+  }
+
   .notif {
     @include border-radius-percent(100);
     background-color: $notifs;
@@ -143,16 +168,7 @@ ul li {
     top: 1.3rem;
     left: 1.3rem;
   }
-/*
-  .notifications-icon:hover, .messages-icon:hover , .friends-icon:hover {
-    .notif {
-      @include border-radius-percent(100);
-      border: 1px solid $notifs;
-      color: $notifs;
-      background-color: $menu-background;
-      @include font-size(1);
-    }
-  }*/
+
 }
 
 .nav input.nav-item {
@@ -187,39 +203,175 @@ ul li {
   display: inline-block;
 }
 
-
-@media screen and (max-width: $break-mid) {
-  ul li.navbar-right input[type=text], ul li.navbar-right .nav-profil, ul li.navbar-left .nav-home {
-    display: none;
-  }
-  ul li.navbar-right .nav-responsive{
-    display: inline-block;
-  }
+ul li.navbar-right .nav-avatar {
+  padding: 0;
+  margin: 0rem;
+  position: absolute;
+  top: 0.5rem;
+  width: 3rem;
+  right: -1.5rem;
 }
 
-@media screen and (min-width: $break-mid) {
-  ul li.navbar-right input[type=text], ul li.navbar-right .nav-profil, ul li.navbar-left .nav-home {
-    display: inline-block;
-  }
-  ul li.navbar-right .nav-responsive {
-    display: none;
-  }
-}
 
-menu-separator {
+.menu-separator {
   vertical-align: middle;
   height: 1.5rem;
   border-right: 0.1rem solid $main-text;
   margin: 0 1.3rem;
+  display: inline-block;
 }
 
 
-ul li.navbar-right .nav-responsive{
-  position: fixed;
-  top : 1rem;
-  right: 1rem;
-  cursor: pointer;
+@media screen and (min-width: $break-mid) {
+   ul li.search-responsive {
+    display: none;
+  }
+
+  ul li.navbar-right {
+    .small-desktop, .mobile, img.nav-responsive {
+      display: none;      
+    }
+  }
+  ul li.navbar-right, ul li.navbar-left {
+    .desktop,  input[type=text], .nav-home {
+      display: inline-block;
+    }  
+ }
+
+  .nav input.nav-search-icon {
+    display: inline-block;
+  }
+
+  .nav-enigmes {
+    margin: 0 1rem;
+  }
+  .mobile {
+    display: none;
+  }
+
 }
+
+
+@media screen and (max-width: $break-mid) {
+
+  ul li.search-responsive {
+    display: block;
+    margin: 0rem;
+    padding: 0rem;
+  }
+  ul li.navbar-right, ul li.navbar-left {
+    .navbar-brand .small-desktop {
+      display: inline-block;
+    }
+    .friends-icon, .messages-icon, .notifications-icon {
+      margin: 0.5rem 1rem;
+    }   
+  }
+
+  ul li.navbar-right .nav-avatar {
+    right: -1.5rem;
+    width: 3rem;
+    top: 0.5rem;
+  }
+
+
+  ul li.navbar-right, ul li.navbar-left {
+    .desktop,  input[type=text], .nav-home, .navbar-brand .mobile, .mobile {
+      display: none; 
+    }
+  }
+  ul li.navbar-right .small-desktop, .navbar-brand .small-desktop {
+    display: inline-block;
+  }
+  .navbar ul.nav {
+    margin: 0;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+    li.navbar-right {
+      position: absolute;
+      right: 3.5rem;
+    }
+  }
+  .nav-enigmes {
+    margin: 0rem;
+  }
+
+  .menu-separator {
+    margin: 0 1.3rem;
+  }
+  .nav input.nav-search-icon {
+    display: none;
+  }
+
+  li.search-responsive {
+    input[type=text] {
+      width: 80%;
+    }
+  }
+
+
+@media screen and (max-width: $break-small) {
+
+    ul li.navbar-right, ul li.navbar-left {
+      .navbar-brand .mobile {
+        display: inline-block;
+        padding-top: 0.75rem;
+        margin-left: -0.25rem;
+      } 
+      .mobile {
+        display: inline-block;
+      } 
+      .friends-icon, .messages-icon, .notifications-icon {
+        margin: 0.5rem 0.5rem;
+      }
+
+    }
+    ul li.navbar-right, ul li.navbar-left {
+      .navbar-brand .small-desktop, .navbar-brand .desktop {
+        display: none;
+      }   
+    }
+    .menu-separator {
+      margin: 0.7rem;
+    }
+    ul li.navbar-right .nav-avatar {
+      right: 1.4rem;
+      top: 0.75rem;
+      width: 2.25rem;
+    }
+
+    ul li.navbar-right {
+      position: absolute;
+      right: -3rem;
+      .mobile img {
+        width: 2.25rem;
+        position: absolute;
+        right: -2.25rem;
+      }
+      .nav-icon.mobile img {
+        position: relative;
+        margin-right: 2rem;
+      }
+
+    }
+
+    ul li.search-responsive {
+      input[type=text] {
+        width: 70%;
+      }
+      img {
+        width: 4rem;
+      }
+    }
+
+  }
+}
+
+
+
+
+
 
 ul li.navbar-right .nav-icon .sub-menu {
   width: 20rem;
@@ -229,8 +381,9 @@ ul li.navbar-right .nav-icon .sub-menu {
   position: absolute;
   top: 5rem;
   margin-left: -10.1rem;
+  cursor: initial;
 
-  p {
+  p.sub-menu-header, p.sub-menu-footer {
     color : $sub-menu-border;
     font-weight: bold;
     text-align: center;
@@ -240,6 +393,7 @@ ul li.navbar-right .nav-icon .sub-menu {
       text-decoration: none;
     }
   }
+
   
   .separator {
     margin: 0.3rem 0;
@@ -249,29 +403,41 @@ ul li.navbar-right .nav-icon .sub-menu {
   ul.list {
     background-color: $sub-menu-list-item-background;
     padding: 0.2rem;
-    p {
+
+    p.content {
       color: $main-text;
       font-weight: normal;   
       font-size: 90%;
     }
 
     li {
-      margin: 0.5rem;
+      margin: 0 0.5rem;
       background-color: $sub-menu-item-background;
 
       ul.sub-menu-item {
         background: none;
         display: inline-block;
-
+        width: 100%;
 
         li {
           padding: 0;
           margin : 0;
           display: inline-block;
           vertical-align: middle;
-          img {
-            min-width: 4rem;
+          img.avatar {
+            width: 4rem;
             margin : 0.5rem 0;
+            margin-right: 0.5rem;
+          }
+          .friend-validation {
+            width: 100%;
+            text-align : center; 
+            img{
+              width: 2rem;
+              margin: 0.5rem 1rem;
+              margin-top: 0rem;
+            }
+
           }
           p {
             text-align: left;
@@ -281,10 +447,16 @@ ul li.navbar-right .nav-icon .sub-menu {
               color: $grey;
           }
 
+
         }
       }
       .content {
-        font-size: 80%;           
+        padding: 0.75rem;           
+      }
+      .message {
+        font-size: 85%;
+        text-align: center;
+        color: $grey;
 
       }
     }
