@@ -67,6 +67,10 @@ class Publication extends Controller {
 			'cmp' => '=',
 			'value' => 1,
 		];
+		$where['OR'] = [
+			'planetId' => $planetId,
+			'publicationTypeId' => ['value' => '1,2 ', 'cmp' => 'IN'],
+		];
 
 		$request = $this->Publication->find([
 			'fields' => [

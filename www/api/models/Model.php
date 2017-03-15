@@ -106,12 +106,19 @@ abstract class Model {
 								$otherConditions = array();
 								foreach ($value as $orKey => $valueOfValue) {
 									// case a same attribut may have several value and dev not using IN clause
+									var_dump($valueOfValue);
 									if(is_array($valueOfValue)){
-										foreach ($valueOfValue as $keyOr => $keyValue) {
-											if(!is_numeric($keyValue)){
-												$keyValue=$this->pdo->quote($keyValue);
+										if (isset($valueOfValue['value']) and isset($valueOfValue['cmp'])) {
+											if($valueOfValue['cmp'] === 'IN') {
+												$otherConditions[] = $orKey . ' ' . $valueOfValue['cmp'] . ' (' . $valueOfValue['value'] .') ';
 											}
-											$otherConditions[] = "$orKey=$keyValue";
+										} else {
+											foreach ($valueOfValue as $keyOr => $keyValue) {
+												if(!is_numeric($keyValue)){
+													$keyValue=$this->pdo->quote($keyValue);
+												}
+												$otherConditions[] = "$orKey=$keyValue";
+											}
 										}
 									} else {
 										if(!is_numeric($valueOfValue)){
@@ -130,7 +137,6 @@ abstract class Model {
 							}
 						}
 					}
-					//var_dump($condition);
 					$sql .= implode(' AND ', $condition);
 				}
 			}
