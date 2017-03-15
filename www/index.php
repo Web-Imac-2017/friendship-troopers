@@ -12,7 +12,7 @@ require_once ROOT.'/api/utils/Autoloader.php';
 
 use \Utils\Router\Router;
 
-Router::init($_GET['url']); 
+Router::init($_GET['url']);
 
 Router::post('/auth/signin','account#inscription');
 Router::post('/auth/signin/username','account#isUsernameFree', 'users.me.usernameFree');
@@ -26,31 +26,28 @@ Router::get('/users/search','account#search', 'users.search');
 Router::get('/users/list','user#usersList', 'users.list'); //ok. prend comme param planetId ou role (l'id)
 Router::get('/users/me','account#getCurrentUser', 'users.me');
 Router::patch('/users/me','account#updateAccountInfos', 'users.me.update');
-<<<<<<< HEAD
-=======
 Router::delete('/users/me','account#delete', 'users.me.delete');
 Router::post('/users/password','account#lostPassword', 'users.me.lostPassword');
 Router::post('/users/password/new','account#setNewPassword', 'users.me.newPassword');
->>>>>>> userFunctions
+
 Router::get('/users/me/avatars','avatar#listUserAvatar', 'users.me.listAvatar');
 Router::patch('/users/me/avatars/:avatarId/current','avatar#setCurrentAvatar', 'users.me.setCurrentAvatar');
-
-Router::post('/users/:userId/user_title','user_title#add');
-Router::get('/users/:userId/user_title/list','user_title#list');
-Router::get('/users/:userId/user_title/current_title','user_title#viewCurrent');
-Router::get('/users/:userId/user_title/count','user_title#count');
-Router::patch('/users/:userId/user_title/set_current/:titleId','user_title#setCurrent');
-<<<<<<< HEAD
-Router::delete('/users/:userId/user_title/:titleId','user_title#delete'); 
-=======
-Router::delete('/users/:userId/user_title/:titleId','user_title#delete');
->>>>>>> userFunctions
 
 Router::get('/users/me/waiting_list_friend','friend#invitationList', 'users.me.invitationList'); //ok
 Router::get('/users/me/friends','friend#listFriend', 'users.me.listUserFriend'); //ok
 
 Router::post('/users/me/interest/add_interest','interest#addUserInterest', 'users.me.updateUserInterest');
 Router::post('/users/me/interest/delete_interest','interest#delete_interest', 'users.me.updateUserInterest');
+
+Router::post('/users/:userId/user_title','user_title#add');
+Router::get('/users/:userId/user_title/list','user_title#list');
+Router::get('/users/:userId/user_title/current_title','user_title#viewCurrent');
+Router::get('/users/:userId/user_title/count','user_title#count');
+Router::patch('/users/:userId/user_title/set_current/:titleId','user_title#setCurrent');
+Router::delete('/users/:userId/user_title/:titleId','user_title#delete');
+
+
+
 
 Router::get('/users/:userId','account#getUser', 'users.profil');
 Router::post('/users/:userId/add_friend','friend#addFriend', 'users.me.addFriend'); //ok
