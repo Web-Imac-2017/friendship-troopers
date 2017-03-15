@@ -12,7 +12,7 @@ require_once ROOT.'/api/utils/Autoloader.php';
 
 use \Utils\Router\Router;
 
-Router::init($_GET['url']);
+Router::init($_GET['url']); 
 
 Router::post('/auth/signin','account#inscription');
 Router::post('/auth/signin/username','account#isUsernameFree', 'users.me.usernameFree');

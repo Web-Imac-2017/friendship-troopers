@@ -47,7 +47,7 @@ const formUser = Vue.extend({
 			
 		},
 		checkDB(){
-			console.log(this.userSignIn.mail);
+			//console.log(this.userSignIn.mail);
 			/*this.$http.post(apiRoot() + 'auth/signin/mail', 
 		       	{
 		       		'mail' : this.userSignIn.mail
@@ -112,7 +112,7 @@ const formUser = Vue.extend({
 		          }
 		        )*/
 				
-	          	this.$http.post(apiRoot() + 'auth/signin/username', 
+	          	/*this.$http.post(apiRoot() + 'auth/signin/username', 
 		       	{
 		       		'username' : this.userSignIn.username
 		       	},{
@@ -160,7 +160,129 @@ const formUser = Vue.extend({
 		            this.alreadyUsedUsername = true;
 		            console.log("pas ok username");
 		          }
-		        )
+		        )*/
+				/*this.$http.post(apiRoot() + 'auth/signin/mail', 
+		       	{
+		       		'mail' : this.userSignIn.mail
+		       	},{
+		        	emulateJSON: true
+		        }).then(
+		          (response) => {
+		          	this.alreadyUsedMail = true;
+		          	console.log(response.data);
+			        console.log("ok mail utilisé");
+		          },
+		          (response) => {
+		          	this.alreadyUsedMail = false;
+		          	console.log(response.data);
+			        console.log("mail libre");
+		          	this.$http.post(apiRoot() + 'auth/signin/username', 
+			       	{
+			       		'username' : this.userSignIn.username
+			       	},{
+			        	emulateJSON: true
+			        }).then(
+			          (response) => {
+			          	this.alreadyUsedUsername = true;
+			          	console.log(response.data);
+			          	console.log("ok username utilisé");
+			          },
+			          (response) => {
+			            this.alreadyUsedUsername = false;
+			            console.log("username libre");
+			          }
+			        )
+
+		          }
+		         )*/
+					this.$http.post(apiRoot() + 'auth/signin/mail', 
+			       	{
+			       		'mail' : this.userSignIn.mail
+			       	},{
+			        	emulateJSON: true
+			        }).then(
+			          (response) => {
+			          	if(response.data == true){
+			          		this.alreadyUsedMail = false;
+				          	this.$http.post(apiRoot() + 'auth/signin/username', 
+					       	{
+					       		'username' : this.userSignIn.username
+					       	},{
+					        	emulateJSON: true
+					        }).then(
+					          (response) => {
+					          	if(response.data == true){
+					          		this.alreadyUsedUsername = false;
+					          		var birthdate = this.userSignIn.year + '-' + this.userSignIn.month + '-' + this.userSignIn.day;
+					          		console.log(this.userSignIn.username);
+					          		console.log(this.userSignIn.mail);
+					          		console.log(this.userSignIn.password);
+					          		console.log(birthdate);
+					          		this.$http.post(apiRoot() + 'auth/signin', 
+							       	{
+							       		'username' : this.userSignIn.username,
+							       		'mail' : this.userSignIn.mail, 
+							       		'birthdate' : birthdate, 
+							       		'password': this.userSignIn.password 
+							       	},{
+							        	emulateJSON: true
+							        }).then(
+							          (response) => {
+							          	console.log(JSON.stringify(response.data));
+										this.falseDate = false;
+										this.errorDB = false;
+							          	console.log("inscription faite !");
+							            this.$router.push({
+										    name: 'WelcomeOnBoard' 
+										});
+							          },
+							          (response) => {
+							            if(response.data.error == "USER_EXISTING"){
+							            	this.alreadyUsedUsername = true;
+											this.alreadyUsedMail = true;
+											console.log(response);
+											console.log(JSON.stringify(response.data));
+							            }
+							            else if(response.data.error == "INVALID_DATE"){
+							            	this.falseDate = true;
+							            	console.log(response);
+							            	console.log(JSON.stringify(response.data));
+							            }
+							            else if(response.data.error == "OUPS"){
+							            	console.log("OUPS");
+							            	console.log(response);
+							            	console.log(JSON.stringify(response.data));
+							            }
+							            else if(response.data.error == "MISSING_FIELDS"){
+							            	console.log("MISSING_FIELDS");
+							            	console.log(response);
+							            	console.log(JSON.stringify(response.data));
+							            }
+							            else{
+							            	this.errorDB = true;
+							            	console.log(response);
+							            	console.log(JSON.stringify(response.data));
+							            }
+							          }
+							        )
+					          	}else{
+					          		this.alreadyUsedUsername = true;
+					          	}
+					          	
+					          },
+					          (response) => {}
+					        )
+			          	}else{
+			          		this.alreadyUsedMail = true;
+			          	}
+			          },
+			          (response) => {}
+			         )
+		          	
+
+		      
+
+				
 
 			
 		},
