@@ -43,6 +43,8 @@ import Error401 from '../components/Error401'
 import Error403 from '../components/Error403'
 import Error404 from '../components/Error404'
 
+import PasswordForgotten from '../components/PasswordForgotten'
+
 
 // ==================== Router registration ====================
 const router = new VueRouter({
@@ -151,6 +153,10 @@ const router = new VueRouter({
       name : 'Error403',
       path: '/erreur403', 
       component : Error403
+  },{ 
+      name : 'PasswordForgotten',
+      path: '/mot-de-passe-oublié', 
+      component : PasswordForgotten
   },{ 
       name : 'Error404',
       path: '/erreur404', 
