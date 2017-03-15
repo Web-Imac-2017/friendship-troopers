@@ -47,16 +47,16 @@ const Post = Vue.extend({
       this.$http.post(apiRoot() + "planets/" + this.planetId + "/posts/" + this.post.id + "/comments", { 'content' : this.newComment}, {emulateJSON : true}).then(
         (response) => {
           this.newComment = '';
+          this.getComments(apiRoot() + "planets/" + this.planetId + "/posts/" + this.post.id + "/comments?limit=" + this.loadMore, false);
+          this.countComments();
         },(response) => {
         }
       );
-      // TODO Actualiser les commentaires
     },
     loadMoreComment : function() {
       this.loadMore += this.loadMore;
       
       this.getComments(this.prevComments, true);
-      //TODO
     },
     formateDate : function(date) {
       var object = new Date(date); 
