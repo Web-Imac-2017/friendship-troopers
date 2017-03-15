@@ -21,7 +21,7 @@ var mapError   = require('../error');
 // On centralise la config, vous pouvez changer librement les valeurs selon vos besoins / envies
 var config = {
   src       : './src/js/main.js',  // Fichier principal à build
-  outputDir : './www/assets/js', // Chemin ou va être généré le build
+  outputDir : '../htdocs/assets/js', // Chemin ou va être généré le build
   outputFile: 'build.js',        // Nom du fichier build
 };
 

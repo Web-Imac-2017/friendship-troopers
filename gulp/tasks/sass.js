@@ -16,7 +16,7 @@ var concat = require('gulp-concat');
 var config = {
   scss      : './src/scss/*.scss',         // Les fichiers à watch
   src       : './src/scss/style.scss', // Le fichier principal
-  outputDir : './www/assets/css',     // Le dossier ou le build sera généré
+  outputDir : '../htdocs/assets/css',     // Le dossier ou le build sera généré
   outputFile: 'style.css'             // Le nom du fichier build
 };
 

@@ -45,7 +45,7 @@ h1, h2, h3, h4, h5, h6 {
 .container-transparent{
   background-color: $transparent-background;
   @include margin4(0, 0, 1, 0);
-  @include padding(1);
+  @include padding2(1, 3);
 }
 
 
@@ -494,12 +494,12 @@ small {
 .post {
   background-color: $articles-background;
   @include padding(1);
-  @include margin(2);
+  @include margin2(2, 0);
 }
 .publish {
   background-color: $comments-background;
   @include padding2(0.8, 1);
-  @include margin(2);
+  @include margin2(2, 0);
   /*margin-bottom: 2%;*/
   textarea {
     width: 100%;
@@ -539,14 +539,23 @@ small {
 
 .avatar {
   max-height: 8rem;
-/*   padding-right:0; */
   text-align:center;
-    img{
-      @include border-radius(10);
-      width:auto;
-      height:inherit;
-    }
+  img{
+    @include border-radius(10);
+    width:auto;
+    height:inherit;
+  }
 }
+.small-avatar {
+  max-height: 4rem;
+  text-align:center;
+  display: inline-block;
+  img {
+    @include border-radius(10);
+    width:auto;
+    height:inherit;
+  }
+} 
 
 .post-content {
   padding-left: 4rem;
@@ -791,7 +800,6 @@ p.honorific-title {
     text-align: center !important;
   }
 }
-
 
 
 
