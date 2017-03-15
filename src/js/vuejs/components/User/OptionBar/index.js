@@ -7,7 +7,12 @@ template     = eval(`\`${template}\``);
 
 const optionBar = Vue.extend({
   template,
-  props: ['myself']
+  props: ['myself'],
+  methods: {
+  	addFriend: function() {
+  		this.$emit("addfriend");
+  	}
+  }
 });
 
 

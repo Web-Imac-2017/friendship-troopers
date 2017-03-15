@@ -1,11 +1,12 @@
 @import "reset";
 @import "variables";
 @import "admin";
-@import "navBar";
-@import "lateralMenu";
+@import "navbar";
+@import "lateral-menu";
 @import "input-range";
 @import "bootstrap-custom";
 @import "riddle";
+@import "user-profil";
 
 .wrapper {
   @include flexbox();
@@ -72,8 +73,6 @@ h1, h2, h3, h4, h5, h6 {
 .bottom-right{
   bottom:1rem;
 }
-
-
 
 /* .container-fluid{
   background:$articles-background;
@@ -323,10 +322,11 @@ form{
     input{
     background: $comments-background ;
     border: none;
-    @include padding-button(1);
+    padding: .9rem .7rem;
     outline: 0;
     display: inline-block;
     width:80%;
+    color: $main-text;
   }
   
   textarea {
@@ -341,7 +341,7 @@ select {
   background: #3b425e;
   color:$white;
   font-weight: 300;
-  @include padding2(0.5,1.5);
+  @include padding2(0.5,0.4);
   width:100%;
   border:none;
   margin: 0;      
@@ -356,8 +356,8 @@ select {
     linear-gradient(135deg, $grey 50%, transparent 50%),
     linear-gradient(to right, $comments-background, $comments-background);
   background-position:
-    calc(105% - 20px) calc(1em + 2px),
-    calc(105% - 15px) calc(1em + 2px),
+    calc(102% - 20px) calc(1em + 1px),
+    calc(102% - 15px) calc(1em + 1px),
     100% 0;
   background-size:
     5px 5px,
@@ -799,7 +799,7 @@ input[type="radio"] {
 .robots {color : $planet-robots;}
 .earth {color : $planet-earth;}
 .alien {color : $planet-alien;}
-.pseudo {font-family: $title-font;}
+.pseudo {font-family: $title-font; margin: 0px 1px 0.5px 2px;}
 
 .friend-list {
   flex-flow: row wrap;
@@ -842,7 +842,10 @@ p.honorific-title {
     background-color: $articles-background;
   }
 
-  .h-separator {
+  
+}
+
+.h-separator {
       border-bottom: 1px solid $main-text;
       width: 60%;
       margin-bottom: 1rem;
@@ -853,7 +856,6 @@ p.honorific-title {
     margin: 20px 0;
     color: $grey;
   }
-}
 
 .pseudo-button {
   cursor : pointer;
@@ -1238,14 +1240,13 @@ p.see {
   text-decoration: underline;
 }
 
-p.see:hover{
+p.see:hover, .green{
   color: $green-text;
 }
 
 p.loadMore {
   padding-left: 1rem;
 }
-
 
 @media screen and (min-width: $break-small) {
   .pageNav .small-circle {
@@ -1296,8 +1297,30 @@ p.loadMore {
 .error {
   text-align: center;
 }
+<<<<<<< HEAD
 
 .border-bottom {
   border-bottom-style: solid;
   border-bottom-width: 0.2rem;
+=======
+.user-params {
+  .page-title {
+    text-align: left;
+  }
+
+  .subtitle {
+    color: $dark-green-text;
+    @include font-size(1.3);
+    text-align: center;
+    margin: 0px 0 10px 0;
+  }
+
+  .bottom-margin {
+    margin-bottom: 25px;
+  }
+
+  .block {
+    display : block;
+  }
+>>>>>>> profil
 }

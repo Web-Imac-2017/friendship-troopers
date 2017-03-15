@@ -157,7 +157,7 @@ const Post = Vue.extend({
   }/*,
   computed: {
     reversedComments : function() {
-      return this.comments.reverse();
+      return this.comments;
     }
   }*/
 });

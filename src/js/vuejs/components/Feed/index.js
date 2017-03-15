@@ -13,7 +13,7 @@ import MenuTools from '../MenuTools/index.js'
 import Deconnexion from '../Deconnexion/index.js'
 import Post from '../Post/index.js'
 import CreatePost from '../CreatePost/index.js'
-import PageNav from '../PageNav/index.js'
+import PageNav from './PageNav/index.js'
 import NavBar from '../NavBar/index.js';
 
 const Feed = Vue.extend({
