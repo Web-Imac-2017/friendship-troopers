@@ -7,7 +7,7 @@
         </router-link>
       </div>
       <div class="user-pseudo">
-        <h1 class="pseudo" v-bind:style="{color : planetData[comment.planeteId] }" >{{ comment.username }}</h1>
+        <h1 class="pseudo" :class="planet" >{{ comment.username }}</h1>
         <small class="date"> {{ formateDate(comment.publishDate) }}</small>
       </div>
       <div class="option-button">
