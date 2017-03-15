@@ -15,7 +15,7 @@ class Comment extends Controller {
 		$this->loadModel('Comment');
 	}
 
-	public function count ($publicationId, $get) {
+	public function count ($planetId, $publicationId, $get) {
 		$count = $this->Comment->findCount([
 			'publicationId' => $publicationId,
 		]);
