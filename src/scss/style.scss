@@ -504,13 +504,16 @@ small {
 }
 
 .content-block {
- @include margin2(2, 0);
+
+  margin : 0 0 2rem;
 } 
+
+
 
 .post {
   background-color: $articles-background;
   @include padding(1);
-  @include margin(2);
+  @include margin2(2,0);
 
   h1 {
     margin: 0;
@@ -593,7 +596,18 @@ small {
   .option-button img {
     top:0;right: 4rem;
   }
+  margin : .5rem 2.5%;
+  width : 95%;
+  padding : 0;
+
+
 }
+
+
+
+
+
+
 
 .post-footer {
   min-height: 2.5rem;
@@ -1169,10 +1183,13 @@ p.honorific-title {
   }
   .avatar {
     width: 6rem;
-    /*@include padding2(0,2.5);*/
     display:inline-block;
-    @include margin2(0,1);
+    @include margin(0);
+    max-height : 5rem;
   }
+
+
+
   .post-content {
       margin: 0 4rem;
   }
