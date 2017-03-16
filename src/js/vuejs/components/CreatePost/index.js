@@ -9,14 +9,15 @@ template     = eval(`\`${template}\``);
 const CreatePost = Vue.extend({
   template,
   created : function(){
-    this.$http.get(apiRoot() + 'users/me').then((response) => {
-      // gérer le succes, toutes les infos renvoyer sont dans response.data      
+    // Get the current user and his avatar
+    this.$http.get(apiRoot() + 'users/me').then((response) => {   
         this.me = response.data;
         this.imagePath = "/assets/images/avatars/" + this.me.name + "/" + this.me.imagePath;
       }, (response) => {
       });
   },
   methods:{
+    // Publish a new post in the database
     publish(){
       this.$emit("newpost", this.post) 
     },
