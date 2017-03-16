@@ -32,7 +32,6 @@
 
 	.colored {
 		background-color: $comments-background;
-		@include padding2(1,5);
 		@include margin2(0, 1);
 		text-align: center;
 	}
@@ -86,6 +85,17 @@
 		display: inline-block;
 	}
 
+
+	.item.pseudo-button {
+	    background-color: $comments-background;
+	    margin: 1rem;
+	    padding: 1rem;
+
+	    &:hover, &:focus, &:active{
+			outline:1px solid $white;
+		}
+	}
+
 }
 
 
@@ -100,3 +110,8 @@
 	span.fat {
 		font-size: 5rem;
 	}
+
+.wrapper{
+	flex-wrap:wrap;
+	justify-content:center;
+}
