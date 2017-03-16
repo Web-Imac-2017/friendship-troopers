@@ -1,7 +1,9 @@
     <div class="publish">
       <div class="row no-gutters">
         <div class="col-md-1  col-lg-1 avatar desktop">
-            <img :src="post.avatar" alt="your avatar" class="avatar">
+         <router-link :to="{ name: 'User', params: { user: me.username, userId : me.userId}}">
+            <img :src="me.imagePath" alt="your avatar" class="avatar pseudo-button">
+          </router-link>
         </div>
         <div class="col-sm-11 col-md-11 col-lg-11">
           <form class="form-post" v-on:submit.prevent="save">

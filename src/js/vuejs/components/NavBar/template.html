@@ -3,8 +3,8 @@
       <li class="search-responsive">
         <div v-if="search">
           <input type ="text" class="nav-item" placeholder="Recherche" v-model="searchByUser"></input>
-          <img v-on:click="searchUsername()" class="pseudo-button" src="/assets/images/validation.svg" alt="valider" title="Valider"> <!-- petite recherche lien -->
-          <img class="pseudo-button" v-on:click="showSearch()" src="/assets/images/Cross.svg"  alt="fermer" title="Fermer">
+           <router-link :to="{ name : 'Search', params : { searchInput : searchByUser }}" > <img v-on:click="searchUsername()" class="pseudo-button" src="/assets/images/validation.svg" alt="valider" title="Valider"> </router-link> <!-- petite recherche lien -->
+          <router-link :to="{ name : 'Search', params : { searchInput : searchByUser }}" > <img class="pseudo-button" src="/assets/images/Cross.svg"  alt="fermer" title="Fermer"> </router-link>
         </div>
       </li>
 

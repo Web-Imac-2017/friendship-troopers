@@ -1,12 +1,20 @@
 'use strict';
 
 import Vue from 'vue/dist/vue';
+import {apiRoot} from '../../../../../config.js';
 
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
 
 const CreatePost = Vue.extend({
   template,
+  created : function(){
+    this.$http.get(apiRoot() + 'users/me').then((response) => {
+      // gérer le succes, toutes les infos renvoyer sont dans response.data      
+        this.me = response.data;
+      }, (response) => {
+      });
+  },
   methods:{
     publish(){
       this.$emit("newpost", this.post) 
@@ -17,15 +25,9 @@ const CreatePost = Vue.extend({
   }, 
   data () {
     return {
+      me : {},
       post : {
-        user: 'Lucky',
-        avatar : "/assets/images/avatars/Terre/miror.svg",
-        date: '20 fev',
-        hour: '12h04',
-        content: '',
-        likes: 0,
-        comments: 0, 
-        id : 7
+        content: ''
       }
     }
   }

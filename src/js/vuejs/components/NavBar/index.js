@@ -59,8 +59,7 @@ const NavBar = Vue.extend({
             name: 'Search',
             params: { searchInput : this.searchByUser }
         });
-      }
-      
+      }       
     }
   }, 
    data () {
