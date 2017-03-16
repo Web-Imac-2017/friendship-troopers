@@ -47,11 +47,14 @@ const User = Vue.extend({
     getRouteParams : function(){
       this.$http.get(apiRoot() + 'users/me').then((response) => {
           this.profil = response.data;
-          if (this.$route.params.userId == response.data.id){
+          console.log(JSON.stringify(response.data.username))
+          if (this.$route.params.username == response.data.username){
             this.myself = true
             this.getNbFriends(apiRoot() + 'users/' + this.profil.id + '/number_friends');
             this.getInterest(apiRoot() + 'users/' + this.profil.id + '/interest');
             this.getPosts(apiRoot() + 'planets/' + this.profil.planetId + '/posts', { 'user' : this.profil.id });
+            this.planetPath = "/assets/images/planets/" + this.profil.name +".svg";
+            this.imagePath = "/assets/images/avatars/" + this.profil.name + "/" + this.profil.imagePath;
           } else {
             this.getUser(apiRoot() + 'users/' + this.$route.params.userId);
             this.myself = false
@@ -66,6 +69,8 @@ const User = Vue.extend({
           this.getNbFriends(apiRoot() + 'users/' + this.profil.id + '/number_friends');
           this.getInterest(apiRoot() + 'users/' + this.profil.id + '/interest');
           this.getPosts(apiRoot() + 'planets/' + this.profil.planetId + '/posts', { 'user' : this.profil.id });
+           this.planetPath = "/assets/images/planets/" + this.profil.name +".svg";
+            this.imagePath = "/assets/images/avatars/" + this.profil.name + "/" + this.profil.imagePath;
       }, (response) => {
       })
    },    
@@ -111,23 +116,28 @@ const User = Vue.extend({
           console.log("Demande envoyée");
         },
         (response) => {
-
+          switch(response.status) {
+            case 401:
+              this.$router.push('/erreur401')
+            break;
+            case 403:
+              this.$router.push('/erreur403')
+            break;
+            default:
+                this.$router.push('/erreur')
+          }
         });
       console.log("User : Adding friend");
     }
   },
   computed : {
-    planetName : function() {
-      return this.planetPath = "/assets/images/planets/" + this.profil.name +".svg";
-    } ,
-    imagePath : function() {
-      return "/assets/images/avatars/" + this.profil.name + "/" + this.profil.imagePath;
-    }
+    
   },
   data () {
       return {
         updated : false,
         profil : {},
+        imagePath : '',
         planetPath : '',
         interests : [],
         nbRiddleSolved : 0,

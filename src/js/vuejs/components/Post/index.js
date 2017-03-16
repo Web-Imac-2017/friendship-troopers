@@ -137,7 +137,7 @@ const Post = Vue.extend({
     }
   },
   computed : {
-    imagePath : function() {
+    imagePath : function() { 
       return "/assets/images/avatars/" + this.planetName + "/" + this.avatar;
     }
   },   
@@ -158,9 +158,9 @@ const Post = Vue.extend({
       totalComments: 0,
       loadMore : 5,
       showFullPost : false,
-      planetName: '',
+      planetName: 'Terre',
       planetId: 1,
-      avatar :''
+      avatar :'astro.svg'
     }
   }/*,
   computed: {

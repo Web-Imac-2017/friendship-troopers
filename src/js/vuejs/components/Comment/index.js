@@ -12,10 +12,8 @@ const Comment = Vue.extend({
     planet : String
   },
   template,
-  computed : {
-    imagePath : function() {
-      return "/assets/images/avatars/" + this.planet + "/" + this.comment.imagePath;
-    }
+  created : function() {
+    this.imagePath = "/assets/images/avatars/" + this.planet + "/" + this.comment.imagePath;
   },
   methods : {
     formateDate : function(date) {
@@ -28,6 +26,7 @@ const Comment = Vue.extend({
     return {
       newComment : '',
       showFullComment : false,
+      imagePath :''
     }
   },
 

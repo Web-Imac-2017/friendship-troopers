@@ -23,18 +23,18 @@
             </div>
             <div class="col-sm-1 border-right"></div>
             <div class="col-sm-2 ">
-              <img :src="planetName" class="planet"> 
+              <img :src="planetPath" class="planet"> 
               <p class="text-center"> {{ profil.name }} </p>
             </div>
           </div>
-        
         <option-bar :myself="myself" v-on:addfriend="addFriend"></option-bar>
  
                 <div class="stat">
         <div class="row center-row no-gutters">  
           <div class="col-sm-4 pink text-center">
-            <p class="inline"><span class="fat" v-if="nbFriends != null"> {{ nbFriends }} </span> </p>
-            <span class="fat" v-else> 0 </span>
+            <p class="inline">
+            <span class="fat" v-if="nbFriends != null"> {{ nbFriends }} </span>
+            <span class="fat" v-else> 0 </span> </p>
             <p class="inline left" v-if="nbFriends < 2"> ami dans <br>
                <span v-if="myself">ton escouade </span> 
                 <span v-else >son escouade </span>
