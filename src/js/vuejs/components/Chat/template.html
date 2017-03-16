@@ -33,9 +33,9 @@
                 </div>
               </div>
               <div v-else> 
-                <div v-for="i in 5"  class="conversation pseudo-button" v-on:click="active(i)" v-bind:class="{ 'conv-selected' : friends[i].selected}">
-                  <img :src="friends[i].imagePath" class="avatar center">
-                  <h1 v-bind:style="{color : planetData[friends[i].planet]}"> {{ friends[i].username }} </h1>
+                <div v-for="i in 5"  class="conversation pseudo-button" v-on:click="active(i-1)" v-bind:class="{ 'conv-selected' : friends[i].selected}">
+                  <img :src="friends[i-1].imagePath" class="avatar center">
+                  <h1 v-bind:style="{color : planetData[friends[i-1].planet]}"> {{ friends[i-1].username }} </h1>
                 </div>
               </div> 
             </div>
@@ -43,10 +43,10 @@
 
           <div class="col-xs-12 col-sm-12 no-gutters show-responsive-all-friends">
 
-            <div v-if="showAllResponsiveFriends" class="container-colored responsive-lasts-friends-list" v-on:click="showFriendsResponsive()" >
+            <div v-if="showAllResponsiveFriends" class="container-colored responsive-lasts-friends-list" v-on:click="showAllFriendsResponsive()" >
               <div class="all-friends col-sm-12">
                 <div v-for="(string, key) in stringIndex">
-                  <p v-for="(friend,index) in allFriends[string]" v-on:click="createNewConv(friend)" v-bind:class="{ 'conv-selected' : friend.selected}" v-bind:style="{color : planetData[key]}" class="pseudo all-friends-list pseudo-button"> <img :src="friend.imagePath" class="small-avatar center"> {{ friend.username }} </p>
+                  <p v-for="(friend,index) in allFriends[string]" v-on:click="createNewConvResponsive(friend)" v-bind:class="{ 'conv-selected' : friend.selected}" v-bind:style="{color : planetData[key]}" class="pseudo all-friends-list pseudo-button"> <img :src="friend.imagePath" class="small-avatar center"> {{ friend.username }} </p>
                   
                 </div>
               </div>
@@ -71,13 +71,12 @@
               </div>
             </div>
             <div v-else> 
-              <div v-for="i in 5"  class="conversation pseudo-button col-md-2 col-lg-11" v-on:click="active(i)" v-bind:class="{ 'conv-selected' : friends[i].selected}">
-                <img :src="friends[i].imagePath" class="avatar center">
-                <h1 v-bind:style="{color : planetData[friends[i].planet]}"> {{ friends[i].username }} </h1>
+              <div v-for="i in 5"  class="conversation pseudo-button col-md-2 col-lg-11" v-on:click="active(i-1)" v-bind:class="{ 'conv-selected' : friends[i-1].selected}">
+                <img :src="friends[i-1].imagePath" class="avatar center">
+                <h1 v-bind:style="{color : planetData[friends[i-1].planet]}">{{ friends[i-1].username }} </h1>
               </div>
             </div> 
           </div>
-
         </div>
 
 

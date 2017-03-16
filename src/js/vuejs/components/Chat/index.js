@@ -75,6 +75,12 @@ const Chat = Vue.extend({
       this.friends.unshift(friend);
       this.showFriends();
       console.log(JSON.stringify(this.friends))
+    },
+    createNewConvResponsive : function(friend){
+      friend["selected"] = false;
+      this.friends.unshift(friend);
+      this.showAllFriendsResponsive();
+      console.log(JSON.stringify(this.friends))
     }
   },
   data () {
