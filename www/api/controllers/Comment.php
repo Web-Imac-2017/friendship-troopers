@@ -165,6 +165,7 @@ class Comment extends Controller {
 			throw new \Utils\RequestException('action reservee aux administeurs', 403);
 		}
 
+		var_dump($patches);
 		$updates = [
 			'id' => $id,
 			'publishDate' => Date('Y-m-d H:i:s'),

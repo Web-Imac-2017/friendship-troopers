@@ -12,6 +12,7 @@ const CreatePost = Vue.extend({
     this.$http.get(apiRoot() + 'users/me').then((response) => {
       // gérer le succes, toutes les infos renvoyer sont dans response.data      
         this.me = response.data;
+        this.imagePath = "/assets/images/avatars/" + this.me.name + "/" + this.me.imagePath;
       }, (response) => {
       });
   },
@@ -23,17 +24,13 @@ const CreatePost = Vue.extend({
       this.picture = true     
     }
   }, 
-  computed : {
-    imagePath : function() {
-      return "/assets/images/avatars/" + this.me.name + "/" + this.me.imagePath;
-    }
-  },
   data () {
     return {
       me : {},
       post : {
         content: ''
-      }
+      },
+      imagePath:''
     }
   }
 });
