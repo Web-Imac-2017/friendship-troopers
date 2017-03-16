@@ -149,7 +149,7 @@ p.honor {
 
 
 
-@media screen and (min-width: $break-x-large) {
+@media all and (min-width: $break-x-large) {
   .lateralMenuAvatar{
     min-height: 13rem;
     .avatarMenu {
@@ -164,7 +164,7 @@ p.honor {
     }
   }
 }
-@media screen and (max-width: $break-large) {
+@media all and (max-width: $break-large) {
   .lateralMenuAvatar{
     min-height: 13rem;
     .avatarMenu {
@@ -180,17 +180,17 @@ p.honor {
   }
 }
 
-@media screen and (max-width: $break-x-large) {
+@media all and (max-width: $break-x-large) {
   .lateralMenuRight {
     display: none;
   }
 }
-@media screen and (min-width: $break-x-large) {
+@media all and (min-width: $break-x-large) {
   .lateralMenuRight {
     display: block;
   }
 }
-@media screen and (max-width: $break-mid) {
+@media all and (max-width: $break-mid) {
   .lateralMenuLeft {
     display: none;
   }
@@ -204,7 +204,7 @@ p.honor {
     display: none;
   }
 }
-@media screen and (min-width: $break-mid) {
+@media all and (min-width: $break-mid) {
   .lateralMenuLeft {
     display: inline-block;
   }
