@@ -66,7 +66,6 @@ const Feed = Vue.extend({
 
           var linkPrev = response.headers.get("Link").split(",")[1].split(";")[0];
           this.routePrevPost = apiRoot() + linkPrev.substring(3, linkPrev.length-1);
-          console.log(response.status)
         },
         (response) => {
         });
