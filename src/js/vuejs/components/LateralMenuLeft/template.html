@@ -4,14 +4,13 @@
 
   <router-link :to="{ name: 'User', params: { user: user.username, userId: user.id }}">
     <div class="lateralMenuAvatar">
-      <img :src="user.imagePath" alt="your avatar" title="mon profil" class="avatarMenu">
+      <img :src="imagePath" alt="your avatar" title="mon profil" class="avatarMenu">
      <!--<img :src="user.userPlanet.path" alt="your planet" class="planetMenu">-->
     </div>
   </router-link>
 
     <h1 :class="user.name"> {{ user.username }} </h1>
     <p class="honor"> {{ user.honorificTitle }} </p>
-
     <p class="enigmes"> Enigmes </p>
 
       <router-link class="sublink" :to="{ name: 'EnigmeCurrent', params: { user: user.username }}"> Résoudre l'énigme en cours </router-link> <br/>

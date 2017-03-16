@@ -127,6 +127,7 @@ const Post = Vue.extend({
         (response) => {
           this.planetId = response.data.planetId;
           this.planetName = response.data.name;
+          this.avatar = response.data.imagePath;
           this.countComments();
           this.getComments(apiRoot() + "planets/" + this.planetId + "/posts/" + this.post.id + "/comments?limit=" + this.loadMore, false);
         }, 
@@ -135,6 +136,11 @@ const Post = Vue.extend({
       );
     }
   },
+  computed : {
+    imagePath : function() {
+      return "/assets/images/avatars/" + this.planetName + "/" + this.avatar;
+    }
+  },   
   created : function() {
     // Savoir si l'utilisateur a déjà liké le post ?
     this.getPlanetPublications();
@@ -152,8 +158,9 @@ const Post = Vue.extend({
       totalComments: 0,
       loadMore : 5,
       showFullPost : false,
-      planetName: "Terre",
-      planetId: 1
+      planetName: '',
+      planetId: 1,
+      avatar :''
     }
   }/*,
   computed: {

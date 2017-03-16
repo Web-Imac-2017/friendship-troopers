@@ -179,8 +179,8 @@ const Search = Vue.extend({
         // a enlever quand fonction updater
         var planet = this.tabFind(this.usersResult[i].planetId, this.filtersPlanets);
         this.usersResult[i].planetPath = planet.path;
+        this.usersResult[i].avatar = "/assets/images/avatars/" + planet.name + "/" + this.usersResult[i].imagePath;
       }
-
     },
     // Trouve un objet dans un tableau en fonction de l'id envoyé
     tabFind(id, tab){

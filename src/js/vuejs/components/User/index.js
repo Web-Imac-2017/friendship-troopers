@@ -119,7 +119,10 @@ const User = Vue.extend({
   computed : {
     planetName : function() {
       return this.planetPath = "/assets/images/planets/" + this.profil.name +".svg";
-    } 
+    } ,
+    imagePath : function() {
+      return "/assets/images/avatars/" + this.profil.name + "/" + this.profil.imagePath;
+    }
   },
   data () {
       return {

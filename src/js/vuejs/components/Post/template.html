@@ -3,7 +3,7 @@
     <div class="col-sm-12 col-xs-12">
       <div class="avatar post-author-avatar">
         <router-link :to="{ name: 'User', params: { user: post.username, userId : post.userId}}">
-          <img :src="post.imagePath" alt="author avatar" class="avatar">
+          <img :src="imagePath" alt="author avatar" class="avatar">
         </router-link>
       </div>
       <div class="user-pseudo">
@@ -55,7 +55,7 @@
       <div class="row your-comment"> 
         <div class="col-sm-1 desktop">
           <div class="avatar">
-            <img src="/assets/images/Avatar1.svg" alt="default avatar" class="avatar">
+            <img :src="imagePath" alt="default avatar" class="avatar">
           </div>
         </div>
         <div class="col-sm-11 col-xs-12">

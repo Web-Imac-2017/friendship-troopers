@@ -3,7 +3,7 @@
     <div class="col-sm-12 col-xs-12">
       <div class="avatar">
         <router-link :to="{ name: 'User', params: { user: comment.username, userId : comment.userId }}">
-          <img :src="comment.imagePath" alt="author avatar" class="avatar">
+          <img :src="imagePath" alt="author avatar" class="avatar">
         </router-link>
       </div>
       <div class="user-pseudo">

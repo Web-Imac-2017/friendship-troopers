@@ -10,6 +10,9 @@ const FriendTemplate = Vue.extend({
   props: {
   	friend: Object,
   	planet : String
+  },
+  created: function(){
+  	console.log(this.planet)
   }
 });
 

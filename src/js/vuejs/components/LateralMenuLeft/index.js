@@ -16,6 +16,11 @@ const LateralMenuLeft = Vue.extend({
           this.$router.push({name : "Login"});
         });
     },
+    computed : {
+      imagePath : function() {
+        return "/assets/images/avatars/" + this.user.name + "/" + this.user.imagePath;
+      }
+    },    
     data () {
       return {
         user : {},

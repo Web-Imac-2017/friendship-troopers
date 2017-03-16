@@ -23,6 +23,11 @@ const CreatePost = Vue.extend({
       this.picture = true     
     }
   }, 
+  computed : {
+    imagePath : function() {
+      return "/assets/images/avatars/" + this.me.name + "/" + this.me.imagePath;
+    }
+  },
   data () {
     return {
       me : {},

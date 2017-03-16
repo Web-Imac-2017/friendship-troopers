@@ -12,6 +12,11 @@ const Comment = Vue.extend({
     planet : String
   },
   template,
+  computed : {
+    imagePath : function() {
+      return "/assets/images/avatars/" + this.planet + "/" + this.comment.imagePath;
+    }
+  },
   methods : {
     formateDate : function(date) {
       var object = new Date(date); 
@@ -23,8 +28,6 @@ const Comment = Vue.extend({
     return {
       newComment : '',
       showFullComment : false,
-      /* admin / earth / parallel / robots / aliens / space-opera*/
-      planetData: ["#3e3e3e", "#3eb6df", "#ef4646", "#767fe2", "#72b51a", "#f9a519" ]
     }
   },
 

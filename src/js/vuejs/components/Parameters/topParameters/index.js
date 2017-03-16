@@ -11,6 +11,11 @@ const topParameters = Vue.extend({
     user:Object,
     value:Object
   },
+  computed : {
+    imagePath : function() {
+      return "/assets/images/avatars/" + this.user.name + "/" + this.user.imagePath;
+    }
+  },
   data(){
     return{
       titleTab : [ "Astronaute débutant", "Astronaute Intermédiaire","Super alien", "Cacahuete planétaire"],

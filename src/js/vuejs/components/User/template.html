@@ -11,11 +11,11 @@
         <div class="container-colored">
           <div class="row profil">
             <div class="col-sm-2">
-              <img :src="profil.imagePath" class="user-avatar">
+              <img :src="imagePath" class="user-avatar">
             </div>
             <div class="col-sm-7">
-              <p v-if="myself"> Mon profil </p>
-              <p v-else> Profil de {{ profil.username }} </p>
+              <div v-if="myself"> <p>Mon profil </p></div>
+              <div v-else> <p> Profil de <h1 :class="profil.name" class="name"> {{ profil.username }} </h1></p></div>
               <p class="honorific-title"> {{ profil.honorificTitle }} </p>
               <p class="green" v-if="profil.points == null"> 0 point </p>
               <p class="green" v-else-if="profil.points < 2"> {{ profil.points}} point </p>
@@ -33,8 +33,13 @@
                 <div class="stat">
         <div class="row center-row no-gutters">  
           <div class="col-sm-4 pink text-center">
-            <p class="inline"><span class="fat"> {{ nbFriends }} </span> </p>
-            <p class="inline left"> amis dans <br>
+            <p class="inline"><span class="fat" v-if="nbFriends != null"> {{ nbFriends }} </span> </p>
+            <span class="fat" v-else> 0 </span>
+            <p class="inline left" v-if="nbFriends < 2"> ami dans <br>
+               <span v-if="myself">ton escouade </span> 
+                <span v-else >son escouade </span>
+            </p>
+            <p class="inline left" v-else> amis dans <br>
                 <span v-if="myself">ton escouade </span> 
                 <span v-else >son escouade </span>
             </p>
