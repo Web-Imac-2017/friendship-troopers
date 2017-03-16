@@ -11,6 +11,7 @@ import MenuTools from '../MenuTools/index.js'
 import NavBar from '../NavBar/index.js';
 import Deconnexion from '../Deconnexion/index.js';
 import EnigmeLayout from '../EnigmeLayout/index.js';
+import NotDone from '../NotDone/index.js';
 
 
 const EnigmeCurrentChat = Vue.extend({
@@ -21,7 +22,8 @@ const EnigmeCurrentChat = Vue.extend({
   	'menu-tools' : MenuTools,
     'navbar' : NavBar,
     'deconnexion' : Deconnexion,
-    'enigme-layout' : EnigmeLayout
+    'enigme-layout' : EnigmeLayout,
+    'not-done' : NotDone
   },
   data () {
   	return {

@@ -12,6 +12,7 @@ import LateralMenuRight from '../LateralMenuRight/index.js'
 import MenuTools from '../MenuTools/index.js'
 import NavBar from '../NavBar/index.js';
 import Deconnexion from '../Deconnexion/index.js';
+import NotDone from '../NotDone/index.js';
 
 const EnigmeResolved = Vue.extend({
   template,
@@ -21,6 +22,7 @@ const EnigmeResolved = Vue.extend({
   	'menu-tools' : MenuTools,
     'navbar' : NavBar,
     'deconnexion' : Deconnexion,
+    'not-done' : NotDone
   },
   created : function(){
   	this.$http.get(apiRoot() + 'users/me').then((response) => {
@@ -46,7 +48,7 @@ const EnigmeResolved = Vue.extend({
   				username : 'Connor',
           userId : 4,
   				imagePath : '/assets/images/avatars/aliens/aliens.svg',
-  				planetId : 1
+  				planetId : 4
   			}]
   		}],
   		nbBadges : 2

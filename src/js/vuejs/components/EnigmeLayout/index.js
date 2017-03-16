@@ -47,7 +47,7 @@ const EnigmeLayout = Vue.extend({
   				username : 'Connor',
           userId : 4,
   				imagePath : '/assets/images/avatars/aliens/aliens.svg',
-  				planetId : 1
+  				planetId : 4
   			}
   			],
   			points : 125

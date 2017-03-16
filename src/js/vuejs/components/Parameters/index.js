@@ -7,6 +7,7 @@ import topParameters from './topParameters/index.js'
 import bottomParameters from './bottomParameters/index.js'
 import NavBar from '../NavBar/index.js';
 import Deconnexion from '../Deconnexion/index.js';
+import NotDone from '../NotDone/index.js';
 
 import {apiRoot} from '../../../../../config.js';
 
@@ -23,7 +24,8 @@ const Parameters = Vue.extend({
   	'top-parameters' : topParameters,
     'bottom-parameters' : bottomParameters, 
     'navbar' : NavBar,
-    'deconnexion' : Deconnexion
+    'deconnexion' : Deconnexion,
+    'not-done' : NotDone
   }, 
   created : function() {
     this.$http.get(apiRoot() + 'users/me').then((response) => {

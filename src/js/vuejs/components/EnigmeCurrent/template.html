@@ -1,11 +1,12 @@
 <div>
+  <not-done></not-done>
 <navbar></navbar>
 <div class="container-fluid">
   <div class="row">
-    <aside class="col-sm-2">
+    <aside class="col-sm-3 col-md-3 col-lg-2">
       <lateral-menu-left v-on:userinfo="findMe" ref="menu"></lateral-menu-left>
-      <menu-tools></menu-tools>
-      <deconnexion></deconnexion>
+      <deconnexion class="desktop"></deconnexion>
+      <menu-tools class="desktop"></menu-tools>
     </aside>
     <section class="riddle col-sm-8 container-transparent">
       <h1> Résoudre une nouvelle enigme </h1>

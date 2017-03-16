@@ -12,7 +12,6 @@ import User from '../components/User'
 import Parameters from '../components/Parameters'
 import Friends from '../components/Friends'
 import Chat from '../components/Chat'
-import Messages from '../components/Messages'
 import Enigme from '../components/Enigme'
 import EnigmeResolved from '../components/EnigmeResolved'
 import EnigmeCurrent from '../components/EnigmeCurrent'
@@ -85,11 +84,6 @@ const router = new VueRouter({
       component : Chat,
       props: true
   },{ 
-      name : 'Messages',
-      path: '/:user/conversations', 
-      component : Messages,
-      props: true
-  } ,{ 
       name : 'Enigme',
       path: '/:user/enigmes', 
       component: Enigme, 

@@ -8,10 +8,8 @@ template     = eval(`\`${template}\``);
 
 const WelcomeOnBoard = Vue.extend({
   template,
-  created : function(){
-    
-  },
   methods: {
+    // vérifie si l'utilisateur est arrivé à la fin du questionnaire
   finished : function(){
     welcomeData.finish = true;
     for (var i = 0; i < welcomeData.questions.length; i++) {
@@ -20,17 +18,21 @@ const WelcomeOnBoard = Vue.extend({
       }
     }
   },
+  // permet d'aller à la question précédente
     decrement: function(){
       if (welcomeData.current > 0 )
         welcomeData.current --
 
-  }, increment: function(){
+  }, 
+  // permet d'aller à la question suivante
+  increment: function(){
       if (welcomeData.current < welcomeData.questions.length)
         welcomeData.current ++
       this.finished()
       if (this.reached < welcomeData.current)
         this.reached = welcomeData.current;
   },
+  // permet de sélectionner une réponse dans le questionnaire
     selected : function(index){
     welcomeData.answers[welcomeData.current] = welcomeData.questions[welcomeData.current].answer[index].planetID
     welcomeData.answerValidate[welcomeData.current] = true
@@ -41,6 +43,7 @@ const WelcomeOnBoard = Vue.extend({
       this.reached = welcomeData.current;
     this.finished()
   },
+  // retourne l'index de la planète correspondante selon les réponses du questionnaire
   attributePlanet : function(){
     var planet = [0,0,0,0,0];
     for (var i = 0; i < welcomeData.answers.length; i++) {
@@ -56,6 +59,7 @@ const WelcomeOnBoard = Vue.extend({
     welcomeData.current = welcomeData.nbQuestions;
     return index;
   },
+  // envoie l'id de la nouvelle planète au back, pour l'attribuer à l'utilisateur
   submit : function(){
     welcomeData.planetUser = this.attributePlanet()
     this.styleObject.borderColor = welcomeData.planetInfo[welcomeData.planetUser].color
