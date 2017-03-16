@@ -51,10 +51,10 @@ $report-brown : #b5780b;
 
 
 //Planete colors
-$planet-space-opera : #faa61a;
-$planet-parallel : #f04747;
+$planet-space-opera : #f9a519;
+$planet-parallel : #ef4646;
 $planet-robots : #de8ace;
-$planet-earth : #3fb7e0;
+$planet-earth : #3eb6df;
 $planet-alien : #72b51a;
 
 
@@ -189,3 +189,8 @@ html {
   -webkit-order: $val;  
   order: $val;
 }
+
+// Surbrillance
+$subrillance-background : rgba(226,218,195,0.9);
+$subrillance-color : rgb(25,29,43);
+

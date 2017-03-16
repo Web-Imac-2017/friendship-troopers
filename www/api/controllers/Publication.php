@@ -67,6 +67,10 @@ class Publication extends Controller {
 			'cmp' => '=',
 			'value' => 1,
 		];
+		$where['OR'] = [
+			'planetId' => $planetId,
+			'publicationTypeId' => ['value' => '1,2 ', 'cmp' => 'IN'],
+		];
 
 		$request = $this->Publication->find([
 			'fields' => [
@@ -139,7 +143,11 @@ class Publication extends Controller {
 		if (!empty($this->checkRequired($required, $post))) {
 			throw new \Utils\RequestException('champ manquant', 400);
 		}
-
+		$data =$this->filterXSS([
+			'userId' => $userId,
+			'content' => $post['content'],
+			'publicationTypeId' => $post['publicationType'] ?? 3,
+		]);
 		if (!empty($_FILES)) {
 			if (count($_FILES) > 1) {
 				throw new \Utils\RequestException('trop d\'images', 400);
@@ -152,15 +160,11 @@ class Publication extends Controller {
 			}
 
 			$imageId = $this->checkImages($file['tmp_name'], $post['alt']);
+			$data['imageUploadId'] = $imageId;
 		}
 
 		try {
-			$id = $this->Publication->save($this->filterXSS([
-				'userId' => $userId,
-				'content' => $post['content'],
-				'imageUploadId' => $imageId ?? null,
-				'publicationTypeId' => $post['publicationType'] ?? 3,
-			]));
+			$id = $this->Publication->save($data);
 		} catch (\PDOException $e) {
 			return $this->response([
 				'error' => $e->getMessage(),

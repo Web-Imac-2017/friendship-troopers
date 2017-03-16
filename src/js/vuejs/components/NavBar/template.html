@@ -1,30 +1,42 @@
   <div class="navbar">
     <ul class="nav navbar-nav">
+
+      <!-- Recherche responsive -->
+
       <li class="search-responsive">
         <div v-if="search">
           <input type ="text" class="nav-item" placeholder="Recherche" v-model="searchByUser"></input>
-          <img v-on:click="searchUsername()" class="pseudo-button" src="/assets/images/validation.svg" alt="valider" title="Valider"> <!-- petite recherche lien -->
-          <img class="pseudo-button" v-on:click="showSearch()" src="/assets/images/Cross.svg"  alt="fermer" title="Fermer">
+           <router-link :to="{ name : 'Search', params : { searchInput : searchByUser }}" > <img v-on:click="searchUsername()" class="pseudo-button" src="/assets/images/validation.svg" alt="valider" title="Valider"> </router-link> <!-- lien vers la recherche (mobile) -->
+          <router-link :to="{ name : 'Search', params : { searchInput : searchByUser }}" > <img class="pseudo-button" src="/assets/images/Cross.svg"  alt="fermer" title="Fermer"> </router-link>
         </div>
       </li>
+
+      <!-- Navbar, partie gauche -->
 
       <li class="navbar-left">
         <router-link to="/actualites" class="navbar-brand"> <p class="desktop small-desktop"> Friendship<br/>Troopers</p> <p class="mobile"> FT </p> </router-link>
         <div class="menu-separator"></div>
         <router-link to="/actualites" class="nav-item nav-link nav-home desktop"> Accueil </router-link>
-        <router-link :to="{ name: 'Enigme', params: { user: pseudo }}" class="nav-item nav-link nav-enigmes"> Énigmes </router-link>
+        <router-link :to="{ name: 'Enigme', params: { user: user.username }}" class="nav-item nav-link nav-enigmes"> Énigmes </router-link>
       </li>
 
-      <li class="navbar-right">
-          <input type ="text" class="nav-item desktop" placeholder="Recherche" v-model="searchByUser"></input>
-          <input v-on:click="searchUsername()" type="submit" class="pseudo-button nav-item nav-search-icon desktop" value=""></input> <!-- grande recherche lien -->
-          <div v-on:click="showSearch()" class="nav-item nav-icon mobile small-desktop pseudo-button">
-            <img src="/assets/images/search.svg" alt="recherche" title="Effectuer une recherche">
-          </div>
+      <!-- Navbar, partie droite -->
         
+        <!-- Recherche -->
+
+      <li class="navbar-right">
+        <input type ="text" class="nav-item desktop" placeholder="Recherche" v-model="searchByUser"></input>
+        <input v-on:click="searchUsername()" type="submit" class="pseudo-button nav-item nav-search-icon desktop" value=""></input>  <!-- lien vers la recherche (desktop) -->
+        <div v-on:click="showSearch()" class="nav-item nav-icon mobile small-desktop pseudo-button">
+          <img src="/assets/images/search.svg" alt="recherche" title="Effectuer une recherche">
+        </div>
         
         <div class="menu-separator"></div>
-        
+
+        <!-- Notifications -->
+
+          <!-- Amis -->
+
         <div class="nav-item nav-icon">
           <div class="friends-icon" v-on:click="showSubMenu(1)" title="Mes demandes d'amis">
             <p v-if="friendsRequest.length > 99" class="notif">99+</p> 
@@ -47,6 +59,8 @@
           </div>
         </div>
 
+        <!-- Messages -->
+
         <div class="nav-item nav-icon">
           <div class="messages-icon" v-on:click="showSubMenu(2)" title="Mes nouveaux messages">
             <p v-if="messages.length > 99" class="notif">99+</p>
@@ -64,16 +78,15 @@
             </ul>
             <div  v-if = "messages.length > 0" class="separator"></div>
 
-            <p class="sub-menu-footer"> <a href ="/messagerie">Accéder à ma messagerie</a></p>
+            <p class="sub-menu-footer"> <router-link :to="{ name: 'Chat', params: { user: user.username }}">Accéder à ma messagerie</router-link></p>
 
           </div> 
         </div>
         
+        <!-- Tableau de bord -->
 
         <div class="nav-item nav-icon">
           <div class="notifications-icon nav-icon" v-on:click="showSubMenu(3)" title="Mon tableau de bord">
-            <p v-if="notifications.length > 99" class="notif">99+</p> 
-            <p v-else-if="notifications.length > 0" class="notif"> {{ notifications.length }}</p> 
           </div>
 
           <div v-if="subMenu == 3" class="sub-menu menu-notifications"> 
@@ -89,10 +102,16 @@
             <div  v-if = "notifications.length > 0" class="separator"></div>
 
           </div> 
-     
         </div>
+
         <div class="menu-separator"></div>
-        <router-link :to="{ name: 'User', params: { user: username, userId : id }}" class="nav-item nav-link nav-profil"><p class="desktop"> Mon profil</p> <img class="small-desktop mobile nav-avatar" :src=avatar alt="Mon profil" title="Mon profil"> </router-link>
+
+        <!-- Mon profil -->
+
+        <router-link :to="{ name: 'User', params: { user: user.username, userId : user.id }}" class="nav-item nav-link nav-profil"><p class="desktop"> Mon profil</p> <img class="small-desktop mobile nav-avatar" :src=imagePath alt="Mon profil" title="Mon profil"> </router-link>
+        
+        <!-- Deconnexion responsive -->
+
         <div class="mobile"> <div class="menu-separator"></div> <img src=/assets/images/deconnexion.svg alt="Déconnexion" title="Déconnexion"></div>
         
       </li>

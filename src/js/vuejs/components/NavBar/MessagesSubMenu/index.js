@@ -6,10 +6,15 @@ template     = eval(`\`${template}\``);
 
 
 const MessagesSubMenu = Vue.extend({
-  template,
-  props : {
-    message: Object
-  }
+	template,
+	props : {
+		message: Object
+	},
+	computed : {
+		imagePath : function() { 
+			return "/assets/images/avatars/" + this.message.planet + "/" + this.message.avatar;
+    	}
+	}
 });
 
 export default MessagesSubMenu;

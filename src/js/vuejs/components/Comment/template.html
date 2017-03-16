@@ -2,8 +2,8 @@
   <div class="row no-gutters">
     <div class="col-sm-12 col-xs-12">
       <div class="avatar">
-        <router-link :to="{ name: 'User', params: { user: comment.user}}">
-          <img :src="comment.imagePath" alt="author avatar" class="avatar">
+        <router-link :to="{ name: 'User', params: { user: comment.username, userId : comment.userId }}">
+          <img :src="imagePath" alt="author avatar" class="avatar">
         </router-link>
       </div>
       <div class="user-pseudo">
@@ -19,8 +19,7 @@
   <div class="row no-gutters">  
     <div class="col-sm-10 col-xs-10 post-content">
       <div class="col-sm-12 col-xs-12">
-        <p class="content-block" v-if="!showFullComment"> {{ comment.content.slice(0,50) }} </p>
-        <p class="content-block" v-else> {{ comment.content}} </p>
+        <p class="content-block"> {{ comment.content}} </p>
 
         <div class="row content-block" v-if="comment.content.length > 50">
           <div class="left"  v-if="comment.content.length > 50 && showFullComment == false">

@@ -5,6 +5,10 @@
 		border-right: 0.1rem solid $main-text;
 		@include margin2(1, 0);
 		height: 8rem;
+
+		@media all and (max-width: $break-mid) {
+			display:none;
+		}
 	}
 
 	.center-row {
@@ -17,6 +21,10 @@
 		margin-left: auto;
 		margin-right: auto;
 		display: block;
+
+		@media all and (max-width: $break-mid) {
+			height: 6rem;
+		}
 	}
 
 	img.user-avatar {
@@ -24,6 +32,9 @@
 		margin-left: auto;
 		margin-right: auto;
 		display: block;
+		@media all and (max-width: $break-mid) {
+			height: 6rem;
+		}
 	}
 	
 	img {
@@ -32,7 +43,6 @@
 
 	.colored {
 		background-color: $comments-background;
-		@include padding2(1,5);
 		@include margin2(0, 1);
 		text-align: center;
 	}
@@ -48,10 +58,6 @@
 		@include padding2(0.7, 2.5);
 		font-size: 1.7rem;
 		text-align: center;
-	}
-
-	.see-more {
-		@include padding2(0.7, 2.5);
 	}
 
 	.pseudo-button p{
@@ -85,6 +91,43 @@
 	.profil, .option-bar, .stat {
 		margin-bottom: 3rem;
 	}
+	h1.name {
+		text-align: left;
+		display: inline-block;
+	}
 
+
+	.item.pseudo-button {
+	    background-color: $comments-background;
+	    margin: 1rem;
+	    padding: 1rem;
+
+	    &:hover, &:focus, &:active{
+			outline:1px solid $white;
+		}
+	}
+
+	.wrapper{
+		flex-wrap:wrap;
+		justify-content:center;
+	}
+
+	.interest{
+		flex:0!important;
+	}
 
 }
+
+
+	p.center {
+  		vertical-align: middle;
+	}
+
+	.pink {
+		color: $notifs;
+	}
+
+	span.fat {
+		font-size: 5rem;
+	}
+

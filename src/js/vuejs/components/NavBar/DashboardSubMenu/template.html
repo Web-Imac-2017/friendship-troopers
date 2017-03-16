@@ -4,7 +4,7 @@
     <li v-else-if = "notification.type==2"> 
       <ul class = "sub-menu-item">
         <li>
-          <img :src=notification.avatar alt="avatar" class="avatar"> 
+          <img :src="imagePath" alt="avatar" class="avatar"> 
         </li>
         <li> 
           <p>Votre ami {{notification.pseudo}} a publié un message !</p>

@@ -4,13 +4,58 @@ import Vue from 'vue/dist/vue';
 
 let template = require('./template.html');
 template     = eval(`\`${template}\``);
+import {apiRoot} from '../../../../../config.js';
 
+
+import LateralMenuLeft from '../LateralMenuLeft/index.js'
+import LateralMenuRight from '../LateralMenuRight/index.js'
+import MenuTools from '../MenuTools/index.js'
 import NavBar from '../NavBar/index.js';
+import Deconnexion from '../Deconnexion/index.js';
+import NotDone from '../NotDone/index.js';
 
 const EnigmeResolved = Vue.extend({
   template,
   components : {
-  	'navbar' : NavBar
+  'lateral-menu-left' : LateralMenuLeft,
+  	'lateral-menu-right' : LateralMenuRight,
+  	'menu-tools' : MenuTools,
+    'navbar' : NavBar,
+    'deconnexion' : Deconnexion,
+    'not-done' : NotDone
+  },
+  created : function(){
+  	this.$http.get(apiRoot() + 'users/me').then((response) => {
+          this.me = response.data;
+          this.imagePath = "/assets/images/avatars/" + this.me.name + "/" + this.me.imagePath;
+      }, (response) => {
+        console.log(response);
+      })
+  	this.username = this.$route.params.user;
+    this.imagePath = "/assets/images/avatars/" + this.me.name + "/" + this.me.imagePath;
+  }, 
+  data () {
+  	return {
+  		me : {},
+      imagePath : '',
+  		points : 30,
+  		nbBadges : 2,
+  		riddleSolved : [
+  		{
+  			name :'Le trésor caché aux confins du Connecticut ',
+  			level :'debutant',
+  			mode :'multijoueur',
+  			date :'18 fev',
+  			points : 30,
+  			players : [ {
+  				username : 'Connor',
+          userId : 4,
+  				imagePath : '/assets/images/avatars/aliens/aliens.svg',
+  				planetId : 4
+  			}]
+  		}],
+  		nbBadges : 2
+  	}
   }
 });
 

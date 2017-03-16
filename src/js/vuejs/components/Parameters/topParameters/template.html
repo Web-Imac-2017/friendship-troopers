@@ -4,7 +4,7 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
           <p class="subtitle">Modifier votre avatar</p>
-          <img class="block center avatar" :src="user.imagePath">
+          <img class="block center avatar" :src="imagePath">
           <a class="text-center center" v-on:click="showAvatars">Choisir un nouvel avatar</a>
           <div v-if="imgDiv">
             <ul v-for="option in user.avatarPathTab" class="avatar-list">

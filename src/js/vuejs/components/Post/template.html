@@ -3,7 +3,7 @@
     <div class="col-sm-12 col-xs-12">
       <div class="avatar post-author-avatar">
         <router-link :to="{ name: 'User', params: { user: post.username, userId : post.userId}}">
-          <img :src="post.imagePath" alt="author avatar" class="avatar">
+          <img :src="imagePath" alt="author avatar" class="avatar">
         </router-link>
       </div>
       <div class="user-pseudo">
@@ -32,8 +32,8 @@
           </div>
 
           <div class="connect-buttons contain-img post-footer-likes" v-on:click="like">
-            <img v-if="liked" class="like-icon" src="/assets/images/LikeFull.svg" alt="likes">
-            <img v-else class="like-icon" src="/assets/images/Like.svg" alt="likes">
+            <img v-if="liked" class="like-icon pseudo-button" src="/assets/images/LikeFull.svg" alt="likes">
+            <img v-else class="like-icon pseudo-button" src="/assets/images/Like.svg" alt="likes">
             <span> {{ nbLikes }} </span>
           </div>
 
@@ -55,13 +55,13 @@
       <div class="row your-comment"> 
         <div class="col-sm-1 desktop">
           <div class="avatar">
-            <img src="/assets/images/Avatar1.svg" alt="default avatar" class="avatar">
+            <img :src="imagePath" alt="default avatar" class="avatar">
           </div>
         </div>
         <div class="col-sm-11 col-xs-12">
           <form class="form-post">
             <textarea rows="3" type="text" placeholder="Votre commentaire"  class="col-sm-11 col-xs-10" v-model="newComment"></textarea>
-            <img class="col-sm-1 col-xs-2" src="./assets/images/validation.svg" v-on:click="publishNewComment">
+            <img class="col-sm-1 col-xs-2" src="/assets/images/validation.svg" v-on:click="publishNewComment">
           </form>
         </div>
       </div>

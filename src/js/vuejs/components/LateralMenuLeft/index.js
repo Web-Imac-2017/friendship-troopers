@@ -12,13 +12,15 @@ const LateralMenuLeft = Vue.extend({
         (response) => {
           this.user = response.data;
           this.$emit("userinfos");
+          this.imagePath = "/assets/images/avatars/" + this.user.name + "/" + this.user.imagePath;
         }, (response) => {
           this.$router.push({name : "Login"});
         });
-    },
+    },    
     data () {
       return {
         user : {},
+        imagePath : '',
         lastFriends : [ 
         {
           avatar : '/assets/images/avatars/Sautien/aliens.svg',

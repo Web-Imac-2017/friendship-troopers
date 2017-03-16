@@ -6,9 +6,9 @@ let template = require('./template.html');
 template     = eval(`\`${template}\``);
 
 import NavBar from '../NavBar/index.js';
+  
 
-
-const Chat = Vue.extend({
+const PageToCome = Vue.extend({
   template,
   components : {
   	'navbar' : NavBar
@@ -16,4 +16,4 @@ const Chat = Vue.extend({
 });
 
 
-export default Chat;
+export default PageToCome;

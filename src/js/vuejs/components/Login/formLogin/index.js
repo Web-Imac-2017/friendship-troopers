@@ -18,6 +18,7 @@ const formLogin = Vue.extend({
 		}
 	},
 	methods:{
+		// la fonction de connexion renvoit sur la page d'actualité, si l'utilisateur a bien rempli ses champs et existe dans la bdd
 		connect(){
 			this.$emit('input', this.userLogin);
 

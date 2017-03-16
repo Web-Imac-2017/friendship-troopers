@@ -24,6 +24,7 @@ const Search = Vue.extend({
     'deconnexion' : Deconnexion
   },
   computed: {
+    // Si on atterit sur cette page en ayant fait une recherche dans la barre de navigation, une recherche selon pseudonyme est lancée
     searchUser:function(){
       if((this.$route.params.searchInput != "") && !(this.alreadyInThePage)){
         this.alreadyInThePage = true;
@@ -34,6 +35,7 @@ const Search = Vue.extend({
   },
   data () {
     return {
+       // tableau contenant toutes les informations de chaque planète
       filtersPlanets: [{
         path:"/assets/images/planets/Terre.svg",
         id:1,
@@ -69,36 +71,43 @@ const Search = Vue.extend({
       titleSelected : "Sélectionner",
       // LISTE DES UTILISATEURS RENVOYES
       usersResult : {},
-      // TABLEAU D INTERETS COCHES A ENVOYER A LA BDD
+      // TABLEAU D'INTERETS SELECTIONNES PAR L'UTLISATEUR
       interestsPrint : [],
+      // TABLEAU D INTERETS COCHES A ENVOYER A LA BDD : ne contient que des id
       interestsDB : [],
-      // TABLEAU DE TITRES COCHES A ENVOYER A LA BDD
+      // TABLEAU DE TITRES SELECTIONNES PAR L'UTLISATEUR
       titlesPrint : [],
+      // TABLEAU DE TITRES COCHES A ENVOYER A LA BDD : ne contient que des id
       titlesDB : [],
       // PLANETE A ENVOYER A LA BDD, "" SI AUCUNE SELECTIONNEE
       activePlanet:  "",
       // SI AUCUN UTILISATEURS NE CORRESPOND, METTRE A FALSE
       usersExist : false,
       searchUserInput : "",
-
-
       currentPage: 1,
       morePage: true,
       planetId: 0,
+      // ROUTE POUR ACCEDER A LA PAGE SUIVANTE CONTENANT D'AUTRES UTILISATEURS
       routeNextUser: '',
+      // ROUTE POUR ACCEDER A LA PAGE PRECEDANTE CONTENANT D'AUTRES UTILISATEURS
       routePrevUser: '',
-      totalUsers: 7, // à changer : A TROUVE AVEC LA BDD
+      // NOMBRE TOTAL D'UTILISATEURS RENVOYES PAR LA RECHERCHE
+      totalUsers: '', 
+      // DATA A ENVOYER A LA BDD
       dataForDB : {},
       alreadyInThePage: false
     }
   },
+
   created : function(){
+     // fonction qui récupère la liste de tous les intérêts
     this.$http.get(apiRoot() + 'interest/view',{emulateJSON: true }).then(
         (response) => {
           this.filtersInterests = response.data;      
         },
         (response) => {
         });
+     // fonction qui récupère la liste de tous les titres
     this.$http.get(apiRoot() + 'titles',{emulateJSON: true }).then(
         (response) => {
           this.filtersTitles = response.data;       
@@ -107,6 +116,7 @@ const Search = Vue.extend({
         });
   },
   methods : {
+    // fonction qui récupère la liste de tous les utilisateurs renvoyés par le back.
     getUsers : function(route, data) {
         this.$http.get(apiRoot() + route, {
           params : data
@@ -114,10 +124,10 @@ const Search = Vue.extend({
           emulateJSON: true 
         }).then(
         (response) => {
-          this.usersResult = response.data;
-          //this.totalUsers = this.usersResult.length; // ta route te renvoie que deux users max, vu que limit = 2
+          this.totalUsers = response.data[0]['count'];
+          this.usersExist = (this.totalUsers == 0) ? false : true
+          this.usersResult = response.data.slice(1,this.totalUsers+1);
           this.assignPlanetPath();
-          this.usersExist = true;
 
           var linkNext = response.headers.get("Link").split(",")[0].split(";")[0];
           this.routeNextUser = linkNext.substring(2, linkNext.length-1);
@@ -131,31 +141,30 @@ const Search = Vue.extend({
         });
          
     },
+    // si le nombre total d'utilisateur est supérieur à 10, il y aura plus d'une page
     showMoreLink : function() {
-      if (this.currentPage*10 < this.totalUsers) { //10 à changer
+      if (this.currentPage*10 < this.totalUsers) { 
         this.morePage = true;
       } else {
         this.morePage = false;
       }
     },
-    // A TESTER
+    // Permet d'aller sur la page suivante
     showNextPage : function() {
-      if (this.currentPage*10 < this.totalUsers) {//10 à changer
+      if (this.currentPage*10 < this.totalUsers) {
         this.currentPage++;
         this.getUsers(this.routeNextUser, this.dataForDB);
         this.showMoreLink();
       }
       
     },
-    // A TESTER
+    // Permet d'aller sur la page précédente
     showPrevPage : function() {
       this.currentPage--;
       this.getUsers(this.routePrevUser, this.dataForDB); 
       this.showMoreLink();
     },
-
-
-    // Permet de sélectionner la planète active
+    // Permet de sélectionner la planète active dans les filtres
     toggleActive(filter){
       for(var i = 0; i < this.filtersPlanets.length ; i++){
         if(filter.id == this.filtersPlanets[i].id){
@@ -172,14 +181,13 @@ const Search = Vue.extend({
         
       } 
     },
-    // donne un chemin pour l'image de la planète correspondante
+    // donne un chemin à l'utilisateur pour l'image de la planète correspondante
     assignPlanetPath(){
       for(var i = 0; i < this.usersResult.length ; i++){
-        // a enlever quand fonction updater
         var planet = this.tabFind(this.usersResult[i].planetId, this.filtersPlanets);
         this.usersResult[i].planetPath = planet.path;
+        this.usersResult[i].avatar = "/assets/images/avatars/" + planet.name + "/" + this.usersResult[i].imagePath;
       }
-
     },
     // Trouve un objet dans un tableau en fonction de l'id envoyé
     tabFind(id, tab){
@@ -212,16 +220,19 @@ const Search = Vue.extend({
     tabDelete(index, tab){
       tab.splice(index,1);
     },
+    // Permet de créer un tableau pour la bdd : seulement les id doivent être envoyés
     assignIdToTab(newTab, oldTab){
       for(var i = 0; i < oldTab.length ; i++){
         newTab[i] = oldTab[i].id;
       }
     },
+    // permet de faire une recherche par pseudonyme
     searchBarUsername(value){
       this.dataForDB = {};    
       this.dataForDB = {username: value};
       this.getUsers('users/search?limit=10', this.dataForDB);    
     },
+    // permet de faire une recherche personnalisée par filtres
     searchBarFilters(){
       this.titlesDB = [];
       this.interestsDB = [];
@@ -239,8 +250,6 @@ const Search = Vue.extend({
       if(this.activePlanet != ""){
         this.dataForDB.planet = this.activePlanet ;
       }
-
-
       this.getUsers('users/search?limit=10', this.dataForDB);
       
     }

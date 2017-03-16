@@ -12,7 +12,6 @@ import User from '../components/User'
 import Parameters from '../components/Parameters'
 import Friends from '../components/Friends'
 import Chat from '../components/Chat'
-import Messages from '../components/Messages'
 import Enigme from '../components/Enigme'
 import EnigmeResolved from '../components/EnigmeResolved'
 import EnigmeCurrent from '../components/EnigmeCurrent'
@@ -28,20 +27,11 @@ import About from '../components/About'
 import FAQ from '../components/FAQ'
 import Legals from '../components/Legals'
 
-/*import AdminCreatePost from '../components/admin/CreatePost.vue'
-import AdminCreatePost from '../components/admin/CreatePost.vue'
-import AdminCreateEvent from '../components/admin/CreateEvent.vue'
-import AdminAddAdmin from '../components/admin/AddAdmin.vue'
-import AdminReport from '../components/admin/Report.vue'
-import AdminDelateAccount from '../components/admin/DelateAccount.vue'
-import AddBadge from '../components/admin/AddBadge.vue'
-import AddAvatar from '../components/admin/AddAvatar.vue'
-import AddEmoji from '../components/admin/AddEmoji.vue'
-import AddEnigme from '../components/admin/AddEnigme.vue'*/
 
 import Error401 from '../components/Error401'
 import Error403 from '../components/Error403'
 import Error404 from '../components/Error404'
+import PageToCome from '../components/PageToCome'
 
 import PasswordForgotten from '../components/PasswordForgotten'
 
@@ -80,15 +70,10 @@ const router = new VueRouter({
       props: true
   },{ 
       name : 'Chat',
-      path: '/:user/conversations/utilisateur', 
+      path: '/:user/conversations', 
       component : Chat,
       props: true
   },{ 
-      name : 'Messages',
-      path: '/:user/conversations', 
-      component : Messages,
-      props: true
-  } ,{ 
       name : 'Enigme',
       path: '/:user/enigmes', 
       component: Enigme, 
@@ -113,7 +98,6 @@ const router = new VueRouter({
       name : 'Feed',
       path: '/actualites', 
       component : Feed
-      // mettre $planet : unique pour chaque planete
   },{ 
       name : 'Event',
       path: '/univers/evenement', 
@@ -161,43 +145,11 @@ const router = new VueRouter({
       name : 'Error404',
       path: '/erreur404', 
       component : Error404
-  }/*,{ 
-      name : 'AdminCreatePost',
-      path: '/admin/creer-post', 
-      component : AdminCreatePost
   },{ 
-      name : 'AdminCreateEvent',
-      path: '/admin/creer-evenement', 
-      component : AdminCreateEvent
-  },{  
-      name : 'AdminAddAdmin',
-      path: '/admin/nouvel-administrateur', 
-      component : AdminAddAdmin
-  },{  
-      name : 'AdminReport',
-      path: '/admin/signalement', 
-      component : AdminReport
+      name : 'PageToCome',
+      path: '/page-to-come', 
+      component : PageToCome
   },{ 
-      name : 'AdminDelateAccount' ,
-      path: '/admin/supprimer-compte', 
-      component : AdminDelateAccount
-  },{  
-      name : 'AddBadge',
-      path: '/admin/ajout-badge', 
-      component : AddBadge
-  },{   
-      name : 'AddAvatar',
-      path: '/admin/ajout-avatar', 
-      component : AddAvatar
-  },{   
-      name : 'AddEmoji',
-      path: '/admin/ajout-emoticone', 
-      component : AddEmoji
-  },{   
-      name : 'AddEnigme',
-      path: '/admin/ajout-enigme', 
-      component : AddEnigme
-  }*/,{ 
       path: '/index.html', 
       redirect: {name:'Feed'}
   },{ 

@@ -1,7 +1,9 @@
     <div class="publish">
       <div class="row no-gutters">
         <div class="col-md-1  col-lg-1 avatar desktop">
-            <img :src="post.avatar" alt="your avatar" class="avatar">
+         <router-link :to="{ name: 'User', params: { user: me.username, userId : me.userId}}">
+            <img :src="imagePath" alt="your avatar" class="avatar pseudo-button">
+          </router-link>
         </div>
         <div class="col-sm-11 col-md-11 col-lg-11">
           <form class="form-post" v-on:submit.prevent="save">
@@ -9,7 +11,6 @@
           </form>
           <div class="row button-field" >
             <div class="col-sm-6 col-xs-6">
-              <button v-on:click="uploadPicture" class="uploadPicture"> <img src="/assets/images/Image.svg" alt="Upload Picture" class="avatar" title="Joindre une image"> </button>
             </div>
             <div class="col-sm-6 col-xs-6 right">
               <button v-on:click="publish" class="publish-button"> <img src="/assets/images/validation.svg" alt="publier" title="Publier votre message">Publier</button>

@@ -82,7 +82,7 @@ class Interest extends Controller {
    * @param int user's id
    * @return  JSON interests info
    */
-  public function listuserInterest($userId) {
+  public function listUserInterest($userId) {
     $userInterest = new \Models\User_Interest();
     $request = $userInterest->find([
       'fields' => ['interest.id', 'label'],
@@ -108,7 +108,7 @@ class Interest extends Controller {
   /**
    * deleteUserInterest function
    * @param  array $data containing user's interests
-   * @return [type]       [description]
+   * @return void
    */
   public function deleteUserInterest($data) {
     /*Checking if $data is an array*/
@@ -130,14 +130,13 @@ class Interest extends Controller {
       $request = $userInterest->delete(array('userId' => $userId,
                                   'interestId' => $value));
     }
-
     $this->response($request,200);
   }
 
   /**
    * deleteInterest deletes one or more interests
    * @param  array $data containing the interests
-   * @return [type]       [description]
+   * @return void
    */
   public function deleteInterest($data) {
     $this->deleteUserInterest($data);
@@ -145,7 +144,6 @@ class Interest extends Controller {
     foreach($data as $key => $value) {
       $request = $this->Interest->delete($value);
     }
-    echo $request;
     $this->response($request,200);
   }
 

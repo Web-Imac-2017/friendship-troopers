@@ -28,24 +28,21 @@ const Feed = Vue.extend({
     'page-nav' : PageNav,
     'navbar' : NavBar
   },
-  created : function(){
-  },
-  mounted : function() {
-    
-  },
   methods : {
     initialize : function() {
-      // Récupérer les premiers posts de la planète de l'utilisateur
-          this.planetId = this.$refs.menu.user.planetId;
-          this.getPublications(apiRoot() + 'planets/'+ this.planetId + '/posts');
-          this.countPublications();
+      this.planetId = this.$refs.menu.user.planetId;
+      // Get the 10 first post of the user planet
+      this.getPublications(apiRoot() + 'planets/'+ this.planetId + '/posts');
+      this.countPublications();
+      this.showMoreLink();
     },
+    // Create a post in database
     createPost : function(post) {
       this.$http.post(apiRoot() + "planets/" + this.planetId + "/posts", { 'content' : post.content}, {emulateJSON : true}).then(
         (response) => {
           post.content = '';
-          // Reload de la page serait mieux, mais problème avec le htaccess alors...
           this.getPublications(apiRoot() + 'planets/'+ this.planetId + '/posts');
+          // Feedback visuel
           this.countPublications();
           this.currentPage = 1;
           this.showMoreLink();
@@ -53,12 +50,14 @@ const Feed = Vue.extend({
         }
       );
     },
+    // Get the total number of publications in the planet
     countPublications : function() {
       this.$http.get(apiRoot() + "planets/" + this.planetId + "/posts/count", { emulateJSON: true }).then(
         (response) => {
           this.totalPublications = response.data.nbPost;
         },
         (response) => {
+
         });
     },
     getPublications : function(route) {
@@ -70,12 +69,12 @@ const Feed = Vue.extend({
           this.routeNextPost = apiRoot() + linkNext.substring(2, linkNext.length-1);
 
           var linkPrev = response.headers.get("Link").split(",")[1].split(";")[0];
-          this.routePrevPost = apiRoot() + linkPrev.substring(2, linkPrev.length-1);
-
+          this.routePrevPost = apiRoot() + linkPrev.substring(3, linkPrev.length-1);
         },
         (response) => {
         });
     },
+    // Hide or show the next page link 
     showMoreLink : function() {
       if (this.currentPage*10 < this.totalPublications) {
         this.morePage = true;
@@ -83,6 +82,7 @@ const Feed = Vue.extend({
         this.morePage = false;
       }
     },
+    // Click on next page : show the 10 previous publications
     showNextPage : function() {
       if (this.currentPage*10 < this.totalPublications) {
         this.currentPage++;
@@ -90,6 +90,7 @@ const Feed = Vue.extend({
         this.showMoreLink();
       }
     },
+    // Click on prev page : show the 10 next publications
     showPrevPage : function() {
       this.currentPage--;
       this.getPublications(this.routePrevPost);

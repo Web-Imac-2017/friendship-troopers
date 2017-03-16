@@ -1,13 +1,147 @@
 <div>
-<navbar></navbar>  
-  <div class="well">
-    <div class="row">
-      <div class="col-sm-5 text-right">
-        <img class="logo" src="../assets/logo.png">
+  <not-done></not-done>
+  <navbar></navbar>  
+  <div class="row no-gutters">
+    <aside class="col-sm-3 col-md-3 col-lg-2">
+      <lateral-menu-left></lateral-menu-left>
+      <deconnexion class="desktop"></deconnexion>
+      <menu-tools class="desktop"></menu-tools>
+    </aside>
+    <section class="col-sm-9 col-md-9 col-lg-10 container-transparent messages">
+      <h1 class="page-title"> Messagerie </h1>
+      <div class="row">
+          
+        <!-- RESPONSIVE -->
+        <div class="row">
+
+          <!-- Boutons qui s'affichent en responsive pour choisir d'afficher ses amis ou ses correspondants récents -->
+    
+          <div v-on:click="showAllFriendsResponsive()" v-bind:class="{ 'clicked' : showAllResponsiveFriends}" class="container-colored responsive-all-friends pseudo-button">
+            Tous mes amis 
+          </div>
+    
+          <div v-on:click="showLastsFriendsResponsive()" v-bind:class="{ 'clicked' : showLastsResponsiveFriends}" class="container-colored responsive-lasts-friends pseudo-button">
+            Mes correspondants récents
+          </div>
+
+          <div class="row no-gutters">
+
+            <!-- Voir mes conversations récentes -->
+
+            <div class="col-xs-12 col-sm-12 no-gutters show-responsive-lasts-friends">
+              <div v-if="showLastsResponsiveFriends" class="container-colored responsive-lasts-friends-list">
+
+                <div v-if="friends.length < 5">
+                  <div v-for="(friend,index) in friends" class="conversation pseudo-button" v-on:click="active(index)" v-bind:class="{ 'conv-selected' : friend.selected}">
+                    <img :src="friend.imagePath" class="avatar center">
+                    <h1 v-bind:style="{color : planetData[friend.planet]}"> {{ friend.username }} </h1>
+                  </div>
+                </div>
+                <div v-else> 
+                  <div v-for="i in 5"  class="conversation pseudo-button" v-on:click="active(i-1)" v-bind:class="{ 'conv-selected' : friends[i].selected}">
+                    <img :src="friends[i-1].imagePath" class="avatar center">
+                    <h1 v-bind:style="{color : planetData[friends[i-1].planet]}"> {{ friends[i-1].username }} </h1>
+                  </div>
+                </div> 
+              </div>
+            </div>
+
+            <!-- Voir tous mes amis -->
+
+            <div class="col-xs-12 col-sm-12 no-gutters show-responsive-all-friends">
+
+              <div v-if="showAllResponsiveFriends" class="container-colored responsive-lasts-friends-list" v-on:click="showAllFriendsResponsive()" >
+                <div class="all-friends col-sm-12">
+                  <div v-for="(string, key) in stringIndex">
+                    <p v-for="(friend,index) in allFriends[string]" v-on:click="createNewConvResponsive(friend)" v-bind:class="{ 'conv-selected' : friend.selected}" v-bind:style="{color : planetData[key]}" class="pseudo all-friends-list pseudo-button"> <img :src="friend.imagePath" class="small-avatar center"> {{ friend.username }} </p>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- DESKTOP -->
+
+        <!-- Voir mes conversations récentes -->
+
+        <div v-if="!showAllFriends" class="col-sm-12 col-md-12 col-lg-2 container-colored conv">
+          <div class="new-conv pseudo-button col-md-2 col-lg-11 header-all-friends">
+            <img v-on:click="showFriends()" src="/assets/images/More.svg" class=" center">
+          </div>
+          <div class="all-friends col-sm-12">
+            
+            <div v-if="friends.length < 5">
+              <div v-for="(friend,index) in friends" class="conversation pseudo-button col-md-2 col-lg-11" v-on:click="active(index)" v-bind:class="{ 'conv-selected' : friend.selected}">
+                <img :src="friend.imagePath" class="avatar center">
+                <h1 v-bind:style="{color : planetData[friend.planet]}"> {{ friend.username }} </h1>
+              </div>
+            </div>
+            
+            <div v-else> 
+              <div v-for="i in 5"  class="conversation pseudo-button col-md-2 col-lg-11" v-on:click="active(i-1)" v-bind:class="{ 'conv-selected' : friends[i-1].selected}">
+                <img :src="friends[i-1].imagePath" class="avatar center">
+                <h1 v-bind:style="{color : planetData[friends[i-1].planet]}">{{ friends[i-1].username }} </h1>
+              </div>
+            </div> 
+
+          </div>
+        </div>
+
+
+          <!-- Voir tous mes amis -->
+
+        <div v-else class="col-sm-12 col-md-12 col-lg-2 container-colored conv-all">
+          <div class="new-conv pseudo-button col-md-2 col-lg-11 header-all-friends">
+            Mes amis <img  v-on:click="showFriends()" src="/assets/images/Cross.svg" class="right">
+          </div>
+          <div class="all-friends col-sm-12">
+            <div v-for="(string, key) in stringIndex">
+              <p v-for="(friend,index) in allFriends[string]" v-on:click="createNewConv(friend)" v-bind:class="{ 'conv-selected' : friend.selected}" v-bind:style="{color : planetData[key]}" class="pseudo all-friends-list col-sm-12 pseudo-button"> <img :src="friend.imagePath" class="small-avatar center"> {{ friend.username }} </p> 
+            </div>
+          </div>
+        </div>
+
+        <!-- Conversation -->
+
+        <div class="col-sm-12 col-md-12 col-lg-10 container-colored specific-conv">
+          <div class="conv-content">
+            <p class="text-center date">{{date}}</p>
+
+            <!-- Contenu de la conversation  -->
+
+            <div v-for="message in conversation" class="row">
+              <div class="col-sm-12 col-xs-12 message-perso sender-message" v-if="message.sender == 1">
+                <img :src="friends[currentSelected].imagePath" class="avatar">
+                <div class="message-content">
+                  <h1 v-bind:style="{color : planetData[friends[currentSelected].planet]}" class="pseudo"> {{ friends[currentSelected].username }} </h1> <div class="date">{{message.time }}</div>
+                  <p> {{ message.content}} </p>
+                </div>
+              </div>
+              <div class="col-sm-12 col-xs-12 message-perso" v-else>
+                <p class="col-sm-10 col-xs-10 right"> {{ message.content}} </p>
+                <img :src="myself.imagePath"  class="avatar col-sm-2 col-xs-2 right">
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Votre message -->
+
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 message-perso publish-message">
+              <form class="form-post">
+                <img :src="myself.imagePath"  class="avatar col-sm-1 col-xs-1 right">
+                <textarea rows="2" type="text" placeholder="Votre message"  class="col-sm-10 col-xs-10" v-model="newMessage"></textarea>
+                <img class="col-sm-1 col-xs-1 pseudo-button" src="/assets/images/validation.svg" v-on:click="postNewMessage">
+              </form>
+            </div>
+          </div>
+          
+        </div>
       </div>
-      <div id="hello">
-        <h1>Page de chat avec un ami</h1>
-      </div>
-    </div>
+    </section>
   </div>
 </div>
