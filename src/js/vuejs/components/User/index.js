@@ -85,7 +85,6 @@ const User = Vue.extend({
       this.$http.get(route).then((response) => {
         this.nbFriends =  response.data.count;
       }, (response) => {
-        console.log(response);
       });     
     }, 
     /*get the post from a specific user*/
