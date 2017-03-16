@@ -23,13 +23,8 @@ const Chat = Vue.extend({
     this.$http.get(apiRoot() + 'users/me/friends').then((response) => {
       // gérer le succes, toutes les infos renvoyer sont dans response.data      
         this.allFriends = response.data;
-        console.log(response.data["1"]);
-        console.log(JSON.stringify(response.data["1"]));
       }, (response) => {
       });
-    console.log(this.planetData.length)
-     console.log(this.allFriends[1])
-
   },
   computed: {
     // a computed getter
@@ -38,7 +33,6 @@ const Chat = Vue.extend({
       for (var i = 0; i < this.planetData.length; i++){
         array[i] = i.toString();
       }
-      console.log(array)
       return array;
     }
   },
@@ -75,6 +69,12 @@ const Chat = Vue.extend({
     postNewMessage : function(){
       console.log(this.newMessage);
       this.newMessage = '';
+    },
+    createNewConv : function(friend){
+      friend["selected"] = false;
+      this.friends.unshift(friend);
+      this.showFriends();
+      console.log(JSON.stringify(this.friends))
     }
   },
   data () {
@@ -86,39 +86,39 @@ const Chat = Vue.extend({
   		currentSelected : 0,
   		friends : [
     		{
-    			name : "George Micheal",
-    			avatar : "/assets/images/avatars/Multas/aliens.svg",
-    			planete : "Multas",
+    			username : "George Micheal",
+    			imagePath : "/assets/images/avatars/Multas/aliens.svg",
+    			planet : 2,
     			selected : false
     		}, {
-    			name : "John Lennon",
-    			avatar : "/assets/images/avatars/Paranose/astro.svg",
-    			planete : "Paranose",
+    			username : "John Lennon",
+    			imagePath : "/assets/images/avatars/Paranose/astro.svg",
+    			planet : 3,
     			selected : false
      		},
     		{
-    			name : "Patti Smith",
-    			avatar : "/assets/images/avatars/Sautien/dashboard.svg",
-    			planete : "Sautien",
+    			username : "Patti Smith",
+    			imagePath : "/assets/images/avatars/Sautien/dashboard.svg",
+    			planet : 4,
     			selected : false
 
     		}, {
-    			name : "Nina Hagen",
-    			avatar : "/assets/images/avatars/Multas/aliens.svg",
-    			planete : "Multas",
+    			username : "Nina Hagen",
+    			imagePath : "/assets/images/avatars/Multas/aliens.svg",
+    			planet : 5,
     			selected : false
 
     		}, {
-    			name : "Genesis",
-    			avatar : "/assets/images/avatars/Paranose/astro.svg",
-    			planete : "Paranose",
+    			username : "Genesis",
+    			imagePath : "/assets/images/avatars/Paranose/astro.svg",
+    			planet : 1,
     			selected : false
 
     		},
     		{
-    			name : "Cindy Laupers",
-    			avatar : "/assets/images/avatars/Sautien/dashboard.svg",
-    			planete : "Sautien",
+    			username : "Cindy Laupers",
+    			imagePath : "/assets/images/avatars/Sautien/dashboard.svg",
+    			planet : 3,
     			selected : false
 
     		}

@@ -28,14 +28,14 @@
 
               <div v-if="friends.length < 5">
                 <div v-for="(friend,index) in friends" class="conversation pseudo-button" v-on:click="active(index)" v-bind:class="{ 'conv-selected' : friend.selected}">
-                  <img :src="friend.avatar" class="avatar center">
-                  <h1 v-bind:class="friend.planete"> {{ friend.name }} </h1>
+                  <img :src="friend.imagePath" class="avatar center">
+                  <h1 v-bind:style="{color : planetData[friend.planet]}"> {{ friend.username }} </h1>
                 </div>
               </div>
               <div v-else> 
                 <div v-for="i in 5"  class="conversation pseudo-button" v-on:click="active(i)" v-bind:class="{ 'conv-selected' : friends[i].selected}">
-                  <img :src="friends[i].avatar" class="avatar center">
-                  <h1 v-bind:class="friends[i].planete"> {{ friends[i].name }} </h1>
+                  <img :src="friends[i].imagePath" class="avatar center">
+                  <h1 v-bind:style="{color : planetData[friends[i].planet]}"> {{ friends[i].username }} </h1>
                 </div>
               </div> 
             </div>
@@ -46,7 +46,7 @@
             <div v-if="showAllResponsiveFriends" class="container-colored responsive-lasts-friends-list" v-on:click="showFriendsResponsive()" >
               <div class="all-friends col-sm-12">
                 <div v-for="(string, key) in stringIndex">
-                  <p v-for="(friend,index) in allFriends[string]" v-on:click="active(index)" v-bind:class="{ 'conv-selected' : friend.selected}" v-bind:style="{color : planetData[key]}" class="pseudo all-friends-list"> <img :src="friend.imagePath" class="small-avatar center"> {{ friend.username }} </p>
+                  <p v-for="(friend,index) in allFriends[string]" v-on:click="createNewConv(friend)" v-bind:class="{ 'conv-selected' : friend.selected}" v-bind:style="{color : planetData[key]}" class="pseudo all-friends-list pseudo-button"> <img :src="friend.imagePath" class="small-avatar center"> {{ friend.username }} </p>
                   
                 </div>
               </div>
@@ -66,14 +66,14 @@
           <div class="all-friends col-sm-12">
             <div v-if="friends.length < 5">
               <div v-for="(friend,index) in friends" class="conversation pseudo-button col-md-2 col-lg-11" v-on:click="active(index)" v-bind:class="{ 'conv-selected' : friend.selected}">
-                <img :src="friend.avatar" class="avatar center">
-                <h1 v-bind:class="friend.planete"> {{ friend.name }} </h1>
+                <img :src="friend.imagePath" class="avatar center">
+                <h1 v-bind:style="{color : planetData[friend.planet]}"> {{ friend.username }} </h1>
               </div>
             </div>
             <div v-else> 
               <div v-for="i in 5"  class="conversation pseudo-button col-md-2 col-lg-11" v-on:click="active(i)" v-bind:class="{ 'conv-selected' : friends[i].selected}">
-                <img :src="friends[i].avatar" class="avatar center">
-                <h1 v-bind:class="friends[i].planete"> {{ friends[i].name }} </h1>
+                <img :src="friends[i].imagePath" class="avatar center">
+                <h1 v-bind:style="{color : planetData[friends[i].planet]}"> {{ friends[i].username }} </h1>
               </div>
             </div> 
           </div>
@@ -89,7 +89,7 @@
           </div>
           <div class="all-friends col-sm-12">
             <div v-for="(string, key) in stringIndex">
-                  <p v-for="(friend,index) in allFriends[string]" v-on:click="active(index)" v-bind:class="{ 'conv-selected' : friend.selected}" v-bind:style="{color : planetData[key]}" class="pseudo all-friends-list col-sm-12"> <img :src="friend.imagePath" class="small-avatar center"> {{ friend.username }} </p> 
+                  <p v-for="(friend,index) in allFriends[string]" v-on:click="createNewConv(friend)" v-bind:class="{ 'conv-selected' : friend.selected}" v-bind:style="{color : planetData[key]}" class="pseudo all-friends-list col-sm-12 pseudo-button"> <img :src="friend.imagePath" class="small-avatar center"> {{ friend.username }} </p> 
                 </div>
               </div>
         </div>
@@ -107,22 +107,22 @@
             <p class="text-center date">{{date}}</p>
             <div v-for="message in conversation" class="row">
               <div class="col-sm-12 col-xs-12 message-perso sender-message" v-if="message.sender == 1">
-                <img :src="friends[currentSelected].avatar" class="avatar">
+                <img :src="friends[currentSelected].imagePath" class="avatar">
                 <div class="message-content">
-                  <h1 v-bind:class="friends[currentSelected].planete" class="pseudo"> {{ friends[currentSelected].name }} </h1> <div class="date">{{message.time }}</div>
+                  <h1 v-bind:style="{color : planetData[friends[currentSelected].planet]}" class="pseudo"> {{ friends[currentSelected].username }} </h1> <div class="date">{{message.time }}</div>
                   <p > {{ message.content}} </p>
                 </div>
               </div>
               <div class="col-sm-12 col-xs-12 message-perso" v-else>
                 <p class="col-sm-10 col-xs-10 right"> {{ message.content}} </p>
-                <img :src="myself.avatar"  class="avatar col-sm-2 col-xs-2 right">
+                <img :src="myself.imagePath"  class="avatar col-sm-2 col-xs-2 right">
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-xs-12 col-sm-12 message-perso publish-message">
               <form class="form-post">
-                <img :src="myself.avatar"  class="avatar col-sm-1 col-xs-1 right">
+                <img :src="myself.imagePath"  class="avatar col-sm-1 col-xs-1 right">
                 <textarea rows="2" type="text" placeholder="Votre message"  class="col-sm-10 col-xs-10" v-model="newMessage"></textarea>
                 <img class="col-sm-1 col-xs-1 pseudo-button" src="/assets/images/validation.svg" v-on:click="postNewMessage">
               </form>
