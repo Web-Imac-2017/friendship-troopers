@@ -183,7 +183,6 @@ class Account extends Controller{
 			try {
 				$data['id'] = $user->addUser($data);
 			} catch (\PDOException $e) {
-				var_dump($e->getMessage());
 				throw new \Utils\RequestException('USER_EXISTING', 400);
 			}
 			$this->loadModel('User_Avatar');
