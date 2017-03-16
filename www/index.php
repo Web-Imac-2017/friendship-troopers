@@ -5,10 +5,14 @@ if ($_GET['url'] === 'favicon.ico') {
     exit();
 }
 define('ROOT', __DIR__);
+
 require_once ROOT.'/api/utils/Autoloader.php';
 \Utils\Autoloader::register();
 \Utils\Config::init();
 \Utils\Session::init();
+
+require_once ROOT.'/api/utils/Router/Router.php';
+require_once ROOT.'/api/utils/Router/Route.php';
 
 use \Utils\Router\Router;
 
