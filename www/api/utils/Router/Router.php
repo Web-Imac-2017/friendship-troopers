@@ -53,4 +53,6 @@ class Router {
         return '/' . self::$namedRoutes[$name]->getUrl($params);
     }
 
+		
+
 }

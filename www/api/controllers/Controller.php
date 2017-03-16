@@ -60,9 +60,16 @@ abstract class Controller {
     return $currentData;
   }
 
-  public function filterCSRF () {
+  public function generateTokenCSRF (string $name) {
+		$token = uniqid('', true);
+		\Utils\Session::write("csrf_token_$name", $token);
 
+		return $token;
   }
+
+	public function checkCSRFtoken (string $name, string $postToken) {
+		return \Utils\Session::read("csrf_token_$name") === $postToken;
+	}
 
 	/**
 	 * Prepare and return the response with the HTTP code within

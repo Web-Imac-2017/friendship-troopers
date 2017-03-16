@@ -170,10 +170,10 @@ class Publication extends Controller {
 		$this->response([
 			'publicationId' => $id,
 		], 201, [
-			/*'Location' => \Utils\Router\Router::url('planets.posts.view', [
+			'Location' => \Utils\Router\Router::url('planets.posts.view', [
 				'planet' => $planet,
 				'id' => $id,
-			]),*/
+			]),
 		]);
 	}
 
