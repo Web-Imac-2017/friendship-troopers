@@ -66,7 +66,7 @@ const LateralMenuRight = Vue.extend({
         actualite : {
           intergalactique : [
         	{
-        		pseudo: 'luckypon', 
+        		pseudo: 'Luckypon', 
         		avatar:'/assets/images/avatars/Galaxie/astro.svg', 
         		planet :'Galaxie',
         		honor :'Super admin',
@@ -77,7 +77,7 @@ const LateralMenuRight = Vue.extend({
           galactique : [
         	{
         		pseudo: 'Sarkophage', 
-            userId : 6,
+            userId : 37,
         		avatar:'/assets/images/avatars/Terre/planets.svg', 
         		planet :'Terre',
             planetId : 1,
@@ -89,7 +89,7 @@ const LateralMenuRight = Vue.extend({
           planetaire : [
         	{
         		pseudo: 'Harrissa Ford', 
-            userId : 9,
+            userId : 40,
         		avatar:'/assets/images/avatars/Paranose/astro.svg', 
         		planet :'Paranose',
             planetId : 2,

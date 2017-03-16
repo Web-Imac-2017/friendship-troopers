@@ -47,7 +47,7 @@ const User = Vue.extend({
     getRouteParams : function(){
       this.$http.get(apiRoot() + 'users/me').then((response) => {
           this.profil = response.data;
-          if (this.$route.params.username == response.data.username){
+          if (this.$route.params.userId == response.data.id){
             this.myself = true
             this.getNbFriends(apiRoot() + 'users/' + this.profil.id + '/number_friends');
             this.getInterest(apiRoot() + 'users/' + this.profil.id + '/interest');
