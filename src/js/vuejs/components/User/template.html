@@ -14,7 +14,7 @@
               <img :src="imagePath" class="user-avatar">
             </div>
             <div class="col-sm-7">
-              <div v-if="myself"> <p>Mon profil </p></div>
+              <div v-if="myself"> <p style="display:inline">Mon profil </p></div>
               <div v-else> <p> Profil de <h1 :class="profil.name" class="name"> {{ profil.username }} </h1></p></div>
               <p class="honorific-title"> {{ profil.honorificTitle }} </p>
               <p class="green" v-if="profil.points == null"> 0 point </p>
