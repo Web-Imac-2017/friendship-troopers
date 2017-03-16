@@ -9,12 +9,28 @@ class Stardust extends Controller {
   public function __construct() {
     $this->loadModel('Stardust');
   }
+
+  /**
+  * Count stardusts (likes) for a publication.
+  * @param  int 		$publicationId 	publication id passed by road
+  * @param  array 	$get 						associativ array passed by method get (datas)
+  * @return [type] 	[] 							[description]
+  */
+
   public function list ($publicationId, $get) {
     $count = $this->Stardust->findCount([
       'publicationId' => $publicationId,
     ]);
     $this->response($count, 200);
   }
+
+  /**
+  * Checks if stardust exists for a publication.
+  * @param  int 		$publicationId 	publication id passed by road
+  * @param  array 	$get 						associativ array passed by method get (datas)
+  *  @return boolean  ...   true if stardust exists, false if not
+  */
+
   public function exist ($publicationId, $get) {
     if (!\Utils\Session::isLoggedIn()) {
       throw new \Utils\RequestException('operation reservee aux membres', 401);
@@ -24,7 +40,7 @@ class Stardust extends Controller {
       'publicationId' => $publicationId,
       'userId' => $userId,
     ]);
-    
+
     if ($count['count'] != 0) {
       $count['count'] = 1;
     }
@@ -32,6 +48,7 @@ class Stardust extends Controller {
   }
   /**
    * Create a stardust for a publication, there can only be one by user and publication
+   * @param  int 		$publicationId 				publication id passed by road
    * @param  POST     $post Post request from the route
    * @return boolean  ...   true if like created, false if not
    */
@@ -54,7 +71,8 @@ class Stardust extends Controller {
   }
   /**
    * Delete a stardust from a publication
-   * @param  POST     $post UserId and PublicationId, both primary keys of the stardust
+   * @param  int 		$publicationId 				publication id passed by road
+   * @param  array 	$delete 		assosiative array passed by method delete (datas)
    * @return boolean  ...   true if delete succed, false if like not found
    */
   public function delete ($publicationId, $delete) {

@@ -15,6 +15,13 @@ class Publication extends Controller {
 		$this->loadModel('Publication');
 	}
 
+	/**
+	* Count publications for a planet.
+	* @param  int 		$planet 			planet id passed by road
+	* @param  array 	$get 						associative array passed by method get (datas)
+	* @return [type] 	[] 							[description]
+	*/
+
 	public function count ($planet, $get) {
 		$count = $this->Publication->find([
 			'fields' => [

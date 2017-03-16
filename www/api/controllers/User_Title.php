@@ -12,6 +12,13 @@ class User_Title extends Controller {
     $this->loadModel('User_Title');
   }
 
+  /**
+  * Count all titles possessed by a user.
+  * @param  int 		$userId 				user id passed by road
+  * @param  array 	$get 						associative array passed by method get (datas)
+  * @return [type] 	[] 							[description]
+  */
+
   public function count ($userId, $get){
     if (!\Utils\Session::isLoggedIn()) {
       throw new \Utils\RequestException('operation reservee aux membres', 401);
@@ -26,6 +33,13 @@ class User_Title extends Controller {
 
     $this->response($count, 200);
   }
+
+  /**
+  * List all titles possessed by a user.
+  * @param  int 		$userId 				user id passed by road
+  * @param  array 	$get 						associative array passed by method get (datas)
+  * @return [type] 	[] 							[description]
+  */
 
   public function list ($userId, $get){
     if (!\Utils\Session::isLoggedIn()) {
@@ -61,6 +75,12 @@ class User_Title extends Controller {
     $this->response($find, 200);
   }
 
+  /**
+  * View which title is the user's current title.
+  * @param  int 		$userId 				user id passed by road
+  * @param  array 	$get 						associative array passed by method get (datas)
+  * @return [type] 	[] 							[description]
+  */
 
   public function viewCurrent ($userId, $get){
     if (!\Utils\Session::isLoggedIn()) {
@@ -98,6 +118,12 @@ class User_Title extends Controller {
     $this->response($find, 200);
   }
 
+  /**
+  * Add a title to the user.
+  * @param  int 		$userId 				user id passed by road
+  * @param  array 	$post 						associative array passed by method post (datas)
+  * @return [type] 	[] 							[description]
+  */
 
   public function add ($userId, $post) {
     if (!\Utils\Session::isLoggedIn()) {
@@ -128,6 +154,13 @@ class User_Title extends Controller {
     $this->response(null, 200);
   }
 
+  /**
+  * Set an user's title to current (current = true).
+  * @param  int 		$userId 				user id passed by road
+  * @param  int 		$titleId 				title id passed by road
+  * @param  array 	$patches 						associative array passed by method patch (datas)
+  * @return [type] 	[] 							[description]
+  */
 
   public function setCurrent ($userId, $titleId, $patch) {
     if (!\Utils\Session::isLoggedIn()) {
@@ -146,7 +179,7 @@ class User_Title extends Controller {
         'userId' => $userId,
       ],
     ]);
-    
+
     if ($checkTitle == false){
       throw new \Utils\RequestException('ce titre n\'appartient pas a l\utilisateur', 403);
     }
@@ -184,6 +217,14 @@ class User_Title extends Controller {
 
     $this->response(null, 200);
   }
+
+  /*
+  * Delete an user's title. Accessible to administrators and moderators only
+  * @param  int 		$userId 				user id passed by road
+  * @param  int 		$titleId 				title id passed by road
+  * @param  array 	$delete 		assosiative array passed by method delete (datas)
+  * @return [type] 	[] 							[description]
+   */
 
   public function delete ($userId, $titleId, $delete) {
     if (!\Utils\Session::isLoggedIn()) {

@@ -14,6 +14,12 @@ class Planet extends Controller {
     $this->loadModel('Planet');
   }
 
+  /**
+	* List all planets.
+  * @param  array 	$get 		associative array passed by method get (datas)
+	* @return [type] 	[] 				[description]
+	*/
+
   public function list($get){
     if (!\Utils\Session::isLoggedIn()) {
       throw new \Utils\RequestException('operation reservee aux membres', 401);
@@ -27,6 +33,12 @@ class Planet extends Controller {
     ]);
     $this->response($response, 200);
   }
+
+  /**
+	* Create a planet. Accessible by administrators and moderators only.
+	* @param  array 	$post 		associative array passed by method post (datas)
+	* @return [type] 	[] 				[description]
+	*/
 
   public function create($post){
     if (!\Utils\Session::isLoggedIn()) {
@@ -51,7 +63,12 @@ class Planet extends Controller {
     ]));
     $this->response(null, 201);
   }
-
+  /**
+	* Delete a planet. Accessible by administrators and moderators only.
+	* @param  int 		$planetId 	planet id passed by road
+	* @param  array 	$delete 		associative array passed by method delete (datas)
+	* @return [type] 	[] 				[description]
+	*/
   public function delete($planetId, $delete){
     if (!\Utils\Session::isLoggedIn()) {
       throw new \Utils\RequestException('operation reservee aux membres', 401);

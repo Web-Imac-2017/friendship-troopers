@@ -12,6 +12,11 @@ class Title extends Controller {
     $this->loadModel('Title');
   }
 
+  /**
+	* List all titles.
+	* @param  array 	$get 						associative array passed by method get (datas)
+	* @return [type] 	[] 							[description]
+	*/
   public function list($get){
     if (!\Utils\Session::isLoggedIn()) {
       throw new \Utils\RequestException('operation reservee aux membres', 401);
@@ -24,6 +29,12 @@ class Title extends Controller {
     $this->response($find, 200);
 
   }
+
+  /**
+  * Create a title. Accessible to administrators and moderators only
+  * @param  array 	$post 						associative array passed by method post (datas)
+  * @return [type] 	[] 							[description]
+  */
 
   public function create ($post) {
     if (!\Utils\Session::isLoggedIn()) {
@@ -52,6 +63,13 @@ class Title extends Controller {
 
     $this->response(null, 200);
   }
+
+  /**
+  * Update a title. Accessible to administrators and moderators only
+  * @param  int 		$id 			title id passed by road
+  * @param  array 	$patches 						associative array passed by method patch (datas)
+  * @return [type] 	[] 							[description]
+  */
 
   public function update ($id, $patches) {
     if (!\Utils\Session::isLoggedIn()) {
@@ -84,6 +102,13 @@ class Title extends Controller {
     $this->Title->save($this->filterXSS($updates));
     $this->response(null, 200);
   }
+
+  /**
+  * Delete a title. Accessible to administrators and moderators only.
+  * @param  int 		$id 			title id passed by road
+  * @param  array 	$delete 		associative array passed by method delete (datas)
+  * @return [type] 	[] 							[description]
+  */
 
 /*
   public function delete ($id, $delete) {
