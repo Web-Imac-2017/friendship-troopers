@@ -40,18 +40,21 @@ const User = Vue.extend({
        }  
       },
     mounted : function() {
-      /*Get all the user informations */
     this.getRouteParams();
    },
    methods: { 
+    /*gets all the user information*/
     getRouteParams : function(){
       this.$http.get(apiRoot() + 'users/me').then((response) => {
           this.profil = response.data;
-          if (this.$route.params.userId == response.data.id){
+          console.log(JSON.stringify(response.data.username))
+          if (this.$route.params.username == response.data.username){
             this.myself = true
             this.getNbFriends(apiRoot() + 'users/' + this.profil.id + '/number_friends');
             this.getInterest(apiRoot() + 'users/' + this.profil.id + '/interest');
             this.getPosts(apiRoot() + 'planets/' + this.profil.planetId + '/posts', { 'user' : this.profil.id });
+            this.planetPath = "/assets/images/planets/" + this.profil.name +".svg";
+            this.imagePath = "/assets/images/avatars/" + this.profil.name + "/" + this.profil.imagePath;
           } else {
             this.getUser(apiRoot() + 'users/' + this.$route.params.userId);
             this.myself = false
@@ -60,12 +63,15 @@ const User = Vue.extend({
       }, (response) => {
       })
     },
+    /*gets the user nbFriends, profil info and Post if it is not the connected*/
    getUser : function(route){
       this.$http.get(route).then((response) => {
           this.profil = response.data;
           this.getNbFriends(apiRoot() + 'users/' + this.profil.id + '/number_friends');
           this.getInterest(apiRoot() + 'users/' + this.profil.id + '/interest');
           this.getPosts(apiRoot() + 'planets/' + this.profil.planetId + '/posts', { 'user' : this.profil.id });
+           this.planetPath = "/assets/images/planets/" + this.profil.name +".svg";
+            this.imagePath = "/assets/images/avatars/" + this.profil.name + "/" + this.profil.imagePath;
       }, (response) => {
       })
    },    
@@ -85,6 +91,7 @@ const User = Vue.extend({
         console.log(response);
       });     
     }, 
+    /*get the post from a specific user*/
     getPosts : function(route, option) {
       var data = { 'user' : this.profil.id }
       this.$http.get(apiRoot() + 'planets/' + this.profil.planetId + '/posts', {
@@ -106,30 +113,30 @@ const User = Vue.extend({
     showLess : function() {
       this.start = 6;
     },
+    /* send friend request to visited profil*/
     addFriend : function() {
-      //Router::post('/users/:userId/add_friend','friend#addFriend', 'users.me.addFriend'); //ok
       this.$http.post(apiRoot() + "users/" + this.profil.id + "/add_friend", {emulateJSON: true}).then(
         (response) => {
-          console.log("Demande envoyée");
         },
         (response) => {
-
+          switch(response.status) {
+            case 401:
+              this.$router.push('/erreur401')
+            break;
+            case 403:
+              this.$router.push('/erreur403')
+            break;
+            default:
+                this.$router.push('/erreur')
+          }
         });
-      console.log("User : Adding friend");
-    }
-  },
-  computed : {
-    planetName : function() {
-      return this.planetPath = "/assets/images/planets/" + this.profil.name +".svg";
-    } ,
-    imagePath : function() {
-      return "/assets/images/avatars/" + this.profil.name + "/" + this.profil.imagePath;
     }
   },
   data () {
       return {
         updated : false,
         profil : {},
+        imagePath : '',
         planetPath : '',
         interests : [],
         nbRiddleSolved : 0,

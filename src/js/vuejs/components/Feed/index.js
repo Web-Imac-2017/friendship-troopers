@@ -28,10 +28,6 @@ const Feed = Vue.extend({
     'page-nav' : PageNav,
     'navbar' : NavBar
   },
-  created : function(){
-  },
-  mounted : function() {
-  },
   methods : {
     initialize : function() {
       // Récupérer les premiers posts de la planète de l'utilisateur
@@ -43,7 +39,6 @@ const Feed = Vue.extend({
       this.$http.post(apiRoot() + "planets/" + this.planetId + "/posts", { 'content' : post.content}, {emulateJSON : true}).then(
         (response) => {
           post.content = '';
-          // Reload de la page serait mieux, mais problème avec le htaccess alors...
           this.getPublications(apiRoot() + 'planets/'+ this.planetId + '/posts');
           this.countPublications();
           this.currentPage = 1;
@@ -58,6 +53,7 @@ const Feed = Vue.extend({
           this.totalPublications = response.data.nbPost;
         },
         (response) => {
+
         });
     },
     getPublications : function(route) {
@@ -70,7 +66,7 @@ const Feed = Vue.extend({
 
           var linkPrev = response.headers.get("Link").split(",")[1].split(";")[0];
           this.routePrevPost = apiRoot() + linkPrev.substring(3, linkPrev.length-1);
-
+          console.log(response.status)
         },
         (response) => {
         });
