@@ -27,7 +27,7 @@ const Post = Vue.extend({
    methods : {
     like : function() {
       if (!this.liked) { // Si l'utilisateur n'a pas déjà liké, il like
-        this.$http.post(apiRoot() + "/posts/" + this.post.id + "/stardust").then(
+        this.$http.post(apiRoot() + "posts/" + this.post.id + "/stardust").then(
           (response) => {
             this.getLikes(); // On met à jour le nombre de likes affichés
             this.liked = true;
@@ -35,7 +35,7 @@ const Post = Vue.extend({
           (response) => {
           });
       } else { // S'il a déjà liké, il délike
-        this.$http.delete(apiRoot() + "/posts/" + this.post.id + "/stardust").then(
+        this.$http.delete(apiRoot() + "posts/" + this.post.id + "/stardust").then(
           (response) => {
             this.getLikes(); // On met à jour le nombre de likes affichés
             this.liked = false;
@@ -100,7 +100,7 @@ const Post = Vue.extend({
       );
     },
     getTotalComments: function() {
-      this.$http.get(apiRoot() + "/planets/" + this.planetId + "/posts/" + this.post.id + "/comments/count", {emulateJSON: true}).then(
+      this.$http.get(apiRoot() + "planets/" + this.planetId + "/posts/" + this.post.id + "/comments/count", {emulateJSON: true}).then(
         (response) => {
           this.totalComments = response.data.count;
         },
@@ -110,7 +110,7 @@ const Post = Vue.extend({
     },
     isLiked : function() {
       ///posts/:publicationId/stardust/exist
-      this.$http.get(apiRoot() + "/posts/" + this.post.id + "/stardust/exist", {emulateJSON: true}).then(
+      this.$http.get(apiRoot() + "posts/" + this.post.id + "/stardust/exist", {emulateJSON: true}).then(
         (response) => {
           if (response.data == 1) {
             this.liked = true;

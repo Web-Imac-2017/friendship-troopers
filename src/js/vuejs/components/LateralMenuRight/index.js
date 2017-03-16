@@ -9,7 +9,6 @@ Vue.component('intergalactique', {
   props: ['intergalactique'],
   template:
     `<div class="actu-intergalactique"> 
-      <router-link :to="{ name: 'User', params: { user: intergalactique.pseudo}}">
       <ul>
         <li>
           <img :src=intergalactique.avatar alt="avatar" class="avatar"> 
@@ -19,7 +18,6 @@ Vue.component('intergalactique', {
           <p class="honor">{{intergalactique.honor}}</p>
         </li>
       </ul>
-      </router-link>
       <p class="content">{{intergalactique.content}} </p>
     </div>`
 })
@@ -29,7 +27,6 @@ Vue.component('galactique', {
   props: ['galactique'],
   template:
     `<div class="actu-galactique"> 
-      <router-link :to="{ name: 'User', params: { user: galactique.pseudo}}">
       <ul>
         <li>
           <img :src=galactique.avatar alt="avatar" class="avatar"> 
@@ -39,7 +36,6 @@ Vue.component('galactique', {
           <p class="honor">{{galactique.honor}}</p>
         </li>
       </ul>
-      </router-link>
       <p class="content">{{galactique.content}} </p>
     </div>`
 })
@@ -49,7 +45,6 @@ Vue.component('planetaire', {
   props: ['planetaire'],
   template:
     `<div class="actu-planetaire"> 
-      <router-link :to="{ name: 'User', params: { user: planetaire.pseudo}}">
       <ul>
         <li>
           <img :src=planetaire.avatar alt="avatar" class="avatar"> 
@@ -59,7 +54,6 @@ Vue.component('planetaire', {
           <p class="honor">{{planetaire.honor}}</p>
         </li>
       </ul>
-      </router-link>
       <p class="content">{{planetaire.content}} </p>
     </div>`
 })
@@ -77,27 +71,31 @@ const LateralMenuRight = Vue.extend({
         		planet :'Galaxie',
         		honor :'Super admin',
         		date : '12/03/13',
-        		content : 'héhé, je suis une actualité :) !'
+        		content : 'Ajout d\'un nouvel avatar et event en préparation!'
         	}
           ], 
           galactique : [
         	{
-        		pseudo: 'Ponyta', 
+        		pseudo: 'Sarkophage', 
+            userId : 6,
         		avatar:'/assets/images/avatars/Terre/planets.svg', 
         		planet :'Terre',
-         		honor :'Super zorro',
+            planetId : 1,
+         		honor :'Expert en tic',
 	       		date : '12/03/13',
-        		content : 'héhé, je suis une actualité :) ! adipiscing elit. Curabitur ut tortor eu ipsum laoreet faucibus. Etiam mattis eros id leo maximus blandit. Proin id massa in risus gravida suscipit non eu arcu. Aenean auctor lacus risus, porttitor sodales odio vehicula eu. Curabitur luctus ut ligula a iaculis. Aliquam erat volutpat. Pell'
+            content : 'Bienvenue dans la troupe des friends!'
         	}
           ],
           planetaire : [
         	{
-        		pseudo: 'Yakati', 
+        		pseudo: 'Harrissa Ford', 
+            userId : 9,
         		avatar:'/assets/images/avatars/Paranose/astro.svg', 
         		planet :'Paranose',
-         		honor :'Super sayen',
+            planetId : 2,
+         		honor :'druide',
 	       		date : '12/03/13',
-        		content : 'héhé, je suis une actualité :) !'
+        		content : 'Spaghetti party ce soir!'
         	}
         ]
         // type : 0 -> intergalactique / 1 --> galactique / 2 --> planetaire*/

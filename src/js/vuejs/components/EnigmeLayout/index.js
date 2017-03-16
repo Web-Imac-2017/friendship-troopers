@@ -23,9 +23,23 @@ const EnigmeLayout = Vue.extend({
         		console.log(response);
       		})
       	} 
+  }, methods : {
+    sendAnswer : function(){
+      console.log("here" + this.answer)
+      if ((this.answer == "menteur") || (this.answer == "Menteur")){
+        this.$router.push( {name: 'EnigmeResolved',
+            params: { user: this.username }})
+         this.answer = ''
+      } else {
+        this.answer = ''
+        this.wrongAnswer = true
+      }
+     
+    }
   },
   data () {
   	return {
+      wrongAnswer : false,
   		username :'',
   		riddle : {
   			content : 'Je plonge d\'une falaise de 10 mètre de haut. <br\> Je nage sous l\'eau pendant plus d\'une heure. <br\> Je chasse le requin avec les dents. <br\> Chaque matin je traverse la Méditarranée à la brasse ...',
@@ -39,7 +53,7 @@ const EnigmeLayout = Vue.extend({
   			points : 125
   		},
   		planetData: ["#3e3e3e", "#3eb6df", "#ef4646", "#767fe2", "#72b51a", "#f9a519" ],
-  		response : '',
+  		answer : '',
       me:{}
   	}
   }

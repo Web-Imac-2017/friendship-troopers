@@ -58,8 +58,9 @@
       {{ riddle.content }}
     </div>
   </div>
-  <form v-on:submit.prevent.stop="" class="row response pink">
-    <textarea class="col-sm-offset-7 col-sm-4" rows="1" type="text" placeholder="Proposer une réponse" v-model="response"></textarea>
-    <img class="small pseudo-button col-sm-1" src="/assets/images/validation-pink-bolder.svg">
+  <form class="row response pink">
+    <textarea class="col-sm-offset-7 col-sm-4" rows="1" type="text" placeholder="Proposer une réponse" v-model="answer" ></textarea>
+    <img class="small pseudo-button col-sm-1" src="/assets/images/validation-pink-bolder.svg" v-on:click="sendAnswer()">
   </form>
+   <p v-if="wrongAnswer"> Mauvaise réponse! </p>
 </div>

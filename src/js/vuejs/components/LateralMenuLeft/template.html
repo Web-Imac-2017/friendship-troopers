@@ -21,25 +21,5 @@
       <router-link class="sublink" :to="{ name: 'Friends', params: { user: user.username }}"> Voir tous mes amis </router-link> <br>
       <router-link class="sublink" :to="{ name: 'Messages', params: { user: user.username }}"> Accéder à la messagerie </router-link> <br>
 
-      <div v-if="lastFriends.length > 0" class="lastFriends">
-        <p> Derniers compagnons : </p>
-        <ul>
-          <li v-for="friend in lastFriends">
-            <router-link :to="{ name: 'User', params: { user: friend.name }}"> <img :src="friend.avatar" :alt="friend.name" :title="friend.name"></router-link> 
-          </li>
-        </ul>
-      </div> 
     </div>
-
-<!--  
-
-  <div class="menuTools">
-
-      <router-link to="/mentions-legales" class=""> Mentions légales </router-link> -
-      <router-link to="/aide" class=""> Aide </router-link> -
-      <router-link to="/problems" class=""> Signaler un problème </router-link> -
-      <router-link to="/a-propos" class=""> À propos </router-link> -
-      <router-link to="/FAQ" class=""> FAQ </router-link>
-
-  </div> -->
 </div>

@@ -12,7 +12,7 @@ const FriendsSubMenu = Vue.extend({
   },
   methods: {
   	validateInvitation: function() {
-      this.$http.patch(apiRoot() + "/users/" + this.friend.friendId + "/confirm_friend", {emulateJSON: true}).then(
+      this.$http.patch(apiRoot() + "users/" + this.friend.friendId + "/confirm_friend", {emulateJSON: true}).then(
       (response) => {
         this.$emit('friendaction');
       },
@@ -20,7 +20,7 @@ const FriendsSubMenu = Vue.extend({
       });
   	},
   	refuseInvitation : function() {
-      this.$http.delete(apiRoot() + "/users/" + this.friend.friendId + "/delete_friend", {emulateJSON: true}).then(
+      this.$http.delete(apiRoot() + "users/" + this.friend.friendId + "/delete_friend", {emulateJSON: true}).then(
       (response) => {
         this.$emit('friendaction');
       },
