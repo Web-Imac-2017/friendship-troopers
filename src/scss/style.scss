@@ -7,6 +7,7 @@
 @import "bootstrap-custom";
 @import "riddle";
 @import "user-profil";
+@import "messagebox";
 
 .wrapper {
   @include flexbox();
@@ -51,7 +52,7 @@ h1, h2, h3, h4, h5, h6 {
 .container-transparent{
   background-color: $transparent-background;
   @include margin4(0, 0, 1, 0);
-  @include padding(1);
+  @include padding2(1, 3);
 }
 
 
@@ -555,7 +556,7 @@ small {
 .publish {
   background-color: $comments-background;
   @include padding2(0.8, 1);
-  @include margin(2);
+  @include margin2(2, 0);
   /*margin-bottom: 2%;*/
   textarea {
     width: 100%;
@@ -632,14 +633,23 @@ small {
 
 .avatar {
   max-height: 8rem;
-/*   padding-right:0; */
   text-align:center;
-    img{
-      @include border-radius(10);
-      width:auto;
-      height:inherit;
-    }
+  img{
+    @include border-radius(10);
+    width:auto;
+    height:inherit;
+  }
 }
+.small-avatar {
+  max-height: 4rem;
+  text-align:center;
+  display: inline-block;
+  img {
+    @include border-radius(10);
+    width:auto;
+    height:inherit;
+  }
+} 
 
 
 @media screen and (min-width: $break-mid) {
@@ -785,6 +795,10 @@ input[type="radio"] {
 .vertical-align {
     display: flex;
     align-items: center;
+}
+.no-gutters  {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .border-left {
@@ -1107,7 +1121,6 @@ p.honorific-title {
 
 
 
-
 @media all and (max-width: $break-small-welcome-on-board) {
   #welcome-on-board-container {
     
@@ -1226,10 +1239,6 @@ small.date {
   .border-left {
       border-left-width: 0;
   }
-
-  
-
-
  }
 
 
@@ -1244,6 +1253,19 @@ p.see:hover, .green{
 
 p.loadMore {
   padding-left: 1rem;
+}
+
+.not-done {
+  background: $sub-menu-list-item-background;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  height: 6rem;
+  z-index: 15;
+  width: 100%;
+  font-family: $title-font;
+  @include padding(2);
+
 }
 
 @media screen and (min-width: $break-small) {

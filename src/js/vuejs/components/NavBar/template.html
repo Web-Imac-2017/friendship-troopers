@@ -64,7 +64,7 @@
             </ul>
             <div  v-if = "messages.length > 0" class="separator"></div>
 
-            <p class="sub-menu-footer"> <a href ="/messagerie">Accéder à ma messagerie</a></p>
+            <p class="sub-menu-footer"> <router-link :to="{ name: 'Chat', params: { user: user.username }}">Accéder à ma messagerie</router-link></p>
 
           </div> 
         </div>

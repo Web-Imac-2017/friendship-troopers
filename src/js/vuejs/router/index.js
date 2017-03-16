@@ -81,7 +81,7 @@ const router = new VueRouter({
       props: true
   },{ 
       name : 'Chat',
-      path: '/:user/conversations/utilisateur', 
+      path: '/:user/conversations', 
       component : Chat,
       props: true
   },{ 
