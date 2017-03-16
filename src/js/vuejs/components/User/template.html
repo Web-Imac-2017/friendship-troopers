@@ -10,10 +10,10 @@
       <section class="col-sm-8 container-transparent user">
         <div class="container-colored">
           <div class="row profil">
-            <div class="col-xs-2">
+            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3">
               <img :src="imagePath" class="user-avatar">
             </div>
-            <div class="col-xs-7">
+            <div class="col-xs-4 col-sm-3 col-md-5 col-lg-3">
               <div v-if="myself"> <p style="display:inline">Mon profil </p></div>
               <div v-else> <p style="display:inline"> Profil de <h1 :class="profil.name" class="name"> {{ profil.username }} </h1></p></div>
               <p class="honorific-title"> {{ profil.honorificTitle }} </p>
@@ -21,9 +21,9 @@
               <p class="green" v-else-if="profil.points < 2"> {{ profil.points}} point </p>
               <p class="green" v-else> {{ profil.points }} points </p>
             </div>
-            <div class="col-xs-1 border-right"></div>
-            <div class="col-xs-2 ">
-              <img :src="planetName" class="planet"> 
+            <div class="col-sm-1 col-md-1 col-lg-3 border-right"></div>
+            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3">
+              <img :src="planetPath" class="planet"> 
 
               <p class="text-center"> {{ profil.name }} </p>
             </div>
