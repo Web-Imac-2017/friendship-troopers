@@ -8,7 +8,7 @@
   </div>
 
 
-  <div v-show="!introText" class="container welcome-on-board" v-if="welcomeData.current < welcomeData.nbQuestions">
+  <div v-show="!introText" class="container welcome-on-board" v-if="welcomeData.current < welcomeData.nbQuestions &&  !alreadyGotHere">
     <div class="container-transparent">
       <div class="row title">
         <div> {{ welcomeData.questions[welcomeData.current].number }}.</div>  
@@ -49,7 +49,7 @@
             </div>
     </div>
   </div>
-  <div id="planetAttribution" class="container welcome-on-board border-planet" v-bind:style="styleObject" v-else>
+  <div v-else id="planetAttribution" class="container welcome-on-board border-planet" v-bind:style="styleObject" v-else>
     <div class="container-transparent">
       <div class="row no-gutters ">
         <div class="col-xs-12 col-md-6">
@@ -61,7 +61,7 @@
             <p style="text-align:left" > {{ welcomeData.planetInfo[welcomeData.planetUser].info }} </p> 
           </div>
           <div class="row exploration-button"> 
-            <router-link to="/actualites"  class="pseudo-button"> Explorer ! </router-link>
+            <router-link v-on:click="alreadyGotHereFunc" to="/actualites"  class="pseudo-button"> Explorer ! </router-link>
           </div>
         </div>
 

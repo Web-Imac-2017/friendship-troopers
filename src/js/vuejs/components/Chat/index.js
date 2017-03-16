@@ -22,14 +22,17 @@ const Chat = Vue.extend({
     'not-done' : NotDone
   }, 
   created : function(){
-    this.$http.get(apiRoot() + 'users/me/friends').then((response) => {
-      // gérer le succes, toutes les infos renvoyer sont dans response.data      
+    this.$http.get(apiRoot() + 'users/me/friends').then((response) => {  
         this.allFriends = response.data;
+      }, (response) => {
+      });
+    this.$http.get(apiRoot() + 'users/me/').then((response) => {   
+        this.me = response.data;
+        this.imagePath = "/assets/images/avatars/" + this.me.name + "/" + this.me.imagePath;
       }, (response) => {
       });
   },
   computed: {
-    // a computed getter
     stringIndex: function () {
       var array = [];
       for (var i = 0; i < this.planetData.length; i++){
@@ -89,6 +92,7 @@ const Chat = Vue.extend({
   	return {
       allFriends : [
       ],
+      imagePath : '',
       newMessage: '',
   		date : '17 fevrier 1980',
   		currentSelected : 0,
@@ -151,9 +155,7 @@ const Chat = Vue.extend({
           sender : 1
         }
       ],
-  		myself : {
-  			avatar : '/assets/images/avatars/Sautien/dashboard.svg'
-  		}, 
+  		me : {}, 
       showAllFriends : false,
       showLastsResponsiveFriends : false,
       showAllResponsiveFriends : false,

@@ -8,6 +8,10 @@ template     = eval(`\`${template}\``);
 
 const WelcomeOnBoard = Vue.extend({
   template,
+  created: function(){
+      this.alreadyGotHere = false;
+    
+  },
   methods: {
     // vérifie si l'utilisateur est arrivé à la fin du questionnaire
   finished : function(){
@@ -105,6 +109,11 @@ const WelcomeOnBoard = Vue.extend({
       }
       classArray.push(classSelected);
       return classArray;
+    },
+     alreadyGotHereFunc : function(){
+      this.alreadyGotHere = true;
+      this.welcomeData.current = 0;
+      this.answerValidate = [false,false,false,false,false,false];
     }
 }, computed: {
     
@@ -112,6 +121,9 @@ const WelcomeOnBoard = Vue.extend({
       if (planerUser != "")
         return welcomeData.planetInfo[welcomeData.planetUser].color;
     }
+
+
+
 
     
 
@@ -121,6 +133,7 @@ const WelcomeOnBoard = Vue.extend({
       return {
         introText:true,
         validateButton:false,
+        alreadyGotHere : false,
         welcomeData,
         reached : 0,
         styleObject : {

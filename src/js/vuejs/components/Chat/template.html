@@ -122,7 +122,7 @@
               </div>
               <div class="col-sm-12 col-xs-12 message-perso" v-else>
                 <p class="col-sm-10 col-xs-10 right"> {{ message.content}} </p>
-                <img :src="myself.imagePath"  class="avatar col-sm-2 col-xs-2 right">
+                <img :src="imagePath"  class="avatar col-sm-2 col-xs-2 right">
               </div>
             </div>
 
@@ -133,7 +133,7 @@
           <div class="row">
             <div class="col-xs-12 col-sm-12 message-perso publish-message">
               <form class="form-post">
-                <img :src="myself.imagePath"  class="avatar col-sm-1 col-xs-1 right">
+                <img :src="imagePath"  class="avatar col-sm-1 col-xs-1 right">
                 <textarea rows="2" type="text" placeholder="Votre message"  class="col-sm-10 col-xs-10" v-model="newMessage"></textarea>
                 <img class="col-sm-1 col-xs-1 pseudo-button" src="/assets/images/validation.svg" v-on:click="postNewMessage">
               </form>
