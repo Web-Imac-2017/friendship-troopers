@@ -525,7 +525,7 @@ small {
     display: inline-block;
   }
 
-  @media screen and (min-width: $break-mid) {
+  @media all and (min-width: $break-mid) {
     @include padding(1);
     @include margin(2);
     
@@ -538,7 +538,7 @@ small {
     }
   } 
 
-  @media screen and (max-width: $break-mid) {
+  @media all and (max-width: $break-mid) {
     @include padding2(1,2);
     @include margin2(1, 0);  
    
@@ -652,14 +652,14 @@ small {
 } 
 
 
-@media screen and (min-width: $break-mid) {
+@media all and (min-width: $break-mid) {
   .post-content {
     margin-left: 11rem;
     margin-right: 4rem;
   }
 } 
 
-@media screen and (max-width: $break-mid) {
+@media all and (max-width: $break-mid) {
   .post-content {
     margin: 0 2rem;
   }
@@ -703,13 +703,13 @@ small {
   .form-post {
     padding-left: 0;
   }
-  @media screen and (max-width: $break-mid) {
+  @media all and (max-width: $break-mid) {
     .desktop {
       display: none;
       position: relative;
     }
   }
-  @media screen and (min-width: $break-large) {
+  @media all and (min-width: $break-large) {
     .desktop {
       display: inline-block;
       position: relative;
@@ -1176,7 +1176,7 @@ p.honorific-title {
   .post-content {
       margin: 0 4rem;
   }
-  @media screen and (min-width: $break-mid) {
+  @media all and (min-width: $break-mid) {
     .post-content {
       margin-left: 7rem;
       margin-right: 4rem;
@@ -1195,7 +1195,7 @@ p.honorific-title {
     }
   } 
 
-  @media screen and (max-width: $break-mid) {
+  @media all and (max-width: $break-mid) {
     .post-content {
       margin: 0 2rem;
     }
@@ -1234,7 +1234,7 @@ small.date {
   }
 }
 
-@media (max-width: $screen-md-min) { 
+@media all and (max-width: $screen-md-min) { 
 
   .border-left {
       border-left-width: 0;
@@ -1268,25 +1268,25 @@ p.loadMore {
 
 }
 
-@media screen and (min-width: $break-small) {
+@media all and (min-width: $break-small) {
   .pageNav .small-circle {
     display: inline-block;
    
   }
 }
-@media screen and (max-width: $break-small) {
+@media all and (max-width: $break-small) {
   .pageNav .small-circle {
     display: none;
   }
 }
 
-@media screen and (min-width: $break-large) {
+@media all and (min-width: $break-large) {
   .publish .avatar.desktop {
     display: inline-block;
    
   }
 }
-@media screen and (max-width: $break-large) {
+@media all and (max-width: $break-large) {
   .publish .avatar.desktop {
     display: none;
   }

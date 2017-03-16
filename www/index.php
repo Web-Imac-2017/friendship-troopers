@@ -37,7 +37,7 @@ Router::get('/users/me/waiting_list_friend','friend#invitationList', 'users.me.i
 Router::get('/users/me/friends','friend#listFriend', 'users.me.listUserFriend'); //ok
 
 Router::post('/users/me/interest/add_interest','interest#addUserInterest', 'users.me.updateUserInterest');
-Router::post('/users/me/interest/delete_interest','interest#delete_interest', 'users.me.updateUserInterest');
+Router::post('/users/me/interest/delete_interest','interest#deleteUserInterest', 'users.me.updateUserInterest');
 
 Router::post('/users/:userId/user_title','user_title#add');
 Router::get('/users/:userId/user_title/list','user_title#list');
