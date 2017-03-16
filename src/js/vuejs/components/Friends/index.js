@@ -26,6 +26,7 @@ const Friends = Vue.extend({
           for (var i = 0; i < this.planets.length; i++) {
             this.planets[i].selected = false;
           }
+          this.assignPlanetPath();
           this.selectPlanet(0);
         },(response) => {
         });
@@ -50,7 +51,32 @@ const Friends = Vue.extend({
       } else {
         this.displayedFriends = {};
       }
-    }    
+      
+    },
+     assignPlanetPath: function(index){
+      for(var i = 0; i < this.planets.length ; i++){
+
+        switch (this.planets[i].name) {
+          case "Terre":
+              this.planets[i].imagePath = "../assets/images/planets/Terre.svg";
+              break;
+          case "Paranose":
+              this.planets[i].imagePath = "../assets/images/planets/Paranose.svg";
+              break;
+          case "Technome":
+              this.planets[i].imagePath = "../assets/images/planets/Technome.svg";
+              break;
+          case "Sautien":
+              this.planets[i].imagePath = "../assets/images/planets/Sautien.svg";
+              break;
+          case "Multas":
+              this.planets[i].imagePath = "../assets/images/planets/Multas.svg";
+              break;
+          default:
+              this.planets[i].imagePath = "../assets/images/planets/Terre.svg";
+        } 
+      }
+    },    
   },
   data () {
       return {
@@ -58,6 +84,7 @@ const Friends = Vue.extend({
         displayedFriends : {},
         currentPlanetIndex : 0,
         planets : {}
+
     }
 
   }

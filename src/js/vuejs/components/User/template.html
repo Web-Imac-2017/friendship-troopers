@@ -10,20 +10,21 @@
       <section class="col-sm-8 container-transparent user">
         <div class="container-colored">
           <div class="row profil">
-            <div class="col-sm-2">
+            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3">
               <img :src="imagePath" class="user-avatar">
             </div>
-            <div class="col-sm-7">
-              <div v-if="myself"> <p>Mon profil </p></div>
-              <div v-else> <p> Profil de <h1 :class="profil.name" class="name"> {{ profil.username }} </h1></p></div>
+            <div class="col-xs-4 col-sm-3 col-md-5 col-lg-3">
+              <div v-if="myself"> <p style="display:inline">Mon profil </p></div>
+              <div v-else> <p style="display:inline"> Profil de <h1 :class="profil.name" class="name"> {{ profil.username }} </h1></p></div>
               <p class="honorific-title"> {{ profil.honorificTitle }} </p>
               <p class="green" v-if="profil.points == null"> 0 point </p>
               <p class="green" v-else-if="profil.points < 2"> {{ profil.points}} point </p>
               <p class="green" v-else> {{ profil.points }} points </p>
             </div>
-            <div class="col-sm-1 border-right"></div>
-            <div class="col-sm-2 ">
+            <div class="col-sm-1 col-md-1 col-lg-3 border-right"></div>
+            <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3">
               <img :src="planetPath" class="planet"> 
+
               <p class="text-center"> {{ profil.name }} </p>
             </div>
           </div>
@@ -31,10 +32,9 @@
  
                 <div class="stat">
         <div class="row center-row no-gutters">  
-          <div class="col-sm-4 pink text-center">
-            <p class="inline">
-            <span class="fat" v-if="nbFriends != null"> {{ nbFriends }} </span>
-            <span class="fat" v-else> 0 </span> </p>
+          <div class="col-xs-4 pink text-center">
+            <p class="inline"><span class="fat" v-if="nbFriends != null"> {{ nbFriends }} </span> </p>
+            <span class="fat" v-else> 0 </span>
             <p class="inline left" v-if="nbFriends < 2"> ami dans <br>
                <span v-if="myself">ton escouade </span> 
                 <span v-else >son escouade </span>
@@ -44,12 +44,12 @@
                 <span v-else >son escouade </span>
             </p>
           </div>  
-          <div class="col-sm-4 pink text-center">
+          <div class="col-xs-4 pink text-center">
             <span class="fat inline"> {{ nbRiddleSolved }} </span>
             <p v-if="nbRiddleSolved > 1" class="inline center"> énigmes résolues </p>
             <p v-else class="inline center"> énigme résolue</p>
           </div>
-            <div class="col-sm-4 pink text-center">
+            <div class="col-xs-4 pink text-center">
             <span class="fat inline"> {{ interests.length }} </span>
             <p  class="inline center" v-if="interests.length > 1"> centres d'intérêts </p>
             <p class="inline center" v-else> centre d'intérêt </p>
@@ -57,13 +57,14 @@
         </div>
         <span class="h-separator center"></span>
         <div class="row interests">
-            <p class="interest col-sm-2 center" v-for="(interest, index) in interests" v-if="index < start">
+            <p class="interest col-xs-2 center" v-for="(interest, index) in interests" v-if="index < start">
              {{interest.label}} 
             </p>
         </div>
         <span class="h-separator center"></span>
-        <div class="col-sm-12 text-center pseudo-button" v-on:click="showMore" v-if=" start == 6"> + Voir plus + </div>
-        <div class="col-sm-12 text-center pseudo-button" v-on:click="showLess" v-else> - Voir moins - </div>
+        <div class="col-xs-12 text-center pseudo-button" v-on:click="showMore" v-if=" start == 6"> + Voir plus + </div>
+        <div class="col-xs-12 text-center pseudo-button" v-on:click="showLess" v-else-if="start == 0"></div>
+        <div class="col-xs-12 text-center pseudo-button" v-on:click="showLess" v-else> - Voir moins - </div>
         
       </div>
         </div>

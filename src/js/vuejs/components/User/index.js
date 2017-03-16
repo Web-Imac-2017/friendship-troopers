@@ -77,6 +77,8 @@ const User = Vue.extend({
     getInterest : function(route){
       this.$http.get(route).then((response) => {
         this.interests = response.data;
+        if(this.interests.length == 0)
+          this.start = 0;
       }, (response) => {
         console.log(response);
       });
