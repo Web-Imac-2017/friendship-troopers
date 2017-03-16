@@ -7,6 +7,7 @@ import topParameters from './topParameters/index.js'
 import bottomParameters from './bottomParameters/index.js'
 import NavBar from '../NavBar/index.js';
 import Deconnexion from '../Deconnexion/index.js';
+import NotDone from '../NotDone/index.js';
 
 
 let template = require('./template.html');
@@ -22,7 +23,8 @@ const Parameters = Vue.extend({
   	'top-parameters' : topParameters,
     'bottom-parameters' : bottomParameters, 
     'navbar' : NavBar,
-    'deconnexion' : Deconnexion
+    'deconnexion' : Deconnexion,
+    'not-done' : NotDone
   }, 
   mounted : function() {
     console.log("In ref" + JSON.stringify(this.$refs.menu.user));

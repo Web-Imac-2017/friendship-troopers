@@ -148,7 +148,7 @@ const formUser = Vue.extend({
 	    	else
 	    		this.falseDate = false;
 	    },
-	    // fonction appelée au clic sur le bouton s'inscrire
+	    // fonction appelée au clic sur le bouton s'inscrire. Si les champs sont bien remplis, on envoie les infos au back
 		save(){ 
 			this.$emit('input', this.userSignIn);
 			if(this.checkInputs()){

@@ -10,6 +10,7 @@ import NavBar from '../NavBar/index.js';
 import LateralMenuLeft from '../LateralMenuLeft/index.js'
 import Deconnexion from '../Deconnexion/index.js'
 import MenuTools from '../MenuTools/index.js'
+import NotDone from '../NotDone/index.js'
 
 const Chat = Vue.extend({
   template,
@@ -17,7 +18,8 @@ const Chat = Vue.extend({
   	'navbar' : NavBar,
   	'lateral-menu-left' : LateralMenuLeft,
   	'deconnexion' : Deconnexion,
-  	'menu-tools' : MenuTools
+  	'menu-tools' : MenuTools,
+    'not-done' : NotDone
   }, 
   created : function(){
     this.$http.get(apiRoot() + 'users/me/friends').then((response) => {

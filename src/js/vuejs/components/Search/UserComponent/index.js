@@ -14,6 +14,7 @@ const UserComponent = Vue.extend({
   template,
   data () {
     return {
+    	//cette info sert à mettre la bonne couleur au pseudonyme en fonction de la planète de l'utilisateur
        planetData: ["#3e3e3e", "#3eb6df", "#ef4646", "#767fe2", "#72b51a", "#f9a519" ]
     }
   },

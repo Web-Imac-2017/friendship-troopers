@@ -15,6 +15,7 @@ const Login = Vue.extend({
   	'form-login' : formLogin, 
   	'form-user' : formUser },
 	methods: {
+    // ces deux fonctions permettent de switcher entre les onglets inscriptions et connexion
 	    inscription: function(){
 	      this.signIn = true;
         

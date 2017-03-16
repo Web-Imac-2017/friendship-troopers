@@ -72,8 +72,6 @@
 
         <div class="nav-item nav-icon">
           <div class="notifications-icon nav-icon" v-on:click="showSubMenu(3)" title="Mon tableau de bord">
-            <p v-if="notifications.length > 99" class="notif">99+</p> 
-            <p v-else-if="notifications.length > 0" class="notif"> {{ notifications.length }}</p> 
           </div>
 
           <div v-if="subMenu == 3" class="sub-menu menu-notifications"> 

@@ -10,6 +10,8 @@ import LateralMenuRight from '../LateralMenuRight/index.js'
 import MenuTools from '../MenuTools/index.js'
 import NavBar from '../NavBar/index.js';
 import Deconnexion from '../Deconnexion/index.js';
+import NotDone from '../NotDone/index.js';
+
 
 const EnigmeCurrent = Vue.extend({
   template,
@@ -18,7 +20,8 @@ const EnigmeCurrent = Vue.extend({
   	'lateral-menu-right' : LateralMenuRight,
   	'menu-tools' : MenuTools,
     'navbar' : NavBar,
-    'deconnexion' : Deconnexion
+    'deconnexion' : Deconnexion,
+    'not-done' : NotDone
   },
  
   methods : {
