@@ -78,14 +78,12 @@ const User = Vue.extend({
       this.$http.get(route).then((response) => {
         this.interests = response.data;
       }, (response) => {
-        console.log(response);
       });
 
     }, getNbFriends : function(route){
       this.$http.get(route).then((response) => {
         this.nbFriends =  response.data.count;
       }, (response) => {
-        console.log(response);
       });     
     }, 
     getPosts : function(route, option) {
@@ -113,21 +111,9 @@ const User = Vue.extend({
       //Router::post('/users/:userId/add_friend','friend#addFriend', 'users.me.addFriend'); //ok
       this.$http.post(apiRoot() + "users/" + this.profil.id + "/add_friend", {emulateJSON: true}).then(
         (response) => {
-          console.log("Demande envoyée");
         },
         (response) => {
-          switch(response.status) {
-            case 401:
-              this.$router.push('/erreur401')
-            break;
-            case 403:
-              this.$router.push('/erreur403')
-            break;
-            default:
-                this.$router.push('/erreur')
-          }
         });
-      console.log("User : Adding friend");
     }
   },
   computed : {

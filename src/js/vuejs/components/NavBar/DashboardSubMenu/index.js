@@ -9,6 +9,11 @@ const DashboardSubMenu = Vue.extend({
   template,
   props : {
     notification: Object
+  },
+ computed : {
+    imagePath : function() { 
+      return "/assets/images/avatars/" + this.notification.planet + "/" + this.notification.avatar;
+    }
   }
 });
 

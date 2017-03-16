@@ -193,20 +193,3 @@ html {
 // Surbrillance
 $subrillance-background : rgba(226,218,195,0.9);
 $subrillance-color : rgb(25,29,43);
-
-
-dans style.scss
-
-
-::selection {
-  background: $subrillance-background;
-  color: $subrillance-color;
-}
-::-moz-selection {
-  background: $subrillance-background;
-  color: $subrillance-color;
-}
-::-webkit-selection {
-  background: $subrillance-background;
-  color: $subrillance-color;
-}

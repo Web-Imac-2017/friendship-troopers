@@ -1362,3 +1362,18 @@ p.loadMore {
     display : block;
   }
 }
+
+
+
+::selection {
+  background: $subrillance-background;
+  color: $subrillance-color;
+}
+::-moz-selection {
+  background: $subrillance-background;
+  color: $subrillance-color;
+}
+::-webkit-selection {
+  background: $subrillance-background;
+  color: $subrillance-color;
+}

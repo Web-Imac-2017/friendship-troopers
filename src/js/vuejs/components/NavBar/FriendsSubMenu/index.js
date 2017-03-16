@@ -9,6 +9,11 @@ const FriendsSubMenu = Vue.extend({
   template,
   props : {
     friend: Object
+  }, 
+  computed : {
+    imagePath : function() { 
+      return "/assets/images/avatars/" + this.friend.planet + "/" + this.friend.imagePath;
+    }
   },
   methods: {
   	validateInvitation: function() {
