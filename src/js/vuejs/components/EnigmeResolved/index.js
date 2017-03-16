@@ -27,14 +27,17 @@ const EnigmeResolved = Vue.extend({
   created : function(){
   	this.$http.get(apiRoot() + 'users/me').then((response) => {
           this.me = response.data;
+          this.imagePath = "/assets/images/avatars/" + this.me.name + "/" + this.me.imagePath;
       }, (response) => {
         console.log(response);
       })
   	this.username = this.$route.params.user;
+    this.imagePath = "/assets/images/avatars/" + this.me.name + "/" + this.me.imagePath;
   }, 
   data () {
   	return {
   		me : {},
+      imagePath : '',
   		points : 30,
   		nbBadges : 2,
   		riddleSolved : [

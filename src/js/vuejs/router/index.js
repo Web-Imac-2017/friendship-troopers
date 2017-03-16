@@ -27,16 +27,6 @@ import About from '../components/About'
 import FAQ from '../components/FAQ'
 import Legals from '../components/Legals'
 
-/*import AdminCreatePost from '../components/admin/CreatePost.vue'
-import AdminCreatePost from '../components/admin/CreatePost.vue'
-import AdminCreateEvent from '../components/admin/CreateEvent.vue'
-import AdminAddAdmin from '../components/admin/AddAdmin.vue'
-import AdminReport from '../components/admin/Report.vue'
-import AdminDelateAccount from '../components/admin/DelateAccount.vue'
-import AddBadge from '../components/admin/AddBadge.vue'
-import AddAvatar from '../components/admin/AddAvatar.vue'
-import AddEmoji from '../components/admin/AddEmoji.vue'
-import AddEnigme from '../components/admin/AddEnigme.vue'*/
 
 import Error401 from '../components/Error401'
 import Error403 from '../components/Error403'
@@ -108,7 +98,6 @@ const router = new VueRouter({
       name : 'Feed',
       path: '/actualites', 
       component : Feed
-      // mettre $planet : unique pour chaque planete
   },{ 
       name : 'Event',
       path: '/univers/evenement', 
@@ -160,43 +149,7 @@ const router = new VueRouter({
       name : 'PageToCome',
       path: '/page-to-come', 
       component : PageToCome
-  }/*,{ 
-      name : 'AdminCreatePost',
-      path: '/admin/creer-post', 
-      component : AdminCreatePost
   },{ 
-      name : 'AdminCreateEvent',
-      path: '/admin/creer-evenement', 
-      component : AdminCreateEvent
-  },{  
-      name : 'AdminAddAdmin',
-      path: '/admin/nouvel-administrateur', 
-      component : AdminAddAdmin
-  },{  
-      name : 'AdminReport',
-      path: '/admin/signalement', 
-      component : AdminReport
-  },{ 
-      name : 'AdminDelateAccount' ,
-      path: '/admin/supprimer-compte', 
-      component : AdminDelateAccount
-  },{  
-      name : 'AddBadge',
-      path: '/admin/ajout-badge', 
-      component : AddBadge
-  },{   
-      name : 'AddAvatar',
-      path: '/admin/ajout-avatar', 
-      component : AddAvatar
-  },{   
-      name : 'AddEmoji',
-      path: '/admin/ajout-emoticone', 
-      component : AddEmoji
-  },{   
-      name : 'AddEnigme',
-      path: '/admin/ajout-enigme', 
-      component : AddEnigme
-  }*/,{ 
       path: '/index.html', 
       redirect: {name:'Feed'}
   },{ 

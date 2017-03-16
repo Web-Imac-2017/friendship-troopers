@@ -65,7 +65,7 @@
 							<p><strong> Mode de jeu</strong></p>
 							<ul class="row justify-content-center">
 								<li class="col-sm-3 col-sm-offset-3">  
-									<img :src="me.imagePath" alt="avatar">
+									<img :src="imagePath" alt="avatar">
 									<p class="pseudo">{{ me.username }} </p></li> 
 									<li class="col-sm-3 pseudo-button" v-for="player in riddle.players"> 
 										<router-link :to="{ name: 'User', params: { user: player.username, userId : player.userId}}">
