@@ -267,6 +267,20 @@ html, body, #home {
     margin: 0;
 }
 
+
+::selection {
+  background: $subrillance-background;
+  color: $subrillance-color;
+}
+::-moz-selection {
+  background: $subrillance-background;
+  color: $subrillance-color;
+}
+::-webkit-selection {
+  background: $subrillance-background;
+  color: $subrillance-color;
+}
+
 .center{
   @extend %center;
 }

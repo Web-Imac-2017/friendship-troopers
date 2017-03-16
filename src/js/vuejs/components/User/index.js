@@ -40,10 +40,10 @@ const User = Vue.extend({
        }  
       },
     mounted : function() {
-      /*Get all the user informations */
     this.getRouteParams();
    },
    methods: { 
+    /*gets all the user information*/
     getRouteParams : function(){
       this.$http.get(apiRoot() + 'users/me').then((response) => {
           this.profil = response.data;
@@ -63,6 +63,7 @@ const User = Vue.extend({
       }, (response) => {
       })
     },
+    /*gets the user nbFriends, profil info and Post if it is not the connected*/
    getUser : function(route){
       this.$http.get(route).then((response) => {
           this.profil = response.data;
@@ -88,6 +89,7 @@ const User = Vue.extend({
         console.log(response);
       });     
     }, 
+    /*get the post from a specific user*/
     getPosts : function(route, option) {
       var data = { 'user' : this.profil.id }
       this.$http.get(apiRoot() + 'planets/' + this.profil.planetId + '/posts', {
@@ -109,11 +111,10 @@ const User = Vue.extend({
     showLess : function() {
       this.start = 6;
     },
+    /* send friend request to visited profil*/
     addFriend : function() {
-      //Router::post('/users/:userId/add_friend','friend#addFriend', 'users.me.addFriend'); //ok
       this.$http.post(apiRoot() + "users/" + this.profil.id + "/add_friend", {emulateJSON: true}).then(
         (response) => {
-          console.log("Demande envoyée");
         },
         (response) => {
           switch(response.status) {
@@ -127,11 +128,7 @@ const User = Vue.extend({
                 this.$router.push('/erreur')
           }
         });
-      console.log("User : Adding friend");
     }
-  },
-  computed : {
-    
   },
   data () {
       return {
