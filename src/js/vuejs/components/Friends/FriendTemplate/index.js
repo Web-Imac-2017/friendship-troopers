@@ -11,8 +11,15 @@ const FriendTemplate = Vue.extend({
   	friend: Object,
   	planet : String
   },
-  created: function(){
-  	console.log(this.planet)
+  created: function() {
+  	console.log(this.imagePath)
+  	this.imagePath = "/assets/images/avatars/" + this.planet + "/" + this.friend.imagePath;
+
+  },
+  data () {
+  	return {
+  		imagePath: ''
+  	}
   }
 });
 
