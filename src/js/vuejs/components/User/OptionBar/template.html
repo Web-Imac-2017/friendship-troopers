@@ -1,16 +1,16 @@
 <div class="text-center option-bar">
-    <ul class="row user" v-if="myself">
-      <li class="col-sm-4 pseudo-button ">
+    <ul class="wrapper user" v-if="myself">
+      <li class="item pseudo-button ">
       <router-link to="/page-to-come">
         <p class="colored"><img src="/assets/images/Friends.svg">
         Obtenir des récompenses</p>
         </router-link>
       </li>
-      <li class="col-sm-4 pseudo-button ">
+      <li class="item pseudo-button ">
         <router-link to="/me/parametres"> 
         <p class="colored"> <img src="/assets/images/store.svg"> Modifier mes informations</p></router-link>
       </li>
-      <li class="col-sm-4 pseudo-button ">
+      <li class="item pseudo-button ">
          <router-link to="/page-to-come"> 
         <p class="colored"><img src="/assets/images/enigmes/abandon.svg">
         Supprimer mon compte</p>
@@ -19,18 +19,18 @@
       </li>
     </ul>
 
-    <ul class="row text-center" v-else>
-      <li class="col-sm-4  pseudo-button" v-on:click="addFriend">
+    <ul class="wrapper text-center" v-else>
+      <li class="item  pseudo-button" v-on:click="addFriend">
         <p class="colored">
            <img src="/assets/images/Friends.svg">
            Ajouter à mes amis</p>
       </li>
-      <li class="col-sm-4 pseudo-button ">
+      <li class="item pseudo-button ">
         <p class="colored">
            <img src="/assets/images/Messages.svg">
            Envoyer un message</p>
       </li>
-      <li class="col-sm-4 pseudo-button ">
+      <li class="item pseudo-button ">
       <router-link to="/page-to-come"> 
         <p class="colored"> 
            <img src="/assets/images/Signaler.svg">

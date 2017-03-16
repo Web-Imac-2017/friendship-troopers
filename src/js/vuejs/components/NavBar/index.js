@@ -76,12 +76,12 @@ const NavBar = Vue.extend({
                     {pseudo: 'kirikoukou', avatar:'landscape.svg', planet :'Multas', content:"Je t'envoie un message toto !", date : '01/03/13'}
                  ], 
         notifications: [
-        /*  type 1 : post intergalactique / type 2 : ami news  /  type 3 : last post */
+                  /*  type 1 : post intergalactique / type 2 : ami news  /  type 3 : last post */
                     {type:'1', post:'4'},
                     {type:'2', post:'2', pseudo: 'hihi', avatar:'astro.svg', planet :'Terre'},     
                     {type:'3', post:'3'}     
         ], 
-        subMenu : 0,
+        subMenu : 0,   /* 0: aucun / 1: friends / 2: messages / 3: notif */
         username : 'coulon',
         id : 1,
         myAvatar : 'astro.svg',
@@ -89,7 +89,7 @@ const NavBar = Vue.extend({
         search : 0,
         user: {}
 
-        // subMenu : 0 /*1:friends / 2: messages / 3: notif*/
+      
       }
     }
 });

@@ -5,6 +5,10 @@
 		border-right: 0.1rem solid $main-text;
 		@include margin2(1, 0);
 		height: 8rem;
+
+		@media all and (max-width: $break-mid) {
+			display:none;
+		}
 	}
 
 	.center-row {
@@ -17,6 +21,10 @@
 		margin-left: auto;
 		margin-right: auto;
 		display: block;
+
+		@media all and (max-width: $break-mid) {
+			height: 6rem;
+		}
 	}
 
 	img.user-avatar {
@@ -24,6 +32,9 @@
 		margin-left: auto;
 		margin-right: auto;
 		display: block;
+		@media all and (max-width: $break-mid) {
+			height: 6rem;
+		}
 	}
 	
 	img {
@@ -32,7 +43,6 @@
 
 	.colored {
 		background-color: $comments-background;
-		@include padding2(1,5);
 		@include margin2(0, 1);
 		text-align: center;
 	}
@@ -86,6 +96,17 @@
 		display: inline-block;
 	}
 
+
+	.item.pseudo-button {
+	    background-color: $comments-background;
+	    margin: 1rem;
+	    padding: 1rem;
+
+	    &:hover, &:focus, &:active{
+			outline:1px solid $white;
+		}
+	}
+
 }
 
 
@@ -100,3 +121,8 @@
 	span.fat {
 		font-size: 5rem;
 	}
+
+.wrapper{
+	flex-wrap:wrap;
+	justify-content:center;
+}
