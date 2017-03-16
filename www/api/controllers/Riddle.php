@@ -52,6 +52,7 @@ class Riddle extends Controller {
         ],
       ]);
 
+      var_dump($request);
       $this->response($request, 200);
   }
 

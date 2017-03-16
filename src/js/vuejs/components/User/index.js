@@ -20,7 +20,7 @@ import Deconnexion from '../Deconnexion/index.js'
 const User = Vue.extend({
   template,
   props : {
-    userId : Object
+    userId : Number
   }
   ,
    components: {
@@ -47,7 +47,6 @@ const User = Vue.extend({
     getRouteParams : function(){
       this.$http.get(apiRoot() + 'users/me').then((response) => {
           this.profil = response.data;
-          console.log(JSON.stringify(response.data.username))
           if (this.$route.params.username == response.data.username){
             this.myself = true
             this.getNbFriends(apiRoot() + 'users/' + this.profil.id + '/number_friends');
@@ -97,10 +96,8 @@ const User = Vue.extend({
         },{
           emulateJSON: true 
         }).then((response) => {
-          console.log(response);
           this.posts =  response.data;
       }, (response) => {
-        console.log(response);
       });     
 
     },
