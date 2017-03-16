@@ -26,28 +26,30 @@ const Post = Vue.extend({
   },
    methods : {
     like : function() {
-      if (!this.liked) { // Si l'utilisateur n'a pas déjà liké, il like
+      if (!this.liked) { // If the user doesn't like the publication yet, he likes
         this.$http.post(apiRoot() + "posts/" + this.post.id + "/stardust").then(
           (response) => {
-            this.getLikes(); // On met à jour le nombre de likes affichés
+            this.getLikes();
             this.liked = true;
           },
           (response) => {
           });
-      } else { // S'il a déjà liké, il délike
+      } else { // If he likes the publication, he dislikes it
         this.$http.delete(apiRoot() + "posts/" + this.post.id + "/stardust").then(
           (response) => {
-            this.getLikes(); // On met à jour le nombre de likes affichés
+            this.getLikes();
             this.liked = false;
           },
           (response) => {
           });
       }
     },
+    // Publish a new comment on the post
     publishNewComment : function() {
       this.$http.post(apiRoot() + "planets/" + this.planetId + "/posts/" + this.post.id + "/comments", { 'content' : this.newComment}, {emulateJSON : true}).then(
         (response) => {
           this.newComment = '';
+          // Visual feedback
           this.getComments(apiRoot() + "planets/" + this.planetId + "/posts/" + this.post.id + "/comments?limit=" + this.loadMore, false);
           this.countComments();
         },(response) => {
@@ -91,7 +93,7 @@ const Post = Vue.extend({
             this.comments = response.data;
           }
           this.reversedComments = this.comments.slice(0);
-          this.reversedComments.reverse();
+          this.reversedComments.reverse(); // Reverse so the comments will be displayed in chronological order (more recent printed last)
           var tmp = response.headers.get("Link").split(",")[1].split(";")[0];
           this.prevComments = apiRoot() + tmp.substring(2, tmp.length-1);
         },
@@ -99,17 +101,7 @@ const Post = Vue.extend({
         }
       );
     },
-    getTotalComments: function() {
-      this.$http.get(apiRoot() + "planets/" + this.planetId + "/posts/" + this.post.id + "/comments/count", {emulateJSON: true}).then(
-        (response) => {
-          this.totalComments = response.data.count;
-        },
-        (response) => {
-        }
-      );
-    },
     isLiked : function() {
-      ///posts/:publicationId/stardust/exist
       this.$http.get(apiRoot() + "posts/" + this.post.id + "/stardust/exist", {emulateJSON: true}).then(
         (response) => {
           if (response.data == 1) {
@@ -122,6 +114,7 @@ const Post = Vue.extend({
         }
       );
     },
+    // Get the publication info according to the planet id
     getPlanetPublications : function() {
       this.$http.get(apiRoot() + "users/me", {emulateJSON: true}).then(
         (response) => {
@@ -142,7 +135,6 @@ const Post = Vue.extend({
     }
   },   
   created : function() {
-    // Savoir si l'utilisateur a déjà liké le post ?
     this.getPlanetPublications();
     this.isLiked();
     this.getLikes();
@@ -162,12 +154,7 @@ const Post = Vue.extend({
       planetId: 1,
       avatar :'astro.svg'
     }
-  }/*,
-  computed: {
-    reversedComments : function() {
-      return this.comments;
-    }
-  }*/
+  }
 });
 
 

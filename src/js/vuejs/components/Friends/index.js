@@ -14,12 +14,13 @@ import Deconnexion from '../Deconnexion/index.js'
 const Friends = Vue.extend({
   template,
   created :  function() {
-      this.$http.get(apiRoot() + 'users/me/friends').then((response) => {
-      // gérer le succes, toutes les infos renvoyer sont dans response.data      
+    // Get all the user friends
+      this.$http.get(apiRoot() + 'users/me/friends').then((response) => { 
         this.allFriends = response.data;
       }, (response) => {
       });
 
+      // Get all the planets and select the first planet
       this.$http.get(apiRoot() + 'planets/').then(
         (response) => {
           this.planets = response.data;
@@ -38,9 +39,11 @@ const Friends = Vue.extend({
     'navbar' : NavBar,
     'deconnexion' : Deconnexion }, 
   methods : {
+    // Return true if index is a key in allFriends
     isKey : function(index) {
       return (index) in this.allFriends;
     },
+    // Display the friends of the planet with id = index + 1
     selectPlanet : function(index) {
       this.planets[this.currentPlanetIndex].selected = false;
       this.currentPlanetIndex = index;
@@ -53,6 +56,7 @@ const Friends = Vue.extend({
       }
       
     },
+    // Set the good avatar path according to the selected planet
      assignPlanetPath: function(index){
       for(var i = 0; i < this.planets.length ; i++){
 
@@ -80,13 +84,11 @@ const Friends = Vue.extend({
   },
   data () {
       return {
-        allFriends : {},
-        displayedFriends : {},
+        allFriends : {}, // All the user friends, ordered by planet
+        displayedFriends : {}, // Friends displayed in the page
         currentPlanetIndex : 0,
         planets : {}
-
     }
-
   }
 });
 
