@@ -1,6 +1,6 @@
 <div>       
 	<router-link :alt="friend.username" :to="{ name: 'User', params: { user: friend.username }}"> 
-		<img class="center" :src="friend.imagePath"> 
+		<img class="center" :src="imagePath"> 
 		<h1 :class="planet"> {{ friend.username }} </h1>
 		<p class="text-center honorific-title"> {{ friend.honorificTitle }} </p>
 	</router-link>

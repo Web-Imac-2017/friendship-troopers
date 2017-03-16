@@ -2,7 +2,7 @@
   <ul class = "sub-menu-item">
     <li>
       <router-link :to="{ name: 'User', params: { user: friend.username }}">
-        <img :src=friend.imagePath alt="avatar" class="avatar"> 
+        <img :src="imagePath" alt="avatar" class="avatar"> 
       </router-link>
     </li>
      <li>

@@ -80,7 +80,6 @@ const User = Vue.extend({
         if(this.interests.length == 0)
           this.start = 0;
       }, (response) => {
-        console.log(response);
       });
 
     }, getNbFriends : function(route){
@@ -115,16 +114,6 @@ const User = Vue.extend({
         (response) => {
         },
         (response) => {
-          switch(response.status) {
-            case 401:
-              this.$router.push('/erreur401')
-            break;
-            case 403:
-              this.$router.push('/erreur403')
-            break;
-            default:
-                this.$router.push('/erreur')
-          }
         });
     }
   },
