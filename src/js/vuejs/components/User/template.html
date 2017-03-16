@@ -33,8 +33,10 @@
                 <div class="stat">
         <div class="row center-row no-gutters">  
           <div class="col-xs-4 pink text-center">
-            <p class="inline"><span class="fat" v-if="nbFriends != null"> {{ nbFriends }} </span> </p>
-            <span class="fat" v-else> 0 </span>
+            <p class="inline"><span class="fat" v-if="nbFriends != null"> {{ nbFriends }} </span> 
+              <span class="fat" v-else> 0 </span>
+            </p>
+            
             <p class="inline left" v-if="nbFriends < 2"> ami dans <br>
                <span v-if="myself">ton escouade </span> 
                 <span v-else >son escouade </span>
@@ -56,8 +58,8 @@
           </div>
         </div>
         <span class="h-separator center"></span>
-        <div class="row interests">
-            <p class="interest col-xs-2 center" v-for="(interest, index) in interests" v-if="index < start">
+        <div class="wrapper interests">
+            <p class="interest item center" v-for="(interest, index) in interests" v-if="index < start">
              {{interest.label}} 
             </p>
         </div>
