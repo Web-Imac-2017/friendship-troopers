@@ -96,12 +96,12 @@ const Chat = Vue.extend({
     		{
     			username : "George Micheal",
     			imagePath : "/assets/images/avatars/Multas/aliens.svg",
-    			planet : 2,
+    			planet : 5,
     			selected : false
     		}, {
     			username : "John Lennon",
     			imagePath : "/assets/images/avatars/Paranose/astro.svg",
-    			planet : 3,
+    			planet : 2,
     			selected : false
      		},
     		{
@@ -119,14 +119,14 @@ const Chat = Vue.extend({
     		}, {
     			username : "Genesis",
     			imagePath : "/assets/images/avatars/Paranose/astro.svg",
-    			planet : 1,
+    			planet : 2,
     			selected : false
 
     		},
     		{
     			username : "Cindy Laupers",
     			imagePath : "/assets/images/avatars/Sautien/dashboard.svg",
-    			planet : 3,
+    			planet : 4,
     			selected : false
 
     		}

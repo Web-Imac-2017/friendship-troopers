@@ -19,7 +19,7 @@
 
     <p class="friends"> Amis </p>
       <router-link class="sublink" :to="{ name: 'Friends', params: { user: user.username }}"> Voir tous mes amis </router-link> <br>
-      <router-link class="sublink" :to="{ name: 'Messages', params: { user: user.username }}"> Accéder à la messagerie </router-link> <br>
+      <router-link class="sublink" :to="{ name: 'Chat', params: { user: user.username }}"> Accéder à la messagerie </router-link> <br>
 
       <div v-if="lastFriends.length > 0" class="lastFriends">
         <p> Derniers compagnons : </p>
