@@ -1,4 +1,3 @@
 export function apiRoot(){
-    var projectRoot = "http://localhost/";
-    return projectRoot ;
+    return "fts-imac.byethost7.com/v1/";
 }

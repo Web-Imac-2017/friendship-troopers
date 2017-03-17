@@ -10,8 +10,8 @@ import Router    from './router';
 Vue.use(VueRouter);
 Vue.use(VueRessource);
 
-const API_BASE_URL = "http://localhost/"
-Vue.http.options.root = API_BASE_URL + 'api';
+const API_BASE_URL = "http://http://fts-imac.byethost7.com/"
+Vue.http.options.root = API_BASE_URL + 'v1';
 
 
 let initApp = function () {
